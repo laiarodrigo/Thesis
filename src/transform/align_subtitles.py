@@ -4,21 +4,23 @@ from fuzzywuzzy import fuzz
 from scipy.optimize import linear_sum_assignment
 import numpy as np
 import pandas as pd
+from typing import List, Dict, Sequence, Tuple, Callable
+
 
 TIME_WINDOW = timedelta(seconds=60)  # Maximum allowable time difference (start with a large value, aim at around 0.5s)
 WEIGHT_TIME = 0.3
 WEIGHT_TEXT = 0.7
 SIMILARITY_THRESHOLD = 30  # Minimum fuzzy ratio for alignment, considering similarity metric frm fuzzywuzzy
 
-def load_subtitles(filepath):
-    subs = pysrt.open(filepath)
-    return [
-        {
-            "start": pd.to_timedelta(sub.start.ordinal, unit="ms"),
-            "end":   pd.to_timedelta(sub.end.ordinal,   unit="ms"),
-            "text":  sub.text.strip(),
-        } for sub in subs
-    ]
+# def load_subtitles(filepath):
+#     subs = pysrt.open(filepath)
+#     return [
+#         {
+#             "start": pd.to_timedelta(sub.start.ordinal, unit="ms"),
+#             "end":   pd.to_timedelta(sub.end.ordinal,   unit="ms"),
+#             "text":  sub.text.strip(),
+#         } for sub in subs
+#     ]
 
 def time_diff_score(t1, t2, delta):
     diff = abs((t1 - t2).total_seconds())
@@ -118,22 +120,64 @@ def align_subtitles_optimal_hungarian(subs_a, subs_b):
 
 def find_offset_between_subtitles(aligned_pairs, min_score=0.6):
     time_differences = []
+    scores = []
+    matched = 0
     
     for a, b, score in aligned_pairs:
         if b is not None and score > min_score:
-            time_differences.append(abs((a['start'] - b['start']).total_seconds()))
-    
+            matched += 1
+            time_differences.append((a['start'] - b['start']).total_seconds())
+            scores.append(score)
+
     if len(time_differences) == 0:
         return 0.0, 0.0
     
-    average_offset = np.mean(time_differences)
-    maximum_offset = np.max(time_differences)
-    
-    return average_offset, maximum_offset
+    total = len(aligned_pairs)
+    coverage = matched / total if total > 0 else 0.0
+    avg_offset = np.mean(time_differences) if time_differences else 0.0
+    max_offset = np.max(np.abs(time_differences)) if time_differences else 0.0
+    mean_score = np.mean(scores) if scores else 0.0
 
+    return avg_offset, max_offset, coverage, mean_score
+
+def find_offset_between_subtitles_percentile(
+    aligned_pairs: Sequence[Tuple[Dict[str, object], Dict[str, object], float]],
+    top_percent: float = 10.0,          # keep the top-10 % most similar
+    min_pairs: int = 3                  # need at least this many to compute stats
+) -> Tuple[float, float, float, float]:
+
+    diffs, scores = [], []
+    for a, b, s in aligned_pairs:
+        if b is not None:
+            diffs.append((a["start"] - b["start"]).total_seconds())
+            scores.append(float(s))
+
+    total = len(scores)
+    if total == 0:
+        return 0.0, 0.0, 0.0, 0.0
+
+    # percentile threshold
+    q = 100.0 - top_percent            # e.g. 90-th percentile for top 10 %
+    score_cutoff = np.percentile(scores, q)
+
+    # keep only pairs at / above the cutoff
+    kept_diffs  = [d for d, s in zip(diffs, scores) if s >= score_cutoff]
+    kept_scores = [s for s       in scores            if s >= score_cutoff]
+    kept_diffs = np.array(kept_diffs)
+
+    if len(kept_diffs) < min_pairs:    
+        print(f"Warning: not enough pairs ({len(kept_diffs)})")
+        return 0.0, 0.0, len(kept_diffs) / total, (np.mean(kept_scores) if kept_scores else 0.0)
+
+    avg_offset = float(np.median(kept_diffs))        # median, not mean
+    max_offset = float(np.max(np.abs(kept_diffs)))
+    coverage   = len(kept_diffs) / total
+    mean_score = float(np.mean(kept_scores))
+
+    return avg_offset, max_offset, coverage, mean_score
 
 def shift_srt(subs, offset_seconds):
-    delta = pd.to_timedelta(offset_seconds)
+    delta = pd.to_timedelta(offset_seconds, unit='s')
     shifted = []
     for record in subs:
         shifted.append(
@@ -144,6 +188,117 @@ def shift_srt(subs, offset_seconds):
             }
         )
     return shifted
+
+def eliminate_new_lines(subtitles):
+    for sub in subtitles:
+        if '\n' in sub['text']:
+            sub['text'] = sub['text'].replace('\n', ' ')
+
+def merge_subtitle_fragments(
+    blocks: Sequence[Dict[str, object]],
+    gap_threshold: timedelta | pd.Timedelta = pd.Timedelta(milliseconds=120),
+    join_punct: str = " ",                     # what to insert between merged parts
+    terminal_stop: str = ".?!",                # punctuation that *prevents* merging
+) -> List[Dict[str, object]]:
+
+    gap_threshold = pd.Timedelta(gap_threshold)
+
+    merged: List[Dict[str, object]] = []
+    i = 0
+    n = len(blocks)
+
+    while i < n:
+        current = blocks[i].copy()           # shallow copy is enough
+        i += 1                           # provisional advance
+
+        # attempt to merge with followers as long as the rule allows
+        while i < n:
+            nxt = blocks[i]
+            gap = nxt["start"] - current["end"]
+
+            # last char of current text, first char of next
+            tail = current["text"].rstrip()[-1:]          # could be '', ',' …
+            head = nxt["text"].lstrip()[:1]
+
+            mergeable = (
+                gap <= gap_threshold and
+                (tail == "," or tail not in terminal_stop) and
+                head.islower()
+            )
+            if not mergeable:
+                break
+
+            # --- perform merge --------------------------------------------
+            if tail == ",":
+                current["text"] = current["text"].rstrip(",") + " " + nxt["text"].lstrip()
+            else:
+                current["text"] = current["text"].rstrip() + join_punct + nxt["text"].lstrip()
+
+            current["end"] = nxt["end"]      # extend duration
+            i += 1                       # consume the merged‐in block
+
+        merged.append(current)
+
+    return merged
+
+def auto_sync_subs(
+    subs_a: List[Dict[str, object]],
+    subs_b: List[Dict[str, object]],
+    *,
+    aligner: Callable = align_subtitles_optimal_hungarian,
+    offset_estimator: Callable = find_offset_between_subtitles_percentile,
+    eps_offset: float = 0.05,           # 50 ms
+    max_plateau_rounds: int = 2,
+) -> Tuple[List[Dict[str, object]], float]:
+    """
+    Iteratively shift *subs_a* so that it lines-up with *subs_b*.
+
+    Returns
+    -------
+    shifted_a : list[dict]
+        The time-corrected subtitle blocks for A.
+    final_offset : float
+        The last applied offset in seconds (positive ⇒ A shifted earlier).
+
+    Notes
+    -----
+    • Stops when |avg_offset| < eps_offset **and**
+      max_offset < 2*eps_offset, **or** when coverage & mean score
+      plateau (rounded to 3-decimals) for `max_plateau_rounds` passes.
+    • Works in-place on a *copy* of subs_a; subs_b is never modified.
+    """
+    subs_a = [row.copy() for row in subs_a]   # work on a clone
+
+    plateau_rounds   = 0
+    prev_cov_round   = prev_score_round = None
+
+    while True:
+        aligned = aligner(subs_a, subs_b)
+        avg_off, max_off, cov, mean = offset_estimator(aligned)
+
+        cov_r, score_r = round(cov, 3), round(mean, 3)
+        print(f"Offset {avg_off:+.3f}s (max {max_off:.3f})  "
+              f"Coverage {cov_r:.3f}  Mean {score_r:.3f}")
+
+        # good enough?
+        if abs(avg_off) < eps_offset and max_off < 2*eps_offset:
+            break
+
+        # plateau?
+        if (cov_r, score_r) == (prev_cov_round, prev_score_round):
+            plateau_rounds += 1
+            if plateau_rounds >= max_plateau_rounds:
+                print("plateau → stop")
+                break
+        else:
+            plateau_rounds = 0
+
+        prev_cov_round, prev_score_round = cov_r, score_r
+
+        # shift *A* by the signed average offset
+        subs_a = shift_srt(subs_a, avg_off)
+
+    return subs_a, avg_off
 
 # def main():
 #     file_a = 'subtitles_a.srt'
