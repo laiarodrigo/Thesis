@@ -1,4 +1,4 @@
-import pysrt
+import pysrt, re
 from datetime import timedelta
 from fuzzywuzzy import fuzz
 from scipy.optimize import linear_sum_assignment
@@ -194,50 +194,65 @@ def eliminate_new_lines(subtitles):
         if '\n' in sub['text']:
             sub['text'] = sub['text'].replace('\n', ' ')
 
+def strip_tags_str(text: str) -> str:
+    # remove <…> and {…} tags and trim whitespace
+    return re.sub(r'<[^>]+>|\{[^}]+\}', '', text).strip()
+
+# 2) in‐place block‐level cleaner
+def clean_sub_blocks(blocks: List[Dict[str, object]]) -> None:
+    """
+    Given a list of dicts each with a "text" field,
+    strip tags from every block in place.
+    """
+    for b in blocks:
+        b["text"] = strip_tags_str(b["text"])
+
 def merge_subtitle_fragments(
     blocks: Sequence[Dict[str, object]],
     gap_threshold: timedelta | pd.Timedelta = pd.Timedelta(milliseconds=120),
-    join_punct: str = " ",                     # what to insert between merged parts
-    terminal_stop: str = ".?!",                # punctuation that *prevents* merging
+    join_punct: str                   = " ",
+    terminal_stop: str                = ".?!",
 ) -> List[Dict[str, object]]:
-
     gap_threshold = pd.Timedelta(gap_threshold)
-
     merged: List[Dict[str, object]] = []
     i = 0
     n = len(blocks)
 
     while i < n:
-        current = blocks[i].copy()           # shallow copy is enough
-        i += 1                           # provisional advance
+        curr = blocks[i].copy()
+        i += 1
 
-        # attempt to merge with followers as long as the rule allows
         while i < n:
-            nxt = blocks[i]
-            gap = nxt["start"] - current["end"]
+            nxt  = blocks[i]
+            gap  = nxt["start"] - curr["end"]
+            tail_raw = curr["text"].rstrip()
+            tail     = tail_raw[-1:]    # last character ("," or "." or letter)
+            head     = nxt["text"].lstrip()[:1]
 
-            # last char of current text, first char of next
-            tail = current["text"].rstrip()[-1:]          # could be '', ',' …
-            head = nxt["text"].lstrip()[:1]
+            # allow merge if small gap
+            if gap > gap_threshold:
+                break
 
-            mergeable = (
-                gap <= gap_threshold and
-                (tail == "," or tail not in terminal_stop) and
-                head.islower()
-            )
+            # if it ends in a comma, always merge
+            if tail == ",":
+                mergeable = True
+            # otherwise, only merge if not ending in a hard stop and next starts lowercase
+            else:
+                mergeable = (tail not in terminal_stop) and head.islower()
+
             if not mergeable:
                 break
 
-            # --- perform merge --------------------------------------------
+            # --- perform merge keeping the comma this time ------------
             if tail == ",":
-                current["text"] = current["text"].rstrip(",") + " " + nxt["text"].lstrip()
+                curr["text"] = tail_raw + join_punct + nxt["text"].lstrip()
             else:
-                current["text"] = current["text"].rstrip() + join_punct + nxt["text"].lstrip()
+                curr["text"] = tail_raw + join_punct + nxt["text"].lstrip()
 
-            current["end"] = nxt["end"]      # extend duration
-            i += 1                       # consume the merged‐in block
+            curr["end"] = nxt["end"]
+            i += 1
 
-        merged.append(current)
+        merged.append(curr)
 
     return merged
 
