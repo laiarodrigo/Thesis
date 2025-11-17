@@ -24,8 +24,10 @@ from peft import LoraConfig, get_peft_model
 MODEL_ID = "Qwen/Qwen3-0.6B"
 SEED = 123
 
-PROJECT_DB_PATH = pathlib.Path("../data/duckdb/subs_project.duckdb")
-SOURCE_DB_PATH = pathlib.Path("../data/duckdb/subs.duckdb")
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+
+PROJECT_DB_PATH = BASE_DIR / "data" / "duckdb" / "subs_project.duckdb"
+SOURCE_DB_PATH  = BASE_DIR / "data" / "duckdb" / "subs.duckdb"
 
 # change to "cluster_full" on HLT
 RUN_MODE = "local_debug"   # "local_debug" or "cluster_full"
