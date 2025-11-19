@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import random
 import numpy as np
 import torch
@@ -15,6 +16,7 @@ from transformers import (
     Trainer,
 )
 from peft import LoraConfig, get_peft_model
+from types import MethodType
 
 
 # -------------------------
@@ -29,20 +31,19 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 PROJECT_DB_PATH = BASE_DIR / "data" / "duckdb" / "subs_project.duckdb"
 SOURCE_DB_PATH  = BASE_DIR / "data" / "duckdb" / "subs.duckdb"
 
-# change to "cluster_full" on HLT
 RUN_MODE = "local_debug"   # "local_debug" or "cluster_full"
 
 if RUN_MODE == "local_debug":
     # short + tiny run just to make sure everything works
     MAX_LENGTH = 512            # shorter context to save memory
-    OPUS_LIMIT = 50_000         # or even 10_000 if needed
+    TRAIN_LIMIT = 50_000        # cap how many rows we stream from train_data
     PER_DEVICE_BATCH = 1
     GRAD_ACCUM = 1
-    MAX_STEPS = 200             # tiny training run
+    MAX_STEPS = 2000            # tiny training run
     USE_CPU = False             # set True if GPU still OOM and you just want to test
 else:  # "cluster_full"
     MAX_LENGTH = 2048           # your real context length
-    OPUS_LIMIT = None           # full OPUS
+    TRAIN_LIMIT = None          # None = full train_data
     PER_DEVICE_BATCH = 4        # per GPU
     GRAD_ACCUM = 8              # effective batch = 32 sequences
     MAX_STEPS = 8000            # or whatever you and your advisor want
@@ -52,45 +53,45 @@ pd.set_option("display.max_colwidth", 180)
 
 
 # -------------------------
-# DUCKDB STREAMING HELPERS
+# DUCKDB: connect + streaming from VIEWS
 # -------------------------
 
-def find_ptbrvarid_table(con: duckdb.DuckDBPyConnection) -> str:
+PROJECT_DB_STR = PROJECT_DB_PATH.as_posix()
+SOURCE_DB_STR  = SOURCE_DB_PATH.as_posix()
+
+def connect_project(read_only: bool = True) -> duckdb.DuckDBPyConnection:
     """
-    Try to find the PtBrVarId base table in subs.duckdb.
-    Adjust this if your table name is different.
+    Connect to subs_project.duckdb and ensure the 'src' catalog is attached.
+    The views train_data/test_data may reference src.main.*.
     """
-    cand_df = con.execute("""
-        SELECT table_name, table_type
-        FROM information_schema.tables
-        WHERE table_schema='main' AND lower(table_name) LIKE 'ptbrvarid%'
-    """).df()
-    if cand_df.empty:
-        raise RuntimeError("Could not find a PtBrVarId table in subs.duckdb (name like 'ptbrvarid%').")
-    base = cand_df[cand_df.table_type == "BASE TABLE"]
-    if not base.empty:
-        return base.table_name.iloc[0]
-    return cand_df.table_name.iloc[0]
+    con = duckdb.connect(PROJECT_DB_STR, read_only=read_only)
+    dbl = con.execute("PRAGMA database_list").df()
+    if not (dbl["name"] == "src").any():
+        con.execute(f"ATTACH '{SOURCE_DB_STR}' AS src")
+    return con
 
 
-def stream_opus(
-    db_path: str,
+def stream_from_view(
+    view_name: str,
     batch_size: int = 10_000,
     limit: Optional[int] = None,
 ) -> Iterator[Dict]:
     """
-    OPUS / OpenSubs: parallel pt-BR / pt-PT pairs.
+    Stream rows from train_data or test_data (views in subs_project.duckdb).
+    We keep the unified row structure: dataset, source, bucket, theme, label,
+    text_pt_br, text_pt_pt, ref_pt_pt_manual, ref_pt_pt_deepl.
     """
-    con = duckdb.connect(db_path, read_only=True)
-
-    base_query = """
-        SELECT
-            sent_pt_br AS text_pt_br,
-            sent_pt_pt AS text_pt_pt
-        FROM opus_moses_filtered
-    """
-
+    con = connect_project(read_only=True)
     offset = 0
+
+    base_query = f"""
+        SELECT
+          dataset, source, bucket, theme, label,
+          text_pt_br, text_pt_pt,
+          ref_pt_pt_manual, ref_pt_pt_deepl
+        FROM {view_name}
+    """
+
     while True:
         if limit is not None:
             remaining = limit - offset
@@ -100,262 +101,48 @@ def stream_opus(
         else:
             cur_batch = batch_size
 
-        batch = con.execute(
-            base_query + f" LIMIT {cur_batch} OFFSET {offset}"
-        ).df()
-
+        batch = con.execute(base_query + f" LIMIT {cur_batch} OFFSET {offset}").df()
         if batch.empty:
             break
 
         for _, row in batch.iterrows():
-            yield {
-                "dataset": "OpenSubs",
-                "source": "opus_moses_filtered",
-                "bucket": "n/a",
-                "theme": "n/a",
-                "label": None,
-                "text_pt_br": row["text_pt_br"],
-                "text_pt_pt": row["text_pt_pt"],
-                "ref_pt_pt_manual": None,
-                "ref_pt_pt_deepl": None,
-            }
+            yield row.to_dict()
 
         offset += len(batch)
 
     con.close()
 
 
-def stream_ptbrvarid_split(
-    db_path: str,
-    split_kinds=("train", "validation"),
+def stream_training_rows_from_project(
+    train_limit: Optional[int] = None,
     batch_size: int = 10_000,
 ) -> Iterator[Dict]:
     """
-    Stream PtBrVarId rows for given splits from subs.duckdb.
-    - train instance: split_kinds = ('train', 'validation')
-    - test instance : split_kinds = ('test',)
+    Training instance:
+      - All rows from main.train_data view (which already merges OPUS, PtBrVarId, FRMT dev, Gold as you defined).
     """
-    con = duckdb.connect(db_path, read_only=True)
-
-    ptbr_table = find_ptbrvarid_table(con)
-    print(f"Using PtBrVarId table: {ptbr_table} | splits: {split_kinds}")
-
-    split_list = ",".join(f"'{s}'" for s in split_kinds)
-    base_query = f"""
-        SELECT
-            dataset,
-            domain,
-            split,
-            label,
-            text_pt_br,
-            text_pt_pt
-        FROM {ptbr_table}
-        WHERE dataset = 'PtBrVId'
-          AND lower(split) IN ({split_list})
-    """
-
-    offset = 0
-    while True:
-        batch = con.execute(
-            base_query + f" LIMIT {batch_size} OFFSET {offset}"
-        ).df()
-
-        if batch.empty:
-            break
-
-        for _, row in batch.iterrows():
-            yield {
-                "dataset": "PtBrVarId",
-                "source": "liaad/PtBrVId",
-                "bucket": row.get("domain", "n/a") or "n/a",
-                "theme": "n/a",
-                "label": row["label"],       # 'pt-BR' or 'pt-PT'
-                "text_pt_br": row["text_pt_br"],
-                "text_pt_pt": row["text_pt_pt"],
-                "ref_pt_pt_manual": None,
-                "ref_pt_pt_deepl": None,
-            }
-
-        offset += len(batch)
-
-    con.close()
+    print("Streaming rows from train_data...")
+    yield from stream_from_view(
+        view_name="train_data",
+        batch_size=batch_size,
+        limit=train_limit,
+    )
 
 
-def stream_ptbrvarid_train(db_path: str, batch_size: int = 10_000) -> Iterator[Dict]:
-    return stream_ptbrvarid_split(db_path, split_kinds=("train", "validation"), batch_size=batch_size)
-
-
-def stream_ptbrvarid_test(db_path: str, batch_size: int = 10_000) -> Iterator[Dict]:
-    return stream_ptbrvarid_split(db_path, split_kinds=("test",), batch_size=batch_size)
-
-
-def stream_frmt_dev(
-    db_path: str,
+def stream_test_rows_from_project(
+    test_limit: Optional[int] = None,
     batch_size: int = 10_000,
-) -> Iterator[Dict]:
-    con = duckdb.connect(db_path, read_only=True)
-
-    base_query = """
-        SELECT bucket, text_pt_br, text_pt_pt
-        FROM frmt_dev
-    """
-
-    offset = 0
-    while True:
-        batch = con.execute(
-            base_query + f" LIMIT {batch_size} OFFSET {offset}"
-        ).df()
-
-        if batch.empty:
-            break
-
-        for _, row in batch.iterrows():
-            yield {
-                "dataset": "FRMT",
-                "source": "google-research/frmt",
-                "bucket": row.get("bucket", "n/a") or "n/a",
-                "theme": "n/a",
-                "label": None,
-                "text_pt_br": row["text_pt_br"],
-                "text_pt_pt": row["text_pt_pt"],
-                "ref_pt_pt_manual": None,
-                "ref_pt_pt_deepl": None,
-            }
-
-        offset += len(batch)
-
-    con.close()
-
-
-def stream_frmt_test(
-    db_path: str,
-    batch_size: int = 10_000,
-) -> Iterator[Dict]:
-    con = duckdb.connect(db_path, read_only=True)
-
-    base_query = """
-        SELECT bucket, text_pt_br, text_pt_pt
-        FROM frmt_test
-    """
-
-    offset = 0
-    while True:
-        batch = con.execute(
-            base_query + f" LIMIT {batch_size} OFFSET {offset}"
-        ).df()
-
-        if batch.empty:
-            break
-
-        for _, row in batch.iterrows():
-            yield {
-                "dataset": "FRMT",
-                "source": "google-research/frmt",
-                "bucket": row.get("bucket", "n/a") or "n/a",
-                "theme": "n/a",
-                "label": None,
-                "text_pt_br": row["text_pt_br"],
-                "text_pt_pt": row["text_pt_pt"],
-                "ref_pt_pt_manual": None,
-                "ref_pt_pt_deepl": None,
-            }
-
-        offset += len(batch)
-
-    con.close()
-
-
-def stream_gold_test(
-    db_path: str,
-    batch_size: int = 10_000,
-) -> Iterator[Dict]:
-    con = duckdb.connect(db_path, read_only=True)
-
-    base_query = """
-        SELECT bucket, theme, text_pt_br, ref_pt_pt_manual, ref_pt_pt_deepl
-        FROM gold_test
-    """
-
-    offset = 0
-    while True:
-        batch = con.execute(
-            base_query + f" LIMIT {batch_size} OFFSET {offset}"
-        ).df()
-
-        if batch.empty:
-            break
-
-        for _, row in batch.iterrows():
-            yield {
-                "dataset": "Gold",
-                "source": "joaosanches/golden_collection",
-                "bucket": row.get("bucket", "n/a") or "n/a",
-                "theme": row.get("theme", "n/a") or "n/a",
-                "label": None,
-                "text_pt_br": row["text_pt_br"],              # pt-BR
-                "text_pt_pt": row["ref_pt_pt_manual"],        # treat manual EP as pt-PT text
-                "ref_pt_pt_manual": row["ref_pt_pt_manual"],
-                "ref_pt_pt_deepl": row["ref_pt_pt_deepl"],
-            }
-
-        offset += len(batch)
-
-    con.close()
-
-
-def stream_training_rows(
-    opus_limit: Optional[int] = None,
-    opus_batch: int = 10_000,
-    ptbr_batch: int = 10_000,
-    frmt_batch: int = 10_000,
-) -> Iterator[Dict]:
-    """
-    Train instance:
-      - OPUS (translation + classification)
-      - PtBrVarId train+validation (classification only, since no parallel)
-      - FRMT dev (translation + classification when both sides exist)
-    """
-    src_path = SOURCE_DB_PATH.as_posix()
-    proj_path = PROJECT_DB_PATH.as_posix()
-
-    print("Streaming OPUS/OpenSubs (train)...")
-    for row in stream_opus(src_path, batch_size=opus_batch, limit=opus_limit):
-        yield row
-
-    print("Streaming PtBrVarId train+val (train)...")
-    for row in stream_ptbrvarid_train(src_path, batch_size=ptbr_batch):
-        yield row
-
-    print("Streaming FRMT dev (train)...")
-    for row in stream_frmt_dev(proj_path, batch_size=frmt_batch):
-        yield row
-
-
-def stream_test_rows(
-    ptbr_batch: int = 10_000,
-    frmt_batch: int = 10_000,
-    gold_batch: int = 10_000,
 ) -> Iterator[Dict]:
     """
     Test instance:
-      - PtBrVarId test
-      - FRMT test
-      - Gold Collection
+      - All rows from main.test_data view (PtBrVarId test, FRMT test, Gold, etc.).
     """
-    src_path = SOURCE_DB_PATH.as_posix()
-    proj_path = PROJECT_DB_PATH.as_posix()
-
-    print("Streaming PtBrVarId test (eval)...")
-    for row in stream_ptbrvarid_test(src_path, batch_size=ptbr_batch):
-        yield row
-
-    print("Streaming FRMT test (eval)...")
-    for row in stream_frmt_test(proj_path, batch_size=frmt_batch):
-        yield row
-
-    print("Streaming Gold Collection (eval)...")
-    for row in stream_gold_test(proj_path, batch_size=gold_batch):
-        yield row
+    print("Streaming rows from test_data...")
+    yield from stream_from_view(
+        view_name="test_data",
+        batch_size=batch_size,
+        limit=test_limit,
+    )
 
 
 # -------------------------
@@ -370,20 +157,18 @@ def main():
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(SEED)
 
-    # --- build training IterableDataset (streaming) ---
+    # --- build training IterableDataset (streaming from view) ---
     def duckdb_row_generator():
-        yield from stream_training_rows(
-            opus_limit=OPUS_LIMIT,
-            opus_batch=10_000,
-            ptbr_batch=10_000,
-            frmt_batch=10_000,
+        yield from stream_training_rows_from_project(
+            train_limit=TRAIN_LIMIT,
+            batch_size=10_000,
         )
 
     raw_train = IterableDataset.from_generator(duckdb_row_generator)
 
-    # --- build eval dataset in memory ---
+    # --- build eval dataset in memory (from test_data view) ---
     eval_rows = []
-    for i, row in enumerate(stream_test_rows()):
+    for i, row in enumerate(stream_test_rows_from_project(test_limit=10_000, batch_size=10_000)):
         eval_rows.append(row)
         if i >= 10_000:   # cap for practicality
             break
@@ -450,8 +235,8 @@ def main():
         Return a *list* of examples for this row.
         Each example is a dict: {"task": ..., "source": ..., "target": ...}
 
-        - OPUS (dataset == 'OpenSubs'):
-            * Always has both texts -> translation + classification for each side.
+        - OpenSubs (dataset == 'OpenSubs'):
+            * Both texts -> translation + classification for each side.
         - PtBrVarId:
             * Only classification, using the explicit 'label' column.
             * No translation (no rows with two texts).
@@ -459,18 +244,18 @@ def main():
             * If both text_pt_br and text_pt_pt exist -> translation + classification (both sides).
             * Otherwise -> classification only for whichever side exists.
         - Gold:
-            * We treat text_pt_br as pt-BR, ref_pt_pt_manual as pt-PT.
+            * We treat text_pt_br as pt-BR, text_pt_pt (manual) as pt-PT.
             * If both exist -> translation (BR->PT) + classification for both sides.
             * Otherwise -> classification only for available side(s).
         """
         examples = []
 
         dataset = row["dataset"]
-        src_br = row["text_pt_br"]
-        src_pt = row["text_pt_pt"]   # for Gold, this is ref_pt_pt_manual
-        label = row["label"]
+        src_br  = row["text_pt_br"]
+        src_pt  = row["text_pt_pt"]   # for Gold, this is manual EP
+        label   = row["label"]
 
-        # --- 1) OPUS: translation + classification from both columns ---
+        # --- 1) OpenSubs: translation + classification from both columns ---
         if dataset == "OpenSubs":
             if src_br and src_pt:
                 # translation
@@ -496,7 +281,6 @@ def main():
         # --- 2) PtBrVarId: classification only ---
         if dataset == "PtBrVarId":
             if label in ("pt-BR", "pt-PT"):
-                # choose whichever text exists (you said only one per row)
                 text = src_br if src_br else src_pt
                 if text:
                     examples.append({
@@ -549,25 +333,25 @@ def main():
 
         texts = []
         for ex in examples:
-            task = ex["task"]
+            task   = ex["task"]
             source = ex["source"]
             target = ex["target"]
 
             if task == "translate_br2pt":
                 system_prompt = SYSTEM_TRANSLATION
-                user_content = USER_TRANSL_BR2PT.format(source=source)
+                user_content  = USER_TRANSL_BR2PT.format(source=source)
             elif task == "translate_pt2br":
                 system_prompt = SYSTEM_TRANSLATION
-                user_content = USER_TRANSL_PT2BR.format(source=source)
+                user_content  = USER_TRANSL_PT2BR.format(source=source)
             elif task == "classify":
                 system_prompt = SYSTEM_CLASSIFICATION
-                user_content = USER_CLASSIFICATION.format(source=source)
+                user_content  = USER_CLASSIFICATION.format(source=source)
             else:
                 continue
 
             messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_content},
+                {"role": "system",    "content": system_prompt},
+                {"role": "user",      "content": user_content},
                 {"role": "assistant", "content": target},
             ]
             text = tok.apply_chat_template(
@@ -633,11 +417,21 @@ def main():
     model_lora = get_peft_model(model, lora_config)
     model_lora.print_trainable_parameters()
 
+    # ---- Disable PEFT model-card writing to avoid PermissionError ----
+    def _no_model_card(self, output_dir: str):
+        return
+    model_lora.create_or_update_model_card = MethodType(_no_model_card, model_lora)
+
     # -------------------------
     # TrainingArguments & Trainer
     # -------------------------
+
+    # use a writable base dir for checkpoints
+    BASE_OUT = pathlib.Path.home() / "models"
+    BASE_OUT.mkdir(parents=True, exist_ok=True)
+
     training_args = TrainingArguments(
-        output_dir=f"./qwen3-0_6b-ptbr-ptpt-lora-{RUN_MODE}",
+        output_dir=str(BASE_OUT / f"qwen3-0_6b-ptbr-ptpt-lora-{RUN_MODE}"),
 
         # core training
         per_device_train_batch_size=PER_DEVICE_BATCH,
@@ -653,12 +447,14 @@ def main():
 
         # evaluation
         do_eval=True,
-        eval_strategy="steps",
+        evaluation_strategy="steps",
         eval_steps=1000,
 
         # saving
         save_strategy="steps",
         save_steps=1000,
+        save_total_limit=2,
+        overwrite_output_dir=True,
 
         # precision & device
         bf16=torch.cuda.is_available() and not USE_CPU,
@@ -679,9 +475,11 @@ def main():
     trainer.train()
     trainer.evaluate()
 
-    adapter_dir = f"./qwen3-0_6b-ptbr-ptpt-lora-adapter-{RUN_MODE}"
-    trainer.save_model(adapter_dir)
-    tok.save_pretrained(f"{adapter_dir}-tokenizer")
+    # final adapter save
+    adapter_dir = BASE_OUT / f"qwen3-0_6b-ptbr-ptpt-lora-adapter-{RUN_MODE}"
+    adapter_dir.mkdir(parents=True, exist_ok=True)
+    trainer.save_model(str(adapter_dir))
+    tok.save_pretrained(str(adapter_dir) + "-tokenizer")
     print(f"Saved LoRA adapter to {adapter_dir}")
 
 
