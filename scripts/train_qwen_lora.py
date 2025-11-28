@@ -42,20 +42,19 @@ if RUN_MODE == "local_debug":
     TRAIN_LIMIT = 50_000
     PER_DEVICE_BATCH = 1
     GRAD_ACCUM = 1
-    MAX_STEPS = 2000
+    MAX_STEPS = 2_000
     USE_CPU = False
 
     VAL_MAX_ROWS = 2_000
 else:  # "cluster_full"
-    MAX_LENGTH = 2048
+    MAX_LENGTH = 2_048
     TRAIN_LIMIT = None
     PER_DEVICE_BATCH = 2
     GRAD_ACCUM = 4
     MAX_STEPS = 900_000
     USE_CPU = False
 
-    VAL_MAX_ROWS = 100_000    # <= fixed cap for validation size
-
+    VAL_MAX_ROWS = 100_000    # upper cap for validation size
 
 pd.set_option("display.max_colwidth", 180)
 
@@ -78,24 +77,40 @@ def connect_project(read_only: bool = True) -> duckdb.DuckDBPyConnection:
 
 def stream_from_view(
     view_name: str,
+    split: Optional[str] = None,
     batch_size: int = 10_000,
     limit: Optional[int] = None,
 ) -> Iterator[Dict]:
     """
     Stream rows from train_data or test_data (views in subs_project.duckdb).
-    We keep the unified row structure: dataset, source, bucket, theme, label,
-    text_pt_br, text_pt_pt, ref_pt_pt_manual, ref_pt_pt_deepl.
+
+    If `split` is not None, only rows with that split (case-insensitive)
+    are returned (e.g. 'train', 'valid', 'test').
+
+    We keep the unified row structure:
+      dataset, split, source, bucket, theme, label,
+      text_pt_br, text_pt_pt, ref_pt_pt_manual, ref_pt_pt_deepl.
     """
     con = connect_project(read_only=True)
     offset = 0
 
     base_query = f"""
         SELECT
-          dataset, source, bucket, theme, label,
-          text_pt_br, text_pt_pt,
-          ref_pt_pt_manual, ref_pt_pt_deepl
+          dataset,
+          split,
+          source,
+          bucket,
+          theme,
+          label,
+          text_pt_br,
+          text_pt_pt,
+          ref_pt_pt_manual,
+          ref_pt_pt_deepl
         FROM {view_name}
     """
+
+    if split is not None:
+        base_query += f" WHERE lower(split) = '{split.lower()}'"
 
     while True:
         if limit is not None:
@@ -124,80 +139,34 @@ def stream_training_rows_from_project(
 ) -> Iterator[Dict]:
     """
     Training instance:
-      - All rows from main.train_data view (which already merges OPUS, PtBrVarId, FRMT dev, Gold as you defined).
+      - All rows from train_data with split='train'.
+      - Includes OpenSubs, PtBrVarId train, FRMT train, etc.
     """
-    print("Streaming rows from train_data...")
+    print("Streaming rows from train_data (split=train)...")
     yield from stream_from_view(
         view_name="train_data",
+        split="train",
         batch_size=batch_size,
         limit=train_limit,
     )
 
 
-def stream_test_rows_from_project(
-    test_limit: Optional[int] = None,
+def stream_valid_rows_from_project(
+    valid_limit: Optional[int] = None,
     batch_size: int = 10_000,
 ) -> Iterator[Dict]:
     """
-    Test instance:
-      - All rows from main.test_data view (PtBrVarId test, FRMT test, Gold, etc.).
-    NOTE: we no longer use this during training-time evaluation; it's reserved for final test.
+    Validation instance:
+      - All rows from train_data with split='valid'.
+      - Includes PtBrVarId valid, FRMT valid (1% of dev), etc.
     """
-    print("Streaming rows from test_data...")
+    print("Streaming rows from train_data (split=valid)...")
     yield from stream_from_view(
-        view_name="test_data",
+        view_name="train_data",
+        split="valid",
         batch_size=batch_size,
-        limit=test_limit,
+        limit=valid_limit,
     )
-
-
-# -------------------------
-# Helper: build validation dataset by random sampling from train_data
-# -------------------------
-
-def build_val_dataset_from_train(
-    val_max_rows: int,
-    seed: int = SEED,
-) -> Dataset:
-    """
-    Build an in-memory validation Dataset by randomly sampling rows from train_data,
-    with different probabilities per dataset (stratified sampling).
-
-    - val_max_rows: upper cap on number of validation rows.
-    - seed: for reproducibility.
-
-    NOTE: this does NOT guarantee disjointness from the training stream, because
-    we don't have stable IDs to filter them out, but for a large corpus the
-    overlap is usually negligible.
-    """
-    rng = random.Random(seed)
-    val_rows = []
-
-    # Adjust these names/probabilities based on your actual `dataset` values
-    p_by_dataset = {
-        "OpenSubs": 0.02,   # OPUS / subtitles: big, use low prob
-        "OPUS": 0.02,       # in case it's named 'OPUS'
-        "PtBrVarId": 0.30,  # more weight
-        "FRMT": 0.30,       # more weight
-        # any other dataset will use default below
-    }
-
-    for row in stream_training_rows_from_project(train_limit=None, batch_size=10_000):
-        ds = row.get("dataset")
-        p = p_by_dataset.get(ds, 0.05)  # default prob for unknown datasets
-
-        if rng.random() < p:
-            val_rows.append(row)
-            if len(val_rows) >= val_max_rows:
-                break
-
-    val_df = pd.DataFrame(val_rows)
-    print("Validation rows collected from train_data:", len(val_df))
-    if "dataset" in val_df.columns:
-        print("Validation rows by dataset:\n", val_df["dataset"].value_counts())
-
-    return Dataset.from_pandas(val_df, preserve_index=False)
-
 
 
 # -------------------------
@@ -212,11 +181,11 @@ def main():
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(SEED)
 
-    # --- build training IterableDataset (streaming from view) ---
+    # --- build training IterableDataset (split='train') ---
     def duckdb_row_generator():
         """
-        Stream rows from train_data and occasionally print which dataset
-        a row is coming from, just for monitoring.
+        Stream rows from train_data (split=train) and occasionally print which
+        dataset a row is coming from, just for monitoring.
         """
         for i, row in enumerate(
             stream_training_rows_from_project(
@@ -226,17 +195,29 @@ def main():
         ):
             # print with a small probability, e.g. 0.001 = 0.1% of rows
             if random.random() < 0.001:
-                print(f"[stream] row {i} from dataset={row.get('dataset')}")
+                print(f"[stream train] row {i} from dataset={row.get('dataset')}, split={row.get('split')}")
             yield row
-
 
     raw_train = IterableDataset.from_generator(duckdb_row_generator)
 
-    # --- build validation dataset in memory (sampled from train_data) ---
-    eval_ds = build_val_dataset_from_train(
-        val_max_rows=VAL_MAX_ROWS,
-        seed=SEED,
-    )
+    # --- build validation dataset in memory (split='valid' from train_data) ---
+    val_rows = []
+    for i, row in enumerate(
+        stream_valid_rows_from_project(
+            valid_limit=None,
+            batch_size=10_000,
+        )
+    ):
+        val_rows.append(row)
+        if len(val_rows) >= VAL_MAX_ROWS:
+            break
+
+    val_df = pd.DataFrame(val_rows)
+    print(f"Validation rows collected (split='valid' from train_data): {len(val_df)}")
+    if not val_df.empty and "dataset" in val_df.columns:
+        print("Validation rows by dataset:\n", val_df["dataset"].value_counts())
+
+    eval_ds = Dataset.from_pandas(val_df, preserve_index=False)
 
     # -------------------------
     # Tokenizer & Base Model
@@ -300,14 +281,11 @@ def main():
             * Both texts -> translation + classification for each side.
         - PtBrVarId:
             * Only classification, using the explicit 'label' column.
-            * No translation (no rows with two texts).
         - FRMT:
             * If both text_pt_br and text_pt_pt exist -> translation + classification (both sides).
             * Otherwise -> classification only for whichever side exists.
         - Gold:
             * We treat text_pt_br as pt-BR, text_pt_pt (manual) as pt-PT.
-            * If both exist -> translation (BR->PT) + classification for both sides.
-            * Otherwise -> classification only for available side(s).
         """
         examples = []
 
@@ -444,7 +422,7 @@ def main():
         preprocess_batch,
         batched=True,
         remove_columns=[
-            "dataset", "source", "bucket", "theme",
+            "dataset", "split", "source", "bucket", "theme",
             "label", "text_pt_br", "text_pt_pt",
             "ref_pt_pt_manual", "ref_pt_pt_deepl",
         ],
@@ -454,7 +432,7 @@ def main():
         preprocess_batch,
         batched=True,
         remove_columns=[
-            "dataset", "source", "bucket", "theme",
+            "dataset", "split", "source", "bucket", "theme",
             "label", "text_pt_br", "text_pt_pt",
             "ref_pt_pt_manual", "ref_pt_pt_deepl",
         ],
@@ -492,7 +470,8 @@ def main():
     BASE_OUT.mkdir(parents=True, exist_ok=True)
 
     training_args = TrainingArguments(
-        output_dir=str(BASE_OUT / f"qwen3-0_6b-ptbr-ptpt-lora-{RUN_MODE}"),
+        output_dir=str(BASE_OUT
+                       / f"qwen3-0_6b-ptbr-ptpt-lora-{RUN_MODE}"),
 
         # core training
         per_device_train_batch_size=PER_DEVICE_BATCH,
@@ -509,11 +488,11 @@ def main():
         # evaluation
         do_eval=True,
         evaluation_strategy="steps",
-        evaluation_steps=1000,              # how often to run on the fixed val set
+        evaluation_steps=10_000,  # how often to run on the fixed val set
 
         # saving
         save_strategy="steps",
-        save_steps=1000,
+        save_steps=100_000,
         save_total_limit=2,
         overwrite_output_dir=True,
 
