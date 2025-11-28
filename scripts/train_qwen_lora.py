@@ -158,7 +158,7 @@ def stream_valid_rows_from_project(
     """
     Validation instance:
       - All rows from train_data with split='valid'.
-      - Includes PtBrVarId valid, FRMT valid (1% of dev), etc.
+      - Includes PtBrVarId valid, FRMT valid (1% of dev), etc..
     """
     print("Streaming rows from train_data (split=valid)...")
     yield from stream_from_view(
