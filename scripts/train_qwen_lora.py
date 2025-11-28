@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import os
 import random
 import numpy as np
@@ -14,6 +13,7 @@ from transformers import (
     AutoModelForCausalLM,
     TrainingArguments,
     Trainer,
+    EarlyStoppingCallback,
 )
 from peft import LoraConfig, get_peft_model
 from types import MethodType
@@ -26,28 +26,36 @@ from types import MethodType
 MODEL_ID = "Qwen/Qwen3-0.6B"
 SEED = 123
 
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parent.parent   # repo root (one level above scripts/)
 PROJECT_DB_PATH = BASE_DIR / "data" / "duckdb" / "subs_project.duckdb"
 SOURCE_DB_PATH  = BASE_DIR / "data" / "duckdb" / "subs.duckdb"
 
-RUN_MODE = "local_debug"   # "local_debug" or "cluster_full"
+PROJECT_DB_STR = PROJECT_DB_PATH.as_posix()
+SOURCE_DB_STR  = SOURCE_DB_PATH.as_posix()
+
+RUN_MODE = "cluster_full"   # "local_debug" or "cluster_full"
 
 if RUN_MODE == "local_debug":
-    # short + tiny run just to make sure everything works
-    MAX_LENGTH = 512            # shorter context to save memory
-    TRAIN_LIMIT = 50_000        # cap how many rows we stream from train_data
+    MAX_LENGTH = 512
+    TRAIN_LIMIT = 50_000
     PER_DEVICE_BATCH = 1
     GRAD_ACCUM = 1
-    MAX_STEPS = 2000            # tiny training run
-    USE_CPU = False             # set True if GPU still OOM and you just want to test
+    MAX_STEPS = 2000
+    USE_CPU = False
+
+    VAL_MAX_ROWS = 2_000
 else:  # "cluster_full"
-    MAX_LENGTH = 2048           # your real context length
-    TRAIN_LIMIT = None          # None = full train_data
-    PER_DEVICE_BATCH = 4        # per GPU
-    GRAD_ACCUM = 8              # effective batch = 32 sequences
-    MAX_STEPS = 8000            # or whatever you and your advisor want
-    USE_CPU = False             # we want GPUs on HLT
+    MAX_LENGTH = 2048
+    TRAIN_LIMIT = None
+    PER_DEVICE_BATCH = 2
+    GRAD_ACCUM = 4
+    MAX_STEPS = 900_000
+    USE_CPU = False
+
+    VAL_MAX_ROWS = 100_000    # <= fixed cap for validation size
+
 
 pd.set_option("display.max_colwidth", 180)
 
@@ -55,9 +63,6 @@ pd.set_option("display.max_colwidth", 180)
 # -------------------------
 # DUCKDB: connect + streaming from VIEWS
 # -------------------------
-
-PROJECT_DB_STR = PROJECT_DB_PATH.as_posix()
-SOURCE_DB_STR  = SOURCE_DB_PATH.as_posix()
 
 def connect_project(read_only: bool = True) -> duckdb.DuckDBPyConnection:
     """
@@ -136,6 +141,7 @@ def stream_test_rows_from_project(
     """
     Test instance:
       - All rows from main.test_data view (PtBrVarId test, FRMT test, Gold, etc.).
+    NOTE: we no longer use this during training-time evaluation; it's reserved for final test.
     """
     print("Streaming rows from test_data...")
     yield from stream_from_view(
@@ -143,6 +149,55 @@ def stream_test_rows_from_project(
         batch_size=batch_size,
         limit=test_limit,
     )
+
+
+# -------------------------
+# Helper: build validation dataset by random sampling from train_data
+# -------------------------
+
+def build_val_dataset_from_train(
+    val_max_rows: int,
+    seed: int = SEED,
+) -> Dataset:
+    """
+    Build an in-memory validation Dataset by randomly sampling rows from train_data,
+    with different probabilities per dataset (stratified sampling).
+
+    - val_max_rows: upper cap on number of validation rows.
+    - seed: for reproducibility.
+
+    NOTE: this does NOT guarantee disjointness from the training stream, because
+    we don't have stable IDs to filter them out, but for a large corpus the
+    overlap is usually negligible.
+    """
+    rng = random.Random(seed)
+    val_rows = []
+
+    # Adjust these names/probabilities based on your actual `dataset` values
+    p_by_dataset = {
+        "OpenSubs": 0.02,   # OPUS / subtitles: big, use low prob
+        "OPUS": 0.02,       # in case it's named 'OPUS'
+        "PtBrVarId": 0.30,  # more weight
+        "FRMT": 0.30,       # more weight
+        # any other dataset will use default below
+    }
+
+    for row in stream_training_rows_from_project(train_limit=None, batch_size=10_000):
+        ds = row.get("dataset")
+        p = p_by_dataset.get(ds, 0.05)  # default prob for unknown datasets
+
+        if rng.random() < p:
+            val_rows.append(row)
+            if len(val_rows) >= val_max_rows:
+                break
+
+    val_df = pd.DataFrame(val_rows)
+    print("Validation rows collected from train_data:", len(val_df))
+    if "dataset" in val_df.columns:
+        print("Validation rows by dataset:\n", val_df["dataset"].value_counts())
+
+    return Dataset.from_pandas(val_df, preserve_index=False)
+
 
 
 # -------------------------
@@ -159,23 +214,29 @@ def main():
 
     # --- build training IterableDataset (streaming from view) ---
     def duckdb_row_generator():
-        yield from stream_training_rows_from_project(
-            train_limit=TRAIN_LIMIT,
-            batch_size=10_000,
-        )
+        """
+        Stream rows from train_data and occasionally print which dataset
+        a row is coming from, just for monitoring.
+        """
+        for i, row in enumerate(
+            stream_training_rows_from_project(
+                train_limit=TRAIN_LIMIT,
+                batch_size=10_000,
+            )
+        ):
+            # print with a small probability, e.g. 0.001 = 0.1% of rows
+            if random.random() < 0.001:
+                print(f"[stream] row {i} from dataset={row.get('dataset')}")
+            yield row
+
 
     raw_train = IterableDataset.from_generator(duckdb_row_generator)
 
-    # --- build eval dataset in memory (from test_data view) ---
-    eval_rows = []
-    for i, row in enumerate(stream_test_rows_from_project(test_limit=10_000, batch_size=10_000)):
-        eval_rows.append(row)
-        if i >= 10_000:   # cap for practicality
-            break
-
-    eval_df = pd.DataFrame(eval_rows)
-    print(f"Eval rows collected: {len(eval_df)}")
-    eval_ds = Dataset.from_pandas(eval_df, preserve_index=False)
+    # --- build validation dataset in memory (sampled from train_data) ---
+    eval_ds = build_val_dataset_from_train(
+        val_max_rows=VAL_MAX_ROWS,
+        seed=SEED,
+    )
 
     # -------------------------
     # Tokenizer & Base Model
@@ -448,7 +509,7 @@ def main():
         # evaluation
         do_eval=True,
         evaluation_strategy="steps",
-        eval_steps=1000,
+        evaluation_steps=1000,              # how often to run on the fixed val set
 
         # saving
         save_strategy="steps",
@@ -463,6 +524,11 @@ def main():
 
         # important for our custom preprocess_batch
         remove_unused_columns=False,
+
+        # early stopping / best model
+        load_best_model_at_end=True,
+        metric_for_best_model="eval_loss",
+        greater_is_better=False,
     )
 
     trainer = Trainer(
@@ -470,6 +536,7 @@ def main():
         args=training_args,
         train_dataset=train_tokenized,
         eval_dataset=eval_tokenized,
+        callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
     )
 
     trainer.train()
