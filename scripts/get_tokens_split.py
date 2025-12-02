@@ -10,8 +10,8 @@ from transformers import AutoTokenizer
 # -------------------
 # CONFIG
 # -------------------
-PROJECT_DB_PATH = pathlib.Path("../data/duckdb/subs_project.duckdb")
-SOURCE_DB_PATH  = pathlib.Path("../data/duckdb/subs.duckdb")
+PROJECT_DB_PATH = pathlib.Path("data/duckdb/subs_project.duckdb")
+SOURCE_DB_PATH  = pathlib.Path("data/duckdb/subs.duckdb")
 
 MODEL_NAME = "Qwen/Qwen3-0.6B"
 
@@ -19,7 +19,7 @@ MODEL_NAME = "Qwen/Qwen3-0.6B"
 # DB + TOKENIZER SETUP
 # -------------------
 def get_connection() -> duckdb.DuckDBPyConnection:
-    con = duckdb.connect(PROJECT_DB_PATH.as_posix())
+    con = duckdb.connect(PROJECT_DB_PATH.as_posix(), read_only=True)
 
     con.execute("PRAGMA threads=1;")
     con.execute("PRAGMA preserve_insertion_order=false;")
@@ -112,19 +112,15 @@ def main():
     count_tokens = get_tokenizer()
 
     print("Computing train/valid token stats...")
-    train_valid_stats = token_stats_for_table_per_dataset(
-        con,
-        count_tokens,
+    train_valid_stats = token_stats_for_table(
         table="train_data",
         has_split_col=True,
     )
 
     print("Computing test token stats...")
-    test_stats = token_stats_for_table_per_dataset(
-        con,
-        count_tokens,
+    test_stats = token_stats_for(
         table="test_data",
-        has_split_col=False,
+        has_split_col=True,
     )
 
     token_len_stats = (
