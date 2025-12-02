@@ -303,6 +303,11 @@ def main():
                     "source": src_br,
                     "target": src_pt,
                 })
+                examples.append({
+                    "task": "translate_pt2br",
+                    "source": src_pt,
+                    "target": src_br,
+                })
                 # classification BR
                 examples.append({
                     "task": "classify",
@@ -339,6 +344,11 @@ def main():
                 "task": "translate_br2pt",
                 "source": src_br,
                 "target": src_pt,
+            })
+            examples.append({
+                "task": "translate_pt2br",
+                "source": src_pt,
+                "target": src_br,
             })
 
         # b) classification for all available texts
