@@ -525,7 +525,7 @@ def main():
         args=training_args,
         train_dataset=train_tokenized,
         eval_dataset=eval_tokenized,
-        callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
+        callbacks=[EarlyStoppingCallback(early_stopping_patience=50)],
     )
 
     trainer.train()
