@@ -51,7 +51,7 @@ else:  # "cluster_full"
     TRAIN_LIMIT = None
     PER_DEVICE_BATCH = 2
     GRAD_ACCUM = 4
-    MAX_STEPS = 900_000
+    MAX_STEPS = 5_000_000
     USE_CPU = False
 
     VAL_MAX_ROWS = 100_000    # upper cap for validation size
