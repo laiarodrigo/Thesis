@@ -13,12 +13,14 @@ from transformers import AutoTokenizer
 PROJECT_DB_PATH = pathlib.Path("data/duckdb/subs_project.duckdb")
 SOURCE_DB_PATH  = pathlib.Path("data/duckdb/subs.duckdb")
 
-MODEL_NAME = "Qwen/Qwen3-0.6B"
+MODEL_NAME = "Qwen/Qwen3-0.6B"  # make sure this matches your actual HF model id
+
 
 # -------------------
 # DB + TOKENIZER SETUP
 # -------------------
 def get_connection() -> duckdb.DuckDBPyConnection:
+    # read_only=True prevents the locking issue
     con = duckdb.connect(PROJECT_DB_PATH.as_posix(), read_only=True)
 
     con.execute("PRAGMA threads=1;")
@@ -28,6 +30,7 @@ def get_connection() -> duckdb.DuckDBPyConnection:
 
     dbl = con.execute("PRAGMA database_list").df()
     if not (dbl["name"] == "src").any():
+        # src is also just read; this is fine in a read-only connection
         con.execute(f"ATTACH '{SOURCE_DB_PATH.as_posix()}' AS src;")
 
     return con
@@ -43,17 +46,39 @@ def get_tokenizer():
 
     return count_tokens
 
-def token_stats_for_table(table: str, has_split_col: bool) -> pd.DataFrame:
+
+# -------------------
+# TOKEN STATS (PER SPLIT)
+# -------------------
+def token_stats_for_table(
+    con: duckdb.DuckDBPyConnection,
+    count_tokens,
+    table: str,
+    has_split_col: bool,
+    batch_size: int = 50_000,
+) -> pd.DataFrame:
     """
+    Compute token stats per split for text_pt_br and text_pt_pt in `table`.
+
     table: 'train_data' or 'test_data'
-    has_split_col: True for train_data, False for test_data (we inject split='test')
+    has_split_col: True if table has a 'split' column (train_data),
+                   False if it doesn't (test_data -> inject 'test').
     """
-    
-    sql = f"""
-        SELECT split, text_pt_br, text_pt_pt
-        FROM {table}
-        WHERE text_pt_br IS NOT NULL OR text_pt_pt IS NOT NULL
-    """
+
+    if has_split_col:
+        sql = f"""
+            SELECT split, text_pt_br, text_pt_pt
+            FROM {table}
+            WHERE text_pt_br IS NOT NULL OR text_pt_pt IS NOT NULL
+        """
+    else:
+        # test_data usually has no split column; inject 'test'
+        sql = f"""
+            SELECT 'test' AS split, text_pt_br, text_pt_pt
+            FROM {table}
+            WHERE text_pt_br IS NOT NULL OR text_pt_pt IS NOT NULL
+        """
+
     rel = con.execute(sql)
 
     # stats[split] = dict with counters
@@ -63,15 +88,15 @@ def token_stats_for_table(table: str, has_split_col: bool) -> pd.DataFrame:
         "tokens_pt": 0,
     })
 
-    BATCH_SIZE = 50_000 # adjust if you want more/less speed vs memory
     iteration = 0
 
     while True:
-        rows = rel.fetchmany(BATCH_SIZE)  # list of tuples (split, text_pt_br, text_pt_pt)
+        rows = rel.fetchmany(batch_size)  # list of tuples (split, text_pt_br, text_pt_pt)
         if not rows:
             break
         iteration += 1
         print(f"  Processing batch {iteration} ({len(rows)} rows)...")
+
         for split, text_pt_br, text_pt_pt in rows:
             s = stats[split]
             s["n_rows"] += 1
@@ -95,6 +120,10 @@ def token_stats_for_table(table: str, has_split_col: bool) -> pd.DataFrame:
 
     return pd.DataFrame(out_rows)
 
+
+# -------------------
+# MAIN
+# -------------------
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -113,19 +142,23 @@ def main():
 
     print("Computing train/valid token stats...")
     train_valid_stats = token_stats_for_table(
+        con=con,
+        count_tokens=count_tokens,
         table="train_data",
         has_split_col=True,
     )
 
     print("Computing test token stats...")
-    test_stats = token_stats_for(
+    test_stats = token_stats_for_table(
+        con=con,
+        count_tokens=count_tokens,
         table="test_data",
-        has_split_col=True,
+        has_split_col=False,
     )
 
     token_len_stats = (
         pd.concat([train_valid_stats, test_stats], ignore_index=True)
-          .sort_values(["split", "dataset"])
+          .sort_values(["split"])
     )
 
     # Preview in stdout (small)
@@ -140,5 +173,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
