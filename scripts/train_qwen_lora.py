@@ -510,8 +510,8 @@ def main():
 
         # evaluation
         do_eval=True,
-        evaluation_strategy="steps",
-        evaluation_steps=10_000,  # how often to run on the fixed val set
+        eval_strategy="steps",
+        eval_steps=10_000,  # how often to run on the fixed val set
 
         # saving
         save_strategy="steps",
