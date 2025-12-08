@@ -50,9 +50,9 @@ if RUN_MODE == "local_debug":
 else:  # "cluster_full"
     MAX_LENGTH = 512
     TRAIN_LIMIT = None
-    PER_DEVICE_BATCH = 8
-    GRAD_ACCUM = 2
-    MAX_STEPS = 5_000_000
+    PER_DEVICE_BATCH = 10
+    GRAD_ACCUM = 4
+    MAX_STEPS = 2_500_000
     USE_CPU = False
 
     VAL_MAX_ROWS = 100_000    # upper cap for validation size
@@ -497,7 +497,7 @@ def main():
         # core training
         per_device_train_batch_size=PER_DEVICE_BATCH,
         gradient_accumulation_steps=GRAD_ACCUM,
-        dataloader_num_workers=16,                      
+        dataloader_num_workers=32,                      
         dataloader_pin_memory=True,
         learning_rate=1e-4,
         weight_decay=0.01,
