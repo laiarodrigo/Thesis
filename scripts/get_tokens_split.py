@@ -23,7 +23,7 @@ def get_connection() -> duckdb.DuckDBPyConnection:
     # read_only=True prevents the locking issue
     con = duckdb.connect(PROJECT_DB_PATH.as_posix(), read_only=True)
 
-    con.execute("PRAGMA threads=1;")
+    con.execute("PRAGMA threads=8;")
     con.execute("PRAGMA preserve_insertion_order=false;")
     con.execute("PRAGMA memory_limit='4GB';")
     con.execute("PRAGMA temp_directory='/tmp/duckdb_tmp';")
@@ -138,7 +138,7 @@ def main():
     con = get_connection()
 
     print("Loading tokenizer...")
-    count_tokens = get_tokenizer()
+    count_tokens = get_tokenizer() ### carregar apenas uma vez
 
     print("Computing train/valid token stats...")
     train_valid_stats = token_stats_for_table(
@@ -146,6 +146,7 @@ def main():
         count_tokens=count_tokens,
         table="train_data",
         has_split_col=True,
+        batch_size=20_000,
     )
 
     print("Computing test token stats...")

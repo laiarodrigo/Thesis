@@ -14,6 +14,7 @@ from transformers import (
     TrainingArguments,
     Trainer,
     EarlyStoppingCallback,
+    DataCollatorForLanguageModeling,
 )
 from peft import LoraConfig, get_peft_model
 from types import MethodType
@@ -47,10 +48,10 @@ if RUN_MODE == "local_debug":
 
     VAL_MAX_ROWS = 2_000
 else:  # "cluster_full"
-    MAX_LENGTH = 2_048
+    MAX_LENGTH = 512
     TRAIN_LIMIT = None
-    PER_DEVICE_BATCH = 2
-    GRAD_ACCUM = 4
+    PER_DEVICE_BATCH = 8
+    GRAD_ACCUM = 2
     MAX_STEPS = 5_000_000
     USE_CPU = False
 
@@ -278,14 +279,13 @@ def main():
         Each example is a dict: {"task": ..., "source": ..., "target": ...}
 
         - OpenSubs (dataset == 'OpenSubs'):
-            * Both texts -> translation + classification for each side.
+            * One translation direction per row (randomly chosen, BR→PT or PT→BR).
+            * Classification for both sides if present.
         - PtBrVarId:
-            * Only classification, using the explicit 'label' column.
-        - FRMT:
-            * If both text_pt_br and text_pt_pt exist -> translation + classification (both sides).
-            * Otherwise -> classification only for whichever side exists.
-        - Gold:
-            * We treat text_pt_br as pt-BR, text_pt_pt (manual) as pt-PT.
+            * Classification only, using the explicit 'label' column.
+        - FRMT / Gold / others:
+            * One translation direction per row if both sides exist (randomly chosen).
+            * Classification for all available sides.
         """
         examples = []
 
@@ -294,20 +294,25 @@ def main():
         src_pt  = row["text_pt_pt"]   # for Gold, this is manual EP
         label   = row["label"]
 
-        # --- 1) OpenSubs: translation + classification from both columns ---
+        # --- 1) OpenSubs: one translation direction + classification from both columns ---
         if dataset == "OpenSubs":
             if src_br and src_pt:
-                # translation
-                examples.append({
-                    "task": "translate_br2pt",
-                    "source": src_br,
-                    "target": src_pt,
-                })
-                examples.append({
-                    "task": "translate_pt2br",
-                    "source": src_pt,
-                    "target": src_br,
-                })
+                r = random.random()
+                if r > 0.3:
+                    # PT -> BR translation
+                    examples.append({
+                        "task": "translate_pt2br",
+                        "source": src_pt,
+                        "target": src_br,
+                    })
+                else:
+                    # BR -> PT translation
+                    examples.append({
+                        "task": "translate_br2pt",
+                        "source": src_br,
+                        "target": src_pt,
+                    })
+
                 # classification BR
                 examples.append({
                     "task": "classify",
@@ -338,18 +343,23 @@ def main():
         has_br = bool(src_br)
         has_pt = bool(src_pt)
 
-        # a) translation if both sides exist
+        # a) one translation direction if both sides exist
         if has_br and has_pt:
-            examples.append({
-                "task": "translate_br2pt",
-                "source": src_br,
-                "target": src_pt,
-            })
-            examples.append({
-                "task": "translate_pt2br",
-                "source": src_pt,
-                "target": src_br,
-            })
+            r = random.random()
+            if r > 0.3:
+                # PT -> BR translation
+                examples.append({
+                    "task": "translate_pt2br",
+                    "source": src_pt,
+                    "target": src_br,
+                })
+            else:
+                # BR -> PT translation
+                examples.append({
+                    "task": "translate_br2pt",
+                    "source": src_br,
+                    "target": src_pt,
+                })
 
         # b) classification for all available texts
         if has_br:
@@ -367,6 +377,7 @@ def main():
 
         return examples
 
+
     # -------------------------
     # Preprocess / tokenization
     # -------------------------
@@ -378,7 +389,8 @@ def main():
             examples.extend(row_examples)
 
         if not examples:
-            return {"input_ids": [], "attention_mask": [], "labels": []}
+            # No examples generated for this batch
+            return {"input_ids": [], "attention_mask": []}
 
         texts = []
         for ex in examples:
@@ -410,21 +422,15 @@ def main():
             )
             texts.append(text)
 
+        # Dynamic padding: no padding here, just truncation
         tokenized = tok(
             texts,
             max_length=MAX_LENGTH,
             truncation=True,
-            padding="max_length",
+            padding=False,
         )
 
-        labels = tokenized["input_ids"].copy()
-        pad_id = tok.pad_token_id
-        labels = [
-            [(tid if tid != pad_id else -100) for tid in seq]
-            for seq in labels
-        ]
-
-        tokenized["labels"] = labels
+        # No labels here – the collator will create them (copy of input_ids with pads masked as -100)
         return tokenized
 
     # tokenized train/eval
@@ -466,6 +472,11 @@ def main():
     model_lora = get_peft_model(model, lora_config)
     model_lora.print_trainable_parameters()
 
+    data_collator = DataCollatorForLanguageModeling(
+    tokenizer=tok,
+    mlm=False,
+)
+
     # ---- Disable PEFT model-card writing to avoid PermissionError ----
     def _no_model_card(self, output_dir: str):
         return
@@ -486,6 +497,8 @@ def main():
         # core training
         per_device_train_batch_size=PER_DEVICE_BATCH,
         gradient_accumulation_steps=GRAD_ACCUM,
+        dataloader_num_workers=16,                      
+        dataloader_pin_memory=True,
         learning_rate=1e-4,
         weight_decay=0.01,
         warmup_steps=200,
@@ -525,6 +538,7 @@ def main():
         args=training_args,
         train_dataset=train_tokenized,
         eval_dataset=eval_tokenized,
+        data_collator=data_collator,
         callbacks=[EarlyStoppingCallback(early_stopping_patience=50)],
     )
 
