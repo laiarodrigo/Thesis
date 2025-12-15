@@ -485,11 +485,6 @@ def main():
     # -------------------------
     # TrainingArguments & Trainer
     # -------------------------
-
-    # -------------------------
-    # TrainingArguments & Trainer
-    # -------------------------
-
     # use a writable base dir for checkpoints
     BASE_OUT = pathlib.Path.home() / "models"
     BASE_OUT.mkdir(parents=True, exist_ok=True)
@@ -503,12 +498,12 @@ def main():
         # core training
         per_device_train_batch_size=PER_DEVICE_BATCH,
         gradient_accumulation_steps=GRAD_ACCUM,
-        dataloader_num_workers=32,                      
+        dataloader_num_workers=32,
         dataloader_pin_memory=True,
         learning_rate=1e-4,
         weight_decay=0.01,
         warmup_steps=200,
-        max_steps=MAX_STEPS,
+        max_steps=MAX_STEPS,   # may be reduced below if resuming
 
         # logging
         logging_strategy="steps",
@@ -517,7 +512,7 @@ def main():
         # evaluation
         do_eval=True,
         eval_strategy="steps",
-        eval_steps=10_000,  # how often to run on the fixed val set
+        eval_steps=10_000,
 
         # saving
         save_strategy="steps",
@@ -539,6 +534,55 @@ def main():
         greater_is_better=False,
     )
 
+    # ---- "resume" logic: load LoRA weights from latest safetensors checkpoint, avoid torch.load ----
+    latest_ckpt = None
+    starting_step = 0
+
+    if checkpoint_root.exists():
+        ckpts = sorted(
+            [p for p in checkpoint_root.glob("checkpoint-*") if p.is_dir()],
+            key=lambda p: int(p.name.split("-")[-1]),
+        )
+        if ckpts:
+            latest_ckpt = ckpts[-1]
+            starting_step = int(latest_ckpt.name.split("-")[-1])
+            print(f"Found checkpoint {latest_ckpt} (step={starting_step}). "
+                  "Trying to load LoRA weights from adapter_model.safetensors...")
+
+            try:
+                from safetensors.torch import load_file
+
+                st_path = latest_ckpt / "adapter_model.safetensors"
+                if st_path.exists():
+                    state = load_file(str(st_path))
+                    missing, unexpected = model_lora.load_state_dict(state, strict=False)
+                    print(f"Loaded LoRA checkpoint from {st_path}. "
+                          f"Missing keys: {len(missing)}, unexpected keys: {len(unexpected)}")
+
+                    # only train remaining steps to reach MAX_STEPS overall
+                    remaining_steps = max(1, MAX_STEPS - starting_step)
+                    training_args.max_steps = remaining_steps
+                    print(f"Will train for additional {remaining_steps} steps "
+                          f"(target total ≈ {MAX_STEPS}).")
+                else:
+                    print(f"WARNING: {st_path} not found. "
+                          "Cannot safely load weights without torch.load; "
+                          "training will start from fresh LoRA.")
+            except ImportError:
+                print("WARNING: safetensors not installed. Cannot load checkpoint "
+                      "without using torch.load (which is blocked). "
+                      "Training will start from fresh LoRA.")
+            except Exception as e:
+                print(f"WARNING: Failed to load LoRA weights from {latest_ckpt}: {e}")
+                print("Training will start from fresh LoRA.")
+        else:
+            print("No checkpoints found in checkpoint_root, starting from scratch.")
+    else:
+        print("checkpoint_root does not exist yet, starting from scratch.")
+
+    # -------------------------
+    # Trainer
+    # -------------------------
     trainer = Trainer(
         model=model_lora,
         args=training_args,
@@ -548,26 +592,8 @@ def main():
         callbacks=[EarlyStoppingCallback(early_stopping_patience=50)],
     )
 
-    # --- resume from latest checkpoint if it exists ---
-    latest_ckpt = None
-    if checkpoint_root.exists():
-        ckpts = sorted(
-            [p for p in checkpoint_root.glob("checkpoint-*") if p.is_dir()],
-            key=lambda p: int(p.name.split("-")[-1]),
-        )
-        if ckpts:
-            latest_ckpt = ckpts[-1]
-            print(f"Resuming training from checkpoint: {latest_ckpt}")
-        else:
-            print("No checkpoints found in checkpoint_root, starting from scratch.")
-    else:
-        print("checkpoint_root does not exist yet, starting from scratch.")
-
-    if latest_ckpt is not None:
-        trainer.train(resume_from_checkpoint=str(latest_ckpt))
-    else:
-        trainer.train()
-
+    # NOTE: No resume_from_checkpoint here, to avoid torch.load on optimizer/scheduler.
+    trainer.train()
     trainer.evaluate()
 
     # final adapter save
@@ -576,7 +602,6 @@ def main():
     trainer.save_model(str(adapter_dir))
     tok.save_pretrained(str(adapter_dir) + "-tokenizer")
     print(f"Saved LoRA adapter to {adapter_dir}")
-
 
 if __name__ == "__main__":
     main()
