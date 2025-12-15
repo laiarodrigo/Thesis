@@ -486,13 +486,19 @@ def main():
     # TrainingArguments & Trainer
     # -------------------------
 
+    # -------------------------
+    # TrainingArguments & Trainer
+    # -------------------------
+
     # use a writable base dir for checkpoints
     BASE_OUT = pathlib.Path.home() / "models"
     BASE_OUT.mkdir(parents=True, exist_ok=True)
 
+    # where all checkpoints for this run mode live
+    checkpoint_root = BASE_OUT / f"qwen3-0_6b-ptbr-ptpt-lora-{RUN_MODE}"
+
     training_args = TrainingArguments(
-        output_dir=str(BASE_OUT
-                       / f"qwen3-0_6b-ptbr-ptpt-lora-{RUN_MODE}"),
+        output_dir=str(checkpoint_root),
 
         # core training
         per_device_train_batch_size=PER_DEVICE_BATCH,
@@ -542,7 +548,26 @@ def main():
         callbacks=[EarlyStoppingCallback(early_stopping_patience=50)],
     )
 
-    trainer.train()
+    # --- resume from latest checkpoint if it exists ---
+    latest_ckpt = None
+    if checkpoint_root.exists():
+        ckpts = sorted(
+            [p for p in checkpoint_root.glob("checkpoint-*") if p.is_dir()],
+            key=lambda p: int(p.name.split("-")[-1]),
+        )
+        if ckpts:
+            latest_ckpt = ckpts[-1]
+            print(f"Resuming training from checkpoint: {latest_ckpt}")
+        else:
+            print("No checkpoints found in checkpoint_root, starting from scratch.")
+    else:
+        print("checkpoint_root does not exist yet, starting from scratch.")
+
+    if latest_ckpt is not None:
+        trainer.train(resume_from_checkpoint=str(latest_ckpt))
+    else:
+        trainer.train()
+
     trainer.evaluate()
 
     # final adapter save
