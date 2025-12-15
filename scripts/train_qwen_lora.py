@@ -63,28 +63,26 @@ pd.set_option("display.max_colwidth", 180)
 # DATA STREAM RESUME CONFIG
 # -------------------------
 
-# Steps that were already completed in the first long run
+# Steps that were already completed in the first long run (before the 300k checkpoint)
 COMPLETED_STEPS_BEFORE_CHECKPOINT = 300_000
 
-# Approximate average number of training examples generated per DB row.
-# - PtBrVarId rows -> ~1 example (classification)
-# - OpenSubs / FRMT rows -> ~2-3 examples (translation + classifications)
-# We'll use 2.5 as a rough middle; tweak if needed.
-AVG_EXAMPLES_PER_ROW = 2.5
+# Effective batch size per optimizer step on THIS process.
+# (DataParallel splits each batch across GPUs, but the dataset stream is consumed once.)
+EXAMPLES_PER_STEP = PER_DEVICE_BATCH * GRAD_ACCUM  # 10 * 4 = 40 with your config
 
-# Effective batch size per optimizer step:
-# per_device_train_batch_size * gradient_accumulation_steps * world_size
-WORLD_SIZE = max(1, torch.cuda.device_count()) if not USE_CPU else 1
-EFFECTIVE_BATCH_PER_STEP = PER_DEVICE_BATCH * GRAD_ACCUM * WORLD_SIZE
+# Approximate average number of training examples generated per DB row.
+# PtBrVarId rows    -> ~1 example (classification)
+# OpenSubs / FRMT   -> ~2-3 examples (translation + classifications)
+AVG_EXAMPLES_PER_ROW = 2.5
 
 # Approximate number of DB rows consumed up to step 300k
 APPROX_ROWS_BEFORE_CHECKPOINT = int(
-    COMPLETED_STEPS_BEFORE_CHECKPOINT * EFFECTIVE_BATCH_PER_STEP / AVG_EXAMPLES_PER_ROW
+    COMPLETED_STEPS_BEFORE_CHECKPOINT * EXAMPLES_PER_STEP / AVG_EXAMPLES_PER_ROW
 )
 
 print(
     f"[resume-estimate] steps_before_ckpt={COMPLETED_STEPS_BEFORE_CHECKPOINT}, "
-    f"effective_batch={EFFECTIVE_BATCH_PER_STEP}, "
+    f"examples_per_step={EXAMPLES_PER_STEP}, "
     f"avg_examples_per_row={AVG_EXAMPLES_PER_ROW} -> "
     f"approx_rows_before_ckpt={APPROX_ROWS_BEFORE_CHECKPOINT}"
 )
@@ -101,6 +99,7 @@ if CURSOR_PATH.exists():
 else:
     TRAIN_START_OFFSET = APPROX_ROWS_BEFORE_CHECKPOINT
     print(f"[cursor] No cursor file found; using approximate TRAIN_START_OFFSET={TRAIN_START_OFFSET}")
+
 
 # -------------------------
 # DUCKDB: connect + streaming from VIEWS
