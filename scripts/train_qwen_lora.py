@@ -19,7 +19,6 @@ from transformers import (
 from peft import LoraConfig, get_peft_model
 from types import MethodType
 
-
 # -------------------------
 # CONFIG
 # -------------------------
@@ -61,6 +60,49 @@ pd.set_option("display.max_colwidth", 180)
 
 
 # -------------------------
+# DATA STREAM RESUME CONFIG
+# -------------------------
+
+# Steps that were already completed in the first long run
+COMPLETED_STEPS_BEFORE_CHECKPOINT = 300_000
+
+# Approximate average number of training examples generated per DB row.
+# - PtBrVarId rows -> ~1 example (classification)
+# - OpenSubs / FRMT rows -> ~2-3 examples (translation + classifications)
+# We'll use 2.5 as a rough middle; tweak if needed.
+AVG_EXAMPLES_PER_ROW = 2.5
+
+# Effective batch size per optimizer step:
+# per_device_train_batch_size * gradient_accumulation_steps * world_size
+WORLD_SIZE = max(1, torch.cuda.device_count()) if not USE_CPU else 1
+EFFECTIVE_BATCH_PER_STEP = PER_DEVICE_BATCH * GRAD_ACCUM * WORLD_SIZE
+
+# Approximate number of DB rows consumed up to step 300k
+APPROX_ROWS_BEFORE_CHECKPOINT = int(
+    COMPLETED_STEPS_BEFORE_CHECKPOINT * EFFECTIVE_BATCH_PER_STEP / AVG_EXAMPLES_PER_ROW
+)
+
+print(
+    f"[resume-estimate] steps_before_ckpt={COMPLETED_STEPS_BEFORE_CHECKPOINT}, "
+    f"effective_batch={EFFECTIVE_BATCH_PER_STEP}, "
+    f"avg_examples_per_row={AVG_EXAMPLES_PER_ROW} -> "
+    f"approx_rows_before_ckpt={APPROX_ROWS_BEFORE_CHECKPOINT}"
+)
+
+# Cursor file to track exact row index from now on
+CURSOR_PATH = BASE_DIR / "train_cursor.txt"
+
+# Initial streaming offset:
+# - If we already have a cursor from a previous run, trust it.
+# - Otherwise, start after the approx rows from the 300k run.
+if CURSOR_PATH.exists():
+    TRAIN_START_OFFSET = int(CURSOR_PATH.read_text().strip())
+    print(f"[cursor] Resuming data stream from TRAIN_START_OFFSET={TRAIN_START_OFFSET} (from {CURSOR_PATH})")
+else:
+    TRAIN_START_OFFSET = APPROX_ROWS_BEFORE_CHECKPOINT
+    print(f"[cursor] No cursor file found; using approximate TRAIN_START_OFFSET={TRAIN_START_OFFSET}")
+
+# -------------------------
 # DUCKDB: connect + streaming from VIEWS
 # -------------------------
 
@@ -81,6 +123,7 @@ def stream_from_view(
     split: Optional[str] = None,
     batch_size: int = 10_000,
     limit: Optional[int] = None,
+    start_offset: int = 0,
 ) -> Iterator[Dict]:
     """
     Stream rows from train_data or test_data (views in subs_project.duckdb).
@@ -93,7 +136,7 @@ def stream_from_view(
       text_pt_br, text_pt_pt, ref_pt_pt_manual, ref_pt_pt_deepl.
     """
     con = connect_project(read_only=True)
-    offset = 0
+    offset = start_offset
 
     base_query = f"""
         SELECT
@@ -137,6 +180,7 @@ def stream_from_view(
 def stream_training_rows_from_project(
     train_limit: Optional[int] = None,
     batch_size: int = 10_000,
+    start_offset: int = 0,
 ) -> Iterator[Dict]:
     """
     Training instance:
@@ -149,6 +193,7 @@ def stream_training_rows_from_project(
         split="train",
         batch_size=batch_size,
         limit=train_limit,
+        start_offset=start_offset,
     )
 
 
@@ -188,16 +233,36 @@ def main():
         Stream rows from train_data (split=train) and occasionally print which
         dataset a row is coming from, just for monitoring.
         """
-        for i, row in enumerate(
-            stream_training_rows_from_project(
-                train_limit=TRAIN_LIMIT,
-                batch_size=10_000,
-            )
+
+        global_row_index = TRAIN_START_OFFSET
+
+        for row in stream_training_rows_from_project(
+            train_limit=TRAIN_LIMIT,
+            batch_size=10_000,
+            start_offset=TRAIN_START_OFFSET,
         ):
+
             # print with a small probability, e.g. 0.001 = 0.1% of rows
             if random.random() < 0.001:
-                print(f"[stream train] row {i} from dataset={row.get('dataset')}, split={row.get('split')}")
+                print(
+                f"[stream train] global_row_index={global_row_index} "
+                f"dataset={row.get('dataset')}, split={row.get('split')}"
+            )
+            if global_row_index % 1000 == 0:
+                try:
+                    CURSOR_PATH.write_text(str(global_row_index))
+                    # optional: uncomment to see it often
+                    # print(f"[cursor] saved global_row_index={global_row_index} to {CURSOR_PATH}")
+                except Exception as e:
+                    print(f"[cursor] WARNING: failed to write cursor at index {global_row_index}: {e}")
+
             yield row
+            global_row_index += 1
+        try:
+            CURSOR_PATH.write_text(str(global_row_index))
+            print(f"[cursor] Finished stream; final global_row_index={global_row_index} written to {CURSOR_PATH}")
+        except Exception as e:
+            print(f"[cursor] WARNING: failed to write final cursor: {e}")
 
     raw_train = IterableDataset.from_generator(duckdb_row_generator)
 
