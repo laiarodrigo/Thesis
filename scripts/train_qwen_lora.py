@@ -66,6 +66,11 @@ pd.set_option("display.max_colwidth", 180)
 # Steps that were already completed in the first long run (before the 300k checkpoint)
 COMPLETED_STEPS_BEFORE_CHECKPOINT = 300_000
 
+COMPLETED_STEPS_AFTER_CHECKPOINT = 142_499
+
+# Total steps already done toward the global target
+TOTAL_STEPS_DONE = COMPLETED_STEPS_BEFORE_CHECKPOINT + COMPLETED_STEPS_AFTER_CHECKPOINT
+
 # Effective batch size per optimizer step on THIS process.
 # (DataParallel splits each batch across GPUs, but the dataset stream is consumed once.)
 EXAMPLES_PER_STEP = PER_DEVICE_BATCH * GRAD_ACCUM  # 10 * 4 = 40 with your config
@@ -621,13 +626,18 @@ def main():
                     state = load_file(str(st_path))
                     missing, unexpected = model_lora.load_state_dict(state, strict=False)
                     print(f"Loaded LoRA checkpoint from {st_path}. "
-                          f"Missing keys: {len(missing)}, unexpected keys: {len(unexpected)}")
+                        f"Missing keys: {len(missing)}, unexpected keys: {len(unexpected)}")
 
-                    # only train remaining steps to reach MAX_STEPS overall
-                    remaining_steps = max(1, MAX_STEPS - starting_step)
-                    training_args.max_steps = remaining_steps
-                    print(f"Will train for additional {remaining_steps} steps "
-                          f"(target total ≈ {MAX_STEPS}).")
+                    # Total remaining steps toward the global target (e.g. 900k)
+                    steps_remaining_total = max(1, MAX_STEPS - TOTAL_STEPS_DONE)
+                    training_args.max_steps = steps_remaining_total
+
+                    print(
+                        f"Total target steps={MAX_STEPS}, steps already done={TOTAL_STEPS_DONE} "
+                        f"-> steps_remaining_total={steps_remaining_total}. "
+                        "This run will stop after those remaining steps."
+                    )
+
                 else:
                     print(f"WARNING: {st_path} not found. "
                           "Cannot safely load weights without torch.load; "
