@@ -51,7 +51,7 @@ else:  # "cluster_full"
     TRAIN_LIMIT = None
     PER_DEVICE_BATCH = 10
     GRAD_ACCUM = 4
-    MAX_STEPS = 900_000
+    MAX_STEPS = 300_000 
     USE_CPU = False
 
     VAL_MAX_ROWS = 100_000    # upper cap for validation size
@@ -63,47 +63,15 @@ pd.set_option("display.max_colwidth", 180)
 # DATA STREAM RESUME CONFIG
 # -------------------------
 
-# Steps that were already completed in the first long run (before the 300k checkpoint)
-COMPLETED_STEPS_BEFORE_CHECKPOINT = 300_000
-
-COMPLETED_STEPS_AFTER_CHECKPOINT = 142_499
-
-# Total steps already done toward the global target
-TOTAL_STEPS_DONE = COMPLETED_STEPS_BEFORE_CHECKPOINT + COMPLETED_STEPS_AFTER_CHECKPOINT
-
-# Effective batch size per optimizer step on THIS process.
-# (DataParallel splits each batch across GPUs, but the dataset stream is consumed once.)
-EXAMPLES_PER_STEP = PER_DEVICE_BATCH * GRAD_ACCUM  # 10 * 4 = 40 with your config
-
-# Approximate average number of training examples generated per DB row.
-# PtBrVarId rows    -> ~1 example (classification)
-# OpenSubs / FRMT   -> ~2-3 examples (translation + classifications)
-AVG_EXAMPLES_PER_ROW = 2.5
-
-# Approximate number of DB rows consumed up to step 300k
-APPROX_ROWS_BEFORE_CHECKPOINT = int(
-    COMPLETED_STEPS_BEFORE_CHECKPOINT * EXAMPLES_PER_STEP / AVG_EXAMPLES_PER_ROW
-)
-
-print(
-    f"[resume-estimate] steps_before_ckpt={COMPLETED_STEPS_BEFORE_CHECKPOINT}, "
-    f"examples_per_step={EXAMPLES_PER_STEP}, "
-    f"avg_examples_per_row={AVG_EXAMPLES_PER_ROW} -> "
-    f"approx_rows_before_ckpt={APPROX_ROWS_BEFORE_CHECKPOINT}"
-)
-
-# Cursor file to track exact row index from now on
 CURSOR_PATH = BASE_DIR / "train_cursor.txt"
 
-# Initial streaming offset:
-# - If we already have a cursor from a previous run, trust it.
-# - Otherwise, start after the approx rows from the 300k run.
 if CURSOR_PATH.exists():
     TRAIN_START_OFFSET = int(CURSOR_PATH.read_text().strip())
     print(f"[cursor] Resuming data stream from TRAIN_START_OFFSET={TRAIN_START_OFFSET} (from {CURSOR_PATH})")
 else:
-    TRAIN_START_OFFSET = APPROX_ROWS_BEFORE_CHECKPOINT
-    print(f"[cursor] No cursor file found; using approximate TRAIN_START_OFFSET={TRAIN_START_OFFSET}")
+    TRAIN_START_OFFSET = 0
+    print(f"[cursor] No cursor file found; starting from offset 0")
+
 
 
 # -------------------------
@@ -625,23 +593,16 @@ def main():
                 if st_path.exists():
                     state = load_file(str(st_path))
                     missing, unexpected = model_lora.load_state_dict(state, strict=False)
-                    print(f"Loaded LoRA checkpoint from {st_path}. "
-                        f"Missing keys: {len(missing)}, unexpected keys: {len(unexpected)}")
-
-                    # Total remaining steps toward the global target (e.g. 900k)
-                    steps_remaining_total = max(1, MAX_STEPS - TOTAL_STEPS_DONE)
-                    training_args.max_steps = steps_remaining_total
-
                     print(
-                        f"Total target steps={MAX_STEPS}, steps already done={TOTAL_STEPS_DONE} "
-                        f"-> steps_remaining_total={steps_remaining_total}. "
-                        "This run will stop after those remaining steps."
+                        f"Loaded LoRA checkpoint from {st_path}. "
+                        f"Missing keys: {len(missing)}, unexpected keys: {len(unexpected)}"
                     )
 
+                    # NOTE: For this run, we do NOT override max_steps here.
+                    # It stays whatever you set in TrainingArguments (e.g. 300_000).
                 else:
                     print(f"WARNING: {st_path} not found. "
-                          "Cannot safely load weights without torch.load; "
-                          "training will start from fresh LoRA.")
+                        "Cannot safely load weights; training will start from fresh LoRA.")
             except ImportError:
                 print("WARNING: safetensors not installed. Cannot load checkpoint "
                       "without using torch.load (which is blocked). "
