@@ -8,8 +8,8 @@ from datasets import load_dataset
 
 pd.set_option("display.max_colwidth", 180)
 
-PROJECT_DB_PATH = pathlib.Path("../data/duckdb/subs_project.duckdb")
-SOURCE_DB_PATH  = pathlib.Path("../data/duckdb/subs.duckdb")
+PROJECT_DB_PATH = pathlib.Path("data/duckdb/subs_project.duckdb")
+SOURCE_DB_PATH  = pathlib.Path("data/duckdb/subs.duckdb")
 
 PROJECT_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
@@ -31,6 +31,39 @@ def lo(c: str) -> str:
     return f"lower(coalesce({c},''))"
 
 print("✓ Connected. src attached:", SOURCE_DB_PATH.exists())
+
+
+def peek(qname: str, where: str = "", n: int = 5):
+    w = f"WHERE {where}" if where else ""
+    print(f"\n--- PEEK {qname} {w} LIMIT {n} ---")
+    try:
+        df = con.execute(f"SELECT * FROM {qname} {w} LIMIT {n}").df()
+        print(df)
+    except Exception as e:
+        print("PEEK failed:", e)
+
+def domain_stats(qname: str, domain_col: str = "domain"):
+    print(f"\n--- DOMAIN STATS {qname}.{domain_col} ---")
+    try:
+        df = con.execute(f"""
+            SELECT
+              COUNT(*) AS total,
+              SUM(CASE WHEN {domain_col} IS NULL OR length(trim({domain_col}))=0 THEN 1 ELSE 0 END) AS domain_missing,
+              SUM(CASE WHEN {domain_col} IS NOT NULL AND length(trim({domain_col}))>0 THEN 1 ELSE 0 END) AS domain_present
+            FROM {qname}
+        """).df()
+        print(df)
+        top = con.execute(f"""
+            SELECT lower(trim({domain_col})) AS domain, COUNT(*) AS n
+            FROM {qname}
+            WHERE {domain_col} IS NOT NULL AND length(trim({domain_col}))>0
+            GROUP BY 1
+            ORDER BY n DESC
+            LIMIT 20
+        """).df()
+        print(top)
+    except Exception as e:
+        print("DOMAIN STATS failed:", e)
 
 # ===========================
 #  GOLD COLLECTION (test only)
@@ -84,7 +117,28 @@ if not src_ptbr:
 
 print("Using ptbrvarid source:", src_ptbr)
 
+# What dataset tags exist?
+print("\n--- DATASET TAGS in source table ---")
+print(con.execute(f"""
+    SELECT dataset, COUNT(*) AS n
+    FROM {src_ptbr}
+    GROUP BY 1
+    ORDER BY n DESC
+""").df())
+
+# Peek a few source rows (important: include only columns of interest if the table is wide)
+print("\n--- SOURCE SAMPLE (columns of interest) ---")
+print(con.execute(f"""
+    SELECT dataset, domain, split, label, text_pt_br, text_pt_pt
+    FROM {src_ptbr}
+    LIMIT 5
+""").df())
+
+domain_stats(src_ptbr, "domain")
+
 # 1) Repair noisy rows (decode label + text)
+KNOWN_DOMAINS = ("journalistic","legal","web","literature","politics","social_media")
+
 con.execute("DROP VIEW IF EXISTS ptbrvid_repaired_v;")
 con.execute(f"""
 CREATE VIEW ptbrvid_repaired_v AS
@@ -95,66 +149,87 @@ WITH raw AS (
 ),
 norm AS (
   SELECT
-    -- language
+    -- CLEAN DOMAIN: only keep true subset labels; discard garbage text
     CASE
-      WHEN lower(label) IN ('pt-br','pt-pt')
-           THEN CASE WHEN lower(label)='pt-br' THEN 'pt-BR' ELSE 'pt-PT' END
-      WHEN text_pt_br IN ('pt-BR','pt-PT')
-           THEN text_pt_br
+      WHEN domain IS NOT NULL AND lower(trim(domain)) IN {KNOWN_DOMAINS}
+        THEN lower(trim(domain))
       ELSE NULL
+    END AS domain,
+
+    -- normalize label to pt-BR / pt-PT
+    CASE
+      WHEN lower(trim(label)) IN ('pt-br','pt_br','ptbr') THEN 'pt-BR'
+      WHEN lower(trim(label)) IN ('pt-pt','pt_pt','ptpt') THEN 'pt-PT'
+      WHEN label IN ('pt-BR','pt-PT') THEN label
+      ELSE label
     END AS lang,
 
-    -- text (prefer proper columns; fall back to domain if it really looks like text)
+    -- TEXT: use the proper columns only (NO domain fallback)
     CASE
-      WHEN text_pt_br IS NOT NULL AND text_pt_br NOT IN ('pt-BR','pt-PT') THEN text_pt_br
-      WHEN text_pt_pt IS NOT NULL AND text_pt_pt NOT IN ('pt-BR','pt-PT') THEN text_pt_pt
-      WHEN domain IS NOT NULL
-           AND lower(domain) NOT IN ('journalistic','legal','web','literature','politics','social_media')
-           AND length(domain) > 40 THEN domain
+      WHEN text_pt_br IS NOT NULL AND length(trim(text_pt_br))>0 THEN text_pt_br
+      WHEN text_pt_pt IS NOT NULL AND length(trim(text_pt_pt))>0 THEN text_pt_pt
       ELSE NULL
     END AS text
   FROM raw
 )
 SELECT
   'PtBrVId' AS dataset,
-  lang  AS label,
+  domain,
+  lang AS label,
   CASE WHEN lang='pt-BR' THEN text END AS text_pt_br,
   CASE WHEN lang='pt-PT' THEN text END AS text_pt_pt
 FROM norm
-WHERE lang IS NOT NULL AND text IS NOT NULL;
+WHERE lang IN ('pt-BR','pt-PT')
+  AND text IS NOT NULL
+  AND length(trim(text)) > 0;
 """)
+
+print(con.execute("""
+SELECT domain, COUNT(*) AS n
+FROM ptbrvid_repaired_v
+GROUP BY 1
+ORDER BY n DESC;
+""").df().head(20))
+
 
 print("PtBrVId repaired rows:",
       con.execute("SELECT COUNT(*) FROM ptbrvid_repaired_v").fetchone()[0])
 
+peek("ptbrvid_repaired_v", n=5)
+domain_stats("ptbrvid_repaired_v", "domain")
+
 # 2) Deduplicate text (per label)
-con.execute("DROP VIEW IF EXISTS ptbr_unique_v;")
 con.execute("""
+DROP VIEW IF EXISTS ptbr_unique_v;
 CREATE VIEW ptbr_unique_v AS
 WITH keyed AS (
   SELECT
     label,
+    domain,
     NULLIF(TRIM(text_pt_br),'') AS text_pt_br,
     NULLIF(TRIM(text_pt_pt),'') AS text_pt_pt,
     lower(coalesce(text_pt_br, text_pt_pt, '')) AS k_txt
   FROM ptbrvid_repaired_v
 ),
 clean AS (
-  SELECT label, text_pt_br, text_pt_pt, k_txt
+  SELECT label, domain, text_pt_br, text_pt_pt, k_txt
   FROM keyed
   WHERE k_txt <> ''
 ),
 agg AS (
   SELECT
-    label, k_txt,
+    label, domain, k_txt,
     arg_max(text_pt_br, length(coalesce(text_pt_br,''))) AS text_pt_br,
     arg_max(text_pt_pt, length(coalesce(text_pt_pt,''))) AS text_pt_pt
   FROM clean
-  GROUP BY label, k_txt
+  GROUP BY label, domain, k_txt
 )
-SELECT label, text_pt_br, text_pt_pt
+SELECT label, domain, text_pt_br, text_pt_pt
 FROM agg;
 """)
+
+peek("ptbr_unique_v", n=5)
+domain_stats("ptbr_unique_v", "domain")
 
 print("PtBrVId unique rows:",
       con.execute("SELECT COUNT(*) FROM ptbr_unique_v").fetchone()[0])
@@ -162,12 +237,13 @@ print("PtBrVId unique rows:",
 # 3) Deterministic split: train / valid / test
 #    - valid: 1%   (~0.01)
 #    - test:  0.05% (~0.0005)
-con.execute("DROP VIEW IF EXISTS ptbr_split_assign_v;")
 con.execute("""
+DROP VIEW IF EXISTS ptbr_split_assign_v;
 CREATE VIEW ptbr_split_assign_v AS
 WITH base AS (
   SELECT
     label,
+    domain,
     text_pt_br,
     text_pt_pt,
     lower(coalesce(text_pt_br, text_pt_pt, '')) AS k_txt,
@@ -176,15 +252,19 @@ WITH base AS (
 )
 SELECT
   CASE
-    WHEN (h % 10000) < 5   THEN 'test'   -- 5 / 10000 = 0.05%
-    WHEN (h % 10000) < 105 THEN 'valid'  -- next 100 / 10000 = 1%
+    WHEN (h % 10000) < 5   THEN 'test'
+    WHEN (h % 10000) < 105 THEN 'valid'
     ELSE 'train'
   END AS split,
   label,
+  domain,
   text_pt_br,
   text_pt_pt
 FROM base;
 """)
+
+peek("ptbr_split_assign_v", n=5)
+domain_stats("ptbr_split_assign_v", "domain")
 
 print("PtBrVId split counts:")
 print(con.execute("""
@@ -199,44 +279,77 @@ print(con.execute("""
 #        dev: 1% valid, 99% train
 #        test: all test
 # ===========================
-# Load from HF
+# ===========================
+#  FRMT (hugosousa/frmt) — CLEAN IMPORT
+# ===========================
 ds_dev  = load_dataset("hugosousa/frmt", split="dev")
 ds_test = load_dataset("hugosousa/frmt", split="test")
+
+def _nonempty_pair(x):
+    br = x.get("br")
+    pt = x.get("pt")
+    if br is None or pt is None:
+        return False
+    # also reject whitespace-only
+    return bool(str(br).strip()) and bool(str(pt).strip())
+
+# Filter at source (prevents writing null rows into DuckDB)
+ds_dev  = ds_dev.filter(_nonempty_pair)
+ds_test = ds_test.filter(_nonempty_pair)
 
 df_dev  = ds_dev.to_pandas()
 df_test = ds_test.to_pandas()
 
-# Ensure column names are text_pt_br / text_pt_pt.
-# (hugosousa/frmt already uses 'br' and 'pt' columns; rename them.)
-if "br" in df_dev.columns and "pt" in df_dev.columns:
-    df_dev  = df_dev.rename(columns={"br": "text_pt_br", "pt": "text_pt_pt"})
-    df_test = df_test.rename(columns={"br": "text_pt_br", "pt": "text_pt_pt"})
+# Rename and keep only what you actually use downstream
+df_dev  = df_dev.rename(columns={"br": "text_pt_br", "pt": "text_pt_pt"})
+df_test = df_test.rename(columns={"br": "text_pt_br", "pt": "text_pt_pt"})
 
-# Drop old tables and create new ones
+keep_cols = [c for c in ["bucket", "text_pt_br", "text_pt_pt"] if c in df_dev.columns]
+df_dev  = df_dev[keep_cols].copy()
+df_test = df_test[keep_cols].copy()
+
+# Drop old tables and write clean ones
 con.execute("DROP TABLE IF EXISTS frmt_dev;")
 con.execute("DROP TABLE IF EXISTS frmt_test;")
 
-con.execute("CREATE TABLE frmt_dev  AS SELECT * FROM df_dev;")
-con.execute("CREATE TABLE frmt_test AS SELECT * FROM df_test;")
+con.register("df_dev_clean", df_dev)
+con.register("df_test_clean", df_test)
 
-print("FRMT dev rows:",  con.execute("SELECT COUNT(*) FROM frmt_dev").fetchone()[0])
-print("FRMT test rows:", con.execute("SELECT COUNT(*) FROM frmt_test").fetchone()[0])
+con.execute("CREATE TABLE frmt_dev  AS SELECT * FROM df_dev_clean;")
+con.execute("CREATE TABLE frmt_test AS SELECT * FROM df_test_clean;")
 
-# Split FRMT dev into train/valid (1% valid)
-con.execute("DROP VIEW IF EXISTS frmt_dev_split_v;")
+print("FRMT dev rows (clean): ", con.execute("SELECT COUNT(*) FROM frmt_dev").fetchone()[0])
+print("FRMT test rows (clean):", con.execute("SELECT COUNT(*) FROM frmt_test").fetchone()[0])
+
 con.execute("""
+DROP VIEW IF EXISTS frmt_dev_clean_v;
+CREATE VIEW frmt_dev_clean_v AS
+SELECT *
+FROM frmt_dev
+WHERE text_pt_br IS NOT NULL AND text_pt_pt IS NOT NULL
+  AND length(trim(text_pt_br)) > 0
+  AND length(trim(text_pt_pt)) > 0;
+
+DROP VIEW IF EXISTS frmt_test_clean_v;
+CREATE VIEW frmt_test_clean_v AS
+SELECT *
+FROM frmt_test
+WHERE text_pt_br IS NOT NULL AND text_pt_pt IS NOT NULL
+  AND length(trim(text_pt_br)) > 0
+  AND length(trim(text_pt_pt)) > 0;
+""")
+
+con.execute("""
+DROP VIEW IF EXISTS frmt_dev_split_v;
 CREATE VIEW frmt_dev_split_v AS
 WITH base AS (
   SELECT
     *,
-    hash(lower(coalesce(text_pt_br,'')), lower(coalesce(text_pt_pt,''))) AS h
-  FROM frmt_dev
+    hash(lower(trim(text_pt_br)), lower(trim(text_pt_pt))) AS h
+  FROM frmt_dev_clean_v
 )
 SELECT
-  CASE
-    WHEN (h % 100) = 0 THEN 'valid'  -- 1% of dev
-    ELSE 'train'
-  END AS split,
+  CASE WHEN (h % 100) = 0 THEN 'valid' ELSE 'train' END AS split,
   *
 FROM base;
 """)
@@ -283,30 +396,20 @@ else:
 #  TEST PAIRS GUARD (FRMT test + Gold)
 # ===========================
 con.execute("DROP VIEW IF EXISTS test_pairs_guard;")
-have_frmt = tbl_exists("frmt_test")
-have_gold = tbl_exists("gold_test")
-
-if have_frmt and have_gold:
-    con.execute(f"""
-      CREATE VIEW test_pairs_guard AS
-      SELECT DISTINCT n_br, n_pt FROM (
-        SELECT {lo('text_pt_br')} AS n_br, {lo('text_pt_pt')} AS n_pt FROM frmt_test
-        UNION ALL
-        SELECT {lo('text_pt_br')} AS n_br, {lo('ref_pt_pt_manual')} AS n_pt FROM gold_test
-      );
-    """)
-elif have_frmt:
-    con.execute(f"""
-      CREATE VIEW test_pairs_guard AS
-      SELECT DISTINCT {lo('text_pt_br')} AS n_br, {lo('text_pt_pt')} AS n_pt FROM frmt_test;
-    """)
-elif have_gold:
-    con.execute(f"""
-      CREATE VIEW test_pairs_guard AS
-      SELECT DISTINCT {lo('text_pt_br')} AS n_br, {lo('ref_pt_pt_manual')} AS n_pt FROM gold_test;
-    """)
-else:
-    con.execute("CREATE VIEW test_pairs_guard AS SELECT ''::TEXT AS n_br, ''::TEXT AS n_pt WHERE 1=0;")
+con.execute("""
+CREATE VIEW test_pairs_guard AS
+SELECT DISTINCT n_br, n_pt
+FROM (
+  SELECT lower(trim(coalesce(text_pt_br,''))) AS n_br,
+         lower(trim(coalesce(text_pt_pt,''))) AS n_pt
+  FROM frmt_test_clean_v
+  UNION ALL
+  SELECT lower(trim(coalesce(text_pt_br,''))) AS n_br,
+         lower(trim(coalesce(ref_pt_pt_manual,''))) AS n_pt
+  FROM gold_test
+) t
+WHERE n_br <> '' AND n_pt <> '';
+""")
 
 print("test_pairs_guard rows:",
       con.execute("SELECT COUNT(*) FROM test_pairs_guard").fetchone()[0])
@@ -342,13 +445,13 @@ WHERE g.n_br IS NULL
 
 UNION ALL
 
--- PtBrVarId (train + valid)
+-- PtBrVarId (train + valid)  (INSERTED BLOCK: domain -> theme)
 SELECT
-  'PtBrVarId' AS dataset,
-  p.split     AS split,      -- 'train' or 'valid'
+  'PtBrVId' AS dataset,
+  p.split     AS split,
   'liaad/PtBrVId' AS source,
   'n/a' AS bucket,
-  'n/a' AS theme,
+  COALESCE(p.domain,'n/a') AS theme,
   p.label,
   p.text_pt_br,
   p.text_pt_pt,
@@ -362,7 +465,7 @@ UNION ALL
 -- FRMT dev: train + valid
 SELECT
   'FRMT' AS dataset,
-  d.split AS split,          -- 'train' or 'valid'
+  d.split AS split,
   'hugosousa/frmt' AS source,
   d.bucket,
   'n/a' AS theme,
@@ -378,13 +481,13 @@ con.execute("DROP VIEW IF EXISTS test_data;")
 con.execute("""
 CREATE VIEW test_data AS
 
--- PtBrVarId test
+-- PtBrVarId test (INSERTED BLOCK: domain -> theme)
 SELECT
-  'PtBrVarId' AS dataset,
+  'PtBrVId' AS dataset,
   'test'      AS split,
   'liaad/PtBrVId' AS source,
   'n/a' AS bucket,
-  'n/a' AS theme,
+  COALESCE(p.domain,'n/a') AS theme,
   p.label,
   p.text_pt_br,
   p.text_pt_pt,
@@ -395,7 +498,7 @@ WHERE lower(p.split) = 'test'
 
 UNION ALL
 
--- FRMT test
+-- FRMT test (recommended to use clean view so null/empty never leaks)
 SELECT
   'FRMT' AS dataset,
   'test' AS split,
@@ -407,7 +510,7 @@ SELECT
   f.text_pt_pt,
   CAST(NULL AS TEXT) AS ref_pt_pt_manual,
   CAST(NULL AS TEXT) AS ref_pt_pt_deepl
-FROM frmt_test f
+FROM frmt_test_clean_v f
 
 UNION ALL
 
@@ -447,4 +550,22 @@ print(con.execute("""
     FROM test_data
     GROUP BY dataset, split
     ORDER BY dataset, split
+""").df())
+
+
+print("\nFRMT test null/empty check:")
+print(con.execute("""
+SELECT
+  SUM(CASE WHEN text_pt_br IS NULL OR length(trim(text_pt_br))=0 THEN 1 ELSE 0 END) AS bad_br,
+  SUM(CASE WHEN text_pt_pt IS NULL OR length(trim(text_pt_pt))=0 THEN 1 ELSE 0 END) AS bad_pt
+FROM frmt_test;
+""").df())
+
+print(con.execute("""
+SELECT theme, COUNT(*) AS n
+FROM test_data
+WHERE dataset='PtBrVId'
+GROUP BY 1
+ORDER BY n DESC
+LIMIT 30;
 """).df())

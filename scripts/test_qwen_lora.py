@@ -11,6 +11,9 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel
 from sacrebleu import corpus_bleu  # pip install sacrebleu
 
+from collections import defaultdict, Counter
+from dataclasses import dataclass
+
 
 # -------------------------
 # CONFIG – EDIT THESE
@@ -21,11 +24,6 @@ SEED = 123
 
 from pathlib import Path
 
-# Assuming same repo layout locally:
-#   repo_root/
-#     data/duckdb/subs_project.duckdb
-#     data/duckdb/subs.duckdb
-#     scripts/test_script.py  (this file)
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DB_PATH = BASE_DIR / "data" / "duckdb" / "subs_project.duckdb"
 SOURCE_DB_PATH  = BASE_DIR / "data" / "duckdb" / "subs.duckdb"
@@ -33,22 +31,22 @@ SOURCE_DB_PATH  = BASE_DIR / "data" / "duckdb" / "subs.duckdb"
 PROJECT_DB_STR = PROJECT_DB_PATH.as_posix()
 SOURCE_DB_STR  = SOURCE_DB_PATH.as_posix()
 
-# >>> EDIT THIS: where you copied your trained adapter
 ADAPTER_DIR = Path("/path/to/qwen3-0_6b-ptbr-ptpt-lora-adapter-cluster_full")
-
-# >>> EDIT THIS: where you copied the tokenizer saved in train_script
 TOKENIZER_PATH = Path("/path/to/qwen3-0_6b-ptbr-ptpt-lora-adapter-cluster_full-tokenizer")
 
 MAX_LENGTH = 1024
 
-# Use the test_data view here
 EVAL_VIEW  = "test_data"
-# If your test_data has a split column with 'test', set EVAL_SPLIT = "test".
-# If not, leave as None to use all rows in the view.
-EVAL_SPLIT = 'test'
+EVAL_SPLIT = "test"        # set to None if your view doesn't have split=test
+EVAL_ROW_LIMIT = 10        # None for all rows
+GEN_BATCH_SIZE = 8
 
-EVAL_ROW_LIMIT = 10  # set to an integer for quicker testing, or None for all rows
-GEN_BATCH_SIZE   = 8
+# streaming buffer (examples) to keep memory bounded
+MAX_EXAMPLE_BUFFER = 64
+
+# only bucket-level breakdowns (plus "overall")
+GROUP_BY_BUCKET_ONLY = True
+MIN_GROUP_SUPPORT = 2  # only print bucket groups with >= this many examples
 
 pd.set_option("display.max_colwidth", 180)
 
@@ -59,19 +57,15 @@ pd.set_option("display.max_colwidth", 180)
 
 def connect_project(
     read_only: bool = True,
-    memory_limit: str = "3.5GB",   # cap DuckDB memory
-    threads: int = 4,            # number of DuckDB threads
+    memory_limit: str = "3.5GB",
+    threads: int = 4,
 ) -> duckdb.DuckDBPyConnection:
-    """
-    Connect to subs_project.duckdb and ensure the 'src' catalog is attached.
-    Also set DuckDB memory + threading limits for this connection.
-    """
     con = duckdb.connect(
         PROJECT_DB_STR,
         read_only=read_only,
         config={
-            "memory_limit": memory_limit,  # e.g. "512MB", "1GB", "2GB"
-            "threads": threads,            # e.g. 2, 4, 8
+            "memory_limit": memory_limit,
+            "threads": threads,
         },
     )
 
@@ -81,19 +75,13 @@ def connect_project(
 
     return con
 
+
 def stream_from_view(
     view_name: str,
     split: Optional[str] = None,
-    batch_size: int = 10_000,
+    batch_size: int = 2_000,   # smaller is safer locally
     limit: Optional[int] = None,
 ) -> Iterator[Dict]:
-    """
-    Stream rows from train_data or test_data.
-
-    Unified row structure:
-      dataset, split, source, bucket, theme, label,
-      text_pt_br, text_pt_pt, ref_pt_pt_manual, ref_pt_pt_deepl.
-    """
     con = connect_project(read_only=True)
     offset = 0
 
@@ -135,6 +123,7 @@ def stream_from_view(
 
     con.close()
 
+
 # -------------------------
 # PROMPTS (copied from train_script)
 # -------------------------
@@ -174,37 +163,36 @@ USER_CLASSIFICATION = (
 # -------------------------
 
 def build_eval_examples_from_row(row: Dict) -> List[Dict]:
-    """
-    Deterministic examples for evaluation.
-
-    Each example:
-      {"task": "translate_br2pt"|"translate_pt2br"|"classify",
-       "source": <str>, "target": <str> or <label>, "meta": {...}}
-    """
     examples = []
 
-    dataset = row["dataset"]
-    src_br  = row["text_pt_br"]
-    src_pt  = row["text_pt_pt"]
-    label   = row["label"]
+    dataset = row.get("dataset")
+    src_br  = row.get("text_pt_br")
+    src_pt  = row.get("text_pt_pt")
+    label   = row.get("label")
+
+    # bucket is the only field we break down on (plus overall)
+    meta_base = {
+        "dataset": dataset,
+        "bucket": row.get("bucket"),
+    }
 
     has_br = bool(src_br)
     has_pt = bool(src_pt)
 
-    # --- OpenSubs: two translation directions + classification on both sides ---
+    # OpenSubs not expected in test_data, but keep logic safe
     if dataset == "OpenSubs":
         if has_br and has_pt:
             examples.append({
                 "task": "translate_br2pt",
                 "source": src_br,
                 "target": src_pt,
-                "meta": {"dataset": dataset, "direction": "br2pt"},
+                "meta": {**meta_base, "direction": "br2pt"},
             })
             examples.append({
                 "task": "translate_pt2br",
                 "source": src_pt,
                 "target": src_br,
-                "meta": {"dataset": dataset, "direction": "pt2br"},
+                "meta": {**meta_base, "direction": "pt2br"},
             })
 
         if has_br:
@@ -212,19 +200,18 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
                 "task": "classify",
                 "source": src_br,
                 "target": "pt-BR",
-                "meta": {"dataset": dataset, "var": "pt-BR"},
+                "meta": {**meta_base, "var": "pt-BR"},
             })
         if has_pt:
             examples.append({
                 "task": "classify",
                 "source": src_pt,
                 "target": "pt-PT",
-                "meta": {"dataset": dataset, "var": "pt-PT"},
+                "meta": {**meta_base, "var": "pt-PT"},
             })
-
         return examples
 
-    # --- PtBrVarId: classification only, using explicit label ---
+    # PtBrVarId: classification only, trust label
     if dataset == "PtBrVarId":
         if label in ("pt-BR", "pt-PT"):
             text = src_br if src_br else src_pt
@@ -233,23 +220,23 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
                     "task": "classify",
                     "source": text,
                     "target": label,
-                    "meta": {"dataset": dataset, "var": label},
+                    "meta": {**meta_base, "var": label},
                 })
         return examples
 
-    # --- FRMT / Gold / others: generic rule ---
+    # FRMT / Gold / others: translation if both sides exist + classification for each side
     if has_br and has_pt:
         examples.append({
             "task": "translate_br2pt",
             "source": src_br,
             "target": src_pt,
-            "meta": {"dataset": dataset, "direction": "br2pt"},
+            "meta": {**meta_base, "direction": "br2pt"},
         })
         examples.append({
             "task": "translate_pt2br",
             "source": src_pt,
             "target": src_br,
-            "meta": {"dataset": dataset, "direction": "pt2br"},
+            "meta": {**meta_base, "direction": "pt2br"},
         })
 
     if has_br:
@@ -257,21 +244,20 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
             "task": "classify",
             "source": src_br,
             "target": "pt-BR",
-            "meta": {"dataset": dataset, "var": "pt-BR"},
+            "meta": {**meta_base, "var": "pt-BR"},
         })
     if has_pt:
         examples.append({
             "task": "classify",
             "source": src_pt,
             "target": "pt-PT",
-            "meta": {"dataset": dataset, "var": "pt-PT"},
+            "meta": {**meta_base, "var": "pt-PT"},
         })
 
     return examples
 
 
 def build_prompt_from_example(ex: Dict, tok) -> str:
-    """Create the chat-style prompt used for generation (no assistant turn)."""
     task   = ex["task"]
     source = ex["source"]
 
@@ -291,12 +277,7 @@ def build_prompt_from_example(ex: Dict, tok) -> str:
         {"role": "system", "content": system_prompt},
         {"role": "user",   "content": user_content},
     ]
-    prompt_str = tok.apply_chat_template(
-        messages,
-        tokenize=False,
-        add_generation_prompt=True,
-    )
-    return prompt_str
+    return tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 
 
 # -------------------------
@@ -311,18 +292,15 @@ def load_model_and_tokenizer():
         torch.cuda.manual_seed_all(SEED)
 
     if USE_ADAPTER:
-        # ---- use the fine-tuned tokenizer you saved ----
         tok = AutoTokenizer.from_pretrained(str(TOKENIZER_PATH), use_fast=True)
     else:
         print("WARNING: Not using adapter; loading base model and tokenizer only.")
-        # ---- just use the original tokenizer from MODEL_ID ----
         tok = AutoTokenizer.from_pretrained(MODEL_ID, use_fast=True)
 
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     tok.padding_side = "left"
 
-    # base model (always needed)
     base_model = AutoModelForCausalLM.from_pretrained(
         MODEL_ID,
         torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
@@ -331,29 +309,23 @@ def load_model_and_tokenizer():
     )
 
     if USE_ADAPTER:
-        # ---- load LoRA adapter on top ----
-        from peft import PeftModel
         model = PeftModel.from_pretrained(base_model, str(ADAPTER_DIR))
     else:
-        # ---- no adapter: just use the base model ----
         model = base_model
 
-    print("Model loaded.")
     model.eval()
     if not torch.cuda.is_available():
         model.to("cpu")
 
+    print("Model loaded.")
     return model, tok
+
 
 # -------------------------
 # Generation helper
 # -------------------------
 
-def generate_batch(
-    model,
-    tok,
-    prompts: List[str],
-) -> List[str]:
+def generate_batch(model, tok, prompts: List[str]) -> List[str]:
     device = next(model.parameters()).device
     enc = tok(
         prompts,
@@ -368,15 +340,14 @@ def generate_batch(
             **enc,
             do_sample=False,
             temperature=1.0,
+            max_new_tokens=64,  # helps stop runaway generations
         )
 
     preds = []
     for i in range(out.size(0)):
-        # left padding: number of non-pad tokens is the prompt length
         prompt_len = int(enc["attention_mask"][i].sum().item())
         gen_ids = out[i, prompt_len:]
-        text = tok.decode(gen_ids, skip_special_tokens=True).strip()
-        preds.append(text)
+        preds.append(tok.decode(gen_ids, skip_special_tokens=True).strip())
     return preds
 
 
@@ -385,111 +356,180 @@ def generate_batch(
 # -------------------------
 
 def normalize_class_prediction(text: str) -> Optional[str]:
-    """
-    Map raw model text to 'pt-BR' or 'pt-PT' when possible.
-    Very simple heuristics aligned with your instruction.
-    """
-    t = text.lower().strip()
+    t = (text or "").lower().strip()
 
     if "português do brasil" in t or "portugues do brasil" in t or "pt-br" in t or "brasil" in t:
         return "pt-BR"
     if "português europeu" in t or "portugues europeu" in t or "pt-pt" in t or "portugal" in t:
         return "pt-PT"
-
     if t.startswith("pt-br"):
         return "pt-BR"
     if t.startswith("pt-pt"):
         return "pt-PT"
-
     return None
 
 
 # -------------------------
-# MAIN EVAL
+# Metrics
 # -------------------------
+
+def safe_bucket(val) -> str:
+    if val is None:
+        return "UNKNOWN"
+    if isinstance(val, str):
+        v = val.strip()
+        return v if v else "UNKNOWN"
+    return str(val)
+
+def group_keys_from_meta(meta: Dict) -> List[str]:
+    # Only overall + bucket breakdown
+    keys = ["overall"]
+    keys.append(f"bucket={safe_bucket(meta.get('bucket'))}")
+    return keys
+
+@dataclass
+class ClsStats:
+    tp: Counter
+    fp: Counter
+    fn: Counter
+    total: int = 0
+    correct: int = 0
+
+def update_cls(stats: ClsStats, gold: str, pred: str):
+    stats.total += 1
+    if pred == gold:
+        stats.correct += 1
+        stats.tp[gold] += 1
+    else:
+        stats.fn[gold] += 1
+        stats.fp[pred] += 1
+
+def cls_report(stats: ClsStats, labels=("pt-BR", "pt-PT")) -> Dict:
+    acc = stats.correct / stats.total if stats.total else 0.0
+    per = {}
+    for lab in labels:
+        tp = stats.tp[lab]
+        fp = stats.fp[lab]
+        fn = stats.fn[lab]
+        precision = tp / (tp + fp) if (tp + fp) else 0.0
+        recall    = tp / (tp + fn) if (tp + fn) else 0.0  # "coverage" = recall
+        per[lab] = {
+            "precision": precision,
+            "recall": recall,
+            "support": tp + fn,
+        }
+    return {"accuracy": acc, "n": stats.total, "per_class": per}
+
+@dataclass
+class TransStats:
+    refs: List[str]
+    hyps: List[str]
+
+def bleu_score(stats: TransStats) -> float:
+    if not stats.refs:
+        return float("nan")
+    return corpus_bleu(stats.hyps, [stats.refs]).score
+
+
+# -------------------------
+# MAIN EVAL (streaming + bucket breakdown)
+# -------------------------
+
+def _process_batch(batch: List[Dict], model, tok, cls_by_group, trans_all_by_group, trans_dir_by_group):
+    prompts = [build_prompt_from_example(ex, tok) for ex in batch]
+    preds = generate_batch(model, tok, prompts)
+
+    for ex, pred in zip(batch, preds):
+        meta = ex.get("meta", {})
+        gkeys = group_keys_from_meta(meta)
+
+        if ex["task"].startswith("translate"):
+            ref = ex["target"]
+            direction = meta.get("direction", "UNKNOWN")
+
+            for gk in gkeys:
+                trans_all_by_group[gk].refs.append(ref)
+                trans_all_by_group[gk].hyps.append(pred)
+
+                trans_dir_by_group[gk][direction].refs.append(ref)
+                trans_dir_by_group[gk][direction].hyps.append(pred)
+
+        elif ex["task"] == "classify":
+            gold = ex["target"]
+            norm = normalize_class_prediction(pred) or "UNKNOWN"
+            for gk in gkeys:
+                update_cls(cls_by_group[gk], gold, norm)
+
 
 def main():
     model, tok = load_model_and_tokenizer()
 
-    # For BLEU: keep global, and also per-direction BR→PT / PT→BR
-    translation_refs_all = []
-    translation_hyps_all = []
+    cls_by_group = defaultdict(lambda: ClsStats(tp=Counter(), fp=Counter(), fn=Counter()))
+    trans_all_by_group = defaultdict(lambda: TransStats(refs=[], hyps=[]))
+    trans_dir_by_group = defaultdict(lambda: defaultdict(lambda: TransStats(refs=[], hyps=[])))
 
-    br2pt_refs = []
-    br2pt_hyps = []
-    pt2br_refs = []
-    pt2br_hyps = []
+    example_buffer: List[Dict] = []
 
-    # For classification
-    class_gold = []
-    class_pred = []
+    print("Streaming rows and evaluating...", flush=True)
 
-    all_examples = []
-
-    print("Building eval examples...")
-    # 1) build eval examples from test_data
+    row_count = 0
     for row in stream_from_view(
         EVAL_VIEW,
         split=EVAL_SPLIT,
-        batch_size=10_000,
+        batch_size=2_000,
         limit=EVAL_ROW_LIMIT,
     ):
-        print(f"Processing row from dataset={row['dataset']}, split={row['split']}")
-        all_examples.extend(build_eval_examples_from_row(row))
+        row_count += 1
+        example_buffer.extend(build_eval_examples_from_row(row))
 
-    print(f"Total eval examples: {len(all_examples)}")
+        while len(example_buffer) >= MAX_EXAMPLE_BUFFER:
+            batch = example_buffer[:MAX_EXAMPLE_BUFFER]
+            example_buffer = example_buffer[MAX_EXAMPLE_BUFFER:]
+            _process_batch(batch, model, tok, cls_by_group, trans_all_by_group, trans_dir_by_group)
 
-    # 2) loop over examples in generation batches
-    for i in range(0, len(all_examples), GEN_BATCH_SIZE):
-        batch = all_examples[i : i + GEN_BATCH_SIZE]
-        prompts = [build_prompt_from_example(ex, tok) for ex in batch]
-        preds = generate_batch(model, tok, prompts)
+        if row_count % 1000 == 0:
+            print(f"... streamed {row_count} rows (buffer={len(example_buffer)})", flush=True)
 
-        for ex, pred in zip(batch, preds):
-            if ex["task"].startswith("translate"):
-                ref = ex["target"]
-                translation_refs_all.append(ref)
-                translation_hyps_all.append(pred)
+    if example_buffer:
+        _process_batch(example_buffer, model, tok, cls_by_group, trans_all_by_group, trans_dir_by_group)
 
-                direction = ex["meta"].get("direction")
-                if direction == "br2pt":
-                    br2pt_refs.append(ref)
-                    br2pt_hyps.append(pred)
-                elif direction == "pt2br":
-                    pt2br_refs.append(ref)
-                    pt2br_hyps.append(pred)
+    print("\nDone generating. Metrics:\n")
 
-            elif ex["task"] == "classify":
-                gold = ex["target"]
-                norm = normalize_class_prediction(pred)
-                if norm is None:
-                    norm = "UNKNOWN"
-                class_gold.append(gold)
-                class_pred.append(norm)
+    # ---- Translation ----
+    print("=== TRANSLATION (BLEU) ===")
+    for gk in sorted(trans_all_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
+        n = len(trans_all_by_group[gk].refs)
+        if gk != "overall" and n < MIN_GROUP_SUPPORT:
+            continue
 
-    # 3) BLEU for translation
-    if translation_refs_all:
-        bleu_all = corpus_bleu(translation_hyps_all, [translation_refs_all]).score
-        print(f"\nTranslation BLEU (all directions combined): {bleu_all:.2f}")
+        bleu_all = bleu_score(trans_all_by_group[gk])
+        print(f"\n[{gk}] n={n} BLEU={bleu_all:.2f}")
 
-        if br2pt_refs:
-            bleu_br2pt = corpus_bleu(br2pt_hyps, [br2pt_refs]).score
-            print(f"  BR → PT BLEU: {bleu_br2pt:.2f}")
+        for direction in ("br2pt", "pt2br"):
+            st = trans_dir_by_group[gk].get(direction)
+            if not st:
+                continue
+            if gk != "overall" and len(st.refs) < MIN_GROUP_SUPPORT:
+                continue
+            print(f"  - {direction}: n={len(st.refs)} BLEU={bleu_score(st):.2f}")
 
-        if pt2br_refs:
-            bleu_pt2br = corpus_bleu(pt2br_hyps, [pt2br_refs]).score
-            print(f"  PT → BR BLEU: {bleu_pt2br:.2f}")
-    else:
-        print("\nNo translation examples found in test_data.")
+    # ---- Classification ----
+    print("\n=== CLASSIFICATION (accuracy + precision/recall per class) ===")
+    for gk in sorted(cls_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
+        stats = cls_by_group[gk]
+        if gk != "overall" and stats.total < MIN_GROUP_SUPPORT:
+            continue
 
-    # 4) Accuracy for classification
-    if class_gold:
-        total = len(class_gold)
-        correct = sum(1 for g, p in zip(class_gold, class_pred) if g == p)
-        acc = correct / total
-        print(f"\nClassification accuracy: {acc*100:.2f}% ({correct}/{total})")
-    else:
-        print("\nNo classification examples found in test_data.")
+        rep = cls_report(stats, labels=("pt-BR", "pt-PT"))
+        print(f"\n[{gk}] n={rep['n']} accuracy={rep['accuracy']*100:.2f}%")
+
+        for lab, m in rep["per_class"].items():
+            print(
+                f"  - {lab}: "
+                f"precision={m['precision']*100:.2f} "
+                f"recall={m['recall']*100:.2f} "
+                f"support={m['support']}"
+            )
 
 
 if __name__ == "__main__":
