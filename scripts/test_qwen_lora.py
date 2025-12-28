@@ -39,10 +39,10 @@ MAX_LENGTH = 1024
 EVAL_VIEW  = "test_data"
 EVAL_SPLIT = "test"        # set to None if your view doesn't have split=test
 EVAL_ROW_LIMIT = None        # None for all rows
-GEN_BATCH_SIZE = 64
+GEN_BATCH_SIZE = 256
 
 # streaming buffer (examples) to keep memory bounded
-MAX_EXAMPLE_BUFFER = 512
+MAX_EXAMPLE_BUFFER = 1024
 
 # only bucket-level breakdowns (plus "overall")
 GROUP_BY_BUCKET_ONLY = True
