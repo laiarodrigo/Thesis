@@ -39,14 +39,17 @@ MAX_LENGTH = 1024
 EVAL_VIEW  = "test_data"
 EVAL_SPLIT = "test"        # set to None if your view doesn't have split=test
 EVAL_ROW_LIMIT = None        # None for all rows
-GEN_BATCH_SIZE = 8
+GEN_BATCH_SIZE = 64
 
 # streaming buffer (examples) to keep memory bounded
-MAX_EXAMPLE_BUFFER = 64
+MAX_EXAMPLE_BUFFER = 512
 
 # only bucket-level breakdowns (plus "overall")
 GROUP_BY_BUCKET_ONLY = True
 MIN_GROUP_SUPPORT = 2  # only print bucket groups with >= this many examples
+
+N_EXAMPLES_PRINT = 8
+PRINT_RAW_MODEL_OUTPUT = True
 
 pd.set_option("display.max_colwidth", 180)
 
@@ -439,30 +442,91 @@ def bleu_score(stats: TransStats) -> float:
 # MAIN EVAL (streaming + bucket breakdown)
 # -------------------------
 
-def _process_batch(batch: List[Dict], model, tok, cls_by_group, trans_all_by_group, trans_dir_by_group):
-    prompts = [build_prompt_from_example(ex, tok) for ex in batch]
-    preds = generate_batch(model, tok, prompts)
+def _process_batch(
+    batch: List[Dict],
+    model,
+    tok,
+    cls_by_group,
+    trans_all_by_group,
+    trans_dir_by_group,
+    *,
+    gen_batch_size: int = GEN_BATCH_SIZE,
+    # optional: pass lists from main() if you want example printing
+    cls_examples: Optional[List[Dict]] = None,
+    trans_examples: Optional[List[Dict]] = None,
+    max_examples_print: int = 8,
+    print_raw_model_output: bool = True,
+):
+    """
+    Process a list of eval examples.
+    - Builds prompts
+    - Runs generation in chunks of size `gen_batch_size` (important for VRAM control)
+    - Updates classification + translation metric accumulators
+    - Optionally stores a few qualitative examples in cls_examples/trans_examples
+    """
 
-    for ex, pred in zip(batch, preds):
-        meta = ex.get("meta", {})
-        gkeys = group_keys_from_meta(meta)
+    # Small helper: append up to max_examples_print
+    def _append_example(buf: Optional[List[Dict]], item: Dict):
+        if buf is None:
+            return
+        if len(buf) < max_examples_print:
+            buf.append(item)
 
-        if ex["task"].startswith("translate"):
-            ref = ex["target"]
-            direction = meta.get("direction", "UNKNOWN")
+    # Run in generation chunks to avoid big VRAM spikes
+    for start in range(0, len(batch), gen_batch_size):
+        chunk = batch[start : start + gen_batch_size]
 
-            for gk in gkeys:
-                trans_all_by_group[gk].refs.append(ref)
-                trans_all_by_group[gk].hyps.append(pred)
+        prompts = [build_prompt_from_example(ex, tok) for ex in chunk]
+        preds = generate_batch(model, tok, prompts)
 
-                trans_dir_by_group[gk][direction].refs.append(ref)
-                trans_dir_by_group[gk][direction].hyps.append(pred)
+        for ex, pred in zip(chunk, preds):
+            meta = ex.get("meta", {}) or {}
+            gkeys = group_keys_from_meta(meta)
 
-        elif ex["task"] == "classify":
-            gold = ex["target"]
-            norm = normalize_class_prediction(pred) or "UNKNOWN"
-            for gk in gkeys:
-                update_cls(cls_by_group[gk], gold, norm)
+            task = ex.get("task", "")
+
+            if task.startswith("translate"):
+                ref = ex.get("target", "")
+                direction = meta.get("direction", "UNKNOWN")
+
+                # store a few translation examples for qualitative inspection
+                _append_example(trans_examples, {
+                    "dataset": meta.get("dataset"),
+                    "bucket": meta.get("bucket"),
+                    "direction": direction,
+                    "source": ex.get("source", ""),
+                    "ref": ref,
+                    "hyp": pred,
+                })
+
+                for gk in gkeys:
+                    trans_all_by_group[gk].refs.append(ref)
+                    trans_all_by_group[gk].hyps.append(pred)
+
+                    trans_dir_by_group[gk][direction].refs.append(ref)
+                    trans_dir_by_group[gk][direction].hyps.append(pred)
+
+            elif task == "classify":
+                gold = ex.get("target")
+                norm = normalize_class_prediction(pred) or "UNKNOWN"
+
+                # store a few classification examples for qualitative inspection
+                _append_example(cls_examples, {
+                    "dataset": meta.get("dataset"),
+                    "bucket": meta.get("bucket"),
+                    "source": ex.get("source", ""),
+                    "gold": gold,
+                    "pred_norm": norm,
+                    "pred_raw": pred if print_raw_model_output else None,
+                })
+
+                for gk in gkeys:
+                    update_cls(cls_by_group[gk], gold, norm)
+
+            else:
+                # Unknown task type; ignore safely
+                continue
+
 
 
 def main():
@@ -473,6 +537,8 @@ def main():
     trans_dir_by_group = defaultdict(lambda: defaultdict(lambda: TransStats(refs=[], hyps=[])))
 
     example_buffer: List[Dict] = []
+    cls_examples = []
+    trans_examples = []
 
     print("Streaming rows and evaluating...", flush=True)
 
@@ -489,13 +555,37 @@ def main():
         while len(example_buffer) >= MAX_EXAMPLE_BUFFER:
             batch = example_buffer[:MAX_EXAMPLE_BUFFER]
             example_buffer = example_buffer[MAX_EXAMPLE_BUFFER:]
-            _process_batch(batch, model, tok, cls_by_group, trans_all_by_group, trans_dir_by_group)
+            _process_batch(
+                batch,
+                model,
+                tok,
+                cls_by_group,
+                trans_all_by_group,
+                trans_dir_by_group,
+                gen_batch_size=GEN_BATCH_SIZE,              # NEW: chunked generation
+                cls_examples=cls_examples,                  # NEW: save some cls examples
+                trans_examples=trans_examples,              # NEW: save some translation examples
+                max_examples_print=N_EXAMPLES_PRINT,        # NEW: limit stored examples
+                print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
+            )
 
         if row_count % 1000 == 0:
             print(f"... streamed {row_count} rows (buffer={len(example_buffer)})", flush=True)
 
     if example_buffer:
-        _process_batch(example_buffer, model, tok, cls_by_group, trans_all_by_group, trans_dir_by_group)
+        _process_batch(
+            example_buffer,
+            model,
+            tok,
+            cls_by_group,
+            trans_all_by_group,
+            trans_dir_by_group,
+            gen_batch_size=GEN_BATCH_SIZE,
+            cls_examples=cls_examples,
+            trans_examples=trans_examples,
+            max_examples_print=N_EXAMPLES_PRINT,
+            print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
+        )
 
     print("\nDone generating. Metrics:\n")
 
