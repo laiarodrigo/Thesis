@@ -38,7 +38,7 @@ MAX_LENGTH = 1024
 
 EVAL_VIEW  = "test_data"
 EVAL_SPLIT = "test"        # set to None if your view doesn't have split=test
-EVAL_ROW_LIMIT = 10        # None for all rows
+EVAL_ROW_LIMIT = None        # None for all rows
 GEN_BATCH_SIZE = 8
 
 # streaming buffer (examples) to keep memory bounded
@@ -394,9 +394,12 @@ class ClsStats:
     fn: Counter
     total: int = 0
     correct: int = 0
+    unknown: int = 0   
 
 def update_cls(stats: ClsStats, gold: str, pred: str):
     stats.total += 1
+    if pred == "UNKNOWN":
+        stats.unknown += 1
     if pred == gold:
         stats.correct += 1
         stats.tp[gold] += 1
@@ -406,6 +409,7 @@ def update_cls(stats: ClsStats, gold: str, pred: str):
 
 def cls_report(stats: ClsStats, labels=("pt-BR", "pt-PT")) -> Dict:
     acc = stats.correct / stats.total if stats.total else 0.0
+    unk_rate = stats.unknown / stats.total if stats.total else 0.0
     per = {}
     for lab in labels:
         tp = stats.tp[lab]
@@ -418,7 +422,7 @@ def cls_report(stats: ClsStats, labels=("pt-BR", "pt-PT")) -> Dict:
             "recall": recall,
             "support": tp + fn,
         }
-    return {"accuracy": acc, "n": stats.total, "per_class": per}
+    return {"accuracy": acc, "unknown_rate": unk_rate,"n": stats.total, "per_class": per}
 
 @dataclass
 class TransStats:
@@ -521,7 +525,11 @@ def main():
             continue
 
         rep = cls_report(stats, labels=("pt-BR", "pt-PT"))
-        print(f"\n[{gk}] n={rep['n']} accuracy={rep['accuracy']*100:.2f}%")
+        print(
+            f"\n[{gk}] n={rep['n']} "
+            f"accuracy={rep['accuracy']*100:.2f}% "
+            f"unknown={rep['unknown_rate']*100:.2f}%"
+        )
 
         for lab, m in rep["per_class"].items():
             print(
