@@ -18,7 +18,7 @@ from dataclasses import dataclass
 # -------------------------
 # CONFIG – EDIT THESE
 # -------------------------
-USE_ADAPTER = False
+USE_ADAPTER = True
 MODEL_ID = "Qwen/Qwen3-0.6B"
 SEED = 123
 
@@ -31,8 +31,8 @@ SOURCE_DB_PATH  = BASE_DIR / "data" / "duckdb" / "subs.duckdb"
 PROJECT_DB_STR = PROJECT_DB_PATH.as_posix()
 SOURCE_DB_STR  = SOURCE_DB_PATH.as_posix()
 
-ADAPTER_DIR = Path("/path/to/qwen3-0_6b-ptbr-ptpt-lora-adapter-cluster_full")
-TOKENIZER_PATH = Path("/path/to/qwen3-0_6b-ptbr-ptpt-lora-adapter-cluster_full-tokenizer")
+ADAPTER_DIR = Path("/cfs/home/u036584/models/qwen3-0_6b-ptbr-ptpt-lora-adapter-cluster_full")
+TOKENIZER_PATH = Path("/cfs/home/u036584/models/qwen3-0_6b-ptbr-ptpt-lora-adapter-cluster_full-tokenizer")
 
 MAX_LENGTH = 1024
 
@@ -345,8 +345,8 @@ def generate_batch(model, tok, prompts: List[str]) -> List[str]:
 
     preds = []
     for i in range(out.size(0)):
-        prompt_len = int(enc["attention_mask"][i].sum().item())
-        gen_ids = out[i, prompt_len:]
+        input_len = enc["input_ids"].shape[1]
+        gen_ids = out[i, input_len:]
         preds.append(tok.decode(gen_ids, skip_special_tokens=True).strip())
     return preds
 
