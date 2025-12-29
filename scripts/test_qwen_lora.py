@@ -16,6 +16,9 @@ from dataclasses import dataclass
 
 import json
 from datetime import datetime
+import re
+import matplotlib.pyplot as plt
+
 
 # -------------------------
 # CONFIG – EDIT THESE
@@ -397,20 +400,25 @@ class ClsStats:
     tp: Counter
     fp: Counter
     fn: Counter
+    cm: Counter
     total: int = 0
     correct: int = 0
     unknown: int = 0   
 
 def update_cls(stats: ClsStats, gold: str, pred: str):
     stats.total += 1
+    stats.cm[(gold, pred)] += 1  # NEW
+
     if pred == "UNKNOWN":
         stats.unknown += 1
+
     if pred == gold:
         stats.correct += 1
         stats.tp[gold] += 1
     else:
         stats.fn[gold] += 1
         stats.fp[pred] += 1
+
 
 def _f1(p: float, r: float) -> float:
     return (2 * p * r / (p + r)) if (p + r) else 0.0
@@ -511,6 +519,7 @@ def _process_batch(
             meta = ex.get("meta", {}) or {}
             gkeys = group_keys_from_meta(meta)
 
+            task = ex.get("task", "")
             if trans_out_fh is not None:
                 rec = {
                     "task": task,
@@ -522,9 +531,6 @@ def _process_batch(
                     "hyp": pred,
                 }
                 trans_out_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
-
-
-            task = ex.get("task", "")
 
             if task.startswith("translate"):
                 ref = ex.get("target", "")
@@ -585,7 +591,8 @@ def _process_batch(
 def main():
     model, tok = load_model_and_tokenizer()
 
-    cls_by_group = defaultdict(lambda: ClsStats(tp=Counter(), fp=Counter(), fn=Counter()))
+    cls_by_group = defaultdict(lambda: ClsStats(tp=Counter(), fp=Counter(), fn=Counter(), cm=Counter()))
+
     trans_all_by_group = defaultdict(lambda: TransStats(refs=[], hyps=[]))
     trans_dir_by_group = defaultdict(lambda: defaultdict(lambda: TransStats(refs=[], hyps=[])))
 
@@ -661,6 +668,50 @@ def main():
     print(f"Saved translation predictions to: {trans_path}")
     print(f"Saved classification predictions to: {cls_path}")
 
+    def _safe_name(s: str) -> str:
+        s = s.replace("overall", "overall")
+        s = re.sub(r"[^A-Za-z0-9._=-]+", "_", s)
+        return s[:120]
+
+    def save_confusion_matrix_png(
+        stats: ClsStats,
+        out_path: Path,
+        *,
+        title: str,
+        labels=("pt-BR", "pt-PT"),
+        include_unknown: bool = True,
+    ):
+        cols = list(labels) + (["UNKNOWN"] if include_unknown else [])
+        rows = list(labels) + (["UNKNOWN"] if include_unknown else [])
+
+        # matrix: rows=gold, cols=pred
+        M = []
+        for g in rows:
+            M.append([stats.cm.get((g, p), 0) for p in cols])
+
+        fig = plt.figure(figsize=(6.8, 5.6))
+        ax = fig.add_subplot(111)
+        im = ax.imshow(M, interpolation="nearest")  # default colormap is fine
+
+        ax.set_title(f"{title} (n={stats.total})")
+        ax.set_xlabel("Predicted")
+        ax.set_ylabel("Gold")
+
+        ax.set_xticks(range(len(cols)))
+        ax.set_yticks(range(len(rows)))
+        ax.set_xticklabels(cols, rotation=30, ha="right")
+        ax.set_yticklabels(rows)
+
+        # annotate counts
+        for i in range(len(rows)):
+            for j in range(len(cols)):
+                ax.text(j, i, str(M[i][j]), ha="center", va="center")
+
+        fig.tight_layout()
+        fig.savefig(out_path, dpi=200)
+        plt.close(fig)
+
+
     # ---- Translation ----
     print("\n=== TRANSLATION (BLEU) ===")
     for gk in sorted(trans_all_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
@@ -703,6 +754,22 @@ def main():
                 f"f1={m['f1']*100:.2f} "
                 f"support={m['support']}"
             )
+
+    print("\nSaving confusion-matrix figures...")
+    for gk, stats in cls_by_group.items():
+        if gk != "overall" and stats.total < MIN_GROUP_SUPPORT:
+            continue
+        name = _safe_name(gk)
+        cm_path = out_dir / f"{run_id}_confmat_{name}.png"
+        save_confusion_matrix_png(
+            stats,
+            cm_path,
+            title=gk,
+            labels=("pt-BR", "pt-PT"),
+            include_unknown=True,
+        )
+        print(f"  - {gk}: {cm_path}")
+
 
 if __name__ == "__main__":
     main()
