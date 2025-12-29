@@ -520,21 +520,23 @@ def _process_batch(
             gkeys = group_keys_from_meta(meta)
 
             task = ex.get("task", "")
-            if trans_out_fh is not None:
-                rec = {
-                    "task": task,
-                    "dataset": meta.get("dataset"),
-                    "bucket": meta.get("bucket"),
-                    "direction": direction,
-                    "source": ex.get("source", ""),
-                    "ref": ref,
-                    "hyp": pred,
-                }
-                trans_out_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
             if task.startswith("translate"):
                 ref = ex.get("target", "")
                 direction = meta.get("direction", "UNKNOWN")
+
+                # NEW: write translation record (only here, after ref/direction exist)
+                if trans_out_fh is not None:
+                    rec = {
+                        "task": task,
+                        "dataset": meta.get("dataset"),
+                        "bucket": meta.get("bucket"),
+                        "direction": direction,
+                        "source": ex.get("source", ""),
+                        "ref": ref,
+                        "hyp": pred,
+                    }
+                    trans_out_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
                 # store a few translation examples for qualitative inspection
                 _append_example(trans_examples, {
@@ -556,6 +558,8 @@ def _process_batch(
             elif task == "classify":
                 gold = ex.get("target")
                 norm = normalize_class_prediction(pred) or "UNKNOWN"
+
+                # write classification record (only here)
                 if cls_out_fh is not None:
                     rec = {
                         "task": "classify",
@@ -568,8 +572,6 @@ def _process_batch(
                     }
                     cls_out_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
-
-                # store a few classification examples for qualitative inspection
                 _append_example(cls_examples, {
                     "dataset": meta.get("dataset"),
                     "bucket": meta.get("bucket"),
@@ -583,10 +585,7 @@ def _process_batch(
                     update_cls(cls_by_group[gk], gold, norm)
 
             else:
-                # Unknown task type; ignore safely
                 continue
-
-
 
 def main():
     model, tok = load_model_and_tokenizer()
