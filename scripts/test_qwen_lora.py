@@ -58,6 +58,16 @@ PRINT_RAW_MODEL_OUTPUT = True
 
 pd.set_option("display.max_colwidth", 180)
 
+import re
+
+_THINK_RE = re.compile(r"<think>.*?</think>\s*", flags=re.DOTALL)
+
+def clean_hyp(text: str) -> str:
+    t = (text or "").strip()
+    t = _THINK_RE.sub("", t).strip()
+    return t
+
+
 
 # -------------------------
 # DUCKDB: connect + streaming from VIEWS
@@ -514,6 +524,7 @@ def _process_batch(
 
         prompts = [build_prompt_from_example(ex, tok) for ex in chunk]
         preds = generate_batch(model, tok, prompts)
+        preds = [clean_hyp(p) for p in preds]
 
         for ex, pred in zip(chunk, preds):
             meta = ex.get("meta", {}) or {}
