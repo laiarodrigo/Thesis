@@ -14,6 +14,8 @@ from sacrebleu import corpus_bleu  # pip install sacrebleu
 from collections import defaultdict, Counter
 from dataclasses import dataclass
 
+import json
+from datetime import datetime
 
 # -------------------------
 # CONFIG – EDIT THESE
@@ -48,7 +50,7 @@ MAX_EXAMPLE_BUFFER = 512
 GROUP_BY_BUCKET_ONLY = True
 MIN_GROUP_SUPPORT = 2  # only print bucket groups with >= this many examples
 
-N_EXAMPLES_PRINT = 8
+N_EXAMPLES_PRINT = 40
 PRINT_RAW_MODEL_OUTPUT = True
 
 pd.set_option("display.max_colwidth", 180)
@@ -410,22 +412,46 @@ def update_cls(stats: ClsStats, gold: str, pred: str):
         stats.fn[gold] += 1
         stats.fp[pred] += 1
 
+def _f1(p: float, r: float) -> float:
+    return (2 * p * r / (p + r)) if (p + r) else 0.0
+
 def cls_report(stats: ClsStats, labels=("pt-BR", "pt-PT")) -> Dict:
     acc = stats.correct / stats.total if stats.total else 0.0
     unk_rate = stats.unknown / stats.total if stats.total else 0.0
+
     per = {}
+    f1s = []
+    recalls = []
+
     for lab in labels:
         tp = stats.tp[lab]
         fp = stats.fp[lab]
         fn = stats.fn[lab]
         precision = tp / (tp + fp) if (tp + fp) else 0.0
-        recall    = tp / (tp + fn) if (tp + fn) else 0.0  # "coverage" = recall
+        recall    = tp / (tp + fn) if (tp + fn) else 0.0
+        f1        = _f1(precision, recall)
+
         per[lab] = {
             "precision": precision,
             "recall": recall,
+            "f1": f1,
             "support": tp + fn,
         }
-    return {"accuracy": acc, "unknown_rate": unk_rate,"n": stats.total, "per_class": per}
+        f1s.append(f1)
+        recalls.append(recall)
+
+    macro_f1 = sum(f1s) / len(f1s) if f1s else 0.0
+    balanced_acc = sum(recalls) / len(recalls) if recalls else 0.0
+
+    return {
+        "accuracy": acc,
+        "balanced_accuracy": balanced_acc,
+        "macro_f1": macro_f1,
+        "unknown_rate": unk_rate,
+        "n": stats.total,
+        "per_class": per,
+    }
+
 
 @dataclass
 class TransStats:
@@ -456,6 +482,8 @@ def _process_batch(
     trans_examples: Optional[List[Dict]] = None,
     max_examples_print: int = 8,
     print_raw_model_output: bool = True,
+    cls_out_fh=None,
+    trans_out_fh=None,
 ):
     """
     Process a list of eval examples.
@@ -483,6 +511,19 @@ def _process_batch(
             meta = ex.get("meta", {}) or {}
             gkeys = group_keys_from_meta(meta)
 
+            if trans_out_fh is not None:
+                rec = {
+                    "task": task,
+                    "dataset": meta.get("dataset"),
+                    "bucket": meta.get("bucket"),
+                    "direction": direction,
+                    "source": ex.get("source", ""),
+                    "ref": ref,
+                    "hyp": pred,
+                }
+                trans_out_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+
             task = ex.get("task", "")
 
             if task.startswith("translate"):
@@ -509,6 +550,18 @@ def _process_batch(
             elif task == "classify":
                 gold = ex.get("target")
                 norm = normalize_class_prediction(pred) or "UNKNOWN"
+                if cls_out_fh is not None:
+                    rec = {
+                        "task": "classify",
+                        "dataset": meta.get("dataset"),
+                        "bucket": meta.get("bucket"),
+                        "source": ex.get("source", ""),
+                        "gold": gold,
+                        "pred_norm": norm,
+                        "pred_raw": pred if print_raw_model_output else None,
+                    }
+                    cls_out_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
 
                 # store a few classification examples for qualitative inspection
                 _append_example(cls_examples, {
@@ -537,60 +590,79 @@ def main():
     trans_dir_by_group = defaultdict(lambda: defaultdict(lambda: TransStats(refs=[], hyps=[])))
 
     example_buffer: List[Dict] = []
-    cls_examples = []
-    trans_examples = []
+    cls_examples: List[Dict] = []
+    trans_examples: List[Dict] = []
 
-    print("Streaming rows and evaluating...", flush=True)
+    # -------------------------
+    # NEW: output files (JSONL)
+    # -------------------------
+    out_dir = BASE_DIR / "eval_results"
+    out_dir.mkdir(parents=True, exist_ok=True)
 
-    row_count = 0
-    for row in stream_from_view(
-        EVAL_VIEW,
-        split=EVAL_SPLIT,
-        batch_size=2_000,
-        limit=EVAL_ROW_LIMIT,
-    ):
-        row_count += 1
-        example_buffer.extend(build_eval_examples_from_row(row))
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+    trans_path = out_dir / f"{run_id}_translations.jsonl"
+    cls_path   = out_dir / f"{run_id}_classification.jsonl"
 
-        while len(example_buffer) >= MAX_EXAMPLE_BUFFER:
-            batch = example_buffer[:MAX_EXAMPLE_BUFFER]
-            example_buffer = example_buffer[MAX_EXAMPLE_BUFFER:]
+    with open(trans_path, "w", encoding="utf-8") as trans_fh, open(cls_path, "w", encoding="utf-8") as cls_fh:
+        print("Streaming rows and evaluating...", flush=True)
+
+        row_count = 0
+        for row in stream_from_view(
+            EVAL_VIEW,
+            split=EVAL_SPLIT,
+            batch_size=2_000,
+            limit=EVAL_ROW_LIMIT,
+        ):
+            row_count += 1
+            example_buffer.extend(build_eval_examples_from_row(row))
+
+            while len(example_buffer) >= MAX_EXAMPLE_BUFFER:
+                batch = example_buffer[:MAX_EXAMPLE_BUFFER]
+                example_buffer = example_buffer[MAX_EXAMPLE_BUFFER:]
+                _process_batch(
+                    batch,
+                    model,
+                    tok,
+                    cls_by_group,
+                    trans_all_by_group,
+                    trans_dir_by_group,
+                    gen_batch_size=GEN_BATCH_SIZE,
+                    cls_examples=cls_examples,
+                    trans_examples=trans_examples,
+                    max_examples_print=N_EXAMPLES_PRINT,
+                    print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
+                    # NEW: stream predictions to disk
+                    cls_out_fh=cls_fh,
+                    trans_out_fh=trans_fh,
+                )
+
+            if row_count % 1000 == 0:
+                print(f"... streamed {row_count} rows (buffer={len(example_buffer)})", flush=True)
+
+        if example_buffer:
             _process_batch(
-                batch,
+                example_buffer,
                 model,
                 tok,
                 cls_by_group,
                 trans_all_by_group,
                 trans_dir_by_group,
-                gen_batch_size=GEN_BATCH_SIZE,              # NEW: chunked generation
-                cls_examples=cls_examples,                  # NEW: save some cls examples
-                trans_examples=trans_examples,              # NEW: save some translation examples
-                max_examples_print=N_EXAMPLES_PRINT,        # NEW: limit stored examples
+                gen_batch_size=GEN_BATCH_SIZE,
+                cls_examples=cls_examples,
+                trans_examples=trans_examples,
+                max_examples_print=N_EXAMPLES_PRINT,
                 print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
+                # NEW: stream predictions to disk
+                cls_out_fh=cls_fh,
+                trans_out_fh=trans_fh,
             )
 
-        if row_count % 1000 == 0:
-            print(f"... streamed {row_count} rows (buffer={len(example_buffer)})", flush=True)
-
-    if example_buffer:
-        _process_batch(
-            example_buffer,
-            model,
-            tok,
-            cls_by_group,
-            trans_all_by_group,
-            trans_dir_by_group,
-            gen_batch_size=GEN_BATCH_SIZE,
-            cls_examples=cls_examples,
-            trans_examples=trans_examples,
-            max_examples_print=N_EXAMPLES_PRINT,
-            print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
-        )
-
     print("\nDone generating. Metrics:\n")
+    print(f"Saved translation predictions to: {trans_path}")
+    print(f"Saved classification predictions to: {cls_path}")
 
     # ---- Translation ----
-    print("=== TRANSLATION (BLEU) ===")
+    print("\n=== TRANSLATION (BLEU) ===")
     for gk in sorted(trans_all_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
         n = len(trans_all_by_group[gk].refs)
         if gk != "overall" and n < MIN_GROUP_SUPPORT:
@@ -608,7 +680,7 @@ def main():
             print(f"  - {direction}: n={len(st.refs)} BLEU={bleu_score(st):.2f}")
 
     # ---- Classification ----
-    print("\n=== CLASSIFICATION (accuracy + precision/recall per class) ===")
+    print("\n=== CLASSIFICATION (accuracy + balanced_acc + macro-F1 + per-class) ===")
     for gk in sorted(cls_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
         stats = cls_by_group[gk]
         if gk != "overall" and stats.total < MIN_GROUP_SUPPORT:
@@ -618,6 +690,8 @@ def main():
         print(
             f"\n[{gk}] n={rep['n']} "
             f"accuracy={rep['accuracy']*100:.2f}% "
+            f"balanced_acc={rep['balanced_accuracy']*100:.2f}% "
+            f"macro_f1={rep['macro_f1']*100:.2f}% "
             f"unknown={rep['unknown_rate']*100:.2f}%"
         )
 
@@ -626,9 +700,9 @@ def main():
                 f"  - {lab}: "
                 f"precision={m['precision']*100:.2f} "
                 f"recall={m['recall']*100:.2f} "
+                f"f1={m['f1']*100:.2f} "
                 f"support={m['support']}"
             )
-
 
 if __name__ == "__main__":
     main()
