@@ -358,13 +358,13 @@ def generate_batch(model, tok, prompts: List[str]) -> List[str]:
             **enc,
             do_sample=False,
             temperature=1.0,
-            max_new_tokens=512,  # helps stop runaway generations
+            max_new_tokens=128,  # helps stop runaway generations
         )
 
     preds = []
     for i in range(out.size(0)):
-        input_len = int(enc["attention_mask"][i].sum().item())
-        gen_ids = out[i, input_len:]
+        seq_len = enc["input_ids"].shape[1]
+        gen_ids = out[i, seq_len:]
         preds.append(tok.decode(gen_ids, skip_special_tokens=True).strip())
     return preds
 
