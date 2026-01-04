@@ -689,37 +689,58 @@ def main():
         *,
         title: str,
         labels=("pt-BR", "pt-PT"),
-        include_unknown: bool = True,
+        cmap: str = "YlGnBu",   # brighter than default
     ):
-        cols = list(labels) + (["UNKNOWN"] if include_unknown else [])
-        rows = list(labels) + (["UNKNOWN"] if include_unknown else [])
+        rows = list(labels)
+        cols = list(labels)
 
-        # matrix: rows=gold, cols=pred
-        M = []
-        for g in rows:
-            M.append([stats.cm.get((g, p), 0) for p in cols])
+        # Build 2x2 matrix (ignore UNKNOWN and any other labels)
+        M = np.zeros((len(rows), len(cols)), dtype=int)
+        for i, g in enumerate(rows):
+            for j, p in enumerate(cols):
+                M[i, j] = stats.cm.get((g, p), 0)
 
-        fig = plt.figure(figsize=(6.8, 5.6))
+        n_included = int(M.sum())
+        n_excluded = stats.total - n_included  # includes UNKNOWN or any other label pairs
+
+        fig = plt.figure(figsize=(7.6, 6.2), dpi=240)
         ax = fig.add_subplot(111)
-        im = ax.imshow(M, interpolation="nearest")  # default colormap is fine
 
-        ax.set_title(f"{title} (n={stats.total})")
-        ax.set_xlabel("Predicted")
-        ax.set_ylabel("Gold")
+        # Brighter look: explicit cmap + scaling
+        vmax = max(1, M.max())
+        im = ax.imshow(M, cmap=cmap, interpolation="nearest", vmin=0, vmax=vmax)
+
+        ax.set_title(f"{title} (n={n_included}, excluded={n_excluded})", fontsize=16, pad=12)
+        ax.set_xlabel("Predicted", fontsize=14)
+        ax.set_ylabel("Gold", fontsize=14)
 
         ax.set_xticks(range(len(cols)))
         ax.set_yticks(range(len(rows)))
-        ax.set_xticklabels(cols, rotation=30, ha="right")
-        ax.set_yticklabels(rows)
+        ax.set_xticklabels(cols, rotation=25, ha="right", fontsize=12)
+        ax.set_yticklabels(rows, fontsize=12)
 
-        # annotate counts
+        # Colorbar for readability
+        cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+        cbar.ax.tick_params(labelsize=11)
+
+        # Annotate counts with contrast-aware text color
+        thresh = 0.55 * vmax
         for i in range(len(rows)):
             for j in range(len(cols)):
-                ax.text(j, i, str(M[i][j]), ha="center", va="center")
+                val = M[i, j]
+                txt_color = "white" if val > thresh else "black"
+                ax.text(
+                    j, i, str(val),
+                    ha="center", va="center",
+                    fontsize=14, fontweight="bold",
+                    color=txt_color,
+                )
 
+        ax.set_aspect("equal")
         fig.tight_layout()
-        fig.savefig(out_path, dpi=200)
+        fig.savefig(out_path, bbox_inches="tight")
         plt.close(fig)
+
 
 
     # ---- Translation ----
@@ -776,7 +797,7 @@ def main():
             cm_path,
             title=gk,
             labels=("pt-BR", "pt-PT"),
-            include_unknown=True,
+            cmap="YlGnBu",
         )
         print(f"  - {gk}: {cm_path}")
 
