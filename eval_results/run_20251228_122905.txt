@@ -1,3 +1,0 @@
-Model loaded.
-Streaming rows and evaluating...
-... streamed 1000 rows (buffer=1000)

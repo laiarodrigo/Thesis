@@ -1,0 +1,1001 @@
+kind,id,sent_pt_br,sent_pt_pt,len_br,len_pt,ratio,robust_z
+hard_threshold,6776810,Quer minha opinião profissional?,A,32,1,0.03125,11.108171874999998
+hard_threshold,7119139,Eis a minha atração favorita.,A,29,1,0.034482758620689655,11.07110344827586
+hard_threshold,7934219,Nossa manchete principal...,A,27,1,0.037037037037037035,11.041814814814812
+hard_threshold,1376080,E merecemos uma recompensa.,E,27,1,0.037037037037037035,11.041814814814812
+hard_threshold,2074665,A realidade é a seguinte...,A,27,1,0.037037037037037035,11.041814814814812
+hard_threshold,4913768,"Veja, esse é o meu lema...",O,26,1,0.038461538461538464,11.025480769230768
+hard_threshold,4200321,E vou te dizer uma coisa.,E,25,1,0.04,11.007839999999998
+hard_threshold,9928886,Toby Ziegler disse que...,O,25,1,0.04,11.007839999999998
+hard_threshold,696063,Cuidado com 15 de março.,V,24,1,0.041666666666666664,10.988729166666666
+hard_threshold,837030,Fuzileiros em Iwo Jima!,E,23,1,0.043478260869565216,10.967956521739127
+hard_threshold,9146588,E é porisso que eu digo,E,23,1,0.043478260869565216,10.967956521739127
+hard_threshold,4570771,Minha filosofia disto.,A,22,1,0.045454545454545456,10.945295454545452
+hard_threshold,10089700,Minha última produção;,A,22,1,0.045454545454545456,10.945295454545452
+hard_threshold,942528,Não há nenhuma dúvida.,O,22,1,0.045454545454545456,10.945295454545452
+hard_threshold,4266155,"E como Mercutio disse,",E,22,1,0.045454545454545456,10.945295454545452
+hard_threshold,14262678,Essa é minha pergunta.,A,22,1,0.045454545454545456,10.945295454545452
+hard_threshold,6000600,E disse a mim mesmo...,E,22,1,0.045454545454545456,10.945295454545452
+hard_threshold,6775251,E vou dizer outra vez.,E,22,1,0.045454545454545456,10.945295454545452
+hard_threshold,6398028,Simplesmente como soa.,U,22,1,0.045454545454545456,10.945295454545452
+hard_threshold,7809457,Conferência amanhã...,A,21,1,0.047619047619047616,10.920476190476188
+hard_threshold,6235461,"Meu pai sempre disse,",O,21,1,0.047619047619047616,10.920476190476188
+hard_threshold,15221914,THE UNIT 2ª Temporada,T,21,1,0.047619047619047616,10.920476190476188
+hard_threshold,2207090,A resposta é simples.,A,21,1,0.047619047619047616,10.920476190476188
+hard_threshold,493214,A situação permanece.,A,21,1,0.047619047619047616,10.920476190476188
+hard_threshold,4909923,"A resposta correta é,",A,21,1,0.047619047619047616,10.920476190476188
+hard_threshold,3333299,"Sim, pode deixar, BC.",J,21,1,0.047619047619047616,10.920476190476188
+hard_threshold,4568944,"Eu pensei, depois...",E,20,1,0.05,10.893174999999998
+hard_threshold,8043718,Meus grandes feitos.,A,20,1,0.05,10.893174999999998
+hard_threshold,7575123,E eu lhe respondo...,A,20,1,0.05,10.893174999999998
+hard_threshold,14604552,Posso terminar isso?,E,20,1,0.05,10.893174999999998
+hard_threshold,12519520,História engraçada.,É,19,1,0.05263157894736842,10.862999999999998
+hard_threshold,15481898,Sei de uma coisa...,A,19,1,0.05263157894736842,10.862999999999998
+hard_threshold,16000417,Derrubar o guarda 2,1,19,1,0.05263157894736842,10.862999999999998
+hard_threshold,1904614,E Frutas e legumes!,E,19,1,0.05263157894736842,10.862999999999998
+hard_threshold,7243521,E vou responder-te.,E,19,1,0.05263157894736842,10.862999999999998
+hard_threshold,9934959,E o peixinho diz...,E,19,1,0.05263157894736842,10.862999999999998
+hard_threshold,4450569,Legado de Magritte,O,18,1,0.05555555555555555,10.82947222222222
+hard_threshold,10690364,Esse é o problema.,O,18,1,0.05555555555555555,10.82947222222222
+hard_threshold,15669084,"Minha força disse,",A,18,1,0.05555555555555555,10.82947222222222
+hard_threshold,13974163,A coisa era assim.,A,18,1,0.05555555555555555,10.82947222222222
+hard_threshold,13282125,Descobri algo sobre estes demônios.,E?,35,2,0.05714285714285714,10.811271428571427
+hard_threshold,5200892,"Não farei promessas, exceto uma...",Só,34,2,0.058823529411764705,10.791999999999996
+hard_threshold,4729664,E mais uma coisa.,E,17,1,0.058823529411764705,10.791999999999996
+hard_threshold,13315914,E aí eu gritei...,E,17,1,0.058823529411764705,10.791999999999996
+hard_threshold,6548488,Até este filho da,E,17,1,0.058823529411764705,10.791999999999996
+hard_threshold,9349630,A mesma história.,O,17,1,0.058823529411764705,10.791999999999996
+hard_threshold,6735514,As autoridades não acreditariam...,As,34,2,0.058823529411764705,10.791999999999996
+hard_threshold,6363213,A minha avó dizia,A,17,1,0.058823529411764705,10.791999999999996
+hard_threshold,8846870,A música é assim.,A,17,1,0.058823529411764705,10.791999999999996
+hard_threshold,14548868,E um pouco disso.,E,17,1,0.058823529411764705,10.791999999999996
+hard_threshold,7920608,E está dizendo...,E,17,1,0.058823529411764705,10.791999999999996
+hard_threshold,12105279,"Assim, quando terminar a história",S.,33,2,0.06060606060606061,10.771560606060604
+hard_threshold,5184693,"Sala 5, Taeko Okajima, 25 pontos.",25,33,2,0.06060606060606061,10.771560606060604
+hard_threshold,12522942,Esse é o acordo.,O,16,1,0.0625,10.749843749999997
+hard_threshold,6316070,E na cabeça dele,E,16,1,0.0625,10.749843749999997
+hard_threshold,15719995,"Minha mãe dizia,",A,16,1,0.0625,10.749843749999997
+hard_threshold,3105144,"Então Harry diz,",E,16,1,0.0625,10.749843749999997
+hard_threshold,2224663,O tenente Calley,O,16,1,0.0625,10.749843749999997
+hard_threshold,14875206,"Então eu disse,",E,15,1,0.06666666666666667,10.702066666666664
+hard_threshold,14936024,Estou em frente ao computador.,Já,30,2,0.06666666666666667,10.702066666666664
+hard_threshold,10530554,Preciso sair e achar Crichton.,Ok,30,2,0.06666666666666667,10.702066666666664
+hard_threshold,14481210,"Pensei na hora,",O,15,1,0.06666666666666667,10.702066666666664
+hard_threshold,415578,Se vocês dois tivessem dito...,Se,30,2,0.06666666666666667,10.702066666666664
+hard_threshold,7317802,Tradução Mara Reajustes Arodri,M.,30,2,0.06666666666666667,10.702066666666664
+hard_threshold,10549905,O problema é...,O,15,1,0.06666666666666667,10.702066666666664
+hard_threshold,8549329,Desafiaram a polícia federal.,Um,29,2,0.06896551724137931,10.675706896551722
+hard_threshold,5202793,Os meus homens descobriram...,Os,29,2,0.06896551724137931,10.675706896551722
+hard_threshold,447296,E além do mais,E,14,1,0.07142857142857142,10.647464285714284
+hard_threshold,15059067,"Sem problema, sem problema, sem problema.",Lá.,41,3,0.07317073170731707,10.627487804878047
+hard_threshold,12785834,Provavelmente ganharei algumas respostas negativas...,Sim.,53,4,0.07547169811320754,10.601103773584905
+hard_threshold,9206128,"Não matarás"".",O,13,1,0.07692307692307693,10.584461538461538
+hard_threshold,8400431,Estava no fundo da ravina.,E?,26,2,0.07692307692307693,10.584461538461538
+hard_threshold,13170453,Que tal isso?,E,13,1,0.07692307692307693,10.584461538461538
+hard_threshold,5386825,Isso não é nada engraçado.,Tu,26,2,0.07692307692307693,10.584461538461538
+hard_threshold,8197086,Meu amigo está sentado aí.,E?,26,2,0.07692307692307693,10.584461538461538
+hard_threshold,9983279,A Aurion 620.,A,13,1,0.07692307692307693,10.584461538461538
+hard_threshold,324027,Adaptação e Legendas Gustavo Nightmare,Fim,38,3,0.07894736842105263,10.561249999999998
+hard_threshold,15438680,Não sei como é que ficou.,É.,25,2,0.08,10.549179999999998
+hard_threshold,7935124,Dr. Nick riviera medicina clandestina,Dr.,37,3,0.08108108108108109,10.53678378378378
+hard_threshold,2089848,"Meu pai diz,",O,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,6182821,Eu implorei.,E,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,10832587,0BoxeadorJoe,0,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,15952877,Em uma carta,A,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,7365387,Quem é você?,E,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,3328574,"Sim, eu sei.",J,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,10971061,"Básicamente,",E,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,5523767,"Adam - 12, 1",1,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,13781205,É seu sonho.,É,12,1,0.08333333333333333,10.510958333333331
+hard_threshold,15598140,Traduzido por Tkdoll (Tô munitaaaaaaaaaaaaaaam?,Boa!,47,4,0.0851063829787234,10.490627659574466
+hard_threshold,15693255,[Respirando pesadamente] [Respirando pesadamente] [Respirando pesadamente] Ahhh...,Ahhh...,82,7,0.08536585365853659,10.487652439024389
+hard_threshold,181487,Wellington_tetsuo wellington_tetsuo,Meb,35,3,0.08571428571428572,10.48365714285714
+hard_threshold,6708128,Mas vou lhe dizer isto.,Te,23,2,0.08695652173913043,10.469413043478259
+hard_threshold,2624057,Os antigos não dizem...,Os,23,2,0.08695652173913043,10.469413043478259
+hard_threshold,12825646,"Por favor, o burro não.",Eu,23,2,0.08695652173913043,10.469413043478259
+hard_threshold,6108389,Estabilizador atingido.,0.,23,2,0.08695652173913043,10.469413043478259
+hard_threshold,3296175,É tudo que quero fazer.,Só,23,2,0.08695652173913043,10.469413043478259
+hard_threshold,1958484,Vander Colombo e Gianfranco Marchi,Fim,34,3,0.08823529411764706,10.454749999999997
+hard_threshold,7316220,"Tenham calma, rapazes.",M!,22,2,0.09090909090909091,10.424090909090907
+hard_threshold,2200018,"Meus parabéns, senhor.",10,22,2,0.09090909090909091,10.424090909090907
+hard_threshold,3522899,"Quack, quack Quack, quack, quack!",Quá,33,3,0.09090909090909091,10.424090909090907
+hard_threshold,5533912,"Discagem rápida, três.",3.,22,2,0.09090909090909091,10.424090909090907
+hard_threshold,13029576,"Bonjour, mademoiselle.",V?,22,2,0.09090909090909091,10.424090909090907
+hard_threshold,8733201,"Se tratando de melões,",Um,22,2,0.09090909090909091,10.424090909090907
+hard_threshold,1372365,Atrairá nosso público.,É!,22,2,0.09090909090909091,10.424090909090907
+hard_threshold,5496436,É assim que,A,11,1,0.09090909090909091,10.424090909090907
+hard_threshold,15810004,Unidade de análise comportamental,Fbi,33,3,0.09090909090909091,10.424090909090907
+hard_threshold,15877149,E não custa,E,11,1,0.09090909090909091,10.424090909090907
+hard_threshold,9798637,Você consegue dizer 'Hyung Yung'?,Ok.,33,3,0.09090909090909091,10.424090909090907
+hard_threshold,1192951,"Até mais, senhora Até logo! Até logo! Até mais, senhora Até logo!",Adeus.,65,6,0.09230769230769231,10.408053846153843
+hard_threshold,6408469,Mãe! --------------------------------------,Mãe!,43,4,0.09302325581395349,10.399848837209301
+hard_threshold,9568495,Até amanhã eu terei esquecido...,Não,32,3,0.09375,10.391515624999998
+hard_threshold,10334117,Com uma melhorada ficaria ótimo.,Ok.,32,3,0.09375,10.391515624999998
+hard_threshold,6567100,Quem do Homem-Aranha?,J.,21,2,0.09523809523809523,10.374452380952379
+hard_threshold,6770706,Veja por este ângulo.,Vê,21,2,0.09523809523809523,10.374452380952379
+hard_threshold,3341046,Eu fiquei pensando...,Só,21,2,0.09523809523809523,10.374452380952379
+hard_threshold,8881044,Eu estava pensando...,Eu,21,2,0.09523809523809523,10.374452380952379
+hard_threshold,6505215,Ninguém assina igual.,E?,21,2,0.09523809523809523,10.374452380952379
+hard_threshold,11945290,"Eu não suporto mentiras, ouviu?",Ei.,31,3,0.0967741935483871,10.356838709677415
+hard_threshold,3136944,Não estava com nenhum problema.,Tu.,31,3,0.0967741935483871,10.356838709677415
+hard_threshold,95278,"Agora, demonstraremos a capacidade desta máquina maravilhosa.",Eis as,61,6,0.09836065573770492,10.338647540983605
+hard_threshold,3542776,Otavio August Cameiro Ferreira,Fim,30,3,0.1,10.319849999999997
+hard_threshold,2738775,E A Enfermaria Nº 6?,E?,20,2,0.1,10.319849999999997
+hard_threshold,2800390,Foi uma noite longa.,É.,20,2,0.1,10.319849999999997
+hard_threshold,3304616,"Gravei um comercial,",Eu,20,2,0.1,10.319849999999997
+hard_threshold,9259502,DIA DA CORRIDA Memo!,9H,20,2,0.1,10.319849999999997
+hard_threshold,14593571,E agora é hora de perguntar...,E é,30,3,0.1,10.319849999999997
+hard_threshold,9338280,O mesmo que em você.,No,20,2,0.1,10.319849999999997
+hard_threshold,8890415,Você pensou que tinha acabado?,Tu.,30,3,0.1,10.319849999999997
+hard_threshold,8476576,As categorias são...,As,20,2,0.1,10.319849999999997
+hard_threshold,8961523,Entrei lá e disse...,Eu,20,2,0.1,10.319849999999997
+hard_threshold,7841272,Comprar 12 calças de borracha.,Ah!,30,3,0.1,10.319849999999997
+hard_threshold,12610016,Todos vós!,A,10,1,0.1,10.319849999999997
+hard_threshold,7810385,A conferência é daqui a pouco.,Há.,30,3,0.1,10.319849999999997
+hard_threshold,4928187,"Que bela companhia que arranjaste, Kate.",Não.,40,4,0.1,10.319849999999997
+hard_threshold,14025029,Por quê...,E,10,1,0.1,10.319849999999997
+hard_threshold,9801236,"Rapazes, a",A,10,1,0.1,10.319849999999997
+hard_threshold,15060863,A pergunta,A,10,1,0.1,10.319849999999997
+hard_threshold,11974466,O Inspetor,O,10,1,0.1,10.319849999999997
+hard_threshold,3889295,Vou Ihe dizer o que vou fazer.,Vou,30,3,0.1,10.319849999999997
+hard_threshold,7078027,Bom tempo.,É,10,1,0.1,10.319849999999997
+hard_threshold,8864235,O homem no,O,10,1,0.1,10.319849999999997
+hard_threshold,15281468,Ele estava tentando andar honestamente.,Sim.,39,4,0.10256410256410256,10.290448717948715
+hard_threshold,5424583,Dirigido por... HayaoMiyazaki,Fim,29,3,0.10344827586206896,10.280310344827585
+hard_threshold,11909320,Pois vou lhe dizer uma coisa.,Vou,29,3,0.10344827586206896,10.280310344827585
+hard_threshold,11945206,"Muito obrigado, isso é ótimo.",Ok.,29,3,0.10344827586206896,10.280310344827585
+hard_threshold,15149119,Nem sabia que existiam lados.,Há.,29,3,0.10344827586206896,10.280310344827585
+hard_threshold,7202023,"Saia desta loja agora, Jewel!",Vá!,29,3,0.10344827586206896,10.280310344827585
+hard_threshold,10930387,Farei 30 anos na sexta-feira.,30?,29,3,0.10344827586206896,10.280310344827585
+hard_threshold,5486903,Bem de onde saimos.,E.,19,2,0.10526315789473684,10.2595
+hard_threshold,15473403,Porque estamos esperando até casarmos.,Vai!,38,4,0.10526315789473684,10.2595
+hard_threshold,5516683,Está falando sério?,É.,19,2,0.10526315789473684,10.2595
+hard_threshold,15662310,"Oh, não, não, não, não, não, não, não.",Não.,38,4,0.10526315789473684,10.2595
+hard_threshold,11325038,Isso deve ser dura.,É.,19,2,0.10526315789473684,10.2595
+hard_threshold,9747926,Achei a saída de emergência.,Oh.,28,3,0.10714285714285714,10.237946428571426
+hard_threshold,10925421,Queria minha roupa de volta.,Sim,28,3,0.10714285714285714,10.237946428571426
+hard_threshold,14480509,Perto de prender esse homem?,Ok!,28,3,0.10714285714285714,10.237946428571426
+hard_threshold,6627425,Meu meio-irmão bem-sucedido.,Hã?,28,3,0.10714285714285714,10.237946428571426
+hard_threshold,10444286,"Apenas faça isso! Muito bem,",Já!,28,3,0.10714285714285714,10.237946428571426
+hard_threshold,3491970,Mas você poderia ter dito...,Mas,28,3,0.10714285714285714,10.237946428571426
+hard_threshold,1268491,"Sim, mas gostaria de ressaltar que...",Sim.,37,4,0.10810810810810811,10.226878378378377
+hard_threshold,10309828,Nunca estive numa instituição mental.,Não.,37,4,0.10810810810810811,10.226878378378377
+hard_threshold,14750020,Temos que ter isso gravado.,Ei!,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,11813741,"E então a Sra. Higgins diz,",E a,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,2464592,##############Guiguns###############,João,36,4,0.1111111111111111,10.192444444444442
+hard_threshold,15914733,"Não, mas obrigada.",É.,18,2,0.1111111111111111,10.192444444444442
+hard_threshold,7066328,Quando eu encontrar meu lar,Sim,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,13543721,Aquela era uma suspensão temporária.,Não.,36,4,0.1111111111111111,10.192444444444442
+hard_threshold,9665984,"Sim, eu explico no caminho.",Ok.,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,9670151,Eis o que eu acho.,Eu,18,2,0.1111111111111111,10.192444444444442
+hard_threshold,15803912,"Butters, se acalme",Ok,18,2,0.1111111111111111,10.192444444444442
+hard_threshold,2232179,A escolha,A,9,1,0.1111111111111111,10.192444444444442
+hard_threshold,13684995,Apenas o nome dele,Só,18,2,0.1111111111111111,10.192444444444442
+hard_threshold,15629100,Isso é...,É,9,1,0.1111111111111111,10.192444444444442
+hard_threshold,12058823,Hrothgar!,É,9,1,0.1111111111111111,10.192444444444442
+hard_threshold,1217867,Sei o que,O,9,1,0.1111111111111111,10.192444444444442
+hard_threshold,6893792,"Iolaus, tenho de ir vê-los.","Uh,",27,3,0.1111111111111111,10.192444444444442
+hard_threshold,316076,Tradução e correções - Kilo,Fim,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,81512,Vamos lá.,Ç,9,1,0.1111111111111111,10.192444444444442
+hard_threshold,13612611,São muito bonitas.,É?,18,2,0.1111111111111111,10.192444444444442
+hard_threshold,14797598,Fiz os ajustes necessários.,Ok.,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,1620762,E vou lhe,E,9,1,0.1111111111111111,10.192444444444442
+hard_threshold,8234929,"Tudo bem, veja, veja, veja.",25!,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,11129859,Olha o passarinho!,X!,18,2,0.1111111111111111,10.192444444444442
+hard_threshold,15101316,Algumas restrições devem aplicar-se.,Sim?,36,4,0.1111111111111111,10.192444444444442
+hard_threshold,11324502,Você já viu antes.,É.,18,2,0.1111111111111111,10.192444444444442
+hard_threshold,7305857,Adoro essa música.,É.,18,2,0.1111111111111111,10.192444444444442
+hard_threshold,14796923,Quanto trabalho para vender colônia.,Olá.,36,4,0.1111111111111111,10.192444444444442
+hard_threshold,6769744,De um vendilhão como Flynt.,Mr.,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,4200840,"Em uma respiração suave, eu",Num,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,7272827,"Policial, foi absolutamente maldoso.",[Pt],36,4,0.1111111111111111,10.192444444444442
+hard_threshold,6500756,Já disse para ficar parada.,Vê?,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,523360,Use um pouco de diplomacia.,Ok!,27,3,0.1111111111111111,10.192444444444442
+hard_threshold,14356637,Eu pensei que você fosse me perguntar como eu estive.,É bom.,53,6,0.11320754716981132,10.168405660377356
+hard_threshold,5273200,"É Sim, eu compreendo completamente.",Vês?,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,4685705,Sofremos perda de energia elétrica.,Não.,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,4682171,"DECÁLOGO, Episódio VII Não Furtarás",Sete,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,9235628,Escuridão enche meu coraçao de dor.,Meu!,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,14106868,Agência de Segurança Federal Russa.,Fsb.,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,2239149,Você recebe o dinheiro diariamante?,Não.,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,13017129,"Margaret, significa tanto para ela.",Pai.,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,9056444,"Relaxe, sou motorista profissional.",Sim?,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,9292644,[Dance music playing] [Cantar] bebê,Baby,35,4,0.11428571428571428,10.156042857142854
+hard_threshold,3330537,Nada aconteceu ao general enquanto ele estava na propriedade.,O Audi.,61,7,0.11475409836065574,10.15067213114754
+hard_threshold,686032,Legendas e Sincronia MAURO,Fim,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,4721647,Quantos na semana passada?,Oh!,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,8328588,Mas vou dizer uma coisa...,Mas,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,9747930,Achei a saída de incêndio.,Oh.,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,10898736,Eu farei negócio com você.,Oh.,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,15914244,Ainda bem que você chegou.,Olá,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,2985515,Você se sentir mais viril.,Mal,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,13242993,TRADUÇÃO - lpatp PRODUÇOES,Opt,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,8488437,"Vamos Marvim, pra Marklar!",Já?,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,5150179,Estamos trabalhando nisso.,Vá.,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,9760468,ajude-me! Estou sangrando!,Ei!,26,3,0.11538461538461539,10.143442307692306
+hard_threshold,12579192,"Não, gracias, Gracias, não, não, Me escuta.",Ouve.,43,5,0.11627906976744186,10.133186046511625
+hard_threshold,7549906,"Agora, se íamos conversar, vamos conversar.",Fale!,43,5,0.11627906976744186,10.133186046511625
+hard_threshold,4861843,"Não, não, não, não, não, não, não!",Não!,34,4,0.11764705882352941,10.117499999999996
+hard_threshold,2123246,Minha esposa é muito superticiosa.,Sim?,34,4,0.11764705882352941,10.117499999999996
+hard_threshold,4997183,Nós podemos ouvir,Já,17,2,0.11764705882352941,10.117499999999996
+hard_threshold,8558664,Agentes Especiais Scully e Mulder.,Fbi.,34,4,0.11764705882352941,10.117499999999996
+hard_threshold,6225198,Você está dispensado desta missão.,Sim.,34,4,0.11764705882352941,10.117499999999996
+hard_threshold,12665161,Deixe-nos preparar algo para eles.,Não.,34,4,0.11764705882352941,10.117499999999996
+hard_threshold,9013556,Ele está concorrendo a presidente?,Sim.,34,4,0.11764705882352941,10.117499999999996
+hard_threshold,1862483,Dr. Tristan Adams,A/,17,2,0.11764705882352941,10.117499999999996
+hard_threshold,5797888,Eu tenho 31 anos.,E?,17,2,0.11764705882352941,10.117499999999996
+hard_threshold,15438282,Nós nos conhecíamos desde criança.,Vem!,34,4,0.11764705882352941,10.117499999999996
+hard_threshold,2526926,O que quer dizer?,E?,17,2,0.11764705882352941,10.117499999999996
+hard_threshold,13605176,Regras para um Escritório Moderno.,Pam.,34,4,0.11764705882352941,10.117499999999996
+hard_threshold,13246483,O DNA confirma-o.,E?,17,2,0.11764705882352941,10.117499999999996
+hard_threshold,10140413,Hospital saint catherine entrada principal,Gwen.,42,5,0.11904761904761904,10.101440476190474
+hard_threshold,8455401,"Eu-poderia-ter-sido- uma-ótima-dançarina""?",Pior.,42,5,0.11904761904761904,10.101440476190474
+hard_threshold,12433971,"Abaixe logo, não se mexa.",Já!,25,3,0.12,10.090519999999998
+hard_threshold,10338846,A corda-bamba dos Jacarés,216,25,3,0.12,10.090519999999998
+hard_threshold,7123763,Do que você está falando?,Eu?,25,3,0.12,10.090519999999998
+hard_threshold,9747833,"Ah, você tocou nos lados!",Oh!,25,3,0.12,10.090519999999998
+hard_threshold,11105207,O MELHOR DA JUVENTUDE fim,Fim,25,3,0.12,10.090519999999998
+hard_threshold,1849024,Legenda por Arnaldo Assis,Fim,25,3,0.12,10.090519999999998
+hard_threshold,10908570,Mas desta vez te imploro.,Mas,25,3,0.12,10.090519999999998
+hard_threshold,9482483,O que estou fazendo aqui?,Eu?,25,3,0.12,10.090519999999998
+hard_threshold,1621407,"Pat, em Pearl Harbor e...",St.,25,3,0.12,10.090519999999998
+hard_threshold,8373864,Já fez vários comerciais.,Faz,25,3,0.12,10.090519999999998
+hard_threshold,15635107,"Está vendo? Oh, meu Deus.",Ok.,25,3,0.12,10.090519999999998
+hard_threshold,1812960,Voltarei com um exército?,Eu?,25,3,0.12,10.090519999999998
+hard_threshold,7132084,Quer dinheiro vivo agora?,Já?,25,3,0.12,10.090519999999998
+hard_threshold,5374459,Ressincronia WEB-DL Bola7,Mgw,25,3,0.12,10.090519999999998
+hard_threshold,8234928,"Vinte cinco, vinte cinco.",25!,25,3,0.12,10.090519999999998
+hard_threshold,2240070,SARANTSEV Nikodim Fomitch,Yu.,25,3,0.12,10.090519999999998
+hard_threshold,3352302,Ângulo de 030 à esquerda.,30.,25,3,0.12,10.090519999999998
+hard_threshold,3669711,Califórnia só estava de passagem.,Não?,33,4,0.12121212121212122,10.076621212121209
+hard_threshold,9207694,Não precisa se comprometer agora.,Sim.,33,4,0.12121212121212122,10.076621212121209
+hard_threshold,12278496,Estou interrompendo alguma coisa?,Não.,33,4,0.12121212121212122,10.076621212121209
+hard_threshold,3559016,"Inauguração em breve""Oi, rapazes.",Olá!,33,4,0.12121212121212122,10.076621212121209
+hard_threshold,9713709,"Oi, estou procurando Carl Ferris.",Olá.,33,4,0.12121212121212122,10.076621212121209
+hard_threshold,12292349,"Quero dizer, o que, deviam dizer,",Será,33,4,0.12121212121212122,10.076621212121209
+hard_threshold,14783194,Você precisa se concentrar nisso.,Não.,33,4,0.12121212121212122,10.076621212121209
+hard_threshold,3119890,"Algo está acontecendo aqui, cara.",Meu.,33,4,0.12121212121212122,10.076621212121209
+hard_threshold,1613852,"Só com uma ligeira modificação, eu tiro, você dá.",Só com,49,6,0.12244897959183673,10.0624387755102
+hard_threshold,12424907,"Agora, quando começarmos, não esqueça de dizer...",Não te,49,6,0.12244897959183673,10.0624387755102
+hard_threshold,14594605,"Ei, olha a boca.",Ok,16,2,0.125,10.033187499999997
+hard_threshold,14875403,"Eu sempre dizia,",Eu,16,2,0.125,10.033187499999997
+hard_threshold,15642050,Há alguns minutos atrás.,Já.,24,3,0.125,10.033187499999997
+hard_threshold,11945306,É o incrível homem desaparecido.,Sim.,32,4,0.125,10.033187499999997
+hard_threshold,2873364,P-a-r...,P,8,1,0.125,10.033187499999997
+hard_threshold,587934,Como se estivéssemos encantados.,Sim.,32,4,0.125,10.033187499999997
+hard_threshold,884006,"Salkhad, o pesquisador de campo.",Dói.,32,4,0.125,10.033187499999997
+hard_threshold,7857832,O que está te impedindo?,Eu!,24,3,0.125,10.033187499999997
+hard_threshold,9776027,A vendedora falou assim.,E a,24,3,0.125,10.033187499999997
+hard_threshold,11389079,O título,O,8,1,0.125,10.033187499999997
+hard_threshold,15031573,Passo 1:,O,8,1,0.125,10.033187499999997
+hard_threshold,5233887,Espere um pouco.,É?,16,2,0.125,10.033187499999997
+hard_threshold,6815690,"Quem você quer enganar, Laverne?",Ora!,32,4,0.125,10.033187499999997
+hard_threshold,2949460,Tradução das legendas Puccabride,DoX®,32,4,0.125,10.033187499999997
+hard_threshold,5942107,Verei o que posso fazer.,"Ok,",24,3,0.125,10.033187499999997
+hard_threshold,3709460,Procuramos o dono deste negócio.,Olá.,32,4,0.125,10.033187499999997
+hard_threshold,15826264,"Tinha um grande ""M""nela.","M""?",24,3,0.125,10.033187499999997
+hard_threshold,163785,Eu disse,E,8,1,0.125,10.033187499999997
+hard_threshold,7843876,"Et cetera, et cetera, et cetera.",Etc.,32,4,0.125,10.033187499999997
+hard_threshold,11110848,Especialmente...,Oi,16,2,0.125,10.033187499999997
+hard_threshold,15731525,Número 10 está demitido.,Um.,24,3,0.125,10.033187499999997
+hard_threshold,7014720,Eu entendo isto.,Eu,16,2,0.125,10.033187499999997
+hard_threshold,11101221,Passamos toda a noite acordados.,Sim.,32,4,0.125,10.033187499999997
+hard_threshold,3491121,"É, independente.",É.,16,2,0.125,10.033187499999997
+hard_threshold,9923924,Que emocionante.,É.,16,2,0.125,10.033187499999997
+hard_threshold,13461674,E o cara,E,8,1,0.125,10.033187499999997
+hard_threshold,3349705,Tiramos vocês dois pelos fundos.,Bem.,32,4,0.125,10.033187499999997
+hard_threshold,6691655,Mais um.,1,8,1,0.125,10.033187499999997
+hard_threshold,5950127,Mostrar níveis de acesso,5 0,24,3,0.125,10.033187499999997
+hard_threshold,9324061,O grande,O,8,1,0.125,10.033187499999997
+hard_threshold,3068345,Não quero que aconteceu?,Eu.,24,3,0.125,10.033187499999997
+hard_threshold,12351488,Deixem Susan fora disso.,Ok.,24,3,0.125,10.033187499999997
+hard_threshold,12356343,Ele está falando de mim.,Eu.,24,3,0.125,10.033187499999997
+hard_threshold,9490225,Tenho vontade de,Só,16,2,0.125,10.033187499999997
+hard_threshold,10065658,Mas vejam os benefícios.,Mas,24,3,0.125,10.033187499999997
+hard_threshold,8366966,Não queria que terminasse assim.,Sim?,32,4,0.125,10.033187499999997
+hard_threshold,7212144,"Anda, vamos arrumar umas fritas.",Sim.,32,4,0.125,10.033187499999997
+hard_threshold,10420528,Porão proibida entrada de alunos,Cave,32,4,0.125,10.033187499999997
+hard_threshold,3832372,É melhor,É,8,1,0.125,10.033187499999997
+hard_threshold,14356225,E então sofrem as consequências.,Fui.,32,4,0.125,10.033187499999997
+hard_threshold,12064079,"O que fazemos agora, K2?",K2?,24,3,0.125,10.033187499999997
+hard_threshold,4008088,Algo importante?,D!,16,2,0.125,10.033187499999997
+hard_threshold,1116198,Príncipe,O,8,1,0.125,10.033187499999997
+hard_threshold,12581370,E toda aquela conversa sobre conquistar o pais.,O quê?,47,6,0.1276595744680851,10.0026914893617
+hard_threshold,5248034,"Para que pagamos vocês, afinal?",Mãe.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,13351761,Devíamos adicionar Vancomicina.,"0,4?",31,4,0.12903225806451613,9.986951612903225
+hard_threshold,9352719,Porque está agindo deste jeito?,Não.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,12663605,"Estou tentando, estou tentando.",Não.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,7485902,Bureau Federal de Investigação.,Fbi.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,10446308,Quantas vezes vencemos o Chefe?,Olá.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,11322583,Posso morrer de cálculo biliar?,Não.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,3118639,Ambos estamos pelados na selva.,Nus.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,7800387,Parece que vamos estudar muito.,Não.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,13349928,Precisamos paralisar e intubar.,Pai!,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,11390078,Eu estou escrevendo sobre isso.,Quê?,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,13362019,A minha apresentação foi ótima.,Sim.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,14466620,Façam sua presença perceptivel.,Fbi.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,3720908,"Estou orgulhosa de você, filho.",Mãe.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,8024791,"Ah, certo, certo, certo, certo.",Sim.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,13975566,Não necessitava esses detalhes.,Sim.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,12370247,Aquela com quem estava sentado?,Sim.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,15460468,Eu estava por perto eu imaginei,Olá.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,14688263,"Ataque terrorista, gás nervoso?",Não.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,12602642,Lembrei como ele era conhecido.,Sim.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,13521023,Estava vivendo como César aqui.,Sim?,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,15910491,"Estão todos esperando, bêbados.",Olá?,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,4566096,"É divertido, você vai adorar É divertido, você vai adorar É divertido, você vai adorar April?",Vais adorar.,93,12,0.12903225806451613,9.986951612903225
+hard_threshold,15725385,"Certo, Stan, não fique nervoso.",Olá.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,6875114,Imagino que tenhamos terminado.,Olá.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,14981828,"Ah, aposto que eram deliciosos.",Sim.,31,4,0.12903225806451613,9.986951612903225
+hard_threshold,12115451,O Instituto Cubano de Arte e Indústria Cinematográfica,O icaic,54,7,0.12962962962962962,9.980101851851849
+hard_threshold,6462245,Apenas estou assustada.,85.,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,4618642,É melhor com meu irmão.,Ei!,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,7521424,Te fiz sentir inseguro?,Eu?,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,7066338,Como o sonho me ensinou,Sim,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,10172199,Ele não estava sozinho.,Vê?,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,1228797,O que andei aprontando?,Eu?,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,4847041,"Dennis, me dê uma arma!",Tu!,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,10442513,Você já fez isso antes.,Ok.,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,4901348,Precisamos um do outro.,Ok.,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,6715610,Clopin vai lhes contar.,Ow.,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,3968649,O que está acontecendo?,Ei!,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,6621113,Então repitam comigo...,Por,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,12157226,"Realmente não é certo"".",Oh!,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,14938469,A mãe mora em Knighton.,Eu?,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,1931984,Não tem cano desta vez?,Pá?,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,13922864,Está fazendo muito bem.,Ok.,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,4543370,Tenho de agradecer-lhe.,Pá.,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,6182204,Pergunta isso para mim?,Eu?,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,4105234,Então É um assunto meu.,Tu?,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,1411704,"Vá em frente, continue.",Vá!,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,6229601,Piloto automático ligado modo invisível ligado,Ligado,46,6,0.13043478260869565,9.970869565217388
+hard_threshold,11295837,"Não se desculpe, Paige.",Já.,23,3,0.13043478260869565,9.970869565217388
+hard_threshold,8878858,"[Conversas de rádio, indistinto] 10-4.",10-4.,38,5,0.13157894736842105,9.957749999999997
+hard_threshold,14750266,Tem alguma coisa terrível acontecendo.,Lori.,38,5,0.13157894736842105,9.957749999999997
+hard_threshold,8400419,Como você consegue pensar claramente mesmo com raiva?,Eu sei.,53,7,0.1320754716981132,9.952056603773583
+hard_threshold,6491856,"Se você perder, vou buscar essas mulheres e te entregar como comida.",Dá a mão.,68,9,0.1323529411764706,9.948874999999997
+hard_threshold,12306803,Eu não tenho nenhuma cicatriz.,Olá.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,12372595,Talvez devesse falar primeiro.,Mãe.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,2585495,"A próxima vez, nós convidamos.",Não.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,6837918,Você está me dizendo que você.,Não!,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,4286877,E também continuar a escrever?,Sim.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,4681914,"Diga-me o endereço, por favor.",Sim.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,4377251,"Claro, em um banco em Palermo.",Sim.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,7426593,Uma dica grátis sobre comédia.,Dica,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,9158528,Isso deve esquecer o pesadelo.,Não!,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,5003386,Como Paul Delacourte a tratou?,Não.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,10983755,Não devia estar andando ainda.,Sim.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,5300697,Cinco segundos!,As,15,2,0.13333333333333333,9.93763333333333
+hard_threshold,13774084,O hit da queda.,Um,15,2,0.13333333333333333,9.93763333333333
+hard_threshold,3144652,Você somente se,Só,15,2,0.13333333333333333,9.93763333333333
+hard_threshold,7825034,Ela tem estado muito estranha.,Não.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,9563966,Quer ouvir minha parada? Claro,Sim.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,2943620,Verônica disse que eram delas.,Sim.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,14627944,Então porque está sussurrando?,Boa.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,1662044,"Sim, vamos ver.",Ok,15,2,0.13333333333333333,9.93763333333333
+hard_threshold,12333160,Apenas me passe aquelas tiras.,Meu.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,7765076,Esqueço coisas.,E?,15,2,0.13333333333333333,9.93763333333333
+hard_threshold,8388084,"Lembre-se do scanner quebrado,",Olá?,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,8732079,Não tenho problema de pressão.,Sim?,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,11214832,Na verdade preparar essas coisas é divertido.,É bom.,45,6,0.13333333333333333,9.93763333333333
+hard_threshold,10903189,"Columbo, certo?",É.,15,2,0.13333333333333333,9.93763333333333
+hard_threshold,4563753,Use duas baterias de caminhão.,Sim.,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,9817135,Não tem nennhuma justificação!,Sim!,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,14223610,Versão Brasileira paulostriker,Lore,30,4,0.13333333333333333,9.93763333333333
+hard_threshold,1400381,Estou perturbado Estou perturbado Estou perturbado Atenção!,Silêncio,59,8,0.13559322033898305,9.911720338983049
+hard_threshold,10964176,Que você e eu somos...,Oh.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,2674297,O que acha que está...,Ei!,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,4141631,"Os Marines, seu burro!",Os!,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,6332125,Serei franco com você.,Vou,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,10295210,Mas uma coisa eu digo.,Mas,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,5442270,Em seus acentos agora!,Já!,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,11293871,"Está na hora, querida.",Ok.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,14738843,Cansei dessa conversa!,Eu.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,157045,Tem lá suas vantagens.,Eu?,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,1254444,"Seu nome, Edward Hall.",35.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,12370193,O que é tão engraçado?,Eu.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,1317370,Subtitles by SOFTITLER,Fim,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,12081747,Você quer dizer fugir?,Ir?,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,1571256,É melhor que descanse.,Tá.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,10618931,"De jeito nenhum, cara.",Eu?,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,7303018,Oximetria de pulso 8O.,80.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,14739009,Você sempre foi assim?,Ok.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,8846681,"Um recado dos ""Anjos"".",Uma,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,14478067,"Isso é bom, muito bom.",Ok.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,5619423,"Número de pontos, 13O.",52.,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,13395301,Os escondi no meu rabo,E a,22,3,0.13636363636363635,9.90288636363636
+hard_threshold,7763857,Ela está absolutamente certa.,Não!,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,6822954,"Sim, mas não é significativo.",Sim.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,13711503,Não estou ouvindo esta coisa.,Olá!,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,3342338,Quinn que seria informante...,Näo.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,3347896,Quero dizer algo para você...,Sim?,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,3906841,"Lembre Mertskhala, Andorinha.",Fixa,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,1800369,Não há outra rota apropriada.,Sim!,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,4275802,Comunique a todos os agentes.,Sim?,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,7859088,"Tem alguma coisa contra, huh?",Bom.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,1311710,"Não, não, não, não, não, não.",Não.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,14842296,"Bones, tem aqui nos arquivos.",Não.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,2494840,"Geologia avançada, Wellesley.",Não?,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,15485795,A enfermeira que você exigiu?,Não.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,14063410,"Ei, quer conhecer minha casa?",Sim.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,6981128,Autoridade Comercial Ferengi.,Acf.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,15687587,Está dormindo com meu marido?,Olá?,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,8194660,"Frank Fitts, fuzileiro naval.",Cor.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,935166,Espera até acabar a marcação.,Sim?,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,224820,Posso lhe fazer uma pergunta?,Sim.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,6506102,"Vamos lá, rapazinho, levanta.",Não!,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,2852527,"Sim, foi assim que o conheci.",Sim.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,7528848,Uma de minhas melhores peças.,Fui.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,6276127,Um milhão de vezes quis dizer,Quis,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,81496,Parece que prefere a marinha.,Sim.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,9009192,"Não, não vou usar o telefone.",Olá.,29,4,0.13793103448275862,9.884913793103445
+hard_threshold,12241904,Estes filmes dão-me muito assustada.,Ouve!,36,5,0.1388888888888889,9.873930555555553
+hard_threshold,11077426,Menino #9 Masakatsu Taguchi Menino #11 Tatsuhiko Hasegawa,6 Mortos,57,8,0.14035087719298245,9.857166666666664
+hard_threshold,5388572,"Vamos lá, Dick é bom!",Vá.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,5166319,Você não parece sério agora.,Sim?,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,6397146,Você era uma garota valente.,Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,3595636,Oitenta-vinte.,20,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,286352,"Sargento Hawkins, assuma o comando.",Sgto.,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,10202034,"Sim, eu quero.",É.,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,7383874,Sim estávamos falando,Sr.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,14517762,"Café-da-manhã dos campeões"".",Sim.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,10348478,Tem a certeza?,É?,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,13478176,"Venha, vamos dar algumas reboladas.",Anda.,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,5365106,Qual o motivo?,É.,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,807948,Tire suas coisas e conserte.,Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,12701259,Eu não agüentava mais,Bo!,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,11326820,É apenas uma entorse.,Iv.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,13749826,Varden e DSM3.,E?,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,10331251,MINISTÉRIO DA informação Oi.,Olá.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,12872583,Restos mortais,Pó,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,8310965,Você me pediu.,E?,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,830507,Estivemos juntas numa festa.,Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,1558448,Vamos dar uma olhada.,Ok.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,11945518,Os muçulmanos chacinaram os hindus.,Yeah.,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,4247531,Mas me responda isso.,Mas,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,11594624,Venham acompanhar a minha performa.,Olha!,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,10447616,Devem estar procurando você.,Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,5428823,"Três, só três!",3!,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,6380384,Desculpe se nós a acordamos.,Olá.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,11944953,Eles pareceram bastante assustados.,Okay.,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,881796,"A nenhuma prisão maldita, está bem?","A, n.",35,5,0.14285714285714285,9.828428571428569
+hard_threshold,14476602,Ei Só uma pergunta...,Oi.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,11494426,É incrível como ela cresceu.,Sim.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,12918277,"Leia, não me importo.",Lê.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,14958819,Snake cambio desligo.,Mr.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,14841148,"Então, quem fazia os cortes?",Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,9729397,Temperatura 34 graus.,34.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,3790906,O que eu faço?,E?,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,1737794,Dona Matilde tem um amante!?,Não!,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,12369038,E então,E,7,1,0.14285714285714285,9.828428571428569
+hard_threshold,14541715,BPeruchi Phoenix0 BPeruchi Phoenix0,Maria,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,768613,A mercadoria está toda aqui.,Sim!,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,1451644,Que batida de nádega!,Ai!,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,12934400,Acontece que estou nas vizinhanças.,Ouve!,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,10208246,Está fazendo uma confusão por nada.,Nada?,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,3877035,Até os paramédicos chegarem.,Mãe.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,14528724,"Vicki, grande sorriso agora.",Olá.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,3068373,E eu perguntei em casamento.,Pai.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,13464982,Depois do acidente de avião?,Sim.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,8602064,Perda de 82% de combustível.,82%.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,5017663,"Nós compraremos algumas, ok?",Nao!,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,6177934,403)}Quarenta e seis.,46!,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,123453,Norton J. WHITE EDITOR - IMPRENSA MATUTINA,Editor,42,6,0.14285714285714285,9.828428571428569
+hard_threshold,7440225,Vocês são todos uns idiotas.,Sim.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,5429319,Travessia descuidada?,Eu?,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,8832767,É pra isso que serve.,Ok.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,7823853,Tenho certeza que há outros.,Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,8267013,Alguém está com fome?,Eu.,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,1438950,Onde o pasto cresce selvagem,Zeb.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,4382981,O que afetaria seu trabalho.,Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,14360635,Ele morava numa casa branca.,Sim!,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,5568294,Ele está me deixando maluca.,Sim.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,478947,Luís Filipe Bernardes,Fim,21,3,0.14285714285714285,9.828428571428569
+hard_threshold,12579361,"Para, para, para, para, para, para.",Pára.,35,5,0.14285714285714285,9.828428571428569
+hard_threshold,5464615,Conheci umas pessoas legais.,Sim.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,5317636,Um homem sábio,Um,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,8460729,Ela nos convenceu a estudar.,Sim.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,10347154,"O jeito deles,",Da,14,2,0.14285714285714285,9.828428571428569
+hard_threshold,11323347,"Love Will Keep Us Together"".",Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,84563,"Sabe o que significa, Tanya?",Não.,28,4,0.14285714285714285,9.828428571428569
+hard_threshold,14808267,Onde está todo mundo?,Uh?,21,3,0.14285714285714285,9.828428571428569
+robust_z,8622756,E,E o Presidente da Câmara disse...,1,33,33.0,366.92799999999994
+robust_z,13144323,À,Para a Princesa dos Elefantes...,1,32,32.0,355.46149999999994
+robust_z,14927825,A,Os polícias a cavalo têm sempre,1,31,31.0,343.9949999999999
+robust_z,14177602,A,Mas a semana passada disse...,1,29,29.0,321.0619999999999
+robust_z,10890264,A,"Portanto, a escolha é vossa.",1,28,28.0,309.59549999999996
+robust_z,5552184,E,Nem imaginas as estrelas que,1,28,28.0,309.59549999999996
+robust_z,8738134,E,"Tenho 3 palavras pra vocês,",1,27,27.0,298.1289999999999
+robust_z,4958579,O,A melhor mascote que há...,1,26,26.0,286.66249999999997
+robust_z,5156516,A,"A conspiração contra JFK"":",1,26,26.0,286.66249999999997
+robust_z,7171732,E,"Não, eu não saio do carro.",1,26,26.0,286.66249999999997
+robust_z,11534184,E,E sabes o que lhe disse?,1,24,24.0,263.7295
+robust_z,5496935,A,Era isso que eu falava.,1,23,23.0,252.26299999999995
+robust_z,2799786,E,[E então ela gritou...],1,23,23.0,252.26299999999995
+robust_z,5131521,E,E então ele disse-me...,1,23,23.0,252.26299999999995
+robust_z,11099106,E,E foi então que o ouvi.,1,23,23.0,252.26299999999995
+robust_z,13099827,E,E tenho outra história.,1,23,23.0,252.26299999999995
+robust_z,172219,O,Já disse que a deixei.,1,22,22.0,240.79649999999995
+robust_z,1459516,E,E disseram a Samuel...,1,22,22.0,240.79649999999995
+robust_z,5442349,É,Somos os Ducks ou quê?,1,22,22.0,240.79649999999995
+robust_z,3211526,E,E os planetas também.,1,21,21.0,229.32999999999996
+robust_z,6344386,E,"Disse para mim mesma,",1,21,21.0,229.32999999999996
+robust_z,520976,É,Foi como me conheceu.,1,21,21.0,229.32999999999996
+robust_z,15496184,E,E os nomeados são...,1,20,20.0,217.86349999999996
+robust_z,8206448,E,"Já lá dizia o outro,",1,20,20.0,217.86349999999996
+robust_z,9711275,E,E depois há o Danny.,1,20,20.0,217.86349999999996
+robust_z,12040263,A,A diferença é esta.,1,19,19.0,206.39699999999996
+robust_z,15609368,E,Digo-lhe uma coisa.,1,19,19.0,206.39699999999996
+robust_z,1872173,E,Estávamos ambos ali,1,19,19.0,206.39699999999996
+robust_z,265693,É...,Bem--------------------------------------------------------------------...,4,74,18.5,200.66374999999994
+robust_z,7921380,Eu,"Bem, vou-vos dizer porque telefonei.",2,36,18.0,194.93049999999997
+robust_z,8748983,E,E faz-me um favor.,1,18,18.0,194.93049999999997
+robust_z,14558996,3,Não praticar o mal,1,18,18.0,194.93049999999997
+robust_z,9533497,É,Da Cruz Vermelha.,1,17,17.0,183.46399999999997
+robust_z,2417772,A,A história é essa,1,17,17.0,183.46399999999997
+robust_z,843843,E,E tu conheces-me.,1,17,17.0,183.46399999999997
+robust_z,4752979,E,E mais uma coisa.,1,17,17.0,183.46399999999997
+robust_z,15599529,E,Tenho aqui outro.,1,17,17.0,183.46399999999997
+robust_z,1429556,O,Aquele que diz...,1,17,17.0,183.46399999999997
+robust_z,8424176,E,E o vencedor é...,1,17,17.0,183.46399999999997
+robust_z,14008577,8,Oito Bravo 20...,1,16,16.0,171.99749999999995
+robust_z,9071507,A,A vida é injusta,1,16,16.0,171.99749999999995
+robust_z,4227382,É?,Conheço cada bebida que existe.,2,31,15.5,166.26424999999998
+robust_z,15239792,É.,"Olha, talvez devêssemos entrar.",2,31,15.5,166.26424999999998
+robust_z,9471189,Só,"Todavia, tenho duas condições.",2,30,15.0,160.53099999999995
+robust_z,6154046,E,Mais uma coisa.,1,15,15.0,160.53099999999995
+robust_z,275869,E,E depois gritou,1,15,15.0,160.53099999999995
+robust_z,4365830,E,Que atenciosos.,1,15,15.0,160.53099999999995
+robust_z,4267956,Al!,"Vinte e três, vinte e quatro, vinte e cinco.",3,44,14.666666666666666,156.7088333333333
+robust_z,3421418,É?,Disse que parecias o Houdini.,2,29,14.5,154.79774999999998
+robust_z,5132057,Já,Consigo já ver os cabeçalhos.,2,29,14.5,154.79774999999998
+robust_z,2002326,E,E o comandante,1,14,14.0,149.06449999999995
+robust_z,4291233,É.,Arriscar a vida pela equipa.,2,28,14.0,149.06449999999995
+robust_z,1391944,Só,"Há, apenas, uma diferença...",2,28,14.0,149.06449999999995
+robust_z,14421568,A,Aniquilem-nos.,1,14,14.0,149.06449999999995
+robust_z,13019647,A,A dica é esta.,1,14,14.0,149.06449999999995
+robust_z,6305149,É?,"O amor não é tudo, pois não?",2,28,14.0,149.06449999999995
+robust_z,15570826,Os,"Os factos eram os seguintes,",2,28,14.0,149.06449999999995
+robust_z,14601390,E,E o orientador,1,14,14.0,149.06449999999995
+robust_z,12363200,É.,"Sim, todo o cuidado é pouco.",2,28,14.0,149.06449999999995
+robust_z,15766881,Fbi,ANÁLISE COMPORTAMENTAL mortes FBI - UNID.,3,41,13.666666666666666,145.2423333333333
+robust_z,13362668,É.,Também tenho saudades tuas.,2,27,13.5,143.33124999999998
+robust_z,9436823,Já,"Voçês conhecem a expressão,",2,27,13.5,143.33124999999998
+robust_z,11347455,É.,"Sim, isso seria fantástico.",2,27,13.5,143.33124999999998
+robust_z,15745837,Os,Os factos são os seguintes.,2,27,13.5,143.33124999999998
+robust_z,9025878,Se,Se alguém te perguntasse...,2,27,13.5,143.33124999999998
+robust_z,6140504,É.,Estou só um bocado abalado.,2,27,13.5,143.33124999999998
+robust_z,7530681,Oh!,Sou primeiramente um taxidermatologista.,3,40,13.333333333333334,141.42016666666666
+robust_z,4005309,E,E pus-me para,1,13,13.0,137.59799999999996
+robust_z,276572,É?,Temos cavalos suficientes.,2,26,13.0,137.59799999999996
+robust_z,3775032,É.,"Sim, vimos isso num filme.",2,26,13.0,137.59799999999996
+robust_z,3930924,O,O paradoxo do,1,13,13.0,137.59799999999996
+robust_z,11528353,É?,Mas mais ninguém o perdeu.,2,26,13.0,137.59799999999996
+robust_z,11657995,W,Norma Wilcox.,1,13,13.0,137.59799999999996
+robust_z,68107,Fim,Tradução e Legendagem Francisco Marques,3,39,13.0,137.59799999999996
+robust_z,13004122,As,"Bom, aqui estão as regras.",2,26,13.0,137.59799999999996
+robust_z,8387198,E,E isto é sim!,1,13,13.0,137.59799999999996
+robust_z,2826581,A,A temperatura,1,13,13.0,137.59799999999996
+robust_z,14956837,E?,E ele deixou-me ir embora.,2,26,13.0,137.59799999999996
+robust_z,8630261,Eu,Encontrei a minha vocação.,2,26,13.0,137.59799999999996
+robust_z,6866080,Eu?,"Hemograma, tipo, 10 unidades cruzadas.",3,38,12.666666666666666,133.77583333333328
+robust_z,7324957,É.,"Desculpe, Bill. [Suspira]",2,25,12.5,131.86475
+robust_z,12949648,Som.,"Som, velocidade. Cabo Anthony Swofford Sacramento,",4,50,12.5,131.86475
+robust_z,14655862,E?,"Claro que podes, querida.",2,25,12.5,131.86475
+robust_z,789671,É.,"Sim, temo que seja, Tess.",2,25,12.5,131.86475
+robust_z,11164749,O,Surpreendido,1,12,12.0,126.13149999999997
+robust_z,14981661,É.,"Sim, devias saber disso.",2,24,12.0,126.13149999999997
+robust_z,3874671,É.,"Cliff Clavin, benfeitor.",2,24,12.0,126.13149999999997
+robust_z,6243222,É!,Tony perkis proprietário,2,24,12.0,126.13149999999997
+robust_z,6807054,A,Há um ditado,1,12,12.0,126.13149999999997
+robust_z,12140140,E,Outra coisa.,1,12,12.0,126.13149999999997
+robust_z,9564295,É,"Sim, eu sei.",1,12,12.0,126.13149999999997
+robust_z,1144393,Lá,Ali tem lugar algo mais.,2,24,12.0,126.13149999999997
+robust_z,11310510,Me,Pergunto-lhe o seguinte.,2,24,12.0,126.13149999999997
+robust_z,12100640,É!,Eu só arranjo problemas.,2,24,12.0,126.13149999999997
+robust_z,11831331,É,Era qualquer,1,12,12.0,126.13149999999997
+robust_z,4851300,A,E vamos para,1,12,12.0,126.13149999999997
+robust_z,1854179,V.,V. STRJELTCHIK Bennigsen,2,24,12.0,126.13149999999997
+robust_z,10057193,O,Será que Mr.,1,12,12.0,126.13149999999997
+robust_z,789087,E,"E ""Parabéns.",1,12,12.0,126.13149999999997
+robust_z,6231132,04,Atoms 21 - sharks 24 04,2,23,11.5,120.39824999999998
+robust_z,14659761,84,"Pulso a normalizar, 84.",2,23,11.5,120.39824999999998
+robust_z,10985946,É?,"Bom, isso explica tudo.",2,23,11.5,120.39824999999998
+robust_z,3292624,Um,Vou dizer-te uma coisa.,2,23,11.5,120.39824999999998
+robust_z,13618924,É.,"Pois, eu apenas acho...",2,23,11.5,120.39824999999998
+robust_z,7776341,É.,Explico-te depois. Olá.,2,23,11.5,120.39824999999998
+robust_z,15525841,É.,Deve estar a descansar.,2,23,11.5,120.39824999999998
+robust_z,8607702,Te,Vou dizer-te uma coisa.,2,23,11.5,120.39824999999998
+robust_z,7846813,Ei.,"Doug, estamos a tornarnos idiotas.",3,34,11.333333333333334,118.48716666666665
+robust_z,20225,Fim,Jonnyth3 Sincronização e correcção,3,34,11.333333333333334,118.48716666666665
+robust_z,13080012,Dói?,Onde está doendo? Você está bem? Está doendo.,4,45,11.25,117.53162499999996
+robust_z,5678707,Dois.,VEDAÇÃO DO RECINTO DO T-REX VEDAÇÃO PERIMÉTRICA dois...,5,55,11.0,114.66499999999998
+robust_z,15632874,As,"Ah, as regras da casa.",2,22,11.0,114.66499999999998
+robust_z,7071605,É.,Sopra-se no rabo dela.,2,22,11.0,114.66499999999998
+robust_z,15207165,É.,"Sim, não precisavas...",2,22,11.0,114.66499999999998
+robust_z,2078237,Fim,Tradução e legendagem PEDRO LOPES,3,33,11.0,114.66499999999998
+robust_z,11976815,Me,Responde-me uma coisa.,2,22,11.0,114.66499999999998
+robust_z,9057832,E?,"Então, como te saíste?",2,22,11.0,114.66499999999998
+robust_z,3732307,De,Lembrei-me de repente.,2,22,11.0,114.66499999999998
+robust_z,13351904,É.,Estamos mesmo casados.,2,22,11.0,114.66499999999998
+robust_z,8385172,Ok.,Que Primavera uma bela irlandesa.,3,33,11.0,114.66499999999998
+robust_z,6506648,É.,Sentes-te responsável.,2,22,11.0,114.66499999999998
+robust_z,9408360,É.,E essa a sua resposta?,2,22,11.0,114.66499999999998
+robust_z,9536072,É.,"Uma chatice, já sabes.",2,22,11.0,114.66499999999998
+robust_z,11187708,Ei!,"Seu bastardo, nós estamos mortos!",3,33,11.0,114.66499999999998
+robust_z,11949166,Oi.,Estou cansado de ser apaparicado.,3,33,11.0,114.66499999999998
+robust_z,7675173,A,"Em geral, a",1,11,11.0,114.66499999999998
+robust_z,5539579,Oi.,"É melhor recuperar aqui, Charlie.",3,33,11.0,114.66499999999998
+robust_z,3700312,É,Sim eu sei.,1,11,11.0,114.66499999999998
+robust_z,4957437,E,Claro que a,1,11,11.0,114.66499999999998
+robust_z,4570511,F,Percebeste?,1,11,11.0,114.66499999999998
+robust_z,9218648,Alô?,"Hotel beverly ernesto hollywood, califórnia",4,43,10.75,111.79837499999996
+robust_z,2898932,Vá!,Agora vamos para as corredeiras.,3,32,10.666666666666666,110.8428333333333
+robust_z,5841762,Oi.,Anda falar comigo quando saíres.,3,32,10.666666666666666,110.8428333333333
+robust_z,4721809,Mas,Mas vamos nos manter aos factos.,3,32,10.666666666666666,110.8428333333333
+robust_z,6865125,65.,Tenho de fazer uma traqueotomia.,3,32,10.666666666666666,110.8428333333333
+robust_z,4359916,Vê?,"Olha, Pelle. Tinha-me esquecido,",3,32,10.666666666666666,110.8428333333333
+robust_z,12544581,Mas,Mas digo-lhes o que vamos fazer.,3,32,10.666666666666666,110.8428333333333
+robust_z,5300991,Vê?,Especialmente se não estamos lá.,3,32,10.666666666666666,110.8428333333333
+robust_z,9120198,Mas,Mas ninguém poderia dissuadi-la.,3,32,10.666666666666666,110.8428333333333
+robust_z,1173267,Fim,: Tradução para PT-PT por mpenaf,3,32,10.666666666666666,110.8428333333333
+robust_z,9015521,É.,As melhores costelas!,2,21,10.5,108.93174999999998
+robust_z,12372873,É!,Ambos tinham barba...,2,21,10.5,108.93174999999998
+robust_z,6550242,As,As empregadas de mesa,2,21,10.5,108.93174999999998
+robust_z,11587309,1.,"Primeiro item, Caixa.",2,21,10.5,108.93174999999998
+robust_z,3579493,É.,Eu não volto a fugir.,2,21,10.5,108.93174999999998
+robust_z,7324959,É.,Então está combinado.,2,21,10.5,108.93174999999998
+robust_z,12271928,É.,"Não sei, porque iria?",2,21,10.5,108.93174999999998
+robust_z,7219412,Ei.,É um instinto visceral genuíno!,3,31,10.333333333333334,107.02066666666664
+robust_z,6303989,Né?,"Gostas de Indianos, não gostas?",3,31,10.333333333333334,107.02066666666664
+robust_z,7993759,Fbi,Agência federal de investigação,3,31,10.333333333333334,107.02066666666664
+robust_z,5645269,Fim,Tradução Adaptação de ednoconun,3,31,10.333333333333334,107.02066666666664
+robust_z,2739492,Sr.,Então apenas faça seu trabalho.,3,31,10.333333333333334,107.02066666666664
+robust_z,10589082,Gdg,A artéria carótida era cortada.,3,31,10.333333333333334,107.02066666666664
+robust_z,6453078,Ei!,"Vamos embora rapazes, vamos lá.",3,31,10.333333333333334,107.02066666666664
+robust_z,1824923,Vê?,Promete não falar para ninguém.,3,31,10.333333333333334,107.02066666666664
+robust_z,3562691,Ei.,Não lhe ensinei nenhuma música.,3,31,10.333333333333334,107.02066666666664
+robust_z,8094269,E você,A indústria musical não anda propriamente a bater-me á porta.,6,61,10.166666666666666,105.1095833333333
+robust_z,12656662,No,No entanto um ficou.,2,20,10.0,103.19849999999998
+robust_z,13442959,Ok.,Taquicardia supra ventricular.,3,30,10.0,103.19849999999998
+robust_z,9540570,Só,Só ouvimos a NRK P1.,2,20,10.0,103.19849999999998
+robust_z,8276839,Eu,"Já te disse, Willie.",2,20,10.0,103.19849999999998
+robust_z,4634201,Al.,"Al, sabia que irias conseguir.",3,30,10.0,103.19849999999998
+robust_z,5903237,Ei!,Pergunte pelo desconto mutante,3,30,10.0,103.19849999999998
+robust_z,11556686,Ei.,Exportam a doutrina religiosa.,3,30,10.0,103.19849999999998
+robust_z,13009081,O,Um racista,1,10,10.0,103.19849999999998
+robust_z,12284128,É.,Parece graxa antiga.,2,20,10.0,103.19849999999998
+robust_z,24489,É!,"Olhe para ele, veja.",2,20,10.0,103.19849999999998
+robust_z,542491,Fim,: Legendas em PT-PT por mpenaf,3,30,10.0,103.19849999999998
+robust_z,15288181,"É,",Cuidado com o braço.,2,20,10.0,103.19849999999998
+robust_z,2585638,É,Aqui está.,1,10,10.0,103.19849999999998
+robust_z,3368166,1,1-W-Larry.,1,10,10.0,103.19849999999998
+robust_z,11142923,É.,No meio do corredor?,2,20,10.0,103.19849999999998
+robust_z,11956750,Eu,Certo. Fui ter com o,2,20,10.0,103.19849999999998
+robust_z,9387453,A,A história,1,10,10.0,103.19849999999998
+robust_z,14460638,Eu,Vou só dizer isto...,2,20,10.0,103.19849999999998
+robust_z,6463620,É.,Vejam-lhe a barriga.,2,20,10.0,103.19849999999998
+robust_z,7843390,É.,Lamento incomodá-lo.,2,20,10.0,103.19849999999998
+robust_z,6894128,Não.,Talvez devêssemos voltar noutra altura.,4,39,9.75,100.33187499999997
+robust_z,6469059,Sim.,"Enquanto houver aperitivos, sem dúvida.",4,39,9.75,100.33187499999997
+robust_z,14585399,Mas?,"Lamento, mas não importa encobrir isto.",4,39,9.75,100.33187499999997
+robust_z,4272118,Vá!,Nunca pensei que cá voltasse.,3,29,9.666666666666666,99.3763333333333
+robust_z,10448936,Oi.,"Paige, tens montes de amigos.",3,29,9.666666666666666,99.3763333333333
+robust_z,10802638,Oi.,Temos um banquete esta noite.,3,29,9.666666666666666,99.3763333333333
+robust_z,15757983,Ei.,"Ele está a inventar, Charlie.",3,29,9.666666666666666,99.3763333333333
+robust_z,9060704,Aa.,Ando nos Alcoólicos Anónimos.,3,29,9.666666666666666,99.3763333333333
+robust_z,15390271,Já?,Trabalhámos nisso o dia todo.,3,29,9.666666666666666,99.3763333333333
+robust_z,12866159,Kc.,Impressionaste-nos imenso KC!,3,29,9.666666666666666,99.3763333333333
+robust_z,10386671,Seu,O contacto de Michael Vaughn.,3,29,9.666666666666666,99.3763333333333
+robust_z,6628354,Ei!,De onde veio esta tempestade?,3,29,9.666666666666666,99.3763333333333
+robust_z,9843842,Oi.,Deixa-me pegar no teu casaco.,3,29,9.666666666666666,99.3763333333333
+robust_z,2309096,Vi.,Alguns vinte dólares o metro.,3,29,9.666666666666666,99.3763333333333
+robust_z,7153977,Ele,Acrescentou um post scriptum.,3,29,9.666666666666666,99.3763333333333
+robust_z,1912125,Oh!,"Saia de meu caminho, Vigário!",3,29,9.666666666666666,99.3763333333333
+robust_z,11829722,Tá.,Podemos deixá-la para depois?,3,29,9.666666666666666,99.3763333333333
+robust_z,1483863,Mas,Mas permite-me que te diga...,3,29,9.666666666666666,99.3763333333333
+robust_z,6619760,Um,Traz-me a carteira.,2,19,9.5,97.46524999999998
+robust_z,14670146,É.,"Sim, sim, sim, sim.",2,19,9.5,97.46524999999998
+robust_z,7064396,É.,Em direcção ao Sol.,2,19,9.5,97.46524999999998
+robust_z,6376461,12,Kelly Mann 1 2 Anos,2,19,9.5,97.46524999999998
+robust_z,1296426,Ok,Isso vai ficar bem.,2,19,9.5,97.46524999999998
+robust_z,14559430,É.,"Bem, temo que seja.",2,19,9.5,97.46524999999998
+robust_z,2265533,É.,"Bem, vai para casa.",2,19,9.5,97.46524999999998
+robust_z,3141897,Me,Diz-me uma coisa...,2,19,9.5,97.46524999999998
+robust_z,7224894,É.,Jogo todos os dias.,2,19,9.5,97.46524999999998
+robust_z,15979244,É.,Vai ser fantástico.,2,19,9.5,97.46524999999998
+robust_z,1708843,Há,Só há uma pergunta.,2,19,9.5,97.46524999999998
+robust_z,5302692,É.,Dávamo-nos tão bem.,2,19,9.5,97.46524999999998
+robust_z,13367875,Eu,Coloquei a questão.,2,19,9.5,97.46524999999998
+robust_z,6669776,Xara,Tradução e Legendagem HomemDasLegendas,4,38,9.5,97.46524999999998
+robust_z,14150033,É.,Também és corajoso?,2,19,9.5,97.46524999999998
+robust_z,2658155,Sim.,"Sim, compreendo aquilo que quer dizer.",4,38,9.5,97.46524999999998
+robust_z,8579689,É?,Vou pegar de volta!,2,19,9.5,97.46524999999998
+robust_z,4611037,Como,Helderbargenberg gefloefen wurterberg.,4,38,9.5,97.46524999999998
+robust_z,12762550,Um,Algures na Sibéria.,2,19,9.5,97.46524999999998
+robust_z,3503217,Ah!,Guisado de canguru à Spur...,3,28,9.333333333333334,95.55416666666665
+robust_z,3105617,"Ah,",Deixa-me dar-te um conselho.,3,28,9.333333333333334,95.55416666666665
+robust_z,11659153,Oi.,Sempre achei que era mais...,3,28,9.333333333333334,95.55416666666665
+robust_z,13601281,Não,Treinador-adjunto da equipa?,3,28,9.333333333333334,95.55416666666665
+robust_z,6500755,Vê?,"Calma, tenho as mãos atadas.",3,28,9.333333333333334,95.55416666666665
+robust_z,5538685,Eu?,Tu ou outra pessoa qualquer.,3,28,9.333333333333334,95.55416666666665
+robust_z,7617619,Ah.,Estou a criar uma lembrança.,3,28,9.333333333333334,95.55416666666665
+robust_z,15261536,Ai!,Quando é que isto aconteceu?,3,28,9.333333333333334,95.55416666666665
+robust_z,13356557,Dr.,"Barnett, ficamos-lhe gratas.",3,28,9.333333333333334,95.55416666666665
+robust_z,5774820,Ah.,A história DE BARNEY COUSlNS,3,28,9.333333333333334,95.55416666666665
+robust_z,11479738,Ah.,"Eu ganho-lhe, seja como for.",3,28,9.333333333333334,95.55416666666665
+robust_z,14385432,Sim.,Os salários actuais estão garantidos.,4,37,9.25,94.59862499999997
+robust_z,5469877,E é?,O Dillon diz que ela é namorada dele.,4,37,9.25,94.59862499999997
+robust_z,15369119,Fbi.,"Chamo-me John McEnroe, agente do FBI.",4,37,9.25,94.59862499999997
+robust_z,9910212,Dst?,Uma doença sexualmente transmíssivel?,4,37,9.25,94.59862499999997
+robust_z,1363874,O,Os factos,1,9,9.0,91.73199999999999
+robust_z,11050564,No,"Ah, sim, você deve",2,18,9.0,91.73199999999999
+robust_z,8019041,E,E O Homem,1,9,9.0,91.73199999999999
+robust_z,1304771,Não.,"Não, não, não, não, não, não, não...",4,36,9.0,91.73199999999999
+robust_z,3092980,Só,Ele é só um homem.,2,18,9.0,91.73199999999999
+robust_z,14450361,É!,Dois dias antes...,2,18,9.0,91.73199999999999
+robust_z,5540558,Os,Ninguém os impede.,2,18,9.0,91.73199999999999
+robust_z,5219190,Só,Digo-te uma coisa.,2,18,9.0,91.73199999999999
+robust_z,4450599,O,Perguntou,1,9,9.0,91.73199999999999
+robust_z,1844356,É?,O teu aproxima-se.,2,18,9.0,91.73199999999999
+robust_z,15379134,É.,"Obrigado, querida.",2,18,9.0,91.73199999999999
+robust_z,6680435,É.,"Raios partam, meu.",2,18,9.0,91.73199999999999
+robust_z,15286452,L!,"Presta atenção, L!",2,18,9.0,91.73199999999999
+robust_z,6059362,Kilo,"Tradução e Legendagem CRISTBET, Lda.",4,36,9.0,91.73199999999999
+robust_z,7294949,Oi,Como detesto isto.,2,18,9.0,91.73199999999999
+robust_z,14690450,Oi.,"De ""separar a sua ligação"".",3,27,9.0,91.73199999999999
+robust_z,153171,Eu?,"Se não se importar, Watson.",3,27,9.0,91.73199999999999
+robust_z,4239810,Oi.,Aqui estão os oito dólares.,3,27,9.0,91.73199999999999
+robust_z,5187056,É.,Faço os possíveis.,2,18,9.0,91.73199999999999
+robust_z,13502908,Sim.,Nós encontrámo-lo no meu escritório.,4,36,9.0,91.73199999999999
+robust_z,9816542,Ola!,Descongeladores de janelas laterais.,4,36,9.0,91.73199999999999
+robust_z,9798636,E?,"Ok, estou a ouvir.",2,18,9.0,91.73199999999999
+robust_z,2770262,Ei!,Também gosto do seu nome...,3,27,9.0,91.73199999999999
+robust_z,11125747,No,No pedido foi dito,2,18,9.0,91.73199999999999
+robust_z,10537787,Oi.,Claro que foi muito difícil,3,27,9.0,91.73199999999999
+robust_z,12386201,Oi.,"Não estou escondido, Julie.",3,27,9.0,91.73199999999999
+robust_z,7323921,Ei!,[Homem gritando] [Ofegante],3,27,9.0,91.73199999999999
+robust_z,13188840,Ok.,Preciso mesmo da tua ajuda.,3,27,9.0,91.73199999999999
+robust_z,8186125,Oo.,Pareces o noticiário das 5.,3,27,9.0,91.73199999999999
+robust_z,13498729,Ok.,Eis o que quero que faça...,3,27,9.0,91.73199999999999
+robust_z,8701027,É.,"Sim, são ""pistas"".",2,18,9.0,91.73199999999999
+robust_z,14700903,É.,Também gosto dela.,2,18,9.0,91.73199999999999
+robust_z,4831492,Aí,É esse o problema.,2,18,9.0,91.73199999999999
+robust_z,8531388,Oi.,Porque eu estava a brincar.,3,27,9.0,91.73199999999999
+robust_z,15646956,Ei.,"Pessoal, dêem-me um minuto.",3,27,9.0,91.73199999999999
+robust_z,4916831,Oi.,Divertiste-te no hipódromo?,3,27,9.0,91.73199999999999
+robust_z,933060,Com,Com a seguinte diferença...,3,27,9.0,91.73199999999999
+robust_z,10193959,Sim.,"Xavier, sim, fizémos umas 'coisas'.",4,35,8.75,88.86537499999999
+robust_z,2239148,Não.,Você recebe o dinheiro diariamante?,4,35,8.75,88.86537499999999
+robust_z,13413780,Mãe.,Deixa-me ser frívola e superficial.,4,35,8.75,88.86537499999999
+robust_z,13758789,Hum?,Onde arranjaste dinheiro para isto?,4,35,8.75,88.86537499999999
+robust_z,15208313,Uau!,# Ponham cada último cuidado fora #,4,35,8.75,88.86537499999999
+robust_z,15815590,"Ah,",Esqueci-me de mencionar...,3,26,8.666666666666666,87.90983333333331
+robust_z,2065740,Uma,Pelo menos isto é verdade.,3,26,8.666666666666666,87.90983333333331
+robust_z,10660186,Bom,Boas Noticias Más Noticias,3,26,8.666666666666666,87.90983333333331
+robust_z,11243221,Ei!,"Estás a magoá-la, canalha!",3,26,8.666666666666666,87.90983333333331
+robust_z,3541500,Ele,"Pediu-me para lhe dizer, e",3,26,8.666666666666666,87.90983333333331
+robust_z,7962641,20?,"10 Barras de latinium, 20?",3,26,8.666666666666666,87.90983333333331
+robust_z,9768843,Ok.,Eu ligo para o alojamento.,3,26,8.666666666666666,87.90983333333331
+robust_z,14548125,É--,As lágrimas de um palhaço.,3,26,8.666666666666666,87.90983333333331
+robust_z,13922865,Ok.,Estás a fazê-lo muito bem.,3,26,8.666666666666666,87.90983333333331
+robust_z,6760220,Oh.,"Bem, devo discordar de si.",3,26,8.666666666666666,87.90983333333331
+robust_z,6380015,Oh.,"Aqui, usam o nome próprio.",3,26,8.666666666666666,87.90983333333331
+robust_z,12232367,Oi.,As crianças estão prontas?,3,26,8.666666666666666,87.90983333333331
+robust_z,276189,Oi!,Não disparem companheiros!,3,26,8.666666666666666,87.90983333333331
+robust_z,11093751,É.,"Pois, pois, pois.",2,17,8.5,85.99874999999997
+robust_z,11259035,É!,Vamos lá rapazes!,2,17,8.5,85.99874999999997
+robust_z,9667561,Não!,Que desapareçam os nossos poderes.,4,34,8.5,85.99874999999997
+robust_z,15254996,É?,Consegues ver-me?,2,17,8.5,85.99874999999997
+robust_z,1872159,Isso,Dava-nos uma sensação inquietante.,4,34,8.5,85.99874999999997
+robust_z,14406466,Eu,Eu anttes sonhava,2,17,8.5,85.99874999999997
+robust_z,2854214,Sim.,Lamento intrometer-me desta forma.,4,34,8.5,85.99874999999997
+robust_z,2855564,E?,Eu perguntei-lhe.,2,17,8.5,85.99874999999997
+robust_z,10033887,É.,Levanta a cabeça.,2,17,8.5,85.99874999999997
+robust_z,8385167,É?,"Eu te adoro, meu.",2,17,8.5,85.99874999999997
+robust_z,14448871,Só,E mais uma coisa.,2,17,8.5,85.99874999999997
+robust_z,3547274,19,"Jogo de futebol"".",2,17,8.5,85.99874999999997
+robust_z,14423801,É!,"Pois, é porreiro!",2,17,8.5,85.99874999999997
+robust_z,2072862,É.,Tenho de o fazer.,2,17,8.5,85.99874999999997
+robust_z,14956824,É.,Vocês discutiram?,2,17,8.5,85.99874999999997
+robust_z,14766616,É.,Olha para aquilo.,2,17,8.5,85.99874999999997
+robust_z,12337650,"Hal,",Só precisamos de umas lanternas...,4,34,8.5,85.99874999999997
+robust_z,11357541,É?,A grande pintura.,2,17,8.5,85.99874999999997
+robust_z,15638329,Lá,Aí o objetivo era,2,17,8.5,85.99874999999997
+robust_z,6147783,É.,Que lhe disseste?,2,17,8.5,85.99874999999997
+robust_z,12471656,É?,Os Papéis Valachi,2,17,8.5,85.99874999999997
+robust_z,924003,2:45.,"3 Menos um quarto, o Bob entra no ""Privé"".",5,42,8.4,84.85209999999998
+robust_z,3449117,Srta.,"Sullivan Sullivan, assim que o encerremos,",5,42,8.4,84.85209999999998
+robust_z,5311363,Onde?,Onde irei receber este prestigioso prémio?,5,42,8.4,84.85209999999998
+robust_z,11766302,Ohh,Estados unidos da américa,3,25,8.333333333333334,84.08766666666665
+robust_z,300413,Ei!,Ainda não mudou de curso!,3,25,8.333333333333334,84.08766666666665
+robust_z,13411717,Ok.,Tenho o telemóvel ligado.,3,25,8.333333333333334,84.08766666666665
+robust_z,567782,Oh!,"Bem, o fato é, esqueça...",3,25,8.333333333333334,84.08766666666665
+robust_z,5648152,Vou,Começo por aqui está bem?,3,25,8.333333333333334,84.08766666666665
+robust_z,4272117,Vá!,Vi-me á rasca para fugir.,3,25,8.333333333333334,84.08766666666665
+robust_z,15274899,Tá?,Tento a seguir ao jantar!,3,25,8.333333333333334,84.08766666666665
+robust_z,9770699,Ei!,Não vais acreditar nisto.,3,25,8.333333333333334,84.08766666666665
+robust_z,133668,Uma,Só uma coisa me incomoda.,3,25,8.333333333333334,84.08766666666665
+robust_z,621428,Seu,O teu pai sempre disse...,3,25,8.333333333333334,84.08766666666665
+robust_z,13571044,Ei.,Recuperação de Fugitivos.,3,25,8.333333333333334,84.08766666666665
+robust_z,14517551,Tá.,Chama-se Arte Divergente.,3,25,8.333333333333334,84.08766666666665
+robust_z,12637542,Ok.,"Muito bem, feche a porta.",3,25,8.333333333333334,84.08766666666665
+robust_z,12828297,Lá.,Lavandaria Quality É ali.,3,25,8.333333333333334,84.08766666666665
+robust_z,7841213,Ei!,Vamos fazer um intervalo.,3,25,8.333333333333334,84.08766666666665
+robust_z,7632200,Oi!,Sejam todos bem-vindos...,3,25,8.333333333333334,84.08766666666665
+robust_z,4015271,Fim,Legendas by jose rolando®,3,25,8.333333333333334,84.08766666666665
+robust_z,8189683,Hã?,Tem duas saias como essa?,3,25,8.333333333333334,84.08766666666665
+robust_z,5828149,Oi.,Não pude deixar de ouvir.,3,25,8.333333333333334,84.08766666666665
+robust_z,15632069,Oi.,Olha para ti todo bonito.,3,25,8.333333333333334,84.08766666666665
+robust_z,8673221,Eu?,Trabalhou ele num casino.,3,25,8.333333333333334,84.08766666666665
+robust_z,620911,Meu,O meu pai sempre disse...,3,25,8.333333333333334,84.08766666666665
+robust_z,6940417,Ei.,La cucaracha La cucaracha,3,25,8.333333333333334,84.08766666666665
+robust_z,4615436,E o,Só o Gustav saberia isso.,3,25,8.333333333333334,84.08766666666665
+robust_z,7882655,Oi.,"Olá, não estamos em casa.",3,25,8.333333333333334,84.08766666666665
+robust_z,1848508,Oh!,A Geraldine foi atingida.,3,25,8.333333333333334,84.08766666666665
+robust_z,4701069,Ok.,Vocês vão buscar o carro.,3,25,8.333333333333334,84.08766666666665
+robust_z,15053321,Vem,Estão a ser anti-sociais.,3,25,8.333333333333334,84.08766666666665
+robust_z,14964115,Oh.,Deve ter sido um inferno.,3,25,8.333333333333334,84.08766666666665
+robust_z,2289821,Não!,"Wee-cha-shad, ou shad-wee-shad...",4,33,8.25,83.13212499999999
+robust_z,14838205,Sim.,"É a Michelle Featherstone, certo?",4,33,8.25,83.13212499999999
+robust_z,11895833,Mas?,"Não, definitivamente, não é isso.",4,33,8.25,83.13212499999999
+robust_z,120948,Hã?!,Jamais teríamos que usar sapatos.,4,33,8.25,83.13212499999999
+robust_z,7839479,Sim.,Cada resultado deve ser distinto.,4,33,8.25,83.13212499999999
+robust_z,9766957,Não!,Já estou envergonhada que chegue.,4,33,8.25,83.13212499999999
+robust_z,449311,Não.,Só Acontece Quando Danço Contigo.,4,33,8.25,83.13212499999999
+robust_z,7859405,Hmm.,Vorpax disse que jamais saberias.,4,33,8.25,83.13212499999999
+robust_z,7351545,Sim.,"Vai apanhá-lo, chefe. Levanta-te.",4,33,8.25,83.13212499999999
+robust_z,11361646,Não.,Talvez esteja nos aposentos dele?,4,33,8.25,83.13212499999999
+robust_z,12338268,Mãe!,Tenho muitos trabalhos de casa...,4,33,8.25,83.13212499999999
+robust_z,91329,Sim.,"Chegou o Capitão Vickers, senhor.",4,33,8.25,83.13212499999999
+robust_z,9874235,Pago,"Embalsamação, caixão, lápide pago",4,33,8.25,83.13212499999999
+robust_z,15462745,E lá!,E andar sobre tapetes de pétalas de rosa.,5,41,8.2,82.55879999999998
+robust_z,4097946,É.,Guarda-me lugar.,2,16,8.0,80.26549999999997
+robust_z,6493732,Oh.,Algum problema com Goth?,3,24,8.0,80.26549999999997
+robust_z,15491986,Ok.,"Muito bem, que se passa?",3,24,8.0,80.26549999999997
+robust_z,15316363,Oh!,CASA de CAMPO de MATILDA,3,24,8.0,80.26549999999997
+robust_z,3535987,Um,Um homem esperto,2,16,8.0,80.26549999999997
+robust_z,4992006,A,Está lá?,1,8,8.0,80.26549999999997
+robust_z,7231541,Eu,Ia perguntar-lhe,2,16,8.0,80.26549999999997
+robust_z,9608814,0,Mary- 0.,1,8,8.0,80.26549999999997
+robust_z,12890037,Olá!,"Quem, pelos demónios, são estes?",4,32,8.0,80.26549999999997
+robust_z,13281852,Ok.,Nós fizemo-lo acontecer.,3,24,8.0,80.26549999999997
+robust_z,14226288,Oi!,Isto é só uma precaução.,3,24,8.0,80.26549999999997
+robust_z,8824589,Não,A Saltykova é uma brasa.,3,24,8.0,80.26549999999997
+robust_z,4275671,Ali!,Preciso que encontre um cadáver.,4,32,8.0,80.26549999999997
+robust_z,6392974,Sim,Disse isso e muito mais.,3,24,8.0,80.26549999999997
+robust_z,10800017,É o,É esse o vosso problema.,3,24,8.0,80.26549999999997
+robust_z,12976859,Rei.,Não foi uma jogada regulamentar!,4,32,8.0,80.26549999999997
+robust_z,5387516,Yo.,Tenho um pedido a fazer.,3,24,8.0,80.26549999999997
+robust_z,11792195,Não,Assusta-te o meu cabelo?,3,24,8.0,80.26549999999997
+robust_z,7844506,Ei?,O que estás a perseguir?,3,24,8.0,80.26549999999997
+robust_z,7746192,É?,Grande acidente?,2,16,8.0,80.26549999999997
+robust_z,3950519,E o,E o Capitão Chunk diz...,3,24,8.0,80.26549999999997
+robust_z,14738829,Eu.,Tentando controlar tudo.,3,24,8.0,80.26549999999997
+robust_z,7843857,É.,Está codificado.,2,16,8.0,80.26549999999997
+robust_z,11576385,Me,Faz-me um favor.,2,16,8.0,80.26549999999997
+robust_z,14498729,Ok,Algo menos frio.,2,16,8.0,80.26549999999997
+robust_z,1379778,É.,"Sim, sim, sim...",2,16,8.0,80.26549999999997
+robust_z,10449500,Leo.,Queres dizer-me o que aconteceu?,4,32,8.0,80.26549999999997
+robust_z,12108917,É?,"Sim, porque não?",2,16,8.0,80.26549999999997
+robust_z,14499515,Sim.,Estiveste mal na minha ausência?,4,32,8.0,80.26549999999997
+robust_z,5365906,1987,Lisa hoberman renovação em 1997:,4,32,8.0,80.26549999999997
+robust_z,4499640,Oh!,Vai ser muito divertido.,3,24,8.0,80.26549999999997
+robust_z,1621059,E,E o mais,1,8,8.0,80.26549999999997
+robust_z,14522838,Viu?,"Pareces-te um pouco comigo, não?",4,32,8.0,80.26549999999997
+robust_z,13573261,Fbi.,Federal Bureau of Investigation.,4,32,8.0,80.26549999999997
+robust_z,7124103,Não!,"Senhor, faz-me boazinha, para...",4,32,8.0,80.26549999999997
+robust_z,2860427,Sim.,"Quem acreditou no incrível, sim.",4,32,8.0,80.26549999999997
+robust_z,14692167,Bom.,"Agora, pede-lhe um refrigerante.",4,32,8.0,80.26549999999997
+robust_z,5223136,É.,De seres criado.,2,16,8.0,80.26549999999997
+robust_z,14652725,Oh,Tem muita graça.,2,16,8.0,80.26549999999997
+robust_z,3303216,Ok,Não te esqueças.,2,16,8.0,80.26549999999997
+robust_z,6102666,Um,Conheci um homem,2,16,8.0,80.26549999999997
+robust_z,13387581,É.,Mostra o cómico.,2,16,8.0,80.26549999999997
+robust_z,13475249,É.,"Sim, está certo.",2,16,8.0,80.26549999999997
+robust_z,11409634,É.,Isso é patético?,2,16,8.0,80.26549999999997
+robust_z,8402692,É.,Precisamos dele.,2,16,8.0,80.26549999999997
+robust_z,8359771,Ele,Foi isto que escreveu...,3,24,8.0,80.26549999999997
+robust_z,14703436,Ok.,O casaco da imobiliária.,3,24,8.0,80.26549999999997
+robust_z,12510545,E?,Bullseye Lights.,2,16,8.0,80.26549999999997
+robust_z,3971703,Não.,É um especialista em caligrafia.,4,32,8.0,80.26549999999997
+robust_z,582976,Não.,Atingimos algum dos seus homens?,4,32,8.0,80.26549999999997
+robust_z,14022949,Isto,"Sonia, ouve, é muito importante.",4,32,8.0,80.26549999999997
+robust_z,13609424,Sim.,Disseste que querias fazer isto.,4,32,8.0,80.26549999999997
+robust_z,15362319,Sim.,"Disseram-te que te liguei, hoje?",4,32,8.0,80.26549999999997
+robust_z,5706643,É?,"Pois, eu também.",2,16,8.0,80.26549999999997
+robust_z,1523767,Mal!,"Caro Pascà, aquele está tramado.",4,32,8.0,80.26549999999997
+robust_z,6919429,Uma,"Vá lá, isto é divertido.",3,24,8.0,80.26549999999997
+robust_z,7843447,Vem,Não era eu que escolhia?,3,24,8.0,80.26549999999997
+robust_z,15648819,Ok.,Acabaram-se os anúncios.,3,24,8.0,80.26549999999997
+robust_z,8455681,Wow.,Vamos agora verificar o Willard.,4,32,8.0,80.26549999999997
+robust_z,7265722,Oi.,Sou uma grande badalhoca,3,24,8.0,80.26549999999997
+robust_z,2387300,Oi.,"Olá, sou o David Sumner.",3,24,8.0,80.26549999999997
+robust_z,10563890,Ok.,Já estou a tratar disso!,3,24,8.0,80.26549999999997
+robust_z,10502116,Com.,O comandante Tucker é engenhoso.,4,32,8.0,80.26549999999997
+robust_z,6499049,É.,Eu não sei nada.,2,16,8.0,80.26549999999997
+robust_z,14951820,Wow.,Os reis magos parecem travestis.,4,32,8.0,80.26549999999997
+robust_z,8287650,É só.,Também tivemos resultados controversos.,5,39,7.8,77.97219999999997
+robust_z,11718854,Inez?,"Inês, necessitamos escritórios maiores.",5,39,7.8,77.97219999999997
+robust_z,11315534,Não.,Queres que chame os seguranças?,4,31,7.75,77.39887499999999
+robust_z,6493679,Ahh.,"Muito, muito tempo, passarinho.",4,31,7.75,77.39887499999999
+robust_z,2409475,Sim.,"Por acaso, estaria interessada?",4,31,7.75,77.39887499999999
+robust_z,12806063,Não.,Acho que terá muitos problemas.,4,31,7.75,77.39887499999999
+robust_z,12829580,Para,Queridas Satsu e pequena Chiyo.,4,31,7.75,77.39887499999999
+robust_z,3195985,Vão!,Agora podemos combatê-los aqui.,4,31,7.75,77.39887499999999
+robust_z,2096489,Sim?,Viemos arranjar a desfibradora.,4,31,7.75,77.39887499999999
+robust_z,9352722,Não?,Sabes que detesto estas coisas.,4,31,7.75,77.39887499999999
+robust_z,14136605,Sim.,Não tinhas uma entrevista hoje?,4,31,7.75,77.39887499999999
+robust_z,12192033,Sim.,Queres um teste de paternidade?,4,31,7.75,77.39887499999999
+robust_z,13379300,Não.,"Síndrome de Huntington, eu sei.",4,31,7.75,77.39887499999999
+robust_z,5432899,P d.,Investigação e Desenvolvimento.,4,31,7.75,77.39887499999999
+robust_z,14528678,Ron!,Vamos precisar do outro barril!,4,31,7.75,77.39887499999999
+robust_z,4236530,Sim.,Fui quarta entre 19 finalistas.,4,31,7.75,77.39887499999999
+robust_z,13502692,Mil?,Vais comprar isso ao Pentágono?,4,31,7.75,77.39887499999999
+robust_z,14922417,Ok?,Amy 23 de julho de 1999,3,23,7.666666666666667,76.44333333333333
+robust_z,14827703,Ei!,Aspersor phyllis diller,3,23,7.666666666666667,76.44333333333333
+robust_z,15990802,Sim,E nós estamos a jantar!,3,23,7.666666666666667,76.44333333333333
+robust_z,7331516,Mas,Há mais qualquer coisa.,3,23,7.666666666666667,76.44333333333333
+robust_z,1351214,Oh!,Nunca as recuperaremos.,3,23,7.666666666666667,76.44333333333333
+robust_z,10448714,Oi.,Ele não me pode magoar.,3,23,7.666666666666667,76.44333333333333
+robust_z,15597162,Oi.,Isto parece-te direito?,3,23,7.666666666666667,76.44333333333333
+robust_z,6899350,Oh!,É um gesto magnífico...,3,23,7.666666666666667,76.44333333333333
+robust_z,6717095,Oh!,"Céus, isto é delicioso.",3,23,7.666666666666667,76.44333333333333
+robust_z,12313773,Ok.,A banheira está pronta.,3,23,7.666666666666667,76.44333333333333
+robust_z,12849609,Já?,Pode ligar-te de volta?,3,23,7.666666666666667,76.44333333333333
+robust_z,4016435,Oh!,Se calhar não foi nada.,3,23,7.666666666666667,76.44333333333333
+robust_z,8645820,Oi.,"Eu disse, larga a arma!",3,23,7.666666666666667,76.44333333333333
+robust_z,15046286,Eu.,Estavam todos ocupados.,3,23,7.666666666666667,76.44333333333333
+robust_z,12729519,"Ok,","Está bem, é o seguinte.",3,23,7.666666666666667,76.44333333333333
+robust_z,6865549,Oi.,"Parabéns, querido Doug!",3,23,7.666666666666667,76.44333333333333
+robust_z,5707652,Ai.,"Foda-se, a minha perna!",3,23,7.666666666666667,76.44333333333333
+robust_z,6457317,40.,"Temperatura de 40,5 oc.",3,23,7.666666666666667,76.44333333333333
+robust_z,5253159,Oi.,Ele não jogava há anos.,3,23,7.666666666666667,76.44333333333333
+robust_z,7358844,20.,"O quê, estão a brincar?",3,23,7.666666666666667,76.44333333333333
+robust_z,11587791,"Ok,","Pronto, funciona assim.",3,23,7.666666666666667,76.44333333333333
+robust_z,7927464,Uso,Uso determinados fatos.,3,23,7.666666666666667,76.44333333333333
+robust_z,1854181,Já.,I. GARANTINS Clausewitz,3,23,7.666666666666667,76.44333333333333
+robust_z,15010723,Oi.,Acho que é uma memória.,3,23,7.666666666666667,76.44333333333333
+robust_z,7383406,Vá.,Pedirei que o detenham.,3,23,7.666666666666667,76.44333333333333
+robust_z,4324163,Eu.,"Vê-me a mim. Muito bem,",3,23,7.666666666666667,76.44333333333333
+robust_z,9187188,Dr.,Cirurgião dos bombeiros,3,23,7.666666666666667,76.44333333333333
+robust_z,15326127,Oi.,Estão os dois a dormir?,3,23,7.666666666666667,76.44333333333333
+robust_z,15590980,Dinho,NomadaPT Damnant quod non intellegunt.,5,38,7.6,75.67889999999998
+robust_z,15525972,1206.,"Um, dois, seis - Um, dois, zero, seis.",5,38,7.6,75.67889999999998
+robust_z,4091707,Labok,Re-sincronização HD Fernando Neiva ---,5,38,7.6,75.67889999999998
+robust_z,13859610,É.,É de confiança.,2,15,7.5,74.53224999999998
+robust_z,14334620,É!,"Nao, nao vamos.",2,15,7.5,74.53224999999998
+robust_z,12295443,É.,Tens a certeza?,2,15,7.5,74.53224999999998
+robust_z,9013347,É.,"Sim, por favor.",2,15,7.5,74.53224999999998
+robust_z,7817596,Pvc?,São contracções ventriculares?,4,30,7.5,74.53224999999998
+robust_z,2023119,Não.,Posso contar-lhe uma história?,4,30,7.5,74.53224999999998
+robust_z,7546733,É.,"Pois, desculpa.",2,15,7.5,74.53224999999998
+robust_z,2493540,Sim!,"Não, encontraremos outro modo.",4,30,7.5,74.53224999999998
+robust_z,8381054,"Bom,",O que acontece é o seguinte...,4,30,7.5,74.53224999999998
+robust_z,6759280,Não.,Estou a chocar qualquer coisa.,4,30,7.5,74.53224999999998
+robust_z,6237731,Sim.,Passa-se algo de muito errado.,4,30,7.5,74.53224999999998
+robust_z,6777516,Olá?,"Portanto, quero mais dinheiro.",4,30,7.5,74.53224999999998
+robust_z,7317898,Não.,Porque alguém quereria partir?,4,30,7.5,74.53224999999998
+robust_z,11504372,Sim!,Pensava que fosses falar do...,4,30,7.5,74.53224999999998
+robust_z,11926407,Pode,É melhor ser traduzido como...,4,30,7.5,74.53224999999998
+robust_z,11700614,É.,Sabes que mais?,2,15,7.5,74.53224999999998
+robust_z,8363086,Uau!,Agenda eletrónica Não sei bem.,4,30,7.5,74.53224999999998
+robust_z,9800386,É.,"Sim, é verdade.",2,15,7.5,74.53224999999998
+robust_z,1941079,Boa.,"Caro senhor, tive muito gosto.",4,30,7.5,74.53224999999998
+robust_z,1523474,É.,"Sim, em tempos.",2,15,7.5,74.53224999999998
+robust_z,8195697,Só,Eu só te ouvi a,2,15,7.5,74.53224999999998
+robust_z,13352585,Bom.,Estás a ameaçar transferir-me?,4,30,7.5,74.53224999999998
+robust_z,4928178,Não.,Eu enviei-o para a Califórnia.,4,30,7.5,74.53224999999998
+robust_z,9634361,É.,Levar arquivos?,2,15,7.5,74.53224999999998
+robust_z,9016128,É?,"Sim, é verdade.",2,15,7.5,74.53224999999998
+robust_z,7317800,Sim.,Devolveu a Serena a vida dela.,4,30,7.5,74.53224999999998
+robust_z,13726282,É.,Revolucionário.,2,15,7.5,74.53224999999998
+robust_z,6597890,Sim.,Toda gravidez causa incômodos.,4,30,7.5,74.53224999999998
+robust_z,8234349,Wow.,"Regalamela, quero ser a minha.",4,30,7.5,74.53224999999998
+robust_z,7554079,Não.,Estou ligeiramente indisposta.,4,30,7.5,74.53224999999998
+robust_z,3177052,Sim.,"Bem, parece que o encontramos.",4,30,7.5,74.53224999999998
+robust_z,8546126,É.,O problema é...,2,15,7.5,74.53224999999998
+robust_z,13806418,Sim.,ESPRIT AGÊNCIA DE MODELOS Sim.,4,30,7.5,74.53224999999998
+robust_z,4685919,Não.,Encontraram o vosso amiguinho?,4,30,7.5,74.53224999999998
+robust_z,9881151,Sei.,"Sim, mas fazemos o seguinte...",4,30,7.5,74.53224999999998
+robust_z,736064,Kilo,Tradução para PT-PT por mpenaf,4,30,7.5,74.53224999999998

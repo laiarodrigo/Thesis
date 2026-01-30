@@ -60,6 +60,12 @@ def length_adaptive_flag(sim: float, L: int, base_min=0.30, long_min=0.70, short
         thr = base_min + t * (long_min - base_min)
     return sim < thr, thr
 
+def length_ratio_flag(len_br: int, len_pt: int, ratio_low: float, ratio_high: float) -> tuple[bool, float | None]:
+    if len_br <= 0 or len_pt <= 0:
+        return True, None
+    ratio = len_pt / len_br
+    return (ratio < ratio_low or ratio > ratio_high), ratio
+
 def main():
     if len(sys.argv) != 6:
         print("usage: shard_filter.py DB_PATH START_LINE END_LINE OUT_PARQUET THRESHOLDS_JSON", file=sys.stderr)
@@ -67,6 +73,8 @@ def main():
 
     db_path, start_line, end_line, out_parquet = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4]
     thr = json.loads(sys.argv[5])
+    ratio_low = float(thr.get("ratio_low", 0.5))
+    ratio_high = float(thr.get("ratio_high", 2.0))
 
     os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
     os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
@@ -122,15 +130,22 @@ def main():
 
                 sim = new_sim(brh, pth, ALIGNER)
                 L   = max(len(ali_tokens(brh)), len(ali_tokens(pth)))
-                bad, thrv = length_adaptive_flag(sim, L,
+                bad_sim, thrv = length_adaptive_flag(sim, L,
                     base_min=thr["base_min_sim"], long_min=thr["long_min_sim"],
                     short_len=thr["short_len"], long_len=thr["long_len"])
-                if bad:
+                bad_ratio, ratio = length_ratio_flag(len(brh or ""), len(pth or ""), ratio_low, ratio_high)
+                if bad_sim or bad_ratio:
                     pid = df.pair_id.iloc[i]
+                    if bad_ratio and ratio is None:
+                        reason = f"length_ratio_outlier(len_pt/len_br=NA,lo={ratio_low},hi={ratio_high})"
+                    elif bad_ratio:
+                        reason = f"length_ratio_outlier(len_pt/len_br={ratio:.2f},lo={ratio_low},hi={ratio_high})"
+                    else:
+                        reason = f"low_similarity@simple(thr={thrv:.2f},L={L})"
                     rows.append({
                         "line_no": ln,
                         "pair_id": int(pid) if pd.notna(pid) else None,
-                        "reason": f"low_similarity@simple(thr={thrv:.2f},L={L})",
+                        "reason": reason,
                         "base_sim": float(sim),
                         "thr": float(thrv),
                         "L": int(L),
