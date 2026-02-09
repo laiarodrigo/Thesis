@@ -104,7 +104,7 @@ def stream_from_view(
     are returned (e.g. 'train', 'valid', 'test').
 
     We keep the unified row structure:
-      dataset, split, source, bucket, theme, label,
+      dataset, split, source, bucket, theme, domain, label,
       text_pt_br, text_pt_pt, ref_pt_pt_manual, ref_pt_pt_deepl.
     """
     con = connect_project(read_only=True)
@@ -117,6 +117,7 @@ def stream_from_view(
           source,
           bucket,
           theme,
+          domain,
           label,
           text_pt_br,
           text_pt_pt,

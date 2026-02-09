@@ -305,15 +305,36 @@ def _iter_raw_rows(con: duckdb.DuckDBPyConnection, domain: str, split: str, batc
             yield lbl, br, pt
 
 
+def _normalize_label(lbl) -> str:
+    """
+    Normalize raw labels to notebook-compatible targets.
+    Supports string labels and legacy numeric labels.
+    """
+    if lbl is None:
+        return "pt-PT"
+
+    if isinstance(lbl, str):
+        s = lbl.strip().lower().replace("_", "-")
+        if s in {"pt-br", "br", "ptbr", "brazil", "brazilian"}:
+            return "pt-BR"
+        if s in {"pt-pt", "pt", "eu", "european"}:
+            return "pt-PT"
+
+    try:
+        return "pt-BR" if int(lbl) == 1 else "pt-PT"
+    except Exception:
+        return "pt-PT"
+
+
 def process_domain_split(db_path: Path, domain: str, split: str) -> None:
+    print(f"[filter_ptbrvarid] start domain={domain} split={split}")
     stage = f"__ptbr_stage_{_safe_tbl(domain)}_{_safe_tbl(split)}"
 
     raw_n = n_nonempty = n_after_jt = n_after_author = 0
     n_after_clean = n_after_dedup = n_after_filters = 0
     seen, buf = set(), []
-
-    # prepare stage table
     with duckdb.connect(db_path.as_posix()) as con:
+        # prepare stage table
         con.execute(f"DROP TABLE IF EXISTS {stage}")
         con.execute(f"""
             CREATE TABLE {stage} (
@@ -325,9 +346,8 @@ def process_domain_split(db_path: Path, domain: str, split: str) -> None:
             )
         """)
 
-    # pass 1: stream raw -> stage
-    with duckdb.connect(db_path.as_posix(), read_only=True) as con:
-        for lbl, br, pt in _iter_raw_rows(con, domain, split):
+        # pass 1: stream raw -> stage
+        for lbl_raw, br, pt in _iter_raw_rows(con, domain, split):
             raw_n += 1
             t = (br or pt or "")
             t = (t or "").strip()
@@ -361,20 +381,18 @@ def process_domain_split(db_path: Path, domain: str, split: str) -> None:
                 continue
             n_after_filters += 1
 
+            lbl = _normalize_label(lbl_raw)
             L = pt_word_count(t)
             buf.append((domain, split, lbl, t, int(L)))
 
             if len(buf) >= BATCH_ROWS:
-                with duckdb.connect(db_path.as_posix()) as con_w:
-                    con_w.executemany(f"INSERT INTO {stage} VALUES (?,?,?,?,?)", buf)
+                con.executemany(f"INSERT INTO {stage} VALUES (?,?,?,?,?)", buf)
                 buf.clear()
 
-    if buf:
-        with duckdb.connect(db_path.as_posix()) as con_w:
-            con_w.executemany(f"INSERT INTO {stage} VALUES (?,?,?,?,?)", buf)
-        buf.clear()
+        if buf:
+            con.executemany(f"INSERT INTO {stage} VALUES (?,?,?,?,?)", buf)
+            buf.clear()
 
-    with duckdb.connect(db_path.as_posix()) as con:
         n_stage = con.execute(f"SELECT COUNT(*) FROM {stage}").fetchone()[0]
         if n_stage == 0:
             metrics_row = (
@@ -411,7 +429,7 @@ def process_domain_split(db_path: Path, domain: str, split: str) -> None:
         ).fetchone()[0]
 
         con.execute(f"""
-            INSERT INTO ptbrvarid
+            INSERT INTO ptbrvarid (dataset, domain, split, label, text_pt_br, text_pt_pt)
             SELECT
               'PtBrVId' AS dataset,
               domain, split, label,
@@ -451,6 +469,7 @@ def main() -> int:
     ap.add_argument("--db", default=str(DEFAULT_DB), help="DuckDB path (default: data/duckdb/subs.duckdb)")
     args = ap.parse_args()
 
+    print(f"[filter_ptbrvarid] db={args.db}")
     ensure_punkt()
 
     db_path = Path(args.db).expanduser().resolve()
@@ -495,14 +514,23 @@ def main() -> int:
         ).fetchall()
         domains = [d[0] for d in domains]
 
+        print(f"[filter_ptbrvarid] domains={len(domains)}")
         for domain in domains:
             splits = con.execute(
                 "SELECT DISTINCT split FROM ptbrvarid WHERE dataset='PtBrVId-Raw' AND domain=? ORDER BY split",
                 [domain],
             ).fetchall()
             splits = [s[0] for s in splits]
+            print(f"[filter_ptbrvarid] domain={domain} splits={splits}")
             for split in splits:
-                process_domain_split(db_path, domain, split)
+                try:
+                    process_domain_split(db_path, domain, split)
+                except KeyboardInterrupt:
+                    print(f"[filter_ptbrvarid] interrupted at domain={domain} split={split}")
+                    raise SystemExit(130)
+                except Exception as e:
+                    print(f"[filter_ptbrvarid] ERROR domain={domain} split={split}: {e}")
+                    raise
 
     print("[ok] PtBrVId filtering complete")
     return 0

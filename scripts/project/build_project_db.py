@@ -353,6 +353,7 @@ def build_train_test_views(con: duckdb.DuckDBPyConnection):
       'opus_source' AS source,
       'n/a' AS bucket,
       'n/a' AS theme,
+      CAST(NULL AS TEXT) AS domain,
       CAST(NULL AS TEXT) AS label,
       o.sent_pt_br AS text_pt_br,
       o.sent_pt_pt AS text_pt_pt,
@@ -373,6 +374,7 @@ def build_train_test_views(con: duckdb.DuckDBPyConnection):
       'liaad/PtBrVId' AS source,
       'n/a' AS bucket,
       COALESCE(p.domain,'n/a') AS theme,
+      p.domain AS domain,
       p.label,
       p.text_pt_br,
       p.text_pt_pt,
@@ -390,6 +392,7 @@ def build_train_test_views(con: duckdb.DuckDBPyConnection):
       'hugosousa/frmt' AS source,
       d.bucket,
       'n/a' AS theme,
+      CAST(NULL AS TEXT) AS domain,
       CAST(NULL AS TEXT) AS label,
       d.text_pt_br,
       d.text_pt_pt,
@@ -409,6 +412,7 @@ def build_train_test_views(con: duckdb.DuckDBPyConnection):
       'liaad/PtBrVId' AS source,
       'n/a' AS bucket,
       COALESCE(p.domain,'n/a') AS theme,
+      p.domain AS domain,
       p.label,
       p.text_pt_br,
       p.text_pt_pt,
@@ -426,6 +430,7 @@ def build_train_test_views(con: duckdb.DuckDBPyConnection):
       'hugosousa/frmt' AS source,
       f.bucket,
       'n/a' AS theme,
+      CAST(NULL AS TEXT) AS domain,
       CAST(NULL AS TEXT) AS label,
       f.text_pt_br,
       f.text_pt_pt,
@@ -442,6 +447,7 @@ def build_train_test_views(con: duckdb.DuckDBPyConnection):
       'joaosanches/golden_collection' AS source,
       COALESCE(g.bucket,'n/a'),
       COALESCE(g.theme,'n/a'),
+      CAST(NULL AS TEXT) AS domain,
       'n/a' AS label,
       g.text_pt_br,
       CAST(NULL AS TEXT) AS text_pt_pt,
@@ -482,6 +488,9 @@ def main() -> int:
 
     project_db.parent.mkdir(parents=True, exist_ok=True)
 
+    print(f"[build_project_db] project_db={project_db}")
+    print(f"[build_project_db] source_db={source_db}")
+
     con = duckdb.connect(project_db.as_posix(), read_only=False)
     try:
         try:
@@ -491,14 +500,40 @@ def main() -> int:
 
         print("✓ Connected. src attached:", source_db.exists())
 
-        build_gold(con)
-        build_ptbrvarid_views(con)
-        build_frmt(con)
-        build_opus_source(con)
-        build_train_test_views(con)
+        try:
+            print("[build_project_db] build_gold...")
+            build_gold(con)
+        except Exception as e:
+            print(f"[build_project_db] ERROR build_gold: {e}")
+            raise
+        try:
+            print("[build_project_db] build_ptbrvarid_views...")
+            build_ptbrvarid_views(con)
+        except Exception as e:
+            print(f"[build_project_db] ERROR build_ptbrvarid_views: {e}")
+            raise
+        try:
+            print("[build_project_db] build_frmt...")
+            build_frmt(con)
+        except Exception as e:
+            print(f"[build_project_db] ERROR build_frmt: {e}")
+            raise
+        try:
+            print("[build_project_db] build_opus_source...")
+            build_opus_source(con)
+        except Exception as e:
+            print(f"[build_project_db] ERROR build_opus_source: {e}")
+            raise
+        try:
+            print("[build_project_db] build_train_test_views...")
+            build_train_test_views(con)
+        except Exception as e:
+            print(f"[build_project_db] ERROR build_train_test_views: {e}")
+            raise
     finally:
         con.close()
 
+    print("[build_project_db] done")
     return 0
 
 

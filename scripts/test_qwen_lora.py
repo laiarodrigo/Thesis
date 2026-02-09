@@ -110,6 +110,7 @@ def stream_from_view(
           source,
           bucket,
           theme,
+          domain,
           label,
           text_pt_br,
           text_pt_pt,
@@ -242,7 +243,27 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
                 })
         return examples
 
-    # FRMT / Gold / others: translation if both sides exist + classification for each side
+    # Gold: translate pt-BR source into each available reference (manual + DeepL)
+    if dataset == "Gold":
+        ref_manual = row.get("ref_pt_pt_manual")
+        ref_deepl = row.get("ref_pt_pt_deepl")
+        if src_br and ref_manual:
+            examples.append({
+                "task": "translate_br2pt",
+                "source": src_br,
+                "target": ref_manual,
+                "meta": {**meta_base, "direction": "br2pt", "ref_kind": "manual"},
+            })
+        if src_br and ref_deepl:
+            examples.append({
+                "task": "translate_br2pt",
+                "source": src_br,
+                "target": ref_deepl,
+                "meta": {**meta_base, "direction": "br2pt", "ref_kind": "deepl"},
+            })
+        return examples
+
+    # FRMT / others: translation if both sides exist + classification for each side
     if has_br and has_pt:
         examples.append({
             "task": "translate_br2pt",
@@ -547,6 +568,8 @@ def _process_batch(
                         "ref": ref,
                         "hyp": pred,
                     }
+                    if meta.get("ref_kind"):
+                        rec["ref_kind"] = meta.get("ref_kind")
                     trans_out_fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
                 # store a few translation examples for qualitative inspection
