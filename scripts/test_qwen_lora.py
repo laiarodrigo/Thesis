@@ -1,3 +1,4 @@
+import argparse
 import os
 import random
 import numpy as np
@@ -36,8 +37,8 @@ SOURCE_DB_PATH  = BASE_DIR / "data" / "duckdb" / "subs.duckdb"
 PROJECT_DB_STR = PROJECT_DB_PATH.as_posix()
 SOURCE_DB_STR  = SOURCE_DB_PATH.as_posix()
 
-ADAPTER_DIR = Path("/cfs/home/u036584/models/qwen3-0_6b-ptbr-ptpt-lora-adapter-cluster_full")
-TOKENIZER_PATH = Path("/cfs/home/u036584/models/qwen3-0_6b-ptbr-ptpt-lora-adapter-cluster_full-tokenizer")
+ADAPTER_DIR = BASE_DIR / "outputs" / "decoder_only" / "qwen3-0_6b-ptbr-ptpt-lora"
+TOKENIZER_PATH: Optional[Path] = None
 
 MAX_LENGTH = 1024
 
@@ -66,6 +67,85 @@ def clean_hyp(text: str) -> str:
     t = (text or "").strip()
     t = _THINK_RE.sub("", t).strip()
     return t
+
+
+def _optional_int(arg: str) -> Optional[int]:
+    val = arg.strip().lower()
+    if val in {"none", "all"}:
+        return None
+    return int(arg)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Evaluate Qwen base/adapters on test_data with translation + classification metrics."
+    )
+    parser.add_argument("--model-id", default=MODEL_ID)
+    parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--project-db", type=Path, default=PROJECT_DB_PATH)
+    parser.add_argument("--source-db", type=Path, default=SOURCE_DB_PATH)
+
+    parser.add_argument("--use-adapter", dest="use_adapter", action="store_true", default=USE_ADAPTER)
+    parser.add_argument("--no-adapter", dest="use_adapter", action="store_false")
+    parser.add_argument("--adapter-dir", type=Path, default=ADAPTER_DIR)
+    parser.add_argument(
+        "--tokenizer-path",
+        type=Path,
+        default=TOKENIZER_PATH,
+        help="Optional tokenizer path. If omitted, tries adapter dir then model tokenizer.",
+    )
+
+    parser.add_argument("--max-length", type=int, default=MAX_LENGTH)
+    parser.add_argument("--eval-view", default=EVAL_VIEW)
+    parser.add_argument(
+        "--eval-split",
+        default=EVAL_SPLIT,
+        help="Set to 'none' to disable split filter.",
+    )
+    parser.add_argument("--eval-row-limit", type=_optional_int, default=EVAL_ROW_LIMIT)
+    parser.add_argument("--gen-batch-size", type=int, default=GEN_BATCH_SIZE)
+    parser.add_argument("--max-example-buffer", type=int, default=MAX_EXAMPLE_BUFFER)
+    parser.add_argument("--min-group-support", type=int, default=MIN_GROUP_SUPPORT)
+    parser.add_argument("--examples-print", type=int, default=N_EXAMPLES_PRINT)
+    parser.add_argument(
+        "--print-raw-model-output",
+        action=argparse.BooleanOptionalAction,
+        default=PRINT_RAW_MODEL_OUTPUT,
+    )
+    return parser.parse_args()
+
+
+def apply_cli_overrides(args: argparse.Namespace) -> None:
+    global USE_ADAPTER, MODEL_ID, SEED
+    global PROJECT_DB_PATH, SOURCE_DB_PATH, PROJECT_DB_STR, SOURCE_DB_STR
+    global ADAPTER_DIR, TOKENIZER_PATH
+    global MAX_LENGTH, EVAL_VIEW, EVAL_SPLIT, EVAL_ROW_LIMIT, GEN_BATCH_SIZE
+    global MAX_EXAMPLE_BUFFER, MIN_GROUP_SUPPORT, N_EXAMPLES_PRINT, PRINT_RAW_MODEL_OUTPUT
+
+    USE_ADAPTER = args.use_adapter
+    MODEL_ID = args.model_id
+    SEED = args.seed
+
+    PROJECT_DB_PATH = args.project_db
+    SOURCE_DB_PATH = args.source_db
+    PROJECT_DB_STR = PROJECT_DB_PATH.as_posix()
+    SOURCE_DB_STR = SOURCE_DB_PATH.as_posix()
+
+    ADAPTER_DIR = args.adapter_dir
+    TOKENIZER_PATH = args.tokenizer_path
+
+    MAX_LENGTH = args.max_length
+    EVAL_VIEW = args.eval_view
+    if isinstance(args.eval_split, str) and args.eval_split.strip().lower() == "none":
+        EVAL_SPLIT = None
+    else:
+        EVAL_SPLIT = args.eval_split
+    EVAL_ROW_LIMIT = args.eval_row_limit
+    GEN_BATCH_SIZE = args.gen_batch_size
+    MAX_EXAMPLE_BUFFER = args.max_example_buffer
+    MIN_GROUP_SUPPORT = args.min_group_support
+    N_EXAMPLES_PRINT = args.examples_print
+    PRINT_RAW_MODEL_OUTPUT = args.print_raw_model_output
 
 
 
@@ -331,7 +411,25 @@ def load_model_and_tokenizer():
         torch.cuda.manual_seed_all(SEED)
 
     if USE_ADAPTER:
-        tok = AutoTokenizer.from_pretrained(str(TOKENIZER_PATH), use_fast=True)
+        tokenizer_candidates = []
+        if TOKENIZER_PATH is not None:
+            tokenizer_candidates.append(str(TOKENIZER_PATH))
+        tokenizer_candidates.append(str(ADAPTER_DIR))
+        tokenizer_candidates.append(MODEL_ID)
+
+        tok = None
+        for cand in tokenizer_candidates:
+            try:
+                tok = AutoTokenizer.from_pretrained(cand, use_fast=True)
+                print(f"Tokenizer loaded from: {cand}")
+                break
+            except Exception:
+                continue
+
+        if tok is None:
+            raise RuntimeError(
+                "Failed to load tokenizer from --tokenizer-path, --adapter-dir, or --model-id."
+            )
     else:
         print("WARNING: Not using adapter; loading base model and tokenizer only.")
         tok = AutoTokenizer.from_pretrained(MODEL_ID, use_fast=True)
@@ -622,6 +720,18 @@ def _process_batch(
                 continue
 
 def main():
+    args = parse_args()
+    apply_cli_overrides(args)
+
+    print("Evaluation configuration:")
+    print(f"  model_id={MODEL_ID}")
+    print(f"  use_adapter={USE_ADAPTER}")
+    if USE_ADAPTER:
+        print(f"  adapter_dir={ADAPTER_DIR}")
+        print(f"  tokenizer_path={TOKENIZER_PATH if TOKENIZER_PATH else '(auto)'}")
+    print(f"  eval_view={EVAL_VIEW}, eval_split={EVAL_SPLIT}, eval_row_limit={EVAL_ROW_LIMIT}")
+    print(f"  gen_batch_size={GEN_BATCH_SIZE}, max_example_buffer={MAX_EXAMPLE_BUFFER}")
+
     model, tok = load_model_and_tokenizer()
 
     cls_by_group = defaultdict(lambda: ClsStats(tp=Counter(), fp=Counter(), fn=Counter(), cm=Counter()))

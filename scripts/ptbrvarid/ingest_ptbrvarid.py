@@ -45,24 +45,63 @@ def main() -> int:
     ap.add_argument("--dataset", default="liaad/PtBrVId-Raw",
                     help="HF dataset id (default: liaad/PtBrVId-Raw)")
     ap.add_argument("--batch-size", type=int, default=50_000, help="Insert batch size")
+    ap.add_argument("--start-domain", default=None, help="Start from this domain (skip earlier domains)")
+    ap.add_argument("--start-split", default=None, help="Start from this split within start-domain (skip earlier splits)")
+    ap.add_argument("--keep-existing", action="store_true",
+                    help="Do not delete existing PtBrVId-Raw rows (useful for resume)")
     args = ap.parse_args()
 
     db_path = Path(args.db).expanduser().resolve()
     db_path.parent.mkdir(parents=True, exist_ok=True)
 
+    print(f"[ingest_ptbrvarid] db={db_path} dataset={args.dataset} batch_size={args.batch_size}")
+    if args.start_domain:
+        print(f"[ingest_ptbrvarid] start_domain={args.start_domain}")
+    if args.start_split:
+        print(f"[ingest_ptbrvarid] start_split={args.start_split}")
+    if args.keep_existing:
+        print("[ingest_ptbrvarid] keep_existing=True (no delete)")
+
     con = duckdb.connect(db_path.as_posix())
     try:
         con.execute(DDL)
+        # Ensure required columns exist (older tables might miss 'domain')
+        cols = con.execute("PRAGMA table_info('ptbrvarid')").df()["name"].str.lower().tolist()
+        for col in ["dataset", "domain", "split", "label", "text_pt_br", "text_pt_pt"]:
+            if col not in cols:
+                con.execute(f"ALTER TABLE ptbrvarid ADD COLUMN {col} TEXT")
         # reset only the RAW tag to avoid mixing runs
-        con.execute("DELETE FROM ptbrvarid WHERE dataset='PtBrVId-Raw'")
+        if not args.keep_existing:
+            con.execute("DELETE FROM ptbrvarid WHERE dataset='PtBrVId-Raw'")
 
         domains = get_dataset_config_names(args.dataset)
+        print(f"[ingest_ptbrvarid] found {len(domains)} domains")
         total_written = 0
 
+        started = args.start_domain is None
         for domain in domains:
-            splits = get_dataset_split_names(args.dataset, domain)
+            if not started:
+                if domain != args.start_domain:
+                    continue
+                started = True
+            try:
+                splits = get_dataset_split_names(args.dataset, domain)
+            except Exception as e:
+                print(f"[ingest_ptbrvarid] ERROR listing splits for domain={domain}: {e}")
+                raise
+            print(f"[ingest_ptbrvarid] domain={domain} splits={splits}")
             for split in splits:
-                ds = load_dataset(args.dataset, domain, split=split, streaming=True)
+                if args.start_domain and args.start_split and domain == args.start_domain:
+                    if split != args.start_split:
+                        continue
+                    # only skip within the start domain once
+                    args.start_split = None
+                print(f"[ingest_ptbrvarid] start domain={domain} split={split}")
+                try:
+                    ds = load_dataset(args.dataset, domain, split=split, streaming=True)
+                except Exception as e:
+                    print(f"[ingest_ptbrvarid] ERROR loading dataset domain={domain} split={split}: {e}")
+                    raise
 
                 buf = []
                 for ex in ds:
@@ -76,7 +115,7 @@ def main() -> int:
 
                     if len(buf) >= args.batch_size:
                         con.executemany(
-                            "INSERT INTO ptbrvarid VALUES (?, ?, ?, ?, ?, ?)",
+                            "INSERT INTO ptbrvarid (dataset, domain, split, label, text_pt_br, text_pt_pt) VALUES (?, ?, ?, ?, ?, ?)",
                             buf,
                         )
                         total_written += len(buf)
@@ -84,7 +123,7 @@ def main() -> int:
 
                 if buf:
                     con.executemany(
-                        "INSERT INTO ptbrvarid VALUES (?, ?, ?, ?, ?, ?)",
+                        "INSERT INTO ptbrvarid (dataset, domain, split, label, text_pt_br, text_pt_pt) VALUES (?, ?, ?, ?, ?, ?)",
                         buf,
                     )
                     total_written += len(buf)

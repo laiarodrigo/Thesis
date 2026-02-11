@@ -12,6 +12,113 @@ fazer requirements.txt
 
 - EDA inventory and pipeline diagrams: `docs/eda_map.md`
 
+## Decoder-Only (Qwen3 + Axolotl, LoRA)
+
+1) Export training/validation JSONL for Axolotl:
+```
+python scripts/decoder_only/axolotl/export_qwen_chat_data.py
+```
+
+2) Preprocess + train with Axolotl:
+```
+scripts/decoder_only/axolotl/run_qwen3_lora.sh
+```
+
+3) Evaluate the trained adapter:
+```
+python scripts/test_qwen_lora.py \
+  --use-adapter \
+  --adapter-dir outputs/decoder_only/qwen3-0_6b-ptbr-ptpt-lora
+```
+
+Main config: `configs/decoder_only/axolotl/qwen3_lora.yaml`
+
+## Encoder-Decoder (HF + PEFT LoRA, 3-way classification)
+
+This path is organized under `scripts/encoder_decoder/` and `configs/encoder_decoder/`.
+Classification labels are: `pt-br`, `pt-pt`, `equal`.
+It uses `transformers` + `peft` training scripts under `scripts/encoder_decoder/` (not the Axolotl runner).
+
+1) Export encoder-decoder datasets (translation + classification):
+```
+scripts/encoder_decoder/run_export.sh
+```
+
+This writes:
+- `data/encoder_decoder/translation_train.jsonl`
+- `data/encoder_decoder/translation_valid.jsonl`
+- `data/encoder_decoder/classification_train.jsonl`
+- `data/encoder_decoder/classification_valid.jsonl`
+
+2) Train translation LoRA:
+```
+scripts/encoder_decoder/run_train_translation_lora.sh
+```
+
+3) Train classification LoRA:
+```
+scripts/encoder_decoder/run_train_classification_lora.sh
+```
+
+4) Evaluate translation:
+```
+scripts/encoder_decoder/eval/run_eval_translation.sh \
+  --dataset-path data/encoder_decoder/translation_valid.jsonl \
+  --model-id google/flan-t5-base \
+  --adapter-dir outputs/encoder_decoder/flan_t5_base_translation_lora
+```
+
+5) Evaluate classification:
+```
+scripts/encoder_decoder/eval/run_eval_classification.sh \
+  --dataset-path data/encoder_decoder/classification_valid.jsonl \
+  --model-id google/flan-t5-base \
+  --adapter-dir outputs/encoder_decoder/flan_t5_base_classification_lora
+```
+
+## HPO Pipelines
+
+### Encoder-Decoder (Optuna)
+
+1) Define search spaces:
+- `hpo/encoder_decoder/translation_search_space.yaml`
+- `hpo/encoder_decoder/classification_search_space.yaml`
+
+2) Run studies:
+```
+python scripts/hpo/encoder_decoder/run_optuna_translation.py
+python scripts/hpo/encoder_decoder/run_optuna_classification.py
+```
+
+3) Collect results:
+```
+python scripts/hpo/encoder_decoder/collect_optuna_results.py
+```
+
+The runner scripts call `scripts/encoder_decoder/train_encdec_lora.py` for each trial, write trial configs under `hpo/encoder_decoder/generated_*`, train outputs under `outputs/hpo/encoder_decoder/*`, and metrics are read from `trainer_state.json` (`eval_loss`).
+
+### Decoder-Only (Axolotl)
+
+1) Define search space:
+- `hpo/decoder_only/qwen3_search_space.yaml`
+
+2) Generate trial configs:
+```
+python scripts/hpo/decoder_only/generate_axolotl_trials.py
+```
+
+3) Run trials:
+```
+scripts/hpo/decoder_only/run_trials.sh
+```
+
+4) Collect results:
+```
+python scripts/hpo/decoder_only/collect_axolotl_metrics.py
+```
+
+The generator creates per-trial Axolotl configs and a manifest CSV, the runner executes `axolotl preprocess/train` per manifest row, and metrics are collected from `trainer_state.json` under each trial output directory.
+
 ## OPUS pipeline (exact run order)
 
 1) Ingest OPUS/OpenSubtitles text files into DuckDB (`opus_moses`):
