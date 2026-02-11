@@ -14,6 +14,7 @@ from transformers import (
     AutoModelForSeq2SeqLM,
     AutoTokenizer,
     DataCollatorForSeq2Seq,
+    EarlyStoppingCallback,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
 )
@@ -141,6 +142,14 @@ def main() -> None:
 
     training_args = build_training_args(train_cfg)
     collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
+    callbacks = []
+    early_stopping_patience = train_cfg.get("early_stopping_patience")
+    if early_stopping_patience is not None:
+        callbacks.append(
+            EarlyStoppingCallback(
+                early_stopping_patience=int(early_stopping_patience),
+            )
+        )
 
     trainer = Seq2SeqTrainer(
         model=model,
@@ -149,6 +158,7 @@ def main() -> None:
         eval_dataset=tokenized["validation"],
         data_collator=collator,
         tokenizer=tokenizer,
+        callbacks=callbacks,
     )
 
     print("Starting training...")
