@@ -2,6 +2,7 @@
 # scripts/ingest_ptbrvarid.py
 import argparse
 from pathlib import Path
+import time
 import duckdb
 from datasets import load_dataset, get_dataset_config_names, get_dataset_split_names
 
@@ -45,6 +46,8 @@ def main() -> int:
     ap.add_argument("--dataset", default="liaad/PtBrVId-Raw",
                     help="HF dataset id (default: liaad/PtBrVId-Raw)")
     ap.add_argument("--batch-size", type=int, default=50_000, help="Insert batch size")
+    ap.add_argument("--progress-every", type=int, default=100_000,
+                    help="Print heartbeat every N streamed rows per split (0 disables)")
     ap.add_argument("--start-domain", default=None, help="Start from this domain (skip earlier domains)")
     ap.add_argument("--start-split", default=None, help="Start from this split within start-domain (skip earlier splits)")
     ap.add_argument("--keep-existing", action="store_true",
@@ -55,6 +58,7 @@ def main() -> int:
     db_path.parent.mkdir(parents=True, exist_ok=True)
 
     print(f"[ingest_ptbrvarid] db={db_path} dataset={args.dataset} batch_size={args.batch_size}")
+    print(f"[ingest_ptbrvarid] progress_every={args.progress_every}")
     if args.start_domain:
         print(f"[ingest_ptbrvarid] start_domain={args.start_domain}")
     if args.start_split:
@@ -104,9 +108,23 @@ def main() -> int:
                     raise
 
                 buf = []
+                split_streamed = 0
+                split_inserted = 0
+                t0 = time.time()
+                next_progress = args.progress_every if args.progress_every > 0 else None
                 for ex in ds:
+                    split_streamed += 1
                     text = (ex.get("text") or "").strip()
                     if not text:
+                        if next_progress is not None and split_streamed >= next_progress:
+                            elapsed = max(time.time() - t0, 1e-9)
+                            print(
+                                f"[ingest_ptbrvarid] progress {domain}/{split}: "
+                                f"streamed={split_streamed:,} inserted={split_inserted + len(buf):,} "
+                                f"rate={split_streamed / elapsed:,.1f} rows/s",
+                                flush=True,
+                            )
+                            next_progress += args.progress_every
                         continue
                     lang = _label_to_lang(ex.get("label"))
                     br = text if lang == "pt-BR" else None
@@ -119,7 +137,18 @@ def main() -> int:
                             buf,
                         )
                         total_written += len(buf)
+                        split_inserted += len(buf)
                         buf.clear()
+
+                    if next_progress is not None and split_streamed >= next_progress:
+                        elapsed = max(time.time() - t0, 1e-9)
+                        print(
+                            f"[ingest_ptbrvarid] progress {domain}/{split}: "
+                            f"streamed={split_streamed:,} inserted={split_inserted + len(buf):,} "
+                            f"rate={split_streamed / elapsed:,.1f} rows/s",
+                            flush=True,
+                        )
+                        next_progress += args.progress_every
 
                 if buf:
                     con.executemany(
@@ -127,8 +156,14 @@ def main() -> int:
                         buf,
                     )
                     total_written += len(buf)
+                    split_inserted += len(buf)
 
-                print(f"✓ {domain}/{split}: wrote {total_written:,} total rows", flush=True)
+                elapsed = max(time.time() - t0, 1e-9)
+                print(
+                    f"✓ {domain}/{split}: streamed={split_streamed:,} inserted={split_inserted:,} "
+                    f"elapsed={elapsed/60:.1f} min total_written={total_written:,}",
+                    flush=True,
+                )
 
         print(f"[ok] PtBrVId-Raw rows inserted: {total_written:,}")
     finally:
