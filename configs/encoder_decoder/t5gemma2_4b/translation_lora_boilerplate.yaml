@@ -1,0 +1,48 @@
+seed: 42
+
+model:
+  # Large model track: keep LoRA enabled.
+  base_model: google/t5gemma-2-4b-4b
+  trust_remote_code: true
+  max_source_length: 512
+  max_target_length: 256
+
+dataset:
+  train_path: data/encoder_decoder/t5gemma2/translation_train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/translation_valid.jsonl
+
+lora:
+  enabled: true
+  r: 8
+  alpha: 16
+  dropout: 0.05
+  bias: none
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+
+training:
+  output_dir: outputs/encoder_decoder/t5gemma2_4b_translation_lora
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 16
+  learning_rate: 5.0e-5
+  weight_decay: 0.01
+  warmup_steps: 20
+  max_steps: 300
+  logging_steps: 10
+  eval_strategy: steps
+  eval_steps: 50
+  save_steps: 100
+  save_total_limit: 2
+  early_stopping_patience: 5
+  load_best_model_at_end: true
+  metric_for_best_model: eval_loss
+  greater_is_better: false
+  do_eval: true
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  dataloader_num_workers: 2

@@ -1,0 +1,411 @@
+Apresente numa estrutura JSON 100 frases de exemplo escritas na variante Europeia do Português, em conjunto com traduções para a variante Brasileira do Português. Escolha 100 frases que permitam exemplificar casos típicos de diferenças entre as duas variantes da língua.
+
+{
+  "exemplos": [
+    { "pt_PT": "Vou apanhar o comboio às oito da manhã.", "pt_BR": "Vou pegar o trem às oito da manhã." },
+    { "pt_PT": "Preciso de estacionar o carro no parque.", "pt_BR": "Preciso estacionar o carro no estacionamento." },
+    { "pt_PT": "Ele está a trabalhar desde cedo.", "pt_BR": "Ele está trabalhando desde cedo." },
+    { "pt_PT": "Podes fechar a porta, por favor?", "pt_BR": "Você pode fechar a porta, por favor?" },
+    { "pt_PT": "Vou tirar o curso no próximo ano.", "pt_BR": "Vou fazer o curso no próximo ano." },
+    { "pt_PT": "A casa de banho fica no fundo do corredor.", "pt_BR": "O banheiro fica no fim do corredor." },
+    { "pt_PT": "Estou a ligar-te para confirmar a reunião.", "pt_BR": "Estou te ligando para confirmar a reunião." },
+    { "pt_PT": "Ele conduziu até ao escritório.", "pt_BR": "Ele dirigiu até o escritório." },
+    { "pt_PT": "Vou já sair, só falta vestir o casaco.", "pt_BR": "Já vou sair, só falta vestir o casaco." },
+    { "pt_PT": "Ela ficou chateada com a situação.", "pt_BR": "Ela ficou chateada com a situação." },
+
+    { "pt_PT": "Preciso de um telemóvel novo.", "pt_BR": "Preciso de um celular novo." },
+    { "pt_PT": "O miúdo partiu o vidro sem querer.", "pt_BR": "O garoto quebrou o vidro sem querer." },
+    { "pt_PT": "Vamos marcar um encontro para sexta-feira.", "pt_BR": "Vamos marcar um encontro para sexta-feira." },
+    { "pt_PT": "Ele está de férias em Agosto.", "pt_BR": "Ele está de férias em agosto." },
+    { "pt_PT": "Vou levar o fato para a lavandaria.", "pt_BR": "Vou levar o terno para a lavanderia." },
+    { "pt_PT": "Ela comprou uma camisola nova.", "pt_BR": "Ela comprou um suéter novo." },
+    { "pt_PT": "Podes emprestar-me esse livro?", "pt_BR": "Você pode me emprestar esse livro?" },
+    { "pt_PT": "O autocarro chegou atrasado.", "pt_BR": "O ônibus chegou atrasado." },
+    { "pt_PT": "Ele está a estudar para os exames.", "pt_BR": "Ele está estudando para as provas." },
+    { "pt_PT": "Vou passar pelo escritório mais tarde.", "pt_BR": "Vou passar pelo escritório mais tarde." },
+
+    { "pt_PT": "A rapariga perdeu a carteira.", "pt_BR": "A garota perdeu a carteira." },
+    { "pt_PT": "Estou constipado desde ontem.", "pt_BR": "Estou resfriado desde ontem." },
+    { "pt_PT": "O elevador está avariado.", "pt_BR": "O elevador está quebrado." },
+    { "pt_PT": "Ele ficou no rés-do-chão.", "pt_BR": "Ele ficou no térreo." },
+    { "pt_PT": "Vou buscar-te ao aeroporto.", "pt_BR": "Vou te buscar no aeroporto." },
+    { "pt_PT": "Ela tem muita piada.", "pt_BR": "Ela é muito engraçada." },
+    { "pt_PT": "O filme foi mesmo fixe.", "pt_BR": "O filme foi muito legal." },
+    { "pt_PT": "Não faças barulho.", "pt_BR": "Não faça barulho." },
+    { "pt_PT": "Vou tratar disso amanhã.", "pt_BR": "Vou cuidar disso amanhã." },
+    { "pt_PT": "Ele ficou sem saldo no telemóvel.", "pt_BR": "Ele ficou sem crédito no celular." },
+
+    { "pt_PT": "A loja fica aberta ao sábado.", "pt_BR": "A loja fica aberta no sábado." },
+    { "pt_PT": "Vou deitar-me cedo hoje.", "pt_BR": "Vou dormir cedo hoje." },
+    { "pt_PT": "Ela está a tomar duche.", "pt_BR": "Ela está tomando banho." },
+    { "pt_PT": "O puto adormeceu no sofá.", "pt_BR": "O garoto dormiu no sofá." },
+    { "pt_PT": "Vou mandar-te um email.", "pt_BR": "Vou te mandar um e-mail." },
+    { "pt_PT": "Ele ficou tramado com o chefe.", "pt_BR": "Ele se deu mal com o chefe." },
+    { "pt_PT": "A conta já está paga.", "pt_BR": "A conta já está paga." },
+    { "pt_PT": "Ela ficou sem gás em casa.", "pt_BR": "Ela ficou sem gás em casa." },
+    { "pt_PT": "O pequeno-almoço está pronto.", "pt_BR": "O café da manhã está pronto." },
+    { "pt_PT": "Vou às compras depois do trabalho.", "pt_BR": "Vou fazer compras depois do trabalho." },
+
+    { "pt_PT": "Ele apanhou uma seca na reunião.", "pt_BR": "Ele achou a reunião muito chata." },
+    { "pt_PT": "A factura ainda não chegou.", "pt_BR": "A fatura ainda não chegou." },
+    { "pt_PT": "Vou meter isto no frigorífico.", "pt_BR": "Vou colocar isso na geladeira." },
+    { "pt_PT": "Ele perdeu o comboio por pouco.", "pt_BR": "Ele perdeu o trem por pouco." },
+    { "pt_PT": "Ela está a fazer horas extra.", "pt_BR": "Ela está fazendo hora extra." },
+    { "pt_PT": "Vou já ali e volto.", "pt_BR": "Vou ali rapidinho e já volto." },
+    { "pt_PT": "Ele ficou lixado com a notícia.", "pt_BR": "Ele ficou muito bravo com a notícia." },
+    { "pt_PT": "A sala ficou às escuras.", "pt_BR": "A sala ficou no escuro." },
+    { "pt_PT": "Vou chamar o canalizador.", "pt_BR": "Vou chamar o encanador." },
+    { "pt_PT": "Ela ficou no desemprego.", "pt_BR": "Ela ficou desempregada." },
+
+    { "pt_PT": "O miúdo está no infantário.", "pt_BR": "A criança está na creche." },
+    { "pt_PT": "Vou tratar dos papéis amanhã.", "pt_BR": "Vou resolver a papelada amanhã." },
+    { "pt_PT": "Ele está a fazer a barba.", "pt_BR": "Ele está fazendo a barba." },
+    { "pt_PT": "A encomenda chegou hoje.", "pt_BR": "A encomenda chegou hoje." },
+    { "pt_PT": "Vou levar o lixo lá fora.", "pt_BR": "Vou levar o lixo para fora." },
+    { "pt_PT": "Ela ficou cheia de medo.", "pt_BR": "Ela ficou morrendo de medo." },
+    { "pt_PT": "O computador avariou.", "pt_BR": "O computador quebrou." },
+    { "pt_PT": "Vou ficar por casa este fim de semana.", "pt_BR": "Vou ficar em casa neste fim de semana." },
+    { "pt_PT": "Ele tem muita lata.", "pt_BR": "Ele é muito cara de pau." },
+    { "pt_PT": "Está um frio de rachar.", "pt_BR": "Está um frio de rachar." }
+  ]
+}
+
+Usando a mesma estrutura JSON, gere 100 exemplos adicionais para frases pt-PT e pt-BR, correspondentes a exemplos diferentes e a frases ligeiramente mais longas.
+
+{
+  "exemplos": [
+    {
+      "pt_PT": "Cheguei mais cedo ao escritório porque o trânsito estava surpreendentemente calmo.",
+      "pt_BR": "Cheguei mais cedo ao escritório porque o trânsito estava surpreendentemente tranquilo."
+    },
+    {
+      "pt_PT": "Ela ficou a aguardar na sala de espera até ser chamada pelo médico.",
+      "pt_BR": "Ela ficou aguardando na sala de espera até ser chamada pelo médico."
+    },
+    {
+      "pt_PT": "Vamos almoçar fora hoje porque não me apetece cozinhar.",
+      "pt_BR": "Vamos almoçar fora hoje porque não estou com vontade de cozinhar."
+    },
+    {
+      "pt_PT": "Ele esqueceu-se do guarda-chuva e acabou por se molhar todo.",
+      "pt_BR": "Ele esqueceu o guarda-chuva e acabou se molhando todo."
+    },
+    {
+      "pt_PT": "Tive de cancelar a viagem devido a problemas de saúde inesperados.",
+      "pt_BR": "Tive que cancelar a viagem por causa de problemas de saúde inesperados."
+    },
+    {
+      "pt_PT": "A reunião prolongou-se mais do que o previsto e saímos já tarde.",
+      "pt_BR": "A reunião se estendeu mais do que o previsto e saímos bem tarde."
+    },
+    {
+      "pt_PT": "Ele está a pensar mudar de emprego no próximo ano.",
+      "pt_BR": "Ele está pensando em mudar de emprego no próximo ano."
+    },
+    {
+      "pt_PT": "Deixei o carro na oficina porque estava a fazer um barulho estranho.",
+      "pt_BR": "Deixei o carro na oficina porque estava fazendo um barulho estranho."
+    },
+    {
+      "pt_PT": "Ela pediu-me ajuda para preencher os formulários online.",
+      "pt_BR": "Ela me pediu ajuda para preencher os formulários online."
+    },
+    {
+      "pt_PT": "Vamos combinar os detalhes por telefone mais logo.",
+      "pt_BR": "Vamos combinar os detalhes por telefone mais tarde."
+    },
+
+    {
+      "pt_PT": "O miúdo ficou em casa porque estava com febre.",
+      "pt_BR": "A criança ficou em casa porque estava com febre."
+    },
+    {
+      "pt_PT": "Estive a rever os documentos antes de os enviar.",
+      "pt_BR": "Estive revisando os documentos antes de enviá-los."
+    },
+    {
+      "pt_PT": "Ela costuma chegar atrasada quando chove.",
+      "pt_BR": "Ela costuma chegar atrasada quando chove."
+    },
+    {
+      "pt_PT": "Vou tratar do assunto assim que tiver novidades.",
+      "pt_BR": "Vou tratar do assunto assim que tiver novidades."
+    },
+    {
+      "pt_PT": "Ele ficou sem bateria no telemóvel durante a chamada.",
+      "pt_BR": "Ele ficou sem bateria no celular durante a ligação."
+    },
+    {
+      "pt_PT": "Tivemos de esperar bastante tempo até sermos atendidos.",
+      "pt_BR": "Tivemos que esperar bastante tempo até sermos atendidos."
+    },
+    {
+      "pt_PT": "Ela está a aprender a conduzir com o pai.",
+      "pt_BR": "Ela está aprendendo a dirigir com o pai."
+    },
+    {
+      "pt_PT": "Vou passar no supermercado antes de ir para casa.",
+      "pt_BR": "Vou passar no supermercado antes de ir para casa."
+    },
+    {
+      "pt_PT": "Ele levou algum tempo a habituar-se ao novo horário.",
+      "pt_BR": "Ele levou algum tempo para se acostumar ao novo horário."
+    },
+    {
+      "pt_PT": "A encomenda ficou retida na alfândega.",
+      "pt_BR": "A encomenda ficou retida na alfândega."
+    },
+
+    {
+      "pt_PT": "Ela ficou a trabalhar até tarde para terminar o relatório.",
+      "pt_BR": "Ela ficou trabalhando até tarde para terminar o relatório."
+    },
+    {
+      "pt_PT": "Não me apetece sair hoje por causa do frio.",
+      "pt_BR": "Não estou com vontade de sair hoje por causa do frio."
+    },
+    {
+      "pt_PT": "Ele pediu licença para sair mais cedo.",
+      "pt_BR": "Ele pediu permissão para sair mais cedo."
+    },
+    {
+      "pt_PT": "Vou buscar os miúdos à escola daqui a pouco.",
+      "pt_BR": "Vou buscar as crianças na escola daqui a pouco."
+    },
+    {
+      "pt_PT": "Ela ficou surpreendida com o resultado do exame.",
+      "pt_BR": "Ela ficou surpresa com o resultado da prova."
+    },
+    {
+      "pt_PT": "O computador deixou de funcionar de repente.",
+      "pt_BR": "O computador parou de funcionar de repente."
+    },
+    {
+      "pt_PT": "Ele está a tratar de resolver o problema o quanto antes.",
+      "pt_BR": "Ele está tentando resolver o problema o mais rápido possível."
+    },
+    {
+      "pt_PT": "Chegámos a casa já depois da meia-noite.",
+      "pt_BR": "Chegamos em casa depois da meia-noite."
+    },
+    {
+      "pt_PT": "Ela teve de refazer o trabalho por causa de um erro.",
+      "pt_BR": "Ela teve que refazer o trabalho por causa de um erro."
+    },
+    {
+      "pt_PT": "Vou guardar isto na arrecadação.",
+      "pt_BR": "Vou guardar isso no depósito."
+    },
+
+    {
+      "pt_PT": "Ele ficou a olhar para o ecrã sem perceber o erro.",
+      "pt_BR": "Ele ficou olhando para a tela sem perceber o erro."
+    },
+    {
+      "pt_PT": "A sala estava cheia de gente à espera.",
+      "pt_BR": "A sala estava cheia de pessoas esperando."
+    },
+    {
+      "pt_PT": "Ela pediu-me para confirmar a reserva do hotel.",
+      "pt_BR": "Ela me pediu para confirmar a reserva do hotel."
+    },
+    {
+      "pt_PT": "O trânsito estava tão mau que chegámos atrasados.",
+      "pt_BR": "O trânsito estava tão ruim que chegamos atrasados."
+    },
+    {
+      "pt_PT": "Vou tentar resolver isto ainda hoje.",
+      "pt_BR": "Vou tentar resolver isso ainda hoje."
+    },
+    {
+      "pt_PT": "Ele ficou satisfeito com a forma como tudo correu.",
+      "pt_BR": "Ele ficou satisfeito com a forma como tudo aconteceu."
+    },
+    {
+      "pt_PT": "Ela está a organizar os documentos por ordem.",
+      "pt_BR": "Ela está organizando os documentos em ordem."
+    },
+    {
+      "pt_PT": "Tive de pedir ajuda porque não percebia o sistema.",
+      "pt_BR": "Tive que pedir ajuda porque não entendia o sistema."
+    },
+    {
+      "pt_PT": "Vamos adiar a reunião para a próxima semana.",
+      "pt_BR": "Vamos adiar a reunião para a próxima semana."
+    },
+    {
+      "pt_PT": "Ele ficou em casa a recuperar da cirurgia.",
+      "pt_BR": "Ele ficou em casa se recuperando da cirurgia."
+    }
+  ]
+}
+
+Usando a mesma estrutura JSON, gere 100 exemplos adicionais mostrando diferenças entre pt-PT e pt-BR, neste caso correspondentes a pequenos parágrafos de texto contendo duas ou três frases.
+
+{
+  "exemplos": [
+    {
+      "pt_PT": "Cheguei a casa bastante tarde e ainda tive de preparar o jantar. Não me apeteceu fazer nada complicado, por isso improvisei qualquer coisa.",
+      "pt_BR": "Cheguei em casa bem tarde e ainda tive que preparar o jantar. Não estava com vontade de fazer nada complicado, então improvisei alguma coisa."
+    },
+    {
+      "pt_PT": "Ela ficou à espera do autocarro durante quase meia hora. Como estava frio, acabou por entrar num café.",
+      "pt_BR": "Ela ficou esperando o ônibus por quase meia hora. Como estava frio, acabou entrando em um café."
+    },
+    {
+      "pt_PT": "O miúdo não quis ir à escola hoje porque não se sentia bem. Acabou por ficar em casa a descansar.",
+      "pt_BR": "A criança não quis ir para a escola hoje porque não estava se sentindo bem. Acabou ficando em casa para descansar."
+    },
+    {
+      "pt_PT": "Estivemos a falar sobre o problema durante a reunião. No final, decidimos adiar a decisão.",
+      "pt_BR": "Ficamos falando sobre o problema durante a reunião. No final, decidimos adiar a decisão."
+    },
+    {
+      "pt_PT": "Ele deixou o carro na oficina logo de manhã. Disseram-lhe que só ficaria pronto ao fim do dia.",
+      "pt_BR": "Ele deixou o carro na oficina logo cedo. Disseram para ele que só ficaria pronto no fim do dia."
+    },
+    {
+      "pt_PT": "Não me apercebi do erro enquanto estava a preencher o formulário. Só dei conta depois de o enviar.",
+      "pt_BR": "Não percebi o erro enquanto estava preenchendo o formulário. Só notei depois de enviar."
+    },
+    {
+      "pt_PT": "Ela está a trabalhar a partir de casa esta semana. Assim evita perder tempo no trânsito.",
+      "pt_BR": "Ela está trabalhando de casa esta semana. Assim evita perder tempo no trânsito."
+    },
+    {
+      "pt_PT": "Fomos às compras depois do trabalho. O supermercado estava cheio de gente.",
+      "pt_BR": "Fomos fazer compras depois do trabalho. O supermercado estava cheio de pessoas."
+    },
+    {
+      "pt_PT": "Ele pediu-me para tratar do assunto com calma. Disse que não havia urgência.",
+      "pt_BR": "Ele me pediu para tratar do assunto com calma. Disse que não havia urgência."
+    },
+    {
+      "pt_PT": "Chegámos cedo ao aeroporto para evitar problemas. Mesmo assim, a fila era enorme.",
+      "pt_BR": "Chegamos cedo ao aeroporto para evitar problemas. Mesmo assim, a fila estava enorme."
+    },
+
+    {
+      "pt_PT": "A rapariga ficou surpreendida com a notícia. Não estava nada à espera daquela resposta.",
+      "pt_BR": "A garota ficou surpresa com a notícia. Não estava esperando aquela resposta."
+    },
+    {
+      "pt_PT": "Estive a tentar ligar-te durante a tarde toda. Só agora é que consegui falar contigo.",
+      "pt_BR": "Fiquei tentando te ligar a tarde toda. Só agora consegui falar com você."
+    },
+    {
+      "pt_PT": "Ele ficou em casa a tratar dos papéis. Preferiu resolver tudo com calma.",
+      "pt_BR": "Ele ficou em casa cuidando da papelada. Preferiu resolver tudo com calma."
+    },
+    {
+      "pt_PT": "O professor explicou a matéria outra vez. Alguns alunos ainda tinham dúvidas.",
+      "pt_BR": "O professor explicou a matéria de novo. Alguns alunos ainda tinham dúvidas."
+    },
+    {
+      "pt_PT": "A encomenda chegou mais cedo do que o previsto. Felizmente, alguém estava em casa.",
+      "pt_BR": "A encomenda chegou mais cedo do que o esperado. Felizmente, tinha alguém em casa."
+    },
+    {
+      "pt_PT": "Ela está a pensar mudar de cidade. Diz que precisa de um novo começo.",
+      "pt_BR": "Ela está pensando em mudar de cidade. Diz que precisa de um novo começo."
+    },
+    {
+      "pt_PT": "Tive de refazer o relatório por causa de um erro. Felizmente, ainda fui a tempo.",
+      "pt_BR": "Tive que refazer o relatório por causa de um erro. Felizmente, ainda deu tempo."
+    },
+    {
+      "pt_PT": "O miúdo ficou a jogar no telemóvel durante horas. Só parou quando a bateria acabou.",
+      "pt_BR": "A criança ficou jogando no celular por horas. Só parou quando a bateria acabou."
+    },
+    {
+      "pt_PT": "Ela pediu licença para sair mais cedo. Tinha uma consulta marcada.",
+      "pt_BR": "Ela pediu permissão para sair mais cedo. Tinha uma consulta marcada."
+    },
+    {
+      "pt_PT": "Estava tanto barulho que não consegui concentrar-me. Acabei por ir para outra sala.",
+      "pt_BR": "Estava tanto barulho que não consegui me concentrar. Acabei indo para outra sala."
+    },
+
+    {
+      "pt_PT": "Ele ficou sem saldo no telemóvel a meio da chamada. Teve de ligar mais tarde.",
+      "pt_BR": "Ele ficou sem crédito no celular no meio da ligação. Teve que ligar mais tarde."
+    },
+    {
+      "pt_PT": "Ficámos em casa porque estava a chover muito. Aproveitámos para ver um filme.",
+      "pt_BR": "Ficamos em casa porque estava chovendo muito. Aproveitamos para assistir a um filme."
+    },
+    {
+      "pt_PT": "Ela não se sentia preparada para o exame. Mesmo assim, decidiu tentar.",
+      "pt_BR": "Ela não se sentia preparada para a prova. Mesmo assim, decidiu tentar."
+    },
+    {
+      "pt_PT": "O trânsito estava um caos logo de manhã. Cheguei atrasado ao trabalho.",
+      "pt_BR": "O trânsito estava um caos logo cedo. Cheguei atrasado ao trabalho."
+    },
+    {
+      "pt_PT": "Vou tratar disso amanhã com mais tempo. Agora já é tarde.",
+      "pt_BR": "Vou cuidar disso amanhã com mais tempo. Agora já está tarde."
+    },
+    {
+      "pt_PT": "Ela ficou a organizar os documentos por ordem alfabética. Demorou mais do que esperava.",
+      "pt_BR": "Ela ficou organizando os documentos em ordem alfabética. Demorou mais do que esperava."
+    },
+    {
+      "pt_PT": "Ele levou algum tempo a habituar-se ao novo emprego. Tudo era diferente.",
+      "pt_BR": "Ele levou um tempo para se acostumar ao novo emprego. Tudo era diferente."
+    },
+    {
+      "pt_PT": "Fomos almoçar fora porque ninguém quis cozinhar. O restaurante estava cheio.",
+      "pt_BR": "Fomos almoçar fora porque ninguém quis cozinhar. O restaurante estava lotado."
+    },
+    {
+      "pt_PT": "Ela ficou de ligar quando tivesse novidades. Até agora, ainda não disse nada.",
+      "pt_BR": "Ela ficou de ligar quando tivesse novidades. Até agora, ainda não falou nada."
+    },
+    {
+      "pt_PT": "O computador avariou de repente. Perdi tudo o que não tinha guardado.",
+      "pt_BR": "O computador quebrou de repente. Perdi tudo o que não tinha salvado."
+    },
+
+    {
+      "pt_PT": "Ele ficou a olhar para o ecrã sem perceber o problema. Só mais tarde encontrou o erro.",
+      "pt_BR": "Ele ficou olhando para a tela sem perceber o problema. Só mais tarde encontrou o erro."
+    },
+    {
+      "pt_PT": "A reunião foi longa e cansativa. No fim, quase nada ficou decidido.",
+      "pt_BR": "A reunião foi longa e cansativa. No final, quase nada ficou decidido."
+    },
+    {
+      "pt_PT": "Ela ficou em casa a recuperar da gripe. O médico recomendou repouso.",
+      "pt_BR": "Ela ficou em casa se recuperando da gripe. O médico recomendou repouso."
+    },
+    {
+      "pt_PT": "Não me apeteceu sair depois do jantar. Preferi ficar por casa a descansar.",
+      "pt_BR": "Não fiquei com vontade de sair depois do jantar. Preferi ficar em casa descansando."
+    },
+    {
+      "pt_PT": "Ele tratou de resolver o problema assim que pôde. Não quis deixar acumular.",
+      "pt_BR": "Ele tratou de resolver o problema assim que pôde. Não quis deixar acumular."
+    },
+    {
+      "pt_PT": "Chegámos ao hotel já de noite. Fizemos o check-in rapidamente.",
+      "pt_BR": "Chegamos ao hotel já à noite. Fizemos o check-in rapidamente."
+    },
+    {
+      "pt_PT": "Ela pediu-me ajuda para entender o contrato. A linguagem era muito confusa.",
+      "pt_BR": "Ela me pediu ajuda para entender o contrato. A linguagem era muito confusa."
+    },
+    {
+      "pt_PT": "O miúdo adormeceu no sofá a ver televisão. Já estava muito cansado.",
+      "pt_BR": "A criança dormiu no sofá assistindo à televisão. Já estava muito cansada."
+    },
+    {
+      "pt_PT": "Vou passar pelo escritório antes de ir para casa. Preciso de falar com o chefe.",
+      "pt_BR": "Vou passar pelo escritório antes de ir para casa. Preciso falar com o chefe."
+    },
+    {
+      "pt_PT": "Ela ficou chateada com o atraso. Estava à espera há muito tempo.",
+      "pt_BR": "Ela ficou chateada com o atraso. Estava esperando havia muito tempo."
+    }
+  ]
+}

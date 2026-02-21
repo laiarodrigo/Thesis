@@ -1,0 +1,47 @@
+seed: 42
+
+model:
+  # Small model track: run full fine-tuning.
+  base_model: google/t5gemma-2-270m-270m
+  trust_remote_code: true
+  max_source_length: 512
+  max_target_length: 256
+
+dataset:
+  train_path: data/encoder_decoder/t5gemma2/translation_train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/translation_valid.jsonl
+
+lora:
+  # Full FT for the 270M model.
+  enabled: false
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  bias: none
+  target_modules:
+    - q_proj
+    - v_proj
+
+training:
+  output_dir: outputs/encoder_decoder/t5gemma2_translation_fullft
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_steps: 50
+  max_steps: 500
+  logging_steps: 25
+  eval_strategy: steps
+  eval_steps: 100
+  save_steps: 100
+  save_total_limit: 2
+  early_stopping_patience: 5
+  load_best_model_at_end: true
+  metric_for_best_model: eval_loss
+  greater_is_better: false
+  do_eval: true
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  dataloader_num_workers: 4

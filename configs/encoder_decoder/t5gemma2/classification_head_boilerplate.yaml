@@ -1,0 +1,44 @@
+seed: 42
+
+model:
+  # Small model track: full encoder fine-tuning + classification head.
+  base_model: google/t5gemma-2-270m-270m
+  trust_remote_code: true
+  num_labels: 3
+  freeze_decoder: true
+  dropout: 0.1
+  label2id:
+    pt-br: 0
+    pt-pt: 1
+    equal: 2
+  id2label:
+    "0": pt-br
+    "1": pt-pt
+    "2": equal
+  max_source_length: 512
+
+dataset:
+  train_path: data/encoder_decoder/t5gemma2/classification_train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/classification_valid.jsonl
+
+training:
+  output_dir: outputs/encoder_decoder/t5gemma2_classification_head_fullft
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 8
+  gradient_accumulation_steps: 2
+  learning_rate: 3.0e-5
+  weight_decay: 0.01
+  warmup_steps: 50
+  max_steps: 1000
+  num_train_epochs: 3
+  logging_steps: 20
+  eval_steps: 100
+  save_steps: 200
+  save_total_limit: 2
+  load_best_model_at_end: true
+  metric_for_best_model: eval_f1_macro
+  greater_is_better: true
+  bf16: true
+  fp16: false
+  gradient_checkpointing: false
+  dataloader_num_workers: 4
