@@ -3,6 +3,7 @@ import argparse
 import json
 import math
 import random
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Dict, Iterator, Optional
@@ -45,6 +46,7 @@ def parse_args() -> argparse.Namespace:
     default_project_db = repo_root / "data" / "duckdb" / "subs_project.duckdb"
     default_source_db = repo_root / "data" / "duckdb" / "subs.duckdb"
     default_out_dir = repo_root / "data" / "decoder_only" / "qwen3"
+    default_gpt_dir = repo_root / "data" / "encoder_decoder" / "t5gemma2"
 
     parser = argparse.ArgumentParser(
         description=(
@@ -68,6 +70,25 @@ def parse_args() -> argparse.Namespace:
         default=0.7,
         help="Probability of choosing PT->BR when both sides are available.",
     )
+    parser.add_argument(
+        "--task-mode",
+        choices=["multitask", "translation", "classification"],
+        default="multitask",
+        help="Choose which tasks to export into chat JSONL.",
+    )
+    parser.add_argument(
+        "--gpt-only",
+        action="store_true",
+        default=False,
+        help=(
+            "Use GPT task JSONL files from Step 2/3 instead of DuckDB views. "
+            "This bypasses train_data/test_data schema."
+        ),
+    )
+    parser.add_argument("--gpt-translation-train-file", type=Path, default=default_gpt_dir / "translation_train.jsonl")
+    parser.add_argument("--gpt-translation-valid-file", type=Path, default=default_gpt_dir / "translation_valid.jsonl")
+    parser.add_argument("--gpt-classification-train-file", type=Path, default=default_gpt_dir / "classification_train.jsonl")
+    parser.add_argument("--gpt-classification-valid-file", type=Path, default=default_gpt_dir / "classification_valid.jsonl")
     parser.add_argument("--out-dir", type=Path, default=default_out_dir)
     parser.add_argument("--train-file", default="train.jsonl")
     parser.add_argument("--valid-file", default="valid.jsonl")
@@ -154,8 +175,122 @@ def count_rows_for_split(
     return int(con.execute(query, params).fetchone()[0])
 
 
-def build_examples_from_row(row: Dict, rng: random.Random, pt2br_prob: float) -> list[Dict]:
+def iter_jsonl(path: Path) -> Iterator[Dict]:
+    with path.open("r", encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            yield json.loads(line)
+
+
+def strip_task_prefix(text: Optional[str]) -> str:
+    if not text:
+        return ""
+    return re.sub(r"^<[^>]+>\s*", "", str(text).strip())
+
+
+def normalize_class_label(label: Optional[str]) -> Optional[str]:
+    t = (label or "").strip().lower()
+    if t == "pt-br":
+        return "pt-BR"
+    if t == "pt-pt":
+        return "pt-PT"
+    return None
+
+
+def export_split_from_gpt_files(
+    *,
+    translation_file: Path,
+    classification_file: Path,
+    out_path: Path,
+    task_mode: str,
+) -> Dict:
+    include_translation = task_mode in {"multitask", "translation"}
+    include_classification = task_mode in {"multitask", "classification"}
+
+    task_counts = Counter()
+    dataset_counts = Counter()
+    row_count = 0
+    written_count = 0
+    skipped_equal = 0
+
+    with out_path.open("w", encoding="utf-8") as fh:
+        if include_translation:
+            if not translation_file.exists():
+                raise FileNotFoundError(f"Missing GPT translation file: {translation_file}")
+            for row in iter_jsonl(translation_file):
+                row_count += 1
+                source = as_clean_text(row.get("source_text")) or strip_task_prefix(row.get("input_text"))
+                target = as_clean_text(row.get("target_text"))
+                direction = (row.get("direction") or "").strip().lower()
+                if not direction:
+                    pref = str(row.get("input_text") or "").strip()
+                    if pref.startswith("<br-pt>"):
+                        direction = "br2pt"
+                    elif pref.startswith("<pt-br>"):
+                        direction = "pt2br"
+
+                if not source or not target or direction not in {"br2pt", "pt2br"}:
+                    continue
+
+                ex = {
+                    "task": "translate_br2pt" if direction == "br2pt" else "translate_pt2br",
+                    "source": source,
+                    "target": target,
+                    "dataset": "GPT",
+                }
+                fh.write(json.dumps(to_axolotl_chat_record(ex), ensure_ascii=False) + "\n")
+                written_count += 1
+                task_counts[ex["task"]] += 1
+                dataset_counts["GPT"] += 1
+
+        if include_classification:
+            if not classification_file.exists():
+                raise FileNotFoundError(f"Missing GPT classification file: {classification_file}")
+            for row in iter_jsonl(classification_file):
+                row_count += 1
+                source = as_clean_text(row.get("text")) or strip_task_prefix(row.get("input_text"))
+                target = normalize_class_label(as_clean_text(row.get("label")))
+                if not source:
+                    continue
+                if target is None:
+                    skipped_equal += 1
+                    continue
+
+                ex = {
+                    "task": "classify",
+                    "source": source,
+                    "target": target,
+                    "dataset": "GPT",
+                }
+                fh.write(json.dumps(to_axolotl_chat_record(ex), ensure_ascii=False) + "\n")
+                written_count += 1
+                task_counts[ex["task"]] += 1
+                dataset_counts["GPT"] += 1
+
+    out = {
+        "rows": row_count,
+        "rows_selected": row_count,
+        "examples": written_count,
+        "tasks": dict(task_counts),
+        "datasets": dict(dataset_counts),
+        "path": out_path.as_posix(),
+    }
+    if skipped_equal:
+        out["skipped_equal_labels"] = skipped_equal
+    return out
+
+
+def build_examples_from_row(
+    row: Dict,
+    rng: random.Random,
+    pt2br_prob: float,
+    task_mode: str,
+) -> list[Dict]:
     examples = []
+    include_translation = task_mode in {"multitask", "translation"}
+    include_classification = task_mode in {"multitask", "classification"}
 
     dataset = row.get("dataset")
     src_br = as_clean_text(row.get("text_pt_br"))
@@ -166,7 +301,7 @@ def build_examples_from_row(row: Dict, rng: random.Random, pt2br_prob: float) ->
     has_pt = bool(src_pt)
 
     if dataset == "OpenSubs":
-        if has_br and has_pt:
+        if include_translation and has_br and has_pt:
             if rng.random() < pt2br_prob:
                 examples.append(
                     {"task": "translate_pt2br", "source": src_pt, "target": src_br, "dataset": dataset}
@@ -175,26 +310,27 @@ def build_examples_from_row(row: Dict, rng: random.Random, pt2br_prob: float) ->
                 examples.append(
                     {"task": "translate_br2pt", "source": src_br, "target": src_pt, "dataset": dataset}
                 )
+        if include_classification and has_br and has_pt:
             examples.append({"task": "classify", "source": src_br, "target": "pt-BR", "dataset": dataset})
             examples.append({"task": "classify", "source": src_pt, "target": "pt-PT", "dataset": dataset})
         return examples
 
     if dataset == "PtBrVarId":
-        if label in ("pt-BR", "pt-PT"):
+        if include_classification and label in ("pt-BR", "pt-PT"):
             text = src_br if has_br else src_pt
             if text:
                 examples.append({"task": "classify", "source": text, "target": label, "dataset": dataset})
         return examples
 
-    if has_br and has_pt:
+    if include_translation and has_br and has_pt:
         if rng.random() < pt2br_prob:
             examples.append({"task": "translate_pt2br", "source": src_pt, "target": src_br, "dataset": dataset})
         else:
             examples.append({"task": "translate_br2pt", "source": src_br, "target": src_pt, "dataset": dataset})
 
-    if has_br:
+    if include_classification and has_br:
         examples.append({"task": "classify", "source": src_br, "target": "pt-BR", "dataset": dataset})
-    if has_pt:
+    if include_classification and has_pt:
         examples.append({"task": "classify", "source": src_pt, "target": "pt-PT", "dataset": dataset})
 
     return examples
@@ -236,6 +372,7 @@ def export_split(
     out_path: Path,
     rng: random.Random,
     pt2br_prob: float,
+    task_mode: str,
 ) -> Dict:
     row_count = 0
     written_count = 0
@@ -251,7 +388,12 @@ def export_split(
             limit=limit,
         ):
             row_count += 1
-            examples = build_examples_from_row(row, rng=rng, pt2br_prob=pt2br_prob)
+            examples = build_examples_from_row(
+                row,
+                rng=rng,
+                pt2br_prob=pt2br_prob,
+                task_mode=task_mode,
+            )
             for ex in examples:
                 record = to_axolotl_chat_record(ex)
                 fh.write(json.dumps(record, ensure_ascii=False) + "\n")
@@ -264,6 +406,7 @@ def export_split(
 
     return {
         "rows": row_count,
+        "rows_selected": row_count,
         "examples": written_count,
         "tasks": dict(task_counts),
         "datasets": dict(dataset_counts),
@@ -274,64 +417,97 @@ def export_split(
 def main() -> None:
     args = parse_args()
     args.out_dir.mkdir(parents=True, exist_ok=True)
-
     rng = random.Random(args.seed)
-    con = connect_project(args.project_db, args.source_db, read_only=True)
+    train_path = args.out_dir / args.train_file
+    valid_path = args.out_dir / args.valid_file
 
-    try:
-        train_path = args.out_dir / args.train_file
-        valid_path = args.out_dir / args.valid_file
+    if args.gpt_only:
+        print("GPT-only mode: exporting from GPT task JSONL files (Step 2/3 outputs).")
+        print(f"  translation train: {args.gpt_translation_train_file}")
+        print(f"  translation valid: {args.gpt_translation_valid_file}")
+        if args.task_mode in {"multitask", "classification"}:
+            print(f"  classification train: {args.gpt_classification_train_file}")
+            print(f"  classification valid: {args.gpt_classification_valid_file}")
 
-        train_source_rows = count_rows_for_split(
-            con,
-            view_name=args.train_view,
-            split=args.train_split,
-        )
-        valid_source_rows = count_rows_for_split(
-            con,
-            view_name=args.valid_view,
-            split=args.valid_split,
-        )
-
-        print("Sanity check (source rows from DuckDB views):")
-        print(
-            f"  train source: view={args.train_view} split={args.train_split} rows={train_source_rows}"
-        )
-        print(
-            f"  valid source: view={args.valid_view} split={args.valid_split} rows={valid_source_rows}"
-        )
-
-        train_stats = export_split(
-            con,
-            view_name=args.train_view,
-            split=args.train_split,
-            limit=args.train_limit,
-            batch_size=args.batch_size,
+        train_stats = export_split_from_gpt_files(
+            translation_file=args.gpt_translation_train_file,
+            classification_file=args.gpt_classification_train_file,
             out_path=train_path,
-            rng=rng,
-            pt2br_prob=args.pt2br_prob,
+            task_mode=args.task_mode,
         )
-
-        valid_stats = export_split(
-            con,
-            view_name=args.valid_view,
-            split=args.valid_split,
-            limit=args.valid_limit,
-            batch_size=args.batch_size,
+        valid_stats = export_split_from_gpt_files(
+            translation_file=args.gpt_translation_valid_file,
+            classification_file=args.gpt_classification_valid_file,
             out_path=valid_path,
-            rng=rng,
-            pt2br_prob=args.pt2br_prob,
+            task_mode=args.task_mode,
         )
-    finally:
-        con.close()
+    else:
+        con = connect_project(args.project_db, args.source_db, read_only=True)
+        try:
+            train_source_rows = count_rows_for_split(
+                con,
+                view_name=args.train_view,
+                split=args.train_split,
+            )
+            valid_source_rows = count_rows_for_split(
+                con,
+                view_name=args.valid_view,
+                split=args.valid_split,
+            )
+
+            print("Sanity check (source rows from DuckDB views):")
+            print(
+                f"  train source: view={args.train_view} split={args.train_split} rows={train_source_rows}"
+            )
+            print(
+                f"  valid source: view={args.valid_view} split={args.valid_split} rows={valid_source_rows}"
+            )
+
+            train_stats = export_split(
+                con,
+                view_name=args.train_view,
+                split=args.train_split,
+                limit=args.train_limit,
+                batch_size=args.batch_size,
+                out_path=train_path,
+                rng=rng,
+                pt2br_prob=args.pt2br_prob,
+                task_mode=args.task_mode,
+            )
+
+            valid_stats = export_split(
+                con,
+                view_name=args.valid_view,
+                split=args.valid_split,
+                limit=args.valid_limit,
+                batch_size=args.batch_size,
+                out_path=valid_path,
+                rng=rng,
+                pt2br_prob=args.pt2br_prob,
+                task_mode=args.task_mode,
+            )
+        finally:
+            con.close()
 
     print("\nExport completed.")
+    print(f"Task mode: {args.task_mode}")
+    print(f"GPT-only filter: {args.gpt_only}")
     print(f"Train file: {train_stats['path']}")
-    print(f"  rows={train_stats['rows']} examples={train_stats['examples']}")
+    print(
+        f"  rows_total={train_stats['rows']} rows_selected={train_stats['rows_selected']} "
+        f"examples={train_stats['examples']}"
+    )
     print(f"  tasks={train_stats['tasks']}")
+    if "skipped_equal_labels" in train_stats:
+        print(f"  skipped_equal_labels={train_stats['skipped_equal_labels']}")
     print(f"Valid file: {valid_stats['path']}")
-    print(f"  rows={valid_stats['rows']} examples={valid_stats['examples']}")
+    print(
+        f"  rows_total={valid_stats['rows']} rows_selected={valid_stats['rows_selected']} "
+        f"examples={valid_stats['examples']}"
+    )
     print(f"  tasks={valid_stats['tasks']}")
+    if "skipped_equal_labels" in valid_stats:
+        print(f"  skipped_equal_labels={valid_stats['skipped_equal_labels']}")
 
     train_jsonl_lines = sum(1 for _ in train_path.open("r", encoding="utf-8"))
     valid_jsonl_lines = sum(1 for _ in valid_path.open("r", encoding="utf-8"))

@@ -31,24 +31,43 @@ class EncoderClassifier(torch.nn.Module):
         *,
         num_labels: int,
         trust_remote_code: bool,
+        local_files_only: bool = False,
         freeze_decoder: bool = True,
         dropout: float = 0.1,
     ) -> None:
         super().__init__()
         dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
-        try:
-            self.base = AutoModelForSeq2SeqLM.from_pretrained(
-                base_model,
-                dtype=dtype,
-                trust_remote_code=trust_remote_code,
-            )
-        except TypeError:
-            # Backward compatibility with transformers versions that still expect torch_dtype.
-            self.base = AutoModelForSeq2SeqLM.from_pretrained(
-                base_model,
-                torch_dtype=dtype,
-                trust_remote_code=trust_remote_code,
-            )
+        load_errors = []
+        trust_options = [trust_remote_code]
+        if trust_remote_code:
+            trust_options.append(False)
+        for trust_opt in trust_options:
+            try:
+                self.base = AutoModelForSeq2SeqLM.from_pretrained(
+                    base_model,
+                    dtype=dtype,
+                    trust_remote_code=trust_opt,
+                    local_files_only=local_files_only,
+                )
+                break
+            except TypeError:
+                # Backward compatibility with transformers versions that still expect torch_dtype.
+                try:
+                    self.base = AutoModelForSeq2SeqLM.from_pretrained(
+                        base_model,
+                        torch_dtype=dtype,
+                        trust_remote_code=trust_opt,
+                        local_files_only=local_files_only,
+                    )
+                    break
+                except Exception as e:  # pragma: no cover - fallback path
+                    load_errors.append(e)
+            except Exception as e:  # pragma: no cover - fallback path
+                load_errors.append(e)
+        else:
+            if load_errors:
+                raise load_errors[-1]
+            raise RuntimeError("Failed to load base model.")
 
         hidden_size = self._infer_hidden_size()
         if hidden_size is None:
@@ -181,6 +200,8 @@ class EncoderClassifier(torch.nn.Module):
             denom = mask.sum(dim=1).clamp(min=1.0)
             pooled = (hidden * mask).sum(dim=1) / denom
 
+        # Keep classifier matmul dtype-consistent across bf16/fp32 environments.
+        pooled = pooled.to(self.classifier.weight.dtype)
         logits = self.classifier(self.dropout(pooled))
 
         loss = None
@@ -338,6 +359,7 @@ def main() -> None:
         model_cfg["base_model"],
         num_labels=int(model_cfg["num_labels"]),
         trust_remote_code=bool(model_cfg.get("trust_remote_code", True)),
+        local_files_only=bool(model_cfg.get("local_files_only", False)),
         freeze_decoder=bool(model_cfg.get("freeze_decoder", True)),
         dropout=float(model_cfg.get("dropout", 0.1)),
     )

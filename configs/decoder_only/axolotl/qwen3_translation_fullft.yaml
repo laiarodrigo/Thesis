@@ -6,21 +6,9 @@ chat_template: tokenizer_default
 
 load_in_8bit: false
 load_in_4bit: false
-adapter: lora
-lora_r: 16
-lora_alpha: 32
-lora_dropout: 0.05
-lora_target_modules:
-  - q_proj
-  - k_proj
-  - v_proj
-  - o_proj
-  - gate_proj
-  - up_proj
-  - down_proj
 
 datasets:
-  - path: data/decoder_only/qwen3/train.jsonl
+  - path: data/decoder_only/qwen3_translation/train.jsonl
     ds_type: json
     type: chat_template
     field_messages: messages
@@ -28,38 +16,40 @@ datasets:
       - assistant
 
 test_datasets:
-  - path: data/decoder_only/qwen3/valid.jsonl
+  - path: data/decoder_only/qwen3_translation/valid.jsonl
     ds_type: json
     type: chat_template
     field_messages: messages
     roles_to_train:
       - assistant
 
-dataset_prepared_path: data/decoder_only/qwen3/prepared
-output_dir: outputs/decoder_only/qwen3-0_6b-ptbr-ptpt-lora
+dataset_prepared_path: data/decoder_only/qwen3_translation/prepared_fullft
+output_dir: outputs/decoder_only/qwen3_translation/fullft
 
-sequence_len: 512
+sequence_len: 128
 sample_packing: false
 pad_to_sequence_len: true
 
-micro_batch_size: 10
-gradient_accumulation_steps: 4
-learning_rate: 1.0e-4
+micro_batch_size: 1
+gradient_accumulation_steps: 80
+learning_rate: 2.0e-5
 weight_decay: 0.01
 warmup_steps: 200
-max_steps: 300000
+max_steps: 3000
+eval_batch_size: 1
+eval_on_start: false
 
 gradient_checkpointing: true
 bf16: true
 fp16: false
-tf32: true
+tf32: false
+eval_causal_lm_metrics: []
 
 logging_steps: 50
-eval_steps: 10000
-save_steps: 100000
+eval_steps: 1000000
+save_steps: 200
 save_total_limit: 2
-early_stopping_patience: 8
 
-load_best_model_at_end: true
+load_best_model_at_end: false
 metric_for_best_model: eval_loss
 greater_is_better: false

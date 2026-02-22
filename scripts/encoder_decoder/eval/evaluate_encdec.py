@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import re
 from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime
@@ -11,11 +12,12 @@ import numpy as np
 import torch
 from datasets import load_dataset
 from peft import PeftModel
-from sacrebleu import corpus_bleu
+from sacrebleu import corpus_bleu, sentence_bleu
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 
 LABELS = ("pt-br", "pt-pt", "equal")
+WORST_BLEU_K = 10
 
 
 def parse_args() -> argparse.Namespace:
@@ -28,6 +30,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--max-source-length", type=int, default=512)
     parser.add_argument("--max-new-tokens", type=int, default=64)
+    parser.add_argument(
+        "--no-repeat-ngram-size",
+        type=int,
+        default=3,
+        help="Anti-repetition ngram size for generation; set 0 to disable.",
+    )
+    parser.add_argument(
+        "--repetition-penalty",
+        type=float,
+        default=1.1,
+        help="Penalty > 1.0 discourages loops in generated text.",
+    )
     parser.add_argument("--output-dir", type=Path, default=Path("eval_results") / "encoder_decoder")
     return parser.parse_args()
 
@@ -80,7 +94,21 @@ def load_model_and_tokenizer(model_id: str, adapter_dir: Optional[Path], tokeniz
     return model, tok
 
 
-def generate_batch(model, tok, inputs: list[str], max_source_length: int, max_new_tokens: int) -> list[str]:
+def normalize_generation_text(text: str) -> str:
+    # Keep output single-line and compact for CSV/JSONL inspection.
+    text = text.replace("\n", " ").replace("\r", " ")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def generate_batch(
+    model,
+    tok,
+    inputs: list[str],
+    max_source_length: int,
+    max_new_tokens: int,
+    no_repeat_ngram_size: int,
+    repetition_penalty: float,
+) -> list[str]:
     device = next(model.parameters()).device
     enc = tok(
         inputs,
@@ -90,12 +118,21 @@ def generate_batch(model, tok, inputs: list[str], max_source_length: int, max_ne
         max_length=max_source_length,
     ).to(device)
 
+    eos_token_id = tok.eos_token_id
+    pad_token_id = tok.pad_token_id if tok.pad_token_id is not None else eos_token_id
+
     with torch.no_grad():
-        out = model.generate(
+        generate_kwargs = dict(
             **enc,
             do_sample=False,
             max_new_tokens=max_new_tokens,
+            eos_token_id=eos_token_id,
+            pad_token_id=pad_token_id,
+            repetition_penalty=repetition_penalty,
         )
+        if no_repeat_ngram_size and no_repeat_ngram_size > 0:
+            generate_kwargs["no_repeat_ngram_size"] = int(no_repeat_ngram_size)
+        out = model.generate(**generate_kwargs)
     return tok.batch_decode(out, skip_special_tokens=True)
 
 
@@ -173,31 +210,49 @@ def main() -> None:
     cls_stats = ClsStats()
     refs = []
     hyps = []
+    worst_bleu_examples = []
+    has_id_column = "id" in ds.column_names
 
     with pred_path.open("w", encoding="utf-8") as fh:
         for start in range(0, len(ds), args.batch_size):
             batch = ds[start : start + args.batch_size]
             inputs = batch["input_text"]
             targets = batch["target_text"]
+            if has_id_column:
+                batch_ids = batch["id"]
+            else:
+                batch_ids = list(range(start, start + len(inputs)))
             preds = generate_batch(
                 model,
                 tok,
                 inputs=inputs,
                 max_source_length=args.max_source_length,
                 max_new_tokens=args.max_new_tokens,
+                no_repeat_ngram_size=args.no_repeat_ngram_size,
+                repetition_penalty=args.repetition_penalty,
             )
 
-            for src, gold, pred in zip(inputs, targets, preds):
-                pred_clean = (pred or "").strip()
+            for ex_id, src, gold, pred in zip(batch_ids, inputs, targets, preds):
+                pred_clean = normalize_generation_text(pred or "")
                 if args.task == "translation":
                     refs.append(gold)
                     hyps.append(pred_clean)
+                    ex_bleu = sentence_bleu(pred_clean, [gold]).score
+                    worst_bleu_examples.append(
+                        {
+                            "id": ex_id,
+                            "sentence_bleu": ex_bleu,
+                            "gold": gold,
+                            "pred_raw": pred_clean,
+                        }
+                    )
                 else:
                     gold_norm = normalize_label(gold) or "unknown"
                     pred_norm = normalize_label(pred_clean) or "unknown"
                     cls_stats.update(gold_norm, pred_norm)
 
                 rec = {
+                    "id": ex_id,
                     "input_text": src,
                     "gold": gold,
                     "pred_raw": pred_clean,
@@ -208,11 +263,16 @@ def main() -> None:
                 fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
     if args.task == "translation":
+        worst_bleu_examples.sort(key=lambda x: x["sentence_bleu"])
+        worst_bleu_examples = worst_bleu_examples[:WORST_BLEU_K]
         summary = {
             "task": "translation",
             "n": len(refs),
             "bleu": corpus_bleu(hyps, [refs]).score if refs else float("nan"),
         }
+        summary["worst_sentence_bleu_examples"] = [
+            {"id": x["id"], "sentence_bleu": x["sentence_bleu"]} for x in worst_bleu_examples
+        ]
     else:
         summary = {"task": "classification", **cls_stats.report()}
 
@@ -221,6 +281,10 @@ def main() -> None:
 
     print(f"Saved predictions: {pred_path}")
     print(f"Saved summary: {summary_path}")
+    if args.task == "translation":
+        print(f"Worst {len(worst_bleu_examples)} sentence-BLEU examples:")
+        for ex in worst_bleu_examples:
+            print(f"  id={ex['id']} sentence_bleu={ex['sentence_bleu']:.4f}")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 

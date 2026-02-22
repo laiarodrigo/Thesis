@@ -1,0 +1,45 @@
+seed: 42
+
+model:
+  # Large model track: classification head on top of encoder.
+  base_model: google/t5gemma-2-4b-4b
+  trust_remote_code: true
+  num_labels: 3
+  freeze_decoder: true
+  dropout: 0.1
+  label2id:
+    pt-br: 0
+    pt-pt: 1
+    equal: 2
+  id2label:
+    "0": pt-br
+    "1": pt-pt
+    "2": equal
+  max_source_length: 512
+
+dataset:
+  train_path: data/encoder_decoder/t5gemma2/classification_train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/classification_valid.jsonl
+
+training:
+  output_dir: outputs/encoder_decoder/t5gemma2_4b_classification_head_fullft
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 16
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_steps: 100
+  max_steps: 1500
+  num_train_epochs: 3
+  logging_steps: 25
+  eval_steps: 100
+  save_steps: 200
+  save_total_limit: 2
+  save_checkpoints: false
+  load_best_model_at_end: false
+  metric_for_best_model: eval_f1_macro
+  greater_is_better: true
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  dataloader_num_workers: 2

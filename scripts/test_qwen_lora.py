@@ -8,6 +8,7 @@ import pathlib
 import pandas as pd
 
 from typing import Iterator, Dict, Optional, List
+from contextlib import nullcontext
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel
 from sacrebleu import corpus_bleu  # pip install sacrebleu
@@ -19,7 +20,6 @@ import json
 from datetime import datetime
 import re
 import matplotlib.pyplot as plt
-
 
 # -------------------------
 # CONFIG – EDIT THESE
@@ -46,6 +46,11 @@ EVAL_VIEW  = "test_data"
 EVAL_SPLIT = "test"        # set to None if your view doesn't have split=test
 EVAL_ROW_LIMIT = None        # None for all rows
 GEN_BATCH_SIZE = 128
+EVAL_TASKS = "both"  # translation | classification | both
+EVAL_OUTPUT_DIR = BASE_DIR / "eval_results" / "decoder_only" / "qwen3"
+GPT_ONLY = False
+GPT_TRANSLATION_TEST_FILE = BASE_DIR / "data" / "encoder_decoder" / "t5gemma2" / "translation_test.jsonl"
+GPT_CLASSIFICATION_TEST_FILE = BASE_DIR / "data" / "encoder_decoder" / "t5gemma2" / "classification_test.jsonl"
 
 # streaming buffer (examples) to keep memory bounded
 MAX_EXAMPLE_BUFFER = 512
@@ -104,6 +109,37 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--eval-row-limit", type=_optional_int, default=EVAL_ROW_LIMIT)
     parser.add_argument("--gen-batch-size", type=int, default=GEN_BATCH_SIZE)
+    parser.add_argument(
+        "--eval-tasks",
+        choices=["translation", "classification", "both"],
+        default=EVAL_TASKS,
+        help="Which evaluation tasks to run.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=EVAL_OUTPUT_DIR,
+        help="Directory for JSONL predictions and confusion-matrix images.",
+    )
+    parser.add_argument(
+        "--gpt-only",
+        action="store_true",
+        default=GPT_ONLY,
+        help=(
+            "Use GPT task JSONL files from Step 2/3 instead of DuckDB test_data view. "
+            "This bypasses DuckDB schema assumptions."
+        ),
+    )
+    parser.add_argument(
+        "--gpt-translation-test-file",
+        type=Path,
+        default=GPT_TRANSLATION_TEST_FILE,
+    )
+    parser.add_argument(
+        "--gpt-classification-test-file",
+        type=Path,
+        default=GPT_CLASSIFICATION_TEST_FILE,
+    )
     parser.add_argument("--max-example-buffer", type=int, default=MAX_EXAMPLE_BUFFER)
     parser.add_argument("--min-group-support", type=int, default=MIN_GROUP_SUPPORT)
     parser.add_argument("--examples-print", type=int, default=N_EXAMPLES_PRINT)
@@ -120,6 +156,8 @@ def apply_cli_overrides(args: argparse.Namespace) -> None:
     global PROJECT_DB_PATH, SOURCE_DB_PATH, PROJECT_DB_STR, SOURCE_DB_STR
     global ADAPTER_DIR, TOKENIZER_PATH
     global MAX_LENGTH, EVAL_VIEW, EVAL_SPLIT, EVAL_ROW_LIMIT, GEN_BATCH_SIZE
+    global EVAL_TASKS, EVAL_OUTPUT_DIR, GPT_ONLY
+    global GPT_TRANSLATION_TEST_FILE, GPT_CLASSIFICATION_TEST_FILE
     global MAX_EXAMPLE_BUFFER, MIN_GROUP_SUPPORT, N_EXAMPLES_PRINT, PRINT_RAW_MODEL_OUTPUT
 
     USE_ADAPTER = args.use_adapter
@@ -142,6 +180,11 @@ def apply_cli_overrides(args: argparse.Namespace) -> None:
         EVAL_SPLIT = args.eval_split
     EVAL_ROW_LIMIT = args.eval_row_limit
     GEN_BATCH_SIZE = args.gen_batch_size
+    EVAL_TASKS = args.eval_tasks
+    EVAL_OUTPUT_DIR = args.output_dir
+    GPT_ONLY = args.gpt_only
+    GPT_TRANSLATION_TEST_FILE = args.gpt_translation_test_file
+    GPT_CLASSIFICATION_TEST_FILE = args.gpt_classification_test_file
     MAX_EXAMPLE_BUFFER = args.max_example_buffer
     MIN_GROUP_SUPPORT = args.min_group_support
     N_EXAMPLES_PRINT = args.examples_print
@@ -261,8 +304,87 @@ USER_CLASSIFICATION = (
 # Example builder for EVAL (deterministic)
 # -------------------------
 
+def iter_jsonl(path: Path) -> Iterator[Dict]:
+    with path.open("r", encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            yield json.loads(line)
+
+
+def strip_task_prefix(text: Optional[str]) -> str:
+    if not text:
+        return ""
+    return re.sub(r"^<[^>]+>\s*", "", str(text).strip())
+
+
+def normalize_gpt_label(label: Optional[str]) -> Optional[str]:
+    t = (label or "").strip().lower()
+    if t == "pt-br":
+        return "pt-BR"
+    if t == "pt-pt":
+        return "pt-PT"
+    return None
+
+
+def build_eval_examples_from_gpt_files() -> List[Dict]:
+    examples: List[Dict] = []
+    include_translation = EVAL_TASKS in {"translation", "both"}
+    include_classification = EVAL_TASKS in {"classification", "both"}
+
+    if include_translation:
+        if not GPT_TRANSLATION_TEST_FILE.exists():
+            raise FileNotFoundError(f"Missing GPT translation test file: {GPT_TRANSLATION_TEST_FILE}")
+        for row in iter_jsonl(GPT_TRANSLATION_TEST_FILE):
+            source = (row.get("source_text") or "").strip()
+            if not source:
+                source = strip_task_prefix(row.get("input_text"))
+            target = (row.get("target_text") or "").strip()
+            direction = (row.get("direction") or "").strip().lower()
+            if not direction:
+                inp = str(row.get("input_text") or "").strip()
+                if inp.startswith("<br-pt>"):
+                    direction = "br2pt"
+                elif inp.startswith("<pt-br>"):
+                    direction = "pt2br"
+            if not source or not target or direction not in {"br2pt", "pt2br"}:
+                continue
+            examples.append(
+                {
+                    "task": "translate_br2pt" if direction == "br2pt" else "translate_pt2br",
+                    "source": source,
+                    "target": target,
+                    "meta": {"dataset": "GPT", "bucket": "gpt", "direction": direction},
+                }
+            )
+
+    if include_classification:
+        if not GPT_CLASSIFICATION_TEST_FILE.exists():
+            raise FileNotFoundError(f"Missing GPT classification test file: {GPT_CLASSIFICATION_TEST_FILE}")
+        for row in iter_jsonl(GPT_CLASSIFICATION_TEST_FILE):
+            source = (row.get("text") or "").strip()
+            if not source:
+                source = strip_task_prefix(row.get("input_text"))
+            target = normalize_gpt_label(row.get("label"))
+            if not source or target is None:
+                continue
+            examples.append(
+                {
+                    "task": "classify",
+                    "source": source,
+                    "target": target,
+                    "meta": {"dataset": "GPT", "bucket": "gpt", "var": target},
+                }
+            )
+
+    return examples
+
+
 def build_eval_examples_from_row(row: Dict) -> List[Dict]:
     examples = []
+    include_translation = EVAL_TASKS in {"translation", "both"}
+    include_classification = EVAL_TASKS in {"classification", "both"}
 
     dataset = row.get("dataset")
     src_br  = row.get("text_pt_br")
@@ -280,7 +402,7 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
 
     # OpenSubs not expected in test_data, but keep logic safe
     if dataset == "OpenSubs":
-        if has_br and has_pt:
+        if include_translation and has_br and has_pt:
             examples.append({
                 "task": "translate_br2pt",
                 "source": src_br,
@@ -294,14 +416,14 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
                 "meta": {**meta_base, "direction": "pt2br"},
             })
 
-        if has_br:
+        if include_classification and has_br:
             examples.append({
                 "task": "classify",
                 "source": src_br,
                 "target": "pt-BR",
                 "meta": {**meta_base, "var": "pt-BR"},
             })
-        if has_pt:
+        if include_classification and has_pt:
             examples.append({
                 "task": "classify",
                 "source": src_pt,
@@ -312,7 +434,7 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
 
     # PtBrVarId: classification only, trust label
     if dataset == "PtBrVarId":
-        if label in ("pt-BR", "pt-PT"):
+        if include_classification and label in ("pt-BR", "pt-PT"):
             text = src_br if src_br else src_pt
             if text:
                 examples.append({
@@ -327,14 +449,14 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
     if dataset == "Gold":
         ref_manual = row.get("ref_pt_pt_manual")
         ref_deepl = row.get("ref_pt_pt_deepl")
-        if src_br and ref_manual:
+        if include_translation and src_br and ref_manual:
             examples.append({
                 "task": "translate_br2pt",
                 "source": src_br,
                 "target": ref_manual,
                 "meta": {**meta_base, "direction": "br2pt", "ref_kind": "manual"},
             })
-        if src_br and ref_deepl:
+        if include_translation and src_br and ref_deepl:
             examples.append({
                 "task": "translate_br2pt",
                 "source": src_br,
@@ -344,7 +466,7 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
         return examples
 
     # FRMT / others: translation if both sides exist + classification for each side
-    if has_br and has_pt:
+    if include_translation and has_br and has_pt:
         examples.append({
             "task": "translate_br2pt",
             "source": src_br,
@@ -358,14 +480,14 @@ def build_eval_examples_from_row(row: Dict) -> List[Dict]:
             "meta": {**meta_base, "direction": "pt2br"},
         })
 
-    if has_br:
+    if include_classification and has_br:
         examples.append({
             "task": "classify",
             "source": src_br,
             "target": "pt-BR",
             "meta": {**meta_base, "var": "pt-BR"},
         })
-    if has_pt:
+    if include_classification and has_pt:
         examples.append({
             "task": "classify",
             "source": src_pt,
@@ -731,6 +853,12 @@ def main():
         print(f"  tokenizer_path={TOKENIZER_PATH if TOKENIZER_PATH else '(auto)'}")
     print(f"  eval_view={EVAL_VIEW}, eval_split={EVAL_SPLIT}, eval_row_limit={EVAL_ROW_LIMIT}")
     print(f"  gen_batch_size={GEN_BATCH_SIZE}, max_example_buffer={MAX_EXAMPLE_BUFFER}")
+    print(f"  eval_tasks={EVAL_TASKS}")
+    print(f"  output_dir={EVAL_OUTPUT_DIR}")
+    print(f"  gpt_only={GPT_ONLY}")
+    if GPT_ONLY:
+        print(f"  gpt_translation_test_file={GPT_TRANSLATION_TEST_FILE}")
+        print(f"  gpt_classification_test_file={GPT_CLASSIFICATION_TEST_FILE}")
 
     model, tok = load_model_and_tokenizer()
 
@@ -746,29 +874,26 @@ def main():
     # -------------------------
     # NEW: output files (JSONL)
     # -------------------------
-    out_dir = BASE_DIR / "eval_results"
+    out_dir = EVAL_OUTPUT_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
 
     run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
-    trans_path = out_dir / f"{run_id}_translations.jsonl"
-    cls_path   = out_dir / f"{run_id}_classification.jsonl"
+    do_translation = EVAL_TASKS in {"translation", "both"}
+    do_classification = EVAL_TASKS in {"classification", "both"}
+    trans_path = out_dir / f"{run_id}_translations.jsonl" if do_translation else None
+    cls_path = out_dir / f"{run_id}_classification.jsonl" if do_classification else None
 
-    with open(trans_path, "w", encoding="utf-8") as trans_fh, open(cls_path, "w", encoding="utf-8") as cls_fh:
+    trans_ctx = open(trans_path, "w", encoding="utf-8") if trans_path else nullcontext(None)
+    cls_ctx = open(cls_path, "w", encoding="utf-8") if cls_path else nullcontext(None)
+
+    with trans_ctx as trans_fh, cls_ctx as cls_fh:
         print("Streaming rows and evaluating...", flush=True)
 
-        row_count = 0
-        for row in stream_from_view(
-            EVAL_VIEW,
-            split=EVAL_SPLIT,
-            batch_size=2_000,
-            limit=EVAL_ROW_LIMIT,
-        ):
-            row_count += 1
-            example_buffer.extend(build_eval_examples_from_row(row))
-
-            while len(example_buffer) >= MAX_EXAMPLE_BUFFER:
-                batch = example_buffer[:MAX_EXAMPLE_BUFFER]
-                example_buffer = example_buffer[MAX_EXAMPLE_BUFFER:]
+        if GPT_ONLY:
+            all_examples = build_eval_examples_from_gpt_files()
+            print(f"... loaded {len(all_examples)} GPT task examples", flush=True)
+            for start in range(0, len(all_examples), MAX_EXAMPLE_BUFFER):
+                batch = all_examples[start : start + MAX_EXAMPLE_BUFFER]
                 _process_batch(
                     batch,
                     model,
@@ -781,35 +906,64 @@ def main():
                     trans_examples=trans_examples,
                     max_examples_print=N_EXAMPLES_PRINT,
                     print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
-                    # NEW: stream predictions to disk
+                    cls_out_fh=cls_fh,
+                    trans_out_fh=trans_fh,
+                )
+        else:
+            row_count = 0
+            for row in stream_from_view(
+                EVAL_VIEW,
+                split=EVAL_SPLIT,
+                batch_size=2_000,
+                limit=EVAL_ROW_LIMIT,
+            ):
+                row_count += 1
+                example_buffer.extend(build_eval_examples_from_row(row))
+
+                while len(example_buffer) >= MAX_EXAMPLE_BUFFER:
+                    batch = example_buffer[:MAX_EXAMPLE_BUFFER]
+                    example_buffer = example_buffer[MAX_EXAMPLE_BUFFER:]
+                    _process_batch(
+                        batch,
+                        model,
+                        tok,
+                        cls_by_group,
+                        trans_all_by_group,
+                        trans_dir_by_group,
+                        gen_batch_size=GEN_BATCH_SIZE,
+                        cls_examples=cls_examples,
+                        trans_examples=trans_examples,
+                        max_examples_print=N_EXAMPLES_PRINT,
+                        print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
+                        cls_out_fh=cls_fh,
+                        trans_out_fh=trans_fh,
+                    )
+
+                if row_count % 1000 == 0:
+                    print(f"... streamed {row_count} rows (buffer={len(example_buffer)})", flush=True)
+
+            if example_buffer:
+                _process_batch(
+                    example_buffer,
+                    model,
+                    tok,
+                    cls_by_group,
+                    trans_all_by_group,
+                    trans_dir_by_group,
+                    gen_batch_size=GEN_BATCH_SIZE,
+                    cls_examples=cls_examples,
+                    trans_examples=trans_examples,
+                    max_examples_print=N_EXAMPLES_PRINT,
+                    print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
                     cls_out_fh=cls_fh,
                     trans_out_fh=trans_fh,
                 )
 
-            if row_count % 1000 == 0:
-                print(f"... streamed {row_count} rows (buffer={len(example_buffer)})", flush=True)
-
-        if example_buffer:
-            _process_batch(
-                example_buffer,
-                model,
-                tok,
-                cls_by_group,
-                trans_all_by_group,
-                trans_dir_by_group,
-                gen_batch_size=GEN_BATCH_SIZE,
-                cls_examples=cls_examples,
-                trans_examples=trans_examples,
-                max_examples_print=N_EXAMPLES_PRINT,
-                print_raw_model_output=PRINT_RAW_MODEL_OUTPUT,
-                # NEW: stream predictions to disk
-                cls_out_fh=cls_fh,
-                trans_out_fh=trans_fh,
-            )
-
     print("\nDone generating. Metrics:\n")
-    print(f"Saved translation predictions to: {trans_path}")
-    print(f"Saved classification predictions to: {cls_path}")
+    if trans_path:
+        print(f"Saved translation predictions to: {trans_path}")
+    if cls_path:
+        print(f"Saved classification predictions to: {cls_path}")
 
     def _safe_name(s: str) -> str:
         s = s.replace("overall", "overall")
@@ -877,62 +1031,64 @@ def main():
 
 
     # ---- Translation ----
-    print("\n=== TRANSLATION (BLEU) ===")
-    for gk in sorted(trans_all_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
-        n = len(trans_all_by_group[gk].refs)
-        if gk != "overall" and n < MIN_GROUP_SUPPORT:
-            continue
-
-        bleu_all = bleu_score(trans_all_by_group[gk])
-        print(f"\n[{gk}] n={n} BLEU={bleu_all:.2f}")
-
-        for direction in ("br2pt", "pt2br"):
-            st = trans_dir_by_group[gk].get(direction)
-            if not st:
+    if do_translation:
+        print("\n=== TRANSLATION (BLEU) ===")
+        for gk in sorted(trans_all_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
+            n = len(trans_all_by_group[gk].refs)
+            if gk != "overall" and n < MIN_GROUP_SUPPORT:
                 continue
-            if gk != "overall" and len(st.refs) < MIN_GROUP_SUPPORT:
-                continue
-            print(f"  - {direction}: n={len(st.refs)} BLEU={bleu_score(st):.2f}")
+
+            bleu_all = bleu_score(trans_all_by_group[gk])
+            print(f"\n[{gk}] n={n} BLEU={bleu_all:.2f}")
+
+            for direction in ("br2pt", "pt2br"):
+                st = trans_dir_by_group[gk].get(direction)
+                if not st:
+                    continue
+                if gk != "overall" and len(st.refs) < MIN_GROUP_SUPPORT:
+                    continue
+                print(f"  - {direction}: n={len(st.refs)} BLEU={bleu_score(st):.2f}")
 
     # ---- Classification ----
-    print("\n=== CLASSIFICATION (accuracy + balanced_acc + macro-F1 + per-class) ===")
-    for gk in sorted(cls_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
-        stats = cls_by_group[gk]
-        if gk != "overall" and stats.total < MIN_GROUP_SUPPORT:
-            continue
+    if do_classification:
+        print("\n=== CLASSIFICATION (accuracy + balanced_acc + macro-F1 + per-class) ===")
+        for gk in sorted(cls_by_group.keys(), key=lambda k: (0, k) if k == "overall" else (1, k)):
+            stats = cls_by_group[gk]
+            if gk != "overall" and stats.total < MIN_GROUP_SUPPORT:
+                continue
 
-        rep = cls_report(stats, labels=("pt-BR", "pt-PT"))
-        print(
-            f"\n[{gk}] n={rep['n']} "
-            f"accuracy={rep['accuracy']*100:.2f}% "
-            f"balanced_acc={rep['balanced_accuracy']*100:.2f}% "
-            f"macro_f1={rep['macro_f1']*100:.2f}% "
-            f"unknown={rep['unknown_rate']*100:.2f}%"
-        )
-
-        for lab, m in rep["per_class"].items():
+            rep = cls_report(stats, labels=("pt-BR", "pt-PT"))
             print(
-                f"  - {lab}: "
-                f"precision={m['precision']*100:.2f} "
-                f"recall={m['recall']*100:.2f} "
-                f"f1={m['f1']*100:.2f} "
-                f"support={m['support']}"
+                f"\n[{gk}] n={rep['n']} "
+                f"accuracy={rep['accuracy']*100:.2f}% "
+                f"balanced_acc={rep['balanced_accuracy']*100:.2f}% "
+                f"macro_f1={rep['macro_f1']*100:.2f}% "
+                f"unknown={rep['unknown_rate']*100:.2f}%"
             )
 
-    print("\nSaving confusion-matrix figures...")
-    for gk, stats in cls_by_group.items():
-        if gk != "overall" and stats.total < MIN_GROUP_SUPPORT:
-            continue
-        name = _safe_name(gk)
-        cm_path = out_dir / f"{run_id}_confmat_{name}.png"
-        save_confusion_matrix_png(
-            stats,
-            cm_path,
-            title=gk,
-            labels=("pt-BR", "pt-PT"),
-            cmap="YlGnBu",
-        )
-        print(f"  - {gk}: {cm_path}")
+            for lab, m in rep["per_class"].items():
+                print(
+                    f"  - {lab}: "
+                    f"precision={m['precision']*100:.2f} "
+                    f"recall={m['recall']*100:.2f} "
+                    f"f1={m['f1']*100:.2f} "
+                    f"support={m['support']}"
+                )
+
+        print("\nSaving confusion-matrix figures...")
+        for gk, stats in cls_by_group.items():
+            if gk != "overall" and stats.total < MIN_GROUP_SUPPORT:
+                continue
+            name = _safe_name(gk)
+            cm_path = out_dir / f"{run_id}_confmat_{name}.png"
+            save_confusion_matrix_png(
+                stats,
+                cm_path,
+                title=gk,
+                labels=("pt-BR", "pt-PT"),
+                cmap="YlGnBu",
+            )
+            print(f"  - {gk}: {cm_path}")
 
 
 if __name__ == "__main__":
