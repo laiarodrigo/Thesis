@@ -18,6 +18,20 @@ For `google/t5gemma-2-4b-4b`, safest request is a high-VRAM card:
 
 Reason: translation is LoRA (lighter), but classification-head training still keeps a large seq2seq backbone in memory and can exceed 24 GB depending on runtime overhead.
 
+## Data source guard (GPT-only training)
+
+The two `.sbatch` scripts enforce GPT-only training paths by default:
+- translation: `data/encoder_decoder/t5gemma2/translation_train.jsonl` + `translation_valid.jsonl`
+- classification: `data/encoder_decoder/t5gemma2/classification_train.jsonl` + `classification_valid.jsonl`
+
+They fail fast if the config references `golden_collection`.
+
+Later, when you intentionally switch to another data source (for example datasets exported from DuckDB), disable this guard explicitly:
+
+```bash
+ALLOW_NON_GPT_DATA=1 sbatch ... scripts/slurm/train_t5gemma2_4b_translation.sbatch
+```
+
 ## Submit examples
 
 Single translation job:
@@ -56,4 +70,3 @@ SMOKE_RUN=1 PARTITION=hlt_msc GPU_GRES=gpu:1 bash scripts/slurm/submit_t5gemma2_
 - `sacct -j <job_id>`
 - `tail -f slurm-<job_name>-<job_id>.out`
 - `scancel <job_id>`
-
