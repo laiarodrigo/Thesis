@@ -24,6 +24,25 @@ SELECT_COLUMNS = [
 ]
 
 
+def get_available_columns(con: duckdb.DuckDBPyConnection, view_name: str) -> dict[str, str]:
+    cur = con.execute(f"SELECT * FROM {view_name} LIMIT 0")
+    names = [desc[0] for desc in cur.description]
+    return {n.lower(): n for n in names}
+
+
+def build_select_list(available_cols: dict[str, str]) -> str:
+    parts = []
+    for col in SELECT_COLUMNS:
+        real = available_cols.get(col.lower())
+        if real is None:
+            parts.append(f"NULL AS {col}")
+        elif real == col:
+            parts.append(col)
+        else:
+            parts.append(f"{real} AS {col}")
+    return ", ".join(parts)
+
+
 def parse_args() -> argparse.Namespace:
     repo_root = Path(__file__).resolve().parents[2]
     default_project_db = repo_root / "data" / "duckdb" / "subs_project.duckdb"
@@ -42,6 +61,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--train-split", default="train")
     parser.add_argument("--valid-view", default="train_data")
     parser.add_argument("--valid-split", default="valid")
+    parser.add_argument(
+        "--dataset-include",
+        action="append",
+        default=None,
+        help=(
+            "Optional dataset filter (can be repeated). "
+            "Example: --dataset-include GPT --dataset-include FRMT"
+        ),
+    )
     parser.add_argument("--train-limit", type=int, default=None)
     parser.add_argument("--valid-limit", type=int, default=100_000)
     parser.add_argument("--batch-size", type=int, default=10_000)
@@ -110,12 +138,28 @@ def count_rows_for_split(
     *,
     view_name: str,
     split: Optional[str],
+    dataset_include: Optional[list[str]] = None,
 ) -> int:
+    available_cols = get_available_columns(con, view_name)
     query = f"SELECT COUNT(*) FROM {view_name}"
+    where_clauses = []
     params = []
     if split is not None:
-        query += " WHERE lower(split) = ?"
+        if "split" not in available_cols:
+            raise SystemExit(f"Column `split` not found in view/table: {view_name}")
+        where_clauses.append("lower(split) = ?")
         params.append(split.lower())
+    if dataset_include:
+        if "dataset" not in available_cols:
+            raise SystemExit(
+                f"Column `dataset` not found in view/table: {view_name} "
+                "but --dataset-include was provided."
+            )
+        placeholders = ", ".join(["?"] * len(dataset_include))
+        where_clauses.append(f"lower(dataset) IN ({placeholders})")
+        params.extend([d.lower() for d in dataset_include])
+    if where_clauses:
+        query += " WHERE " + " AND ".join(where_clauses)
     return int(con.execute(query, params).fetchone()[0])
 
 
@@ -123,17 +167,33 @@ def stream_from_view(
     con: duckdb.DuckDBPyConnection,
     view_name: str,
     split: Optional[str] = None,
+    dataset_include: Optional[list[str]] = None,
     batch_size: int = 10_000,
     limit: Optional[int] = None,
 ) -> Iterator[Dict]:
     offset = 0
-    selected = ", ".join(SELECT_COLUMNS)
+    available_cols = get_available_columns(con, view_name)
+    selected = build_select_list(available_cols)
 
     base_query = f"SELECT {selected} FROM {view_name}"
     params = []
+    where_clauses = []
     if split is not None:
-        base_query += " WHERE lower(split) = ?"
+        if "split" not in available_cols:
+            raise SystemExit(f"Column `split` not found in view/table: {view_name}")
+        where_clauses.append("lower(split) = ?")
         params.append(split.lower())
+    if dataset_include:
+        if "dataset" not in available_cols:
+            raise SystemExit(
+                f"Column `dataset` not found in view/table: {view_name} "
+                "but --dataset-include was provided."
+            )
+        placeholders = ", ".join(["?"] * len(dataset_include))
+        where_clauses.append(f"lower(dataset) IN ({placeholders})")
+        params.extend([d.lower() for d in dataset_include])
+    if where_clauses:
+        base_query += " WHERE " + " AND ".join(where_clauses)
 
     while True:
         if limit is not None:
@@ -267,6 +327,7 @@ def export_split(
     *,
     view_name: str,
     split: str,
+    dataset_include: Optional[list[str]],
     limit: Optional[int],
     batch_size: int,
     translation_out_path: Path,
@@ -289,6 +350,7 @@ def export_split(
             con=con,
             view_name=view_name,
             split=split,
+            dataset_include=dataset_include,
             batch_size=batch_size,
             limit=limit,
         ):
@@ -331,8 +393,21 @@ def main() -> None:
     con = connect_project(args.project_db, args.source_db, read_only=True)
     try:
         print("Sanity check (source rows from DuckDB views):")
-        train_source_rows = count_rows_for_split(con, view_name=args.train_view, split=args.train_split)
-        valid_source_rows = count_rows_for_split(con, view_name=args.valid_view, split=args.valid_split)
+        dataset_include = args.dataset_include or []
+        if dataset_include:
+            print(f"  dataset filter: {dataset_include}")
+        train_source_rows = count_rows_for_split(
+            con,
+            view_name=args.train_view,
+            split=args.train_split,
+            dataset_include=dataset_include,
+        )
+        valid_source_rows = count_rows_for_split(
+            con,
+            view_name=args.valid_view,
+            split=args.valid_split,
+            dataset_include=dataset_include,
+        )
         print(
             f"  train source: view={args.train_view} split={args.train_split} rows={train_source_rows}"
         )
@@ -349,6 +424,7 @@ def main() -> None:
             con,
             view_name=args.train_view,
             split=args.train_split,
+            dataset_include=dataset_include,
             limit=args.train_limit,
             batch_size=args.batch_size,
             translation_out_path=translation_train_path,
@@ -361,6 +437,7 @@ def main() -> None:
             con,
             view_name=args.valid_view,
             split=args.valid_split,
+            dataset_include=dataset_include,
             limit=args.valid_limit,
             batch_size=args.batch_size,
             translation_out_path=translation_valid_path,
