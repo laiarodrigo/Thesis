@@ -24,6 +24,16 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Trainer, Training
 from transformers.modeling_outputs import SequenceClassifierOutput
 
 
+def print_trainable_stats(model: torch.nn.Module, *, prefix: str = "") -> None:
+    trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    total = sum(p.numel() for p in model.parameters())
+    pct = 100.0 * trainable / total if total else 0.0
+    msg_prefix = f"{prefix} " if prefix else ""
+    print(
+        f"{msg_prefix}trainable params: {trainable:,} || all params: {total:,} || trainable%: {pct:.4f}"
+    )
+
+
 class EncoderClassifier(torch.nn.Module):
     def __init__(
         self,
@@ -34,6 +44,7 @@ class EncoderClassifier(torch.nn.Module):
         local_files_only: bool = False,
         freeze_decoder: bool = True,
         dropout: float = 0.1,
+        lora_cfg: dict[str, Any] | None = None,
     ) -> None:
         super().__init__()
         dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
@@ -80,6 +91,28 @@ class EncoderClassifier(torch.nn.Module):
         self.classifier = torch.nn.Linear(int(hidden_size), int(num_labels))
         print(f"[classifier] inferred hidden_size={int(hidden_size)}")
 
+        self.using_lora = False
+        if lora_cfg and bool(lora_cfg.get("enabled", False)):
+            from peft import LoraConfig, TaskType, get_peft_model
+
+            missing = [k for k in ("r", "alpha", "dropout") if k not in lora_cfg]
+            if missing:
+                raise ValueError(
+                    "LoRA mode is enabled but lora config is missing keys: "
+                    + ", ".join(missing)
+                )
+            peft_cfg = LoraConfig(
+                task_type=TaskType.SEQ_2_SEQ_LM,
+                r=int(lora_cfg["r"]),
+                lora_alpha=int(lora_cfg["alpha"]),
+                lora_dropout=float(lora_cfg["dropout"]),
+                bias=str(lora_cfg.get("bias", "none")),
+                target_modules=lora_cfg.get("target_modules"),
+            )
+            self.base = get_peft_model(self.base, peft_cfg)
+            self.using_lora = True
+            print("[classifier] LoRA enabled on base model")
+
         if freeze_decoder:
             for name, param in self.base.named_parameters():
                 if (
@@ -89,6 +122,24 @@ class EncoderClassifier(torch.nn.Module):
                     or ".lm_head." in name
                 ):
                     param.requires_grad = False
+
+    def gradient_checkpointing_enable(self, gradient_checkpointing_kwargs: dict[str, Any] | None = None) -> None:
+        """Forward Trainer gradient-checkpointing hook to wrapped HF model."""
+        fn = getattr(self.base, "gradient_checkpointing_enable", None)
+        if fn is None:
+            return
+        if gradient_checkpointing_kwargs:
+            try:
+                fn(gradient_checkpointing_kwargs=gradient_checkpointing_kwargs)
+                return
+            except TypeError:
+                pass
+        fn()
+
+    def gradient_checkpointing_disable(self) -> None:
+        fn = getattr(self.base, "gradient_checkpointing_disable", None)
+        if fn is not None:
+            fn()
 
     def _read_hidden_size(self, obj: Any) -> int | None:
         if obj is None:
@@ -327,6 +378,7 @@ def main() -> None:
     cfg = load_cfg(args.config)
 
     model_cfg = cfg["model"]
+    lora_cfg = cfg.get("lora", {})
     data_cfg = cfg["dataset"]
     train_cfg = cfg["training"]
     seed = cfg.get("seed", 42)
@@ -337,6 +389,7 @@ def main() -> None:
     print(f"  train data: {data_cfg['train_path']}")
     print(f"  valid data: {data_cfg['valid_path']}")
     print(f"  output dir: {train_cfg['output_dir']}")
+    print(f"  lora_enabled={bool(lora_cfg.get('enabled', False))}")
     print(f"  smoke_run={args.smoke_run}")
 
     if not args.execute:
@@ -362,7 +415,9 @@ def main() -> None:
         local_files_only=bool(model_cfg.get("local_files_only", False)),
         freeze_decoder=bool(model_cfg.get("freeze_decoder", True)),
         dropout=float(model_cfg.get("dropout", 0.1)),
+        lora_cfg=lora_cfg,
     )
+    print_trainable_stats(model, prefix="[classifier]")
 
     print("Loading datasets...")
     raw_ds = load_dataset(
@@ -430,6 +485,7 @@ def main() -> None:
         "label2id": model_cfg["label2id"],
         "id2label": model_cfg["id2label"],
         "max_source_length": max_len,
+        "lora": lora_cfg if bool(lora_cfg.get("enabled", False)) else None,
     }
     (output_dir / "classifier_meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
     print(f"Saved classification artifacts to {output_dir}")

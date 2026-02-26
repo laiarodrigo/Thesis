@@ -205,6 +205,7 @@ def main() -> None:
         local_files_only=args.local_files_only,
         freeze_decoder=bool(model_cfg.get("freeze_decoder", True)),
         dropout=float(model_cfg.get("dropout", 0.1)),
+        lora_cfg=cfg.get("lora", {}),
     )
     state = torch.load(state_path, map_location="cpu")
     try:

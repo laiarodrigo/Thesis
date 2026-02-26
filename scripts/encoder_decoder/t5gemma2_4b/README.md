@@ -20,7 +20,7 @@ Config path:
 
 `configs/encoder_decoder/t5gemma2_4b/translation_lora_boilerplate.yaml`
 
-## Classification Head (Encoder + Head)
+## Classification Head + LoRA
 
 Dry-run:
 

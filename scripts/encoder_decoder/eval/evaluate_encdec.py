@@ -31,6 +31,52 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-source-length", type=int, default=512)
     parser.add_argument("--max-new-tokens", type=int, default=64)
     parser.add_argument(
+        "--num-beams",
+        type=int,
+        default=1,
+        help="Beam size for generation. Use 1 for greedy decoding.",
+    )
+    parser.add_argument(
+        "--length-penalty",
+        type=float,
+        default=1.0,
+        help="Length penalty used with beam search.",
+    )
+    parser.add_argument(
+        "--early-stopping",
+        action="store_true",
+        help="Enable beam-search early stopping when all beams finish.",
+    )
+    parser.add_argument(
+        "--adaptive-max-new-tokens",
+        action="store_true",
+        help="Compute max_new_tokens per example from source length.",
+    )
+    parser.add_argument(
+        "--adaptive-ratio",
+        type=float,
+        default=1.3,
+        help="Per-example cap formula: src_len * adaptive_ratio + adaptive_margin.",
+    )
+    parser.add_argument(
+        "--adaptive-margin",
+        type=int,
+        default=10,
+        help="Per-example cap formula: src_len * adaptive_ratio + adaptive_margin.",
+    )
+    parser.add_argument(
+        "--adaptive-min-new-tokens",
+        type=int,
+        default=8,
+        help="Lower bound for adaptive max_new_tokens.",
+    )
+    parser.add_argument(
+        "--adaptive-max-new-tokens-ceiling",
+        type=int,
+        default=512,
+        help="Upper bound for adaptive max_new_tokens.",
+    )
+    parser.add_argument(
         "--no-repeat-ngram-size",
         type=int,
         default=3,
@@ -106,6 +152,14 @@ def generate_batch(
     inputs: list[str],
     max_source_length: int,
     max_new_tokens: int,
+    num_beams: int,
+    length_penalty: float,
+    early_stopping: bool,
+    adaptive_max_new_tokens: bool,
+    adaptive_ratio: float,
+    adaptive_margin: int,
+    adaptive_min_new_tokens: int,
+    adaptive_max_new_tokens_ceiling: int,
     no_repeat_ngram_size: int,
     repetition_penalty: float,
 ) -> list[str]:
@@ -121,19 +175,47 @@ def generate_batch(
     eos_token_id = tok.eos_token_id
     pad_token_id = tok.pad_token_id if tok.pad_token_id is not None else eos_token_id
 
+    generate_base_kwargs = dict(
+        do_sample=False,
+        eos_token_id=eos_token_id,
+        pad_token_id=pad_token_id,
+        repetition_penalty=repetition_penalty,
+    )
+    if no_repeat_ngram_size and no_repeat_ngram_size > 0:
+        generate_base_kwargs["no_repeat_ngram_size"] = int(no_repeat_ngram_size)
+    if num_beams and num_beams > 1:
+        generate_base_kwargs["num_beams"] = int(num_beams)
+        generate_base_kwargs["length_penalty"] = float(length_penalty)
+        generate_base_kwargs["early_stopping"] = bool(early_stopping)
+
+    def per_example_cap(src_len: int) -> int:
+        proposed = int(src_len * adaptive_ratio + adaptive_margin)
+        proposed = max(int(adaptive_min_new_tokens), proposed)
+        proposed = min(int(adaptive_max_new_tokens_ceiling), proposed)
+        return max(1, proposed)
+
     with torch.no_grad():
+        if adaptive_max_new_tokens:
+            preds = []
+            for i in range(enc["input_ids"].shape[0]):
+                src_len = int(enc["attention_mask"][i].sum().item())
+                sample_kwargs = dict(
+                    input_ids=enc["input_ids"][i : i + 1],
+                    attention_mask=enc["attention_mask"][i : i + 1],
+                    max_new_tokens=per_example_cap(src_len),
+                    **generate_base_kwargs,
+                )
+                sample_out = model.generate(**sample_kwargs)
+                preds.append(tok.decode(sample_out[0], skip_special_tokens=True))
+            return preds
+
         generate_kwargs = dict(
             **enc,
-            do_sample=False,
             max_new_tokens=max_new_tokens,
-            eos_token_id=eos_token_id,
-            pad_token_id=pad_token_id,
-            repetition_penalty=repetition_penalty,
+            **generate_base_kwargs,
         )
-        if no_repeat_ngram_size and no_repeat_ngram_size > 0:
-            generate_kwargs["no_repeat_ngram_size"] = int(no_repeat_ngram_size)
         out = model.generate(**generate_kwargs)
-    return tok.batch_decode(out, skip_special_tokens=True)
+        return tok.batch_decode(out, skip_special_tokens=True)
 
 
 @dataclass
@@ -228,6 +310,14 @@ def main() -> None:
                 inputs=inputs,
                 max_source_length=args.max_source_length,
                 max_new_tokens=args.max_new_tokens,
+                num_beams=args.num_beams,
+                length_penalty=args.length_penalty,
+                early_stopping=args.early_stopping,
+                adaptive_max_new_tokens=args.adaptive_max_new_tokens,
+                adaptive_ratio=args.adaptive_ratio,
+                adaptive_margin=args.adaptive_margin,
+                adaptive_min_new_tokens=args.adaptive_min_new_tokens,
+                adaptive_max_new_tokens_ceiling=args.adaptive_max_new_tokens_ceiling,
                 no_repeat_ngram_size=args.no_repeat_ngram_size,
                 repetition_penalty=args.repetition_penalty,
             )
