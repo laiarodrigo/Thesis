@@ -57,7 +57,14 @@ echo "  valid view/split: $VALID_VIEW / $VALID_SPLIT"
 echo "  datasets: $DATASET_INCLUDE"
 echo "  out dir: $OUT_DIR"
 
-python "$REPO_ROOT/scripts/encoder_decoder/export_encdec_data.py" \
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  echo "ERROR: python interpreter not found: $PYTHON_BIN" >&2
+  echo "Set PYTHON_BIN to a valid interpreter, e.g. PYTHON_BIN=python3 or activate your env." >&2
+  exit 2
+fi
+
+"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/export_encdec_data.py" \
   --project-db "$PROJECT_DB_PATH" \
   --source-db "$SOURCE_DB_PATH" \
   --train-view "$TRAIN_VIEW" \

@@ -1,0 +1,39 @@
+seed: 42
+
+model:
+  base_model: google/t5gemma-2-4b-4b
+  trust_remote_code: true
+  max_source_length: 512
+  max_target_length: 512
+
+dataset:
+  train_path: data/encoder_decoder/t5gemma2/translation_train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/translation_valid.jsonl
+
+lora:
+  enabled: true
+  init_adapter_path: outputs/encoder_decoder/compare_staged_smoke/t5gemma2_4b_translation_r24_stageA_opensubs_frmt
+
+training:
+  output_dir: outputs/encoder_decoder/compare_staged_smoke/t5gemma2_4b_translation_r24_stageB_gpt_adapt
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 32
+  learning_rate: 1.0e-5
+  weight_decay: 0.01
+  warmup_steps: 0
+  max_steps: 1
+  logging_steps: 1
+  eval_strategy: steps
+  eval_steps: 1
+  save_steps: 1
+  save_total_limit: 1
+  early_stopping_patience: 3
+  load_best_model_at_end: true
+  metric_for_best_model: eval_loss
+  greater_is_better: false
+  do_eval: true
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  dataloader_num_workers: 4

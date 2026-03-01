@@ -291,18 +291,48 @@ def _safe_tbl(name: str) -> str:
 def _iter_raw_rows(con: duckdb.DuckDBPyConnection, domain: str, split: str, batch_size: int = 10_000):
     cur = con.execute(
         """
-        SELECT label, text_pt_br, text_pt_pt
+        SELECT
+            label,
+            COALESCE(text_pt_br, '') AS text_pt_br,
+            COALESCE(text_pt_pt, '') AS text_pt_pt
         FROM ptbrvarid
         WHERE dataset='PtBrVId-Raw' AND domain=? AND split=?
         """,
         [domain, split],
     )
+    cols = [d[0] for d in (getattr(cur, "description", None) or [])]
     while True:
         rows = cur.fetchmany(batch_size)
         if not rows:
             break
-        for lbl, br, pt in rows:
-            yield lbl, br, pt
+        for row in rows:
+            # Normal DuckDB row shape: (label, text_pt_br, text_pt_pt)
+            if isinstance(row, (tuple, list)) and len(row) == 3:
+                yield row[0], row[1], row[2]
+                continue
+
+            # Some driver builds collapse trailing NULL fields; pad defensively.
+            if isinstance(row, (tuple, list)) and len(row) == 2:
+                yield row[0], row[1], ""
+                continue
+            if isinstance(row, (tuple, list)) and len(row) == 1 and not isinstance(row[0], (tuple, list, dict)):
+                yield row[0], "", ""
+                continue
+
+            # Some environments may wrap a tuple/dict in a single outer field.
+            if isinstance(row, (tuple, list)) and len(row) == 1:
+                inner = row[0]
+                if isinstance(inner, (tuple, list)) and len(inner) == 3:
+                    yield inner[0], inner[1], inner[2]
+                    continue
+                if isinstance(inner, dict):
+                    yield inner.get("label"), inner.get("text_pt_br"), inner.get("text_pt_pt")
+                    continue
+
+            raise RuntimeError(
+                f"Unexpected row format from ptbrvarid query. "
+                f"domain={domain} split={split} cols={cols} sample_row={row!r}"
+            )
 
 
 def _normalize_label(lbl) -> str:
@@ -333,7 +363,9 @@ def process_domain_split(db_path: Path, domain: str, split: str) -> None:
     raw_n = n_nonempty = n_after_jt = n_after_author = 0
     n_after_clean = n_after_dedup = n_after_filters = 0
     seen, buf = set(), []
-    with duckdb.connect(db_path.as_posix()) as con:
+    # Keep read/write on separate connections: issuing INSERTs on the same
+    # connection can invalidate an active SELECT cursor in some environments.
+    with duckdb.connect(db_path.as_posix()) as con, duckdb.connect(db_path.as_posix()) as read_con:
         # prepare stage table
         con.execute(f"DROP TABLE IF EXISTS {stage}")
         con.execute(f"""
@@ -347,7 +379,7 @@ def process_domain_split(db_path: Path, domain: str, split: str) -> None:
         """)
 
         # pass 1: stream raw -> stage
-        for lbl_raw, br, pt in _iter_raw_rows(con, domain, split):
+        for lbl_raw, br, pt in _iter_raw_rows(read_con, domain, split):
             raw_n += 1
             t = (br or pt or "")
             t = (t or "").strip()

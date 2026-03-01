@@ -173,14 +173,33 @@ def generate_batch(
     ).to(device)
 
     eos_token_id = tok.eos_token_id
-    pad_token_id = tok.pad_token_id if tok.pad_token_id is not None else eos_token_id
+    if eos_token_id is None:
+        cfg_eos = getattr(model.config, "eos_token_id", None)
+        if isinstance(cfg_eos, (list, tuple)):
+            eos_token_id = cfg_eos[0] if cfg_eos else None
+        else:
+            eos_token_id = cfg_eos
+
+    pad_token_id = tok.pad_token_id
+    if pad_token_id is None:
+        cfg_pad = getattr(model.config, "pad_token_id", None)
+        if isinstance(cfg_pad, (list, tuple)):
+            pad_token_id = cfg_pad[0] if cfg_pad else None
+        else:
+            pad_token_id = cfg_pad
+    if pad_token_id is None:
+        pad_token_id = eos_token_id
 
     generate_base_kwargs = dict(
         do_sample=False,
-        eos_token_id=eos_token_id,
-        pad_token_id=pad_token_id,
         repetition_penalty=repetition_penalty,
     )
+    if eos_token_id is not None:
+        generate_base_kwargs["eos_token_id"] = int(eos_token_id)
+        # Ensure termination token is injected if generation reaches the cap.
+        generate_base_kwargs["forced_eos_token_id"] = int(eos_token_id)
+    if pad_token_id is not None:
+        generate_base_kwargs["pad_token_id"] = int(pad_token_id)
     if no_repeat_ngram_size and no_repeat_ngram_size > 0:
         generate_base_kwargs["no_repeat_ngram_size"] = int(no_repeat_ngram_size)
     if num_beams and num_beams > 1:

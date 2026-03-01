@@ -124,12 +124,18 @@ def canonical_label(raw: Optional[str]) -> Optional[str]:
     return None
 
 
-def connect_project(project_db: Path, source_db: Path, read_only: bool = True) -> duckdb.DuckDBPyConnection:
+def connect_project(
+    project_db: Path,
+    source_db: Path,
+    read_only: bool = True,
+    attach_source: bool = True,
+) -> duckdb.DuckDBPyConnection:
     con = duckdb.connect(project_db.as_posix(), read_only=read_only)
-    dbl = con.execute("PRAGMA database_list").fetchall()
-    names = {row[1] for row in dbl}
-    if "src" not in names:
-        con.execute(f"ATTACH '{source_db.as_posix()}' AS src")
+    if attach_source:
+        dbl = con.execute("PRAGMA database_list").fetchall()
+        names = {row[1] for row in dbl}
+        if "src" not in names:
+            con.execute(f"ATTACH '{source_db.as_posix()}' AS src (READ_ONLY)")
     return con
 
 
@@ -390,62 +396,108 @@ def main() -> None:
     args = parse_args()
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
-    con = connect_project(args.project_db, args.source_db, read_only=True)
+    needs_source_attach = any(
+        str(v).strip().lower().startswith("src.")
+        for v in (args.train_view, args.valid_view)
+    )
+    con = connect_project(
+        args.project_db,
+        args.source_db,
+        read_only=True,
+        attach_source=needs_source_attach,
+    )
     try:
-        print("Sanity check (source rows from DuckDB views):")
         dataset_include = args.dataset_include or []
-        if dataset_include:
-            print(f"  dataset filter: {dataset_include}")
-        train_source_rows = count_rows_for_split(
-            con,
-            view_name=args.train_view,
-            split=args.train_split,
-            dataset_include=dataset_include,
-        )
-        valid_source_rows = count_rows_for_split(
-            con,
-            view_name=args.valid_view,
-            split=args.valid_split,
-            dataset_include=dataset_include,
-        )
-        print(
-            f"  train source: view={args.train_view} split={args.train_split} rows={train_source_rows}"
-        )
-        print(
-            f"  valid source: view={args.valid_view} split={args.valid_split} rows={valid_source_rows}"
-        )
 
-        translation_train_path = args.out_dir / args.translation_train_file
-        translation_valid_path = args.out_dir / args.translation_valid_file
-        classification_train_path = args.out_dir / args.classification_train_file
-        classification_valid_path = args.out_dir / args.classification_valid_file
+        def run_export_once():
+            print("Sanity check (source rows from DuckDB views):")
+            if dataset_include:
+                print(f"  dataset filter: {dataset_include}")
+            train_source_rows = count_rows_for_split(
+                con,
+                view_name=args.train_view,
+                split=args.train_split,
+                dataset_include=dataset_include,
+            )
+            valid_source_rows = count_rows_for_split(
+                con,
+                view_name=args.valid_view,
+                split=args.valid_split,
+                dataset_include=dataset_include,
+            )
+            print(
+                f"  train source: view={args.train_view} split={args.train_split} rows={train_source_rows}"
+            )
+            print(
+                f"  valid source: view={args.valid_view} split={args.valid_split} rows={valid_source_rows}"
+            )
 
-        train_stats = export_split(
-            con,
-            view_name=args.train_view,
-            split=args.train_split,
-            dataset_include=dataset_include,
-            limit=args.train_limit,
-            batch_size=args.batch_size,
-            translation_out_path=translation_train_path,
-            classification_out_path=classification_train_path,
-            br2pt_token=args.br2pt_token,
-            pt2br_token=args.pt2br_token,
-            classification_token=args.classification_token,
-        )
-        valid_stats = export_split(
-            con,
-            view_name=args.valid_view,
-            split=args.valid_split,
-            dataset_include=dataset_include,
-            limit=args.valid_limit,
-            batch_size=args.batch_size,
-            translation_out_path=translation_valid_path,
-            classification_out_path=classification_valid_path,
-            br2pt_token=args.br2pt_token,
-            pt2br_token=args.pt2br_token,
-            classification_token=args.classification_token,
-        )
+            translation_train_path = args.out_dir / args.translation_train_file
+            translation_valid_path = args.out_dir / args.translation_valid_file
+            classification_train_path = args.out_dir / args.classification_train_file
+            classification_valid_path = args.out_dir / args.classification_valid_file
+
+            train_stats = export_split(
+                con,
+                view_name=args.train_view,
+                split=args.train_split,
+                dataset_include=dataset_include,
+                limit=args.train_limit,
+                batch_size=args.batch_size,
+                translation_out_path=translation_train_path,
+                classification_out_path=classification_train_path,
+                br2pt_token=args.br2pt_token,
+                pt2br_token=args.pt2br_token,
+                classification_token=args.classification_token,
+            )
+            valid_stats = export_split(
+                con,
+                view_name=args.valid_view,
+                split=args.valid_split,
+                dataset_include=dataset_include,
+                limit=args.valid_limit,
+                batch_size=args.batch_size,
+                translation_out_path=translation_valid_path,
+                classification_out_path=classification_valid_path,
+                br2pt_token=args.br2pt_token,
+                pt2br_token=args.pt2br_token,
+                classification_token=args.classification_token,
+            )
+            return (
+                translation_train_path,
+                translation_valid_path,
+                classification_train_path,
+                classification_valid_path,
+                train_stats,
+                valid_stats,
+            )
+
+        try:
+            (
+                translation_train_path,
+                translation_valid_path,
+                classification_train_path,
+                classification_valid_path,
+                train_stats,
+                valid_stats,
+            ) = run_export_once()
+        except duckdb.BinderException as e:
+            msg = str(e).lower()
+            if "catalog \"src\" does not exist" not in msg:
+                raise
+            print(
+                "Detected missing `src` catalog while reading views. "
+                "Retrying once after ATTACHing source DB..."
+            )
+            con.execute(f"ATTACH '{args.source_db.as_posix()}' AS src (READ_ONLY)")
+            (
+                translation_train_path,
+                translation_valid_path,
+                classification_train_path,
+                classification_valid_path,
+                train_stats,
+                valid_stats,
+            ) = run_export_once()
     finally:
         con.close()
 

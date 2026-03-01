@@ -9,7 +9,7 @@ import numpy as np
 import torch
 import yaml
 from datasets import load_dataset
-from peft import LoraConfig, TaskType, get_peft_model
+from peft import LoraConfig, PeftModel, TaskType, get_peft_model
 from transformers import (
     AutoModelForSeq2SeqLM,
     AutoTokenizer,
@@ -99,6 +99,7 @@ def main() -> None:
     train_cfg = cfg["training"]
     lora_cfg = cfg.get("lora", {})
     use_lora = bool(lora_cfg.get("enabled", True))
+    init_adapter_path = lora_cfg.get("init_adapter_path")
     seed = cfg.get("seed", 123)
 
     set_seed(seed)
@@ -112,22 +113,37 @@ def main() -> None:
     )
 
     if use_lora:
-        missing = [k for k in ("r", "alpha", "dropout") if k not in lora_cfg]
-        if missing:
-            raise SystemExit(
-                "LoRA mode is enabled but lora config is missing keys: "
-                + ", ".join(missing)
+        if init_adapter_path:
+            print(f"Training mode: LoRA (continue from adapter: {init_adapter_path})")
+            try:
+                model = PeftModel.from_pretrained(
+                    model,
+                    str(init_adapter_path),
+                    is_trainable=True,
+                )
+            except TypeError:
+                model = PeftModel.from_pretrained(model, str(init_adapter_path))
+                # Backward-compatible fallback for older PEFT versions.
+                for name, param in model.named_parameters():
+                    if "lora_" in name or "modules_to_save" in name:
+                        param.requires_grad = True
+        else:
+            missing = [k for k in ("r", "alpha", "dropout") if k not in lora_cfg]
+            if missing:
+                raise SystemExit(
+                    "LoRA mode is enabled but lora config is missing keys: "
+                    + ", ".join(missing)
+                )
+            peft_cfg = LoraConfig(
+                task_type=TaskType.SEQ_2_SEQ_LM,
+                r=lora_cfg["r"],
+                lora_alpha=lora_cfg["alpha"],
+                lora_dropout=lora_cfg["dropout"],
+                bias=lora_cfg.get("bias", "none"),
+                target_modules=lora_cfg.get("target_modules"),
             )
-        peft_cfg = LoraConfig(
-            task_type=TaskType.SEQ_2_SEQ_LM,
-            r=lora_cfg["r"],
-            lora_alpha=lora_cfg["alpha"],
-            lora_dropout=lora_cfg["dropout"],
-            bias=lora_cfg.get("bias", "none"),
-            target_modules=lora_cfg.get("target_modules"),
-        )
-        model = get_peft_model(model, peft_cfg)
-        print("Training mode: LoRA")
+            model = get_peft_model(model, peft_cfg)
+            print("Training mode: LoRA")
         if hasattr(model, "print_trainable_parameters"):
             model.print_trainable_parameters()
         else:
@@ -145,6 +161,15 @@ def main() -> None:
 
     max_source_length = model_cfg.get("max_source_length", 512)
     max_target_length = model_cfg.get("max_target_length", 128)
+    eos_token_id = tokenizer.eos_token_id
+    if eos_token_id is None:
+        cfg_eos = getattr(model.config, "eos_token_id", None)
+        if isinstance(cfg_eos, (list, tuple)):
+            eos_token_id = cfg_eos[0] if cfg_eos else None
+        else:
+            eos_token_id = cfg_eos
+    if eos_token_id is None:
+        print("WARNING: eos_token_id is undefined; labels will not be forced to end with EOS.")
 
     def preprocess_batch(batch):
         model_inputs = tokenizer(
@@ -157,7 +182,21 @@ def main() -> None:
             max_length=max_target_length,
             truncation=True,
         )
-        model_inputs["labels"] = labels["input_ids"]
+        label_ids = labels["input_ids"]
+        if eos_token_id is not None:
+            fixed_label_ids = []
+            for seq in label_ids:
+                if not seq:
+                    fixed_label_ids.append([int(eos_token_id)])
+                    continue
+                if seq[-1] == eos_token_id:
+                    fixed_label_ids.append(seq)
+                    continue
+                if len(seq) >= max_target_length:
+                    seq = seq[: max_target_length - 1]
+                fixed_label_ids.append(seq + [int(eos_token_id)])
+            label_ids = fixed_label_ids
+        model_inputs["labels"] = label_ids
         return model_inputs
 
     tokenized = raw_ds.map(
