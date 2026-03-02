@@ -50,4 +50,4 @@ if [[ "${SMOKE_RUN:-0}" == "1" ]]; then
   SMOKE_FLAG+=(--smoke-run)
 fi
 
-bash scripts/encoder_decoder/t5gemma2_4b/run_step4b_classification_head_boilerplate.sh --execute "${SMOKE_FLAG[@]}"
+bash scripts/encoder_decoder/single_task_models/t5gemma2_4b/run_step4b_classification_head_boilerplate.sh --execute "${SMOKE_FLAG[@]}"

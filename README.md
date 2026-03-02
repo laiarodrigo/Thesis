@@ -41,7 +41,7 @@ It uses `transformers` + `peft` training scripts under `scripts/encoder_decoder/
 
 1) Export encoder-decoder datasets (translation + classification):
 ```
-scripts/encoder_decoder/run_export.sh
+scripts/encoder_decoder/single_task_models/run_export.sh
 ```
 
 This writes:
@@ -52,12 +52,12 @@ This writes:
 
 2) Train translation LoRA:
 ```
-scripts/encoder_decoder/run_train_translation_lora.sh
+scripts/encoder_decoder/single_task_models/run_train_translation_lora.sh
 ```
 
 3) Train classification LoRA:
 ```
-scripts/encoder_decoder/run_train_classification_lora.sh
+scripts/encoder_decoder/single_task_models/run_train_classification_lora.sh
 ```
 
 4) Evaluate translation:

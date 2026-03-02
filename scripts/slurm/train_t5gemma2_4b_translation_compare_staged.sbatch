@@ -37,4 +37,4 @@ if [[ ! -f "$CONFIG_PATH" ]]; then
   exit 2
 fi
 
-python3 scripts/encoder_decoder/t5gemma2/step4a_translation_train_boilerplate.py --config "$CONFIG_PATH" --execute
+python3 scripts/encoder_decoder/single_task_models/t5gemma2/step4a_translation_train_boilerplate.py --config "$CONFIG_PATH" --execute

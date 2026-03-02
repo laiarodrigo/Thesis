@@ -1,8 +1,8 @@
 # SLURM launchers for T5Gemma2 4B
 
 These scripts run the existing large-model launchers:
-- `scripts/encoder_decoder/t5gemma2_4b/run_step4a_translation_boilerplate.sh --execute`
-- `scripts/encoder_decoder/t5gemma2_4b/run_step4b_classification_head_boilerplate.sh --execute`
+- `scripts/encoder_decoder/single_task_models/t5gemma2_4b/run_step4a_translation_boilerplate.sh --execute`
+- `scripts/encoder_decoder/single_task_models/t5gemma2_4b/run_step4b_classification_head_boilerplate.sh --execute`
 
 ## Files
 

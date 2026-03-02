@@ -1,0 +1,66 @@
+{
+  "generated_rows": 65,
+  "nearest_neighbor_jaccard": {
+    "mean_max_jaccard": 0.2496,
+    "p90_max_jaccard": 0.4545,
+    "count_ge_0_6": 0,
+    "count_ge_0_7": 0
+  },
+  "top_openings": [
+    {
+      "opening": "a apresentação foi adiada",
+      "count": 2
+    },
+    {
+      "opening": "se precisares de ajuda",
+      "count": 2
+    },
+    {
+      "opening": "se tiveres tempo no",
+      "count": 2
+    },
+    {
+      "opening": "ela esqueceu se do",
+      "count": 2
+    },
+    {
+      "opening": "enquanto passeava pelo jardim",
+      "count": 1
+    },
+    {
+      "opening": "enquanto caminhava pela floresta",
+      "count": 1
+    },
+    {
+      "opening": "enquanto caminhava pelo parque",
+      "count": 1
+    },
+    {
+      "opening": "enquanto passeava pelo parque",
+      "count": 1
+    },
+    {
+      "opening": "enquanto esperávamos pelo autocarro",
+      "count": 1
+    },
+    {
+      "opening": "amanhã antes de sairmos",
+      "count": 1
+    },
+    {
+      "opening": "enquanto esperávamos pelo táxi",
+      "count": 1
+    },
+    {
+      "opening": "enquanto caminhávamos pela praia",
+      "count": 1
+    }
+  ],
+  "kind_counts": {
+    "equal_long": 8,
+    "equal_short": 6,
+    "long": 22,
+    "short": 16,
+    "story": 13
+  }
+}

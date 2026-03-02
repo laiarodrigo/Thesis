@@ -22,20 +22,20 @@ fi
 mkdir -p "$OUT_DIR"
 
 echo "== Pre-export dataset counts =="
-"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/report_duckdb_dataset_counts.py" \
+"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/single_task_models/report_duckdb_dataset_counts.py" \
   --project-db "$PROJECT_DB_PATH" \
   --source-db "$SOURCE_DB_PATH" \
   --view "$TRAIN_VIEW" \
   --split "$TRAIN_SPLIT"
 
-"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/report_duckdb_dataset_counts.py" \
+"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/single_task_models/report_duckdb_dataset_counts.py" \
   --project-db "$PROJECT_DB_PATH" \
   --source-db "$SOURCE_DB_PATH" \
   --view "$VALID_VIEW" \
   --split "$VALID_SPLIT"
 
 echo "== Exporting Stage A data (OpenSubs + FRMT) =="
-"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/export_encdec_data.py" \
+"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/single_task_models/export_encdec_data.py" \
   --project-db "$PROJECT_DB_PATH" \
   --source-db "$SOURCE_DB_PATH" \
   --train-view "$TRAIN_VIEW" \

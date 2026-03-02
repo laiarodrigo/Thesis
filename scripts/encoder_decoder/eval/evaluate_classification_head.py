@@ -61,7 +61,12 @@ def load_cfg(path: Path) -> dict[str, Any]:
 
 
 def load_encoder_classifier_class() -> type:
-    step4b_path = Path(__file__).resolve().parents[1] / "t5gemma2" / "step4b_classification_head_boilerplate.py"
+    step4b_path = (
+        Path(__file__).resolve().parents[1]
+        / "single_task_models"
+        / "t5gemma2"
+        / "step4b_classification_head_boilerplate.py"
+    )
     spec = importlib.util.spec_from_file_location("step4b_cls", step4b_path.as_posix())
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Could not load module spec from {step4b_path}")

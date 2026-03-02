@@ -45,4 +45,4 @@ if [[ "${ALLOW_NON_GPT_DATA:-0}" != "1" ]]; then
   fi
 fi
 
-bash scripts/encoder_decoder/t5gemma2_4b/run_step4a_translation_boilerplate.sh --execute
+bash scripts/encoder_decoder/single_task_models/t5gemma2_4b/run_step4a_translation_boilerplate.sh --execute

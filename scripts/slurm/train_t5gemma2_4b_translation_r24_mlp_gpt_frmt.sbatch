@@ -33,13 +33,13 @@ if [[ ! -f "$CONFIG_PATH" ]]; then
 fi
 if [[ ! -f "$TRAIN_FILE" ]]; then
   echo "ERROR: missing train file: $TRAIN_FILE" >&2
-  echo "Run export first with scripts/encoder_decoder/t5gemma2_4b/run_export_translation_gpt_frmt.sh" >&2
+  echo "Run export first with scripts/encoder_decoder/single_task_models/t5gemma2_4b/run_export_translation_gpt_frmt.sh" >&2
   exit 2
 fi
 if [[ ! -f "$VALID_FILE" ]]; then
   echo "ERROR: missing valid file: $VALID_FILE" >&2
-  echo "Run export first with scripts/encoder_decoder/t5gemma2_4b/run_export_translation_gpt_frmt.sh" >&2
+  echo "Run export first with scripts/encoder_decoder/single_task_models/t5gemma2_4b/run_export_translation_gpt_frmt.sh" >&2
   exit 2
 fi
 
-bash scripts/encoder_decoder/t5gemma2_4b/run_step4a_translation_lora_r24_gpt_frmt.sh --execute
+bash scripts/encoder_decoder/single_task_models/t5gemma2_4b/run_step4a_translation_lora_r24_gpt_frmt.sh --execute

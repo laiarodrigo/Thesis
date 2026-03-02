@@ -64,7 +64,7 @@ if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
   exit 2
 fi
 
-"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/export_encdec_data.py" \
+"$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/single_task_models/export_encdec_data.py" \
   --project-db "$PROJECT_DB_PATH" \
   --source-db "$SOURCE_DB_PATH" \
   --train-view "$TRAIN_VIEW" \
