@@ -1,0 +1,7 @@
+dataset,domain,split,raw_rows,after_jusText_rows,jusText_removed_rows,final_retained_rows,source_db
+PtBrVId,journalistic,train,1842804,1717167,125637,1573133,data/duckdb/subs_ptbr_filtered.duckdb
+PtBrVId,legal,train,4302002,2110995,2191007,1118531,data/duckdb/subs_ptbr_filtered.duckdb
+PtBrVId,literature,train,81984,59513,22471,39399,data/duckdb/subs_ptbr_filtered.duckdb
+PtBrVId,politics,train,34604,32427,2177,22828,data/duckdb/subs_ptbr_filtered.duckdb
+PtBrVId,social_media,train,2678579,266648,2411931,219376,data/duckdb/subs_ptbr_filtered.duckdb
+PtBrVId,web,train,133664,101401,32263,17728,data/duckdb/subs_ptbr_filtered.duckdb

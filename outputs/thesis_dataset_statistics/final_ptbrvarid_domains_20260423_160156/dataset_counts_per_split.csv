@@ -1,0 +1,13 @@
+dataset,split,unit,rows,translation_examples,classification_examples,pt_br_rows,pt_pt_rows,source_path,notes
+OpenSubs,train,pair,10347883,20695766,17698911,10347883,10347883,data/duckdb/subs_project.duckdb::train_data,Counts come from the unified project train_data view after test-pair guarding.
+FRMT,train,pair,2502,5004,4984,2502,2502,data/duckdb/subs_project.duckdb::frmt_dev_split_v,Counts come from the FRMT dev hash split for train/valid and the clean FRMT test split.
+FRMT,valid,pair,20,40,40,20,20,data/duckdb/subs_project.duckdb::frmt_dev_split_v,Counts come from the FRMT dev hash split for train/valid and the clean FRMT test split.
+FRMT,test,pair,2611,5222,5203,2611,2611,data/duckdb/subs_project.duckdb::frmt_test_clean_v,Counts come from the FRMT dev hash split for train/valid and the clean FRMT test split.
+GPT-Wikipedia,train,pair,4519,9038,7845,4519,4519,data/encoder_decoder/t5gemma2/compare_staged_v2/stageB_gpt_wiki/pairs_train.jsonl,Counts come from the real pair split exported from the merged Wikipedia variant CSV.
+GPT-Wikipedia,valid,pair,564,1128,976,564,564,data/encoder_decoder/t5gemma2/compare_staged_v2/stageB_gpt_wiki/pairs_valid.jsonl,Counts come from the real pair split exported from the merged Wikipedia variant CSV.
+GPT-Wikipedia,test,pair,566,1132,970,566,566,data/encoder_decoder/t5gemma2/compare_staged_v2/stageB_gpt_wiki/pairs_test.jsonl,Counts come from the real pair split exported from the merged Wikipedia variant CSV.
+Golden Collection,test,pair,500,1000,773,500,500,data/duckdb/subs_project.duckdb::gold_test,Golden Collection is treated as a test-only evaluation dataset in this repository.
+PtBrVId-Raw,train,variant_text,2990995,,,337146,2653849,data/duckdb/subs_ptbr_filtered.duckdb,"Counts come from the filtered PtBrVId table used by the augmentation scripts, not from guessed split ratios."
+PtBrVId-TranslatedStageB,train,pair,3600,7200,6812,3600,3600,data/encoder_decoder/t5gemma2/ptbrvarid_translated_stageB_r48_500_t50/pairs_train.jsonl,Counts come from the exported translated canonical PtBrVId pairs used by the optional Stage B translation mix.
+PtBrVId-TranslatedStageB,valid,pair,0,0,0,0,0,data/encoder_decoder/t5gemma2/ptbrvarid_translated_stageB_r48_500_t50/pairs_valid.jsonl,Counts come from the exported translated canonical PtBrVId pairs used by the optional Stage B translation mix.
+PtBrVId-TranslatedStageB,test,pair,400,800,760,400,400,data/encoder_decoder/t5gemma2/ptbrvarid_translated_stageB_r48_500_t50/pairs_test.jsonl,Counts come from the exported translated canonical PtBrVId pairs used by the optional Stage B translation mix.

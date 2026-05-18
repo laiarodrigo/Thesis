@@ -3,17 +3,17 @@ seed: 42
 model:
   base_model: outputs/encoder_decoder/multitask_compare/t5gemma2_270m_stageA_opensubs_frmt
   trust_remote_code: true
-  max_source_length: 512
-  max_target_length: 512
-  enforce_first_label_task_token: true
+  max_source_length: 384
+  max_target_length: 256
 
 dataset:
-  train_path: data/encoder_decoder/t5gemma2/multitask_stageB/train.jsonl
-  valid_path: data/encoder_decoder/t5gemma2/multitask_stageB/valid.jsonl
-  enforce_first_label_task_token: true
+  train_path: data/encoder_decoder/t5gemma2/compare_staged_v2/multitask_stageB/train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/compare_staged_v2/multitask_stageB/valid.jsonl
+  max_valid_rows: 20000
 
 training:
   output_dir: outputs/encoder_decoder/multitask_compare/t5gemma2_270m_stageB_gpt_adapt
+  loss_mode: cross_entropy_only
   per_device_train_batch_size: 4
   per_device_eval_batch_size: 2
   gradient_accumulation_steps: 4
@@ -23,8 +23,8 @@ training:
   max_steps: 1200
   logging_steps: 25
   eval_strategy: steps
-  eval_steps: 100
-  save_steps: 100
+  eval_steps: 300
+  save_steps: 300
   save_total_limit: 2
   load_best_model_at_end: true
   metric_for_best_model: eval_loss
@@ -33,4 +33,3 @@ training:
   fp16: false
   gradient_checkpointing: true
   dataloader_num_workers: 8
-

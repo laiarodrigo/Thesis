@@ -1,5 +1,19 @@
 # Thesis
 
+## Report
+
+The thesis/report source is tracked in
+`report/Rodrigo_Laia_MEIC_Thesis/`, which is the local copy of the Overleaf
+project. To build the PDF locally:
+
+```bash
+cd report/Rodrigo_Laia_MEIC_Thesis
+make pdf
+```
+
+This keeps the writing context in the repository so the report can be revised
+directly alongside the project code and notes.
+
 ja consigo extrair ficheiros pt e br do open subtitles.
 agr falta adicionalos a uma base de dados (em principio nao importa o filme em si, ou seja só precisamos de dar parse nos ficheiros e cada linha da base de dados é uma fala e a sua comparação)
 
@@ -11,6 +25,43 @@ fazer requirements.txt
 ## Docs
 
 - EDA inventory and pipeline diagrams: `docs/eda_map.md`
+
+## Wikipedia-inspired pt-PT/pt-BR generation
+
+If you extract Portuguese Wikipedia with NeMo Curator, the resulting JSONL records contain fields such as `text`, `title`, `id`, `url`, `language`, and `source_id`. You can turn that output into small inspiration files and then use one file at a time to generate near-literal pt-PT/pt-BR pairs.
+
+1) Build inspiration JSON files from NeMo Curator Wikipedia JSONL:
+```
+python scripts/build_wikipedia_pt_inspiration_batches.py \
+  --input-jsonl data/wikipedia/pt/*.jsonl \
+  --output-dir data/wikipedia_pt_inspiration \
+  --num-files 0 \
+  --articles-per-file 25 \
+  --sentences-per-article 5
+```
+
+2) Generate translation pairs with the simpler prompt style:
+```
+python scripts/generate_pt_variant_prompts_csv.py \
+  --env-file bla.env \
+  --examples-file data/wikipedia_pt_inspiration/ptwiki_inspiration_batch_01.json \
+  --prompt-style minimal_lexical \
+  --disable-topic-tags \
+  --exclude-equal \
+  --min-variant-differences 1 \
+  --output-csv data/pt_variant_prompts_wikipedia_batch01.csv
+```
+
+The `minimal_lexical` prompt style asks for pt-BR outputs that stay as close as possible to pt-PT, changing only clear lexical or morphosyntactic variant differences instead of paraphrasing freely.
+
+3) Generate 50 examples for each Wikipedia inspiration JSON file:
+```
+python scripts/generate_wikipedia_pt_variant_loop.py \
+  --env-file bla.env \
+  --input-dir data/wikipedia_pt_inspiration \
+  --output-dir data/wikipedia_pt_variant_csv \
+  --per-file-total 50
+```
 
 ## Decoder-Only (Qwen3 + Axolotl, LoRA)
 

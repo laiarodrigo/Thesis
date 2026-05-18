@@ -1,0 +1,62 @@
+seed: 42
+
+model:
+  base_model: google/t5gemma-2-4b-4b
+  trust_remote_code: true
+  max_source_length: 512
+  max_target_length: 512
+  encoder_input_format: plain_source
+  decoder_target_format: label_first
+  br_token: BR
+  pt_token: PT
+
+dataset:
+  train_path: data/encoder_decoder/stage_c_subset/frmt_gpt_wiki_data_legit/stage_c_subset.jsonl
+
+lora:
+  enabled: true
+  init_adapter_path: outputs/encoder_decoder/compare_staged/t5gemma2_4b_translation_r48_stageB_gpt_wiki_label_first_with_cls_equal
+
+reward:
+  metric: bleu_ter
+  include_first_token_reward: true
+  bleu_weight: 0.4
+  ter_weight: 0.4
+  first_token_weight: 0.2
+  epsilon: 1.0e-8
+  copy_penalty: 0.10
+
+rl:
+  algorithm: dr_grpo
+  beta: 0.0
+  num_generations: 4
+  include_reference_candidate: true
+  loss_mix_mode: reference_candidate_auto
+  rl_weight: 1.0
+  sft_weight: 0.05
+  do_sample: true
+  temperature: 0.8
+  top_p: 0.95
+  max_completion_length: 128
+  no_repeat_ngram_size: 0
+  early_stopping: false
+  advantage_eps: 1.0e-6
+
+training:
+  output_dir: outputs/encoder_decoder/compare_staged/t5gemma2_4b_translation_r48_stageC_lfclseq_frmt_gpt_wiki_legit_bleu_ter_first_token_bf16
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 5.0e-6
+  weight_decay: 0.0
+  warmup_steps: 20
+  max_steps: 600
+  logging_steps: 10
+  debug_candidate_every_steps: 20
+  debug_candidate_examples: 1
+  save_steps: 200
+  save_total_limit: 3
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  max_grad_norm: 1.0
+  lr_scheduler_type: linear

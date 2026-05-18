@@ -1,0 +1,8 @@
+% #############################################################################
+% Abstract Text
+% !TEX root = ../main.tex
+% #############################################################################
+% reset acronyms
+\acresetall
+% use \noindent in firts paragraph
+\noindent Large language models trained on Portuguese text are strongly shaped by the predominance of Brazilian Portuguese (BP) on training corpora collected from the Web, which can reduce their effectiveness for European Portuguese (EP). Effective methods for filtering and/or translating between both Portuguese variants are thus in need. This work aims to explore how decoder-only pre-trained models can be adapted to distinguish between the BP and EP variants, and to rewrite text from one variant to the other. We will construct a unified corpus by combining OPUS OpenSubtitles data with other datasets prepared in previous studies, and we will apply a tailored preprocessing pipeline that includes normalization, sentence merging, boilerplate removal, deduplication, sentence-length filtering, and alignment filtering. Using this corpus, we plan to adapt multilingual language models to support both the language variety identification and translation tasks. We have already conducted an initial experiment with a model of the Qwen family. This work aims to provide a reproducible methodology and a consolidated resource for developing large language models that handle Portuguese varieties more reliably.

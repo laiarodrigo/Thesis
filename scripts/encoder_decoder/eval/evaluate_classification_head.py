@@ -19,6 +19,14 @@ import yaml
 from datasets import load_dataset
 from transformers import AutoTokenizer
 
+try:
+    from metrics_utils import PT_VARIANT_LABELS, macro_f1_from_labels
+except ModuleNotFoundError:
+    from scripts.encoder_decoder.eval.metrics_utils import (
+        PT_VARIANT_LABELS,
+        macro_f1_from_labels,
+    )
+
 
 def parse_args() -> argparse.Namespace:
     repo_root = Path(__file__).resolve().parents[3]
@@ -86,19 +94,17 @@ def to_id2label(meta_or_cfg: dict[str, Any]) -> dict[int, str]:
     return id2label
 
 
-def macro_f1(gold: list[int], pred: list[int], labels: list[int]) -> float:
-    f1s = []
-    g = np.asarray(gold, dtype=np.int64)
-    p = np.asarray(pred, dtype=np.int64)
-    for lab in labels:
-        tp = int(((p == lab) & (g == lab)).sum())
-        fp = int(((p == lab) & (g != lab)).sum())
-        fn = int(((p != lab) & (g == lab)).sum())
-        precision = tp / (tp + fp) if (tp + fp) else 0.0
-        recall = tp / (tp + fn) if (tp + fn) else 0.0
-        f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) else 0.0
-        f1s.append(f1)
-    return float(sum(f1s) / len(f1s)) if f1s else 0.0
+def extract_gold_ids(batch: dict[str, Any], label2id: dict[str, int]) -> list[int]:
+    if "label_id" in batch:
+        return [int(x) for x in batch["label_id"]]
+    if "label" in batch:
+        return [int(label2id[str(x)]) for x in batch["label"]]
+    if "target_text" in batch:
+        return [int(label2id[str(x)]) for x in batch["target_text"]]
+    raise KeyError(
+        "Expected one of label_id, label, or target_text in classification dataset batch. "
+        f"Available keys: {sorted(batch.keys())}"
+    )
 
 
 def _remap_state_dict_keys_for_layout(
@@ -251,10 +257,7 @@ def main() -> None:
         for start in range(0, len(ds), args.batch_size):
             batch = ds[start : start + args.batch_size]
             texts = batch["input_text"]
-            if "label_id" in batch:
-                gold_ids = [int(x) for x in batch["label_id"]]
-            else:
-                gold_ids = [int(label2id[str(x)]) for x in batch["label"]]
+            gold_ids = extract_gold_ids(batch, label2id)
 
             enc = tok(
                 texts,
@@ -281,9 +284,11 @@ def main() -> None:
                 }
                 fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
-    labels = sorted(set(all_gold) | set(all_pred))
     accuracy = float(np.mean(np.asarray(all_gold) == np.asarray(all_pred))) if all_gold else 0.0
-    f1_macro = macro_f1(all_gold, all_pred, labels)
+    labels = sorted(set(all_gold) | set(all_pred))
+    gold_labels = [id2label.get(label_id, str(label_id)).lower() for label_id in all_gold]
+    pred_labels = [id2label.get(label_id, str(label_id)).lower() for label_id in all_pred]
+    f1_macro = macro_f1_from_labels(gold_labels, pred_labels, PT_VARIANT_LABELS)
     confusion = {
         f"{id2label.get(g, g)}->{id2label.get(p, p)}": int(cm[(g, p)])
         for g in labels
@@ -294,6 +299,12 @@ def main() -> None:
         "n": len(all_gold),
         "accuracy": accuracy,
         "f1_macro": f1_macro,
+        "f1_macro_all_labels": macro_f1_from_labels(
+            gold_labels,
+            pred_labels,
+            tuple(sorted({*gold_labels, *pred_labels})),
+        ),
+        "f1_macro_labels": list(PT_VARIANT_LABELS),
         "labels": {str(k): v for k, v in sorted(id2label.items())},
         "confusion_matrix": confusion,
         "dataset_path": args.dataset_path.as_posix(),

@@ -4,6 +4,8 @@ import argparse
 import hashlib
 import os
 import re
+import time
+import unicodedata
 from pathlib import Path
 
 import duckdb
@@ -226,15 +228,46 @@ def author_transform_chain(text: str) -> str:
 
 
 def apply_clean_text_ascii(s: str) -> str:
-    return clean(s, fix_unicode=True, to_ascii=True, lower=False,
-                 no_line_breaks=False, no_urls=False, no_emails=False,
-                 no_phone_numbers=False, no_numbers=False, no_digits=False, no_currency_symbols=False)
+    kwargs = dict(
+        to_ascii=True,
+        lower=False,
+        no_line_breaks=False,
+        no_urls=False,
+        no_emails=False,
+        no_phone_numbers=False,
+        no_numbers=False,
+        no_digits=False,
+        no_currency_symbols=False,
+    )
+    try:
+        return clean(s, fix_unicode=True, **kwargs)
+    except TypeError:
+        try:
+            return clean(s, **kwargs)
+        except TypeError:
+            text = unicodedata.normalize("NFKC", s)
+            return unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
 
 
 def apply_clean_text_unicode_only(s: str) -> str:
-    return clean(s, fix_unicode=True, to_ascii=False, lower=False,
-                 no_line_breaks=False, no_urls=False, no_emails=False,
-                 no_phone_numbers=False, no_numbers=False, no_digits=False, no_currency_symbols=False)
+    kwargs = dict(
+        to_ascii=False,
+        lower=False,
+        no_line_breaks=False,
+        no_urls=False,
+        no_emails=False,
+        no_phone_numbers=False,
+        no_numbers=False,
+        no_digits=False,
+        no_currency_symbols=False,
+    )
+    try:
+        return clean(s, fix_unicode=True, **kwargs)
+    except TypeError:
+        try:
+            return clean(s, **kwargs)
+        except TypeError:
+            return unicodedata.normalize("NFKC", s)
 
 
 _FALLBACK_TOKEN_RE = re.compile(r"\w+|[^\w\s]")
@@ -356,13 +389,14 @@ def _normalize_label(lbl) -> str:
         return "pt-PT"
 
 
-def process_domain_split(db_path: Path, domain: str, split: str) -> None:
-    print(f"[filter_ptbrvarid] start domain={domain} split={split}")
+def process_domain_split(db_path: Path, domain: str, split: str, progress_every: int = 100_000) -> None:
+    print(f"[filter_ptbrvarid] start domain={domain} split={split}", flush=True)
     stage = f"__ptbr_stage_{_safe_tbl(domain)}_{_safe_tbl(split)}"
 
     raw_n = n_nonempty = n_after_jt = n_after_author = 0
     n_after_clean = n_after_dedup = n_after_filters = 0
     seen, buf = set(), []
+    started_at = time.time()
     # Keep read/write on separate connections: issuing INSERTs on the same
     # connection can invalidate an active SELECT cursor in some environments.
     with duckdb.connect(db_path.as_posix()) as con, duckdb.connect(db_path.as_posix()) as read_con:
@@ -381,6 +415,16 @@ def process_domain_split(db_path: Path, domain: str, split: str) -> None:
         # pass 1: stream raw -> stage
         for lbl_raw, br, pt in _iter_raw_rows(read_con, domain, split):
             raw_n += 1
+            if progress_every > 0 and raw_n % progress_every == 0:
+                elapsed = max(time.time() - started_at, 1e-9)
+                print(
+                    f"[filter_ptbrvarid] progress {domain}/{split}: "
+                    f"raw={raw_n:,} nonempty={n_nonempty:,} justext={n_after_jt:,} "
+                    f"clean={n_after_clean:,} dedup={n_after_dedup:,} "
+                    f"filters={n_after_filters:,} stage_buf={len(buf):,} "
+                    f"rate={raw_n / elapsed:,.1f} rows/s",
+                    flush=True,
+                )
             t = (br or pt or "")
             t = (t or "").strip()
             if not t:
@@ -446,7 +490,7 @@ def process_domain_split(db_path: Path, domain: str, split: str) -> None:
                 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             """, metrics_row)
             con.execute(f"DROP TABLE {stage}")
-            print(f"{domain}/{split}: raw={raw_n:,} → after_IQR=0 (0.0%)")
+            print(f"{domain}/{split}: raw={raw_n:,} → after_IQR=0 (0.0%)", flush=True)
             return
 
         q1, q3 = con.execute(
@@ -493,15 +537,24 @@ def process_domain_split(db_path: Path, domain: str, split: str) -> None:
         con.execute(f"DROP TABLE {stage}")
 
         pct = round(100.0 * (n_after_iqr / max(1, raw_n)), 2)
-        print(f"{domain}/{split}: raw={raw_n:,} → after_IQR={n_after_iqr:,} ({pct}%)")
+        print(f"{domain}/{split}: raw={raw_n:,} → after_IQR={n_after_iqr:,} ({pct}%)", flush=True)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Run PtBrVarId filtering pipeline (jusText + clean + IQR).")
     ap.add_argument("--db", default=str(DEFAULT_DB), help="DuckDB path (default: data/duckdb/subs.duckdb)")
+    ap.add_argument("--domain", default=None, help="Only process this domain")
+    ap.add_argument("--split", default=None, help="Only process this split")
+    ap.add_argument("--progress-every", type=int, default=100_000,
+                    help="Heartbeat every N raw rows per domain/split (0 disables)")
     args = ap.parse_args()
 
-    print(f"[filter_ptbrvarid] db={args.db}")
+    print(f"[filter_ptbrvarid] db={args.db}", flush=True)
+    if args.domain:
+        print(f"[filter_ptbrvarid] only_domain={args.domain}", flush=True)
+    if args.split:
+        print(f"[filter_ptbrvarid] only_split={args.split}", flush=True)
+    print(f"[filter_ptbrvarid] progress_every={args.progress_every}", flush=True)
     ensure_punkt()
 
     db_path = Path(args.db).expanduser().resolve()
@@ -538,33 +591,73 @@ def main() -> int:
                 IQR_hi              DOUBLE
             )
         """)
-        con.execute("DELETE FROM ptbrvarid WHERE dataset='PtBrVId'")
-        con.execute("DELETE FROM ptbrvarid_metrics WHERE dataset='PtBrVId'")
+        if args.domain and args.split:
+            con.execute(
+                "DELETE FROM ptbrvarid WHERE dataset='PtBrVId' AND domain=? AND split=?",
+                [args.domain, args.split],
+            )
+            con.execute(
+                "DELETE FROM ptbrvarid_metrics WHERE dataset='PtBrVId' AND domain=? AND split=?",
+                [args.domain, args.split],
+            )
+        elif args.domain:
+            con.execute(
+                "DELETE FROM ptbrvarid WHERE dataset='PtBrVId' AND domain=?",
+                [args.domain],
+            )
+            con.execute(
+                "DELETE FROM ptbrvarid_metrics WHERE dataset='PtBrVId' AND domain=?",
+                [args.domain],
+            )
+        elif args.split:
+            con.execute(
+                "DELETE FROM ptbrvarid WHERE dataset='PtBrVId' AND split=?",
+                [args.split],
+            )
+            con.execute(
+                "DELETE FROM ptbrvarid_metrics WHERE dataset='PtBrVId' AND split=?",
+                [args.split],
+            )
+        else:
+            con.execute("DELETE FROM ptbrvarid WHERE dataset='PtBrVId'")
+            con.execute("DELETE FROM ptbrvarid_metrics WHERE dataset='PtBrVId'")
 
-        domains = con.execute(
-            "SELECT DISTINCT domain FROM ptbrvarid WHERE dataset='PtBrVId-Raw' ORDER BY domain"
-        ).fetchall()
+        if args.domain:
+            domains = con.execute(
+                "SELECT DISTINCT domain FROM ptbrvarid WHERE dataset='PtBrVId-Raw' AND domain=? ORDER BY domain",
+                [args.domain],
+            ).fetchall()
+        else:
+            domains = con.execute(
+                "SELECT DISTINCT domain FROM ptbrvarid WHERE dataset='PtBrVId-Raw' ORDER BY domain"
+            ).fetchall()
         domains = [d[0] for d in domains]
 
-        print(f"[filter_ptbrvarid] domains={len(domains)}")
+        print(f"[filter_ptbrvarid] domains={len(domains)}", flush=True)
         for domain in domains:
-            splits = con.execute(
-                "SELECT DISTINCT split FROM ptbrvarid WHERE dataset='PtBrVId-Raw' AND domain=? ORDER BY split",
-                [domain],
-            ).fetchall()
+            if args.split:
+                splits = con.execute(
+                    "SELECT DISTINCT split FROM ptbrvarid WHERE dataset='PtBrVId-Raw' AND domain=? AND split=? ORDER BY split",
+                    [domain, args.split],
+                ).fetchall()
+            else:
+                splits = con.execute(
+                    "SELECT DISTINCT split FROM ptbrvarid WHERE dataset='PtBrVId-Raw' AND domain=? ORDER BY split",
+                    [domain],
+                ).fetchall()
             splits = [s[0] for s in splits]
-            print(f"[filter_ptbrvarid] domain={domain} splits={splits}")
+            print(f"[filter_ptbrvarid] domain={domain} splits={splits}", flush=True)
             for split in splits:
                 try:
-                    process_domain_split(db_path, domain, split)
+                    process_domain_split(db_path, domain, split, progress_every=args.progress_every)
                 except KeyboardInterrupt:
-                    print(f"[filter_ptbrvarid] interrupted at domain={domain} split={split}")
+                    print(f"[filter_ptbrvarid] interrupted at domain={domain} split={split}", flush=True)
                     raise SystemExit(130)
                 except Exception as e:
-                    print(f"[filter_ptbrvarid] ERROR domain={domain} split={split}: {e}")
+                    print(f"[filter_ptbrvarid] ERROR domain={domain} split={split}: {e}", flush=True)
                     raise
 
-    print("[ok] PtBrVId filtering complete")
+    print("[ok] PtBrVId filtering complete", flush=True)
     return 0
 
 

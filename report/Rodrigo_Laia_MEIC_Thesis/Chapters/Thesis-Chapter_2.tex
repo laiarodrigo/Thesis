@@ -1,0 +1,505 @@
+% #############################################################################
+% This is Chapter 2
+% !TEX root = ../main.tex
+% #############################################################################
+% Change the Name of the Chapter i the following line
+\fancychapter{Fundamental Concepts}
+% The following line allows to ref this chapter
+\label{chap:back}
+
+This chapter introduces the linguistic and technical background
+needed to understand the modeling choices made in the remainder of the thesis.
+It first describes the main differences between European and Brazilian
+Portuguese (\cref{sec:epbp-differences}) and then reviews the language-modeling
+ideas on which modern NLP systems are built (\cref{sec:language-models}). The
+chapter then presents the Transformer architecture (\cref{sec:transformers}),
+the main language-model families that can be adapted through fine-tuning
+(\cref{sec:model-families}), and the task formulations used for Portuguese
+variety processing (\cref{sec:task-formulations}). Finally, it introduces the
+adaptation techniques needed later in the thesis, from supervised fine-tuning to
+reinforcement-learning-based optimization (\cref{sec:fine-tuning,sec:rl-reward-ft}).
+
+\section{Differences Between European Portuguese and Brazilian Portuguese}
+\label{sec:epbp-differences}
+
+Publicly available Portuguese text is strongly skewed toward the Brazilian variant, which means
+that models pretrained on Web-scale corpora tend to absorb BP lexical,
+orthographic, and morphosyntactic preferences more readily than EP ones. This
+imbalance matters in two ways. First, it makes automatic variety
+identification harder in borderline cases where the distinction depends on
+subtle cues rather than on unmistakable lexical markers. Second, it increases
+the risk that rewriting systems default to BP-leaning outputs even when EP is
+explicitly requested [Enhancing Portuguese Variety Identification with
+Cross-Domain Approaches; From Brazilian Portuguese to European Portuguese]. For
+this reason, an adaptation corpus must expose
+contrasts that are visible in written text, yet nuanced enough that a generic
+Portuguese model cannot be assumed to handle them reliably without targeted
+fine-tuning [A Neural Approach to Language Variety Translation; BP2EP -
+Adaptation of Brazilian Portuguese Texts to European Portuguese].
+
+The contrast between EP and BP is not limited to isolated vocabulary
+substitutions. Prior literature on paraphrastic correspondences between the two varieties
+shows that many differences appear as recurrent alternatives in how equivalent
+meanings are expressed, including progressive constructions, clitic placement,
+pronoun realization, determiner use, forms of address, and multiword lexical
+choices \citep{barreiro-mota-2018-paraphrastic}.
+\citet{Cyrino_2001} also discusses contrasts involving null objects and verb phrase
+ellipsis, relating them to changes in the verbal structure of BP sentences.
+
+The differences below illustrate several phenomena
+that are especially relevant for variety identification and controlled
+rewriting:
+
+\begin{itemize}
+\item \textbf{Orthography and morphology.} Differences in spelling persist,
+although many contrasts were reduced by the Portuguese Orthographic Agreement.
+In particular, older EP texts may still retain muted consonants such as
+\textit{projecto}, \textit{acto}, or \textit{baptismo}, whereas contemporary
+standardized spelling typically drops them, yielding \textit{projeto},
+\textit{ato}, and \textit{batismo}. Such forms can still appear in legacy
+corpora and archival material, but are less reliable markers in
+post-Agreement data \citep{costa-jussa-etal-2018-neural}.
+
+\item \textbf{Progressive and aspectual periphrases.} EP typically favors the
+progressive with \textit{estar a} + infinitive (e.g.,\textit{Ele estava a
+correr}), whereas BP strongly prefers \textit{estar} + gerund (e.g., \textit{Ele estava correndo}) \citep{barreiro-mota-2018-paraphrastic}.
+
+\item \textbf{Clitic placement and word order.} EP commonly places clitics
+postverbally with hyphenation in affirmative contexts (e.g., \textit{Ele
+viu-me na rua}), while BP more often favors preverbal placement without
+hyphenation (e.g., \textit{Ele me viu na rua}) \citep{barreiro-mota-2018-paraphrastic}.
+
+\item \textbf{Subject pronoun realization (pronoun drop).} Both varieties
+allow null subjects, but BP more frequently includes subject pronouns in
+contexts where EP more readily omits them. For example, EP often allows a null
+subject in a sentence such as \textit{Fui ao supermercado ontem}, whereas BP
+more often uses an overt pronoun (e.g., \textit{Eu fui ao supermercado ontem})
+\citep{barreiro-mota-2018-paraphrastic, costa-jussa-etal-2018-neural}.
+
+\item \textbf{Pronoun preferences.} BP frequently uses \textit{você} as the
+default second-person address form, whereas EP more often uses \textit{tu} in
+informal contexts, or omits the overt subject altogether. In practice, this
+creates frequent rewrite pairs between EP second-person verb morphology and BP
+third-person morphology with \textit{você} \citep{barreiro-mota-2018-paraphrastic, costa-jussa-etal-2018-neural}.
+
+\item \textbf{Determiners with possessives and zero determiners.} In BP,
+definite articles before possessives are often omitted (e.g., \textit{Vendi
+meu carro}), whereas EP more typically requires them (e.g., \textit{Vendi o meu
+carro}). More broadly, BP omits more determiners in contexts where EP prefers
+an overt article \citep{barreiro-mota-2018-paraphrastic, Cyrino_2001}.
+
+\item \textbf{Lexical and multiword preferences.} Some of the most robust
+distinctions in written corpora arise from lexical choice and multiword
+expressions, such as \textit{comboio}/\textit{trem},
+\textit{fato}/\textit{terno}, or \textit{toda a gente}/\textit{todo o mundo}
+\citep{barreiro-mota-2018-paraphrastic, costa-jussa-etal-2018-neural}. Apart from these more familiar
+alternations, lexical variation also includes strong variety preferences and
+false cognates. For instance, \textit{nomeadamente} is very frequent in EP and
+rare in BP, while \textit{propina} most often means \textit{fee} in EP but is
+more commonly interpreted as \textit{bribe} in BP \citep{costa-jussa-etal-2018-neural}.
+\end{itemize}
+
+From an NLP perspective, some of these differences provide strong surface cues
+for variety identification, especially lexical preferences and a subset of
+orthographic contrasts. Others are more structural and are therefore
+particularly important for rewriting, because the model must alter sentence
+organization rather than merely substitute isolated words.
+
+These differences are consistent with the quantitative analysis reported in
+\citep{alves-2025-information}, which studies EP/BP variation in the FRMT dataset using information-theoretic
+measures. The main finding is that lexical choice accounts for the largest
+divergence between the two varieties, but the study also identifies systematic
+grammatical preferences, particularly in subject-pronoun use, progressive
+constructions, and clitic-related patterns. Additional analyses based on
+part-of-speech distributions, dependency relations, and word-order entropy
+suggest that EP and BP share most of their syntactic backbone, while still
+diverging in recurrent local preferences that are salient enough to affect
+automatic processing.
+
+To make these contrasts visible, \cref{tab:frmt-ep-bp-examples} presents a small
+set of representative FRMT pairs. The examples are illustrative and were selected to mirror the divergences highlighted by \citet{alves-2025-information}.
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.20\linewidth} >{\raggedright\arraybackslash}p{0.35\linewidth} >{\raggedright\arraybackslash}p{0.35\linewidth}}
+\toprule
+\textbf{Phenomenon} & \textbf{EP example} & \textbf{BP example} \\
+\midrule
+Lexical choice &
+\textit{O autocarro está atrasado por causa do trânsito.} &
+\textit{O ônibus está atrasado por causa do trânsito.} \\
+Progressive aspect &
+\textit{... ficámos a conversar durante algum tempo.} &
+\textit{... ficamos conversando por um tempo.} \\
+Forms of address and object realization &
+\textit{Se fores à mercearia, traz-me um pacote de bolachas e um sumo de laranja...} &
+\textit{Se você for ao mercado, traz um pacote de biscoitos e um suco de laranja para mim...} \\
+Possessive determiner and progressive aspect &
+\textit{A minha irmã está a planear um jantar romântico...} &
+\textit{Minha irmã está planejando um jantar romântico...} \\
+\bottomrule
+\end{tabular}
+\caption[Representative FRMT examples for EP/BP contrasts]{Representative
+sentence pairs from FRMT illustrating the lexical and morphosyntactic tendencies discussed
+above.}
+\label{tab:frmt-ep-bp-examples}
+\end{table}
+
+Taken together, these contrasts show why EP/BP processing is not well modeled
+as a purely lexical substitution problem and motivate the need for variety-aware
+adaptation. The next subsection therefore introduces language
+models as the main computational framework on top of which such adaptation is
+built.
+
+\section{Language Models}
+\label{sec:language-models}
+
+Language modeling is the task of assigning probabilities to sequences of text.
+Given a sequence of tokens $x_1, x_2, \ldots, x_n$, a language model estimates
+the probability of the full sequence by factorizing it into conditional
+probabilities, typically of the form
+$p(x_1, \ldots, x_n) = \prod_t p(x_t \mid x_{<t})$. In practice, this means
+that the model learns which tokens are likely to occur in a given context. In
+autoregressive settings, this objective appears directly as next-token
+prediction, whereas in other self-supervised settings the model may be trained
+to reconstruct masked or corrupted portions of text from the surrounding
+context \citep{zhao2025surveylargelanguagemodels}.
+
+Early language models were predominantly statistical. One of the most common
+approaches was the $n$-gram model, which estimates the probability of a token
+from the previous $n-1$ tokens by counting how often short sequences occur in a
+corpus. These models were simple and useful for capturing local regularities,
+but they suffered from data sparsity and were inherently limited in their
+ability to model long-range dependencies, since the context window was fixed in
+advance \citep{880083}. As a result, statistical
+language modeling depended heavily on smoothing techniques and large amounts of
+carefully curated training data \citep{Jelinek1997StatisticalMF}.
+
+Neural language models \citep{10.5555/944919.944966} addressed part of this problem by replacing explicit
+count-based statistics with learned distributed representations. Instead of
+treating each context as an isolated symbolic pattern, models used feed-forward networks to learn dense vector
+embeddings for tokens and use trainable nonlinear functions to generalize
+across similar contexts. Recurrent neural networks, and later gated variants
+such as Long-Short Term Memory (LSTM) networks, further improved the ability to handle variable-length context
+and longer dependencies, although training them efficiently at scale remained a
+challenge \citep{Mikolov2010RecurrentNN}.
+
+The current paradigm is strongly shaped by transfer learning, in which a model is first pretrained on large unlabeled corpora and then adapted to downstream tasks. This shift closely tied to the emergence of Transformer architectures, which use self-attention instead of recurrent processing and
+made long-range context more directly accessible, while also enabling more
+efficient large-scale training \citep{46201}. Pre-training on
+large unlabeled corpora followed by task-specific adaptation then became the
+standard recipe for deploying language models across a wide range of NLP tasks.
+
+BERT \citep{devlin2019bertpretrainingdeepbidirectional} helped consolidate Transformer-based encoder models for NLP by showing
+that bidirectional masked-token pretraining could transfer effectively to
+understanding-oriented tasks such as classification and retrieval with minimal
+task-specific changes. As parameter counts, data diversity, and context
+windows continued to grow, decoder-oriented models also became increasingly
+powerful generators. At large scales, these models began to
+display strong prompt-based generalization, in-context learning, and other
+emergent capabilities \citep{10.5555/3495724.3495883, zhao2025surveylargelanguagemodels}. 
+
+In parallel, encoder-decoder models helped reinforce a unified
+sequence-to-sequence view of NLP, in which many tasks can be formulated as
+text-conditioned text generation rather than as entirely separate modeling
+problems \citep{Raffel2019ExploringTL}.
+
+An important design choice in modern neural language modeling concerns tokenization. Rather than operating directly on raw words or characters, many systems represent text as sequences of subword units. 
+Frequent words may remain intact, whereas rarer or morphologically complex forms may be split into smaller pieces. This reduces out-of-vocabulary problems, allows lexical material to be reused across related forms, and helps models handle spelling variation and productive morphology \citep{sennrich-etal-2016-neural}.
+For EP/BP processing, these relevant distinctions may appear either as full lexical substitutions or as smaller orthographic and morphological variations.
+
+As stated before, pretrained language models are a natural starting point for
+the tasks studied in this work, as they already encode a broad prior over
+Portuguese usage and therefore provide a much stronger basis than task-specific
+training from scratch. At the same time, they can be further adapted so that
+the generic knowledge acquired during pretraining becomes more sensitive to the
+distinctions required for variety identification and controlled rewriting. The
+next subsection therefore turns to the Transformer architecture, which underlies
+most modern pretrained language models.
+
+\section{Transformers: Self-Attention, Encoders and Decoders}
+\label{sec:transformers}
+
+To explain in more detail what a Transformer is, it is useful to begin with the
+self-attention operation. Self-attention allows each token in a sequence to mix
+information from the others by computing attention weights that reflect learned
+similarities between token representations. Each token is first mapped to a
+continuous embedding. Since self-attention is permutation-invariant, token
+order must be injected separately through positional encodings. In the
+original Transformer, these are fixed sinusoidal vectors added to token
+embeddings, yielding input representations
+$X \in \mathbb{R}^{n \times d_{\text{model}}}$, where $n$ is the sequence
+length and $d_{\text{model}}$ is the hidden dimension. The value of $n$ is in
+practice bounded by the model's context window, that is, the maximum number of
+tokens it can attend to in one forward pass \citep{46201}.
+
+Given token representations $X$, which already include positional information,
+queries, keys, and values are obtained through learned linear projections,
+\[
+Q = XW^Q, \qquad K = XW^K, \qquad V = XW^V.
+\]
+The scaled dot-product attention used throughout the architecture is then given
+by
+\[
+\mathrm{Attention}(Q, K, V) =
+\mathrm{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
+\]
+This operation replaces each token representation by a similarity-weighted
+combination of the others. Multi-head attention repeats this computation with
+different learned projections and concatenates the resulting representations,
+allowing the model to capture several interaction patterns in parallel
+\citep{46201}.
+
+Although many later architectures are based on self-attention, the original
+Transformer was proposed as an encoder-decoder model for sequence-to-sequence
+tasks. An encoder is a stack of Transformer blocks, each formed by a
+self-attention sublayer followed by a position-wise feed-forward network, with
+residual connections and layer normalization supporting stable training. The
+feed-forward network is position-wise in the sense that the same multilayer
+perceptron is applied independently to each token representation. Since encoder
+self-attention is bidirectional, every position can attend to every other
+position in the source sequence, producing contextual representations that are
+useful both for text understanding and for conditioning downstream generation
+\citep{46201}.
+
+A decoder is also a stack of Transformer blocks, but it introduces two
+mechanisms required for generation. First, masked self-attention applies a
+causal mask that prevents each position from attending to future tokens, so the
+model generates from left to right. Second, a cross-attention sublayer allows
+the decoder to attend to the encoder outputs, making target generation
+explicitly conditioned on the source sequence \citep{46201}.
+
+This architectural template gives rise to distinct model families, which differ in training objectives
+and in how naturally they support classification and text generation. The next subsection reviews these
+families and motivates the model selection for the initial experiment performed in this work.
+
+\section{Language Model Families Amenable to Fine-Tuning}
+\label{sec:model-families}
+
+Modern pretrained language models rely on the Transformer architecture, but
+they differ in how the architecture is used and in the pretraining objectives
+that shape their representations. The main families relevant to
+downstream adaptation are encoder-only, decoder-only, and encoder-decoder
+models.
+
+Encoder-only models, such as BERT, are bidirectional encoders trained to
+recover masked tokens or spans from their surrounding context
+\citep{devlin2019bertpretrainingdeepbidirectional}. Since each position can
+attend to both left and right context, these models are especially effective at
+building contextual representations for tasks such as classification, retrieval,
+or span prediction. In practice, they are often adapted by attaching a
+task-specific prediction head on top of the encoder. However, they are not
+generative by default, which makes them less convenient
+when one wants a single model family to cover both understanding-oriented and
+generation-oriented tasks.
+
+Decoder-only models use a single Transformer stack with causal masking and
+define an autoregressive distribution over continuations
+\citep{10.5555/3495724.3495883}. As their native operation is text generation, given a prefix sequence the model defines the probability of each next token conditioned on the tokens that precede it. 
+This makes decoder-only models a natural fit for open-ended
+generation. When they undergo additional adaptation through instruction tuning,
+they can also become well suited to task following and prompting-based interaction.
+These models can be used for classification as well, either by generating a label directly
+or by scoring candidate labels according to their conditional likelihood. 
+
+Encoder-decoder models combine a bidirectional encoder with an autoregressive
+decoder. The encoder constructs contextual representations of the source
+sequence, and the decoder generates the target sequence while attending to that
+source representation. This formulation is the classical choice for machine
+translation and other conditional generation tasks, and it also supports the
+text-to-text view in which multiple NLP problems are expressed as mappings from
+an input sequence to an output sequence \citep{Raffel2019ExploringTL}. 
+
+All three families operate over tokenized text within a finite context window
+and can benefit from transfer learning through downstream fine-tuning. The key
+question is therefore not whether these families can in principle represent the
+tasks studied, but how naturally their pretraining setup aligns with the
+desired use case. Encoder-only models are particularly strong for
+understanding-oriented prediction and decoder-only models provide a flexible
+generative interface. As this work focuses on both bidirectional rewriting and
+variety-aware prediction, encoder-decoder models provide a particularly
+coherent starting point for the modeling choices introduced in the following
+sections.
+
+Within this encoder-decoder space, we considered a model from the T5Gemma 2 family, most notably the
+\texttt{t5gemma-2-4b-4b} checkpoint. T5Gemma 2 is presented as a family of
+encoder-decoder models obtained by adapting pretrained decoder-only Gemma
+models and then continuing pretraining with a UL2-style objective, which mixes
+several denoising objectives, including span corruption and prefix-style
+prediction, so that the model is exposed both to bidirectional understanding
+and to autoregressive generation 
+\citep{zhang2025t5gemma2seeingreading, 52876}.
+
+This matches the main setups used in the present work reasonably well. The
+dominant task is source-conditioned rewriting, where the model receives a BP or
+EP sentence and must generate its counterpart in the other variety. In
+addition, some of the setups used encode classification-like
+information directly in the decoder target, for instance by making the decoder
+begin with a short variety label before producing the rewritten sentence. In
+that sense, the appeal of T5Gemma 2 in this research is not mainly its
+multimodal or very long-context capability, which are not central to our
+experiments, but rather its compatibility with conditional generation and
+structured text targets.
+
+T5Gemma 2 also introduces architectural choices that are worth noting. For example, these models share word embeddings
+across the encoder and the decoder and replace the usual separation between decoder
+self-attention and cross-attention with a merged attention module
+\citep{zhang2025t5gemma2seeingreading}. The first choice reduces parameter
+duplication, while the second aims to improve efficiency without removing the
+decoder's access to the encoded source. Recent work on adapting Gemma models
+from decoder-only to encoder-decoder form further argues that this architecture
+offers a favorable trade-off between richer source representations, efficient
+inference, and strong downstream fine-tuning behavior \citep{Zhang2025EncoderDecoderGI}.
+
+The next step is to make explicit how tasks are represented for such a model. The
+following section therefore defines variety identification and variety
+rewriting as task formulations.
+
+\section{Task Formulations for Portuguese Variety Processing}
+\label{sec:task-formulations}
+
+In this work, Portuguese variety processing is organized around two
+complementary formulations. One asks the model to decide which variety
+a text belongs to, while the other asks it to produce a version of a sentence in
+a requested variety. This distinction is useful as both tasks depend on
+the same linguistic contrast, but expose that contrast through different output
+structures.
+
+The standard formulation of variety identification is supervised
+classification where, given a text segment, the system selects one label from a
+small set of possible varieties, such as EP or BP
+\citep{article, sousa2025enhancingportuguesevarietyidentification}. However, in a generative
+model, the same task can be represented as generation over a restricted
+output space, where the decoder is expected to produce only a short variety
+label. This does not change the underlying task, but changes the model's
+interface. In a unified sequence-to-sequence setting, this can be implemented
+with label-only targets for identification examples, or with structured targets
+where the first generated token is a variety label. If the target contains both
+a label and a longer sentence, the learning signal can also be restricted to
+the label positions for identification-specific objectives. 
+
+On the other hand, variety rewriting is naturally formulated as conditional generation. The model
+receives a source sentence together with a target-variety
+specification and generates an equivalent sentence in the requested variety. At
+the task-formulation level, EP/BP rewriting is close to language-variety
+translation, where the source and target are not different languages but
+national or regional varieties of the same language
+\citep{costa-jussa-etal-2018-neural,sanches2024brazilianportugueseeuropeanportuguese}.
+The rewriting formulation is also related to paraphrastic reformulation, since
+many valid conversions between EP and BP involve meaning-preserving
+alternatives at the lexical, phrasal, or syntactic level
+\citep{barreiro-mota-2018-paraphrastic}.
+
+A text-to-text formulation provides a common representation for these two
+tasks. In this setting, both inputs and outputs are token sequences, and the
+difference between tasks lies mainly in the expected target sequence. For
+identification, the target is a short label and, for rewriting, the target is a
+full sentence. This type of unified formulation has been used to express many
+NLP problems within a single sequence-to-sequence framework
+\citep{Raffel2019ExploringTL}. For the present work, the motivation is not
+only interface simplicity. The two tasks rely on overlapping variety-sensitive
+evidence, since the cues that support an EP/BP decision are often the same cues
+that must be preserved or modified during rewriting. Sharing model parameters
+across tasks can therefore allow identification data to reinforce what signals
+variety, while rewriting data teaches how those signals should change when a
+target variety is requested \citep{10.1023/A:1007379606734}. This does not imply that a
+multitask model must outperform a dedicated single-task model on every metric,
+since single-task models can allocate all capacity to one objective. However,
+one of the benefits is to obtain a single model that can perform both
+variety-aware prediction and controlled rewriting.
+
+The desired variety can also be made explicit through conditioning. In
+region-aware translation benchmarks, the target region or variety is part of
+the task specification, so the model is expected to generate an output that is
+appropriate not only in meaning but also in regional form
+\citep{riley2023frmtbenchmarkfewshotregionaware}. In text-to-text models, this
+kind of conditioning can be represented in several ways. For example, a task
+prefix can be placed in the input to indicate the operation to perform. A
+control token can specify the desired attribute of the output, such as the
+target variety. In addition, a structured target can require the decoder to
+emit information in a fixed order, for example a variety label
+followed by the generated sentence \citep{Raffel2019ExploringTL}. 
+The exact labels, token choices, and dataset conversion rules are
+implementation details and are therefore described later in the methodology
+chapter.
+
+\section{Fine-Tuning Pretrained Language Models}
+\label{sec:fine-tuning}
+
+The previous sections described how Portuguese variety processing can be
+expressed as text-to-text prediction and why encoder-decoder models are a
+natural backbone for this setting. However, pretraining alone does not guarantee
+that a model will follow the specific behavior required by a downstream task.
+Even when a pretrained model has broad linguistic knowledge, it may not
+consistently distinguish EP from BP, preserve meaning during rewriting, or obey
+the requested target variety. Fine-tuning is the adaptation step that addresses
+this gap by continuing training on data that is closer to the intended use case.
+
+In supervised fine-tuning, the model is trained on input-output examples and
+the parameters are updated to increase the likelihood of the desired targets.
+For a text-to-text model, this means that both classification-style examples and
+rewriting examples can be represented as sequence prediction problems
+\citep{Raffel2019ExploringTL}. A related form of adaptation is continued
+pretraining or domain-adaptive pretraining, where the model is exposed to
+additional in-domain text while keeping a self-supervised objective rather than
+a task-specific target [Don't Stop Pretraining: Adapt Language Models to
+Domains and Tasks]. The difference is that supervised fine-tuning teaches the
+model the desired mapping, whereas continued pretraining mainly adapts the
+model's internal representations to a domain or variety of text.
+
+A central design choice is how many parameters should be updated during
+adaptation. Full fine-tuning updates the entire pretrained model. This gives the
+optimizer maximum flexibility and can be useful when the target task or domain
+differs substantially from pretraining, but it is expensive in memory and
+computation, and may overfit when the supervision is narrow. Parameter-Efficient
+Fine-Tuning (PEFT) instead freezes most or all of the pretrained backbone and
+learns a much smaller set of task-specific parameters. Adapter-based methods
+insert small trainable modules into the network while keeping the original
+model fixed, allowing task adaptation with far fewer updated parameters than
+full fine-tuning \citep{houlsby2019parameterefficienttransferlearningnlp}.
+
+LoRA follows the same parameter-efficient motivation, but implements it by
+learning low-rank updates to selected weight matrices rather than by inserting
+separate adapter layers. If a pretrained weight matrix is denoted by
+\(W \in \mathbb{R}^{d \times k}\), LoRA keeps \(W\) frozen and learns an update
+\(\Delta W = BA\), where \(B \in \mathbb{R}^{d \times r}\),
+\(A \in \mathbb{R}^{r \times k}\), and \(r\) is much smaller than \(d\) and
+\(k\). The effective adapted weight is therefore \(W + \Delta W\), but only the
+low-rank factors are trained \citep{hu2021loralowrankadaptationlarge}. This
+substantially reduces the number of trainable parameters and makes it possible
+to adapt larger models under limited hardware. Quantized variants extend this
+idea by storing the frozen backbone in low precision while training the adapter
+parameters in higher precision [QLoRA: Efficient Finetuning of Quantized LLMs].
+
+Fine-tuning also need not occur in a single step. In staged or sequential
+fine-tuning, adaptation is divided into phases that may use different datasets,
+objectives, or levels of supervision. This can be useful when one phase is meant
+to teach broad task behavior, another to specialize the model to cleaner or more
+specific data, and a later phase to optimize preferences or reward-based
+criteria. The advantage is that each phase can emphasize a different learning
+signal; the risk is that later phases can overwrite behavior learned earlier,
+especially when the data distribution or objective changes substantially
+\citep{pfeiffer-etal-2021-adapterfusion}. In this thesis, the concept is
+important because variety identification, bidirectional rewriting, and
+reward-guided refinement are related but not identical forms of adaptation. The
+next section therefore introduces the background needed when the final
+adaptation signal is expressed as a reward rather than as a fixed reference
+target.
+
+\section{Reinforcement Learning and Reward-Based Fine-Tuning}
+\label{sec:rl-reward-ft}
+
+% Scope for this subsection:
+% - Start from the general idea of optimizing model behavior with rewards or
+%   preferences rather than only token-level supervision.
+% - Cover preference-based fine-tuning and RL-style optimization at a level
+%   broad enough to support the later Stage C discussion.
+% - Include the idea of combining multiple reward components, since this is
+%   central to the thesis setup.
+% - Explain reward weighting, reward shaping, and the possibility of mixing
+%   supervised and RL losses only conceptually.
+% - Do not put the thesis-specific reward design here (BLEU/TER/first-token
+%   weights, copy penalty values, exact candidate-generation settings); those
+%   belong in methods and experiments.

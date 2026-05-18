@@ -1,0 +1,38 @@
+seed: 42
+
+model:
+  base_model: outputs/encoder_decoder/multitask_compare/t5gemma2_270m_stageA_opensubs_frmt_smoke
+  trust_remote_code: true
+  max_source_length: 512
+  max_target_length: 512
+
+dataset:
+  train_path: data/encoder_decoder/t5gemma2/compare_staged_v2/multitask_stageB/train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/compare_staged_v2/multitask_stageB/valid.jsonl
+  max_train_rows: 500
+  max_valid_rows: 100
+  sample_shuffle: true
+  sample_seed: 42
+
+training:
+  output_dir: outputs/encoder_decoder/multitask_compare/t5gemma2_270m_stageB_gpt_adapt_smoke
+  loss_mode: cross_entropy_only
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_steps: 0
+  max_steps: 1
+  logging_steps: 1
+  eval_strategy: steps
+  eval_steps: 1
+  save_steps: 1
+  save_total_limit: 1
+  load_best_model_at_end: false
+  metric_for_best_model: eval_loss
+  greater_is_better: false
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  dataloader_num_workers: 8

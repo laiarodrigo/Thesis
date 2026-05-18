@@ -1,0 +1,65 @@
+base_model: outputs/decoder_only/qwen3_translation_stageA_opensubs_only_lora_merged
+model_type: AutoModelForCausalLM
+tokenizer_type: AutoTokenizer
+trust_remote_code: true
+chat_template: tokenizer_default
+
+load_in_8bit: false
+load_in_4bit: false
+adapter: lora
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+datasets:
+  - path: data/decoder_only/qwen3_translation_stageB_gpt_wiki_frmt/train.jsonl
+    ds_type: json
+    type: chat_template
+    field_messages: messages
+    roles_to_train:
+      - assistant
+
+test_datasets:
+  - path: data/decoder_only/qwen3_translation_stageB_gpt_wiki_frmt/valid.jsonl
+    ds_type: json
+    type: chat_template
+    field_messages: messages
+    roles_to_train:
+      - assistant
+
+dataset_prepared_path: data/decoder_only/qwen3_translation_stageB_gpt_wiki_frmt/prepared
+output_dir: outputs/decoder_only/qwen3_translation_stageB_gpt_wiki_frmt_lora
+
+sequence_len: 512
+sample_packing: false
+pad_to_sequence_len: true
+
+micro_batch_size: 10
+gradient_accumulation_steps: 4
+learning_rate: 5.0e-5
+weight_decay: 0.01
+warmup_steps: 100
+max_steps: 1200
+
+gradient_checkpointing: true
+bf16: true
+fp16: false
+tf32: true
+
+logging_steps: 25
+eval_steps: 100
+save_steps: 200
+save_total_limit: 2
+early_stopping_patience: 8
+
+load_best_model_at_end: true
+metric_for_best_model: eval_loss
+greater_is_better: false

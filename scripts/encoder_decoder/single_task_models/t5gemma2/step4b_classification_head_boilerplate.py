@@ -34,6 +34,16 @@ def print_trainable_stats(model: torch.nn.Module, *, prefix: str = "") -> None:
     )
 
 
+def maybe_limit_split(dataset, *, max_rows: int | None, seed: int, split_name: str):
+    if max_rows is None:
+        return dataset
+    limit = int(max_rows)
+    if limit <= 0 or len(dataset) <= limit:
+        return dataset
+    print(f"[dataset] limiting {split_name} rows: {len(dataset)} -> {limit}")
+    return dataset.shuffle(seed=seed).select(range(limit))
+
+
 class EncoderClassifier(torch.nn.Module):
     def __init__(
         self,
@@ -42,37 +52,42 @@ class EncoderClassifier(torch.nn.Module):
         num_labels: int,
         trust_remote_code: bool,
         local_files_only: bool = False,
+        torch_dtype: torch.dtype | None = None,
         freeze_decoder: bool = True,
         dropout: float = 0.1,
         lora_cfg: dict[str, Any] | None = None,
     ) -> None:
         super().__init__()
-        dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
         load_errors = []
         trust_options = [trust_remote_code]
         if trust_remote_code:
             trust_options.append(False)
         for trust_opt in trust_options:
+            common_kwargs = {
+                "trust_remote_code": trust_opt,
+                "local_files_only": local_files_only,
+            }
             try:
-                self.base = AutoModelForSeq2SeqLM.from_pretrained(
-                    base_model,
-                    dtype=dtype,
-                    trust_remote_code=trust_opt,
-                    local_files_only=local_files_only,
-                )
-                break
-            except TypeError:
-                # Backward compatibility with transformers versions that still expect torch_dtype.
-                try:
+                if torch_dtype is None:
                     self.base = AutoModelForSeq2SeqLM.from_pretrained(
                         base_model,
-                        torch_dtype=dtype,
-                        trust_remote_code=trust_opt,
-                        local_files_only=local_files_only,
+                        **common_kwargs,
                     )
-                    break
-                except Exception as e:  # pragma: no cover - fallback path
-                    load_errors.append(e)
+                else:
+                    try:
+                        self.base = AutoModelForSeq2SeqLM.from_pretrained(
+                            base_model,
+                            dtype=torch_dtype,
+                            **common_kwargs,
+                        )
+                    except TypeError:
+                        # Backward compatibility with transformers versions that still expect torch_dtype.
+                        self.base = AutoModelForSeq2SeqLM.from_pretrained(
+                            base_model,
+                            torch_dtype=torch_dtype,
+                            **common_kwargs,
+                        )
+                break
             except Exception as e:  # pragma: no cover - fallback path
                 load_errors.append(e)
         else:
@@ -298,6 +313,35 @@ def load_cfg(path: Path) -> dict[str, Any]:
         return yaml.safe_load(fh)
 
 
+def normalize_label(raw_label: Any) -> str:
+    text = " ".join(str(raw_label).strip().split()).lower().replace("_", "-")
+    candidates = [text]
+    if ":" in text:
+        candidates.append(text.split(":")[-1].strip())
+    if " " in text:
+        candidates.append(text.split(" ")[-1].strip())
+
+    for cand in candidates:
+        if cand in {"pt-br", "ptbr", "br"}:
+            return "pt-br"
+        if cand in {"pt-pt", "ptpt", "pt"}:
+            return "pt-pt"
+        if cand in {"equal", "same", "shared"}:
+            return "equal"
+
+    raise ValueError(f"Unsupported classification label value: {raw_label!r}")
+
+
+def resolve_model_load_dtype(training_cfg: dict[str, Any]) -> torch.dtype | None:
+    if not torch.cuda.is_available():
+        return None
+    if bool(training_cfg.get("bf16", False)):
+        return torch.bfloat16
+    if bool(training_cfg.get("fp16", False)):
+        return torch.float16
+    return None
+
+
 def build_training_args(training_cfg: dict[str, Any], *, smoke_run: bool) -> TrainingArguments:
     max_steps = 30 if smoke_run else training_cfg.get("max_steps", -1)
     eval_steps = 10 if smoke_run else training_cfg.get("eval_steps", 200)
@@ -373,6 +417,43 @@ def compute_metrics(eval_pred) -> dict[str, float]:
     return {"accuracy": acc, "f1_macro": macro_f1}
 
 
+def _remap_state_dict_keys_for_layout(
+    state: dict[str, torch.Tensor], model: torch.nn.Module
+) -> dict[str, torch.Tensor]:
+    model_keys = set(model.state_dict().keys())
+    state_keys = set(state.keys())
+
+    model_uses_text_model = any(".encoder.text_model." in k for k in model_keys)
+    state_uses_text_model = any(".encoder.text_model." in k for k in state_keys)
+
+    if model_uses_text_model == state_uses_text_model:
+        return state
+
+    remapped: dict[str, torch.Tensor] = {}
+    for key, val in state.items():
+        new_key = key
+        if model_uses_text_model and not state_uses_text_model:
+            if key.startswith("base.model.encoder.layers."):
+                new_key = key.replace("base.model.encoder.", "base.model.encoder.text_model.", 1)
+            elif key.startswith("base.model.encoder.embed_tokens."):
+                new_key = key.replace("base.model.encoder.", "base.model.encoder.text_model.", 1)
+            elif key.startswith("base.model.encoder.norm."):
+                new_key = key.replace("base.model.encoder.", "base.model.encoder.text_model.", 1)
+            elif key.startswith("encoder.layers."):
+                new_key = key.replace("encoder.", "base.model.encoder.text_model.", 1)
+            elif key.startswith("encoder.embed_tokens."):
+                new_key = key.replace("encoder.", "base.model.encoder.text_model.", 1)
+            elif key.startswith("encoder.norm."):
+                new_key = key.replace("encoder.", "base.model.encoder.text_model.", 1)
+        elif (not model_uses_text_model) and state_uses_text_model:
+            if key.startswith("base.model.encoder.text_model."):
+                new_key = key.replace("base.model.encoder.text_model.", "base.model.encoder.", 1)
+            elif key.startswith("encoder.text_model."):
+                new_key = key.replace("encoder.text_model.", "encoder.", 1)
+        remapped[new_key] = val
+    return remapped
+
+
 def main() -> None:
     args = parse_args()
     cfg = load_cfg(args.config)
@@ -407,22 +488,64 @@ def main() -> None:
         use_fast=True,
         trust_remote_code=model_cfg.get("trust_remote_code", True),
     )
+    load_dtype = resolve_model_load_dtype(train_cfg)
+    print(f"  model_load_dtype={str(load_dtype) if load_dtype is not None else 'default'}")
 
     model = EncoderClassifier(
         model_cfg["base_model"],
         num_labels=int(model_cfg["num_labels"]),
         trust_remote_code=bool(model_cfg.get("trust_remote_code", True)),
         local_files_only=bool(model_cfg.get("local_files_only", False)),
+        torch_dtype=load_dtype,
         freeze_decoder=bool(model_cfg.get("freeze_decoder", True)),
         dropout=float(model_cfg.get("dropout", 0.1)),
         lora_cfg=lora_cfg,
     )
+
+    init_from_dir = train_cfg.get("init_from_dir")
+    if init_from_dir:
+        init_dir = Path(str(init_from_dir))
+        init_state_path = init_dir / "classifier_state_dict.pt"
+        if not init_state_path.exists():
+            raise SystemExit(f"init_from_dir provided but missing state dict: {init_state_path}")
+        print(f"Loading init weights from: {init_state_path}")
+        init_state = torch.load(init_state_path, map_location="cpu")
+        try:
+            model.load_state_dict(init_state, strict=True)
+        except RuntimeError as first_error:
+            remapped_state = _remap_state_dict_keys_for_layout(init_state, model)
+            load_result = model.load_state_dict(remapped_state, strict=False)
+            missing = list(load_result.missing_keys)
+            critical_missing = [k for k in missing if k.startswith("classifier.")]
+            if critical_missing:
+                raise RuntimeError(
+                    "State dict init load failed; classifier head weights are missing after remap.\n"
+                    f"Original error: {first_error}\n"
+                    f"Critical missing keys: {critical_missing[:10]}"
+                ) from first_error
+            print(
+                "Warning: non-strict init state_dict load after key remap. "
+                f"missing={len(missing)}, unexpected={len(load_result.unexpected_keys)}"
+            )
+
     print_trainable_stats(model, prefix="[classifier]")
 
     print("Loading datasets...")
     raw_ds = load_dataset(
         "json",
         data_files={"train": data_cfg["train_path"], "validation": data_cfg["valid_path"]},
+    )
+    raw_ds["train"] = maybe_limit_split(
+        raw_ds["train"],
+        max_rows=data_cfg.get("max_train_rows"),
+        seed=seed,
+        split_name="train",
+    )
+    raw_ds["validation"] = maybe_limit_split(
+        raw_ds["validation"],
+        max_rows=data_cfg.get("max_valid_rows"),
+        seed=seed,
+        split_name="validation",
     )
 
     max_len = int(model_cfg.get("max_source_length", 512))
@@ -433,11 +556,15 @@ def main() -> None:
             truncation=True,
             max_length=max_len,
         )
+        label2id = model_cfg["label2id"]
         if "label_id" in batch:
             out["labels"] = [int(x) for x in batch["label_id"]]
+        elif "label" in batch:
+            out["labels"] = [int(label2id[normalize_label(lbl)]) for lbl in batch["label"]]
+        elif "target_text" in batch:
+            out["labels"] = [int(label2id[normalize_label(lbl)]) for lbl in batch["target_text"]]
         else:
-            label2id = model_cfg["label2id"]
-            out["labels"] = [int(label2id[str(lbl)]) for lbl in batch["label"]]
+            raise KeyError("Classification dataset must include one of: label_id, label, target_text")
         return out
 
     tokenized = raw_ds.map(

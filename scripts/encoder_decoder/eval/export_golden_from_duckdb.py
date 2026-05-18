@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Iterator
 
@@ -40,6 +41,22 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--br2pt-token", default="<br-pt>")
     parser.add_argument("--pt2br-token", default="<pt-br>")
     parser.add_argument("--classification-token", default="<id>")
+    parser.add_argument(
+        "--translation-directions",
+        nargs="+",
+        choices=("br2pt", "pt2br"),
+        default=("br2pt", "pt2br"),
+        help="Translation directions to export. Classification rows are still exported for kept source rows.",
+    )
+    parser.add_argument(
+        "--exclude-source-ids-file",
+        type=Path,
+        default=None,
+        help=(
+            "Optional file listing Golden Collection source_ids to exclude. "
+            "Supports .txt/.csv/.json/.jsonl and ignores lines starting with '#'."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -52,6 +69,50 @@ def as_clean_text(value: object) -> str | None:
 
 def normalize_space(text: str) -> str:
     return " ".join(text.split())
+
+
+def load_excluded_source_ids(path: Path | None) -> set[int]:
+    if path is None:
+        return set()
+
+    def collect_from_obj(obj: object) -> set[int]:
+        ids: set[int] = set()
+        if isinstance(obj, int):
+            ids.add(int(obj))
+        elif isinstance(obj, list):
+            for item in obj:
+                ids.update(collect_from_obj(item))
+        elif isinstance(obj, dict):
+            if "source_id" in obj:
+                ids.update(collect_from_obj(obj["source_id"]))
+            for key in ("source_ids", "exclude_source_ids", "excluded_source_ids"):
+                if key in obj:
+                    ids.update(collect_from_obj(obj[key]))
+        return ids
+
+    suffix = path.suffix.lower()
+    if suffix == ".json":
+        return collect_from_obj(json.loads(path.read_text(encoding="utf-8")))
+    if suffix == ".jsonl":
+        ids: set[int] = set()
+        with path.open("r", encoding="utf-8") as fh:
+            for line in fh:
+                line = line.strip()
+                if not line:
+                    continue
+                ids.update(collect_from_obj(json.loads(line)))
+        return ids
+
+    ids: set[int] = set()
+    with path.open("r", encoding="utf-8") as fh:
+        for raw_line in fh:
+            line = raw_line.split("#", 1)[0].strip()
+            if not line:
+                continue
+            first_field = line.split(",", 1)[0].strip()
+            if re.fullmatch(r"\d+", first_field):
+                ids.add(int(first_field))
+    return ids
 
 
 def connect_project(project_db: Path, source_db: Path) -> duckdb.DuckDBPyConnection:
@@ -115,9 +176,12 @@ def main() -> None:
     args.out_dir.mkdir(parents=True, exist_ok=True)
     translation_out = args.out_dir / args.translation_file
     classification_out = args.out_dir / args.classification_file
+    translation_directions = set(args.translation_directions)
+    excluded_source_ids = load_excluded_source_ids(args.exclude_source_ids_file)
 
     con = connect_project(args.project_db, args.source_db)
     source_rows = 0
+    skipped_source_rows = 0
     translation_examples = 0
     classification_examples = 0
 
@@ -134,6 +198,9 @@ def main() -> None:
         ):
             source_rows += 1
             source_id = int(row["source_id"])
+            if source_id in excluded_source_ids:
+                skipped_source_rows += 1
+                continue
             text_br = as_clean_text(row.get("text_pt_br"))
             text_pt = (
                 as_clean_text(row.get("text_pt_pt"))
@@ -144,49 +211,51 @@ def main() -> None:
             if text_br and text_pt:
                 is_equal = normalize_space(text_br) == normalize_space(text_pt)
 
-                trans_fh.write(
-                    json.dumps(
-                        {
-                            "id": translation_examples,
-                            "source_id": source_id,
-                            "task": "translation",
-                            "direction": "br2pt",
-                            "input_text": f"{args.br2pt_token} {text_br}",
-                            "target_text": text_pt,
-                            "source_text": text_br,
-                            "target_variant": "pt-pt",
-                            "is_equal_pair": is_equal,
-                            "dataset": row.get("dataset"),
-                            "bucket": row.get("bucket"),
-                            "source": row.get("source"),
-                        },
-                        ensure_ascii=False,
+                if "br2pt" in translation_directions:
+                    trans_fh.write(
+                        json.dumps(
+                            {
+                                "id": translation_examples,
+                                "source_id": source_id,
+                                "task": "translation",
+                                "direction": "br2pt",
+                                "input_text": f"{args.br2pt_token} {text_br}",
+                                "target_text": text_pt,
+                                "source_text": text_br,
+                                "target_variant": "pt-pt",
+                                "is_equal_pair": is_equal,
+                                "dataset": row.get("dataset"),
+                                "bucket": row.get("bucket"),
+                                "source": row.get("source"),
+                            },
+                            ensure_ascii=False,
+                        )
+                        + "\n"
                     )
-                    + "\n"
-                )
-                translation_examples += 1
+                    translation_examples += 1
 
-                trans_fh.write(
-                    json.dumps(
-                        {
-                            "id": translation_examples,
-                            "source_id": source_id,
-                            "task": "translation",
-                            "direction": "pt2br",
-                            "input_text": f"{args.pt2br_token} {text_pt}",
-                            "target_text": text_br,
-                            "source_text": text_pt,
-                            "target_variant": "pt-br",
-                            "is_equal_pair": is_equal,
-                            "dataset": row.get("dataset"),
-                            "bucket": row.get("bucket"),
-                            "source": row.get("source"),
-                        },
-                        ensure_ascii=False,
+                if "pt2br" in translation_directions:
+                    trans_fh.write(
+                        json.dumps(
+                            {
+                                "id": translation_examples,
+                                "source_id": source_id,
+                                "task": "translation",
+                                "direction": "pt2br",
+                                "input_text": f"{args.pt2br_token} {text_pt}",
+                                "target_text": text_br,
+                                "source_text": text_pt,
+                                "target_variant": "pt-br",
+                                "is_equal_pair": is_equal,
+                                "dataset": row.get("dataset"),
+                                "bucket": row.get("bucket"),
+                                "source": row.get("source"),
+                            },
+                            ensure_ascii=False,
+                        )
+                        + "\n"
                     )
-                    + "\n"
-                )
-                translation_examples += 1
+                    translation_examples += 1
 
                 if is_equal:
                     label = "equal"
@@ -277,8 +346,11 @@ def main() -> None:
 
     print("Golden export completed")
     print(f"  source rows: {source_rows}")
+    print(f"  skipped source rows: {skipped_source_rows}")
     print(f"  translation examples: {translation_examples}")
     print(f"  classification examples: {classification_examples}")
+    print(f"  translation directions: {sorted(translation_directions)}")
+    print(f"  excluded source ids: {len(excluded_source_ids)}")
     print(f"  translation file: {translation_out}")
     print(f"  classification file: {classification_out}")
 

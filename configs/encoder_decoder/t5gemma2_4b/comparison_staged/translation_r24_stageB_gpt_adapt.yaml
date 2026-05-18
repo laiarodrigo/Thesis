@@ -7,8 +7,8 @@ model:
   max_target_length: 512
 
 dataset:
-  train_path: data/encoder_decoder/t5gemma2/translation_train.jsonl
-  valid_path: data/encoder_decoder/t5gemma2/translation_valid.jsonl
+  train_path: data/encoder_decoder/t5gemma2/compare_staged_v2/stageB_gpt_refresh2_frmt_mix/translation_train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/compare_staged_v2/stageB_gpt_refresh2_frmt_mix/translation_valid.jsonl
 
 lora:
   enabled: true

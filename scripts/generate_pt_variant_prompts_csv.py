@@ -14,12 +14,14 @@ from __future__ import annotations
 
 import argparse
 import csv
+import difflib
 import json
 import math
 import os
 import random
 import re
 import time
+import unicodedata
 import uuid
 from collections import Counter
 from pathlib import Path
@@ -41,19 +43,54 @@ FLEX_PAIR_REGEX_B = re.compile(
 )
 SIMILARITY_TOKEN_REGEX = re.compile(r"\w+", flags=re.UNICODE)
 SENTENCE_SPLIT_REGEX = re.compile(r"(?<=[.!?…])\s+")
+STAGEC_TOKEN_REGEX = re.compile(r"\w+|[^\w\s]", flags=re.UNICODE)
+PROPER_NOUN_REGEX = re.compile(
+    r"\b[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ][\wÁÀÂÃÉÊÍÓÔÕÚÇáàâãéêíóôõúç-]+(?:\s+[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ][\wÁÀÂÃÉÊÍÓÔÕÚÇáàâãéêíóôõúç-]+){0,3}"
+)
+STRICT_MARKER_VARIANTS = {
+    "autocarro", "ônibus", "comboio", "trem", "telemóvel", "celular",
+    "sumo", "suco", "bolachas", "biscoitos", "fixe", "legal",
+    "rapariga", "raparigas", "moça", "moças", "miúdo", "miúda", "miúdos", "miúdas",
+    "garoto", "garota", "garotos", "garotas", "fato", "terno",
+    "frigorífico", "geladeira", "gelado", "sorvete", "chávena", "xícara",
+    "bicha", "fila", "propina", "mensalidade", "ecrã", "tela",
+    "ficheiro", "arquivo", "ordenador", "computador", "esferográfica", "caneta",
+    "prémio", "prêmio", "investigação", "pesquisa", "investigador", "pesquisador",
+    "investigadora", "pesquisadora", "equipa", "equipe", "infeção", "infecção",
+    "concerto", "show", "decorreu", "ocorreu", "costeira", "litorânea",
+    "edifício", "prédio", "seu", "sua", "num", "numa",
+}
+GEO_SENSITIVE_TOKENS = {
+    "portugues", "portuguesa", "portugueses", "portuguesas",
+    "brasileiro", "brasileira", "brasileiros", "brasileiras",
+    "lisboeta", "lisboetas", "lisboeta", "lisboetas",
+    "carioca", "cariocas", "paulista", "paulistas",
+    "portuense", "portuenses", "coimbrão", "coimbrã", "coimbrãos", "coimbrãs",
+    "europeu", "europeia", "europeus", "europeias",
+    "nordestino", "nordestina", "nordestinos", "nordestinas",
+    "pantaneiro", "pantaneira", "pantaneiros", "pantaneiras",
+}
 DEFAULT_TOPICS = [
-    "compras",
-    "alimentacao",
-    "familia",
-    "trabalho",
-    "escola",
-    "saude",
-    "transportes",
-    "viagens",
-    "casa",
+    "sci-fi",
+    "romance",
+    "fantasia",
+    "mistério",
+    "drama",
+    "aventura",
+    "histórico",
+    "thriller",
+    "comédia",
     "tecnologia",
-    "lazer",
-    "servicos",
+    "vida_quotidiana",
+    "jornalismo",
+]
+DEFAULT_LITERARY_INSPIRATIONS = [
+    "realismo social",
+    "ficção especulativa",
+    "romance intimista",
+    "crónica urbana",
+    "conto fantástico",
+    "narrativa histórica",
 ]
 
 
@@ -80,13 +117,44 @@ def parse_args() -> argparse.Namespace:
         "--examples-file",
         type=Path,
         default=repo_root / "exemplos.txt",
-        help="Reference examples file used to mimic style.",
+        help=(
+            "Reference inspiration file. Accepts TXT/JSON/JSONL with pt_PT/pt_BR pairs "
+            "or monolingual passages (for example, Wikipedia excerpts)."
+        ),
+    )
+    parser.add_argument(
+        "--extra-examples-file",
+        action="append",
+        type=Path,
+        default=[],
+        help=(
+            "Additional reference file(s) appended to the prompt. "
+            "Useful for injecting the last good CSV as pair guidance."
+        ),
     )
     parser.add_argument(
         "--output-csv",
         type=Path,
         default=repo_root / "data" / "pt_variant_prompts_500.csv",
         help="Output CSV path.",
+    )
+    parser.add_argument(
+        "--dedupe-against-dir",
+        type=Path,
+        default=None,
+        help="Optional directory of existing CSVs used for cross-batch deduplication.",
+    )
+    parser.add_argument(
+        "--dedupe-glob",
+        default="pt_variant_prompts_wikipedia_batch_*.csv",
+        help="Glob used inside --dedupe-against-dir to find CSVs for deduplication.",
+    )
+    parser.add_argument(
+        "--dedupe-exclude-file",
+        action="append",
+        type=Path,
+        default=[],
+        help="CSV file(s) to exclude from cross-batch deduplication.",
     )
     parser.add_argument(
         "--env-file",
@@ -157,6 +225,15 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         default=False,
         help="Append generated rows to existing output CSV instead of overwriting.",
+    )
+    parser.add_argument(
+        "--plain-only",
+        action="store_true",
+        default=False,
+        help=(
+            "Generate all examples in a single plain sentence mode without "
+            "long/short/story prompt framing."
+        ),
     )
     parser.add_argument(
         "--long-ratio",
@@ -315,12 +392,122 @@ def parse_args() -> argparse.Namespace:
         "--reference-pairs",
         type=int,
         default=12,
-        help="How many pairs to pull from exemplos.txt as style anchors.",
+        help="Maximum number of reference items to include from --examples-file.",
+    )
+    parser.add_argument(
+        "--prompt-style",
+        choices=("legacy", "minimal_lexical"),
+        default="legacy",
+        help=(
+            "Prompt template. 'legacy' keeps the original topic/literary generation style; "
+            "'minimal_lexical' asks for near-literal pt-PT/pt-BR pairs with only clear variant changes."
+        ),
     )
     parser.add_argument(
         "--topics",
         default=",".join(DEFAULT_TOPICS),
         help="Comma-separated list of allowed topic tags used for coverage balancing.",
+    )
+    parser.add_argument(
+        "--generation-profile",
+        choices=("topics", "literary", "mixed"),
+        default="mixed",
+        help="Prompt profile for style guidance: topic-only, literary-inspired, or mixed.",
+    )
+    parser.add_argument(
+        "--literary-inspirations",
+        default=",".join(DEFAULT_LITERARY_INSPIRATIONS),
+        help=(
+            "Comma-separated literary style inspirations used when generation-profile is literary/mixed."
+        ),
+    )
+    parser.add_argument(
+        "--min-variant-differences",
+        type=int,
+        default=2,
+        help=(
+            "Minimum lexical/phrase differences requested between pt_PT and pt_BR "
+            "to reduce copy-like pairs."
+        ),
+    )
+    parser.add_argument(
+        "--rewrite-intensity",
+        choices=("normal", "heavy"),
+        default="normal",
+        help="Controls how strongly pt_PT/pt_BR must be rewritten relative to each other.",
+    )
+    parser.add_argument(
+        "--min-enforced-variant-token-edits",
+        type=int,
+        default=0,
+        help=(
+            "Post-filter minimum token edit count between pt_PT and pt_BR. "
+            "0 disables the hard filter (prompt guidance still applies)."
+        ),
+    )
+    parser.add_argument(
+        "--min-enforced-variant-edit-ratio",
+        type=float,
+        default=0.0,
+        help=(
+            "Post-filter minimum edit ratio between pt_PT and pt_BR in [0,1]. "
+            "0 disables the hard filter."
+        ),
+    )
+    parser.add_argument(
+        "--strict-variant-filter",
+        action="store_true",
+        default=False,
+        help="Apply a Stage-C-style post-filter to reject neutral paraphrases and weak edits.",
+    )
+    parser.add_argument(
+        "--reject-entity-drift",
+        action="store_true",
+        default=False,
+        help="Reject candidate pairs that change names, locations, institutions, dates or other capitalized entities.",
+    )
+    parser.add_argument(
+        "--forbid-frmt-leakage",
+        action="store_true",
+        default=False,
+        help=(
+            "Add anti-leak constraints to prompts and filter out candidates "
+            "too similar to texts loaded from --frmt-guard-dataset."
+        ),
+    )
+    parser.add_argument(
+        "--frmt-guard-dataset",
+        type=Path,
+        default=None,
+        help=(
+            "Optional JSONL/CSV/TXT file containing FRMT-like texts used as a leakage guard."
+        ),
+    )
+    parser.add_argument(
+        "--frmt-guard-max-jaccard-similarity",
+        type=float,
+        default=0.58,
+        help=(
+            "Reject candidates with token Jaccard similarity above this threshold "
+            "against guard dataset texts."
+        ),
+    )
+    parser.add_argument(
+        "--exclude-equal",
+        action="store_true",
+        default=False,
+        help=(
+            "Disable equal-pair generation (pt_PT == pt_BR). "
+            "If set, non-equal ratios are automatically re-normalized."
+        ),
+    )
+    parser.add_argument(
+        "--drop-existing-equal",
+        action="store_true",
+        default=False,
+        help=(
+            "When output CSV exists, remove existing equal rows before new generation."
+        ),
     )
     parser.add_argument(
         "--disable-topic-tags",
@@ -339,6 +526,15 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=140,
         help="Maximum API attempts for each generation mode.",
+    )
+    parser.add_argument(
+        "--rotate-thread-every-requested-items",
+        type=int,
+        default=0,
+        help=(
+            "Rotate the active thread id after this many requested items have been tried "
+            "within a generation mode. 0 disables cadence-based rotation."
+        ),
     )
     parser.add_argument(
         "--rotate-thread-on-backend-error",
@@ -487,6 +683,181 @@ def reference_block(pairs: list[dict[str, str]]) -> str:
     return "\n".join(lines)
 
 
+def truncate_reference_text(text: str, max_chars: int = 420) -> str:
+    cleaned = normalize_space(text)
+    if len(cleaned) <= max_chars:
+        return cleaned
+    trimmed = cleaned[: max_chars - 1].rstrip()
+    last_space = trimmed.rfind(" ")
+    if last_space >= max_chars // 2:
+        trimmed = trimmed[:last_space]
+    return trimmed.rstrip(" ,;:") + "…"
+
+
+def load_json_records(path: Path) -> list[Any]:
+    suffix = path.suffix.lower()
+    if suffix == ".jsonl":
+        records: list[Any] = []
+        with path.open("r", encoding="utf-8") as fh:
+            for line in fh:
+                raw = line.strip()
+                if not raw:
+                    continue
+                try:
+                    records.append(json.loads(raw))
+                except json.JSONDecodeError:
+                    continue
+        return records
+
+    if suffix != ".json":
+        return []
+
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return []
+
+    if isinstance(payload, dict):
+        for key in ("exemplos", "examples", "items", "records", "articles", "passages"):
+            value = payload.get(key)
+            if isinstance(value, list):
+                return value
+        return [payload]
+    if isinstance(payload, list):
+        return payload
+    return []
+
+
+def extract_reference_snippet(item: Any) -> dict[str, str] | None:
+    if isinstance(item, str):
+        text = truncate_reference_text(item)
+        return {"text": text} if text else None
+
+    if not isinstance(item, dict):
+        return None
+
+    title = normalize_space(
+        str(item.get("title") or item.get("titulo") or item.get("headline") or "").strip()
+    )
+    url = normalize_space(str(item.get("url") or item.get("source_url") or "").strip())
+
+    text = normalize_space(
+        str(
+            item.get("text")
+            or item.get("texto")
+            or item.get("passage")
+            or item.get("snippet")
+            or item.get("content")
+            or item.get("article_text")
+            or ""
+        ).strip()
+    )
+    if not text:
+        paragraphs = item.get("paragraphs") or item.get("paragrafos")
+        if isinstance(paragraphs, list):
+            parts = [normalize_space(str(part).strip()) for part in paragraphs if str(part).strip()]
+            text = " ".join(parts[:2]).strip()
+
+    if not text:
+        return None
+
+    result = {"text": truncate_reference_text(text)}
+    if title:
+        result["title"] = title
+    if url:
+        result["url"] = url
+    return result
+
+
+def load_reference_material(path: Path, limit: int) -> str:
+    if not path.exists():
+        return "No explicit reference examples provided."
+
+    suffix = path.suffix.lower()
+    text = path.read_text(encoding="utf-8") if suffix in {".txt", ".md"} else ""
+    pair_items: list[dict[str, str]] = []
+    snippet_items: list[dict[str, str]] = []
+
+    if text:
+        pair_items.extend(read_reference_pairs(path, limit))
+
+    if suffix == ".csv":
+        with path.open("r", encoding="utf-8", newline="") as fh:
+            reader = csv.DictReader(fh)
+            for row in reader:
+                if len(pair_items) >= limit and len(snippet_items) >= limit:
+                    break
+                pt_pt = normalize_space(str(row.get("pt_PT") or row.get("pt_pt") or "").strip())
+                pt_br = normalize_space(str(row.get("pt_BR") or row.get("pt_br") or "").strip())
+                if pt_pt and pt_br and len(pair_items) < limit:
+                    pair_items.append({"pt_PT": pt_pt, "pt_BR": pt_br})
+                    continue
+                snippet = extract_reference_snippet(row)
+                if snippet is not None and len(snippet_items) < limit:
+                    snippet_items.append(snippet)
+
+    if suffix in {".json", ".jsonl"}:
+        for record in load_json_records(path):
+            if len(pair_items) >= limit and len(snippet_items) >= limit:
+                break
+            if isinstance(record, dict):
+                pt_pt = normalize_space(
+                    str(
+                        record.get("pt_PT")
+                        or record.get("pt_pt")
+                        or record.get("pt-PT")
+                        or record.get("ptPT")
+                        or ""
+                    ).strip()
+                )
+                pt_br = normalize_space(
+                    str(
+                        record.get("pt_BR")
+                        or record.get("pt_br")
+                        or record.get("pt-BR")
+                        or record.get("ptBR")
+                        or ""
+                    ).strip()
+                )
+                if pt_pt and pt_br and len(pair_items) < limit:
+                    pair_items.append({"pt_PT": pt_pt, "pt_BR": pt_br})
+                    continue
+
+            snippet = extract_reference_snippet(record)
+            if snippet is not None and len(snippet_items) < limit:
+                snippet_items.append(snippet)
+
+    if not pair_items and not snippet_items and text:
+        for raw_line in text.splitlines():
+            cleaned = truncate_reference_text(raw_line)
+            if cleaned:
+                snippet_items.append({"text": cleaned})
+            if len(snippet_items) >= limit:
+                break
+
+    sections: list[str] = []
+    if pair_items:
+        sections.append("Pares de referência pt_PT/pt_BR:")
+        sections.append(reference_block(pair_items[:limit]))
+    if snippet_items:
+        sections.append("Passagens de referência:")
+        for idx, item in enumerate(snippet_items[:limit], start=1):
+            title_prefix = f'Título: {item["title"]}. ' if item.get("title") else ""
+            sections.append(f'{idx}. {title_prefix}"{item["text"]}"')
+
+    return "\n".join(sections).strip() if sections else "No explicit reference examples provided."
+
+
+def load_reference_materials(paths: list[Path], limit: int) -> str:
+    sections: list[str] = []
+    for path in paths:
+        material = load_reference_material(path, limit)
+        if not material or material == "No explicit reference examples provided.":
+            continue
+        sections.append(f"Ficheiro: {path.name}\n{material}")
+    return "\n\n".join(sections) if sections else "No explicit reference examples provided."
+
+
 def parse_topics(raw: str) -> list[str]:
     out: list[str] = []
     seen: set[str] = set()
@@ -498,6 +869,185 @@ def parse_topics(raw: str) -> list[str]:
             out.append(topic)
             seen.add(topic)
     return out
+
+
+def parse_values(raw: str) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+    for part in raw.split(","):
+        value = part.strip()
+        if not value:
+            continue
+        key = value.lower()
+        if key not in seen:
+            out.append(value)
+            seen.add(key)
+    return out
+
+
+def normalize_space(text: str) -> str:
+    return " ".join((text or "").split())
+
+
+def fold_for_compare(text: str) -> str:
+    raw = unicodedata.normalize("NFKD", (text or "").lower())
+    return "".join(ch for ch in raw if not unicodedata.combining(ch))
+
+
+def normalized_variant_tokens(text: str) -> list[str]:
+    return SIMILARITY_TOKEN_REGEX.findall(fold_for_compare(text))
+
+
+def variant_edit_stats(pt_pt: str, pt_br: str) -> tuple[int, float]:
+    pt_pt_tokens = normalized_variant_tokens(pt_pt)
+    pt_br_tokens = normalized_variant_tokens(pt_br)
+    if not pt_pt_tokens and not pt_br_tokens:
+        return 0, 0.0
+    matcher = difflib.SequenceMatcher(a=pt_pt_tokens, b=pt_br_tokens, autojunk=False)
+    token_edits = 0
+    for tag, i1, i2, j1, j2 in matcher.get_opcodes():
+        if tag == "equal":
+            continue
+        token_edits += max(i2 - i1, j2 - j1)
+    denom = max(len(pt_pt_tokens), len(pt_br_tokens), 1)
+    return token_edits, token_edits / denom
+
+
+def strict_tokenize(text: str) -> list[str]:
+    return STAGEC_TOKEN_REGEX.findall(normalize_space(text))
+
+
+def is_word_token(token: str) -> bool:
+    return bool(token) and any(ch.isalnum() for ch in token)
+
+
+def is_strict_marker_token(token: str) -> bool:
+    return token.casefold() in STRICT_MARKER_VARIANTS
+
+
+def is_geo_sensitive_token(token: str) -> bool:
+    return fold_for_compare(token) in GEO_SENSITIVE_TOKENS
+
+
+def extract_proper_nouns(text: str) -> set[str]:
+    blocked = {"A", "O", "Os", "As", "Um", "Uma", "No", "Na", "Nos", "Nas", "Em", "De"}
+    spans: set[str] = set()
+    for match in PROPER_NOUN_REGEX.finditer(text or ""):
+        span = normalize_space(match.group(0))
+        if span in blocked:
+            continue
+        spans.add(span.casefold())
+    return spans
+
+
+def strict_variant_metrics(pt_pt: str, pt_br: str) -> dict[str, int | float | bool]:
+    pt_tokens = strict_tokenize(pt_pt)
+    br_tokens = strict_tokenize(pt_br)
+    matcher = difflib.SequenceMatcher(
+        a=[tok.casefold() for tok in pt_tokens],
+        b=[tok.casefold() for tok in br_tokens],
+        autojunk=False,
+    )
+
+    changed_spans = 0
+    changed_word_tokens = 0
+    marker_changed_tokens = 0
+    non_marker_changed_tokens = 0
+    capitalized_changed_tokens = 0
+    digit_changed_tokens = 0
+    geo_sensitive_changed_tokens = 0
+
+    for tag, i1, i2, j1, j2 in matcher.get_opcodes():
+        if tag == "equal":
+            continue
+        changed_spans += 1
+        for tok in [*pt_tokens[i1:i2], *br_tokens[j1:j2]]:
+            if not is_word_token(tok):
+                continue
+            changed_word_tokens += 1
+            if any(ch.isdigit() for ch in tok):
+                digit_changed_tokens += 1
+            if tok[:1].isupper():
+                capitalized_changed_tokens += 1
+            if is_geo_sensitive_token(tok):
+                geo_sensitive_changed_tokens += 1
+            if is_strict_marker_token(tok):
+                marker_changed_tokens += 1
+            else:
+                non_marker_changed_tokens += 1
+
+    denom = max(
+        sum(1 for tok in pt_tokens if is_word_token(tok)),
+        sum(1 for tok in br_tokens if is_word_token(tok)),
+        1,
+    )
+    structural_overlap = difflib.SequenceMatcher(
+        a=[tok.casefold() for tok in pt_tokens],
+        b=[tok.casefold() for tok in br_tokens],
+        autojunk=False,
+    ).ratio()
+    return {
+        "changed_spans": changed_spans,
+        "changed_word_tokens": changed_word_tokens,
+        "marker_changed_tokens": marker_changed_tokens,
+        "non_marker_changed_tokens": non_marker_changed_tokens,
+        "edit_ratio": changed_word_tokens / denom,
+        "structural_overlap": structural_overlap,
+        "paraphrase_score": non_marker_changed_tokens / denom,
+        "entity_drift": extract_proper_nouns(pt_pt) != extract_proper_nouns(pt_br),
+        "capitalized_changed_tokens": capitalized_changed_tokens,
+        "digit_changed_tokens": digit_changed_tokens,
+        "geo_sensitive_changed_tokens": geo_sensitive_changed_tokens,
+    }
+
+
+def strict_variant_reject_reason(pt_pt: str, pt_br: str, *, reject_entity_drift: bool) -> str | None:
+    metrics = strict_variant_metrics(pt_pt, pt_br)
+    if reject_entity_drift and (
+        metrics["entity_drift"] or metrics["geo_sensitive_changed_tokens"] > 0
+    ):
+        return "entity_drift"
+    if (
+        metrics["capitalized_changed_tokens"] > 0
+        or metrics["digit_changed_tokens"] > 0
+        or metrics["geo_sensitive_changed_tokens"] > 0
+    ):
+        return "entity_drift"
+    passes_core = (
+        metrics["changed_spans"] <= 4
+        and metrics["edit_ratio"] <= 0.30
+        and metrics["structural_overlap"] >= 0.72
+        and metrics["paraphrase_score"] <= 0.18
+        and metrics["non_marker_changed_tokens"] <= 6
+        and metrics["marker_changed_tokens"] > 0
+        and (metrics["non_marker_changed_tokens"] - metrics["marker_changed_tokens"] <= 2)
+    )
+    if not passes_core:
+        return "strict_variant"
+    return None
+
+
+def entity_drift_reject_reason(pt_pt: str, pt_br: str) -> str | None:
+    metrics = strict_variant_metrics(pt_pt, pt_br)
+    if (
+        metrics["entity_drift"]
+        or metrics["capitalized_changed_tokens"] > 0
+        or metrics["digit_changed_tokens"] > 0
+        or metrics["geo_sensitive_changed_tokens"] > 0
+    ):
+        return "entity_drift"
+    return None
+
+
+def normalize_topic_key(topic: str) -> str:
+    raw = (topic or "").strip().lower()
+    if not raw:
+        return ""
+    raw = unicodedata.normalize("NFKD", raw)
+    raw = "".join(ch for ch in raw if not unicodedata.combining(ch))
+    # Treat hyphens/underscores/spaces/punctuation as equivalent separators.
+    raw = re.sub(r"[^a-z0-9]+", "", raw)
+    return raw
 
 
 def count_words(text: str) -> int:
@@ -512,6 +1062,74 @@ def count_sentences(text: str) -> int:
     if not parts:
         return 1
     return len(parts)
+
+
+def strip_variant_prefix(text: str) -> str:
+    if not text:
+        return ""
+    return re.sub(r"^\s*<[^>]+>\s*", "", text).strip()
+
+
+def load_guard_texts(path: Path) -> list[str]:
+    if not path.exists():
+        return []
+
+    texts: list[str] = []
+    suffix = path.suffix.lower()
+
+    def add(text: str) -> None:
+        cleaned = normalize_space(strip_variant_prefix(str(text)))
+        if cleaned:
+            texts.append(cleaned)
+
+    if suffix == ".csv":
+        with path.open("r", encoding="utf-8", newline="") as fh:
+            reader = csv.DictReader(fh)
+            for row in reader:
+                for key in ("pt_PT", "pt_BR", "text", "gold", "input_text", "target"):
+                    if key in row and row.get(key):
+                        add(str(row[key]))
+        return list(dict.fromkeys(texts))
+
+    if suffix in {".jsonl", ".json"}:
+        with path.open("r", encoding="utf-8") as fh:
+            if suffix == ".jsonl":
+                for line in fh:
+                    raw = line.strip()
+                    if not raw:
+                        continue
+                    try:
+                        obj = json.loads(raw)
+                    except json.JSONDecodeError:
+                        continue
+                    if isinstance(obj, dict):
+                        for key in ("input_text", "text", "gold", "target", "pt_PT", "pt_BR"):
+                            if key in obj and obj.get(key):
+                                add(str(obj[key]))
+                    elif isinstance(obj, str):
+                        add(obj)
+            else:
+                try:
+                    payload = json.loads(fh.read())
+                except json.JSONDecodeError:
+                    payload = None
+                if isinstance(payload, list):
+                    for item in payload:
+                        if isinstance(item, dict):
+                            for key in ("input_text", "text", "gold", "target", "pt_PT", "pt_BR"):
+                                if key in item and item.get(key):
+                                    add(str(item[key]))
+                        elif isinstance(item, str):
+                            add(item)
+                elif isinstance(payload, dict):
+                    for key in ("input_text", "text", "gold", "target", "pt_PT", "pt_BR"):
+                        if key in payload and payload.get(key):
+                            add(str(payload[key]))
+        return list(dict.fromkeys(texts))
+
+    for line in path.read_text(encoding="utf-8").splitlines():
+        add(line)
+    return list(dict.fromkeys(texts))
 
 
 def allocate_counts(total: int, weights: dict[str, float]) -> dict[str, int]:
@@ -702,8 +1320,21 @@ def build_prompt(
     nonce: str,
     topics: list[str],
     include_topic_tag: bool,
+    generation_profile: str,
+    literary_inspirations: list[str],
+    min_variant_differences: int,
+    rewrite_intensity: str,
+    forbid_frmt_leakage: bool,
+    prompt_style: str,
 ) -> str:
-    if mode == "long":
+    if mode == "plain":
+        length_rule = (
+            "Generate plain sentence examples only. Each pt_PT example should be a single natural sentence. "
+            "Do not force short, long, or story style, and do not repeat the same beginning across examples."
+        )
+        equality_rule = "pt_PT and pt_BR must not be identical."
+        sentence_rule = "Each variant must be a single sentence."
+    elif mode == "long":
         length_rule = (
             f"Generate long examples only. Each pt_PT sentence should be at least {long_min} words, "
             "single sentence, natural prose (not subtitle style), and can include a subordinate clause. Do not repeat the same beginning across examples."
@@ -746,17 +1377,156 @@ def build_prompt(
     else:
         raise ValueError(f"Unknown mode: {mode}")
 
+    if prompt_style == "minimal_lexical":
+        if mode == "plain":
+            sentence_rule_pt = "Cada variante deve ser uma única frase natural."
+            length_rule_pt = (
+                "Gera apenas frases naturais inspiradas pelas passagens, sem impor categorias de curto, longo ou história."
+            )
+            equality_rule_pt = "pt_PT e pt_BR não podem ser frases idênticas."
+        elif mode == "long":
+            sentence_rule_pt = "Cada variante deve ser uma única frase."
+            length_rule_pt = (
+                f"Gera apenas exemplos longos. Cada frase pt_PT deve ter pelo menos {long_min} palavras."
+            )
+            equality_rule_pt = "pt_PT e pt_BR não podem ser frases idênticas."
+        elif mode == "short":
+            sentence_rule_pt = "Cada variante deve ser uma única frase."
+            length_rule_pt = (
+                f"Gera apenas exemplos curtos. Cada frase pt_PT deve ter entre {short_min} e {short_max} palavras."
+            )
+            equality_rule_pt = "pt_PT e pt_BR não podem ser frases idênticas."
+        elif mode == "story":
+            sentence_rule_pt = "Cada variante deve ser uma micro-história coerente com várias frases."
+            length_rule_pt = (
+                f"Gera apenas micro-histórias. Cada texto pt_PT deve ter entre {story_min_sentences} e "
+                f"{story_max_sentences} frases e entre {story_min_words} e {story_max_words} palavras."
+            )
+            equality_rule_pt = "pt_PT e pt_BR não podem ser textos idênticos."
+        elif mode == "equal_long":
+            sentence_rule_pt = "Cada variante deve ser uma única frase."
+            length_rule_pt = (
+                f"Gera apenas exemplos longos idênticos. Cada frase deve ter pelo menos {long_min} palavras."
+            )
+            equality_rule_pt = "pt_PT e pt_BR devem ser exatamente o mesmo texto."
+        elif mode == "equal_short":
+            sentence_rule_pt = "Cada variante deve ser uma única frase."
+            length_rule_pt = (
+                f"Gera apenas exemplos curtos idênticos. Cada frase deve ter entre {short_min} e {short_max} palavras."
+            )
+            equality_rule_pt = "pt_PT e pt_BR devem ser exatamente o mesmo texto."
+        elif mode == "equal_story":
+            sentence_rule_pt = "Cada variante deve ser uma micro-história coerente com várias frases."
+            length_rule_pt = (
+                f"Gera apenas micro-histórias idênticas. Cada texto deve ter entre {story_min_sentences} e "
+                f"{story_max_sentences} frases e entre {story_min_words} e {story_max_words} palavras."
+            )
+            equality_rule_pt = "pt_PT e pt_BR devem ser exatamente o mesmo texto."
+        else:
+            raise ValueError(f"Unknown mode: {mode}")
+
+        schema = '{"exemplos":[{"pt_PT":"...", "pt_BR":"..."}]}'
+        topic_rule = ""
+        if include_topic_tag and topics:
+            allowed_topics = ", ".join(topics)
+            schema = '{"exemplos":[{"topic":"...", "pt_PT":"...", "pt_BR":"..."}]}'
+            topic_rule = (
+                f'11) Inclui um campo "topic" e usa exatamente um destes valores: {allowed_topics}.\n'
+                "12) Distribui os exemplos por tópicos diferentes ao longo do lote."
+            )
+
+        leakage_rule = ""
+        if forbid_frmt_leakage:
+            leakage_rule = (
+                "13) Não copies nem parafraseies de perto frases de benchmarks, testes ou ficheiros de avaliação.\n"
+                "14) Usa os exemplos apenas como inspiração de domínio, registo e vocabulário."
+            )
+
+        preferred_max_differences = max(2, min_variant_differences + 1)
+        return f"""
+Gera exatamente {n_items} exemplos bilingues NOVOS com este JSON:
+{schema}
+
+Tarefa:
+Considera os exemplos do ficheiro de inspiração apenas como fonte de tema, domínio e registo.
+Cria frases em Português Europeu e a respetiva tradução em Português do Brasil.
+
+Regras obrigatórias:
+1) {sentence_rule_pt}
+2) As versões pt_PT e pt_BR devem permanecer o mais parecidas possível.
+3) Usa as passagens apenas como inspiração abstrata; não resumas, não traduzas e não recombines o seu conteúdo factual.
+4) Cada exemplo deve estar claramente ancorado em pelo menos uma das passagens de referência, refletindo um tema, domínio, objeto, atividade ou campo semântico reconhecível dessas passagens.
+5) Ao longo do lote, distribui os exemplos por passagens diferentes e tenta cobrir o maior número possível de artigos do ficheiro de inspiração; evita concentrar várias saídas na mesma passagem se houver outras disponíveis.
+6) Usa vocabulário e cenários específicos das passagens; evita frases genéricas intercambiáveis como conferências, exposições, romances, autores ou cientistas, exceto se esses elementos estiverem realmente presentes nas passagens.
+7) Cria conteúdo novo plausível no mesmo domínio ou registo, sem reutilizar as mesmas entidades centrais.
+8) Evita repetir nomes próprios, topónimos, datas, números exatos, títulos de obras, cargos, doenças específicas ou factos raros presentes nas passagens.
+9) Não escrevas paráfrases livres entre pt_PT e pt_BR nem alteres o significado entre variantes sem necessidade.
+10) Muda apenas diferenças lexicais ou morfossintáticas claras entre variantes.
+11) Nos pares não idênticos, prefere entre {min_variant_differences} e {preferred_max_differences} diferenças claras; evita reescritas extensas.
+12) Diferenças apenas de pontuação, maiúsculas, acentos ou ortografia não contam sozinhas.
+13) {length_rule_pt}
+14) {equality_rule_pt}
+15) Antes de finalizar cada exemplo, verifica se ele continua claramente relacionado com uma passagem concreta do lote e rejeita exemplos genéricos que poderiam caber em quase qualquer lote.
+16) Mantém ambas as variantes naturais e gramaticalmente corretas.
+17) Devolve apenas JSON válido, sem markdown, comentários ou chaves extra.
+{topic_rule}
+{leakage_rule}
+
+Nonce do lote: {nonce}
+
+Exemplos do ficheiro de inspiração:
+{refs}
+""".strip()
+
+    if prompt_style != "legacy":
+        raise ValueError(f"Unknown prompt_style: {prompt_style}")
+
     schema = '{"exemplos":[{"pt_PT":"...", "pt_BR":"..."}]}'
     topic_rule = ""
     topic_hint = ""
+    profile_rule = ""
+    rewrite_rule = (
+        "Use variant-specific wording beyond spelling/accents, while keeping equivalent meaning."
+    )
+    if rewrite_intensity == "heavy":
+        rewrite_rule = (
+            "Apply heavier rewriting across variants: change multiple lexical items and at least one phrase/clause structure, "
+            "while preserving meaning."
+        )
+    if generation_profile == "topics":
+        profile_rule = (
+            "Prioritize strong topical identity in each example "
+            "(e.g., sci-fi, romance, fantasy, thriller, jornalismo)."
+        )
+    elif generation_profile == "literary":
+        styles = ", ".join(literary_inspirations) if literary_inspirations else "literary prose"
+        profile_rule = (
+            f"Use literary-inspired phrasing and rhythm based on: {styles}. "
+            "Do not quote or mention specific copyrighted works."
+        )
+    else:  # mixed
+        styles = ", ".join(literary_inspirations) if literary_inspirations else "literary prose"
+        profile_rule = (
+            f"Mix topic-driven scenarios with literary-inspired style ({styles}). "
+            "Do not quote or mention specific copyrighted works."
+        )
+
     if include_topic_tag and topics:
         allowed_topics = ", ".join(topics)
         schema = '{"exemplos":[{"topic":"...", "pt_PT":"...", "pt_BR":"..."}]}'
         topic_rule = (
-            f'9) Include a "topic" field and use exactly one of these values: {allowed_topics}.\n'
-            "10) Spread examples across different topics and avoid concentrating one topic in a batch."
+            f'11) Include a "topic" field and use exactly one of these values: {allowed_topics}.\n'
+            "12) Spread examples across different topics and avoid concentrating one topic in a batch."
         )
         topic_hint = f"Allowed topics: {allowed_topics}"
+
+    leakage_rule = ""
+    if forbid_frmt_leakage:
+        leakage_rule = (
+            "13) Never copy, closely paraphrase, or minimally edit sentences from FRMT or any benchmark/test dataset; "
+            "invent fresh fictional scenarios.\n"
+            "14) Avoid proper names or specialized entities likely to come from evaluation corpora."
+        )
 
     return f"""
 Generate exactly {n_items} NEW bilingual examples with this JSON schema:
@@ -764,14 +1534,18 @@ Generate exactly {n_items} NEW bilingual examples with this JSON schema:
 
 Hard requirements:
 1) {sentence_rule}
-2) Keep meaning equivalent across variants, but adapt naturally to each variant.
+2) Keep meaning equivalent across variants and use clearly variant-specific wording in pt_PT and pt_BR.
 3) Make examples diverse in topic and wording.
 4) Avoid repeating prior samples; produce novel wording and scenarios.
 5) Keep both variants natural and grammatically correct.
 6) Return valid JSON only. No markdown, no comments, no extra keys.
 7) {length_rule}
 8) {equality_rule}
+9) Ensure at least {min_variant_differences} clear lexical/phrase differences between pt_PT and pt_BR; accent/spelling/punctuation-only changes do not count.
+10) {rewrite_rule}
+11) {profile_rule}
 {topic_rule}
+{leakage_rule}
 
 Batch nonce (for diversity): {nonce}
 {topic_hint}
@@ -996,6 +1770,12 @@ def request_batch(
     story_max_words: int,
     topics: list[str],
     include_topic_tag: bool,
+    generation_profile: str,
+    literary_inspirations: list[str],
+    min_variant_differences: int,
+    rewrite_intensity: str,
+    forbid_frmt_leakage: bool,
+    prompt_style: str,
 ) -> list[dict[str, str]]:
     nonce = uuid.uuid4().hex[:12]
     prompt = build_prompt(
@@ -1013,13 +1793,27 @@ def request_batch(
         nonce=nonce,
         topics=topics,
         include_topic_tag=include_topic_tag,
+        generation_profile=generation_profile,
+        literary_inspirations=literary_inspirations,
+        min_variant_differences=min_variant_differences,
+        rewrite_intensity=rewrite_intensity,
+        forbid_frmt_leakage=forbid_frmt_leakage,
+        prompt_style=prompt_style,
     )
     raw = send_agent_message(config, prompt)
-    if "ProcessingUnexpected processing error" in raw:
+    processing_error_markers = (
+        "ProcessingUnexpected processing error",
+        "ProcessingRate limit reached",
+        "ProcessingToo many requests",
+    )
+    if any(marker in raw for marker in processing_error_markers):
         debug_path = Path("data/iaedu_last_response_debug.txt")
         debug_path.parent.mkdir(parents=True, exist_ok=True)
         debug_path.write_text(raw, encoding="utf-8")
-        raise RuntimeError("IAEDU backend processing error (non-JSON stream payload).")
+        # Bubble up backend payload details so retryability checks can detect 429/5xx markers.
+        compact = raw.strip().replace("\n", " ")
+        compact = compact[:240]
+        raise RuntimeError(f"IAEDU backend processing error (non-JSON stream payload): {compact}")
     try:
         examples = extract_examples_from_raw_response(raw)
         if examples:
@@ -1068,6 +1862,69 @@ def read_existing_rows(path: Path) -> tuple[set[str], int, list[str]]:
     return seen_pairs, max_id, pt_pt_texts
 
 
+def load_dedupe_rows_from_dir(
+    directory: Path,
+    *,
+    pattern: str,
+    exclude_paths: set[Path] | None = None,
+) -> tuple[set[str], list[str], int]:
+    seen_pairs: set[str] = set()
+    pt_pt_texts: list[str] = []
+    file_count = 0
+    exclude_resolved = {p.resolve() for p in (exclude_paths or set()) if p.exists() or True}
+
+    if not directory.exists():
+        return seen_pairs, pt_pt_texts, file_count
+
+    for path in sorted(directory.glob(pattern)):
+        try:
+            resolved = path.resolve()
+        except Exception:
+            resolved = path
+        if resolved in exclude_resolved:
+            continue
+        file_seen, _, file_pt_pt = read_existing_rows(path)
+        if not file_seen and not file_pt_pt:
+            continue
+        seen_pairs.update(file_seen)
+        pt_pt_texts.extend(file_pt_pt)
+        file_count += 1
+
+    return seen_pairs, pt_pt_texts, file_count
+
+
+def drop_equal_rows_from_csv(path: Path) -> tuple[int, int]:
+    if not path.exists():
+        return 0, 0
+
+    with path.open("r", encoding="utf-8", newline="") as fh:
+        reader = csv.DictReader(fh)
+        header = list(reader.fieldnames or [])
+        if not header:
+            return 0, 0
+        if "pt_PT" not in header or "pt_BR" not in header:
+            raise SystemExit(
+                "Cannot drop equal rows: CSV header must include pt_PT and pt_BR."
+            )
+        kept_rows: list[dict[str, str]] = []
+        removed = 0
+        for row in reader:
+            pt_pt = normalize_space(str(row.get("pt_PT", "")).strip())
+            pt_br = normalize_space(str(row.get("pt_BR", "")).strip())
+            if pt_pt and pt_br and pt_pt == pt_br:
+                removed += 1
+                continue
+            kept_rows.append({key: str(row.get(key, "")) for key in header})
+
+    tmp_path = path.with_suffix(path.suffix + ".tmp")
+    with tmp_path.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=header)
+        writer.writeheader()
+        writer.writerows(kept_rows)
+    tmp_path.replace(path)
+    return removed, len(kept_rows)
+
+
 def validate_mode_candidate(
     mode: str,
     *,
@@ -1089,6 +1946,13 @@ def validate_mode_candidate(
         return "skipped_not_equal"
     if not is_equal_mode and pt_pt == pt_br:
         return "skipped_equal"
+
+    if mode == "plain":
+        if sentences != 1:
+            return "skipped_sentence_count"
+        if words < 5:
+            return "skipped_too_short"
+        return None
 
     if mode in {"long", "equal_long"}:
         if sentences != 1:
@@ -1178,6 +2042,7 @@ def collect_examples(
     config: dict[str, Any],
     *,
     total: int,
+    plain_only: bool,
     long_ratio: float,
     short_ratio: float,
     story_ratio: float,
@@ -1197,6 +2062,7 @@ def collect_examples(
     story_max_words: int,
     equal_split: str,
     max_attempts: int,
+    rotate_thread_every_requested_items: int,
     pause_seconds: float,
     rotate_thread_on_backend_error: bool,
     candidate_multiplier: float,
@@ -1210,37 +2076,63 @@ def collect_examples(
     max_consecutive_retryable_errors: int,
     topics: list[str],
     enable_topic_tags: bool,
+    generation_profile: str,
+    literary_inspirations: list[str],
+    min_variant_differences: int,
+    rewrite_intensity: str,
+    prompt_style: str,
+    min_enforced_variant_token_edits: int,
+    min_enforced_variant_edit_ratio: float,
+    strict_variant_filter: bool,
+    reject_entity_drift: bool,
+    forbid_frmt_leakage: bool,
+    frmt_guard_texts: list[str] | None,
+    frmt_guard_max_jaccard_similarity: float,
     preexisting_seen: set[str] | None = None,
     preexisting_pt_pt: list[str] | None = None,
     accept_callback: Callable[[dict[str, str]], None] | None = None,
 ) -> list[dict[str, str]]:
-    top_level_targets = allocate_counts(
-        total,
-        {
-            "long": long_ratio,
-            "short": short_ratio,
-            "story": story_ratio,
-            "equal_total": equal_ratio,
-        },
-    )
-    equal_targets = split_equal_targets(
-        top_level_targets["equal_total"],
-        strategy=equal_split,
-        long_ratio=long_ratio,
-        short_ratio=short_ratio,
-        story_ratio=story_ratio,
-    )
-    mode_targets = {
-        "long": top_level_targets["long"],
-        "short": top_level_targets["short"],
-        "story": top_level_targets["story"],
-        "equal_long": equal_targets["equal_long"],
-        "equal_short": equal_targets["equal_short"],
-        "equal_story": equal_targets["equal_story"],
-    }
+    if plain_only:
+        mode_targets = {
+            "plain": total,
+            "long": 0,
+            "short": 0,
+            "story": 0,
+            "equal_long": 0,
+            "equal_short": 0,
+            "equal_story": 0,
+        }
+    else:
+        top_level_targets = allocate_counts(
+            total,
+            {
+                "long": long_ratio,
+                "short": short_ratio,
+                "story": story_ratio,
+                "equal_total": equal_ratio,
+            },
+        )
+        equal_targets = split_equal_targets(
+            top_level_targets["equal_total"],
+            strategy=equal_split,
+            long_ratio=long_ratio,
+            short_ratio=short_ratio,
+            story_ratio=story_ratio,
+        )
+        mode_targets = {
+            "plain": 0,
+            "long": top_level_targets["long"],
+            "short": top_level_targets["short"],
+            "story": top_level_targets["story"],
+            "equal_long": equal_targets["equal_long"],
+            "equal_short": equal_targets["equal_short"],
+            "equal_story": equal_targets["equal_story"],
+        }
 
     topic_tags_enabled = bool(enable_topic_tags and topics)
-    topic_lookup = {topic.lower(): topic for topic in topics}
+    topic_lookup = {
+        normalize_topic_key(topic): topic for topic in topics if normalize_topic_key(topic)
+    }
     topic_counts: dict[str, Counter[str]] = {mode: Counter() for mode in mode_targets}
     topic_limits: dict[str, int] = {}
     if topic_tags_enabled and topics and len(topics) > 0:
@@ -1252,7 +2144,7 @@ def collect_examples(
 
     log(
         "Generation targets: "
-        f"total={total}, long={mode_targets['long']}, short={mode_targets['short']}, story={mode_targets['story']}, "
+        f"total={total}, plain={mode_targets['plain']}, long={mode_targets['long']}, short={mode_targets['short']}, story={mode_targets['story']}, "
         f"equal_long={mode_targets['equal_long']}, equal_short={mode_targets['equal_short']}, "
         f"equal_story={mode_targets['equal_story']}, "
         f"long_batch_size={batch_size}, short_batch_size={short_batch_size}, "
@@ -1265,6 +2157,7 @@ def collect_examples(
 
     seen: set[str] = set(preexisting_seen or set())
     similarity_index = [similarity_tokens(text) for text in (preexisting_pt_pt or []) if text.strip()]
+    frmt_guard_index = [similarity_tokens(text) for text in (frmt_guard_texts or []) if text.strip()]
     opening_policies: list[tuple[int, int]] = [(opening_ngram_size, max_opening_reuse)]
     if not disable_secondary_opening_guard and secondary_opening_ngram_size != opening_ngram_size:
         opening_policies.append((secondary_opening_ngram_size, secondary_max_opening_reuse))
@@ -1281,6 +2174,13 @@ def collect_examples(
         log(f"Loaded {len(seen)} existing pairs; dedup will exclude them.")
     if similarity_index:
         log(f"Loaded {len(similarity_index)} existing pt_PT rows for near-duplicate filtering.")
+    if forbid_frmt_leakage and frmt_guard_index:
+        log(
+            f"Loaded FRMT guard index with {len(frmt_guard_index)} texts "
+            f"(max_jaccard={frmt_guard_max_jaccard_similarity:.2f})."
+        )
+    elif forbid_frmt_leakage:
+        log("FRMT leakage guard requested but no guard texts were loaded; relying on prompt constraints only.")
 
     short_config = config
     if config.get("short_thread_id"):
@@ -1291,6 +2191,7 @@ def collect_examples(
         short_config = dict(config)
 
     mode_specs: list[dict[str, Any]] = [
+        {"mode": "plain", "batch_size": batch_size, "config": long_config, "label": "PLAIN"},
         {"mode": "long", "batch_size": batch_size, "config": long_config, "label": "LONG"},
         {"mode": "short", "batch_size": short_batch_size, "config": short_config, "label": "SHORT"},
         {"mode": "story", "batch_size": story_batch_size, "config": short_config, "label": "STORY"},
@@ -1311,6 +2212,7 @@ def collect_examples(
         backend_errors = 0
         consecutive_retryable_errors = 0
         zero_accept_streak = 0
+        requested_since_rotation = 0
 
         while len(rows_by_mode[mode]) < mode_target and attempts < max_attempts:
             attempts += 1
@@ -1319,10 +2221,22 @@ def collect_examples(
                 max_candidate_batch,
                 max(needed, math.ceil(needed * candidate_multiplier)),
             )
+            if (
+                rotate_thread_every_requested_items > 0
+                and requested_since_rotation >= rotate_thread_every_requested_items
+            ):
+                old_tid = mode_config["thread_id"]
+                mode_config["thread_id"] = rotated_thread_id(old_tid)
+                requested_since_rotation = 0
+                log(
+                    f"[{label}] rotated thread_id after requested-items cadence: "
+                    f"{old_tid} -> {mode_config['thread_id']}"
+                )
             log(
                 f"[{label}] attempt={attempts}/{max_attempts}, need={needed}, request_size={request_size}, "
                 f"collected={len(rows_by_mode[mode])}/{mode_target}"
             )
+            requested_since_rotation += request_size
             try:
                 batch = request_batch(
                     config=mode_config,
@@ -1339,6 +2253,12 @@ def collect_examples(
                     story_max_words=story_max_words,
                     topics=topics,
                     include_topic_tag=topic_tags_enabled,
+                    generation_profile=generation_profile,
+                    literary_inspirations=literary_inspirations,
+                    min_variant_differences=min_variant_differences,
+                    rewrite_intensity=rewrite_intensity,
+                    forbid_frmt_leakage=forbid_frmt_leakage,
+                    prompt_style=prompt_style,
                 )
                 log(f"[{label}] parsed batch_size={len(batch)}")
                 consecutive_retryable_errors = 0
@@ -1382,7 +2302,7 @@ def collect_examples(
             for item in batch:
                 pt_pt = item["pt_PT"].strip()
                 pt_br = item["pt_BR"].strip()
-                topic = topic_lookup.get(str(item.get("topic", "")).strip().lower(), "")
+                topic = topic_lookup.get(normalize_topic_key(str(item.get("topic", ""))), "")
                 key = normalize_pair(pt_pt, pt_br)
                 if key in seen:
                     counters["skipped_dup"] += 1
@@ -1414,12 +2334,52 @@ def collect_examples(
                     counters[mode_reject] += 1
                     continue
 
+                is_equal_mode = mode.startswith("equal_")
+                if not is_equal_mode and (
+                    min_enforced_variant_token_edits > 0 or min_enforced_variant_edit_ratio > 0.0
+                ):
+                    token_edits, edit_ratio = variant_edit_stats(pt_pt, pt_br)
+                    if (
+                        token_edits < min_enforced_variant_token_edits
+                        or edit_ratio < min_enforced_variant_edit_ratio
+                    ):
+                        counters["skipped_variant_diff"] += 1
+                        continue
+                if not is_equal_mode and reject_entity_drift:
+                    drift_reject = entity_drift_reject_reason(pt_pt, pt_br)
+                    if drift_reject is not None:
+                        counters["skipped_entity_drift"] += 1
+                        continue
+                if not is_equal_mode and strict_variant_filter:
+                    strict_reject = strict_variant_reject_reason(
+                        pt_pt,
+                        pt_br,
+                        reject_entity_drift=False,
+                    )
+                    if strict_reject == "entity_drift":
+                        counters["skipped_entity_drift"] += 1
+                        continue
+                    if strict_reject is not None:
+                        counters["skipped_strict_variant"] += 1
+                        continue
+
                 tokens = similarity_tokens(pt_pt)
                 if tokens and any(
                     jaccard_similarity(tokens, previous_tokens) >= max_jaccard_similarity
                     for previous_tokens in similarity_index
                 ):
                     counters["skipped_similar"] += 1
+                    continue
+                if (
+                    forbid_frmt_leakage
+                    and tokens
+                    and frmt_guard_index
+                    and any(
+                        jaccard_similarity(tokens, guard_tokens) >= frmt_guard_max_jaccard_similarity
+                        for guard_tokens in frmt_guard_index
+                    )
+                ):
+                    counters["skipped_leak_risk"] += 1
                     continue
                 opening_signatures: dict[int, str] = {}
                 opening_rejected = False
@@ -1461,7 +2421,11 @@ def collect_examples(
                 f"skipped_sentence_count={counters['skipped_sentence_count']}, "
                 f"skipped_story_sentence_count={counters['skipped_story_sentence_count']}, "
                 f"skipped_story_word_range={counters['skipped_story_word_range']}, "
-                f"skipped_similar={counters['skipped_similar']}, skipped_opening={counters['skipped_opening']}, "
+                f"skipped_variant_diff={counters['skipped_variant_diff']}, "
+                f"skipped_strict_variant={counters['skipped_strict_variant']}, "
+                f"skipped_entity_drift={counters['skipped_entity_drift']}, "
+                f"skipped_similar={counters['skipped_similar']}, skipped_leak_risk={counters['skipped_leak_risk']}, "
+                f"skipped_opening={counters['skipped_opening']}, "
                 f"skipped_topic={counters['skipped_topic']}, skipped_topic_cap={counters['skipped_topic_cap']}"
             )
 
@@ -1478,7 +2442,8 @@ def collect_examples(
                 time.sleep(pause_seconds)
 
     rows = (
-        rows_by_mode["long"]
+        rows_by_mode["plain"]
+        + rows_by_mode["long"]
         + rows_by_mode["short"]
         + rows_by_mode["story"]
         + rows_by_mode["equal_long"]
@@ -1489,7 +2454,8 @@ def collect_examples(
         log(
             "WARNING: could not reach target size after max attempts. "
             f"Generated {len(rows)} of {total} "
-            f"(long={len(rows_by_mode['long'])}/{mode_targets['long']}, "
+            f"(plain={len(rows_by_mode['plain'])}/{mode_targets['plain']}, "
+            f"long={len(rows_by_mode['long'])}/{mode_targets['long']}, "
             f"short={len(rows_by_mode['short'])}/{mode_targets['short']}, "
             f"story={len(rows_by_mode['story'])}/{mode_targets['story']}, "
             f"equal_long={len(rows_by_mode['equal_long'])}/{mode_targets['equal_long']}, "
@@ -1553,6 +2519,20 @@ def main() -> None:
 
     if args.total <= 0:
         raise SystemExit("--total must be > 0")
+    if args.exclude_equal:
+        non_equal_sum = args.long_ratio + args.short_ratio + args.story_ratio
+        if non_equal_sum <= 0:
+            raise SystemExit(
+                "When --exclude-equal is set, at least one of --long-ratio/--short-ratio/--story-ratio must be > 0."
+            )
+        args.long_ratio = args.long_ratio / non_equal_sum
+        args.short_ratio = args.short_ratio / non_equal_sum
+        args.story_ratio = args.story_ratio / non_equal_sum
+        args.equal_ratio = 0.0
+        log(
+            "Equal generation disabled. Re-normalized non-equal ratios to: "
+            f"long={args.long_ratio:.4f}, short={args.short_ratio:.4f}, story={args.story_ratio:.4f}."
+        )
     if not (0.0 <= args.long_ratio <= 1.0):
         raise SystemExit("--long-ratio must be between 0 and 1")
     if not (0.0 <= args.short_ratio <= 1.0):
@@ -1606,12 +2586,53 @@ def main() -> None:
         raise SystemExit("--request-timeout must be > 0")
     if args.max_attempts <= 0:
         raise SystemExit("--max-attempts must be > 0")
+    if args.rotate_thread_every_requested_items < 0:
+        raise SystemExit("--rotate-thread-every-requested-items must be >= 0")
     if args.max_consecutive_retryable_errors <= 0:
         raise SystemExit("--max-consecutive-retryable-errors must be > 0")
+    if args.min_variant_differences < 1:
+        raise SystemExit("--min-variant-differences must be >= 1")
+    if args.min_enforced_variant_token_edits < 0:
+        raise SystemExit("--min-enforced-variant-token-edits must be >= 0")
+    if not (0.0 <= args.min_enforced_variant_edit_ratio <= 1.0):
+        raise SystemExit("--min-enforced-variant-edit-ratio must be between 0 and 1")
+    if not (0.0 <= args.frmt_guard_max_jaccard_similarity <= 1.0):
+        raise SystemExit("--frmt-guard-max-jaccard-similarity must be between 0 and 1")
+
+    if args.rewrite_intensity == "heavy":
+        if args.min_variant_differences < 3:
+            args.min_variant_differences = 3
+        if args.min_enforced_variant_token_edits <= 0:
+            args.min_enforced_variant_token_edits = max(6, args.min_variant_differences * 2)
+        if args.min_enforced_variant_edit_ratio <= 0:
+            args.min_enforced_variant_edit_ratio = 0.18
+        log(
+            "Heavy rewrite enabled. Enforced thresholds: "
+            f"min_variant_differences={args.min_variant_differences}, "
+            f"min_enforced_variant_token_edits={args.min_enforced_variant_token_edits}, "
+            f"min_enforced_variant_edit_ratio={args.min_enforced_variant_edit_ratio:.2f}"
+        )
+    if args.prompt_style == "minimal_lexical":
+        if args.rewrite_intensity == "heavy":
+            raise SystemExit(
+                "--prompt-style minimal_lexical is incompatible with --rewrite-intensity heavy"
+            )
+        if args.min_variant_differences == 2:
+            args.min_variant_differences = 1
+            log(
+                "Minimal lexical prompt selected. Lowered min_variant_differences to 1 "
+                "to encourage near-literal variant translation pairs."
+            )
     topics = parse_topics(args.topics)
+    literary_inspirations = parse_values(args.literary_inspirations)
     topic_tags_enabled = not args.disable_topic_tags and bool(topics)
+    if args.prompt_style == "minimal_lexical" and topic_tags_enabled:
+        topic_tags_enabled = False
+        log("Minimal lexical prompt selected. Topic tags disabled to keep the prompt simple.")
     if not topics and not args.disable_topic_tags:
         log("No topics configured. Topic balancing will be disabled.")
+    if args.generation_profile in {"literary", "mixed"} and not literary_inspirations:
+        log("No literary inspirations configured. Literary guidance will be generic.")
 
     config = resolve_api_config(args)
     if config.get("short_thread_id") and "your_fresh_short_thread_id" in str(config["short_thread_id"]):
@@ -1624,20 +2645,88 @@ def main() -> None:
     )
     if config.get("short_thread_id"):
         log(f"Resolved short thread id: {config['short_thread_id']}")
-    log(f"Reference examples file: {args.examples_file.resolve()}")
+    reference_files = [args.examples_file, *args.extra_examples_file]
+    log(
+        "Reference examples files: "
+        + ", ".join(str(path.resolve()) for path in reference_files)
+    )
     log(f"Output CSV: {args.output_csv.resolve()}")
+    log(
+        "Prompt profile: "
+        f"prompt_style={args.prompt_style}, profile={args.generation_profile}, "
+        f"rewrite_intensity={args.rewrite_intensity}, "
+        f"min_variant_differences={args.min_variant_differences}, "
+        f"min_enforced_variant_token_edits={args.min_enforced_variant_token_edits}, "
+        f"min_enforced_variant_edit_ratio={args.min_enforced_variant_edit_ratio:.2f}, "
+        f"literary_inspirations={literary_inspirations or ['(none)']}"
+    )
     if topic_tags_enabled:
         log(f"Topic balancing enabled with topics={topics}")
     else:
         log("Topic balancing disabled.")
-    refs = reference_block(read_reference_pairs(args.examples_file, args.reference_pairs))
+    if args.drop_existing_equal and args.output_csv.exists():
+        removed, kept = drop_equal_rows_from_csv(args.output_csv)
+        log(
+            f"Dropped {removed} existing equal rows from {args.output_csv.resolve()} "
+            f"(kept_rows={kept})."
+        )
+    refs = load_reference_materials(reference_files, args.reference_pairs)
     existing_seen: set[str] = set()
     existing_pt_pt: list[str] = []
     start_id = 0
+    frmt_guard_texts: list[str] = []
+
+    if args.dedupe_against_dir is not None:
+        exclude_files = {args.output_csv, *args.dedupe_exclude_file}
+        global_seen, global_pt_pt, global_file_count = load_dedupe_rows_from_dir(
+            args.dedupe_against_dir,
+            pattern=args.dedupe_glob,
+            exclude_paths=exclude_files,
+        )
+        if global_seen or global_pt_pt:
+            existing_seen.update(global_seen)
+            existing_pt_pt.extend(global_pt_pt)
+            log(
+                f"Cross-batch dedupe enabled from {args.dedupe_against_dir.resolve()} "
+                f"(files={global_file_count}, pairs={len(global_seen)}, pt_PT_texts={len(global_pt_pt)})."
+            )
+
+    repo_root = Path(__file__).resolve().parents[1]
+    if args.forbid_frmt_leakage:
+        guard_candidates: list[Path] = []
+        if args.frmt_guard_dataset is not None:
+            guard_candidates.append(args.frmt_guard_dataset)
+        guard_candidates.extend(
+            [
+                repo_root / "data" / "encoder_decoder" / "t5gemma2" / "frmt_only" / "translation_test.jsonl",
+                repo_root
+                / "eval_results"
+                / "encoder_decoder"
+                / "compare_staged"
+                / "frmt_eval"
+                / "270m_two_staged_old"
+                / "20260311_184804_translation_predictions.jsonl",
+            ]
+        )
+        guard_path = next((p for p in guard_candidates if p.exists()), None)
+        if guard_path is None and args.frmt_guard_dataset is not None:
+            log(
+                f"FRMT guard dataset not found at {args.frmt_guard_dataset.resolve()}; "
+                "leak guard will rely on prompt constraints only."
+            )
+        elif guard_path is not None:
+            frmt_guard_texts = load_guard_texts(guard_path)
+            log(
+                f"FRMT guard enabled using {guard_path.resolve()} "
+                f"(loaded_texts={len(frmt_guard_texts)})."
+            )
+
     if args.append:
-        existing_seen, start_id, existing_pt_pt = read_existing_rows(args.output_csv)
+        append_seen, start_id, append_pt_pt = read_existing_rows(args.output_csv)
+        existing_seen.update(append_seen)
+        existing_pt_pt.extend(append_pt_pt)
         log(
-            f"Append mode enabled. Loaded existing_pairs={len(existing_seen)}, "
+            f"Append mode enabled. Loaded existing_pairs={len(append_seen)}, "
             f"starting_new_ids_from={start_id + 1}"
         )
 
@@ -1646,6 +2735,7 @@ def main() -> None:
         rows = collect_examples(
             config=config,
             total=args.total,
+            plain_only=args.plain_only,
             long_ratio=args.long_ratio,
             short_ratio=args.short_ratio,
             story_ratio=args.story_ratio,
@@ -1665,6 +2755,7 @@ def main() -> None:
             story_max_words=args.story_max_words,
             equal_split=args.equal_split,
             max_attempts=args.max_attempts,
+            rotate_thread_every_requested_items=args.rotate_thread_every_requested_items,
             pause_seconds=args.pause_seconds,
             rotate_thread_on_backend_error=args.rotate_thread_on_backend_error,
             candidate_multiplier=args.candidate_multiplier,
@@ -1678,6 +2769,18 @@ def main() -> None:
             max_consecutive_retryable_errors=args.max_consecutive_retryable_errors,
             topics=topics,
             enable_topic_tags=topic_tags_enabled,
+            generation_profile=args.generation_profile,
+            literary_inspirations=literary_inspirations,
+            min_variant_differences=args.min_variant_differences,
+            rewrite_intensity=args.rewrite_intensity,
+            prompt_style=args.prompt_style,
+            min_enforced_variant_token_edits=args.min_enforced_variant_token_edits,
+            min_enforced_variant_edit_ratio=args.min_enforced_variant_edit_ratio,
+            strict_variant_filter=args.strict_variant_filter,
+            reject_entity_drift=args.reject_entity_drift,
+            forbid_frmt_leakage=args.forbid_frmt_leakage,
+            frmt_guard_texts=frmt_guard_texts,
+            frmt_guard_max_jaccard_similarity=args.frmt_guard_max_jaccard_similarity,
             preexisting_seen=existing_seen,
             preexisting_pt_pt=existing_pt_pt,
             accept_callback=sink.write,
@@ -1685,6 +2788,7 @@ def main() -> None:
     finally:
         sink.close()
 
+    plain_count = sum(1 for r in rows if r["kind"] == "plain")
     long_count = sum(1 for r in rows if r["kind"] == "long")
     short_count = sum(1 for r in rows if r["kind"] == "short")
     story_count = sum(1 for r in rows if r["kind"] == "story")
@@ -1703,7 +2807,7 @@ def main() -> None:
     action = "Appended" if args.append else "Wrote"
     print(
         f"{action} {sink.written} rows to {args.output_csv} "
-        f"(long={long_count}, short={short_count}, story={story_count}, "
+        f"(plain={plain_count}, long={long_count}, short={short_count}, story={story_count}, "
         f"equal_long={equal_long_count}, equal_short={equal_short_count}, "
         f"equal_story={equal_story_count}, equal_total={equal_count}, total_now={total_now})."
     )

@@ -1,0 +1,61 @@
+seed: 42
+
+model:
+  base_model: google/t5gemma-2-4b-4b
+  trust_remote_code: true
+  num_labels: 3
+  freeze_decoder: true
+  dropout: 0.1
+  label2id:
+    pt-br: 0
+    pt-pt: 1
+    equal: 2
+  id2label:
+    "0": pt-br
+    "1": pt-pt
+    "2": equal
+  max_source_length: 256
+
+dataset:
+  train_path: data/encoder_decoder/t5gemma2/compare_staged_v2/stageA_opensubs_frmt/classification_train.jsonl
+  valid_path: data/encoder_decoder/t5gemma2/compare_staged_v2/stageA_opensubs_frmt/classification_valid.jsonl
+  max_valid_rows: 20000
+
+lora:
+  enabled: true
+  r: 24
+  alpha: 48
+  dropout: 0.05
+  bias: none
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+training:
+  output_dir: outputs/encoder_decoder/compare_staged/t5gemma2_4b_classification_head_r24_stageA_opensubs_plus_frmt
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 8
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_steps: 200
+  max_steps: 800
+  num_train_epochs: 3
+  logging_steps: 25
+  eval_strategy: steps
+  eval_steps: 400
+  save_steps: 400
+  save_total_limit: 2
+  save_checkpoints: false
+  load_best_model_at_end: false
+  metric_for_best_model: eval_f1_macro
+  greater_is_better: true
+  bf16: false
+  fp16: true
+  gradient_checkpointing: true
+  dataloader_num_workers: 8

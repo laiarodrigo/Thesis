@@ -1,0 +1,109 @@
+% #############################################################################
+% This is Chapter 1
+% !TEX root = ../main.tex
+% #############################################################################
+% Change the Name of the Chapter i the following line
+\fancychapter{Introduction}
+% The following line allows to ref this chapter
+\label{chap:intro}
+\noindent 
+Language modeling seeks to estimate the likelihood of word sequences and to use context to predict or generate text. 
+When such models are trained at very large scale, they enter the regime of Large Language Models (LLMs), which have become strong general-purpose tools
+for tasks such as classification, generation, translation, and structured text
+transformation \citep{zhao2025surveylargelanguagemodels}. Their success, however, should not hide the
+basic limitation their behavior being shaped by the
+distribution of the data on which it was trained. For languages with multiple
+standardized varieties, models trained on generic web-scale data often become
+better aligned with the dominant variety and less reliable for the others.
+
+This issue is not specific to Portuguese. Many widely spoken languages are
+pluricentric, in the sense that they are shared across different countries and
+speech communities. Geographic separation, migration, institutional standardization, media
+ecosystems, and local cultural practices all contribute to differences in
+spelling, morphosyntax, lexical choice, and discourse conventions.
+Comparable challenges arise in languages such as English, Spanish, Arabic, or
+French, where users may expect computational systems to respect the variety
+they actually use rather than the variety most represented in the training data. From an NLP perspective, these differences are
+large enough to affect downstream performance, yet subtle enough that they are
+frequently ignored during data collection and pre-training.
+
+The Portuguese case makes this problem especially visible. Portuguese is the
+official language of eight countries and is spoken by approximately 200 million of
+people worldwide. Within this linguistic
+space, European Portuguese (EP) and Brazilian Portuguese (BP) are the two most
+prominent standardized varieties. While some differences are orthographic, many are
+lexical, and others involve morphosyntactic preferences such as clitic
+placement, verbal periphrases, subject realization, or forms of address \citep{barreiro-mota-2018-paraphrastic}.
+
+The challenge is not only linguistic, but also sociotechnical. Brazilian Portuguese
+overwhelmingly dominates the amount of Portuguese text available on the web, and
+resources labeled simply as Portuguese tend to overrepresent Brazilian
+usage. That imbalance propagates to pre-trained models, which are more likely to treat BP as the unmarked default
+and to under-serve EP users in generation, classification, and translation
+settings \citep{sousa2025enhancingportuguesevarietyidentification}. The problem can become even more severe when automatic
+filtering pipelines used to build large training corpora discard material that
+looks noisy, unusual, or weakly aligned, since dialectal and sociolectal text
+is often disproportionately affected by such heuristics
+\citep{sousa2025enhancingportuguesevarietyidentification}. At the same
+time, although commercial systems increasingly expose language-variant options,
+direct support for EP-BP rewriting remains much more limited than translation
+between clearly different languages.
+
+Research on NLP for language varieties has grown in recent years, but it still
+remains comparatively limited when the goal is to jointly address variety
+identification, translation between varieties, user-controlled generation, and
+the data-quality issues that shape all of these tasks. This work aims to take
+Portuguese as a case study for that broader problem. Rather than
+treating Portuguese as a single homogeneous language, it explicitly models
+intra-language variation and studies how corpus construction, data filtering,
+model architecture, and fine-tuning strategies influence variety-aware behavior.
+
+% The work reported in this dissertation developed along two closely connected
+% axes. The first is data-centric: consolidating scattered EP-BP resources into a
+% single corpus and subjecting them to a common preprocessing and quality-control
+% pipeline. The second is model-centric: training and comparing systems for both
+% variety identification and rewriting, with the goal of understanding which
+% modeling choices matter most under realistic data and compute constraints.
+
+This research project makes four main contributions:
+
+\begin{enumerate}
+    \item It consolidates a reusable EP-BP corpus by combining resources such
+    as OPUS OpenSubtitles \citep{4992de1b5fb34f3e9691772606b36edf}, FRMT \citep{riley2023frmtbenchmarkfewshotregionaware}, the Gold Collection \citep{sanches2024brazilianportugueseeuropeanportuguese}, and
+    PtBrVarId \citep{sousa2025enhancingportuguesevarietyidentification}, together with a documented preprocessing and filtering
+    pipeline tailored to the quality issues of each source.
+    \item It develops and evaluates models for both language variety
+    identification and bidirectional rewriting between EP and BP.
+    \item It provides a comparative study of model architecture and adaptation
+    strategy, with particular emphasis on encoder-decoder models at two scales and on the trade-off between full fine-tuning and
+    parameter-efficient adaptation.
+    \item It complements aggregate evaluation with corpus analysis and
+    qualitative error analysis, highlighting where the data is strong, where
+    the models fail, and which linguistic phenomena remain difficult even after
+    fine-tuning.
+\end{enumerate}
+
+The corpus contribution goes beyond simply concatenating existing datasets. The
+resulting resource combines parallel data, variety-labeled data, and
+automatically derived pairs, and it is accompanied by a preprocessing pipeline
+that includes normalization, sentence merging when needed, boilerplate removal,
+deduplication, length-based filtering, and alignment-based quality control. This is especially important for subtitle-derived data, where
+segmentation noise, misalignment, and domain-specific artifacts can otherwise
+dominate the signal learned by the model. Treating corpus construction as a
+central research component, rather than as a preliminary cleanup step, is
+therefore part of the contribution of this thesis.
+
+From the modeling side, we study encoder-decoder adaptation
+for classifying whether a sentence is EP or BP, and rewriting text from one variety
+into the other while preserving meaning. The main model usede is
+T5Gemma2 \citep{zhang2025t5gemma2seeingreading}, explored at 270 million and 4 billion parameters.
+Given the available compute budget and the practical relevance of efficient
+adaptation, the larger configuration is trained primarily with Low-Rank
+Adaptation (LoRA) adapters \citep{hu2021loralowrankadaptationlarge}, while the smaller configuration is
+fully fine-tuned to provide a strong comparison point \citep{houlsby2019parameterefficienttransferlearningnlp}. The results
+obtained throughout this work show that carefully curated data and targeted
+fine-tuning can yield systems that slightly outperform previously tested baselines for
+EP/BP classification and rewriting.
+
+
+The remainder of this dissertation is organized as follows. \textbf{FINISH LATER}

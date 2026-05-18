@@ -9,6 +9,7 @@ calls the existing generic trainer. Fill TODOs incrementally.
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -57,6 +58,11 @@ def main() -> None:
         raise SystemExit(f"Missing trainer script: {trainer_script}")
 
     cmd = ["python3", trainer_script.as_posix(), "--config", args.config.as_posix()]
+    child_env = dict(os.environ)
+    alloc_conf = child_env.get("PYTORCH_CUDA_ALLOC_CONF", "").strip()
+    if not alloc_conf:
+        alloc_conf = "expandable_segments:True"
+        child_env["PYTORCH_CUDA_ALLOC_CONF"] = alloc_conf
 
     print("Step 4A boilerplate")
     print(f"  config: {args.config}")
@@ -65,6 +71,7 @@ def main() -> None:
     print(f"  valid data: {cfg['dataset']['valid_path']}")
     print(f"  output dir: {cfg['training']['output_dir']}")
     print(f"  mode: {'lora' if use_lora else 'full-finetune'}")
+    print(f"  PYTORCH_CUDA_ALLOC_CONF: {alloc_conf}")
     print(f"  command: {' '.join(cmd)}")
 
     if not args.execute:
@@ -79,7 +86,7 @@ def main() -> None:
             print("3) Monitor memory and reduce batch size if needed.")
         return
 
-    subprocess.run(cmd, check=True)
+    subprocess.run(cmd, check=True, env=child_env)
 
 
 if __name__ == "__main__":
