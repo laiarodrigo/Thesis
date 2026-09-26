@@ -1,0 +1,3 @@
+# LaTeX intermediates are ignored globally. Keep only the source project and
+# the deliberately committed final PDF in this directory.
+acmguide.pdf

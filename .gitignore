@@ -129,7 +129,11 @@ celerybeat.pid
 
 # Environments
 .env
+*.env
+!.env.example
 .venv
+.venv-curator/
+.venv-axolotl/
 env/
 venv/
 ENV/
@@ -175,3 +179,90 @@ cython_debug/
 
 # caches
 data/opus_cache/
+
+# repository-local environments and vendored installations
+/.vendor/
+/thesis/
+/thesis_g*/
+
+# editor, recovery, and temporary artifacts
+*.orig
+wget-log*
+/.codex
+/tmp/
+
+# logs and generated run output
+/logs/
+/outputs/
+/eval_results/
+*.log
+
+# large local databases and columnar data
+*.duckdb
+*.duckdb.wal
+*.wal
+*.parquet
+
+# LaTeX build artifacts (source files and final PDFs remain trackable)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.glo
+*.gls
+*.glg
+*.ist
+*.loa
+*.loc
+*.lof
+*.lol
+*.lot
+*.maf
+*.mlf*
+*.mlt*
+*.mtc*
+*.out
+*.run.xml
+*.soc
+*.synctex.gz
+*.toc
+*.xdy
+
+# project-local outputs (not for version control)
+eda's/images/
+eda's/csv's/
+qwen3-0_6b-ptbr-ptpt-lora-local_debug/
+thesis/
+data/axolotl/
+data/decoder_only/
+outputs/decoder_only/
+data/corpus.br
+data/corpus.clean.br
+data/corpus.clean.pt
+data/corpus.pt
+data/duckdb/*:Zone.Identifier
+data/filter_shards/
+data/keep.idx
+data/pairid_to_idx.tsv
+data/ptBR.raw
+data/ptPT.raw
+data/wikipedia/
+data/wikipedia_downloads/
+data/wikipedia_pt_inspiration/
+data/wikipedia_pt_variant_csv/
+data/pt_variant_prompts_wikipedia_batch*.csv
+logs_filter_ptbrvarid.txt
+data/encoder_decoder/
+hpo/encoder_decoder/*.db
+hpo/encoder_decoder/*_results.csv
+hpo/encoder_decoder/best_trials.csv
+hpo/encoder_decoder/generated_*/
+hpo/decoder_only/generated_configs/
+hpo/decoder_only/*_manifest.csv
+hpo/decoder_only/*_status.csv
+hpo/decoder_only/*_metrics.csv
+data/ptbrvarid/**/*.json
+data/ptbrvarid/**/*.txt
+data/ptbrvarid/**/*.text
