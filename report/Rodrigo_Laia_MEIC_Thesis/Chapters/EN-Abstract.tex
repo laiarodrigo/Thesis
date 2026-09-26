@@ -5,4 +5,28 @@
 % reset acronyms
 \acresetall
 % use \noindent in firts paragraph
-\noindent Large language models trained on Portuguese text are strongly shaped by the predominance of Brazilian Portuguese (BP) on training corpora collected from the Web, which can reduce their effectiveness for European Portuguese (EP). Effective methods for filtering and/or translating between both Portuguese variants are thus in need. This work aims to explore how decoder-only pre-trained models can be adapted to distinguish between the BP and EP variants, and to rewrite text from one variant to the other. We will construct a unified corpus by combining OPUS OpenSubtitles data with other datasets prepared in previous studies, and we will apply a tailored preprocessing pipeline that includes normalization, sentence merging, boilerplate removal, deduplication, sentence-length filtering, and alignment filtering. Using this corpus, we plan to adapt multilingual language models to support both the language variety identification and translation tasks. We have already conducted an initial experiment with a model of the Qwen family. This work aims to provide a reproducible methodology and a consolidated resource for developing large language models that handle Portuguese varieties more reliably.
+\noindent Portuguese is a pluricentric language, but large language models trained
+on generic web corpora are often shaped by the predominance of Brazilian
+Portuguese. This dissertation studies language-variety processing for European Portuguese (EP) and Brazilian Portuguese (BP) through two related tasks: sentence-level variety
+identification and bidirectional rewriting. The work consolidates supervision
+from OpenSubtitles, Few-shot Region-aware Machine Translation (FRMT), a manually curated Golden Collection, and a
+GPT-Wikipedia resource, applying preprocessing and filtering procedures aimed
+at preserving variety-relevant differences while reducing noisy paraphrase and
+alignment errors.
+
+The experimental study adapts T5Gemma 2 encoder-decoder models with 270M and 4B
+parameters. The 270M-parameter T5Gemma 2 model is fully fine-tuned to test
+decoder-controlled protocol choices before the subsequent experiments, while
+the 4B-parameter model is adapted with Low-Rank Adaptation (LoRA). The study also compares encoder-side control strings with decoder-side variety labels and evaluates a three-stage training pipeline composed of broad supervised adaptation, targeted supervised specialization, and reward-based continuation. Additional diagnostics analyze LoRA rank and isolated
+reward-design variants. Among the matched supervised comparisons, data
+composition produces the largest observed changes in rewriting performance.
+Supervision aligned with localized rewriting is strongest on the conservative
+Golden Collection benchmark, while adding supervision from FRMT strongly
+lowers Golden Collection rewriting and produces formulation- and
+direction-dependent FRMT effects. Control placement is therefore conditional
+rather than universally ordered. Reward-based continuation partly restores
+Golden Collection performance for the GPT-Wikipedia + FRMT conditions. These findings make
+supervision quality and evaluation central to Portuguese variety adaptation:
+aligned EP/BP resources can encourage different rewriting behavior, while
+automatic metrics remain highly sensitive to copying and do not fully
+distinguish necessary adaptation from broader reformulation.

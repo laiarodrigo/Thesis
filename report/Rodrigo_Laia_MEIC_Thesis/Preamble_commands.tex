@@ -58,6 +58,10 @@
 % The 'longtable' package is only required when tables extend beyond the length
 % of one page, which typically does not happen and should be avoided
 \usepackage{array}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{colortbl}
@@ -190,7 +194,7 @@
 % given at the first usage. 
 % IMPORTANT: do not use acronyms in titles/captions; otherwise the definition 
 % will appear on the table of contents.
-\usepackage[printonlyused]{acronym}
+\usepackage[nohyperlinks]{acronym}
 %
 % -----------------------------------------------------------------------------
 % PACKAGE hyperref
@@ -205,6 +209,10 @@
              breaklinks=true,
              bookmarksnumbered=true,
              bookmarksopen=true,
+             pdftitle={Recognizing and Translating Between Portuguese Varieties with Fine-tuned Language Models},
+             pdfauthor={Rodrigo Farate Laia},
+             pdfsubject={Portuguese variety identification and bidirectional rewriting between European and Brazilian Portuguese},
+             pdfkeywords={Portuguese language varieties, European Portuguese, Brazilian Portuguese, Variety identification, Text rewriting, Encoder-decoder models, Parameter-efficient fine-tuning, Reward-based fine-tuning},
 }
 %
 % -----------------------------------------------------------------------------
@@ -256,7 +264,8 @@
 \makeatother
 \setglossarystyle{mystyle}
 
-\makeglossaries
+% Disabled while the thesis does not use a glossary.
+%\makeglossaries
 
 \input{./Chapters/Glossary.tex}
 % #############################################################################
@@ -276,10 +285,9 @@
 \textwidth 16 cm
 \textheight 22.4 cm
 \makeatletter
-% package indentfirst says \let\@afterindentfalse\@afterindenttrue
-% and we revert this modification, reinstating the original definitio
-% of \@afterindentfalse
-\def\@afterindentfalse{\let\if@afterindent\iffalse}
+% Keep the first paragraph after chapter, section, subsection, and
+% subsubsection headings indented throughout the dissertation.
+\let\@afterindentfalse\@afterindenttrue
 \makeatother
 % -----------------------------------------------------------------------------
 % PACKAGE fancyhdr:
@@ -367,8 +375,9 @@
   \color{chaptergrey}
 }
 \makeatletter
+% Compact chapter-opening whitespace consistently while preserving the template hierarchy.
 \def\@makechapterhead#1{%
-  \vspace*{50\p@}%
+  \vspace*{24\p@}%
   {\parindent \z@ \raggedright \normalfont
     {\chapnumfont\ifnum \c@secnumdepth >\m@ne
 %         \huge\bfseries \@chapapp\space \thechapter
@@ -378,7 +387,7 @@
     \fi}
     \interlinepenalty\@M
     {\raggedleft\Huge \bfseries #1\par\nobreak}
-    \vskip 40\p@
+    \vskip 12\p@
   }}
 \makeatother
 % Now put it all together as a command \fancychapter

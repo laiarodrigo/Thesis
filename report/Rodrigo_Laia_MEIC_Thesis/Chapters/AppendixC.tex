@@ -1,0 +1,163 @@
+% #############################################################################
+% This is Appendix C
+% !TEX root = ../main.tex
+% #############################################################################
+\chapter[Isolated Reward-Based Continuation Ablations]{Isolated Reward-Based\\Continuation Ablations}
+\label{chap:appendix-rl-ablation}
+
+This appendix reports isolated reward-design diagnostics on the fully fine-tuned
+270M-parameter T5Gemma 2 model. They are separate from the Stage C
+continuations with the 4B-parameter model described in
+\Cref{sec:method-stage-c,sec:rewriting-results}. Four independent diagnostics examine
+the base normalized BLEU/TER reward and three modifications involving classifier
+feedback, token conservatism, and candidate-group construction. Both
+encoder-controlled and decoder-controlled formulations are examined.
+
+\section{Experimental Setup}
+
+Each diagnostic begins independently from the selected supervised Stage B
+checkpoint of the 270M-parameter model for its control formulation. These
+checkpoints follow Stage A adaptation on OpenSubtitles and Stage B
+specialization on GPT-Wikipedia under the supervised protocol selected in
+\Cref{sec:smaller-model-protocol-study}. No reward variant is continued from
+another.
+
+The encoder-controlled and decoder-controlled diagnostics start from different
+supervised checkpoints, so their effects are interpreted relative to their own
+Stage B baselines rather than through direct comparison of absolute values.
+
+All continuations use the same 1200-step optimization budget. Evaluation follows
+the 270M-parameter protocol-selection comparison, reporting macro-F1 for
+identification and aggregate corpus BLEU and TER for rewriting on FRMT and the
+Golden Collection.
+
+\section{Reward Variants}
+
+The base reward uses the normalized BLEU and TER components defined in
+\Cref{sec:method-stage-c}. For each generated candidate, sentence-level BLEU
+and TER are computed against the reference rewrite and normalized relative to
+the scores obtained by leaving the source unchanged. The base reward weights the two
+components equally and applies a penalty of 0.10 when a candidate copies the
+source but the reference requires a change.
+
+In the decoder-controlled diagnostic, the generated \texttt{PT}/\texttt{BR}
+control label is also checked before the sentence-level reward is used. An
+incorrect first label sets the candidate reward to zero, whereas the main
+decoder-controlled Stage C reward assigns a weighted component to first-label
+correctness instead of using this hard gate.
+
+The classifier-reward variant adds an auxiliary variety-identification score.
+Each generated rewrite is passed back through the model using the identification
+formulation for the same control setup, and the probability assigned to the
+intended variety of the rewritten sentence provides the classifier score. This
+measures whether the generated sentence itself exhibits the requested variety.
+Under decoder control, this component is separate from the binary first-label
+gate, which checks only the generated control token.
+
+The token-conservatism variant adds a token-level score. After lowercasing and
+tokenizing the source, candidate, and reference, each generated token receives one of three scores.
+A token absent from the reference receives 0. A token present in both the
+reference and source receives 0.5. A token present in the reference but absent
+from the source receives 1.0. The sequence score is the mean of these token
+scores.
+
+For both auxiliary-reward variants, normalized BLEU and TER each receive a
+weight of 0.45, while the added component receives a weight of 0.10.
+
+The TER-diverse grouping variant changes candidate-group construction rather
+than the reward formula. For each input, a pool of 12 candidates is first
+sampled and their TER against the reference is computed. After duplicate
+normalized candidate texts are removed, the remaining candidates are ordered
+by TER and up to four are selected at evenly spaced quantile positions across that
+ordering, producing a group that covers different levels of distance from the
+reference. The reference candidate is then appended, so the group-relative
+optimization normally compares four selected samples with the reference
+candidate. The selected candidates use the same normalized BLEU/TER reward as
+the base configuration. This diagnostic therefore changes the examples compared
+within the group-relative update rather than adding another reward component.
+
+\section{Results}
+
+\Cref{tab:appendix-rl-d,tab:appendix-rl-e} report the decoder-controlled and
+encoder-controlled diagnostics, respectively.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{4pt}
+\caption{Decoder-controlled 270M isolated Stage C ablations.}
+\label{tab:appendix-rl-d}
+\begin{tabularx}{\textwidth}{@{}Ycccccc@{}}
+\toprule
+\textbf{Configuration} &
+\multicolumn{3}{c}{\textbf{FRMT}} &
+\multicolumn{3}{c}{\textbf{Golden Collection}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+& \shortstack{\textbf{Macro-F1}\\\textbf{(\%)}} & \shortstack{\textbf{BLEU}\\\textbf{(0--100)}} & \textbf{TER}
+& \shortstack{\textbf{Macro-F1}\\\textbf{(\%)}} & \shortstack{\textbf{BLEU}\\\textbf{(0--100)}} & \textbf{TER} \\
+\midrule
+Supervised Stage B start & \textbf{70.76} & \textbf{39.13} & \textbf{0.4788} & \textbf{67.63} & 86.57 & 0.0980 \\
+\midrule
+Base reward & 68.76 & 39.11 & 0.4800 & 67.15 & 86.88 & 0.0962 \\
+Classifier reward & 69.54 & 39.04 & 0.4806 & 67.57 & 86.96 & 0.0969 \\
+Token conservatism & 69.49 & 39.07 & 0.4804 & 67.43 & 86.58 & 0.1007 \\
+TER-diverse grouping & 68.24 & 39.12 & 0.4799 & 66.70 & \textbf{87.19} & \textbf{0.0949} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{4pt}
+\caption{Encoder-controlled 270M isolated Stage C ablations.}
+\label{tab:appendix-rl-e}
+\begin{tabularx}{\textwidth}{@{}Ycccccc@{}}
+\toprule
+\textbf{Configuration} &
+\multicolumn{3}{c}{\textbf{FRMT}} &
+\multicolumn{3}{c}{\textbf{Golden Collection}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+& \shortstack{\textbf{Macro-F1}\\\textbf{(\%)}} & \shortstack{\textbf{BLEU}\\\textbf{(0--100)}} & \textbf{TER}
+& \shortstack{\textbf{Macro-F1}\\\textbf{(\%)}} & \shortstack{\textbf{BLEU}\\\textbf{(0--100)}} & \textbf{TER} \\
+\midrule
+Supervised Stage B start & 71.73 & \textbf{27.06} & \textbf{0.6204} & 65.43 & \textbf{65.53} & \textbf{0.2996} \\
+\midrule
+Base reward & 71.90 & 13.62 & 0.7525 & 65.77 & 38.21 & 0.5154 \\
+Classifier reward & 71.81 & 15.67 & 0.7319 & 66.29 & 44.25 & 0.4704 \\
+Token conservatism & \textbf{72.28} & 16.27 & 0.7268 & \textbf{66.34} & 42.79 & 0.4808 \\
+TER-diverse grouping & 72.22 & 13.18 & 0.7571 & 66.14 & 38.96 & 0.5118 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\looseness=-1
+For the decoder-controlled diagnostics, FRMT rewriting remains close to the
+supervised Stage B starting point across all four variants, with a largest
+absolute BLEU change of only 0.09 points. However, on the Golden Collection,
+TER-diverse grouping gives the best rewriting result among the diagnostics,
+reaching 87.19 BLEU and 0.0949 TER compared with 86.57 BLEU and 0.0980 TER at
+the supervised starting point. Its macro-F1 is lower, at 66.70 compared with
+67.63. Token conservatism does not improve Golden Collection TER, reaching
+0.1007 compared with 0.0980 at the starting point.
+
+\looseness=-1
+The encoder-controlled diagnostics show a different pattern. Every
+reward-based continuation substantially reduces rewriting quality relative to
+the supervised Stage B starting point. On FRMT, the best diagnostic BLEU is
+16.27 under token conservatism, compared with 27.06 at the starting point. On
+the Golden Collection, classifier reward gives the highest diagnostic BLEU at
+44.25, compared with 65.53 before continuation. Identification changes are much
+smaller than the rewriting changes, with token conservatism giving the highest
+macro-F1 among the diagnostics on both FRMT and the Golden Collection.
+
+\looseness=-1
+Taken together, no tested reward modification improves rewriting consistently
+across both control formulations. Decoder-controlled continuation remains close
+to its supervised starting point and yields modest Golden Collection gains
+under some variants, with TER-diverse grouping giving the best
+decoder-controlled rewriting result. In contrast, every encoder-controlled
+continuation substantially reduces rewriting despite much smaller identification
+changes. The classifier and token-conservatism components provide no consistent
+advantage across formulations, so none of the tested modifications is generally
+preferable.

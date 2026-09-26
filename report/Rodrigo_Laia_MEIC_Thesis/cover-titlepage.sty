@@ -89,7 +89,7 @@
 		\centering
 		\begin{setfont}{12}
 			\ifthenelse{\equal{\th@othersupervisor}{\relax}}{
-               \tlangComSupervisor \th@supervisor
+               \tlangSupervisors \th@supervisor
                }{
                  \tlangSupervisors \th@supervisor
                  
@@ -113,7 +113,7 @@
     		\begin{setfont}{12}
     			{\tlangChairperson \th@chairperson}
     				
-                {\tlangComSupervisor \th@supervisor}
+                {\tlangSupervisors \th@supervisor}
                 	
                 \ifthenelse{\equal{\th@vogaltwo}{\relax}}{
                     \tlangMember \th@vogalone

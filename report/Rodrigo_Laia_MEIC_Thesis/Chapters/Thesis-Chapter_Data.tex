@@ -1,0 +1,210 @@
+% #############################################################################
+% This is the Data chapter
+% !TEX root = ../main.tex
+% #############################################################################
+\fancychapter{Data}
+\label{chap:data}
+\label{sec:data}
+
+The reported experiments use four main resources with different roles. Each
+resource is first converted into a common aligned-pair format containing a BP
+sentence, an EP sentence, optional dataset-specific metadata, and a split label.
+This chapter describes the origin and preparation of each resource.
+\Cref{tab:data-resources} summarizes aligned EP/BP pair counts for each resource
+before task-specific rendering.
+
+\begin{table}[htbp]
+  \centering
+  \thesistablefont
+  \caption{Aligned EP/BP pair counts by resource and split before task-specific rendering.}
+  \label{tab:data-resources}
+\begin{tabular}{@{}lccc@{}}
+    \toprule
+    Resource & Train & Validation & Test \\
+    \midrule
+    OpenSubtitles & 10,347,883 & 0 & 0 \\
+    GPT-Wikipedia & 4,519 & 564 & 566 \\
+    FRMT & 2,502 & 20 & 2,611 \\
+    Golden Collection & 0 & 0 & 500 \\
+    \bottomrule
+  \end{tabular}
+
+\end{table}
+
+\section{OpenSubtitles}
+\label{sec:data-opensubtitles}
+
+OPUS OpenSubtitles \citep{4992de1b5fb34f3e9691772606b36edf} is a large
+collection of aligned subtitles from movies and television series. It provides
+the scale needed for an initial broad adaptation phase and exposes the models
+to diverse topics and informal dialogue. However, its scale comes with
+limitations, as subtitle segments can be elliptical, weakly aligned, or
+stylistically distant from conservative EP/BP adaptation. Its role in the
+experiments is broad exposure rather than precise control of
+individual variety markers.
+
+{\tolerance=1500\looseness=-1
+After exact duplicate pairs are removed, preprocessing first removes
+subtitle-specific formatting noise, including leading dialogue dashes, speaker
+labels, dash artifacts after punctuation, irregular whitespace, wrapping and
+unbalanced quotation marks, and fully capitalized line formatting. The next step
+repairs segmentation when adjacent subtitle rows appear to belong to the same
+sentence. Rows \(i\) and \(i+1\) are merged when either the EP or BP side
+provides a continuation cue: row \(i\) ends in a comma, semicolon, colon, or dash,
+or contains fewer than 40 characters, and the first alphabetic character of row
+\(i+1\) is lowercase. A separate merge condition handles cases where the paired
+sentences show inconsistent apparent sentence boundaries. Whenever a merge
+condition is met on either side, both BP and EP rows are joined so their
+alignment is preserved. \Cref{tab:opensubs-merge-examples} illustrates
+representative segmentation repairs. In each example, ``Line \(i\)'' and ``Line
+\(i+1\)'' are adjacent subtitle rows, while ``Merged sentence'' shows the reconstructed
+BP sentence.\par}
+
+\begin{table}[htbp]
+  \centering
+  \thesistablefont
+  \caption{Examples of OpenSubtitles segmentation repairs shown using the BP sentence from each aligned EP/BP pair.}
+  \label{tab:opensubs-merge-examples}
+  \begin{tabularx}{\textwidth}{@{}YYYY@{}}
+    \toprule
+    Merge cue & Line \(i\) & Line \(i+1\) & Merged sentence \\
+    \midrule
+    Unfinished punctuation + lowercase continuation &
+    \textit{N\~ao achava que o basquete era assim, o cansa\c{c}o, a vit\'oria,} &
+    \textit{o cansa\c{c}o.} &
+    \textit{N\~ao achava que o basquete era assim, o cansa\c{c}o, a vit\'oria, o cansa\c{c}o.} \\
+    \addlinespace
+    Short fragment split across rows &
+    \textit{Massa Macinaia.} &
+    \textit{Deve ser uma vila perto de...} &
+    \textit{Massa Macinaia. Deve ser uma vila perto de...} \\
+    \addlinespace
+    Ellipsis + lowercase continuation &
+    \textit{N\~ao pode colocar na sua cabe\c{c}a? ...} &
+    \textit{eu n\~ao morri na primeira vez.} &
+    \textit{N\~ao pode colocar na sua cabe\c{c}a?... Eu n\~ao morri na primeira vez.} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+{\tolerance=1500\looseness=-1
+Surface overlap alone is not a reliable filter for aligned EP/BP pairs, since
+valid correspondences may preserve the same content while using different
+lexical forms or one-to-many constructions. For example, a BP gerund can
+correspond to an EP infinitival construction. The pairs are therefore filtered
+with SimAlign \citep{jalili-sabet-etal-2020-simalign}, which uses contextual
+token embeddings to provide a bilingual alignment signal rather than relying
+on exact word matching.\par}
+
+{\tolerance=1500\looseness=-1
+Using SimAlign requires choosing how the alignments are obtained. The first
+choice is the multilingual encoder used to compute contextual embeddings for
+both sentences. The second is the granularity of the alignment, since token
+connections can be produced over subword pieces or over the original words
+after combining the representations of their subword pieces.
+The third is the alignment extraction method that converts token similarities
+into links between the sentences of the pair. In this work, the filter uses the
+XLM-RoBERTa (XLM-R)-based encoder configuration, word-level alignments, and the
+\texttt{inter} extraction method. This extraction can be understood as a
+similarity matrix whose rows are BP tokens and whose columns are EP tokens.
+Each cell estimates how close two contextual token representations are, and
+\texttt{inter} keeps a link only when the two tokens select each other as their
+highest-scoring option. The resulting links are used only as evidence that the
+paired sentences still express the same content. They are converted into a coverage
+score over normalized word tokens. Shorter subtitle fragments are allowed to
+have lower coverage, while longer pairs must show stronger bilingual
+alignment. A separate length-ratio check rejects pairs where one sentence is
+much shorter or longer than its counterpart. The exact scoring rule, thresholds,
+alternative SimAlign options, and an illustrative token-similarity matrix are detailed in
+\Cref{chap:appendix-opensubs-filtering}.\par}
+
+\section{GPT-Wikipedia}
+\label{sec:data-gpt-wikipedia}
+
+{\tolerance=1500\looseness=-1
+GPT-Wikipedia is the main constructed resource for controlled EP/BP
+rewriting. It was created to provide more conservative supervision than could
+be expected from subtitle data alone, while retaining broader topical coverage
+than a small manually curated benchmark. The resource is designed around
+near-literal EP/BP pairs, where the two sentences remain close in meaning and
+word overlap. Stricter
+conservative subsets are also derived from this resource for later
+reward-based continuation experiments.\par}
+
+GPT-Wikipedia is built from Portuguese Wikipedia article dumps used as
+inspiration material. For each article, only the first few sentences from
+informative paragraphs are kept. Paragraphs that are too short, list-like, or
+punctuation-poor are discarded. These texts are used only to provide topics and
+contexts for generation, not as aligned examples.
+
+Generated pairs are obtained with a Portuguese prompt sent to OpenAI GPT-4o
+through the IAedu API. The
+template requests new EP/BP pairs in JSON format and favors minimal lexical
+change. Its main constraints are summarized by the translated and simplified
+excerpt below.
+
+\begin{quote}
+\small
+Generate \(N\) new bilingual examples in valid JSON, with one
+EP sentence and one BP sentence per example. Use the
+reference passages only as inspiration for topic, domain, and register. Keep
+the two variants as close as possible. Do not write free paraphrases or change
+meaning without need. Change only clear lexical or morphosyntactic contrasts.
+In non-identical pairs, prefer one or two clear differences and avoid extensive
+rewrites.
+\end{quote}
+
+The generated batches are then merged and checked for suspicious differences.
+The check compares observed edits with an allowlist of expected EP/BP
+correspondences and flags unexpected lexical substitutions or broader reordering
+for review.
+
+{\tolerance=1500\looseness=-1
+During review, variety-relevant differences are kept with the EP expression in
+the EP sentence and the BP expression in the BP sentence. Differences judged unnecessary
+for EP/BP adaptation are collapsed to the same wording. As a result, the final
+cleaned resource is not restricted to non-equal pairs. The dataset contains
+1,648 equal pairs among 5,649 pairs after cleanup.\par}
+
+\section{FRMT}
+\label{sec:data-frmt}
+
+{\tolerance=1500\looseness=-1
+FRMT \citep{riley2023frmtbenchmarkfewshotregionaware} is a benchmark for
+few-shot region-aware MT. It provides English sentences translated into
+regional varieties, including EP and BP. Its examples are organized into three
+buckets. The lexical bucket is designed around
+articles likely to elicit region-dependent terminology. The entity
+bucket focuses on people, places, institutions, and other region-associated
+entities. The random bucket draws from randomly selected high-quality
+Wikipedia articles and evaluates broader regional behavior without
+preselecting a lexical or entity contrast.\par}
+
+FRMT is not generated internally, but it is converted into the same pair
+format used by the rest of the resources so that training and evaluation
+scripts can share a common interface. Its bucket labels are preserved in the
+common representation so that the original FRMT partition metadata remain
+available.
+
+{\tolerance=1500\looseness=-1
+The complete FRMT training split provides additional supervised data in the
+GPT-Wikipedia + FRMT condition, while the held-out test split is used for evaluation.
+A stricter conservative subset is selected later for reward-based continuation,
+as described in Section~\ref{sec:method-stage-c}.\par}
+
+\section{Golden Collection}
+\label{sec:data-golden-collection}
+
+The Golden Collection is a manually curated evaluation resource introduced by
+\citet{sanches2024brazilianportugueseeuropeanportuguese}. It contains 500 BP
+sentences divided across Science, Legislative, Literature, Social Media, and
+Wiki topics. In the original dataset, each source is associated with EP references, including a
+manually curated reference and an automatic DeepL reference.
+
+{\tolerance=1500\looseness=-1
+Each BP sentence is paired with the manually curated EP
+reference, rather than the automatic DeepL reference. The resulting 500 EP/BP
+pairs are used only for evaluation. For rewriting evaluation, each pair is
+converted into two examples: one BP-to-EP and one EP-to-BP. When both
+sentences are identical, the expected output is the unchanged sentence.
+\par}

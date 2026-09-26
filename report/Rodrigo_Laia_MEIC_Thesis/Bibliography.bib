@@ -7,39 +7,54 @@
 
 %% Saved with string encoding Unicode (UTF-8) 
 
-@misc{sousa2025enhancingportuguesevarietyidentification,
-      title={Enhancing Portuguese Variety Identification with Cross-Domain Approaches}, 
-      author={Hugo Sousa and Rúben Almeida and Purificação Silvano and Inês Cantante and Ricardo Campos and Alípio Jorge},
-      year={2025},
-      eprint={2502.14394},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2502.14394}, 
+@article{sousa2025enhancingportuguesevarietyidentification,
+  title={Enhancing {Portuguese} Variety Identification with Cross-Domain Approaches},
+  journal={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={24},
+  pages={25192--25200},
+  year={2025},
+  doi={10.1609/aaai.v39i24.34705},
+  author={Sousa, Hugo and Almeida, Rúben and Silvano, Purificação and Cantante, Inês and Campos, Ricardo and Jorge, Alípio}
 }
 
-@inbook{4992de1b5fb34f3e9691772606b36edf,
-title = "News from OPUS - A Collection of Multilingual Parallel Corpora with Tools and Interfaces",
-author = "J{\"o}rg Tiedemann",
-year = "2009",
-language = "odefinierat/ok{\"a}nt",
-volume = "V",
-pages = "237--248",
-editor = "N. Nicolov and K. Bontcheva and G. Angelova and R. Mitkov",
-booktitle = "Recent Advances in Natural Language Processing",
+@incollection{4992de1b5fb34f3e9691772606b36edf,
+  author = {J{\"o}rg Tiedemann},
+  title = {News from {OPUS} -- A Collection of Multilingual Parallel Corpora with Tools and Interfaces},
+  booktitle = {Recent Advances in Natural Language Processing V: Selected Papers from RANLP 2007},
+  editor = {Nicolas Nicolov and Galia Angelova and Ruslan Mitkov},
+  series = {Current Issues in Linguistic Theory},
+  volume = {309},
+  pages = {237--248},
+  publisher = {John Benjamins Publishing Company},
+  year = {2009},
+  doi = {10.1075/cilt.309.19tie},
+  url = {https://doi.org/10.1075/cilt.309.19tie}
 }
 
-@misc{riley2023frmtbenchmarkfewshotregionaware,
-      title={FRMT: A Benchmark for Few-Shot Region-Aware Machine Translation}, 
-      author={Parker Riley and Timothy Dozat and Jan A. Botha and Xavier Garcia and Dan Garrette and Jason Riesa and Orhan Firat and Noah Constant},
-      year={2023},
-      eprint={2210.00193},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2210.00193}, 
+@article{riley2023frmtbenchmarkfewshotregionaware,
+    title = "{FRMT}: A Benchmark for Few-Shot Region-Aware Machine Translation",
+    author = "Riley, Parker  and
+      Dozat, Timothy  and
+      Botha, Jan A.  and
+      Garcia, Xavier  and
+      Garrette, Dan  and
+      Riesa, Jason  and
+      Firat, Orhan  and
+      Constant, Noah",
+    journal = "Transactions of the Association for Computational Linguistics",
+    volume = "11",
+    year = "2023",
+    address = "Cambridge, MA",
+    publisher = "MIT Press",
+    url = "https://aclanthology.org/2023.tacl-1.39/",
+    doi = "10.1162/tacl_a_00568",
+    pages = "671--685",
+    abstract = "We present FRMT, a new dataset and evaluation benchmark for Few-shot Region-aware Machine Translation, a type of style-targeted translation. The dataset consists of professional translations from English into two regional variants each of Portuguese and Mandarin Chinese. Source documents are selected to enable detailed analysis of phenomena of interest, including lexically distinct terms and distractor terms. We explore automatic evaluation metrics for FRMT and validate their correlation with expert human evaluation across both region-matched and mismatched rating scenarios. Finally, we present a number of baseline models for this task, and offer guidelines for how researchers can train, evaluate, and compare their own models. Our dataset and evaluation code are publicly available: \url{https://bit.ly/frmt-task}."
 }
 
 @misc{sanches2024brazilianportugueseeuropeanportuguese,
-      title={From Brazilian Portuguese to European Portuguese}, 
+      title={From {Brazilian Portuguese} to {European Portuguese}},
       author={João Sanches and Rui Ribeiro and Luísa Coheur},
       year={2024},
       eprint={2408.07457},
@@ -48,44 +63,68 @@ booktitle = "Recent Advances in Natural Language Processing",
       url={https://arxiv.org/abs/2408.07457}, 
 }
 
-@misc{sabet2021simalignhighqualityword,
-      title={SimAlign: High Quality Word Alignments without Parallel Training Data using Static and Contextualized Embeddings}, 
-      author={Masoud Jalili Sabet and Philipp Dufter and François Yvon and Hinrich Schütze},
-      year={2021},
-      eprint={2004.08728},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2004.08728}, 
+@inproceedings{jalili-sabet-etal-2020-simalign,
+    title = "{S}im{A}lign: High Quality Word Alignments Without Parallel Training Data Using Static and Contextualized Embeddings",
+    author = {Jalili Sabet, Masoud  and
+      Dufter, Philipp  and
+      Yvon, Fran{\c{c}}ois  and
+      Sch{\"u}tze, Hinrich},
+    editor = "Cohn, Trevor  and
+      He, Yulan  and
+      Liu, Yang",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2020",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.findings-emnlp.147/",
+    doi = "10.18653/v1/2020.findings-emnlp.147",
+    pages = "1627--1643",
+    abstract = "Word alignments are useful for tasks like statistical and neural machine translation (NMT) and cross-lingual annotation projection. Statistical word aligners perform well, as do methods that extract alignments jointly with translations in NMT. However, most approaches require parallel training data and quality decreases as less training data is available. We propose word alignment methods that require no parallel data. The key idea is to leverage multilingual word embeddings {--} both static and contextualized {--} for word alignment. Our multilingual embeddings are created from monolingual data only without relying on any parallel data or dictionaries. We find that alignments created from embeddings are superior for four and comparable for two language pairs compared to those produced by traditional statistical aligners {--} even with abundant parallel data; e.g., contextualized embeddings achieve a word alignment F1 for English-German that is 5 percentage points higher than eflomal, a high-quality statistical aligner, trained on 100k parallel sentences."
 }
 
-@misc{houlsby2019parameterefficienttransferlearningnlp,
-      title={Parameter-Efficient Transfer Learning for NLP}, 
-      author={Neil Houlsby and Andrei Giurgiu and Stanislaw Jastrzebski and Bruna Morrone and Quentin de Laroussilhe and Andrea Gesmundo and Mona Attariyan and Sylvain Gelly},
-      year={2019},
-      eprint={1902.00751},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/1902.00751}, 
+@InProceedings{pmlr-v97-houlsby19a,
+  title = 	 {Parameter-Efficient Transfer Learning for {NLP}},
+  author =       {Houlsby, Neil and Giurgiu, Andrei and Jastrzebski, Stanislaw and Morrone, Bruna and De Laroussilhe, Quentin and Gesmundo, Andrea and Attariyan, Mona and Gelly, Sylvain},
+  booktitle = 	 {Proceedings of the 36th International Conference on Machine Learning},
+  pages = 	 {2790--2799},
+  year = 	 {2019},
+  editor = 	 {Chaudhuri, Kamalika and Salakhutdinov, Ruslan},
+  volume = 	 {97},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {09--15 Jun},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v97/houlsby19a/houlsby19a.pdf},
+  url = 	 {https://proceedings.mlr.press/v97/houlsby19a.html},
+  abstract = 	 {Fine-tuning large pretrained models is an effective transfer mechanism in NLP. However, in the presence of many downstream tasks, fine-tuning is parameter inefficient: an entire new model is required for every task. As an alternative, we propose transfer with adapter modules. Adapter modules yield a compact and extensible model; they add only a few trainable parameters per task, and new tasks can be added without revisiting previous ones. The parameters of the original network remain fixed, yielding a high degree of parameter sharing. To demonstrate adapter’s effectiveness, we transfer the recently proposed BERT Transformer model to $26$ diverse text classification tasks, including the GLUE benchmark. Adapters attain near state-of-the-art performance, whilst adding only a few parameters per task. On GLUE, we attain within $0.8%$ of the performance of full fine-tuning, adding only $3.6%$ parameters per task. By contrast, fine-tuning trains $100%$ of the parameters per task.}
 }
 
-@misc{hu2021loralowrankadaptationlarge,
-      title={LoRA: Low-Rank Adaptation of Large Language Models}, 
-      author={Edward J. Hu and Yelong Shen and Phillip Wallis and Zeyuan Allen-Zhu and Yuanzhi Li and Shean Wang and Lu Wang and Weizhu Chen},
-      year={2021},
-      eprint={2106.09685},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2106.09685}, 
+
+@inproceedings{hu2022lora,
+author = {Hu, Edward J. and Shen, Yelong and Wallis, Phillip and Allen-Zhu, Zeyuan and Yuanzhi  Li and Wang, Shean and Wang, Lu and Chen, Weizhu},
+title = {{LoRA}: Low-Rank Adaptation of Large Language Models},
+booktitle = {ICLR 2022},
+year = {2022},
+month = {April},
+abstract = {An important paradigm of natural language processing consists of large-scale pre-training on general domain data and adaptation to particular tasks or domains. As we pre-train larger models, full fine-tuning, which retrains all model parameters, becomes less feasible. Using GPT-3 175B as an example -- deploying independent instances of fine-tuned models, each with 175B parameters, is prohibitively expensive. We propose Low-Rank Adaptation, or LoRA, which freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks. Compared to GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable parameters by a factor of 10,000 and the GPU memory requirement by a factor of 3. LoRA performs on-par or better than fine-tuning in model quality on RoBERTa, DeBERTa, GPT-2, and GPT-3, despite having fewer trainable parameters, a higher training throughput, and, unlike adapters, no additional inference latency. We also provide an empirical investigation into rank-deficiency in language model adaptation, which sheds light on the efficacy of LoRA. We release a package that facilitates the integration of LoRA with PyTorch models and provide our implementations and model checkpoints for RoBERTa, DeBERTa, and GPT-2 on GitHub.},
+url = {https://www.microsoft.com/en-us/research/publication/lora-low-rank-adaptation-of-large-language-models/},
 }
 
-@misc{zhao2025surveylargelanguagemodels,
-      title={A Survey of Large Language Models}, 
-      author={Wayne Xin Zhao and Kun Zhou and Junyi Li and Tianyi Tang and Xiaolei Wang and Yupeng Hou and Yingqian Min and Beichen Zhang and Junjie Zhang and Zican Dong and Yifan Du and Chen Yang and Yushuo Chen and Zhipeng Chen and Jinhao Jiang and Ruiyang Ren and Yifan Li and Xinyu Tang and Zikang Liu and Peiyu Liu and Jian-Yun Nie and Ji-Rong Wen},
-      year={2025},
-      eprint={2303.18223},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2303.18223}, 
+@article{zhao2025surveylargelanguagemodels,
+  author  = {Zhao, Wayne Xin and Zhou, Kun and Li, Junyi and Tang, Tianyi and
+             Dong, Zican and Hou, Yupeng and Zhang, Beichen and Min, Yingqian and
+             Zhang, Junjie and Liu, Peiyu and Wang, Xiaolei and Du, Yifan and
+             Yang, Chen and Chen, Yushuo and Chen, Zhipeng and Jiang, Jinhao and
+             Ren, Ruiyang and Li, Yifan and Tang, Xinyu and Liu, Zikang and
+             Hu, Yiwen and Nie, Jian-Yun and Wen, Ji-Rong},
+  title   = {A Survey of Large Language Models},
+  journal = {Frontiers of Computer Science},
+  year    = {2026},
+  volume  = {20},
+  number  = {12},
+  pages   = {2012627},
+  doi     = {10.1007/s11704-026-60308-3},
+  url     = {https://doi.org/10.1007/s11704-026-60308-3}
 }
 
 @inproceedings{barreiro-mota-2018-paraphrastic,
@@ -109,7 +148,7 @@ booktitle = "Recent Advances in Natural Language Processing",
 }
 
 @misc{zhang2025t5gemma2seeingreading,
-      title={T5Gemma 2: Seeing, Reading, and Understanding Longer}, 
+      title={{T5Gemma 2}: Seeing, Reading, and Understanding Longer},
       author={Biao Zhang and Paul Suganthan and Gaël Liu and Ilya Philippov and Sahil Dua and Ben Hora and Kat Black and Gus Martins and Omar Sanseviero and Shreya Pathak and Cassidy Hardin and Francesco Visin and Jiageng Zhang and Kathleen Kenealy and Qin Yin and Xiaodan Song and Olivier Lacombe and Armand Joulin and Tris Warkentin and Adam Roberts},
       year={2025},
       eprint={2512.14856},
@@ -158,25 +197,6 @@ booktitle = "Recent Advances in Natural Language Processing",
     abstract = "In this paper we present the first neural-based machine translation system trained to translate between standard national varieties of the same language. We take the pair Brazilian - European Portuguese as an example and compare the performance of this method to a phrase-based statistical machine translation system. We report a performance improvement of 0.9 BLEU points in translating from European to Brazilian Portuguese and 0.2 BLEU points when translating in the opposite direction. We also carried out a human evaluation experiment with native speakers of Brazilian Portuguese which indicates that humans prefer the output produced by the neural-based system in comparison to the statistical system."
 }
 
-@inproceedings{marujo-etal-2011-bp2ep,
-    title = "{BP}2{EP} - Adaptation of {B}razilian {P}ortuguese texts to {E}uropean {P}ortuguese",
-    author = "Marujo, Luis  and
-      Grazina, Nuno  and
-      Luis, Tiago  and
-      Ling, Wang  and
-      Coheur, Luisa  and
-      Trancoso, Isabel",
-    editor = "Forcada, Mikel L.  and
-      Depraetere, Heidi  and
-      Vandeghinste, Vincent",
-    booktitle = "Proceedings of the 15th Annual Conference of the European Association for Machine Translation",
-    month = may # " 30–31",
-    year = "2011",
-    address = "Leuven, Belgium",
-    publisher = "European Association for Machine Translation",
-    url = "https://aclanthology.org/2011.eamt-1.19/"
-}
-
 @article{Cyrino_2001, title={Algumas diferenças entre o Português brasileiro e o português europeu e sua relação com a mudança sintática no português brasileiro}, volume={4}, url={https://ojs.uel.br/revistas/uel/index.php/signum/article/view/4366}, DOI={10.5433/2237-4876.2001v4n1p95}, abstractNote={&amp;lt;span style=&amp;quot;font-family: Verdana, sans-serif; font-size: small;&amp;quot;&amp;gt;&amp;lt;span style=&amp;quot;font-size: 11px; line-height: 16px;&amp;quot;&amp;gt;&amp;lt;span style=&amp;quot;font-size: 8.0pt; line-height: 150%; font-family: &amp;quot;&amp;gt;Este trabalho tem o objetivo de apresentar algumas diferenças entre o português brasileiro (PB) e o português europeu (PE) atuais e questionar como elas podem ser detectadas e servir de base para uma investigação sobre a história do PB. Embora esse tipo de análise não tenha ainda merecido muitos estudos, esse tipo de pesquisa é importante na medida em que o PB pode apresentar diferenças em relação ao PE atual como conseqüências de mudanças que tenham ocorrido em seu percurso diacrônico. Primeiramente apresenta as diferenças encontradas entre o PE e o PB acerca do objeto nulo e, em seguida, acerca da elipse de VP. Através da observação desses fenômenos, considera-se algumas hipóteses sobre a mudança diacrônica que pode estar relacionada, ou seja, a mudança na estrutura verbal do PB. &amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;}, number={1}, journal={Signum: Estudos da Linguagem}, author={Cyrino, Sonia Maria Lazzarini}, year={2001}, month={jul.}, pages={95–112} }
 
 @ARTICLE{880083,
@@ -191,47 +211,65 @@ booktitle = "Recent Advances in Natural Language Processing",
   doi={10.1109/5.880083}
 }
 
-@inproceedings{Jelinek1997StatisticalMF,
-  title={Statistical methods for speech recognition},
-  author={Frederick Jelinek},
-  year={1997},
-  url={https://api.semanticscholar.org/CorpusID:12495425}
+@book{Jelinek1997StatisticalMF,
+  author = {Frederick Jelinek},
+  title = {Statistical Methods for Speech Recognition},
+  publisher = {The MIT Press},
+  year = {1998},
+  isbn = {9780262100663}
 }
 
 @article{10.5555/944919.944966,
-author = {Bengio, Yoshua and Ducharme, R\'{e}jean and Vincent, Pascal and Janvin, Christian},
-title = {A neural probabilistic language model},
-year = {2003},
-issue_date = {3/1/2003},
-publisher = {JMLR.org},
-volume = {3},
-number = {null},
-issn = {1532-4435},
-abstract = {A goal of statistical language modeling is to learn the joint probability function of sequences of words in a language. This is intrinsically difficult because of the curse of dimensionality: a word sequence on which the model will be tested is likely to be different from all the word sequences seen during training. Traditional but very successful approaches based on n-grams obtain generalization by concatenating very short overlapping sequences seen in the training set. We propose to fight the curse of dimensionality by learning a distributed representation for words which allows each training sentence to inform the model about an exponential number of semantically neighboring sentences. The model learns simultaneously (1) a distributed representation for each word along with (2) the probability function for word sequences, expressed in terms of these representations. Generalization is obtained because a sequence of words that has never been seen before gets high probability if it is made of words that are similar (in the sense of having a nearby representation) to words forming an already seen sentence. Training such large models (with millions of parameters) within a reasonable time is itself a significant challenge. We report on experiments using neural networks for the probability function, showing on two text corpora that the proposed approach significantly improves on state-of-the-art n-gram models, and that the proposed approach allows to take advantage of longer contexts.},
-journal = {J. Mach. Learn. Res.},
-month = mar,
-pages = {1137–1155},
-numpages = {19}
+  author = {Yoshua Bengio and R\'{e}jean Ducharme and Pascal Vincent and Christian Jauvin},
+  title = {A Neural Probabilistic Language Model},
+  journal = {Journal of Machine Learning Research},
+  volume = {3},
+  pages = {1137--1155},
+  year = {2003},
+  url = {https://www.jmlr.org/papers/v3/bengio03a.html}
 }
 
-@inproceedings{46201,title	= {Attention is All You Need},author	= {Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},year	= {2017},URL	= {https://arxiv.org/pdf/1706.03762.pdf}}
+@inproceedings{NIPS2017_3f5ee243,
+ author = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, \L ukasz and Polosukhin, Illia},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {I. Guyon and U. Von Luxburg and S. Bengio and H. Wallach and R. Fergus and S. Vishwanathan and R. Garnett},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {Attention Is All You Need},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf},
+ volume = {30},
+ year = {2017}
+}
+
 
 @inproceedings{Mikolov2010RecurrentNN,
-  title={Recurrent neural network based language model},
-  author={Tomas Mikolov and Martin Karafiat and Lukas Burget and Jan Honza Cernocky and Sanjeev Khudanpur},
-  booktitle={Interspeech},
-  year={2010},
-  url={https://api.semanticscholar.org/CorpusID:17048224}
+  author = {Tom{\'a}{\v{s}} Mikolov and Martin Karafi{\'a}t and Luk{\'a}{\v{s}} Burget and Jan {\v{C}}ernock{\'y} and Sanjeev Khudanpur},
+  title = {Recurrent Neural Network Based Language Model},
+  booktitle = {INTERSPEECH 2010},
+  pages = {1045--1048},
+  year = {2010},
+  doi = {10.21437/Interspeech.2010-343},
+  url = {https://www.isca-archive.org/interspeech_2010/mikolov10_interspeech.html}
 }
 
-@misc{devlin2019bertpretrainingdeepbidirectional,
-      title={BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding}, 
-      author={Jacob Devlin and Ming-Wei Chang and Kenton Lee and Kristina Toutanova},
-      year={2019},
-      eprint={1810.04805},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/1810.04805}, 
+@inproceedings{devlin-etal-2019-bert,
+    title = "{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    author = "Devlin, Jacob  and
+      Chang, Ming-Wei  and
+      Lee, Kenton  and
+      Toutanova, Kristina",
+    editor = "Burstein, Jill  and
+      Doran, Christy  and
+      Solorio, Thamar",
+    booktitle = "Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+    month = jun,
+    year = "2019",
+    address = "Minneapolis, Minnesota",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/N19-1423/",
+    doi = "10.18653/v1/N19-1423",
+    pages = "4171--4186",
+    abstract = "We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models (Peters et al., 2018a; Radford et al., 2018), BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications. BERT is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5 (7.7 point absolute improvement), MultiNLI accuracy to 86.7{\%} (4.6{\%} absolute improvement), SQuAD v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1 (5.1 point absolute improvement)."
 }
 
 @inproceedings{10.5555/3495724.3495883,
@@ -250,13 +288,14 @@ series = {NIPS '20}
 }
 
 @article{Raffel2019ExploringTL,
-  title={Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer},
-  author={Colin Raffel and Noam Shazeer and Adam Roberts and Katherine Lee and Sharan Narang and Michael Matena and Yanqi Zhou and Wei Li and Peter J. Liu},
-  journal={J. Mach. Learn. Res.},
-  year={2019},
-  volume={21},
-  pages={140:1-140:67},
-  url={https://api.semanticscholar.org/CorpusID:204838007}
+  author = {Colin Raffel and Noam Shazeer and Adam Roberts and Katherine Lee and Sharan Narang and Michael Matena and Yanqi Zhou and Wei Li and Peter J. Liu},
+  title = {Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer},
+  journal = {Journal of Machine Learning Research},
+  volume = {21},
+  number = {140},
+  pages = {1--67},
+  year = {2020},
+  url = {https://www.jmlr.org/papers/v21/20-074.html}
 }
 
 @inproceedings{sennrich-etal-2016-neural,
@@ -277,7 +316,7 @@ series = {NIPS '20}
 }
 
 @misc{aksenova2025minilinguasmallopensourcellm,
-      title={MiniLingua: A Small Open-Source LLM for European Languages}, 
+      title={{MiniLingua}: A Small Open-Source {LLM} for {European} Languages},
       author={Anna Aksenova and Boris Zverkov and Nicola Dainese and Alexander Nikitin and Pekka Marttinen},
       year={2025},
       eprint={2512.13298},
@@ -287,7 +326,7 @@ series = {NIPS '20}
 }
 
 @misc{yang2025qwen3technicalreport,
-      title={Qwen3 Technical Report}, 
+      title={{Qwen3} Technical Report},
       author={An Yang and Anfeng Li and Baosong Yang and Beichen Zhang and Binyuan Hui and Bo Zheng and Bowen Yu and Chang Gao and Chengen Huang and Chenxu Lv and Chujie Zheng and Dayiheng Liu and Fan Zhou and Fei Huang and Feng Hu and Hao Ge and Haoran Wei and Huan Lin and Jialong Tang and Jian Yang and Jianhong Tu and Jianwei Zhang and Jianxin Yang and Jiaxi Yang and Jing Zhou and Jingren Zhou and Junyang Lin and Kai Dang and Keqin Bao and Kexin Yang and Le Yu and Lianghao Deng and Mei Li and Mingfeng Xue and Mingze Li and Pei Zhang and Peng Wang and Qin Zhu and Rui Men and Ruize Gao and Shixuan Liu and Shuang Luo and Tianhao Li and Tianyi Tang and Wenbiao Yin and Xingzhang Ren and Xinyu Wang and Xinyu Zhang and Xuancheng Ren and Yang Fan and Yang Su and Yichang Zhang and Yinger Zhang and Yu Wan and Yuqiong Liu and Zekun Wang and Zeyu Cui and Zhenru Zhang and Zhipeng Zhou and Zihan Qiu},
       year={2025},
       eprint={2505.09388},
@@ -296,7 +335,66 @@ series = {NIPS '20}
       url={https://arxiv.org/abs/2505.09388}, 
 }
 
-@inproceedings{52876,title	= {UL2: Unifying Language Learning Paradigms},author	= {Yi Tay and Mostafa Dehghani and Vinh Tran and Xavier Garcia and Jason Wei and Xuezhi Wang and Hyung Won Chung and Dara Bahri and Tal Schuster and Steven Zheng and Denny Zhou and Neil Houlsby and Don Metzler},year	= {2023},URL	= {https://openreview.net/pdf?id=6ruVLB727MC}}
+@inproceedings{simplicio-etal-2026-amalia,
+    title = "{AMALIA}: A Fully Open Large Language Model for {European Portuguese}",
+    author = "Simpl{\'i}cio, Afonso  and
+      Vinagre, Gon{\c{c}}alo  and
+      Ramos, Miguel Moura  and
+      Tavares, Diogo  and
+      Ferreira, Rafael  and
+      Attanasio, Giuseppe  and
+      Alves, Duarte M.  and
+      Calvo, In{\^e}s  and
+      Vieira, In{\^e}s  and
+      Guerra, Rui  and
+      Furtado, James  and
+      Canaverde, Beatriz  and
+      Paulo, Iago  and
+      Ramos, Vasco  and
+      Gl{\'o}ria-Silva, Diogo  and
+      Faria, Miguel  and
+      Treviso, Marcos  and
+      Gomes, Daniel  and
+      Gomes, Pedro  and
+      Semedo, David  and
+      Martins, Andr{\'e}  and
+      Magalh{\~a}es, Jo{\~a}o",
+    editor = "Souza, Marlo  and
+      de-Dios-Flores, Iria  and
+      Santos, Diana  and
+      Freitas, Larissa  and
+      Souza, Jackson Wilke da Cruz  and
+      Ribeiro, Eug{\'e}nio",
+    booktitle = "Proceedings of the 17th International Conference on Computational Processing of {P}ortuguese ({PROPOR} 2026) - Vol. 1",
+    month = apr,
+    year = "2026",
+    address = "Salvador, Brazil",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.propor-1.38/",
+    pages = "380--391",
+    ISBN = "979-8-89176-387-6",
+    abstract = "Despite rapid progress in open large language models (LLMs), European Portuguese (pt-PT) remains underrepresented in both training data and native evaluation, with machine-translated benchmarks likely missing the variant{'}s linguistic and cultural nuances. We introduce AMALIA, a fully open LLM that prioritizes pt-PT by using more high-quality pt-PT data during both the mid- and post-training stages. To evaluate pt-PT more faithfully, we release a suite of pt-PT benchmarks that includes translated standard tasks and four new datasets targeting pt-PT generation, linguistic competence, and pt-PT/pt-BR bias. Experiments show that AMALIA matches strong baselines on translated benchmarks while substantially improving performance on pt-PT-specific evaluations, supporting the case for targeted training and native benchmarking for European Portuguese."
+}
+
+@article{chung2022scalinginstructionfinetunedlanguagemodels,
+  author = {Chung, Hyung Won and Hou, Le and Longpre, Shayne and Zoph, Barret and Tai, Yi and Fedus, William and Li, Yunxuan and Wang, Xuezhi and Dehghani, Mostafa and Brahma, Siddhartha and Webson, Albert and Gu, Shixiang Shane and Dai, Zhuyun and Suzgun, Mirac and Chen, Xinyun and Chowdhery, Aakanksha and Castro-Ros, Alex and Pellat, Marie and Robinson, Kevin and Valter, Dasha and Narang, Sharan and Mishra, Gaurav and Yu, Adams and Zhao, Vincent and Huang, Yanping and Dai, Andrew and Yu, Hongkun and Petrov, Slav and Chi, Ed H. and Dean, Jeff and Devlin, Jacob and Roberts, Adam and Zhou, Denny and Le, Quoc V. and Wei, Jason},
+  title = {Scaling Instruction-Finetuned Language Models},
+  journal = {Journal of Machine Learning Research},
+  volume = {25},
+  number = {70},
+  pages = {1--53},
+  year = {2024},
+  url = {https://www.jmlr.org/papers/v25/23-0870.html}
+}
+
+
+@inproceedings{Tay2023,
+  author = {Yi Tay and Mostafa Dehghani and Vinh Q. Tran and Xavier Garcia and Jason Wei and Xuezhi Wang and Hyung Won Chung and Dara Bahri and Tal Schuster and Steven Zheng and Denny Zhou and Neil Houlsby and Donald Metzler},
+  title = {{UL2}: Unifying Language Learning Paradigms},
+  booktitle = {International Conference on Learning Representations},
+  year = {2023},
+  url = {https://openreview.net/forum?id=6ruVLB727MC}
+}
 
 @article{Zhang2025EncoderDecoderGI,
   title={Encoder-Decoder Gemma: Improving the Quality-Efficiency Trade-Off via Adaptation},
@@ -304,16 +402,7 @@ series = {NIPS '20}
   journal={ArXiv},
   year={2025},
   volume={abs/2504.06225},
-  url={https://api.semanticscholar.org/CorpusID:277626724}
-}
-
-@article{article,
-author = {Zampieri, Marcos and Gebre, Binyam},
-year = {2012},
-month = {01},
-pages = {},
-title = {Automatic Identification of Language Varieties: The Case of Portuguese},
-volume = {5}
+  url={https://arxiv.org/abs/2504.06225}
 }
 
 @article{10.1023/A:1007379606734,
@@ -334,17 +423,6 @@ month = jul,
 pages = {41–75},
 numpages = {35},
 keywords = {supervised learning, parallel transfer, multitask learning, kernel regression, k-nearest neighbor, inductive transfer, generalization, backpropagation}
-}
-
-@article{JMLR:v21:20-074,
-  author  = {Colin Raffel and Noam Shazeer and Adam Roberts and Katherine Lee and Sharan Narang and Michael Matena and Yanqi Zhou and Wei Li and Peter J. Liu},
-  title   = {Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer},
-  journal = {Journal of Machine Learning Research},
-  year    = {2020},
-  volume  = {21},
-  number  = {140},
-  pages   = {1--67},
-  url     = {http://jmlr.org/papers/v21/20-074.html}
 }
 
 @inproceedings{pfeiffer-etal-2021-adapterfusion,
@@ -383,3 +461,890 @@ location = {New Orleans, LA, USA},
 series = {NIPS '22}
 }
 
+@inproceedings{NEURIPS2023_1feb8787,
+ author = {Dettmers, Tim and Pagnoni, Artidoro and Holtzman, Ari and Zettlemoyer, Luke},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {A. Oh and T. Naumann and A. Globerson and K. Saenko and M. Hardt and S. Levine},
+ pages = {10088--10115},
+ publisher = {Curran Associates, Inc.},
+ title = {{QLoRA}: Efficient Finetuning of Quantized {LLM}s},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2023/file/1feb87871436031bdc0f2beaa62a049b-Paper-Conference.pdf},
+ volume = {36},
+ year = {2023}
+}
+
+@inproceedings{cao-etal-2021-continual,
+    title = "Continual Learning for Neural Machine Translation",
+    author = "Cao, Yue  and
+      Wei, Hao-Ran  and
+      Chen, Boxing  and
+      Wan, Xiaojun",
+    editor = "Toutanova, Kristina  and
+      Rumshisky, Anna  and
+      Zettlemoyer, Luke  and
+      Hakkani-Tur, Dilek  and
+      Beltagy, Iz  and
+      Bethard, Steven  and
+      Cotterell, Ryan  and
+      Chakraborty, Tanmoy  and
+      Zhou, Yichao",
+    booktitle = "Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jun,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.naacl-main.310/",
+    doi = "10.18653/v1/2021.naacl-main.310",
+    pages = "3964--3974",
+    abstract = "Neural machine translation (NMT) models are data-driven and require large-scale training corpus. In practical applications, NMT models are usually trained on a general domain corpus and then fine-tuned by continuing training on the in-domain corpus. However, this bears the risk of catastrophic forgetting that the performance on the general domain is decreased drastically. In this work, we propose a new continual learning framework for NMT models. We consider a scenario where the training is comprised of multiple stages and propose a dynamic knowledge distillation technique to alleviate the problem of catastrophic forgetting systematically. We also find that the bias exists in the output linear projection when fine-tuning on the in-domain corpus, and propose a bias-correction module to eliminate the bias. We conduct experiments on three representative settings of NMT application. Experimental results show that the proposed method achieves superior performance compared to baseline models in all settings."
+}
+
+@inproceedings{gu-etal-2022-continual,
+    title = "Continual Learning of Neural Machine Translation within Low Forgetting Risk Regions",
+    author = "Gu, Shuhao  and
+      Hu, Bojie  and
+      Feng, Yang",
+    editor = "Goldberg, Yoav  and
+      Kozareva, Zornitsa  and
+      Zhang, Yue",
+    booktitle = "Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing",
+    month = dec,
+    year = "2022",
+    address = "Abu Dhabi, United Arab Emirates",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.emnlp-main.111/",
+    doi = "10.18653/v1/2022.emnlp-main.111",
+    pages = "1707--1718",
+    abstract = "This paper considers continual learning of large-scale pretrained neural machine translation model without accessing the previous training data or introducing model separation. We argue that the widely used regularization-based methods, which perform multi-objective learning with an auxiliary loss, suffer from the misestimate problem and cannot always achieve a good balance between the previous and new tasks. To solve the problem, we propose a two-stage training method based on the local features of the real loss. We first search low forgetting risk regions, where the model can retain the performance on the previous task as the parameters are updated, to avoid the catastrophic forgetting problem. Then we can continually train the model within this region only with the new training data to fit the new task. Specifically, we propose two methods to search the low forgetting risk regions, which are based on the curvature of loss and the impacts of the parameters on the model output, respectively. We conduct experiments on domain adaptation and more challenging language adaptation tasks, and the experimental results show that our method can achieve significant improvements compared with several strong baselines."
+}
+
+@inproceedings{gu-feng-2020-investigating,
+    title = "Investigating Catastrophic Forgetting During Continual Training for Neural Machine Translation",
+    author = "Gu, Shuhao  and
+      Feng, Yang",
+    editor = "Scott, Donia  and
+      Bel, Nuria  and
+      Zong, Chengqing",
+    booktitle = "Proceedings of the 28th International Conference on Computational Linguistics",
+    month = dec,
+    year = "2020",
+    address = "Barcelona, Spain (Online)",
+    publisher = "International Committee on Computational Linguistics",
+    url = "https://aclanthology.org/2020.coling-main.381/",
+    doi = "10.18653/v1/2020.coling-main.381",
+    pages = "4315--4326",
+    abstract = "Neural machine translation (NMT) models usually suffer from catastrophic forgetting during continual training where the models tend to gradually forget previously learned knowledge and swing to fit the newly added data which may have a different distribution, e.g. a different domain. Although many methods have been proposed to solve this problem, we cannot get to know what causes this phenomenon yet. Under the background of domain adaptation, we investigate the cause of catastrophic forgetting from the perspectives of modules and parameters (neurons). The investigation on the modules of the NMT model shows that some modules have tight relation with the general-domain knowledge while some other modules are more essential in the domain adaptation. And the investigation on the parameters shows that some parameters are important for both the general-domain and in-domain translation and the great change of them during continual training brings about the performance decline in general-domain. We conducted experiments across different language pairs and domains to ensure the validity and reliability of our findings."
+}
+
+@inproceedings{shao-feng-2022-overcoming,
+    title = "Overcoming Catastrophic Forgetting beyond Continual Learning: Balanced Training for Neural Machine Translation",
+    author = "Shao, Chenze  and
+      Feng, Yang",
+    editor = "Muresan, Smaranda  and
+      Nakov, Preslav  and
+      Villavicencio, Aline",
+    booktitle = "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = may,
+    year = "2022",
+    address = "Dublin, Ireland",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.acl-long.143/",
+    doi = "10.18653/v1/2022.acl-long.143",
+    pages = "2023--2036",
+    abstract = "Neural networks tend to gradually forget the previously learned knowledge when learning multiple tasks sequentially from dynamic data distributions. This problem is called \textit{catastrophic forgetting}, which is a fundamental challenge in the continual learning of neural networks. In this work, we observe that catastrophic forgetting not only occurs in continual learning but also affects the traditional static training. Neural networks, especially neural machine translation models, suffer from catastrophic forgetting even if they learn from a static training set. To be specific, the final model pays imbalanced attention to training samples, where recently exposed samples attract more attention than earlier samples. The underlying cause is that training samples do not get balanced training in each model update, so we name this problem \textit{imbalanced training}. To alleviate this problem, we propose Complementary Online Knowledge Distillation (COKD), which uses dynamically updated teacher models trained on specific data orders to iteratively provide complementary knowledge to the student model. Experimental results on multiple machine translation tasks show that our method successfully alleviates the problem of imbalanced training and achieves substantial improvements over strong baseline systems."
+}
+
+@book{10.5555/3312046,
+author = {Sutton, Richard S. and Barto, Andrew G.},
+title = {Reinforcement Learning: An Introduction},
+year = {2018},
+isbn = {0262039249},
+publisher = {A Bradford Book},
+address = {Cambridge, MA, USA},
+abstract = {The significantly expanded and updated new edition of a widely used text on reinforcement learning, one of the most active research areas in artificial intelligence. Reinforcement learning, one of the most active research areas in artificial intelligence, is a computational approach to learning whereby an agent tries to maximize the total amount of reward it receives while interacting with a complex, uncertain environment. In Reinforcement Learning, Richard Sutton and Andrew Barto provide a clear and simple account of the field's key ideas and algorithms. This second edition has been significantly expanded and updated, presenting new topics and updating coverage of other topics. Like the first edition, this second edition focuses on core online learning algorithms, with the more mathematical material set off in shaded boxes. Part I covers as much of reinforcement learning as possible without going beyond the tabular case for which exact solutions can be found. Many algorithms presented in this part are new to the second edition, including UCB, Expected Sarsa, and Double Learning. Part II extends these ideas to function approximation, with new sections on such topics as artificial neural networks and the Fourier basis, and offers expanded treatment of off-policy learning and policy-gradient methods. Part III has new chapters on reinforcement learning's relationships to psychology and neuroscience, as well as an updated case-studies chapter including AlphaGo and AlphaGo Zero, Atari game playing, and IBM Watson's wagering strategy. The final chapter discusses the future societal impacts of reinforcement learning.}
+}
+
+@book{Lattimore_Szepesvári_2020, place={Cambridge}, title={Bandit Algorithms}, publisher={Cambridge University Press}, author={Lattimore, Tor and Szepesvári, Csaba}, year={2020}}
+
+@article{Schulman2017ProximalPO,
+  title={Proximal Policy Optimization Algorithms},
+  author={John Schulman and Filip Wolski and Prafulla Dhariwal and Alec Radford and Oleg Klimov},
+  journal={ArXiv},
+  year={2017},
+  volume={abs/1707.06347},
+  url={https://api.semanticscholar.org/CorpusID:28695052}
+}
+
+@inproceedings{10.5555/3666122.3668460,
+author = {Rafailov, Rafael and Sharma, Archit and Mitchell, Eric and Ermon, Stefano and Manning, Christopher D. and Finn, Chelsea},
+title = {Direct preference optimization: your language model is secretly a reward model},
+year = {2023},
+publisher = {Curran Associates Inc.},
+address = {Red Hook, NY, USA},
+abstract = {While large-scale unsupervised language models (LMs) learn broad world knowledge and some reasoning skills, achieving precise control of their behavior is difficult due to the completely unsupervised nature of their training. Existing methods for gaining such steerability collect human labels of the relative quality of model generations and fine-tune the unsupervised LM to align with these preferences, often with reinforcement learning from human feedback (RLHF). However, RLHF is a complex and often unstable procedure, first fitting a reward model that reflects the human preferences, and then fine-tuning the large unsupervised LM using reinforcement learning to maximize this estimated reward without drifting too far from the original model. In this paper, we leverage a mapping between reward functions and optimal policies to show that this constrained reward maximization problem can be optimized exactly with a single stage of policy training, essentially solving a classification problem on the human preference data. The resulting algorithm, which we call Direct Preference Optimization (DPO), is stable, performant, and computationally lightweight, eliminating the need for fitting a reward model, sampling from the LM during fine-tuning, or performing significant hyperparameter tuning. Our experiments show that DPO can fine-tune LMs to align with human preferences as well as or better than existing methods. Notably, fine-tuning with DPO exceeds RLHF's ability to control sentiment of generations and improves response quality in summarization and single-turn dialogue while being substantially simpler to implement and train.},
+booktitle = {Proceedings of the 37th International Conference on Neural Information Processing Systems},
+articleno = {2338},
+numpages = {14},
+location = {New Orleans, LA, USA},
+series = {NIPS '23}
+}
+
+@article{Shao2024DeepSeekMathPT,
+  title={{DeepSeekMath}: Pushing the Limits of Mathematical Reasoning in Open Language Models},
+  author={Zhihong Shao and Peiyi Wang and Qihao Zhu and Runxin Xu and Jun-Mei Song and Mingchuan Zhang and Y. K. Li and Yu Wu and Daya Guo},
+  journal={ArXiv},
+  year={2024},
+  volume={abs/2402.03300},
+  url={https://arxiv.org/abs/2402.03300}
+}
+
+@misc{liu2025understandingr1zeroliketrainingcritical,
+      title={Understanding R1-Zero-Like Training: A Critical Perspective},
+      author={Zichen Liu and Changyu Chen and Wenjun Li and Penghui Qi and Tianyu Pang and Chao Du and Wee Sun Lee and Min Lin},
+      year={2025},
+      eprint={2503.20783},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2503.20783},
+}
+
+@InProceedings{pmlr-v235-wang24ay,
+  title = 	 {Transforming and Combining Rewards for Aligning Large Language Models},
+  author =       {Wang, Zihao and Nagpal, Chirag and Berant, Jonathan and Eisenstein, Jacob and D'Amour, Alexander Nicholas and Koyejo, Sanmi and Veitch, Victor},
+  booktitle = 	 {Proceedings of the 41st International Conference on Machine Learning},
+  pages = 	 {51161--51176},
+  year = 	 {2024},
+  editor = 	 {Salakhutdinov, Ruslan and Kolter, Zico and Heller, Katherine and Weller, Adrian and Oliver, Nuria and Scarlett, Jonathan and Berkenkamp, Felix},
+  volume = 	 {235},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {21--27 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {https://raw.githubusercontent.com/mlresearch/v235/main/assets/wang24ay/wang24ay.pdf},
+  url = 	 {https://proceedings.mlr.press/v235/wang24ay.html},
+  abstract = 	 {A common approach for aligning language models to human preferences is to first learn a reward model from preference data, and then use this reward model to update the language model. We study two closely related problems that arise in this approach. First, any monotone transformation of the reward model preserves preference ranking; is there a choice that is "better" than others? Second, we often wish to align language models to multiple properties: how should we combine multiple reward models? Using a probabilistic interpretation of the alignment procedure, we identify a natural choice for transformation for (the common case of) rewards learned from Bradley-Terry preference models. The derived transformation is straightforward: we apply a log-sigmoid function to the centered rewards, a method we term "LSC-transformation" (log-sigmoid-centered transformation). This transformation has two important properties. First, it emphasizes improving poorly-performing outputs, rather than outputs that already score well. This mitigates both underfitting (where some prompts are not improved) and reward hacking (where the model learns to exploit misspecification of the reward model). Second, it enables principled aggregation of rewards by linking summation to logical conjunction: the sum of transformed rewards corresponds to the probability that the output is "good" in all measured properties, in a sense we make precise. Experiments aligning language models to be both helpful and harmless using RLHF show substantial improvements over the baseline (non-transformed) approach.}
+}
+
+@inproceedings{adebara-abdul-mageed-2021-improving,
+    title = "Improving Similar Language Translation With Transfer Learning",
+    author = "Adebara, Ife  and
+      Abdul-Mageed, Muhammad",
+    editor = "Barrault, Loic  and
+      Bojar, Ondrej  and
+      Bougares, Fethi  and
+      Chatterjee, Rajen  and
+      Costa-jussa, Marta R.  and
+      Federmann, Christian  and
+      Fishel, Mark  and
+      Fraser, Alexander  and
+      Freitag, Markus  and
+      Graham, Yvette  and
+      Grundkiewicz, Roman  and
+      Guzman, Paco  and
+      Haddow, Barry  and
+      Huck, Matthias  and
+      Yepes, Antonio Jimeno  and
+      Koehn, Philipp  and
+      Kocmi, Tom  and
+      Martins, Andre  and
+      Morishita, Makoto  and
+      Monz, Christof",
+    booktitle = "Proceedings of the Sixth Conference on Machine Translation",
+    month = nov,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.wmt-1.27/",
+    pages = "273--278",
+    abstract = "We investigate transfer learning based on pre-trained neural machine translation models to translate between (low-resource) similar languages. This work is part of our contribution to the WMT 2021 Similar Languages Translation Shared Task where we submitted models for different language pairs, including French-Bambara, Spanish-Catalan, and Spanish-Portuguese in both directions. Our models for Catalan-Spanish (82.79 BLEU)and Portuguese-Spanish (87.11 BLEU) rank top 1 in the official shared task evaluation, and we are the only team to submit models for the French-Bambara pairs."
+}
+
+@inproceedings{lakew-etal-2018-neural,
+    title = "Neural Machine Translation into Language Varieties",
+    author = "Lakew, Surafel Melaku  and
+      Erofeeva, Aliia  and
+      Federico, Marcello",
+    editor = "Bojar, Ond{\v{r}}ej  and
+      Chatterjee, Rajen  and
+      Federmann, Christian  and
+      Fishel, Mark  and
+      Graham, Yvette  and
+      Haddow, Barry  and
+      Huck, Matthias  and
+      Yepes, Antonio Jimeno  and
+      Koehn, Philipp  and
+      Monz, Christof  and
+      Negri, Matteo  and
+      N{\'e}v{\'e}ol, Aur{\'e}lie  and
+      Neves, Mariana  and
+      Post, Matt  and
+      Specia, Lucia  and
+      Turchi, Marco  and
+      Verspoor, Karin",
+    booktitle = "Proceedings of the Third Conference on Machine Translation: Research Papers",
+    month = oct,
+    year = "2018",
+    address = "Brussels, Belgium",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/W18-6316/",
+    doi = "10.18653/v1/W18-6316",
+    pages = "156--164",
+    abstract = "Both research and commercial machine translation have so far neglected the importance of properly handling the spelling, lexical and grammar divergences occurring among language varieties. Notable cases are standard national varieties such as Brazilian and European Portuguese, and Canadian and European French, which popular online machine translation services are not keeping distinct. We show that an evident side effect of modeling such varieties as unique classes is the generation of inconsistent translations. In this work, we investigate the problem of training neural machine translation from English to specific pairs of language varieties, assuming both labeled and unlabeled parallel texts, and low-resource conditions. We report experiments from English to two pairs of dialects, European-Brazilian Portuguese and European-Canadian French, and two pairs of standardized varieties, Croatian-Serbian and Indonesian-Malay. We show significant BLEU score improvements over baseline systems when translation into similar languages is learned as a multilingual task with shared representations."
+}
+
+@inproceedings{Jiao2023IsCA,
+  title={Is {ChatGPT} A Good Translator? Yes With {GPT-4} As The Engine},
+  author={Wenxiang Jiao and Wenxuan Wang and Jen-Tse Huang and Xing Wang and Zhaopeng Tu},
+  year={2023},
+  url={https://api.semanticscholar.org/CorpusID:257631519}
+}
+
+@inproceedings{faisal-etal-2024-dialectbench,
+    title = "{DIALECTBENCH}: An {NLP} Benchmark for Dialects, Varieties, and Closely-Related Languages",
+    author = "Faisal, Fahim  and
+      Ahia, Orevaoghene  and
+      Srivastava, Aarohi  and
+      Ahuja, Kabir  and
+      Chiang, David  and
+      Tsvetkov, Yulia  and
+      Anastasopoulos, Antonios",
+    editor = "Ku, Lun-Wei  and
+      Martins, Andre  and
+      Srikumar, Vivek",
+    booktitle = "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.acl-long.777/",
+    doi = "10.18653/v1/2024.acl-long.777",
+    pages = "14412--14454",
+    abstract = "Language technologies should be judged on their usefulness in real-world use cases. An often overlooked aspect in natural language processing (NLP) research and evaluation is language variation in the form of non-standard dialects or language varieties (hereafter, varieties). Most NLP benchmarks are limited to standard language varieties. To fill this gap, we propose DIALECTBENCH, the first-ever large-scale benchmark for NLP on varieties, which aggregates an extensive set of task-varied varieties datasets (10 text-level tasks covering 281 varieties). This allows for a comprehensive evaluation of NLP system performance on different varieties. We provide substantial proof of performance disparities between standard and non-standard language varieties, and we also identify language clusters with larger performance divergence across tasks.We believe DIALECTBENCH provides a comprehensive view of the current state of NLP for varieties and one step towards advancing it further."
+}
+
+@inproceedings{faisal-anastasopoulos-2025-testing,
+    title = "Testing the Boundaries of {LLM}s: Dialectal and Language-Variety Tasks",
+    author = "Faisal, Fahim  and
+      Anastasopoulos, Antonios",
+    editor = "Scherrer, Yves  and
+      Jauhiainen, Tommi  and
+      Ljube{\v{s}}i{\'c}, Nikola  and
+      Nakov, Preslav  and
+      Tiedemann, Jorg  and
+      Zampieri, Marcos",
+    booktitle = "Proceedings of the 12th Workshop on NLP for Similar Languages, Varieties and Dialects",
+    month = jan,
+    year = "2025",
+    address = "Abu Dhabi, UAE",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.vardial-1.6/",
+    pages = "68--92",
+    abstract = "This study evaluates the performance of large language models (LLMs) on benchmark datasets designed for dialect-specific NLP tasks. Dialectal NLP is a low-resource field, yet it is crucial for evaluating the robustness of language models against linguistic diversity. This work is the first to systematically compare state-of-the-art instruction-tuned LLMs{---}both open-weight multilingual and closed-weight generative models{---}with encoder-based models that rely on supervised task-specific fine-tuning for dialectal tasks. We conduct extensive empirical analyses to provide insights into the current LLM landscape for dialect-focused tasks. Our findings indicate that certain tasks, such as dialect identification, are challenging for LLMs to replicate effectively due to the complexity of multi-class setups and the suitability of these tasks for supervised fine-tuning. Additionally, the structure of task labels{---}whether categorical or continuous scoring{---}significantly affects model performance. While LLMs excel in tasks like machine reading comprehension, their instruction-following ability declines in simpler tasks like POS tagging when task instructions are inherently complex. Overall, subtle variations in prompt design can greatly impact performance, underscoring the need for careful prompt engineering in dialectal evaluations."
+}
+
+@article{zampieri2020natural,
+  title = {Natural language processing for similar languages, varieties, and dialects: A survey},
+  author = {Zampieri, Marcos and Nakov, Preslav and Scherrer, Yves},
+  journal = {Natural Language Engineering},
+  volume = {26},
+  number = {6},
+  pages = {595--612},
+  year = {2020},
+  publisher = {Cambridge University Press},
+  doi = {10.1017/S1351324920000492}
+}
+
+@inproceedings{khered-etal-2025-multi,
+    title = "A Multi-Task Learning Approach to Dialectal {A}rabic Identification and Translation to Modern Standard {A}rabic",
+    author = "Khered, Abdullah  and
+      Benkhedda, Youcef  and
+      Batista-Navarro, Riza",
+    editor = "Estevanell-Valladares, Ernesto Luis  and
+      Picazo-Izquierdo, Alicia  and
+      Ranasinghe, Tharindu  and
+      Mikaberidze, Besik  and
+      Ostermann, Simon  and
+      Gurgurov, Daniil  and
+      Mueller, Philipp  and
+      Borg, Claudia  and
+      {\v{S}}imko, Mari{\'a}n",
+    booktitle = "Proceedings of the First Workshop on Advancing {NLP} for Low-Resource Languages",
+    month = sep,
+    year = "2025",
+    address = "Varna, Bulgaria",
+    publisher = "INCOMA Ltd., Shoumen, Bulgaria",
+    url = "https://aclanthology.org/2025.lowresnlp-1.4/",
+    pages = "21--31"
+}
+
+@misc{sharma2026indicdialect,
+      title = {{INDIC} {DIALECT}: A Multi Task Benchmark to Evaluate and Translate in Indian Language Dialects},
+      author = {Tarun Sharma and Manikandan Ravikiran and Sourava Kumar Behera and Pramit Bhattacharya and Arnab Bhattacharya and Rohit Saluja},
+      year = {2026},
+      eprint = {2601.10388},
+      archivePrefix = {arXiv},
+      primaryClass = {cs.CL},
+      url = {https://arxiv.org/abs/2601.10388}
+}
+
+@INPROCEEDINGS{4052828,
+  author={Da Silva, Joaquim Ferreira and Lopes, Gabriel Pereira},
+  booktitle={2006 International Conference on Computational Inteligence for Modelling Control and Automation and International Conference on Intelligent Agents Web Technologies and International Commerce (CIMCA'06)},
+  title={Identification of Document Language is Not yet a Completely Solved Problem},
+  year={2006},
+  volume={},
+  number={},
+  pages={212-212},
+  keywords={Natural languages;Frequency;Probability;Web pages;Computational intelligence;Robustness;Statistics;Text categorization;Contracts;Europe},
+  doi={10.1109/CIMCA.2006.117}}
+
+@INPROCEEDINGS{7839597,
+  author={Castro, Dayvid and Souza, Ellen and De Oliveira, Adriano L.I.},
+  booktitle={2016 5th Brazilian Conference on Intelligent Systems (BRACIS)},
+  title={Discriminating between {Brazilian Portuguese} and {European Portuguese} National Varieties on {Twitter} Texts},
+  year={2016},
+  volume={},
+  number={},
+  pages={265-270},
+  keywords={Twitter;Smoothing methods;Europe;Standards;Natural language processing;DSL;Language Identification;National Language Varieties;Portuguese Language;Twitter;Text Classification},
+  doi={10.1109/BRACIS.2016.056}}
+
+@inproceedings{zampieri-etal-2024-language,
+    title = "Language Variety Identification with True Labels",
+    author = "Zampieri, Marcos  and
+      North, Kai  and
+      Jauhiainen, Tommi  and
+      Felice, Mariano  and
+      Kumari, Neha  and
+      Nair, Nishant  and
+      Bangera, Yash Mahesh",
+    editor = "Calzolari, Nicoletta  and
+      Kan, Min-Yen  and
+      Hoste, Veronique  and
+      Lenci, Alessandro  and
+      Sakti, Sakriani  and
+      Xue, Nianwen",
+    booktitle = "Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)",
+    month = may,
+    year = "2024",
+    address = "Torino, Italia",
+    publisher = "ELRA and ICCL",
+    url = "https://aclanthology.org/2024.lrec-main.882/",
+    pages = "10100--10109",
+    abstract = "Language identification is an important first step in many NLP applications. Most publicly available language identification datasets, however, are compiled under the assumption that the gold label of each instance is determined by where texts are retrieved from. Research has shown that this is a problematic assumption, particularly in the case of very similar languages (e.g., Croatian and Serbian) and national language varieties (e.g., Brazilian and European Portuguese), where texts may contain no distinctive marker of the particular language or variety. To overcome this important limitation, this paper presents DSL True Labels (DSL-TL), the first human-annotated multilingual dataset for language variety identification. DSL-TL contains a total of 12,900 instances in Portuguese, split between European Portuguese and Brazilian Portuguese; Spanish, split between Argentine Spanish and Castilian Spanish; and English, split between American English and British English. We trained multiple models to discriminate between these language varieties, and we present the results in detail. The data and models presented in this paper provide a reliable benchmark toward the development of robust and fairer language variety identification systems. We make DSL-TL freely available to the research community."
+}
+
+@inproceedings{DBLP:conf/konvens/ZampieriG12,
+  author       = {Marcos Zampieri and
+                  Binyam Gebrekidan Gebre},
+  editor       = {Jeremy Jancsary},
+  title        = {Automatic Identification of Language Varieties: The Case of {Portuguese}},
+  booktitle    = {11th Conference on Natural Language Processing, {KONVENS} 2012, Empirical
+                  Methods in Natural Language Processing, Vienna, Austria, September
+                  19-21, 2012},
+  series       = {Scientific series of the {\"{O}}GAI},
+  volume       = {5},
+  pages        = {233--237},
+  publisher    = {{\"{O}}GAI, Wien, {\"{O}}sterreich},
+  address      = {Vienna, Austria},
+  year         = {2012},
+  url          = {http://www.oegai.at/konvens2012/proceedings/33\_zampieri12p/},
+  timestamp    = {Sat, 29 Nov 2014 17:59:24 +0100},
+  biburl       = {https://dblp.org/rec/conf/konvens/ZampieriG12.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{sousa2025tradutorbuildingvarietyspecific,
+  author  = {Hugo Sousa and Satya Almasian and Ricardo Campos and Al{\'i}pio Jorge},
+  title   = {Tradutor: Building a Variety Specific Translation Model},
+  journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume  = {39},
+  number  = {24},
+  pages   = {25183--25191},
+  year    = {2025},
+  doi     = {10.1609/aaai.v39i24.34704},
+  url     = {https://doi.org/10.1609/aaai.v39i24.34704}
+}
+
+@inproceedings{10.1609/aaai.v39i24.34704,
+author = {Sousa, Hugo and Almasian, Satya and Campos, Ricardo and Jorge, Al\'{\i}pio},
+title = {Tradutor: building a variety specific translation model},
+year = {2025},
+isbn = {978-1-57735-897-8},
+publisher = {AAAI Press},
+url = {https://doi.org/10.1609/aaai.v39i24.34704},
+doi = {10.1609/aaai.v39i24.34704},
+abstract = {Language models have become foundational to many widely used systems. However, these seemingly advantageous models are double-edged swords. While they excel in tasks related to resource-rich languages like English, they often lose the fine nuances of language forms, dialects, and varieties that are inherent to languages spoken in multiple regions of the world. Languages like European Portuguese are neglected in favor of their more popular counterpart, Brazilian Portuguese, leading to suboptimal performance in various linguistic tasks. To address this gap, we introduce the first open-source translation model specifically tailored for European Portuguese, along with a novel dataset specifically designed for this task. Results from automatic evaluations on two benchmark datasets demonstrate that our best model surpasses existing open-source translation systems for Portuguese and approaches the performance of industry-leading closed-source systems for European Portuguese. By making our dataset, models, and code publicly available, we aim to support and encourage further research, fostering advancements in the representation of underrepresented language varieties.},
+booktitle = {Proceedings of the Thirty-Ninth AAAI Conference on Artificial Intelligence and Thirty-Seventh Conference on Innovative Applications of Artificial Intelligence and Fifteenth Symposium on Educational Advances in Artificial Intelligence},
+articleno = {2806},
+numpages = {9},
+series = {AAAI'25/IAAI'25/EAAI'25}
+}
+
+@InProceedings{souza2020bertimbau,
+    author="Souza, F{\'a}bio and Nogueira, Rodrigo and Lotufo, Roberto",
+    editor="Cerri, Ricardo and Prati, Ronaldo C.",
+    title="{BERTimbau}: Pretrained {BERT} Models for {Brazilian Portuguese}",
+    booktitle="Intelligent Systems",
+    year="2020",
+    publisher="Springer International Publishing",
+    address="Cham",
+    pages="403--417",
+    isbn="978-3-030-61377-8"
+}
+
+@inproceedings{preda-etal-2024-across,
+    title = "Across the Atlantic: Distinguishing Between {E}uropean and {B}razilian {P}ortuguese Dialects",
+    author = "Preda, David  and
+      Os{\'o}rio, Tom{\'a}s  and
+      Cardoso, Henrique Lopes",
+    editor = "Gamallo, Pablo  and
+      Claro, Daniela  and
+      Teixeira, Ant{\'o}nio  and
+      Real, Livy  and
+      Garcia, Marcos  and
+      Oliveira, Hugo Gon{\c{c}}alo  and
+      Amaro, Raquel",
+    booktitle = "Proceedings of the 16th International Conference on Computational Processing of Portuguese - Vol. 1",
+    month = mar,
+    year = "2024",
+    address = "Santiago de Compostela, Galicia/Spain",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.propor-1.36/",
+    pages = "353--363"
+}
+
+@inproceedings{zampieri-etal-2014-report,
+    title = "A Report on the {DSL} Shared Task 2014",
+    author = {Zampieri, Marcos  and
+      Tan, Liling  and
+      Ljube{\v{s}}i{\'c}, Nikola  and
+      Tiedemann, J{\"o}rg},
+    editor = {Zampieri, Marcos  and
+      Tan, Liling  and
+      Ljube{\v{s}}i{\'c}, Nikola  and
+      Tiedemann, J{\"o}rg},
+    booktitle = "Proceedings of the First Workshop on Applying {NLP} Tools to Similar Languages, Varieties and Dialects",
+    month = aug,
+    year = "2014",
+    address = "Dublin, Ireland",
+    publisher = "Association for Computational Linguistics and Dublin City University",
+    url = "https://aclanthology.org/W14-5307/",
+    doi = "10.3115/v1/W14-5307",
+    pages = "58--67"
+}
+
+@inproceedings{marujo-etal-2011-bp2ep,
+    title = "{BP}2{EP} - Adaptation of {B}razilian {P}ortuguese texts to {E}uropean {P}ortuguese",
+    author = "Marujo, Luis  and
+      Grazina, Nuno  and
+      Luis, Tiago  and
+      Ling, Wang  and
+      Coheur, Luisa  and
+      Trancoso, Isabel",
+    editor = "Forcada, Mikel L.  and
+      Depraetere, Heidi  and
+      Vandeghinste, Vincent",
+    booktitle = "Proceedings of the 15th Annual Conference of the European Association for Machine Translation",
+    month = may # " 30–31",
+    year = "2011",
+    address = "Leuven, Belgium",
+    publisher = "European Association for Machine Translation",
+    url = "https://aclanthology.org/2011.eamt-1.19/"
+}
+
+@inproceedings{joulin-etal-2017-bag,
+    title = "Bag of Tricks for Efficient Text Classification",
+    author = "Joulin, Armand  and
+      Grave, Edouard  and
+      Bojanowski, Piotr  and
+      Mikolov, Tomas",
+    editor = "Lapata, Mirella  and
+      Blunsom, Phil  and
+      Koller, Alexander",
+    booktitle = "Proceedings of the 15th Conference of the {E}uropean Chapter of the Association for Computational Linguistics: Volume 2, Short Papers",
+    month = apr,
+    year = "2017",
+    address = "Valencia, Spain",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/E17-2068/",
+    pages = "427--431",
+    abstract = "This paper explores a simple and efficient baseline for text classification. Our experiments show that our fast text classifier fastText is often on par with deep learning classifiers in terms of accuracy, and many orders of magnitude faster for training and evaluation. We can train fastText on more than one billion words in less than ten minutes using a standard multicore CPU, and classify half a million sentences among 312K classes in less than a minute."
+}
+
+@inproceedings{caswell-etal-2020-language-id-wild,
+    title = "Language {ID} in the Wild: Unexpected Challenges on the Path to a Thousand-Language Web Text Corpus",
+    author = "Caswell, Isaac  and
+      Breiner, Theresa  and
+      van Esch, Daan  and
+      Bapna, Ankur",
+    editor = "Scott, Donia  and
+      Bel, Nuria  and
+      Zong, Chengqing",
+    booktitle = "Proceedings of the 28th International Conference on Computational Linguistics",
+    month = dec,
+    year = "2020",
+    address = "Barcelona, Spain (Online)",
+    publisher = "International Committee on Computational Linguistics",
+    url = "https://aclanthology.org/2020.coling-main.579/",
+    doi = "10.18653/v1/2020.coling-main.579",
+    pages = "6588--6608",
+    abstract = "Large text corpora are increasingly important for a wide variety of Natural Language Processing (NLP) tasks, and automatic language identification (LangID) is a core technology needed to collect such datasets in a multilingual context. LangID is largely treated as solved in the literature, with models reported that achieve over 90{\%} average F1 on as many as 1,366 languages. We train LangID models on up to 1,629 languages with comparable quality on held-out test sets, but find that human-judged LangID accuracy for web-crawl text corpora created using these models is only around 5{\%} for many lower-resource languages, suggesting a need for more robust evaluation. Further analysis revealed a variety of error modes, arising from domain mismatch, class imbalance, language similarity, and insufficiently expressive models. We propose two classes of techniques to mitigate these errors: wordlist-based tunable-precision filters (for which we release curated lists in about 500 languages) and transformer-based semi-supervised LangID models, which increase median dataset precision from 5.5{\%} to 71.2{\%}. These techniques enable us to create an initial data set covering 100K or more relatively clean sentences in each of 500+ languages, paving the way towards a 1,000-language web text corpus."
+}
+
+@inproceedings{burchell-etal-2023-openlid,
+    title = "An Open Dataset and Model for Language Identification",
+    author = "Burchell, Laurie and
+      Birch, Alexandra and
+      Bogoychev, Nikolay and
+      Heafield, Kenneth",
+    booktitle = "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",
+    month = jul,
+    year = "2023",
+    address = "Toronto, Canada",
+    publisher = "Association for Computational Linguistics",
+    pages = "865--879"
+}
+
+@inproceedings{banon-etal-2024-fastspell,
+    title = "{F}ast{S}pell: The {L}ang{I}d Magic Spell",
+    author = "Ba{\~n}{\'o}n, Marta  and
+      Ram{\'i}rez-S{\'a}nchez, Gema  and
+      Zaragoza-Bernabeu, Jaume  and
+      Ortiz Rojas, Sergio",
+    editor = "Calzolari, Nicoletta  and
+      Kan, Min-Yen  and
+      Hoste, Veronique  and
+      Lenci, Alessandro  and
+      Sakti, Sakriani  and
+      Xue, Nianwen",
+    booktitle = "Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)",
+    month = may,
+    year = "2024",
+    address = "Torino, Italia",
+    publisher = "ELRA and ICCL",
+    url = "https://aclanthology.org/2024.lrec-main.626/",
+    pages = "7133--7140",
+    abstract = "Language identification is a crucial component in the automated production of language resources, particularly in multilingual and big data contexts. However, commonly used language identifiers struggle to differentiate between similar or closely-related languages. This paper introduces FastSpell, a language identifier that combines fastText (a pre-trained language identifier tool) and Hunspell (a spell checker) with the aim of having a refined second-opinion before deciding which language should be assigned to a text. We provide a description of the FastSpell algorithm along with an explanation on how to use and configure it. To that end, we motivate the need of such a tool and present a benchmark including some popular language identifiers evaluated during the development of FastSpell. We show how FastSpell is useful not only to improve identification of similar languages, but also to identify new ones ignored by other tools."
+}
+
+@inproceedings{fedorova-etal-2026-openlidv3,
+    title = "{O}pen{LID}-v3: Improving the Precision of Closely Related Language Identification {--} An Experience Report",
+    author = "Fedorova, Mariia  and
+      Arefyev, Nikolay  and
+      Buljan, Maja  and
+      Helcl, Jind{\v{r}}ich  and
+      Oepen, Stephan  and
+      R{\o}nningstad, Egil  and
+      Scherrer, Yves",
+    editor = "Scherrer, Yves  and
+      Aepli, No{\"e}mi  and
+      Blaschke, Verena  and
+      Jauhiainen, Tommi  and
+      Ljube{\v{s}}i{\'c}, Nikola  and
+      Nakov, Preslav  and
+      Tiedemann, J{\"o}rg  and
+      Zampieri, Marcos",
+    booktitle = "Proceedings of the 13th Workshop on {NLP} for Similar Languages, Varieties and Dialects",
+    month = mar,
+    year = "2026",
+    address = "Rabat, Morocco",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.vardial-1.23/",
+    doi = "10.18653/v1/2026.vardial-1.23",
+    pages = "275--292",
+    abstract = "Language identification (LID) is an essential step in building high-quality multilingual datasets from web data. Existing LID tools (such as OpenLID or GlotLID) often struggle to identify closely related languages and to distinguish valid natural language from noise, which contaminates language-specific subsets, especially for low-resource languages. In this work we extend the OpenLID classifier by adding more training data, merging problematic language variant clusters, and introducing a special label for marking noise. We call this extended system OpenLID-v3 and evaluate it against GlotLID on multiple benchmarks. During the development we focus on three groups of closely related languages (Bosnian, Croatian, and Serbian; Romance varieties of Northern Italy and Southern France; and Scandinavian languages) and contribute new evaluation datasets where existing ones are inadequate. We find that ensemble approaches improve precision but also substantially reduce coverage for low-resource languages."
+}
+
+@inproceedings{xu2024paradigmshiftmachinetranslation,
+    title = "A Paradigm Shift in Machine Translation: Boosting Translation Performance of Large Language Models",
+    author = "Xu, Haoran and Kim, Young Jin and Sharaf, Amr and Awadalla, Hany Hassan",
+    booktitle = "International Conference on Learning Representations",
+    year = "2024",
+    url = "https://openreview.net/forum?id=farT6XXntP"
+}
+
+@inproceedings{alves2024toweropenmultilingual,
+title={{Tower}: An Open Multilingual Large Language Model for Translation-Related Tasks},
+author={Duarte Miguel Alves and Jos{\'e} Pombal and Nuno M Guerreiro and Pedro Henrique Martins and Jo{\~a}o Alves and Amin Farajian and Ben Peters and Ricardo Rei and Patrick Fernandes and Sweta Agrawal and Pierre Colombo and Jos{\'e} G. C. de Souza and Andre Martins},
+booktitle={First Conference on Language Modeling},
+year={2024},
+url={https://openreview.net/forum?id=EHPns3hVkj}
+}
+
+@inproceedings{rei2025towerbridginggenerality,
+    title = "{TOWER}+: Bridging Generality and Translation Specialization in Multilingual {LLM}s",
+    author = "Rei, Ricardo  and
+      Guerreiro, Nuno M  and
+      Pombal, Jos{\'e}  and
+      Alves, Jo{\~a}o  and
+      Farajian, Amin  and
+      Teixeirinha, Pedro  and
+      Martins, Andre",
+    editor = "Liakata, Maria  and
+      Moreira, Viviane P.  and
+      Zhang, Jiajun  and
+      Jurgens, David",
+    booktitle = "Proceedings of the 64th Annual Meeting of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2026",
+    address = "San Diego, California, United States",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.acl-long.1366/",
+    doi = "10.18653/v1/2026.acl-long.1366",
+    pages = "29614--29635",
+    ISBN = "979-8-89176-390-6",
+    abstract = "Fine-tuning pretrained LLMs has proven effective for reaching state-of-the-art performance on specific tasks like machine translation. However, this process often implies sacrificing general-purpose capabilities, such as conversational reasoning and instruction-following, hampering the usefulness of the system in real-world applications requiring a mixture of skills. In this paper, we introduce Tower+, a suite of models designed to deliver strong performance on both translation and multilingual general-purpose text capabilities. We improve the TOwer (Alves et al., 2024) recipe by adding novel stages of preference optimization and reinforcement learning with verifiable rewards, in addition to continued pretraining and supervised fine-tuning. At each stage, we carefully generate and curate data to strengthen performance on translation and general-purpose tasks like coding, mathematics, and instruction-following. We develop models at multiple scales: 2B, 9B, and 72B. Our smaller models often outperform larger general-purpose open-weight and proprietary LLMs (e.g., Llama 3.3 70B, GPT-4o). Our largest model delivers best-in-class translation performance for high-resource languages, and top results on multilingual Arena Hard and IF-MT, a benchmark we introduce for evaluating both translation and instruction-following."
+}
+
+@inproceedings{nguyen-etal-2017-reinforcement,
+    title = "Reinforcement Learning for Bandit Neural Machine Translation with Simulated Human Feedback",
+    author = "Nguyen, Khanh and Daum{\'e} III, Hal and Boyd-Graber, Jordan",
+    booktitle = "Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing",
+    month = sep,
+    year = "2017",
+    address = "Copenhagen, Denmark",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D17-1153/",
+    doi = "10.18653/v1/D17-1153",
+    pages = "1464--1474"
+}
+
+@inproceedings{thu2023rlnmt,
+    title = "{RL-NMT}: Reinforcement Learning Fine-tuning for Improved Neural Machine Translation of {Burmese} Dialects",
+    author = "Thu, Ye Kyaw and Oo, Thazin Myint and Supnithi, Thepchai",
+    booktitle = "Proceedings of the 5th ACM International Conference on Multimedia in Asia Workshops",
+    year = "2023",
+    publisher = "Association for Computing Machinery",
+    doi = "10.1145/3611380.3628564"
+}
+
+@inproceedings{he-etal-2024-improving,
+    title = "Improving Machine Translation with Human Feedback: An Exploration of Quality Estimation as a Reward Model",
+    author = "He, Zhiwei and Wang, Xing and Jiao, Wenxiang and Zhang, Zhuosheng and Wang, Rui and Shi, Shuming and Tu, Zhaopeng",
+    booktitle = "Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)",
+    month = jun,
+    year = "2024",
+    address = "Mexico City, Mexico",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.naacl-long.451/",
+    doi = "10.18653/v1/2024.naacl-long.451",
+    pages = "8164--8180"
+}
+
+@misc{xu2024advancingtranslationpreference,
+      title = {Advancing Translation Preference Modeling with {RLHF}: A Step Towards Cost-Effective Solution},
+      author = {Xu, Nuo and Zhao, Jun and Zu, Can and Li, Sixian and Chen, Lu and Zhang, Zhihao and Zheng, Rui and Dou, Shihan and Qin, Wenjuan and Gui, Tao and Zhang, Qi and Huang, Xuanjing},
+      year = {2024},
+      eprint = {2402.11525},
+      archivePrefix = {arXiv},
+      primaryClass = {cs.CL},
+      url = {https://arxiv.org/abs/2402.11525}
+}
+
+@article{ramos2024finegrainedrewardoptimization,
+    title = "Fine-Grained Reward Optimization for Machine Translation using Error Severity Mappings",
+    author = "Ramos, Miguel Moura  and
+      Almeida, Tom{\'a}s  and
+      Vareta, Daniel  and
+      Azevedo, Filipe  and
+      Agrawal, Sweta  and
+      Fernandes, Patrick  and
+      Martins, Andr{\'e} F. T.",
+    journal = "Transactions of the Association for Computational Linguistics",
+    volume = "14",
+    year = "2026",
+    address = "Cambridge, MA",
+    publisher = "MIT Press",
+    url = "https://aclanthology.org/2026.tacl-1.33/",
+    doi = "10.1162/tacl.a.646",
+    pages = "733--754",
+    abstract = "Reinforcement learning (RL) has been proven to be an effective and robust method for training neural machine translation systems, especially when paired with powerful reward models that accurately assess translation quality. However, most research has focused on RL methods that use sentence-level feedback, leading to inefficient learning signals due to the reward sparsity problem{---}the model receives a single score for the entire sentence. To address this, we propose a novel approach that leverages fine-grained, token-level quality assessments along with error severity levels using RL methods. Specifically, we use xCOMET, a state-of-the-art quality estimation system, as our token-level reward model. We conduct experiments on small and large translation datasets with standard encoder-decoder and large language models-based machine translation systems, comparing the impact of sentence-level versus fine-grained reward signals on translation quality. Our results show that training with token-level rewards improves translation quality across language pairs over baselines according to both automatic and human evaluation. Furthermore, token-level reward optimization improves training stability, evidenced by a steady increase in mean rewards over training epochs."
+}
+
+@inproceedings{feng2025mtr1zero,
+    title = "{MT}-R1-Zero: Advancing {LLM}-based Machine Translation via R1-Zero-like Reinforcement Learning",
+    author = "Feng, Zhaopeng  and
+      Cao, Shaosheng  and
+      Ren, Jiahan  and
+      Su, Jiayuan  and
+      Chen, Ruizhe  and
+      Zhang, Yan  and
+      Wu, Jian  and
+      Liu, Zuozhu",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2025",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.findings-emnlp.1015/",
+    doi = "10.18653/v1/2025.findings-emnlp.1015",
+    pages = "18685--18702",
+    ISBN = "979-8-89176-335-7",
+    abstract = "Large-scale reinforcement learning (RL) methods have proven highly effective in enhancing the reasoning abilities of large language models (LLMs), particularly for tasks with verifiable solutions such as mathematics and coding. However, applying this idea to machine translation (MT), where outputs are flexibly formatted and difficult to automatically evaluate with explicit rules, remains underexplored. In this work, we introduce \textbf{MT-R1-Zero}, the first open-source adaptation of the R1-Zero RL framework for MT without supervised fine-tuning or cold-start. We propose a rule-metric mixed reward mechanism to guide LLMs towards improved translation quality via emergent reasoning. On the WMT 24 English-Chinese benchmark, our MT-R1-Zero-3B-Mix achieves competitive performance, surpassing TowerInstruct-7B-v0.2 by an average of 1.26 points. Meanwhile, our MT-R1-Zero-7B-Mix attains a high average score of 62.25 across all metrics, placing it on par with advanced proprietary models such as GPT-4o and Claude-3.5-Sonnet, while the MT-R1-Zero-7B-Sem variant achieves state-of-the-art scores on semantic metrics. Moreover, our work exhibits strong generalization capabilities on out-of-distribution MT tasks, robustly supporting multilingual and low-resource settings. Extensive analysis of model behavior across different initializations and reward metrics offers pioneering insight into the critical role of reward design, LLM adaptability, training dynamics, and emergent reasoning patterns within the R1-Zero paradigm for MT. Our code is available at \url{https://github.com/fzp0424/MT-R1-Zero}."
+}
+
+@article{wang2025deeptrans,
+    author = {Jiaan Wang and Fandong Meng and Jie Zhou},
+    title = {{DeepTrans}: Deep Reasoning Translation via Reinforcement Learning},
+    journal = {Transactions of the Association for Computational Linguistics},
+    volume = {14},
+    pages = {47--63},
+    year = {2026},
+    doi = {10.1162/TACL.a.65},
+    url = {https://aclanthology.org/2026.tacl-1.3/}
+}
+
+@inproceedings{liu-etal-2026-mending,
+    title = "Mending the Holes: Mitigating Reward Hacking in Reinforcement Learning for Multilingual Translation",
+    author = "Liu, Yifeng  and
+      Ouyang, Siqi  and
+      R, Yatish H  and
+      Li, Lei",
+    editor = "Liakata, Maria  and
+      Moreira, Viviane P.  and
+      Zhang, Jiajun  and
+      Jurgens, David",
+    booktitle = "Findings of the {A}ssociation for {C}omputational {L}inguistics: {ACL} 2026",
+    month = jul,
+    year = "2026",
+    address = "San Diego, California, United States",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.findings-acl.1682/",
+    doi = "10.18653/v1/2026.findings-acl.1682",
+    pages = "33699--33723",
+    ISBN = "979-8-89176-395-1",
+    abstract = "Large Language Models (LLMs) have demonstrated remarkable capability in machine translation on high-resource language pairs, yet their performance on low-resource translation still lags behind. Existing post-training methods rely heavily on high-quality parallel data, which are often scarce or unavailable for low-resource languages. In this paper, we introduce WALAR, a reinforcement training method using only monolingual text to elevate LLMs' translation capabilities on massive low-resource languages while retaining their performance on high-resource languages. Our key insight is based on the observation of failure modes (or ``holes'') in existing source-based multilingual quality estimation (QE) models. Reinforcement learning (RL) using these QE models tends to amplify such holes, resulting in poorer multilingual LLMs. We develop techniques including word alignment and language alignment to mitigate such holes in WALAR{'}s reward for RL training. We continually trained an LLM supporting translation of 101 languages using WALAR. The experiments show that our new model outperforms LLaMAX, one of the strongest open-source multilingual LLMs by a large margin on 1,414 language directions on Flores-101 dataset."
+}
+@inproceedings{zhang2018learningstructured,
+      title = {Learning Structured Representation for Text Classification via Reinforcement Learning},
+      author = {Zhang, Tianyang and Huang, Minlie and Zhao, Li},
+      booktitle = {Proceedings of the Thirty-Second AAAI Conference on Artificial Intelligence},
+      year = {2018},
+      doi = {10.1609/aaai.v32i1.12047},
+      url = {https://ojs.aaai.org/index.php/AAAI/article/view/12047}
+}
+
+@inproceedings{pmlr-v119-chai20a,
+      title = {Description Based Text Classification with Reinforcement Learning},
+      author = {Chai, Duo and Wu, Wei and Han, Qinghong and Wu, Fei and Li, Jiwei},
+      booktitle = {Proceedings of the 37th International Conference on Machine Learning},
+      pages = {1371--1382},
+      year = {2020},
+      editor = {III, Hal Daum{\'e} and Singh, Aarti},
+      volume = {119},
+      series = {Proceedings of Machine Learning Research},
+      publisher = {PMLR},
+      url = {https://proceedings.mlr.press/v119/chai20a.html}
+}
+
+@inproceedings{zeng-etal-2025-gta,
+    title = "{GTA}: Supervised-Guided Reinforcement Learning for Text Classification with Large Language Models",
+    author = "Zeng, Min  and
+      Sun, Jingfei  and
+      Luo, Xueyou  and
+      Zhang, Shiqi  and
+      Xie, Li  and
+      Liu, Caiquan  and
+      Chen, Xiaoxin",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2025",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.findings-emnlp.56/",
+    doi = "10.18653/v1/2025.findings-emnlp.56",
+    pages = "1050--1060",
+    ISBN = "979-8-89176-335-7",
+    abstract = "In natural language processing (NLP) tasks, pure reinforcement learning fine-tuning methods often suffer from inefficient exploration and slow convergence; while supervised fine-tuning (SFT) methods, although efficient in training, have limited performance ceiling and less solid theoretical foundation compared to reinforcement learning. To address efficiency-capability trade-off, we propose the Guess-Think-Answer (GTA) framework that combines the efficiency of SFT with the capability gains of RL in a unified training paradigm. GTA works by having the model first produce a provisional guess (optimized via cross-entropy loss), then reflect on this guess before generating the final answer, with RL rewards shaping both the final output and the format of the entire GTA structure. This hybrid approach achieves both faster convergence than pure RL and higher performance ceiling than pure SFT. To mitigate gradient conflicts between the two training signals, we employ loss masking and gradient constraints. Empirical results on three text classification benchmarks demonstrate that GTA substantially accelerates convergence while outperforming both standalone SFT and RL baselines."
+}
+@misc{zhang2025surveyreinforcementlearninglarge,
+      title = {A Survey of Reinforcement Learning for Large Reasoning Models},
+      author = {Zhang, Kaiyan and Zuo, Yuxin and He, Bingxiang and Sun, Youbang and Liu, Runze and Jiang, Che and Fan, Yuchen and Tian, Kai and Jia, Guoli and Li, Pengfei and Fu, Yu and Lv, Xingtai and Zhang, Yuchen and Zeng, Sihang and Qu, Shang and Li, Haozhan and Wang, Shijie and Wang, Yuru and Long, Xinwei and Liu, Fangfu and Xu, Xiang and Ma, Jiaze and Zhu, Xuekai and Hua, Ermo and Liu, Yihao and Li, Zonglin and Chen, Huayu and Qu, Xiaoye and Li, Yafu and Chen, Weize and Yuan, Zhenzhao and Gao, Junqi and Li, Dong and Ma, Zhiyuan and Cui, Ganqu and Liu, Zhiyuan and Qi, Biqing and Ding, Ning and Zhou, Bowen},
+      year = {2025},
+      eprint = {2509.08827},
+      archivePrefix = {arXiv},
+      primaryClass = {cs.CL},
+      doi = {10.48550/arXiv.2509.08827},
+      url = {https://arxiv.org/abs/2509.08827}
+}
+
+@misc{omnilingualmtteam2026omnilingualmtmachinetranslation,
+      title={Omnilingual {MT}: Machine Translation for 1,600 Languages},
+      author={Omnilingual MT Team and Belen Alastruey and Niyati Bafna and Andrea Caciolai and Kevin Heffernan and Artyom Kozhevnikov and Christophe Ropers and Eduardo Sánchez and Charles-Eric Saint-James and Ioannis Tsiamas and Xiang "Tony" Cao and Chierh Cheng and Joe Chuang and Paul-Ambroise Duquenne and Mark Duppenthaler and Nate Ekberg and Cynthia Gao and Pere Lluís Huguet Cabot and João Maria Janeiro and Jean Maillard and Gabriel Mejia Gonzalez and Holger Schwenk and Edan Toledo and Arina Turkatenko and Albert Ventayol-Boada and Rashel Moritz and Alexandre Mourachko and Surya Parimi and Mary Williamson and Shireen Yates and David Dale and Marta R. Costa-jussà},
+      year={2026},
+      eprint={2603.16309},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2603.16309},
+}
+
+@inproceedings{post-2018-call,
+  title = {A Call for Clarity in Reporting {BLEU} Scores},
+  author = {Post, Matt},
+  booktitle = {Proceedings of the Third Conference on Machine Translation: Research Papers},
+  month = oct,
+  year = {2018},
+  address = {Brussels, Belgium},
+  publisher = {Association for Computational Linguistics},
+  pages = {186--191},
+  doi = {10.18653/v1/W18-6319},
+  url = {https://aclanthology.org/W18-6319/}
+}
+
+@inproceedings{papineni2002bleu,
+  title = {{BLEU}: a Method for Automatic Evaluation of Machine Translation},
+  author = {Papineni, Kishore and Roukos, Salim and Ward, Todd and Zhu, Wei-Jing},
+  booktitle = {Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics},
+  year = {2002},
+  address = {Philadelphia, Pennsylvania, USA},
+  publisher = {Association for Computational Linguistics},
+  pages = {311--318},
+  doi = {10.3115/1073083.1073135},
+  url = {https://aclanthology.org/P02-1040/}
+}
+
+@inproceedings{snover2006study,
+  title = {A Study of Translation Edit Rate with Targeted Human Annotation},
+  author = {Snover, Matthew and Dorr, Bonnie and Schwartz, Richard and Micciulla, Linnea and Makhoul, John},
+  booktitle = {Proceedings of the 7th Conference of the Association for Machine Translation in the Americas: Technical Papers},
+  publisher = {Association for Machine Translation in the Americas},
+  address = {Cambridge, Massachusetts, USA},
+  pages = {223--231},
+  year = {2006},
+  url = {https://aclanthology.org/2006.amta-papers.25/}
+}
+
+@article{Liu2026GDPOGR,
+  title={GDPO: Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization},
+  author={Shih-Yang Liu and Xin Dong and Ximing Lu and Shizhe Diao and Peter Belc{\'a}k and Mingjie Liu and Min-Hung Chen and Hongxu Yin and Yu-Chiang Frank Wang and Kwang-Ting Cheng and Yejin Choi and Jan Kautz and Pavlo Molchanov},
+  journal={ArXiv},
+  year={2026},
+  volume={abs/2601.05242},
+  url={https://api.semanticscholar.org/CorpusID:284543897}
+}
+
+@article{Wu2023FineGrainedHF,
+  title={Fine-Grained Human Feedback Gives Better Rewards for Language Model Training},
+  author={Zeqiu Wu and Yushi Hu and Weijia Shi and Nouha Dziri and Alane Suhr and Prithviraj Ammanabrolu and Noah A. Smith and Mari Ostendorf and Hannaneh Hajishirzi},
+  journal={ArXiv},
+  year={2023},
+  volume={abs/2306.01693},
+  url={https://api.semanticscholar.org/CorpusID:259064099}
+}
+
+
+@inproceedings{Loshchilov2017DecoupledWD,
+  author = {Ilya Loshchilov and Frank Hutter},
+  title = {Decoupled Weight Decay Regularization},
+  booktitle = {International Conference on Learning Representations},
+  year = {2019},
+  url = {https://openreview.net/forum?id=Bkg6RiCqY7}
+}

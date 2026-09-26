@@ -3,7 +3,292 @@
 % !TEX root = ../main.tex
 % #############################################################################
 % Change the Name of the Chapter i the following line
-\fancychapter{This is the Third Chapter}
+\fancychapter{Related Work}
 % The following line allows to ref this chapter
-\label{chap:architecture}
+\label{chap:related_work}
 
+This chapter reviews previous work that is most directly connected to the
+tasks studied in this research. \Cref{sec:rw-portuguese-variety-identification}
+covers EP/BP identification, while
+\Cref{sec:rw-portuguese-variety-translation} reviews work on rewriting between
+the two varieties. \Cref{sec:rw-varieties-beyond-portuguese} broadens the
+discussion to language processing beyond Portuguese, including work on
+dialectal and regional settings. \Cref{sec:rw-sequential-adaptation-mt}
+reviews staged adaptation for machine translation, and
+\Cref{sec:rw-reward-based-ft-translation} covers reward-based adaptation for
+translation. \Cref{sec:rw-overview} identifies the research gap.
+
+\section{European and Brazilian Portuguese Identification}
+\label{sec:rw-portuguese-variety-identification}
+
+Early work on EP/BP identification showed that simple surface features are
+already highly informative for this distinction.
+\citet{DBLP:conf/konvens/ZampieriG12} proposed one of the first automatic
+systems for discriminating European and Brazilian Portuguese, using character
+\(n\)-grams and word \(n\)-gram language models. Their results indicate that orthographic and lexical cues can be highly
+informative for EP/BP identification. More broadly, work on document language
+identification cautions against treating closely related varieties as an easy
+identification problem \citep{4052828}.
+
+\citet{7839597} tested the same distinction on Twitter, where spelling
+variation, limited context, and informal writing make EP/BP identification less
+controlled than in edited corpora. Their use of smoothed \(n\)-gram models and
+an ensemble strategy shows that lexical and character-level evidence remains
+useful in social-media settings, although its reliability depends on the amount
+and quality of the available context. \citet{preda-etal-2024-across} introduce
+stronger experimental controls through a Portuguese dialect-identification
+dataset derived from TED2020, a parallel corpus containing aligned European and
+Brazilian Portuguese versions of the same talks. The authors compare handcrafted
+linguistic features, word \(n\)-gram classifiers with optional part-of-speech
+(POS) information, adaptive Naive Bayes variants, and LoRA-adapted models. Their
+evaluation varies input length, from sentence-level segments to full
+transcripts, and tests cross-dataset robustness on out-of-domain news sources,
+which makes text granularity and domain shift part of the evaluation rather
+than minor experimental settings. The LoRA-adapted Albertina classifiers obtain
+the strongest in-domain results on TED2020, while a logistic-regression bigram
+model performs best in the joint cross-dataset evaluation.
+
+The reliability of these comparisons depends heavily on dataset construction,
+particularly when labels are inferred from metadata such as source country,
+domain, or Uniform Resource Locator (URL) \citep{zampieri-etal-2014-report}. For very similar varieties,
+metadata can be weak supervision, as a text collected from a given country may
+contain few explicit markers of that variety, or may have been written in a
+different variety altogether. \citet{zampieri-etal-2024-language} address this
+issue with Discriminating Between Similar Languages -- True Labels (DSL-TL), a human-annotated multilingual dataset for language-variety
+identification that includes European and Brazilian Portuguese, highlighting that high scores on silver-labeled corpora do not necessarily
+imply robust variety discrimination.
+
+More recently, \citet{sousa2025enhancingportuguesevarietyidentification}
+compiled PtBrVarId, a cross-domain dataset covering journalistic, legal,
+political, web, social-media, and literary texts, and evaluated both
+\(n\)-gram-based baselines and Transformer-based classifiers. Their best
+systems fine-tune BERTimbau \citep{souza2020bertimbau} and use a two-step
+cross-domain protocol with partial delexicalization, masking named entities
+and selected part-of-speech categories to reduce overfitting to domain-specific
+lexical cues. The delexicalized BERT model is their strongest system on both DSL-TL and FRMT.
+Their FRMT identification results provide one of the closest published
+comparisons for this dissertation's identification task.
+
+\section{Rewriting Between European and Brazilian Portuguese}
+\label{sec:rw-portuguese-variety-translation}
+
+\citet{marujo-etal-2011-bp2ep} studied the specific task of converting BP texts
+into EP, rather than generating Portuguese text more generally. Their
+rule-based and statistical setting was used to adapt BP resources for
+EP-oriented machine translation, and the adapted resources improved translation
+quality compared with using the same material without the BP-to-EP conversion
+step. A complementary linguistic perspective is provided by
+\citet{barreiro-mota-2018-paraphrastic}, who extracted paraphrastic
+correspondences between both Portuguese variants from a parallel corpus. Their analysis shows that some EP/BP correspondences involve multiword
+expressions and syntactic changes, so rewriting is not always word replacement.
+
+In the neural setting, \citet{costa-jussa-etal-2018-neural} presented a system
+for translating between EP and BP in both directions and compared it with
+phrase-based statistical machine translation. Their recurrent encoder-decoder model improved automatic scores and was also
+preferred in human evaluation, indicating that neural models can learn
+cross-variety transformations that challenge phrase-based methods.
+
+\citet{sanches2024brazilianportugueseeuropeanportuguese} bring this task closer
+to current pretrained systems by focusing on BP-to-EP translation with modern
+encoder-decoder and decoder-only architectures. The authors provide a
+comparison point for the rewriting component of this work by fine-tuning
+multilingual encoder-decoder models, such as M2M100 and mBART50, on parallel
+data from subtitles and TED talks. They introduce the manually curated Golden
+Collection benchmark and compare the fine-tuned models with ChatGPT 3.5 using
+both automatic metrics and human evaluation. Their study finds that the best fine-tuned system
+generalizes well on test data close to its training domains, while ChatGPT 3.5
+is stronger on the manually curated Golden Collection. Copying the input is also a
+very strong baseline against the manual references in that collection,
+reflecting the conservative nature of many valid EP/BP conversions.
+
+\section{Language Processing Beyond Portuguese}
+\label{sec:rw-varieties-beyond-portuguese}
+
+Language- and variety-identification systems can affect not only evaluation but
+also the data available for later model training \citep{zampieri2020natural}.
+OpenLID \citep{burchell-etal-2023-openlid} and OpenLID-v3
+\citep{fedorova-etal-2026-openlidv3} provide multilingual
+language-identification resources for data curation, where predictions can
+determine whether candidate web texts are kept, discarded, or routed to a
+language-specific subset. FastSpell \citep{banon-etal-2024-fastspell}
+specifically addresses confusable languages by combining an initial
+language-identifier prediction with dictionary-based verification.
+\citet{caswell-etal-2020-language-id-wild} show why this distinction matters in
+practice: strong benchmark F1 does not necessarily produce clean web-filtered
+corpora under domain mismatch, class imbalance, and language similarity.
+Identification errors can therefore propagate into the composition of the
+corpora used for subsequent adaptation.
+
+Related work on generation shows that national and regional varieties can also
+be represented explicitly as output targets rather than collapsed under a
+single language label. \citet{lakew-etal-2018-neural} train multilingual NMT
+systems from English into specific national varieties and closely related
+standardized languages, including European and Brazilian Portuguese, and find
+that treating the varieties as distinct targets improves translation
+consistency in their setting. The task remains translation from English rather
+than rewriting directly between two Portuguese varieties.
+\citet{sousa2025tradutorbuildingvarietyspecific} provide a more recent
+Portuguese example with PTradutor, an open-source English-to-EP translation
+model built with retro-translated data. Its improvement over generic
+open-source Portuguese translation systems further shows that targeting the
+desired national variety can matter during data construction and model
+adaptation.
+
+Broader dialect and language-variety benchmarks show that the usefulness of
+different model families depends on the task being evaluated.
+\citet{faisal-etal-2024-dialectbench} introduce DIALECTBENCH, a large-scale
+benchmark covering 281 varieties and 10 text-level tasks. Building on this
+benchmark, \citet{faisal-anastasopoulos-2025-testing} compare instruction-tuned
+LLMs with supervised encoder-based models and find that LLMs can be competitive
+on some comprehension-style tasks, while multi-class identification often still
+benefits from task-specific supervised fine-tuning. The two studies therefore
+provide a benchmark and a subsequent model comparison within the same broader
+evaluation setting, rather than independent evidence about unrelated
+dialect-processing problems.
+
+Work that combines identification with generation is particularly relevant to
+the shared formulation studied in this dissertation.
+\citet{khered-etal-2025-multi} combine Arabic dialect identification and
+dialect-to-Modern-Standard-Arabic translation within a multi-task
+encoder-decoder model. Their experiments report improved translation over the
+evaluated baselines, but the study changes both the shared multi-task setup and
+the training data, so the gain supports the combined experimental design
+without isolating multi-task learning itself as the cause.
+\citet{sharma2026indicdialect} introduce INDIC-DIALECT, a human-curated corpus
+and multi-task benchmark for Hindi and Odia dialects that includes dialect
+classification, multiple-choice question answering, and machine translation.
+Their experiments find weak zero-shot LLM classification, substantially
+stronger fine-tuned Indic models, and translation results in which hybrid
+rule-based and neural systems perform best, with the preferred strategy
+depending on conversion direction. Together with the preceding work, these
+studies place the present EP/BP setting within a broader literature in which
+variety information affects corpus selection, generation targets, and joint
+task modeling.
+
+\section{Staged Adaptation for Machine Translation}
+\label{sec:rw-sequential-adaptation-mt}
+
+Classical NMT domain adaptation trains models on general-domain bitext before
+adapting them to in-domain data, assigning broad and specialized supervision
+different roles across successive phases.
+\citet{xu2024paradigmshiftmachinetranslation} introduce the Advanced Language
+Model-based trAnslator (ALMA), a decoder-only MT system adapted first with
+monolingual data and then with a smaller set of high-quality parallel data.
+Their ablations show benefits from the monolingual adaptation stage and from
+high-quality parallel supervision, without isolating the effect of stage
+order.
+
+\citet{alves2024toweropenmultilingual} use a related staged recipe in Tower,
+combining continued pretraining on multilingual monolingual and parallel data
+with later fine-tuning on translation-related instructions.
+\citet{rei2025towerbridginggenerality} extend this recipe by adding preference
+optimization and reinforcement learning under verifiable reward signals, so
+later phases introduce objectives that are absent from the earlier supervised
+stages. Omnilingual MT
+\citep{omnilingualmtteam2026omnilingualmtmachinetranslation} assigns distinct
+roles to several training phases at larger scale. Its decoder-only system
+starts from LLaMA instruction models, extends the tokenizer for multilingual
+coverage, continues pretraining on monolingual language modeling and parallel
+translation data, and then uses supervised fine-tuning to recover
+instruction-following behavior while specializing the model for MT. Its
+encoder-decoder OMT-NLLB system uses decoder training on parallel MT and
+monolingual autoencoding, cross-attention warm-up, and final end-to-end
+fine-tuning on parallel data. The reported gains from autoencoding, warm-up,
+and the final stage show that successive phases can serve different functions
+rather than simply extending the total amount of training.
+
+Sequential specialization can also weaken behavior acquired in earlier
+training phases. Continual-learning studies examine this retention problem
+explicitly in NMT
+\citep{cao-etal-2021-continual,gu-feng-2020-investigating,gu-etal-2022-continual}.
+\citet{shao-feng-2022-overcoming} show that related degradation can also arise
+from imbalanced exposure to training examples outside a strict
+continual-learning setting. These results make retention across later
+adaptation phases an important consideration without treating staged
+adaptation and continual learning as the same setting.
+
+\section{Reward-Based Adaptation for Translation}
+\label{sec:rw-reward-based-ft-translation}
+
+\citet{nguyen-etal-2017-reinforcement} show that an existing NMT system can be
+updated from scalar feedback without receiving a corrected translation for
+every generated sentence. Their bandit NMT experiments use simulated human
+ratings and optimize corpus-level MT objectives with policy-gradient updates.
+\citet{thu2023rlnmt} apply reward-based continuation after supervised training
+for low-resource Burmese dialect translation and report improvements over
+non-RL baselines. In both studies, reward optimization modifies an already
+trained translation system rather than defining the translation task from
+scratch.
+
+\citet{he-etal-2024-improving} use Quality Estimation (QE), which predicts
+translation quality without requiring a reference translation, as a reward for
+MT feedback training. They report translation-quality gains but also observe
+overoptimization, where the learned reward continues to improve while actual
+translation quality deteriorates. \citet{xu2024advancingtranslationpreference}
+train a reward model from human translation preferences and report
+improvements over their supervised starting model after Reinforcement Learning
+from Human Feedback (RLHF)-based translation optimization, together with
+evidence that part of the learned preference signal transfers to translation
+directions not used for RLHF training.
+
+\citet{ramos2024finegrainedrewardoptimization} use xCOMET error spans and
+severity predictions to replace a single sentence-level score with token-level
+rewards. Their experiments report better translation quality than
+sentence-level reward baselines and more stable reward progression during
+training. \citet{feng2025mtr1zero} combine format constraints with
+metric-based translation quality in a mixed reward and show that lexical,
+semantic, and mixed metric rewards lead to different translation behavior
+during continuation. \citet{pmlr-v235-wang24ay} show that reward scaling,
+transformations, and aggregation affect behavior under joint optimization.
+
+Omnilingual MT \citep{omnilingualmtteam2026omnilingualmtmachinetranslation}
+reports an optimization failure in which straightforward Group Relative Policy
+Optimization (GRPO) continuation after SFT produces low entropy and vanishing
+gradients. The revised setup enlarges candidate groups, reintroduces
+Kullback--Leibler (KL) regularization, and uses a balanced multi-criterion
+reward. \mbox{\citet{liu-etal-2026-mending}} show a complementary failure mode
+in multilingual MT, where source-based QE rewards can amplify weaknesses in
+the evaluator. These results show that reward-based MT can fail through both
+the reward signal and the optimization procedure.
+
+\section{Overview and Research Positioning}
+\label{sec:rw-overview}
+
+The closest published experimental comparisons are
+\citet{sousa2025enhancingportuguesevarietyidentification} for EP/BP
+identification on FRMT and
+\citet{sanches2024brazilianportugueseeuropeanportuguese} for BP-to-EP
+rewriting on the Golden Collection. Neither study evaluates identification and
+bidirectional rewriting across both resources. \citet{sousa2025enhancingportuguesevarietyidentification} provide the most
+direct published identification comparison used in \Cref{chap:evaluation},
+while \citet{sanches2024brazilianportugueseeuropeanportuguese} provide the most direct published rewriting comparison
+and introduce the Golden Collection benchmark.
+
+In Arabic, \citet{khered-etal-2025-multi} combine dialect identification with
+dialect-to-Modern-Standard-Arabic translation in a shared encoder-decoder
+model. Their translation gains are reported for a setup that also changes the
+available training data, so they do not isolate the contribution of multi-task
+learning alone. \citet{khered-etal-2025-multi} study one-way dialect-to-standard translation,
+whereas this work combines variety identification with bidirectional EP/BP
+rewriting and alternates between short label outputs and full-sentence
+generation in the same model.
+
+\citet{caswell-etal-2020-language-id-wild} show that language-identification
+scores can overstate corpus quality when labels are noisy, classes are
+imbalanced, or closely related varieties are mixed. Staged MT studies show
+that successive adaptation phases can serve different roles and that later
+training can alter earlier behavior
+\citep{alves2024toweropenmultilingual,rei2025towerbridginggenerality,omnilingualmtteam2026omnilingualmtmachinetranslation}.
+Reward-based MT studies show that evaluator choice, reward composition, and
+optimization stability can materially affect the behavior learned during
+continuation
+\citep{he-etal-2024-improving,feng2025mtr1zero,pmlr-v235-wang24ay}.
+
+Within the literature reviewed in this chapter, no single study combines EP/BP
+identification and bidirectional rewriting in a shared model while evaluating
+both tasks across FRMT and the Golden Collection. This work studies that
+combined setting with encoder-decoder models and examines how encoder-side and
+decoder-side control, supervision composition, staged adaptation, and
+reward-based continuation affect identification and conservative rewriting.
+The rewriting objective is to preserve meaning while making only the changes
+needed for the requested Portuguese variety.

@@ -5,4 +5,11 @@
 % reset acronyms
 \acresetall
 % use \noindent in firts paragraph
-\noindent 
+\noindent O português é uma língua pluricêntrica, mas os grandes modelos de linguagem treinados em corpora genéricos da web são frequentemente condicionados pela predominância do português brasileiro. Este trabalho estuda o processamento de variedades linguísticas para o português europeu (EP) e o português brasileiro (BP) através de duas tarefas relacionadas: identificação da variedade ao nível da frase e reescrita bidirecional. O estudo consolida supervisão proveniente do OpenSubtitles, do Few-shot Region-aware Machine Translation (FRMT), de uma Golden Collection manualmente curada e de um recurso GPT-Wikipedia, aplicando procedimentos de pré-processamento e filtragem destinados a preservar diferenças relevantes entre variedades e a reduzir paráfrases ruidosas e erros de alinhamento.
+
+O estudo experimental adapta modelos encoder-decoder T5Gemma 2 com 270M e 4B parâmetros. O modelo com 270M parâmetros é sujeito a fine-tuning completo para comparar escolhas de protocolo, enquanto o modelo com 4B parâmetros é adaptado com Low-Rank Adaptation (LoRA). O estudo compara ainda controlo no encoder com etiquetas de variedade no decoder e avalia um pipeline em três etapas composto por adaptação supervisionada abrangente, especialização supervisionada direcionada e continuação baseada em recompensa. Diagnósticos adicionais analisam o rank de LoRA e variantes isoladas do desenho da recompensa.
+
+Entre as comparações supervisionadas emparelhadas, a composição dos dados produz as maiores alterações no desempenho de reescrita. A supervisão alinhada com reescrita localizada apresenta os melhores resultados na Golden Collection, enquanto a adição de supervisão do FRMT reduz fortemente o desempenho neste benchmark e produz efeitos no FRMT dependentes da formulação e da direção. A colocação do controlo não apresenta uma ordenação universal, e a continuação baseada em recompensa recupera parcialmente o desempenho na Golden Collection nas condições GPT-Wikipedia + FRMT.
+
+Estes resultados tornam a qualidade da supervisão e a avaliação centrais para a adaptação entre variedades do português. Recursos EP/BP alinhados podem incentivar comportamentos de reescrita distintos, enquanto as métricas automáticas permanecem muito sensíveis à cópia e não distinguem plenamente a adaptação necessária de reformulações mais abrangentes.
+\clearpage

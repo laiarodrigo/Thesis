@@ -7,4 +7,133 @@
 % The following line allows to ref this chapter
 \label{chap:conclusion}
 
- 
+This chapter brings together the main findings from the identification and
+rewriting experiments. Section~\ref{sec:conclusion-summary} summarizes the main
+empirical conclusions and their implications for Portuguese variety adaptation,
+while Section~\ref{sec:conclusion-future-work} outlines future work on data,
+evaluation, and staged training.
+
+\section{Summary}
+\label{sec:conclusion-summary}
+
+{\tolerance=1500\looseness=-1
+This work studied European and Brazilian Portuguese through variety
+identification and bidirectional rewriting in a shared T5Gemma 2 encoder-decoder
+framework. Lower-cost experiments with the 270M-parameter model were used to
+select the supervised protocol and examine reward-design choices, while the
+4B-parameter model was used for the main comparisons of control formulation,
+supervision composition, and staged adaptation. The protocol-selection
+experiments improved individual metrics under some variants, but none
+consistently improved performance across both tasks and evaluation resources.\par}
+
+{\tolerance=1500\looseness=-1
+The clearest result from the 4B-parameter experiments concerns supervision
+composition. GPT-Wikipedia produces substantially better Golden Collection
+rewriting than the GPT-Wikipedia + FRMT data mix, while the effect of adding FRMT
+on FRMT itself depends on rewriting direction and control formulation. The
+identification task is less sensitive to this change. Adding FRMT improves FRMT
+identification under both formulations, while its effect on the Golden
+Collection is mixed. The performance differences between encoder and decoder
+control also depend on rewriting direction. Decoder control performs better in
+every BP-to-EP rewriting comparison, whereas EP-to-BP includes cases where
+encoder control performs better. Removing identification supervision from the
+encoder-controlled models does not improve rewriting overall.\par}
+
+{\tolerance=1500\looseness=-1
+The reported models also perform better numerically than the closest published
+systems used for comparison. The encoder-controlled GPT-Wikipedia model exceeds
+the published FRMT identification result reported by
+\cite{sousa2025enhancingportuguesevarietyidentification}, while the
+decoder-controlled GPT-Wikipedia model exceeds the strongest trained BP-to-EP
+Golden Collection result reported by
+\cite{sanches2024brazilianportugueseeuropeanportuguese}. These comparisons remain
+contextual, since the previous systems use different training setups and
+objectives.\par}
+
+{\tolerance=1500\looseness=-1
+The training stages have different effects depending on the supervision
+condition. Stage A produces its largest gains when GPT-Wikipedia is used for
+later specialization, particularly on the Golden Collection. Stage C changes
+the GPT-Wikipedia conditions only modestly. However, after GPT-Wikipedia + FRMT
+specialization, Stage C recovers a substantial part of the Golden Collection
+performance lost at Stage B, while its effect on FRMT rewriting remains mixed.
+The identification results remain close to the corresponding Stage B values
+after Stage C despite the continuation stage using rewriting-only data.\par}
+
+{\tolerance=1500\looseness=-1
+Many Golden Collection references require little or no change, making
+conservative outputs highly competitive. Models trained with GPT-Wikipedia
+preserve the source much more often than models trained with the GPT-Wikipedia +
+FRMT data mix. Adding FRMT can reduce under-editing when a change is required,
+but it also increases broader reformulation. Inspection of the aligned data
+shows that some FRMT pairs contain lexical substitutions, omissions, and other
+changes in expressed information that go beyond the localized changes required
+for EP/BP rewriting. Similar reference-side differences also occur in some
+Golden Collection examples.\par}
+
+{\tolerance=1500\looseness=-1
+These reference properties also affect what can be concluded from automatic
+evaluation. BLEU and TER measure agreement with a particular reference, but
+that reference does not always isolate the variety-specific change required by
+the task. The same issue affects Stage C when sentence-level BLEU and TER
+contribute to the reward, since a broader-than-required reference can favor
+candidates that reproduce that broader rewrite. Across the experiments,
+supervision composition produces the largest changes in rewriting behavior,
+while the error analysis shows that the construction of the aligned pairs
+influences both the behavior learned by the models and how that behavior is
+evaluated.\par}
+
+\section{Future Work}
+\label{sec:conclusion-future-work}
+
+{\tolerance=1500\looseness=-1
+The strongest direction for future work is to improve the supervision used for
+controlled rewriting. Larger manually verified resources would make it possible
+to distinguish required variety-specific changes from optional paraphrase and
+changes in expressed information more reliably. The OpenSubtitles filtering
+procedure could also be evaluated more systematically by varying the SimAlign
+coverage threshold and allowed sentence-length ratio, and by comparing the
+current XLM-R, word-level intersection setup with alternative encoders,
+alignment granularities, and extraction methods. For Stage C data selection, the
+existing structural-similarity and edit criteria could be supplemented with
+content-preservation checks for entities, numbers, parenthetical information,
+units, and other source--reference differences. This could remove pairs with
+differences beyond the requested variety change despite high structural
+similarity.\par}
+
+{\tolerance=1500\looseness=-1
+Improved supervision should be accompanied by evaluation criteria that are less
+dependent on a single reference. Future evaluation should assess whether the
+required variety-specific changes were made while preserving the source meaning
+and avoiding unnecessary rewriting. Human evaluation would provide the
+strongest basis for validating these judgments, while targeted linguistic
+checks, multiple acceptable references, or learned evaluators could support
+larger-scale evaluation.\par}
+
+{\tolerance=1500\looseness=-1
+A validated evaluation signal would also make it possible to study Stage C
+under better controlled conditions. The current Stage C comparison changes both
+the optimization procedure and the training subset, so a follow-up should vary
+these factors independently. One comparison could keep the Stage C training
+subset fixed and contrast supervised continuation with reward-based
+optimization, while another could hold the optimization method fixed and vary
+the training subset. Once these effects are separated, reward design could be
+studied more directly by comparing individual quality and conservatism
+components, explicitly including the unchanged source among the candidates,
+varying candidate-group construction, or assigning feedback to the particular
+spans that require adaptation. These experiments could also test whether the
+identification behavior retained in the current Stage C models remains stable
+under stronger rewriting-focused optimization.\par}
+
+{\tolerance=1500\looseness=-1
+Finally, the stability of these findings should be tested beyond the present
+resources and T5Gemma 2 configurations. Additional domains, model families, and
+larger manually evaluated test sets would show whether the observed effects of
+supervision composition, control formulation, and staged adaptation generalize
+beyond the current experimental setting. This broader validation would be most
+informative after supervision and evaluation are better controlled, since it
+would help separate model-dependent differences from effects caused by the
+available training and evaluation resources. The descriptive external
+comparison in \Cref{chap:appendix-external-model-comparison} could also be
+strengthened by evaluating a current frontier proprietary model under the same
+identification and bidirectional rewriting protocol.\par}

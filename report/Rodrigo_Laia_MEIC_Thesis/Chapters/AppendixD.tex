@@ -1,0 +1,88 @@
+% #############################################################################
+% This is Appendix D
+% !TEX root = ../main.tex
+% #############################################################################
+\chapter{External Model Comparisons}
+\label{chap:appendix-external-model-comparison}
+
+This appendix evaluates four external pretrained or instruction-following
+systems on the same EP/BP identification and rewriting tasks to provide
+context for the adapted T5Gemma 2 models evaluated in \Cref{chap:evaluation}.
+The systems are
+AMALIA-9B-0626-SFT and AMALIA-9B-0626-DPO
+\citep{simplicio-etal-2026-amalia}, Qwen3-4B
+\citep{yang2025qwen3technicalreport}, and FLAN-T5-XL
+\citep{chung2022scalinginstructionfinetunedlanguagemodels}.
+
+\section{Evaluation Protocol}
+
+The evaluated checkpoints are \path{amalia-llm/AMALIA-9B-0626-SFT},
+\path{amalia-llm/AMALIA-9B-0626-DPO}, \path{Qwen/Qwen3-4B}, and
+\path{google/flan-t5-xl}.
+
+Rewriting prompts specify whether the sentence should be rewritten from BP to
+EP or from EP to BP. The generated sentences are evaluated with the same BLEU
+and TER scoring procedure used for the adapted models, with the two directions
+reported separately.
+
+Identification is performed differently across the external systems. AMALIA SFT
+and AMALIA DPO generate an answer freely and the predicted variety label is
+then parsed from the output, whereas Qwen3-4B and FLAN-T5-XL score the possible
+natural-language labels directly and select the higher-scoring option. The
+comparison therefore reflects each system together with its identification
+inference procedure.
+
+The systems differ in architecture, scale, training history, prompting, and
+inference procedure, so the comparison provides external context rather than a
+controlled model comparison.
+
+\section{Results}
+
+\Cref{tab:appendix-external-model-comparison} reports the external-model
+results on both evaluation resources.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{4.5pt}
+\caption{External-model results on FRMT and the Golden Collection.}
+\label{tab:appendix-external-model-comparison}
+\begin{tabular}{@{}llccc@{}}
+\toprule
+\textbf{Model} & \textbf{Dataset} & \shortstack{\textbf{Macro-F1}\\\textbf{(\%)}} &
+\textbf{BP-to-EP} & \textbf{EP-to-BP} \\
+& & & \shortstack{\textbf{BLEU (0--100)}\\\textbf{/ TER}} & \shortstack{\textbf{BLEU (0--100)}\\\textbf{/ TER}} \\
+\midrule
+AMALIA SFT & FRMT & 45.37 & \textbf{44.65}/\textbf{0.4289} & 40.22/0.4682 \\
+& Golden Collection & 43.99 & 68.44/0.2347 & 74.66/0.1920 \\
+\addlinespace[0.2em]
+AMALIA DPO & FRMT & \textbf{59.72} & 43.82/0.4494 & 35.16/0.6063 \\
+& Golden Collection & \textbf{56.55} & 58.08/0.3239 & 57.18/0.3773 \\
+\addlinespace[0.2em]
+Qwen3-4B & FRMT & 52.56 & 39.44/0.4709 & \textbf{40.73}/\textbf{0.4654} \\
+& Golden Collection & 49.96 & \textbf{78.33}/\textbf{0.1540} & \textbf{78.26}/\textbf{0.1590} \\
+\addlinespace[0.2em]
+FLAN-T5-XL & FRMT & 47.87 & 32.22/0.5263 & 32.17/0.5373 \\
+& Golden Collection & 40.99 & 67.06/0.2209 & 66.31/0.2292 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+AMALIA DPO gives the highest external identification macro-F1 on both evaluation
+resources, but remains below the best adapted configurations reported in
+\Cref{tab:r48-classification-breakdown}.
+
+On the Golden Collection, Qwen3-4B performs best among the external rewriting
+systems in both directions, but the adapted configurations perform better for
+both BP-to-EP and EP-to-BP in
+\Cref{tab:r48-translation-breakdown}.
+
+\looseness=-1
+On FRMT, AMALIA SFT slightly outperforms the best adapted BP-to-EP result, with
+44.65 BLEU compared with 43.97, while Qwen3-4B remains below the best adapted
+EP-to-BP result.
+
+Overall, the adapted models perform better on identification and Golden
+Collection rewriting, while the external systems are competitive on FRMT only
+in the BP-to-EP direction.

@@ -2,8 +2,451 @@
 % This is Chapter 4
 % !TEX root = ../main.tex
 % #############################################################################
-% Change the Name of the Chapter i the following line
-\fancychapter{This is the Fourth Chapter}
-% The following line allows to ref this chapter
-\label{chap:implement}
+\fancychapter{Methodology}
+\label{chap:methodology}
 
+This chapter describes the experimental methodology. \Cref{sec:method-models}
+introduces the model family and the fine-tuning regimes.
+\Cref{sec:method-task-formulations} explains how rewriting and identification
+instances are represented in a shared sequence-to-sequence format.
+\Cref{sec:method-training-stages} presents the three-stage fine-tuning
+pipeline. \Cref{sec:method-ablation-design} defines the supervised protocol-selection
+study preceding the 4B-parameter experiments.
+
+\section{Models and Fine-Tuning Setup}
+\label{sec:method-models}
+
+The reported experiments use encoder-decoder models from the T5Gemma 2 family
+\citep{zhang2025t5gemma2seeingreading} with 270M and 4B parameters. The 270M-parameter experiments start from \texttt{google/t5gemma-2-270m-270m},
+and the 4B-parameter experiments start from \texttt{google/t5gemma-2-4b-4b}.
+
+The 270M-parameter model is fully fine-tuned for the supervised
+protocol-selection study described in \Cref{sec:method-ablation-design}. These
+lower-cost experiments compare choices involving batch composition,
+control-string treatment, and classification loss before the experiments with
+the 4B-parameter model are conducted. The study is not a controlled
+comparison between full fine-tuning and LoRA, since model scale and adaptation
+method change at the same time.
+
+The 4B-parameter model is adapted with LoRA using rank \(r=48\), scaling factor
+\(\alpha=96\), and dropout \(=0.05\). LoRA is applied to the attention and
+feed-forward projection layers, while bias terms remain frozen. With \(r=48\),
+this setup yields 187,772,928 trainable LoRA parameters. A separate LoRA-rank
+diagnostic is reported in \Cref{chap:appendix-lora-rank}.
+
+The reported supervised experiments use seed 42. During supervised training,
+encoder inputs and decoder targets are truncated to a maximum of 512 tokens
+during preprocessing.
+
+\section{Task Formulations and Instance Construction}
+\label{sec:method-task-formulations}
+
+Two control formulations are used to construct rewriting and identification
+instances: encoder-controlled and decoder-controlled. Both use \texttt{PT} and
+\texttt{BR}, while \texttt{CLS} appears only in encoder-controlled
+identification inputs. \texttt{PT} marks an EP source sentence, \texttt{BR}
+marks a BP source sentence, and \texttt{PT} and \texttt{BR} determine rewriting
+direction and act as identification targets.
+
+An aligned EP/BP pair can provide supervision for both tasks. For rewriting,
+each sentence in the aligned pair is used once as input and once as output. One aligned pair therefore
+produces a BP-to-EP instance and an EP-to-BP instance. For identification, each
+sentence is treated independently and paired with its variety label. A
+complete non-equal pair can consequently provide one BP identification
+instance and one EP identification instance. Equal pairs, that is, aligned
+EP/BP pairs whose two sentences are identical, are retained for rewriting,
+but they do not generate identification rows. Such rows would assign different
+variety labels to identical sentence text.
+The templates used to build
+these examples are summarized in \Cref{tab:method-training-templates}.
+These templates correspond to the task-specific row types used during training.
+\Cref{sec:method-stage-a} and \Cref{sec:method-stage-b} quantify the rewriting
+and classification rows in each stage mixture.
+
+In both formulations, rewriting and identification share the same
+encoder-decoder parameters, embeddings, and decoder vocabulary. The
+formulations differ in where the control signal is introduced and how
+classification supervision is attached to the target sequence.
+
+\subsection{Encoder-Controlled Formulation}
+\label{sec:method-encoder-control}
+
+For BP-to-EP rewriting, the encoder receives the BP source sentence prefixed
+with \texttt{BR}, and the decoder target is the aligned EP sentence. For
+EP-to-BP rewriting, the encoder receives the EP source sentence prefixed with
+\texttt{PT}, and the decoder target is the aligned BP sentence. In the
+encoder-controlled formulation, identification uses the input \texttt{CLS} followed
+by the sentence, and the decoder target is the corresponding variety
+label. In this task, the complete label target is supervised.
+
+A matched rewriting-only configuration is defined as an ablation of this
+standard encoder-controlled formulation. It uses the same rewriting templates
+but omits identification examples during training.
+
+\subsection{Decoder-Controlled Formulation}
+\label{sec:method-decoder-label}
+
+The alternative formulation moves the control signal to the generated
+sequence. In rewriting instances, the encoder receives the clean source
+sentence with no task prefix. For BP-to-EP rewriting, the decoder target starts
+with \texttt{BR} and then continues with the EP rewrite. For EP-to-BP
+rewriting, the decoder target starts with \texttt{PT} and then continues with
+the BP rewrite. Identification examples use the same decoder-side labels but
+omit the rewritten sentence, leaving \texttt{PT} or \texttt{BR} as the complete
+target.
+
+The coupling is particularly direct in the decoder-controlled formulation.
+Both task types supervise the same first decoding decision, while rewriting
+additionally requires generation of the converted sentence.
+
+The decoder-controlled setup also requires a distinction in the loss mask.
+Identification rows compute loss only for the first token of the tokenized
+decoder target. \texttt{PT} and \texttt{BR} are already present in the
+tokenizer's base vocabulary and each is represented as a single token in the
+tested configurations, so this position corresponds to the complete variety
+label. Rewriting rows retain the complete target sequence in the loss.
+This masking isolates classification from sequence termination
+and avoids teaching the decoder to treat the control string alone as a complete
+rewriting output.
+
+\begin{table}[htbp]
+  \centering
+  \thesistablefont
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.14}
+  \caption{Sequence-to-sequence templates used to construct rewriting and identification instances. PT and BR denote the input variety, while CLS marks identification inputs.}
+  \label{tab:method-training-templates}
+  \begin{tabularx}{\textwidth}{@{}>{\hsize=.7\hsize}Y>{\hsize=1.15\hsize}Y>{\hsize=1.15\hsize}Y@{}}
+    \toprule
+    Setup & Encoder input & Decoder target \\
+    \midrule
+    Encoder-controlled rewriting &
+    BP-to-EP: \texttt{BR} + BP sentence \newline EP-to-BP: \texttt{PT} + EP sentence &
+    BP-to-EP: EP sentence \newline EP-to-BP: BP sentence \\
+    \addlinespace[0.35em]
+    Encoder-controlled identification &
+    \texttt{CLS} + sentence &
+    \texttt{PT} or \texttt{BR} \\
+    \addlinespace[0.35em]
+    Decoder-controlled rewriting &
+    BP-to-EP: BP sentence \newline EP-to-BP: EP sentence &
+    BP-to-EP: \texttt{BR} + EP sentence \newline EP-to-BP: \texttt{PT} + BP sentence \\
+    \addlinespace[0.35em]
+    Decoder-controlled identification &
+    sentence &
+    \texttt{PT} or \texttt{BR} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Training Stages}
+\label{sec:method-training-stages}
+
+The training procedure is organized into three stages. Stage A provides initial
+supervised adaptation, Stage B continues supervised training with targeted
+resources, and Stage C optionally applies reward-based fine-tuning to the Stage
+B models. The supervised protocol used in Stages A and B was selected beforehand
+with the 270M-parameter model in the study described in
+\Cref{sec:method-ablation-design}. Alongside this staged procedure, matched
+variants are used to isolate selected training choices and are introduced in the
+stage where they first apply. Both the 270M- and 4B-parameter models use Stages A
+and B, whereas the Stage C configurations use the 4B-parameter model. Separate
+experiments with the 270M-parameter model, reported in
+\Cref{chap:appendix-rl-ablation}, probe isolated reward and candidate-group
+design choices. These experiments serve as diagnostics rather than a selection
+procedure for the 4B-parameter Stage C configuration.
+
+Across the supervised stages, optimization uses AdamW
+\citep{Loshchilov2017DecoupledWD} with weight decay \(0.01\). The learning rate
+follows a linear schedule with warm-up, rising to the stage-specific peak value
+and then decreasing over the remaining training steps. The
+subsections give learning rates, warm-up budgets, gradient
+accumulation, training-step budgets, data composition, and validation
+procedures.
+
+\begin{table}[htbp]
+  \centering
+  \thesistablefont
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.12}
+  \caption{Task-specific training examples by stage and data condition. Percentages in parentheses give task shares within each training set.}
+  \label{tab:method-training-composition}
+  \begin{tabularx}{\textwidth}{@{}cYcc@{}}
+    \toprule
+    Stage & Data & Rewriting examples & Identification examples \\
+    \midrule
+    A & OpenSubtitles & 20,695,766 (73.0\%) & 7,666,883 (27.0\%) \\
+    \midrule
+    B & GPT-Wikipedia & 9,038 (57.6\%) & 6,652 (42.4\%) \\
+    B & GPT-Wikipedia + FRMT & 14,042 (54.7\%) & 11,616 (45.3\%) \\
+    \midrule
+    C & GPT-Wikipedia & 6,686 (100\%) & --- \\
+    C & GPT-Wikipedia + FRMT & 6,828 (100\%) & --- \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\Cref{tab:method-training-composition} summarizes the task-specific examples
+available for training at each stage. Stages A and B combine rewriting and
+identification supervision, whereas Stage C uses rewriting-only training data.
+
+\subsection{Stage A: Broad Variety Adaptation}
+\label{sec:method-stage-a}
+
+Stage A provides broad supervised adaptation to both Portuguese varieties using
+OpenSubtitles as its only data source. OpenSubtitles provides substantially
+larger-scale EP/BP supervision than the resources used in Stage B. The resulting
+checkpoint starts the more targeted Stage B adaptation.
+
+After task construction, Stage A follows the natural OpenSubtitles task mixture
+summarized in \Cref{tab:method-training-composition}, with approximately 73\%
+rewriting and 27\% identification supervision. Under the supervised protocol
+selected in \Cref{sec:method-ablation-design}, the two tasks are not explicitly
+rebalanced.
+
+The 4B-parameter model uses batch size 1, gradient accumulation 32, a peak
+learning rate of \(10^{-5}\), 400 warm-up steps, and a maximum of 2500 training
+steps. The protocol-selection experiments with the 270M-parameter model introduced in
+\Cref{sec:method-models} use batch size 1, gradient accumulation 16, a peak
+learning rate of \(2\times10^{-5}\), 200 warm-up steps, and a fixed budget of
+2500 training steps. If the complete training budget is reached, these settings
+correspond to at most 80,000 training-example presentations for the 4B-parameter
+model and 40,000 for the 270M-parameter model. Under this protocol, training
+examples are shuffled in a seed-controlled order. These budgets cover
+only a small fraction of the Stage A training pool, so examples do not repeat
+before the maximum step budget is reached.
+
+OpenSubtitles has no resource-level validation split. Stage A therefore uses a
+fixed 200-instance validation view sampled with seed 42 from the processed
+training data after task construction. The sampled instances remain eligible for
+training, so the validation view is not a disjoint held-out split. For the
+4B-parameter model, validation and checkpointing are performed every
+200 steps with patience 5. The protocol-selection experiments with the 270M-parameter model validate and
+checkpoint every 150 steps with the same patience. Early stopping
+is based on validation loss, and the checkpoint with the lowest validation loss
+is restored for subsequent training rather than retaining the final training
+step.
+
+Matched no-Stage-A configurations start at Stage B rather than from a Stage A
+checkpoint to assess the initial adaptation stage's contribution. Stage B
+settings and data composition are matched.
+
+\subsection{Stage B: Targeted Variety Adaptation}
+\label{sec:method-stage-b}
+
+Stage B shifts training from broad subtitle supervision toward more targeted
+EP/BP resources. It uses the reviewed GPT-Wikipedia resource described in
+\Cref{sec:data-gpt-wikipedia} as its primary data source. A second Stage B
+condition incorporates the complete FRMT training split, allowing the effect
+of data composition to be evaluated while keeping the same task templates and
+training procedure. The task composition of both Stage B conditions is
+summarized in \Cref{tab:method-training-composition}. Adding FRMT increases the
+amount of both rewriting and identification supervision and shifts the mixture
+slightly toward identification examples.
+
+The GPT-Wikipedia + FRMT data mix concatenates the
+corresponding GPT-Wikipedia and FRMT training splits and, separately, their
+validation splits. The mix uses no weighting or resampling.
+
+The 4B-parameter model uses batch size 1, gradient accumulation 32, a peak
+learning rate of \(10^{-5}\), 150 warm-up steps, and a maximum of 1200 training
+steps. The protocol-selection experiments with the 270M-parameter model use batch size
+1, gradient accumulation 16, a peak learning rate of \(2\times10^{-5}\), 150
+warm-up steps, and a fixed budget of 1200 training steps. If the complete
+training budget is reached, these settings correspond to at most 38,400
+training-example presentations for the 4B-parameter model and 19,200 for the
+270M-parameter model. For the 4B-parameter model, both Stage B training sets are
+smaller than the 38,400-presentation budget, so examples can repeat across
+shuffled epochs. For the 270M-parameter model, the 19,200-presentation budget
+exceeds the GPT-Wikipedia training set but not the GPT-Wikipedia + FRMT data
+mix.
+
+Each Stage B condition uses a held-out validation split constructed with the
+same task templates as its training split. Matched encoder-controlled and
+decoder-controlled configurations within the same data condition use the same
+underlying training and validation examples. For the 4B-parameter model, validation and checkpointing are performed every
+100 steps with patience 3. The protocol-selection experiments with the 270M-parameter model also validate
+and checkpoint every 100 steps, using patience 5. Early stopping is based on validation loss, and the checkpoint with
+the lowest validation loss is restored.
+
+A secondary decoder-controlled ablation removes equal source-reference
+rewriting examples from the supervised data while retaining identification
+examples. The corresponding Stage C variant uses the same continuation data,
+with aggregate results reported in Appendix E.
+
+\subsection{Stage C: Reward-Based Fine-Tuning}
+\label{sec:method-stage-c}
+
+Stage C applies reward-based continuation to the corresponding Stage B
+configurations using more conservative rewriting-only data. The GPT-Wikipedia
+configuration starts from the model trained with GPT-Wikipedia data, while the
+GPT-Wikipedia + FRMT configuration starts from the model trained with the
+corresponding data mix. Stage C is not applied to the no-Stage-A
+configurations.
+
+To select conservative rewriting examples for Stage C, several measures are
+computed over each aligned EP/BP pair to quantify the extent and type of the
+differences between the two sentences. A case-insensitive sequence alignment
+over word and punctuation tokens is used to identify changed regions. A changed
+region corresponds to one contiguous non-matching alignment block. The edit
+proportion measures the number of changed word tokens relative to the larger
+sentence, while structural similarity is computed from the sequence-alignment
+ratio over the complete token sequences. Changes are also compared with a
+predefined inventory of EP/BP marker forms. Changed word tokens in the
+non-matching alignment blocks are divided into marker and non-marker tokens
+according to case-insensitive membership in this inventory. The non-marker
+change proportion is the number of non-marker changed-token occurrences across
+both sentences divided by the larger sentence word count.
+
+For a non-equal pair to be included in the Stage C training set, it must contain at
+most four changed regions, have an edit proportion of at most 0.30, and have a
+structural similarity score of at least 0.72. The non-marker change proportion
+must not exceed 0.18, and the pair may contain at most six non-marker
+changed-token occurrences. When at least one marker token changes, the number of
+non-marker changed tokens may exceed the number of marker changed tokens by at
+most two. This final constraint is not applied when no marker token changes.
+Unchanged pairs are retained separately as no-change examples, for which copying
+the source is the correct output.
+
+Both Stage C training sets are balanced across rewriting directions. The
+combined set contains the same 6,686 GPT-Wikipedia rewriting examples used in
+the GPT-Wikipedia set together with 142 FRMT examples derived from 71 aligned
+pairs. No-change examples make up about 35\% of each Stage C set.
+
+Stage C contains no identification examples. Under decoder control, rewriting
+targets still begin with \texttt{PT} or \texttt{BR}, and correctness of this
+first generated token contributes to the reward.
+
+The Stage C configurations with the 4B-parameter model use batch size 1,
+gradient accumulation 8, a learning rate of \(5\times10^{-6}\), 20 warm-up
+steps, and a fixed optimization budget of 600 steps. AdamW is used with weight decay 0 and the same linear learning-rate
+schedule defined for the preceding stages. Unlike the supervised stages,
+Stage C does not use validation-based early stopping or best-validation-loss
+checkpoint selection. The configurations use seed 42 and gradient clipping with
+maximum norm 1.0. The final training state after 600 steps is used for
+evaluation.
+
+The optimization uses a group-relative update inspired by the reward
+optimization methods described in \Cref{sec:rl-reward-ft}
+\citep{Shao2024DeepSeekMathPT}. For each training
+input, four candidate rewrites are sampled with temperature 0.8, top-\(p\)
+0.95, a maximum completion length of 128 tokens, and no n-gram blocking. The
+gold target is then included in the same candidate group, so each group usually
+contains five candidate entries. The gold target participates in reward
+normalization like the sampled candidates.
+
+The reward compares each rewrite with the reference and unchanged
+source. For the BLEU component, let \(B_m\) denote candidate sentence-level BLEU
+and \(B_c\) the BLEU from copying the source:
+
+\[
+R_{\mathrm{BLEU}}
+=
+\frac{B_m}{B_m+B_c+\epsilon}.
+\]
+
+Similarly, let \(T_m\) be candidate TER and \(T_c\) the copy-source TER:
+
+\[
+R_{\mathrm{TER}}
+=
+\frac{T_c+\epsilon}{T_m+T_c+2\epsilon}.
+\]
+
+The constant \(\epsilon=10^{-8}\) prevents division by zero.
+
+These forms reward a candidate relative to the unchanged-source alternative
+rather than using the raw BLEU and TER values alone. Encoder-controlled models
+weight the two components equally:
+
+\[
+R_{\mathrm{enc}}
+=
+0.5R_{\mathrm{BLEU}}
++
+0.5R_{\mathrm{TER}},
+\]
+
+Decoder-controlled models additionally reward correctness of the first
+generated input-variety label:
+
+\[
+R_{\mathrm{dec}}
+=
+0.4R_{\mathrm{BLEU}}
++
+0.4R_{\mathrm{TER}}
++
+0.2R_{\mathrm{label}}.
+\]
+
+For BP-to-EP examples, \(R_{\mathrm{label}}\) is 1 when the first generated
+label is \texttt{BR}. For EP-to-BP examples, it is 1 when the first generated
+label is \texttt{PT}. Otherwise, it is 0. After removal of any decoder control
+label and whitespace normalization, \(0.10\) is subtracted from the combined
+candidate reward when the generated rewrite exactly matches the source and the
+reference requires a change.
+
+Candidate rewards are converted to group-normalized advantages using the
+procedure described in \Cref{sec:rl-reward-ft}. If the reward standard deviation
+within a group is zero, all advantages for that group are set to zero. The
+implemented Stage C loss is
+
+\[
+\mathcal{L}_{\mathrm{StageC}}(\theta)
+=
+-\frac{1}{|G(x)|}
+\sum_{y_i \in G(x)}
+A_i
+\frac{\log p_\theta(y_i \mid x)}{L_{\max}},
+\]
+
+where \(A_i\) is the group-normalized advantage for candidate \(y_i\) and
+\(L_{\max}=128\) is the maximum completion length used for normalization. The
+implemented objective does not use Proximal Policy Optimization (PPO)-style
+likelihood ratios or clipping.
+With \(\beta=0\), no explicit KL penalty toward the starting policy is applied.
+
+Stage C differs from Stage B in both the optimization procedure and the
+training data. Thus, Stage B-to-Stage C comparisons characterize the
+Stage C procedure rather than the reward objective alone.
+
+\section{Supervised Protocol Selection}
+\label{sec:method-ablation-design}
+
+The protocol-selection study with the 270M-parameter model compares four
+decoder-controlled supervised-training configurations at lower computational
+cost before the experiments with the 4B-parameter model. All configurations use full fine-tuning and follow the same Stage A and Stage
+B training path described in \Cref{sec:method-training-stages}, with
+OpenSubtitles used in Stage A and GPT-Wikipedia used in Stage B. The
+comparison keeps the same T5Gemma 2 checkpoint, decoder-controlled task
+formulation, task construction, evaluation procedure, and comparable
+step-budget settings, while varying only the supervised protocol component
+being tested. The results are reported in
+\Cref{sec:smaller-model-protocol-study}.
+
+The comparison comprises one base protocol and three single-factor variants:
+task-balanced training, added-token treatment, and restricted classification
+loss. In the base protocol, rewriting and identification rows are combined in
+the same training mixture and shuffled together, so their contribution follows
+their relative frequency in the data rather than an explicit task balance. The
+control strings use the existing base-vocabulary representations of
+\texttt{PT} and \texttt{BR} described in \Cref{sec:method-decoder-label}.
+Classification examples are scored against the normal decoder
+vocabulary, with the supervised target positions determined by the formulation
+described in \Cref{sec:method-task-formulations}.
+
+The task-balanced variant changes only the composition of the examples
+contributing to each optimizer update, enforcing equal numbers of rewriting
+and identification rows. The data, task templates, tokenizer treatment, and
+identification loss remain unchanged from the base protocol.
+
+The added-token variant keeps the same control strings and task templates but
+explicitly registers them with the
+tokenizer instead of using their existing base-vocabulary representations.
+The data mixture, sampling procedure, and loss computation remain unchanged
+from the base protocol.
+
+The restricted-classification-loss variant changes only classification loss by
+restricting scoring to \texttt{PT} and \texttt{BR}. Rewriting examples still
+use the full decoder vocabulary.

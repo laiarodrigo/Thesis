@@ -1,0 +1,48 @@
+% #############################################################################
+% This is Appendix E
+% !TEX root = ../main.tex
+% #############################################################################
+\chapter{Secondary No-Equal Ablation}
+\label{chap:appendix-no-equal}
+
+The decoder-controlled no-equal variant removes equal source-reference
+rewriting examples from the supervised stages while retaining identification
+examples. It uses the same Stage C continuation data as the matched
+configuration. Stage C therefore differs through its supervised starting
+checkpoint rather than through a separate continuation-data variant.
+
+\Cref{tab:no-equal-ablation} reports the aggregate results for this ablation.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{3pt}
+\caption{Secondary decoder-controlled no-equal ablation under aggregate evaluation.}
+\label{tab:no-equal-ablation}
+\begin{tabularx}{\textwidth}{@{}lYlcccc@{}}
+\toprule
+\textbf{Stage} & \textbf{Data condition} & \textbf{Dataset} & \shortstack{\textbf{Accuracy}\\\textbf{(\%)}} & \shortstack{\textbf{Macro-F1}\\\textbf{(\%)}} & \shortstack{\textbf{BLEU}\\\textbf{(0--100)}} & \textbf{TER} \\
+\midrule
+Stage B & GPT-Wikipedia
+& FRMT & 81.98 & 81.86 & 41.31 & 0.4605 \\
+& & Golden Collection & 71.61 & 71.38 & 86.29 & 0.0981 \\
+Stage B & GPT-Wikipedia + FRMT
+& FRMT & \textbf{86.84} & \textbf{86.84} & \textbf{44.73} & \textbf{0.4297} \\
+& & Golden Collection & 71.43 & 71.37 & 62.52 & 0.2833 \\
+\midrule
+Stage C & GPT-Wikipedia
+& FRMT & 82.45 & 82.37 & 40.80 & 0.4643 \\
+& & Golden Collection & \textbf{73.08} & \textbf{73.00} & \textbf{87.79} & \textbf{0.0889} \\
+Stage C & GPT-Wikipedia + FRMT
+& FRMT & 85.86 & 85.78 & 43.53 & 0.4409 \\
+& & Golden Collection & 70.70 & 70.47 & 80.03 & 0.1468 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Removing equal rewriting examples produces only small changes on FRMT but
+generally reduces Golden Collection rewriting performance, supporting retention
+of equal examples in the supervised data. The reduction is consistent with the
+copy-friendly structure of the Golden Collection discussed in
+\Cref{sec:error-analysis-copy}, where many examples require little or no
+rewriting.

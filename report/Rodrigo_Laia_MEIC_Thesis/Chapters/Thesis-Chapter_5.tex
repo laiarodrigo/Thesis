@@ -2,8 +2,550 @@
 % This is Chapter 5
 % !TEX root = ../main.tex
 % #############################################################################
-% Change the Name of the Chapter i the following line
-\fancychapter{This is the Fifth Chapter}
-% The following line allows to ref this chapter
+\fancychapter{Experiments and Evaluation}
 \label{chap:evaluation}
 
+This chapter evaluates the trained models on variety identification and
+bidirectional rewriting. \Cref{sec:evaluation-methodology} defines the
+evaluation setup, and \Cref{sec:smaller-model-protocol-study} reports the protocol-selection
+study with the 270M-parameter model used to choose the supervised training
+protocol.
+\Cref{sec:identification-results,sec:rewriting-results}
+analyze identification and rewriting with the 4B-parameter model, while
+\Cref{sec:error-analysis} examines copying behavior, representative
+outputs, and limitations of the available supervision.
+
+\section{Evaluation Setup}
+\label{sec:evaluation-methodology}
+
+Evaluation uses the FRMT test split and the Golden Collection described in
+\Cref{chap:data}. Golden Collection evaluation uses the manually curated
+reference instead of the automatic DeepL reference.
+
+Rewriting quality is measured with BLEU \citep{papineni2002bleu}, computed with
+SacreBLEU \citep{post-2018-call}, and TER \citep{snover2006study}, with higher
+BLEU and lower TER indicating closer agreement with the reference. BLEU values use
+the 0--100 reporting scale, and
+rewriting uses beam search with beam size 4. Decoder-side variety labels are
+removed before scoring. Rewriting comparisons are reported separately for
+BP-to-EP and EP-to-BP when directional results are available, while the Stage A
+ablation uses aggregate rewriting metrics. For evaluation, corpus BLEU and TER
+are used for aggregate model comparisons, while sentence-level BLEU and TER are
+reserved for the diagnostic analyses in \Cref{sec:error-analysis}. Stage C
+separately uses sentence-level BLEU and TER within the training reward described
+in \Cref{sec:method-stage-c}. Corpus BLEU is computed over
+each complete dataset-and-direction slice by aggregating candidate \(n\)-gram
+counts and the corresponding reference-limited match counts across all sentences
+before calculating the corpus-level score.
+
+Many EP/BP examples require only localized changes, and some require no
+modification. The evaluation therefore also includes a deterministic copy
+baseline that returns the source sentence unchanged, providing a reference for
+how favorable each evaluation set is to source preservation.
+
+Variety identification is evaluated with accuracy and macro-F1. Predictions are
+obtained by scoring \texttt{PT} and \texttt{BR} under the adapted
+sequence-to-sequence model and selecting the higher-scoring label.
+
+\section[Supervised Protocol Selection with the 270M-Parameter T5Gemma 2 Model]{Supervised Protocol Selection with the\\270M-Parameter T5Gemma 2 Model}
+\label{sec:smaller-model-protocol-study}
+
+The supervised protocol was selected with the fully fine-tuned 270M-parameter
+T5Gemma 2 model under decoder control so that alternative training choices
+could be compared at lower computational cost. Table~\ref{tab:protocol-ablation-270m} reports the
+base protocol, task-balanced batches, added-token treatment, and restricted
+classification loss after the same OpenSubtitles Stage A and GPT-Wikipedia
+Stage B path. The variants differ only in the protocol component defined in
+\Cref{sec:method-ablation-design}.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{3pt}
+\caption{Decoder-controlled 270M full-fine-tuning supervised protocol-selection ablations.}
+\label{tab:protocol-ablation-270m}
+\begin{tabularx}{\textwidth}{@{}Y*{10}{c}@{}}
+\toprule
+\multirow{3}{=}{\textbf{Protocol variant}} & \multicolumn{5}{c}{\textbf{FRMT}} & \multicolumn{5}{c}{\textbf{Golden Collection}} \\
+\cmidrule(lr){2-6} \cmidrule(lr){7-11}
+& \multirow{2}{*}{\shortstack{\textbf{Macro-F1}\\\textbf{(\%)}}} & \multicolumn{2}{c}{\shortstack{\textbf{BLEU}\\\textbf{(0--100)}}} & \multicolumn{2}{c}{\textbf{TER}} & \multirow{2}{*}{\shortstack{\textbf{Macro-F1}\\\textbf{(\%)}}} & \multicolumn{2}{c}{\shortstack{\textbf{BLEU}\\\textbf{(0--100)}}} & \multicolumn{2}{c}{\textbf{TER}} \\
+\cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){8-9} \cmidrule(lr){10-11}
+& & {\scriptsize\textbf{BP-to-EP}} & {\scriptsize\textbf{EP-to-BP}} & {\scriptsize\textbf{BP-to-EP}} & {\scriptsize\textbf{EP-to-BP}} & & {\scriptsize\textbf{BP-to-EP}} & {\scriptsize\textbf{EP-to-BP}} & {\scriptsize\textbf{BP-to-EP}} & {\scriptsize\textbf{EP-to-BP}} \\
+\midrule
+Base protocol & 70.76 & 38.56 & 38.69 & \textbf{0.4748} & \textbf{0.4828} & 67.63 & 86.45 & 86.70 & 0.0978 & 0.0981 \\
+Task-balanced batches & 69.74 & 38.56 & 38.55 & 0.4751 & 0.4859 & 68.52 & 86.04 & 86.45 & 0.0987 & 0.1001 \\
+Added-token path & \textbf{72.93} & 38.36 & 38.67 & 0.4768 & 0.4864 & 66.66 & 86.23 & 86.60 & 0.0986 & 0.1006 \\
+Restricted classification loss & 70.74 & \textbf{38.70} & \textbf{38.72} & 0.4750 & 0.4832 & \textbf{69.10} & \textbf{87.01} & \textbf{87.32} & \textbf{0.0941} & \textbf{0.0956} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Task-balanced batches do not provide a broad improvement: they slightly lower
+FRMT identification and rewriting, improve Golden Collection identification,
+and slightly lower Golden Collection rewriting. The added-token path gives the
+largest FRMT identification gain, but
+slightly lowers FRMT rewriting, lowers Golden Collection identification, and
+does not improve Golden Collection rewriting. Restricted classification loss
+gives the strongest Golden Collection identification and rewriting values, and
+only a small FRMT BLEU increase, with a specialized classification loss but no
+FRMT identification gain.
+
+Although individual variants improve particular metrics, none provides a
+consistent gain across identification and rewriting. The base protocol is
+therefore retained as the simpler configuration for the subsequent experiments
+with the 4B-parameter model.
+
+\section{Variety Identification Results}
+\label{sec:identification-results}
+
+Identification performance varies more clearly with the Stage B supervision
+condition than with control placement, particularly on FRMT.
+Table~\ref{tab:r48-classification-breakdown} reports these differences and the
+Stage C results.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{4pt}
+\caption{Identification results for the 4B-parameter T5Gemma 2 model with rank-48 LoRA.}
+\label{tab:r48-classification-breakdown}
+\begin{tabularx}{\textwidth}{@{}clYcccc@{}}
+\toprule
+\textbf{Stage} & \textbf{Control} & \textbf{Data condition} &
+\multicolumn{2}{c}{\textbf{FRMT}} &
+\multicolumn{2}{c}{\textbf{Golden Collection}} \\
+\cmidrule(lr){4-5} \cmidrule(lr){6-7}
+& & & \shortstack{\textbf{Accuracy}\\\textbf{(\%)}} & \shortstack{\textbf{Macro-F1}\\\textbf{(\%)}} & \shortstack{\textbf{Accuracy}\\\textbf{(\%)}} & \shortstack{\textbf{Macro-F1}\\\textbf{(\%)}} \\
+\midrule
+B & Encoder & GPT-Wikipedia & 82.39 & 82.39 & \textbf{73.99} & \textbf{73.92} \\
+B & Decoder & GPT-Wikipedia & 81.69 & 81.68 & 71.61 & 71.53 \\
+B & Encoder & GPT-Wikipedia + FRMT & 86.09 & 86.06 & 71.43 & 71.19 \\
+B & Decoder & GPT-Wikipedia + FRMT & \textbf{86.15} & \textbf{86.10} & 72.53 & 72.38 \\
+\midrule
+C & Encoder & GPT-Wikipedia & 82.33 & 82.33 & 73.63 & 73.50 \\
+C & Decoder & GPT-Wikipedia & 81.52 & 81.31 & 72.34 & 71.81 \\
+C & Encoder & GPT-Wikipedia + FRMT & 85.82 & 85.78 & 71.43 & 71.17 \\
+C & Decoder & GPT-Wikipedia + FRMT & 85.65 & 85.54 & 72.34 & 72.02 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Adding FRMT supervision improves FRMT identification under both control
+formulations, with macro-F1 increasing from 82.39 to 86.06 under encoder control
+and from 81.68 to 86.10 under decoder control. The effect differs on the Golden
+Collection: encoder-controlled macro-F1 decreases from 73.92 to 71.19, while
+decoder-controlled macro-F1 increases from 71.53 to 72.38. Control placement
+also changes with the supervision condition. With GPT-Wikipedia alone, encoder
+control gives the higher macro-F1 on both evaluation resources, whereas after
+adding FRMT, decoder control is slightly higher on both.
+
+Accuracy and macro-F1 remain very close across all configurations, with
+identification evaluated on equal numbers of PT- and BR-labeled examples.
+
+The FRMT results also allow a comparison with the identification results
+reported by \citet{sousa2025enhancingportuguesevarietyidentification}. The Stage
+B encoder-controlled configuration trained on GPT-Wikipedia reaches 82.39
+macro-F1 on FRMT, compared with the 77.25 F1 of their strongest
+BERTimbau-based identifier. Although both studies use FRMT for evaluation,
+their training setups and objectives differ: the previous model is dedicated
+to identification, whereas this work uses a shared encoder-decoder interface.
+
+Identification changes only slightly from Stage B to the corresponding Stage C
+configurations. Across the four matched comparisons and both evaluation
+resources, the largest absolute macro-F1 change is 0.56 percentage points, from
+86.10 to 85.54 for the decoder-controlled GPT-Wikipedia + FRMT configuration on
+FRMT. The remaining changes are smaller and include both increases and
+decreases, with no consistent identification improvement or systematic
+degradation across the evaluated conditions.
+
+\section{Variety Rewriting Results}
+\label{sec:rewriting-results}
+
+Rewriting is more sensitive than identification to changes in supervision
+composition. Table~\ref{tab:r48-translation-breakdown} summarizes performance
+across supervision settings, control formulations, and training
+stages.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{3pt}
+\caption{Directional rewriting results for the 4B-parameter T5Gemma 2 model after Stage B and Stage C with rank-48 LoRA.}
+\label{tab:r48-translation-breakdown}
+\begin{tabularx}{\textwidth}{@{}clYcccc@{}}
+\toprule
+\textbf{Stage} & \textbf{Control} & \textbf{Data condition} &
+\multicolumn{2}{c}{\textbf{FRMT}} &
+\multicolumn{2}{c}{\textbf{Golden Collection}} \\
+\cmidrule(lr){4-5} \cmidrule(lr){6-7}
+& & & \textbf{BP-to-EP} & \textbf{EP-to-BP}
+& \textbf{BP-to-EP} & \textbf{EP-to-BP} \\
+& & & \shortstack{\textbf{BLEU (0--100)}\\\textbf{/ TER}} & \shortstack{\textbf{BLEU (0--100)}\\\textbf{/ TER}}
+& \shortstack{\textbf{BLEU (0--100)}\\\textbf{/ TER}} & \shortstack{\textbf{BLEU (0--100)}\\\textbf{/ TER}} \\
+\midrule
+B & Encoder & GPT-Wikipedia & 37.87/0.4791 & 40.10/0.4714 & 86.08/0.0946 & \textbf{89.09}/\textbf{0.0823} \\
+B & Encoder (rewriting-only) & GPT-Wikipedia & 37.73/0.4803 & 40.31/0.4715 & 85.66/0.0976 & 88.66/0.0847 \\
+B & Decoder & GPT-Wikipedia & 40.45/0.4594 & 40.60/0.4673 & 87.75/0.0874 & 87.50/0.0916 \\
+B & Encoder & GPT-Wikipedia + FRMT & 37.99/0.4770 & \textbf{45.43}/0.4273 & 65.14/0.2555 & 66.61/0.2535 \\
+B & Encoder (rewriting-only) & GPT-Wikipedia + FRMT & 36.76/0.4852 & 45.40/\textbf{0.4251} & 56.10/0.3222 & 58.69/0.3103 \\
+B & Decoder & GPT-Wikipedia + FRMT & \textbf{43.97}/\textbf{0.4338} & 44.74/0.4306 & 68.37/0.2336 & 67.83/0.2400 \\
+\midrule
+C & Encoder & GPT-Wikipedia & 37.89/0.4784 & 40.28/0.4696 & 86.22/0.0953 & 88.93/0.0837 \\
+C & Decoder & GPT-Wikipedia & 40.34/0.4603 & 40.33/0.4698 & \textbf{88.44}/\textbf{0.0824} & 88.02/0.0878 \\
+C & Encoder & GPT-Wikipedia + FRMT & 38.35/0.4756 & 43.47/0.4440 & 77.16/0.1601 & 79.95/0.1488 \\
+C & Decoder & GPT-Wikipedia + FRMT & 42.72/0.4417 & 42.72/0.4466 & 81.52/0.1351 & 80.70/0.1402 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Adding FRMT supervision has a direction-dependent effect on FRMT rewriting,
+ranging from almost no change to a clear improvement. In contrast, Golden
+Collection BLEU drops by roughly 20 points across every direction and control
+comparison, with corresponding increases in TER.
+
+To examine whether identification supervision changes rewriting quality, the
+encoder-controlled Stage B comparison includes matched multitask and
+rewriting-only configurations trained with the same rewriting data. With
+GPT-Wikipedia, removing identification supervision changes rewriting by less
+than half a BLEU point in every comparison. With GPT-Wikipedia + FRMT, the two
+configurations remain close on FRMT, while the multitask configuration is
+stronger on the Golden Collection by 9.04 BLEU in BP-to-EP and 7.92 BLEU in
+EP-to-BP. Removing identification supervision does not improve
+encoder-controlled rewriting.
+
+The effect of control placement depends on rewriting direction. Decoder control
+performs better in every BP-to-EP comparison, while EP-to-BP is mixed and
+sometimes favors encoder control.
+
+Beyond these supervised comparisons, Stage C shows how the models change after
+reward-based continuation. Reward-based continuation changes the GPT-Wikipedia models only slightly. The
+larger effect appears after GPT-Wikipedia + FRMT specialization, where Golden
+Collection BLEU recovers by roughly 12--13 points across the direction and
+control comparisons. Changes in FRMT rewriting performance remain comparatively
+small and mixed. Stage C therefore recovers much of the Golden Collection
+performance lost after Stage B specialization with the GPT-Wikipedia + FRMT data
+mix, while its FRMT effect remains direction- and formulation-dependent.
+
+The most directly comparable prior rewriting result is BP-to-EP evaluation on
+the Golden Collection. After rescaling the BLEU values reported by
+\citet{sanches2024brazilianportugueseeuropeanportuguese} to the 0--100 scale,
+their strongest trained system obtains approximately 84 BLEU and 0.10 TER,
+while their published single-direction BP-to-EP copy baseline reaches
+approximately 89 BLEU and 0.07 TER. The decoder-controlled GPT-Wikipedia
+configuration reaches 87.75 BLEU and 0.0874 TER at Stage B and 88.44 BLEU and
+0.0824 TER after Stage C. This numerical relation is contextual, as
+\citet{sanches2024brazilianportugueseeuropeanportuguese} train specifically for
+BP-to-EP rewriting, while the present configuration is bidirectional and also
+supports identification.
+
+Additional descriptive comparisons with external pretrained and
+instruction-following models evaluated under the same protocol are reported in
+\Cref{chap:appendix-external-model-comparison}.
+
+The Stage A ablation reported in Table~\ref{tab:stage-a-ablation} compares each
+configuration with a matched model that starts directly from Stage B. To capture
+effects on both tasks, the comparison reports macro-F1 together with aggregate
+rewriting BLEU and TER deltas.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{4pt}
+\caption{Stage A warm-up ablation under aggregate evaluation. Deltas are computed as the Stage A model minus the matched no-Stage-A model. Positive deltas indicate improvement for macro-F1 and BLEU, while negative deltas indicate improvement for TER.}
+\label{tab:stage-a-ablation}
+\begin{tabularx}{\textwidth}{@{}llYccc@{}}
+\toprule
+\textbf{Control} & \textbf{Data condition} & \textbf{Dataset} & \shortstack{\(\Delta\) \textbf{Macro-F1}\\\textbf{(pp)}} & \shortstack{\(\Delta\) \textbf{BLEU}\\\textbf{(points)}} & \(\Delta\) \textbf{TER} \\
+\midrule
+Encoder & GPT-Wikipedia & FRMT & \textbf{+0.87} & \textbf{+4.40} & \textbf{-0.0573} \\
+Encoder & GPT-Wikipedia & Golden Collection & \textbf{+4.01} & \textbf{+25.41} & \textbf{-0.2404} \\
+Encoder & GPT-Wikipedia + FRMT & FRMT & +0.81 & +1.92 & -0.0176 \\
+Encoder & GPT-Wikipedia + FRMT & Golden Collection & +1.62 & -6.79 & +0.0425 \\
+Decoder & GPT-Wikipedia & FRMT & -1.28 & -0.01 & +0.0004 \\
+Decoder & GPT-Wikipedia & Golden Collection & +2.67 & +1.42 & -0.0144 \\
+Decoder & GPT-Wikipedia + FRMT & FRMT & -0.07 & +0.35 & -0.0031 \\
+Decoder & GPT-Wikipedia + FRMT & Golden Collection & +2.19 & +2.00 & -0.0217 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The clearest aggregate Stage A benefit occurs on the Golden Collection
+after specialization with GPT-Wikipedia data, especially under encoder control,
+where Stage A adds 4.01 macro-F1 points and 25.41 BLEU while reducing TER by
+0.2404. The decoder-controlled GPT-Wikipedia condition also improves on the
+Golden Collection, while the GPT-Wikipedia + FRMT conditions show smaller or
+mixed changes.
+
+Overall, supervision composition produces the clearest changes in rewriting
+performance. GPT-Wikipedia alone is consistently better suited to the Golden
+Collection at Stage B, while adding FRMT can improve FRMT rewriting depending
+on direction and control formulation but sharply reduces Golden Collection
+performance. Decoder control shows the stronger overall tendency for rewriting,
+performing better in every BP-to-EP comparison, although EP-to-BP remains mixed.
+Stage A generally helps the training process, with its largest gains after
+GPT-Wikipedia specialization, while Stage C produces its largest gains after
+GPT-Wikipedia + FRMT specialization, where it consistently recovers Golden
+Collection performance across control formulations and rewriting directions.
+
+\section{Error Analysis}
+\label{sec:error-analysis}
+
+\Cref{sec:rewriting-results} shows that adding FRMT supervision can improve FRMT
+rewriting while sharply reducing Golden Collection performance at Stage B. To
+examine this contrast, \Cref{sec:error-analysis-copy} first considers how closely
+references remain to their sources,
+\Cref{sec:error-analysis-frmt-stage-b} then compares the copying and rewriting
+behavior under the two Stage B conditions, and
+\Cref{sec:error-analysis-data} examines supervision limitations.
+
+\subsection{Copy-Friendly Evaluation Cases}
+\label{sec:error-analysis-copy}
+
+The Golden Collection contains many cases in which little or no rewriting is
+required. Of its 1,000 directional cases, 454 have identical source and
+reference sentences. When the source itself is used as the candidate, 566 cases
+obtain TER at most 0.05 and 636 obtain TER at most 0.08. At corpus level, the
+unchanged-source baseline reaches 89.17 BLEU and 0.0755 TER on the Golden
+Collection, compared with 38.75 BLEU and 0.4819 TER on FRMT. The Golden
+Collection is therefore much more favorable to conservative outputs, whereas
+FRMT references differ more substantially from their sources.
+
+\Cref{tab:golden-copy-comparison-rates} compares sentence-level BLEU (sBLEU)
+and TER with the unchanged-source baseline.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{4pt}
+\caption{Golden Collection sentence-level predictions matching or outperforming the unchanged-source baseline for the Stage B models in Table~\ref{tab:r48-translation-breakdown}.}
+\label{tab:golden-copy-comparison-rates}
+\begin{tabularx}{\textwidth}{@{}Ylccc@{}}
+\toprule
+\textbf{Data condition} &
+\textbf{Control} &
+\textbf{Direction} &
+\shortstack{\textbf{sBLEU \(\geq\) copy}\\\textbf{(\%)}} &
+\shortstack{\textbf{TER \(\leq\) copy}\\\textbf{(\%)}} \\
+\midrule
+GPT-Wikipedia & Encoder & BP-to-EP & 78.6 & 78.8 \\
+GPT-Wikipedia & Encoder & EP-to-BP & 81.4 & 81.2 \\
+GPT-Wikipedia & Decoder & BP-to-EP & 74.0 & 74.4 \\
+GPT-Wikipedia & Decoder & EP-to-BP & 72.8 & 73.6 \\
+\midrule
+GPT-Wikipedia + FRMT & Encoder & BP-to-EP & 23.0 & 23.0 \\
+GPT-Wikipedia + FRMT & Encoder & EP-to-BP & 23.6 & 24.4 \\
+GPT-Wikipedia + FRMT & Decoder & BP-to-EP & 31.0 & 31.2 \\
+GPT-Wikipedia + FRMT & Decoder & EP-to-BP & 30.2 & 29.8 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The sentence-level comparison in
+\Cref{tab:golden-copy-comparison-rates} counts a prediction when its
+sentence-level BLEU matches or exceeds the copy baseline, or when its
+sentence-level TER matches or improves on the copy baseline. Across both control
+formulations, predictions under GPT-Wikipedia supervision match or outperform
+copying in 72.8--81.4\% of cases by sentence-level BLEU and 73.6--81.2\% by
+sentence-level TER. With GPT-Wikipedia + FRMT, the corresponding ranges fall to
+23.0--31.0\% and 23.0--31.2\%, respectively.
+
+Sentence-level comparisons cannot be read as sentence-weighted versions of the
+corpus metrics. Corpus BLEU aggregates \(n\)-gram match statistics over the complete
+evaluation slice instead of averaging sentence-level BLEU or counting wins. A
+model can therefore match or improve over copying on a large proportion of
+individual sentences yet obtain lower corpus BLEU when losses on other examples remove
+proportionally more matched \(n\)-grams. This sensitivity is especially relevant
+for the many short, copy-friendly Golden Collection sentences. Changing one word
+in a short sentence can disrupt a large fraction of its available \(n\)-grams,
+so an unnecessary change can incur a disproportionate overlap loss. A correct
+small edit and an unnecessary small edit can consequently have very different
+effects depending on the reference. Corpus TER similarly sums edit counts over
+the complete evaluation slice and divides by the total reference-token count. It
+does not average sentence-level TER values, so sentence-level gains
+can coexist with worse corpus TER when losses elsewhere add more edits
+per reference token.
+
+\Cref{tab:golden-copy-bleu-paradox} illustrates both outcomes with one
+conservative Stage B GPT-Wikipedia checkpoint. In the first and second rows, the
+model applies the required local substitution and matches the reference exactly.
+In the third and fourth rows, copying is correct, but rewriting sharply lowers
+sentence-level BLEU.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{4pt}
+\caption{Golden Collection examples comparing the unchanged-source baseline with predictions from a conservative Stage B GPT-Wikipedia checkpoint. Boldface marks the sentence spans responsible for the illustrated contrast, and the higher sBLEU value in each row is bold.}
+\label{tab:golden-copy-bleu-paradox}
+\begin{tabularx}{\textwidth}{@{}YYYcc@{}}
+\toprule
+Source & Reference & Model prediction & \shortstack{Copy sBLEU\\(0--100)} & \shortstack{Model sBLEU\\(0--100)} \\
+\midrule
+\textit{Clonar animais continua \textbf{sendo} uma tarefa dif\'icil.} &
+\textit{Clonar animais continua \textbf{a ser} uma tarefa dif\'icil.} &
+\textit{Clonar animais continua \textbf{a ser} uma tarefa dif\'icil.} &
+44.12 &
+\textbf{100.00} \\
+
+\textit{O artigo do \textbf{investigador} est\'a na edi\c{c}\~ao de hoje da revista ``Science''.} &
+\textit{O artigo do \textbf{pesquisador} est\'a na edi\c{c}\~ao de hoje da revista ``Science''.} &
+\textit{O artigo do \textbf{pesquisador} est\'a na edi\c{c}\~ao de hoje da revista ``Science''.} &
+80.03 &
+\textbf{100.00} \\
+
+\textit{\textbf{V.Ex.\textordfeminine}\ est\'a inscrito para falar contra.} &
+\textit{\textbf{V.Ex.\textordfeminine}\ est\'a inscrito para falar contra.} &
+\textit{\textbf{Sua Excel\^encia} est\'a inscrito para falar contra.} &
+\textbf{100.00} &
+46.76 \\
+
+\textit{--- Ah!} &
+\textit{--- Ah!} &
+\textit{\textbf{\'E...}} &
+\textbf{100.00} &
+0.00 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The much weaker FRMT copy baseline reflects references that are farther from
+their sources on average. Broader rewriting can therefore improve corpus-level
+agreement more readily than on the Golden Collection, although broader changes
+are not necessarily appropriate for every example in FRMT.
+
+\subsection{Effect of FRMT During Supervised Specialization}
+\label{sec:error-analysis-frmt-stage-b}
+
+Given the Golden Collection's sensitivity to unnecessary changes, the next
+question is whether the two Stage B supervision conditions differ in how often
+they preserve the source. The encoder-controlled Stage B models trained with
+GPT-Wikipedia data and with the GPT-Wikipedia + FRMT data mix differ clearly in
+this behavior. On the 454 exact-copy Golden Collection rows, where leaving the source
+unchanged matches the reference, the model trained with GPT-Wikipedia preserves
+the source exactly in 74.7\% of cases, compared with 18.7\% for the model trained
+with the GPT-Wikipedia + FRMT data mix. On the 546 non-exact rows, the
+corresponding copy rates are 33.7\% and 3.1\%. In these cases, unchanged copying
+can indicate under-editing, so reducing copying can help realize required
+changes but also increases the opportunity for unnecessary reformulation.
+
+\Cref{tab:golden-qualitative-overtranslation} illustrates both sides of this
+trade-off. In the first row, the model trained with GPT-Wikipedia under-edits by
+leaving \textit{procura} unchanged, whereas the model trained with the
+GPT-Wikipedia + FRMT data mix makes the required change to \textit{demanda} but
+also reformulates the sentence more broadly. In the fourth row, the reference is
+identical to the source, which the GPT-Wikipedia model preserves, while the
+GPT-Wikipedia + FRMT model rewrites unnecessarily.
+
+\begin{table}[htbp]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{4pt}
+\caption{Illustrative Golden Collection predictions from encoder-controlled Stage B models trained with GPT-Wikipedia and GPT-Wikipedia + FRMT. Boldface marks model-output spans that illustrate under-editing or unnecessary reformulation discussed in the text.}
+\label{tab:golden-qualitative-overtranslation}
+\begin{tabularx}{\textwidth}{@{}cYYYY@{}}
+\toprule
+Example & Source & Reference & GPT-Wikipedia & GPT-Wikipedia + FRMT \\
+\midrule
+1 &
+\textit{``A procura aumenta de forma dr\'astica no mundo todo'', afirmou o especialista em recursos h\'idricos Jos\'e Galizia Tundisi, do Instituto Internacional de Ecologia, em S\~ao Carlos (SP).} &
+\textit{``A demanda aumenta de forma dr\'astica no mundo todo'', afirmou o especialista em recursos h\'idricos Jos\'e Galizia Tundisi, do Instituto Internacional de Ecologia, em S\~ao Carlos (SP).} &
+\textit{``A \textbf{procura} aumenta de forma dr\'astica no mundo todo'', afirmou o especialista em recursos h\'idricos Jos\'e Galizia Tundisi, do Instituto Internacional de Ecologia, em S\~ao Carlos (SP).} &
+\textit{``A demanda \textbf{est\'a aumentando drasticamente em todo o mundo}'', \textbf{disse} o especialista em recursos h\'idricos Jos\'e Galizia Tundisi, do Instituto Internacional de Ecologia em S\~ao Carlos (SP).} \\
+
+2 &
+\textit{Ele afirmou que o aumento de temperatura, que pode chegar a 3C nas \'areas h\'umidas, seria um desastre.} &
+\textit{Ele afirmou que o aumento de temperatura, que pode chegar a 3C nas \'areas \'umidas, seria um desastre.} &
+\textit{Ele afirmou que o aumento de temperatura, que pode chegar a 3C nas \'areas \'umidas, seria um desastre.} &
+\textit{Ele \textbf{disse} que o aumento de temperatura, que pode chegar a \textbf{3\textordmasculine C em \'areas \'umidas}, seria um desastre.} \\
+
+3 &
+\textit{Segundo o investigador, a equipa inclusive pediu patentes sobre algumas dessas aplica\c{c}\~oes, mas, enquanto o pedido n\~ao for aprovado, Perales prefere n\~ao revelar exatamente do que se trata.} &
+\textit{Segundo o pesquisador, a equipe inclusive pediu patentes sobre algumas dessas aplica\c{c}\~oes, mas, enquanto o pedido n\~ao for aprovado, Perales prefere n\~ao revelar exatamente do que se trata.} &
+\textit{Segundo o pesquisador, a equipe inclusive pediu patentes sobre algumas dessas aplica\c{c}\~oes, mas, enquanto o pedido n\~ao for aprovado, Perales prefere n\~ao revelar exatamente do que se trata.} &
+\textit{Segundo o pesquisador, a equipe \textbf{at\'e mesmo solicitou} patentes sobre algumas dessas aplica\c{c}\~oes, mas enquanto o pedido n\~ao for aprovado, Perales prefere n\~ao revelar exatamente do que se trata.} \\
+
+4 &
+\textit{Da\'i por que est\'a absolutamente correto no conte\'udo, como na forma, o parecer do ilustre Relator Bernardo Cabral.} &
+\textit{Da\'i por que est\'a absolutamente correto no conte\'udo, como na forma, o parecer do ilustre Relator Bernardo Cabral.} &
+\textit{Da\'i por que est\'a absolutamente correto no conte\'udo, como na forma, o parecer do ilustre Relator Bernardo Cabral.} &
+\textit{\textbf{Por isso, o parecer do ilustre Relator, Bernardo Cabral, \'e absolutamente correto tanto no conte\'udo como na forma.}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Limitations of the Available Supervision}
+\label{sec:error-analysis-data}
+
+The broader rewriting behavior observed after adding FRMT supervision may
+reflect differences in the aligned data itself. Inspection of the available
+pairs shows source--reference differences that extend beyond localized EP/BP
+conversion, including lexical reformulation and changes in expressed
+information. In some FRMT examples, lexical substitutions such as
+\textit{marcante} to \textit{importante},
+\textit{ganhou} to \textit{recebeu},
+\textit{reside} to \textit{vive},
+\textit{usar} to \textit{utilizar}, and
+\textit{m\'usica} to \textit{can\c{c}\~ao} alter the wording
+without a clear EP/BP adaptation.
+
+A second issue concerns differences in the information expressed by the source
+and reference. \Cref{tab:dataset-information-mismatch} shows representative
+cases from both evaluation resources. In the Golden Collection examples, the
+reference removes or compresses source material, while in the FRMT examples it
+removes repeated title glosses and unit conversions. These transformations go
+beyond direct language-variety substitution. Additional inspected FRMT examples
+contain other omissions or editorial changes of the same general kind, so the
+cases in \Cref{tab:dataset-information-mismatch} are illustrative rather than
+exhaustive.
+
+\begin{table}[H]
+\centering
+\thesistablefont
+\setlength{\tabcolsep}{4pt}
+\caption{Examples where source and reference sentences differ in expressed information. Boldface marks the spans responsible for the information difference discussed in the text.}
+\label{tab:dataset-information-mismatch}
+\begin{tabularx}{\textwidth}{@{}lcYY@{}}
+\toprule
+Dataset & Direction & Source & Reference \\
+\midrule
+Golden Collection &
+BP-to-EP &
+\textit{- Oww voc\^e \'e um amor Obrigado viu!- Falei \textbf{e o mesmo retribuiu com um abra\c{c}o.}} &
+\textit{- Oww, \'es ador\'avel. Obrigado!} \\
+
+Golden Collection &
+EP-to-BP &
+\textit{Ent\~ao, o latifundi\'ario pode tirar toda a madeira, expulsar os \textbf{que ocuparam a terra abandonada} e fazer verdadeiros \textbf{atos} absurdos nesse per\'iodo.} &
+\textit{Ent\~ao, o latifundi\'ario pode tirar toda a madeira, expulsar os \textbf{posseiros} e fazer verdadeiros absurdos nesse per\'iodo.} \\
+
+FRMT &
+BP-to-EP &
+\textit{A UNICEF concedeu a Lerner o Pr\^emio Crian\c{c}a e Paz em 1996 pelos seus programas ``Da Rua para a Escola'' \textbf{(Da Rua para a Escola)}, ``Protegendo a Vida'' \textbf{(Protegendo a Vida)} e ``Universidade do Professor'' \textbf{(Universidade do Professor)}.} &
+\textit{A UNICEF atribuiu a Lerner o Pr\'emio Crian\c{c}a e Paz em 1996 pelos programas ``Da Rua para a Escola'', ``Protegendo a Vida'' e ``Universidade do Professor''.} \\
+
+FRMT &
+BP-to-EP &
+\textit{O Aut\'odromo Internacional Orlando Moura tem uma pista de 3.433 metros \textbf{(11.263 p\'es)}, e o Kart\'odromo Ayrton Senna uma pista de 930 metros \textbf{(3.051 p\'es)}.} &
+\textit{O Aut\'odromo Internacional Orlando Moura tem uma pista de 3433 metros e o Kart\'odromo Ayrton Senna tem uma pista de 930 metros.} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Such differences affect both training and evaluation. When they appear in
+supervision, they can teach transformations broader than controlled EP/BP
+rewriting. When they appear in evaluation references, they can affect scores
+even for meaning-preserving, appropriate variety-specific changes.
+
+This analysis also highlights a limitation of BLEU and TER. Both compare a
+model output with a particular reference, so they cannot determine whether a
+difference from that reference reflects a necessary variety-specific edit, an
+acceptable alternative, or an unnecessary reformulation. This ambiguity
+becomes more important when the reference itself contains paraphrastic or
+editorial changes. The same issue also carries into Stage C, where
+sentence-level BLEU and TER contribute directly to the reward. If a reference
+contains a broader rewrite than the task requires, the reward can favor
+candidates that reproduce that rewrite over candidates that make a smaller but
+still appropriate variety-specific change. Conversely, when copying is
+appropriate, the relative-to-copy formulation can reward restraint. The
+reference quality therefore affects both evaluation and the Stage C training
+signal.

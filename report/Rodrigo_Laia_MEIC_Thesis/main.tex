@@ -39,6 +39,14 @@
 % Modify it to suit your needs
 % -----------------------------------------------------------------------------
 \input{Preamble_commands}
+% One unscaled font for every table body and header; captions retain template styling.
+\newcommand{\thesistablefont}{\footnotesize}
+% Keep the template's heading skips from stretching to fill short pages.
+\raggedbottom
+% Reduce widows and orphans in the rendered dissertation pages.
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
 %
 % #############################################################################
 % #############################################################################
@@ -70,6 +78,7 @@
 \begin{abstract}
 	\input{./Chapters/EN-Abstract.tex}
 \end{abstract}
+\clearpage
 \begin{keywords}
 	\input{./Chapters/EN-KeyWords.tex}
 \end{keywords}
@@ -110,8 +119,8 @@
 \renewcommand{\baselinestretch}{1.5}
 % -----------------------------------------------------------------------------
 % List of Figures
-\pdfbookmark[1]{List of Figures}{lof}
-\listoffigures
+% \pdfbookmark[1]{List of Figures}{lof}
+% \listoffigures
 %\cleardoublepage
 % -----------------------------------------------------------------------------
 \begingroup 
@@ -127,20 +136,18 @@
 %\cleardoublepage
 % -----------------------------------------------------------------------------
 % List of Algorithms
-% If not used, comments the lines!
-% Requires packages algorithmic, algorithm
-\pdfbookmark[1]{List of Algorithms}{loa}
-\listofalgorithms
+% Disabled until the thesis contains actual algorithms.
+%\pdfbookmark[1]{List of Algorithms}{loa}
+%\listofalgorithms
 % If Printing on DOUBLE SIDED pages, the second page should be white.
 \endgroup
 % Otherwise, comment the following command:
 %\cleardoublepage
 % -----------------------------------------------------------------------------
 % Listings
-% If not used, comments the lines!
-% Requires packages listings
-\pdfbookmark[1]{Listings}{lol}
-\lstlistoflistings
+% Disabled until the thesis contains actual code listings.
+%\pdfbookmark[1]{Listings}{lol}
+%\lstlistoflistings
 %\cleardoublepage
 % -----------------------------------------------------------------------------
 % % List of acronyms
@@ -151,11 +158,11 @@
 \clearpage
 % -----------------------------------------------------------------------------
 % Glossary
-% Comment if not used
-\pdfbookmark[1]{Glossary}{glo}
-\printglossary[]
+% Disabled until the thesis uses glossary entries in the text.
+%\pdfbookmark[1]{Glossary}{glo}
+%\printglossary[]
 % Otherwise, comment the following command:
-\cleardoublepage
+%\cleardoublepage
 % -----------------------------------------------------------------------------
 % PAGE NUMBERING FOR DOCUMENT MATTER in ARABIC
 % Pages number is starting with arabic style. Until here were on roman mode
@@ -184,18 +191,24 @@
 \cleardoublepage
 %
 %Chapter 4
-\input{./Chapters/Thesis-Chapter_4.tex}
+\input{./Chapters/Thesis-Chapter_Data.tex}
 % If Printing on DOUBLE SIDED pages, the second page should be white.
 % Otherwise, comment the following command:
-%\cleardoublepage
+\cleardoublepage
 %
 %Chapter 5
-\input{./Chapters/Thesis-Chapter_5.tex}
+\input{./Chapters/Thesis-Chapter_4.tex}
 % If Printing on DOUBLE SIDED pages, the second page should be white.
 % Otherwise, comment the following command:
 \cleardoublepage
 %
 %Chapter 6
+\input{./Chapters/Thesis-Chapter_5.tex}
+% If Printing on DOUBLE SIDED pages, the second page should be white.
+% Otherwise, comment the following command:
+\cleardoublepage
+%
+%Chapter 7
 \input{./Chapters/Thesis-Chapter_6.tex}
 % If Printing on DOUBLE SIDED pages, the second page should be white.
 % Otherwise, comment the following command:
@@ -205,7 +218,8 @@
 % BIBLIOGRAPHY
 % Add the Bibliography to the PDF table of contents (not the document table of contents)
 %\pdfbookmark[0]{Bibliography}{bib}
-\addcontentsline{toc}{chapter}{Bibliography}
+% Add the TOC entry after the bibliography's chapter page has opened.
+\AddToHookNext{cmd/bibsection/after}{\phantomsection\addcontentsline{toc}{chapter}{Bibliography}}
 % The bibliography style sheet
 % Chose your preferences on the format of the entries and the Labels:
 % plainnat: Author-year citations compatible with natbib
@@ -224,8 +238,13 @@
 %\bibliographystyle{acm}
 % The following command resets the 'emphasis' style for bibliography entries
 \normalem
+\setlength{\bibsep}{3pt plus 1pt minus 1pt}
 % Name of your BiBTeX file
+% The unnumbered bibliography follows immediately on the next page.
+\begingroup
+\makeatletter\@openrightfalse\makeatother
 \bibliography{Bibliography} % Put here your own filename
+\endgroup
 %
 % The following command modifies the 'emphasis' style for bibliography entries
 \ULforem
@@ -241,16 +260,34 @@
 % -----------------------------------------------------------------------------
 % HERE GO THE APPENDIXES IF REQUIRED
 % If not required just comment the blocks
-% \appendix
+\appendix
 %% First Appendix
-%\pdfbookmark[1]{Appendix A}{appendix}
-% \input{./Chapters/AppendixA.tex}
+\pdfbookmark[1]{Additional Data Preparation Details}{appendixA}
+\input{./Chapters/AppendixA.tex}
 %% If Printing on DOUBLE SIDED pages, the second page should be white.
 %% Otherwise, comment the following command:
 \cleardoublepage
 %% Second Appendix
-%\pdfbookmark[1]{Appendix B}{appendix}
-% \input{./Chapters/AppendixB.tex}
+\pdfbookmark[1]{LoRA Rank Ablation}{appendixB}
+\input{./Chapters/AppendixB.tex}
+%% If Printing on DOUBLE SIDED pages, the second page should be white.
+%% Otherwise, comment the following command:
+\cleardoublepage
+%% Third Appendix
+\pdfbookmark[1]{Isolated Reward-Based Continuation Ablations}{appendixC}
+\input{./Chapters/AppendixC.tex}
+%% If Printing on DOUBLE SIDED pages, the second page should be white.
+%% Otherwise, comment the following command:
+\cleardoublepage
+%% Fourth Appendix
+\pdfbookmark[1]{External Model Comparisons}{appendixD}
+\input{./Chapters/AppendixD.tex}
+%% If Printing on DOUBLE SIDED pages, the second page should be white.
+%% Otherwise, comment the following command:
+\cleardoublepage
+%% Fifth Appendix
+\pdfbookmark[1]{Secondary No-Equal Ablation}{appendixE}
+\input{./Chapters/AppendixE.tex}
 %% If Printing on DOUBLE SIDED pages, the second page should be white.
 %% Otherwise, comment the following command:
 
