@@ -1,0 +1,9 @@
+stage,supervision,dataset,accuracy,macro_f1,bleu,ter
+B,GPT-Wikipedia,FRMT,81.98,81.86,41.31,0.4605
+B,GPT-Wikipedia,Golden Collection,71.61,71.38,86.29,0.0981
+B,GPT-Wikipedia + FRMT,FRMT,86.84,86.84,44.73,0.4297
+B,GPT-Wikipedia + FRMT,Golden Collection,71.43,71.37,62.52,0.2833
+C,GPT-Wikipedia,FRMT,82.45,82.37,40.80,0.4643
+C,GPT-Wikipedia,Golden Collection,73.08,73.00,87.79,0.0889
+C,GPT-Wikipedia + FRMT,FRMT,85.86,85.78,43.53,0.4409
+C,GPT-Wikipedia + FRMT,Golden Collection,70.70,70.47,80.03,0.1468

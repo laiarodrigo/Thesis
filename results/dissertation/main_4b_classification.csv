@@ -1,0 +1,17 @@
+stage,control,supervision,dataset,accuracy,macro_f1,config
+B,encoder,GPT-Wikipedia,FRMT,82.39,82.39,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_encoder_ptbr.yaml
+B,encoder,GPT-Wikipedia,Golden Collection,73.99,73.92,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_encoder_ptbr.yaml
+B,decoder,GPT-Wikipedia,FRMT,81.69,81.68,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_decoder_ptbr.yaml
+B,decoder,GPT-Wikipedia,Golden Collection,71.61,71.53,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_decoder_ptbr.yaml
+B,encoder,GPT-Wikipedia + FRMT,FRMT,86.09,86.06,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_frmt_encoder_ptbr.yaml
+B,encoder,GPT-Wikipedia + FRMT,Golden Collection,71.43,71.19,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_frmt_encoder_ptbr.yaml
+B,decoder,GPT-Wikipedia + FRMT,FRMT,86.15,86.10,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_frmt_decoder_ptbr.yaml
+B,decoder,GPT-Wikipedia + FRMT,Golden Collection,72.53,72.38,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_frmt_decoder_ptbr.yaml
+C,encoder,GPT-Wikipedia,FRMT,82.33,82.33,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageC_E_G_ptbr_gpt_wiki_bleu_ter.yaml
+C,encoder,GPT-Wikipedia,Golden Collection,73.63,73.50,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageC_E_G_ptbr_gpt_wiki_bleu_ter.yaml
+C,decoder,GPT-Wikipedia,FRMT,81.52,81.31,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageC_D_G_ptbr_gpt_wiki_bleu_ter_first_token.yaml
+C,decoder,GPT-Wikipedia,Golden Collection,72.34,71.81,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageC_D_G_ptbr_gpt_wiki_bleu_ter_first_token.yaml
+C,encoder,GPT-Wikipedia + FRMT,FRMT,85.82,85.78,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageC_E_GF_ptbr_frmt_gpt_wiki_bleu_ter.yaml
+C,encoder,GPT-Wikipedia + FRMT,Golden Collection,71.43,71.17,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageC_E_GF_ptbr_frmt_gpt_wiki_bleu_ter.yaml
+C,decoder,GPT-Wikipedia + FRMT,FRMT,85.65,85.54,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageC_D_GF_ptbr_frmt_gpt_wiki_bleu_ter_first_token.yaml
+C,decoder,GPT-Wikipedia + FRMT,Golden Collection,72.34,72.02,configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageC_D_GF_ptbr_frmt_gpt_wiki_bleu_ter_first_token.yaml

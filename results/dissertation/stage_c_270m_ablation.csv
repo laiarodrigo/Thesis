@@ -1,0 +1,21 @@
+control,configuration,dataset,macro_f1,bleu,ter
+decoder,supervised_stage_b_start,FRMT,70.76,39.13,0.4788
+decoder,supervised_stage_b_start,Golden Collection,67.63,86.57,0.0980
+decoder,base_reward,FRMT,68.76,39.11,0.4800
+decoder,base_reward,Golden Collection,67.15,86.88,0.0962
+decoder,classifier_reward,FRMT,69.54,39.04,0.4806
+decoder,classifier_reward,Golden Collection,67.57,86.96,0.0969
+decoder,token_conservatism,FRMT,69.49,39.07,0.4804
+decoder,token_conservatism,Golden Collection,67.43,86.58,0.1007
+decoder,ter_diverse_grouping,FRMT,68.24,39.12,0.4799
+decoder,ter_diverse_grouping,Golden Collection,66.70,87.19,0.0949
+encoder,supervised_stage_b_start,FRMT,71.73,27.06,0.6204
+encoder,supervised_stage_b_start,Golden Collection,65.43,65.53,0.2996
+encoder,base_reward,FRMT,71.90,13.62,0.7525
+encoder,base_reward,Golden Collection,65.77,38.21,0.5154
+encoder,classifier_reward,FRMT,71.81,15.67,0.7319
+encoder,classifier_reward,Golden Collection,66.29,44.25,0.4704
+encoder,token_conservatism,FRMT,72.28,16.27,0.7268
+encoder,token_conservatism,Golden Collection,66.34,42.79,0.4808
+encoder,ter_diverse_grouping,FRMT,72.22,13.18,0.7571
+encoder,ter_diverse_grouping,Golden Collection,66.14,38.96,0.5118

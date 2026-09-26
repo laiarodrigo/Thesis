@@ -1,0 +1,17 @@
+model_id,protocol_variant,dataset,direction,n,macro_f1,bleu,ter
+F270-D-G-PTBR,base_protocol,FRMT,BP-to-EP,2611,70.76,38.56340522085635,0.47483847483847486
+F270-D-G-PTBR,base_protocol,FRMT,EP-to-BP,2611,70.76,38.687790450055395,0.4828325849111924
+F270-D-G-PTBR,base_protocol,Golden Collection,BP-to-EP,500,67.63,86.45118981403269,0.09784003421727973
+F270-D-G-PTBR,base_protocol,Golden Collection,EP-to-BP,500,67.63,86.69548914583731,0.09808999676270638
+F270-D-G-PTBR-task-balanced,task_balanced_batches,FRMT,BP-to-EP,2611,69.74,38.56183942027737,0.47512664179330844
+F270-D-G-PTBR-task-balanced,task_balanced_batches,FRMT,EP-to-BP,2611,69.74,38.54553694576587,0.4859188617810904
+F270-D-G-PTBR-task-balanced,task_balanced_batches,Golden Collection,BP-to-EP,500,68.52,86.0434036153854,0.09869546621043628
+F270-D-G-PTBR-task-balanced,task_balanced_batches,Golden Collection,EP-to-BP,500,68.52,86.44568237217905,0.10014028272364303
+F270-D-G-PTBR-added-tokens,added_token_path,FRMT,BP-to-EP,2611,72.93,38.35968877084997,0.4767949767949768
+F270-D-G-PTBR-added-tokens,added_token_path,FRMT,EP-to-BP,2611,72.93,38.67183223305421,0.4863818033115751
+F270-D-G-PTBR-added-tokens,added_token_path,Golden Collection,BP-to-EP,500,66.66,86.22994545748034,0.0985885372112917
+F270-D-G-PTBR-added-tokens,added_token_path,Golden Collection,EP-to-BP,500,66.66,86.60392854046198,0.10057192187331392
+F270-D-G-PTBR-restricted-loss,restricted_classification_loss,FRMT,BP-to-EP,2611,70.74,38.69883728603755,0.474974974974975
+F270-D-G-PTBR-restricted-loss,restricted_classification_loss,FRMT,EP-to-BP,2611,70.74,38.71560310725325,0.48315664398253166
+F270-D-G-PTBR-restricted-loss,restricted_classification_loss,Golden Collection,BP-to-EP,500,69.10,87.01063923910955,0.09409751924721985
+F270-D-G-PTBR-restricted-loss,restricted_classification_loss,Golden Collection,EP-to-BP,500,69.10,87.31908163788432,0.09560807165209885

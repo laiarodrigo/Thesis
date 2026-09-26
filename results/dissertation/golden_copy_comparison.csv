@@ -1,0 +1,9 @@
+supervision,control,direction,n,sbleu_no_worse_than_copy_percent,ter_no_worse_than_copy_percent
+GPT-Wikipedia,encoder,BP-to-EP,500,78.6,78.8
+GPT-Wikipedia,encoder,EP-to-BP,500,81.4,81.2
+GPT-Wikipedia,decoder,BP-to-EP,500,74.0,74.4
+GPT-Wikipedia,decoder,EP-to-BP,500,72.8,73.6
+GPT-Wikipedia + FRMT,encoder,BP-to-EP,500,23.0,23.0
+GPT-Wikipedia + FRMT,encoder,EP-to-BP,500,23.6,24.4
+GPT-Wikipedia + FRMT,decoder,BP-to-EP,500,31.0,31.2
+GPT-Wikipedia + FRMT,decoder,EP-to-BP,500,30.2,29.8

@@ -1,0 +1,41 @@
+stage,control,supervision,dataset,direction,bleu,ter
+B,encoder,GPT-Wikipedia,FRMT,BP-to-EP,37.87,0.4791
+B,encoder,GPT-Wikipedia,FRMT,EP-to-BP,40.10,0.4714
+B,encoder,GPT-Wikipedia,Golden Collection,BP-to-EP,86.08,0.0946
+B,encoder,GPT-Wikipedia,Golden Collection,EP-to-BP,89.09,0.0823
+B,encoder_rewriting_only,GPT-Wikipedia,FRMT,BP-to-EP,37.73,0.4803
+B,encoder_rewriting_only,GPT-Wikipedia,FRMT,EP-to-BP,40.31,0.4715
+B,encoder_rewriting_only,GPT-Wikipedia,Golden Collection,BP-to-EP,85.66,0.0976
+B,encoder_rewriting_only,GPT-Wikipedia,Golden Collection,EP-to-BP,88.66,0.0847
+B,decoder,GPT-Wikipedia,FRMT,BP-to-EP,40.45,0.4594
+B,decoder,GPT-Wikipedia,FRMT,EP-to-BP,40.60,0.4673
+B,decoder,GPT-Wikipedia,Golden Collection,BP-to-EP,87.75,0.0874
+B,decoder,GPT-Wikipedia,Golden Collection,EP-to-BP,87.50,0.0916
+B,encoder,GPT-Wikipedia + FRMT,FRMT,BP-to-EP,37.99,0.4770
+B,encoder,GPT-Wikipedia + FRMT,FRMT,EP-to-BP,45.43,0.4273
+B,encoder,GPT-Wikipedia + FRMT,Golden Collection,BP-to-EP,65.14,0.2555
+B,encoder,GPT-Wikipedia + FRMT,Golden Collection,EP-to-BP,66.61,0.2535
+B,encoder_rewriting_only,GPT-Wikipedia + FRMT,FRMT,BP-to-EP,36.76,0.4852
+B,encoder_rewriting_only,GPT-Wikipedia + FRMT,FRMT,EP-to-BP,45.40,0.4251
+B,encoder_rewriting_only,GPT-Wikipedia + FRMT,Golden Collection,BP-to-EP,56.10,0.3222
+B,encoder_rewriting_only,GPT-Wikipedia + FRMT,Golden Collection,EP-to-BP,58.69,0.3103
+B,decoder,GPT-Wikipedia + FRMT,FRMT,BP-to-EP,43.97,0.4338
+B,decoder,GPT-Wikipedia + FRMT,FRMT,EP-to-BP,44.74,0.4306
+B,decoder,GPT-Wikipedia + FRMT,Golden Collection,BP-to-EP,68.37,0.2336
+B,decoder,GPT-Wikipedia + FRMT,Golden Collection,EP-to-BP,67.83,0.2400
+C,encoder,GPT-Wikipedia,FRMT,BP-to-EP,37.89,0.4784
+C,encoder,GPT-Wikipedia,FRMT,EP-to-BP,40.28,0.4696
+C,encoder,GPT-Wikipedia,Golden Collection,BP-to-EP,86.22,0.0953
+C,encoder,GPT-Wikipedia,Golden Collection,EP-to-BP,88.93,0.0837
+C,decoder,GPT-Wikipedia,FRMT,BP-to-EP,40.34,0.4603
+C,decoder,GPT-Wikipedia,FRMT,EP-to-BP,40.33,0.4698
+C,decoder,GPT-Wikipedia,Golden Collection,BP-to-EP,88.44,0.0824
+C,decoder,GPT-Wikipedia,Golden Collection,EP-to-BP,88.02,0.0878
+C,encoder,GPT-Wikipedia + FRMT,FRMT,BP-to-EP,38.35,0.4756
+C,encoder,GPT-Wikipedia + FRMT,FRMT,EP-to-BP,43.47,0.4440
+C,encoder,GPT-Wikipedia + FRMT,Golden Collection,BP-to-EP,77.16,0.1601
+C,encoder,GPT-Wikipedia + FRMT,Golden Collection,EP-to-BP,79.95,0.1488
+C,decoder,GPT-Wikipedia + FRMT,FRMT,BP-to-EP,42.72,0.4417
+C,decoder,GPT-Wikipedia + FRMT,FRMT,EP-to-BP,42.72,0.4466
+C,decoder,GPT-Wikipedia + FRMT,Golden Collection,BP-to-EP,81.52,0.1351
+C,decoder,GPT-Wikipedia + FRMT,Golden Collection,EP-to-BP,80.70,0.1402
