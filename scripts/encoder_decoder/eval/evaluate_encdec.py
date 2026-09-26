@@ -40,8 +40,14 @@ except ModuleNotFoundError:
 LABELS = ("pt-br", "pt-pt", "equal")
 WORST_BLEU_K = 10
 FRMT_BUCKETS = ("random", "entity", "lexical")
-ENCODER_TASK_PREFIX_RE = re.compile(r"^\s*<(br-pt|pt-br|id)>\s*", flags=re.IGNORECASE)
-DECODER_LABEL_PREFIX_RE = re.compile(r"^\s*(BR|PT|pt-br|pt-pt)\b[:\-\s]*", flags=re.IGNORECASE)
+ENCODER_TASK_PREFIX_RE = re.compile(
+    r"^\s*(?:<(br-pt|pt-br|pt-pt|id|cls)>|((?:BR|PT|CLS)\b))(?:\s*:\s*|\s+)",
+    flags=re.IGNORECASE,
+)
+DECODER_LABEL_PREFIX_RE = re.compile(
+    r"^\s*(?:<(?:pt-br|pt-pt)>\s*:?\s*|(?:BR|PT|pt-br|pt-pt)\b(?:\s*:\s*|\s+))",
+    flags=re.IGNORECASE,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -113,6 +119,14 @@ def parse_args() -> argparse.Namespace:
         help="Penalty > 1.0 discourages loops in generated text.",
     )
     parser.add_argument(
+        "--no-forced-eos",
+        action="store_true",
+        help=(
+            "Do not pass forced_eos_token_id to generate(). The model can still "
+            "emit EOS normally; this only disables EOS injection at the generation cap."
+        ),
+    )
+    parser.add_argument(
         "--classification-mode",
         choices=["score-sequences", "score-first-token", "generate"],
         default="score-sequences",
@@ -130,6 +144,15 @@ def parse_args() -> argparse.Namespace:
         help=(
             "Optional explicit list of classification target strings to score, e.g. 'BR PT' or "
             "'pt-br pt-pt equal'. Defaults to the unique target_text values found in the eval dataset."
+        ),
+    )
+    parser.add_argument(
+        "--strip-classification-input-prefix",
+        action="store_true",
+        help=(
+            "Legacy option: remove an encoder-side task/control prefix from classification inputs "
+            "before scoring. Leave disabled for the final tokens-in-encoder setup, where <cls> is "
+            "part of the model input."
         ),
     )
     parser.add_argument("--output-dir", type=Path, default=Path("eval_results") / "encoder_decoder")
@@ -166,10 +189,14 @@ def canonicalize_translation_direction(raw_direction: object, input_text: object
     match = ENCODER_TASK_PREFIX_RE.match(raw)
     if not match:
         return None
-    prefix = match.group(1).lower()
+    prefix = (match.group(1) or match.group(2)).lower()
     if prefix == "br-pt":
         return "br2pt"
     if prefix == "pt-br":
+        return "pt2br"
+    if prefix == "br":
+        return "br2pt"
+    if prefix == "pt":
         return "pt2br"
     return None
 
@@ -185,6 +212,33 @@ def normalize_bucket(raw_bucket: object) -> str:
     if not text:
         return "n/a"
     return text
+
+
+def harmonize_vocab_sizes(model, vocab_size: int) -> None:
+    target = int(vocab_size)
+    cfg = model.config
+    for attr in ("vocab_size", "encoder_vocab_size", "decoder_vocab_size"):
+        if hasattr(cfg, attr):
+            setattr(cfg, attr, target)
+    for sub_name in ("text_config", "encoder", "decoder"):
+        sub_cfg = getattr(cfg, sub_name, None)
+        if sub_cfg is None:
+            continue
+        for attr in ("vocab_size", "encoder_vocab_size", "decoder_vocab_size"):
+            if hasattr(sub_cfg, attr):
+                setattr(sub_cfg, attr, target)
+
+
+def resize_model_vocab(model, tokenizer) -> None:
+    input_embeddings = model.get_input_embeddings()
+    if input_embeddings is None:
+        raise RuntimeError("Model does not expose input embeddings for tokenizer resizing.")
+    old_size = int(input_embeddings.num_embeddings)
+    new_size = len(tokenizer)
+    if old_size != new_size:
+        print(f"Resizing token embeddings: old_size={old_size} new_size={new_size}")
+        model.resize_token_embeddings(new_size)
+    harmonize_vocab_sizes(model, new_size)
 
 
 def load_model_and_tokenizer(model_id: str, adapter_dir: Optional[Path], tokenizer_path: Optional[Path]):
@@ -212,6 +266,7 @@ def load_model_and_tokenizer(model_id: str, adapter_dir: Optional[Path], tokeniz
         dtype=target_dtype,
         trust_remote_code=True,
     )
+    resize_model_vocab(base_model, tok)
     if adapter_dir is not None:
         model = PeftModel.from_pretrained(base_model, adapter_dir.as_posix())
     else:
@@ -631,6 +686,7 @@ def generate_batch(
     adaptive_max_new_tokens_ceiling: int,
     no_repeat_ngram_size: int,
     repetition_penalty: float,
+    forced_eos: bool,
 ) -> list[str]:
     device = next(model.parameters()).device
     enc = tok(
@@ -665,8 +721,9 @@ def generate_batch(
     )
     if eos_token_id is not None:
         generate_base_kwargs["eos_token_id"] = int(eos_token_id)
-        # Ensure termination token is injected if generation reaches the cap.
-        generate_base_kwargs["forced_eos_token_id"] = int(eos_token_id)
+        if forced_eos:
+            # Ensure termination token is injected if generation reaches the cap.
+            generate_base_kwargs["forced_eos_token_id"] = int(eos_token_id)
     if pad_token_id is not None:
         generate_base_kwargs["pad_token_id"] = int(pad_token_id)
     if no_repeat_ngram_size and no_repeat_ngram_size > 0:
@@ -816,8 +873,6 @@ def main() -> None:
             batch = ds[start : start + args.batch_size]
             inputs = batch["input_text"]
             if args.task == "classification":
-                inputs = [strip_encoder_task_prefix(text) for text in inputs]
-            if args.task == "classification":
                 targets = extract_classification_targets(batch)
             else:
                 targets = extract_translation_targets(batch)
@@ -830,6 +885,8 @@ def main() -> None:
             batch_buckets = batch["bucket"] if has_bucket_column else [None] * len(inputs)
             batch_datasets = batch["dataset"] if has_dataset_column else [None] * len(inputs)
             pred_infos: list[dict[str, Any]]
+            if args.task == "classification" and args.strip_classification_input_prefix:
+                inputs = [strip_encoder_task_prefix(text) for text in inputs]
             if args.task == "classification" and args.classification_mode != "generate":
                 pred_infos = score_classification_candidates_batch(
                     model,
@@ -856,6 +913,7 @@ def main() -> None:
                     adaptive_max_new_tokens_ceiling=args.adaptive_max_new_tokens_ceiling,
                     no_repeat_ngram_size=args.no_repeat_ngram_size,
                     repetition_penalty=args.repetition_penalty,
+                    forced_eos=not args.no_forced_eos,
                 )
                 pred_infos = [{"pred_text": pred, "scores": None} for pred in preds]
 
@@ -949,6 +1007,26 @@ def main() -> None:
     if args.task == "translation":
         summary = {
             "task": "translation",
+            "eval_config": {
+                "dataset_path": args.dataset_path.as_posix(),
+                "model_id": args.model_id,
+                "adapter_dir": args.adapter_dir.as_posix() if args.adapter_dir else None,
+                "tokenizer_path": args.tokenizer_path.as_posix() if args.tokenizer_path else None,
+                "batch_size": args.batch_size,
+                "max_source_length": args.max_source_length,
+                "max_new_tokens": args.max_new_tokens,
+                "num_beams": args.num_beams,
+                "length_penalty": args.length_penalty,
+                "early_stopping": bool(args.early_stopping),
+                "adaptive_max_new_tokens": bool(args.adaptive_max_new_tokens),
+                "adaptive_ratio": args.adaptive_ratio,
+                "adaptive_margin": args.adaptive_margin,
+                "adaptive_min_new_tokens": args.adaptive_min_new_tokens,
+                "adaptive_max_new_tokens_ceiling": args.adaptive_max_new_tokens_ceiling,
+                "no_repeat_ngram_size": args.no_repeat_ngram_size,
+                "repetition_penalty": args.repetition_penalty,
+                "forced_eos": not args.no_forced_eos,
+            },
             **build_translation_summary(translation_rows),
         }
         per_direction: dict[str, Any] = {}
@@ -973,8 +1051,19 @@ def main() -> None:
     else:
         summary = {
             "task": "classification",
+            "eval_config": {
+                "dataset_path": args.dataset_path.as_posix(),
+                "model_id": args.model_id,
+                "adapter_dir": args.adapter_dir.as_posix() if args.adapter_dir else None,
+                "tokenizer_path": args.tokenizer_path.as_posix() if args.tokenizer_path else None,
+                "batch_size": args.batch_size,
+                "max_source_length": args.max_source_length,
+                "classification_mode": args.classification_mode,
+                "classification_candidates": args.classification_candidates,
+            },
             "classification_mode": args.classification_mode,
             "classification_candidates": classification_candidates,
+            "strip_classification_input_prefix": bool(args.strip_classification_input_prefix),
             "classification_candidate_metadata": classification_candidate_meta,
             "filtered_out_counts": filtered_out_counts or {},
             **cls_stats.report(),

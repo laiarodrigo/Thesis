@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 
 PROJECT_DB_PATH="${PROJECT_DB_PATH:-$REPO_ROOT/data/duckdb/subs_project.duckdb}"
 SOURCE_DB_PATH="${SOURCE_DB_PATH:-$REPO_ROOT/data/duckdb/subs.duckdb}"
@@ -12,7 +12,7 @@ TRAIN_VIEW="${TRAIN_VIEW:-$SOURCE_TABLE}"
 VALID_VIEW="${VALID_VIEW:-$SOURCE_TABLE}"
 TRAIN_SPLIT="${TRAIN_SPLIT:-train}"
 VALID_SPLIT="${VALID_SPLIT:-valid}"
-OUT_DIR="${OUT_DIR:-$REPO_ROOT/data/encoder_decoder/t5gemma2/compare_staged/stageA_opensubs_frmt}"
+OUT_DIR="${OUT_DIR:-$REPO_ROOT/data/encoder_decoder/t5gemma2/compare_staged_v2/stageA_opensubs_only}"
 
 if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
   echo "ERROR: python interpreter not found: $PYTHON_BIN" >&2
@@ -34,7 +34,7 @@ echo "== Pre-export dataset counts =="
   --view "$VALID_VIEW" \
   --split "$VALID_SPLIT"
 
-echo "== Exporting Stage A data (OpenSubs + FRMT) =="
+echo "== Exporting Stage A data (OpenSubs only) =="
 "$PYTHON_BIN" "$REPO_ROOT/scripts/encoder_decoder/single_task_models/export_encdec_data.py" \
   --project-db "$PROJECT_DB_PATH" \
   --source-db "$SOURCE_DB_PATH" \
@@ -43,7 +43,6 @@ echo "== Exporting Stage A data (OpenSubs + FRMT) =="
   --valid-view "$VALID_VIEW" \
   --valid-split "$VALID_SPLIT" \
   --dataset-include OpenSubs \
-  --dataset-include FRMT \
   --out-dir "$OUT_DIR" \
   --translation-train-file translation_train.jsonl \
   --translation-valid-file translation_valid.jsonl \

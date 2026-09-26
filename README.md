@@ -82,6 +82,48 @@ python scripts/test_qwen_lora.py \
   --adapter-dir outputs/decoder_only/qwen3-0_6b-ptbr-ptpt-lora
 ```
 
+### External chat-model evaluation
+
+Zero-shot chat-model evaluation scripts are also available for external causal
+LMs such as AMALIA, Qwen3-4B, and Phi-4-mini on the thesis test sets.
+
+Run an AMALIA-only SLURM sweep:
+```
+scripts/decoder_only/axolotl/run_eval_amalia_all.sh
+```
+
+Run the generic SLURM suite for AMALIA plus the comparison models:
+```
+scripts/slurm/submit_external_chat_eval_suite.sh
+```
+
+By default that suite uses the current control-string evaluation protocol:
+`data/encoder_decoder/t5gemma2/control_string_eval/{golden,frmt}/decoder_unified/`
+with binary classification labels and no `equal` rows. To switch protocols:
+```
+DATA_PROTOCOL=final DATA_KIND=decoder_unified scripts/slurm/submit_external_chat_eval_suite.sh
+DATA_PROTOCOL=legacy scripts/slurm/submit_external_chat_eval_suite.sh
+```
+
+The default model set is:
+```
+amalia-llm/AMALIA-9B-0626-SFT
+Qwen/Qwen3-4B
+microsoft/Phi-4-mini-instruct
+```
+
+The one-model convenience wrappers are still available:
+```
+scripts/decoder_only/axolotl/run_eval_amalia_translation_golden.sh
+scripts/decoder_only/axolotl/run_eval_amalia_translation_frmt.sh
+scripts/decoder_only/axolotl/run_eval_amalia_classification_golden.sh
+scripts/decoder_only/axolotl/run_eval_amalia_classification_frmt.sh
+```
+
+The classification wrappers default to `pt-br pt-pt` candidates so the scores
+match the binary macro-F1 convention already used in the existing comparison
+tables.
+
 Main config: `configs/decoder_only/axolotl/qwen3_lora.yaml`
 
 ## Encoder-Decoder (HF + PEFT LoRA, 3-way classification)

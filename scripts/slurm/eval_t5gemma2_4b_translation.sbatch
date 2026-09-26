@@ -14,8 +14,10 @@ set -euo pipefail
 
 cd "${SLURM_SUBMIT_DIR:-$PWD}"
 
-# Optional: activate conda env.
-if [[ -n "${CONDA_ENV_NAME:-}" ]]; then
+# Optional: activate Python env.
+if [[ -n "${VENV_PATH:-}" ]]; then
+  source "${VENV_PATH}/bin/activate"
+elif [[ -n "${CONDA_ENV_NAME:-}" ]]; then
   source "${CONDA_SH:-$HOME/miniconda3/etc/profile.d/conda.sh}"
   conda activate "$CONDA_ENV_NAME"
 fi

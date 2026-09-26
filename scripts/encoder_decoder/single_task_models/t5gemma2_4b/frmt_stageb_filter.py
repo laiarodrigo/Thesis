@@ -9,7 +9,10 @@ from typing import Any
 
 
 TOKEN_RE = re.compile(r"\w+|[^\w\s]", flags=re.UNICODE)
-TASK_PREFIX_RE = re.compile(r"^\s*<(br-pt|pt-br|id)>\s*", flags=re.IGNORECASE)
+TASK_PREFIX_RE = re.compile(
+    r"^\s*<(br-pt|pt-br|pt-pt|id|cls)>\s*",
+    flags=re.IGNORECASE,
+)
 
 # Keep Stage B aligned with the conservative Stage C row filter.
 MARKER_VARIANTS = {

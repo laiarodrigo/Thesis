@@ -16,7 +16,10 @@ from frmt_stageb_filter import (
 )
 
 
-TASK_PREFIX_RE = re.compile(r"^\s*<(br-pt|pt-br|id)>\s*", flags=re.IGNORECASE)
+TASK_PREFIX_RE = re.compile(
+    r"^\s*<(br-pt|pt-br|pt-pt|id|cls)>\s*",
+    flags=re.IGNORECASE,
+)
 FILTER_REPORT_FIELDS = [
     "record_id",
     "source_path",
@@ -170,6 +173,8 @@ def infer_direction(row: dict) -> str:
     if prefix == "br-pt":
         return "translate_br2pt"
     if prefix == "pt-br":
+        return "translate_br2pt"
+    if prefix == "pt-pt":
         return "translate_pt2br"
     return "translation"
 

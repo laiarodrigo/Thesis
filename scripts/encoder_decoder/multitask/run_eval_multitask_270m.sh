@@ -9,9 +9,14 @@ TRANSLATION_DATASET="${TRANSLATION_DATASET:-$REPO_ROOT/data/encoder_decoder/t5ge
 CLASSIFICATION_DATASET="${CLASSIFICATION_DATASET:-$REPO_ROOT/data/encoder_decoder/t5gemma2/golden_collection/classification_test.jsonl}"
 OUTPUT_DIR="${OUTPUT_DIR:-$REPO_ROOT/eval_results/encoder_decoder/multitask_compare/t5gemma2_270m_stageB_golden}"
 BATCH_SIZE="${BATCH_SIZE:-8}"
-MAX_SOURCE_LENGTH="${MAX_SOURCE_LENGTH:-512}"
-MAX_NEW_TOKENS_TRANSLATION="${MAX_NEW_TOKENS_TRANSLATION:-256}"
-MAX_NEW_TOKENS_CLASSIFICATION="${MAX_NEW_TOKENS_CLASSIFICATION:-6}"
+MAX_SOURCE_LENGTH="${MAX_SOURCE_LENGTH:-384}"
+MAX_NEW_TOKENS_TRANSLATION="${MAX_NEW_TOKENS_TRANSLATION:-192}"
+MAX_NEW_TOKENS_CLASSIFICATION="${MAX_NEW_TOKENS_CLASSIFICATION:-2}"
+ADAPTIVE_MAX_NEW_TOKENS="${ADAPTIVE_MAX_NEW_TOKENS:-1}"
+ADAPTIVE_RATIO="${ADAPTIVE_RATIO:-1.15}"
+ADAPTIVE_MARGIN="${ADAPTIVE_MARGIN:-6}"
+ADAPTIVE_MIN_NEW_TOKENS="${ADAPTIVE_MIN_NEW_TOKENS:-6}"
+ADAPTIVE_MAX_NEW_TOKENS_CEILING="${ADAPTIVE_MAX_NEW_TOKENS_CEILING:-192}"
 
 mkdir -p "$OUTPUT_DIR"
 
@@ -26,10 +31,18 @@ CMD=(
   --max-source-length "$MAX_SOURCE_LENGTH"
   --max-new-tokens-translation "$MAX_NEW_TOKENS_TRANSLATION"
   --max-new-tokens-classification "$MAX_NEW_TOKENS_CLASSIFICATION"
+  --adaptive-ratio "$ADAPTIVE_RATIO"
+  --adaptive-margin "$ADAPTIVE_MARGIN"
+  --adaptive-min-new-tokens "$ADAPTIVE_MIN_NEW_TOKENS"
+  --adaptive-max-new-tokens-ceiling "$ADAPTIVE_MAX_NEW_TOKENS_CEILING"
 )
 
 if [[ -n "$ADAPTER_DIR" ]]; then
   CMD+=(--adapter-dir "$ADAPTER_DIR")
+fi
+
+if [[ "$ADAPTIVE_MAX_NEW_TOKENS" == "1" ]]; then
+  CMD+=(--adaptive-max-new-tokens)
 fi
 
 echo "Multitask eval runner"
@@ -37,6 +50,6 @@ echo "  model: $MODEL_ID"
 echo "  translation dataset: $TRANSLATION_DATASET"
 echo "  classification dataset: $CLASSIFICATION_DATASET"
 echo "  output dir: $OUTPUT_DIR"
+echo "  adaptive max_new_tokens: $ADAPTIVE_MAX_NEW_TOKENS"
 
 "${CMD[@]}"
-

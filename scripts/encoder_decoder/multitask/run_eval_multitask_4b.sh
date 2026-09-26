@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+
+MODEL_ID="${MODEL_ID:-$REPO_ROOT/outputs/encoder_decoder/multitask_compare/t5gemma2_4b_multitask_r8_stageB_gpt_refresh2_frmt}"
+ADAPTER_DIR="${ADAPTER_DIR:-}"
+TRANSLATION_DATASET="${TRANSLATION_DATASET:-$REPO_ROOT/data/encoder_decoder/t5gemma2/golden_collection/translation_test.jsonl}"
+CLASSIFICATION_DATASET="${CLASSIFICATION_DATASET:-$REPO_ROOT/data/encoder_decoder/t5gemma2/golden_collection/classification_test.jsonl}"
+OUTPUT_DIR="${OUTPUT_DIR:-$REPO_ROOT/eval_results/encoder_decoder/multitask_compare/t5gemma2_4b_multitask_r8_stageB_golden}"
+BATCH_SIZE="${BATCH_SIZE:-2}"
+MAX_SOURCE_LENGTH="${MAX_SOURCE_LENGTH:-384}"
+MAX_NEW_TOKENS_TRANSLATION="${MAX_NEW_TOKENS_TRANSLATION:-192}"
+MAX_NEW_TOKENS_CLASSIFICATION="${MAX_NEW_TOKENS_CLASSIFICATION:-2}"
+ADAPTIVE_MAX_NEW_TOKENS="${ADAPTIVE_MAX_NEW_TOKENS:-1}"
+ADAPTIVE_RATIO="${ADAPTIVE_RATIO:-1.15}"
+ADAPTIVE_MARGIN="${ADAPTIVE_MARGIN:-6}"
+ADAPTIVE_MIN_NEW_TOKENS="${ADAPTIVE_MIN_NEW_TOKENS:-6}"
+ADAPTIVE_MAX_NEW_TOKENS_CEILING="${ADAPTIVE_MAX_NEW_TOKENS_CEILING:-192}"
+
+mkdir -p "$OUTPUT_DIR"
+
+CMD=(
+  python3
+  "$REPO_ROOT/scripts/encoder_decoder/multitask/eval_multitask_seq2seq_skeleton.py"
+  --model-id "$MODEL_ID"
+  --translation-dataset "$TRANSLATION_DATASET"
+  --classification-dataset "$CLASSIFICATION_DATASET"
+  --output-dir "$OUTPUT_DIR"
+  --batch-size "$BATCH_SIZE"
+  --max-source-length "$MAX_SOURCE_LENGTH"
+  --max-new-tokens-translation "$MAX_NEW_TOKENS_TRANSLATION"
+  --max-new-tokens-classification "$MAX_NEW_TOKENS_CLASSIFICATION"
+  --adaptive-ratio "$ADAPTIVE_RATIO"
+  --adaptive-margin "$ADAPTIVE_MARGIN"
+  --adaptive-min-new-tokens "$ADAPTIVE_MIN_NEW_TOKENS"
+  --adaptive-max-new-tokens-ceiling "$ADAPTIVE_MAX_NEW_TOKENS_CEILING"
+)
+
+if [[ -n "$ADAPTER_DIR" ]]; then
+  CMD+=(--adapter-dir "$ADAPTER_DIR")
+fi
+
+if [[ "$ADAPTIVE_MAX_NEW_TOKENS" == "1" ]]; then
+  CMD+=(--adaptive-max-new-tokens)
+fi
+
+echo "Multitask eval runner (4B)"
+echo "  model: $MODEL_ID"
+echo "  translation dataset: $TRANSLATION_DATASET"
+echo "  classification dataset: $CLASSIFICATION_DATASET"
+echo "  output dir: $OUTPUT_DIR"
+echo "  adaptive max_new_tokens: $ADAPTIVE_MAX_NEW_TOKENS"
+
+"${CMD[@]}"

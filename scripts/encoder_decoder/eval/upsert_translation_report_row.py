@@ -40,8 +40,14 @@ SIX_DECIMAL_FIELDS = {
     "sentence_copy_better_or_equal_rate_ter",
 }
 REPO_ROOT = Path(__file__).resolve().parents[3]
-ENCODER_TASK_PREFIX_RE = re.compile(r"^\s*<(br-pt|pt-br|id)>\s*", flags=re.IGNORECASE)
-DECODER_LABEL_PREFIX_RE = re.compile(r"^\s*(BR|PT|pt-br|pt-pt)\b[:\-\s]*", flags=re.IGNORECASE)
+ENCODER_TASK_PREFIX_RE = re.compile(
+    r"^\s*(?:<(br-pt|pt-br|pt-pt|id|cls)>|((?:BR|PT|CLS)\b))(?:\s*:\s*|\s+)",
+    flags=re.IGNORECASE,
+)
+DECODER_LABEL_PREFIX_RE = re.compile(
+    r"^\s*(?:<(?:pt-br|pt-pt)>\s*:?\s*|(?:BR|PT|pt-br|pt-pt)\b(?:\s*:\s*|\s+))",
+    flags=re.IGNORECASE,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -124,10 +130,14 @@ def canonicalize_translation_direction(raw_direction: object, input_text: object
     match = ENCODER_TASK_PREFIX_RE.match(raw)
     if not match:
         return None
-    prefix = match.group(1).lower()
+    prefix = (match.group(1) or match.group(2)).lower()
     if prefix == "br-pt":
         return "br2pt"
     if prefix == "pt-br":
+        return "pt2br"
+    if prefix == "br":
+        return "br2pt"
+    if prefix == "pt":
         return "pt2br"
     return None
 
@@ -147,6 +157,7 @@ def load_translation_rows(predictions_path: Path) -> list[dict[str, str | None]]
                 )
             rows.append(
                 {
+                    "id": str(row.get("id", line_no)),
                     "direction": canonicalize_translation_direction(
                         row.get("direction"),
                         row.get("input_text"),

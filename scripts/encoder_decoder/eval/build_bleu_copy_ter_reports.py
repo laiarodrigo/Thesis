@@ -28,8 +28,14 @@ TER_METRIC_FIELDS = (
     "sentence_copy_better_or_equal_rate_ter",
 )
 METRIC_FIELDS = BLEU_METRIC_FIELDS + TER_METRIC_FIELDS
-ENCODER_TASK_PREFIX_RE = re.compile(r"^\s*<(br-pt|pt-br|id)>\s*", flags=re.IGNORECASE)
-DECODER_LABEL_PREFIX_RE = re.compile(r"^\s*(BR|PT|pt-br|pt-pt)\b[:\-\s]*", flags=re.IGNORECASE)
+ENCODER_TASK_PREFIX_RE = re.compile(
+    r"^\s*(?:<(br-pt|pt-br|pt-pt|id|cls)>|((?:BR|PT|CLS)\b))(?:\s*:\s*|\s+)",
+    flags=re.IGNORECASE,
+)
+DECODER_LABEL_PREFIX_RE = re.compile(
+    r"^\s*(?:<(?:pt-br|pt-pt)>\s*:?\s*|(?:BR|PT|pt-br|pt-pt)\b(?:\s*:\s*|\s+))",
+    flags=re.IGNORECASE,
+)
 TWO_DECIMAL_FIELDS = {
     "bleu",
     "model_vs_copy_score_0_100",
@@ -183,10 +189,14 @@ def canonicalize_translation_direction(raw_direction: object, input_text: object
     match = ENCODER_TASK_PREFIX_RE.match(raw)
     if not match:
         return None
-    prefix = match.group(1).lower()
+    prefix = (match.group(1) or match.group(2)).lower()
     if prefix == "br-pt":
         return "br2pt"
     if prefix == "pt-br":
+        return "pt2br"
+    if prefix == "br":
+        return "br2pt"
+    if prefix == "pt":
         return "pt2br"
     return None
 

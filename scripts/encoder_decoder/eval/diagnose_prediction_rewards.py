@@ -16,7 +16,10 @@ except ModuleNotFoundError:
     from scripts.encoder_decoder.eval.metrics_utils import corpus_ter, sentence_ter
 
 
-ENCODER_TASK_PREFIX_RE = re.compile(r"^\s*<(br-pt|pt-br|id)>\s*", flags=re.IGNORECASE)
+ENCODER_TASK_PREFIX_RE = re.compile(
+    r"^\s*(?:<(br-pt|pt-br|pt-pt|id|cls)>|((?:BR|PT|CLS)\b))(?:\s*:\s*|\s+)",
+    flags=re.IGNORECASE,
+)
 
 
 def parse_args() -> argparse.Namespace:

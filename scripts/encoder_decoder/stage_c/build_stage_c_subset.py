@@ -14,7 +14,10 @@ from typing import Iterable
 
 
 TOKEN_RE = re.compile(r"\w+|[^\w\s]", flags=re.UNICODE)
-TASK_PREFIX_RE = re.compile(r"^\s*<(br-pt|pt-br|id)>\s*", flags=re.IGNORECASE)
+TASK_PREFIX_RE = re.compile(
+    r"^\s*<(br-pt|pt-br|pt-pt|id|cls)>\s*",
+    flags=re.IGNORECASE,
+)
 
 # This is intentionally conservative. Stage C should prefer rows where
 # variant-specific edits are explicit and paraphrastic drift is small.
@@ -277,6 +280,8 @@ def canonicalize_direction(task: object, direction: object, input_text: object) 
     if prefix == "br-pt":
         return "translate_br2pt"
     if prefix == "pt-br":
+        return "translate_br2pt"
+    if prefix == "pt-pt":
         return "translate_pt2br"
     return "translation"
 
