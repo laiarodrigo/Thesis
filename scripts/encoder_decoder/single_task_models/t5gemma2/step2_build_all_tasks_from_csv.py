@@ -22,7 +22,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--input-csv",
         type=Path,
-        default=repo_root / "data" / "pt_variant_prompts_500.csv",
+        required=True,
         help="Input CSV with pt_PT and pt_BR columns.",
     )
     parser.add_argument(

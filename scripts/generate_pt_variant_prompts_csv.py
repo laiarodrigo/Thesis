@@ -135,8 +135,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-csv",
         type=Path,
-        default=repo_root / "data" / "pt_variant_prompts_500.csv",
-        help="Output CSV path.",
+        required=True,
+        help="Output CSV path. Required to avoid overwriting an unrelated dataset.",
     )
     parser.add_argument(
         "--dedupe-against-dir",

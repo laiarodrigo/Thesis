@@ -1,10 +1,13 @@
 # Thesis
 
-## Report
+## Reports
 
-The thesis/report source is tracked in
-`report/Rodrigo_Laia_MEIC_Thesis/`, which is the local copy of the Overleaf
-project. To build the PDF locally:
+Both complete LaTeX projects are tracked under `report/`:
+
+- `report/Rodrigo_Laia_MEIC_Thesis/` contains the dissertation.
+- `report/Rodrigo_Laia_Resumo_Tese/` contains the shorter summary paper.
+
+To build either PDF locally, enter its directory and run:
 
 ```bash
 cd report/Rodrigo_Laia_MEIC_Thesis
@@ -13,6 +16,20 @@ make pdf
 
 This keeps the writing context in the repository so the report can be revised
 directly alongside the project code and notes.
+
+See `report/README.md` for the project entry points and reference PDFs.
+
+## Python environment
+
+Install the direct Python dependencies with:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+PyTorch installations depend on the target CUDA environment. On a cluster,
+install the appropriate PyTorch build first if the default package is not
+compatible with the available CUDA modules.
 
 ja consigo extrair ficheiros pt e br do open subtitles.
 agr falta adicionalos a uma base de dados (em principio nao importa o filme em si, ou seja só precisamos de dar parse nos ficheiros e cada linha da base de dados é uma fala e a sua comparação)
@@ -25,6 +42,7 @@ fazer requirements.txt
 ## Docs
 
 - EDA inventory and pipeline diagrams: `docs/eda_map.md`
+- Artifact manifests and release sequence: `docs/artifact_release.md`
 
 ## Wikipedia-inspired pt-PT/pt-BR generation
 

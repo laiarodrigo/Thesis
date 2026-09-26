@@ -253,6 +253,8 @@ data/wikipedia_downloads/
 data/wikipedia_pt_inspiration/
 data/wikipedia_pt_variant_csv/
 data/pt_variant_prompts_wikipedia_batch*.csv
+data/iaedu_last_response_debug.txt
+data/pt_variant_diversity_report.json
 logs_filter_ptbrvarid.txt
 data/encoder_decoder/
 hpo/encoder_decoder/*.db
