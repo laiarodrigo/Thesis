@@ -182,9 +182,9 @@ preselecting a lexical or entity contrast.\par}
 
 FRMT is not generated internally, but it is converted into the same pair
 format used by the rest of the resources so that training and evaluation
-scripts can share a common interface. Its bucket labels are preserved in the
-common representation so that the original FRMT partition metadata remain
-available.
+scripts can share a common interface. Its original bucket labels are retained
+as metadata, although the reported evaluation aggregates over the complete
+FRMT split.
 
 {\tolerance=1500\looseness=-1
 The complete FRMT training split provides additional supervised data in the

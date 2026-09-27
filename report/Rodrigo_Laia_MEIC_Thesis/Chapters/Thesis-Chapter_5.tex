@@ -93,7 +93,11 @@ FRMT identification gain.
 Although individual variants improve particular metrics, none provides a
 consistent gain across identification and rewriting. The base protocol is
 therefore retained as the simpler configuration for the subsequent experiments
-with the 4B-parameter model.
+with the 4B-parameter model. The retained protocol uses the natural
+rewriting-to-identification mixture, the existing \texttt{PT}/\texttt{BR}
+base-vocabulary representations, and normal decoder-vocabulary scoring at the
+supervised identification label position, while rewriting uses loss over the
+complete target sequence.
 
 \section{Variety Identification Results}
 \label{sec:identification-results}

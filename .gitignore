@@ -180,6 +180,9 @@ cython_debug/
 # caches
 data/opus_cache/
 
+# downloaded third-party corpora
+/data/external/
+
 # repository-local environments and vendored installations
 /.vendor/
 /thesis/

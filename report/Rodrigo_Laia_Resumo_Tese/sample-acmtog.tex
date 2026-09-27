@@ -70,7 +70,6 @@
 \acmJournal{TOG}
 \acmVolume{37}
 \acmNumber{4}
-\acmArticle{111}
 \acmMonth{8}
 
 %%
@@ -119,7 +118,7 @@
 %% Of note is the shared affiliation of the first two authors, and the
 %% "authornote" and "authornotemark" commands
 %% used to denote shared contribution to the research.
-\author{Rodrigo Laia}
+\author{\texorpdfstring{\NoCaseChange{Rodrigo Laia}}{Rodrigo Laia}}
 %\authornote{Both authors contributed equally to this research.}
 \email{rodrigo.laia@tecnico.ulisboa.pt}
 %\orcid{1234-5678-9012}
@@ -145,13 +144,13 @@
 %% other information printed in the page headers. This command allows
 %% the author to define a more concise list
 %% of authors' names for this purpose.
-\renewcommand{\shortauthors}{Laia et al.}
+\renewcommand{\shortauthors}{Laia}
 
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-Portuguese has standardized varieties such as European Portuguese (EP) and Brazilian Portuguese (BP), but web-scale Portuguese is dominated by BP. This imbalance can make generic Portuguese systems less reliable for EP. This paper studies how pretrained encoder-decoder models can be adapted to perform both Portuguese variety identification and bidirectional EP/BP rewriting. The experiments compare encoder-controlled and decoder-controlled formulations, differing in whether variety control is represented in the encoder input or in the decoder target, under a staged fine-tuning pipeline with supervised adaptation and reward-based refinement. Among the matched supervised comparisons, data composition produces the largest observed changes in rewriting performance. Supervision aligned with localized rewriting is strongest on the conservative Golden Collection benchmark, while adding supervision from the broader Few-shot Region-aware Machine Translation (FRMT) benchmark strongly lowers Golden Collection rewriting in both directions and produces formulation- and direction-dependent FRMT effects. Control placement is also conditional rather than universally ordered. Reward-based continuation partly restores Golden Collection performance for GPT-Wikipedia + FRMT configurations. These findings highlight two central difficulties for Portuguese variety adaptation, namely obtaining supervision that reflects good EP/BP rewriting rather than paraphrases and evaluating with automatic metrics that remain highly sensitive to copying and do not fully reflect the quality of the produced text.
+Portuguese has standardized varieties such as European Portuguese (EP) and Brazilian Portuguese (BP), yet web-scale Portuguese is dominated by BP, which can make generic Portuguese systems less reliable for EP. We study how pretrained encoder-decoder models can be adapted for both Portuguese variety identification and bidirectional EP/BP rewriting, comparing encoder-controlled and decoder-controlled formulations within a staged pipeline of supervised adaptation and reward-based continuation. Across the supervised comparisons, supervision composition produces the largest rewriting changes. GPT-Wikipedia, constructed around localized variety adaptation, gives the strongest Golden Collection rewriting results, whereas adding the Few-shot Region-aware Machine Translation (FRMT) training split sharply lowers Golden Collection performance in both directions and changes FRMT rewriting in a direction- and control-dependent manner. Control placement also depends on rewriting direction, with decoder control stronger in every BP-to-EP comparison and EP-to-BP results remaining mixed. Reward-based continuation has modest effects after GPT-Wikipedia specialization but recovers a substantial part of the Golden Collection loss after GPT-Wikipedia + FRMT specialization. These results show that Portuguese variety adaptation depends strongly on whether supervision reflects localized EP/BP rewriting and on evaluation signals that distinguish necessary changes, appropriate copying, and broader paraphrase.
 \end{abstract}
 
 %%
@@ -204,55 +203,61 @@ Portuguese has standardized varieties such as European Portuguese (EP) and Brazi
 
 \section{Introduction}
 Most Natural Language Processing (NLP) systems expose Portuguese as a single
-language option, even though the language is used through different national
-standards. When training data do not represent these standards evenly, variety-sensitive behavior can drift toward the variety that is most frequent in the data.
-EP and BP are
-not equally visible online. BP is much more frequent, which can make generic
-Portuguese systems default to BP and serve EP less reliably
+language option even though it is used through different national standards.
+When web-scale training data underrepresent one standard, variety-sensitive
+behavior can drift toward the variety that is more frequent in the data. BP is
+substantially more visible online than EP, which can make generic Portuguese
+systems default toward BP and serve EP less reliably
 \citep{Sousa_Almeida_Silvano_Cantante_Campos_Jorge_2025}.
 
 Portuguese is shared across communities with different linguistic standards,
 and the EP/BP contrast involves orthographic conventions, lexical choices,
-morphosyntactic preferences, clitic placement, verbal periphrases, and forms of address
-\citep{barreiro-mota-2018-paraphrastic}. These distinctions provide evidence for variety identification while also determining which changes are appropriate during rewriting.
-Many valid EP/BP adaptations remain localized rather than requiring broader
-structural reformulation.
+morphosyntactic preferences, clitic placement, verbal periphrases, and forms of
+address \citep{barreiro-mota-2018-paraphrastic}. These distinctions provide
+evidence for variety identification and determine which changes are appropriate
+during rewriting, where many valid EP/BP adaptations require only localized
+edits and some sentences require no modification.
 
-This paper studies this problem through two connected tasks, variety identification and
-bidirectional EP/BP rewriting. The first task tests whether a system can detect
-subtle variety cues. The second tests whether it can produce the requested
-variety while preserving the original meaning. Rewriting also makes the quality
-of supervision especially important, as aligned EP/BP data must distinguish
-genuine variety adaptation from broader paraphrase or editorial normalization.
-Resources differ in domain, alignment quality, and supervision type, so
-their mixtures can teach the same model different rewriting behavior.
+Variety identification tests whether a system can detect subtle variety cues,
+while bidirectional EP/BP rewriting tests whether it can produce the requested
+variety while preserving the original meaning. Rewriting makes supervision
+quality especially important, as aligned EP/BP data must distinguish
+variety-specific adaptation from paraphrastic or editorial changes. The
+available resources differ in domain, alignment quality, construction procedure,
+and the transformations represented by their aligned pairs. Fine-tuning a shared
+model on these resources therefore exposes it to different rewriting behavior
+depending on how the supervision is constructed and combined.
 
-The experiments presented in this work fine-tune pretrained encoder-decoder models from T5Gemma 2 for
-the two tasks under a shared control-string setup. They compare encoder-controlled
-and decoder-controlled formulations. The first formulation places control information
-in the encoder input, while the other places the input-variety label in the
-decoder target. Training follows a staged pipeline with broad supervised
-adaptation, targeted supervised specialization, and reward-based continuation
-using a group-relative objective inspired by Group Relative Policy Optimization
-(GRPO)
-\citep{shao2024deepseekmathpushinglimitsmathematical}. A lower-cost supervised protocol-selection study uses full fine-tuning at 270M scale, while the subsequent experiments use LoRA at 4B scale.
+The experiments fine-tune pretrained T5Gemma 2 encoder-decoder models for both
+tasks under a shared control-string setup. Encoder-controlled and
+decoder-controlled formulations differ in whether variety information is placed
+in the encoder input or the decoder target. Training follows a staged pipeline
+with large-scale supervised adaptation, targeted supervised specialization, and
+reward-based continuation using a group-relative objective inspired by Group
+Relative Policy Optimization (GRPO)
+\citep{shao2024deepseekmathpushinglimitsmathematical}. A lower-cost supervised
+protocol-selection study fully fine-tunes the 270M-parameter model to define the
+training protocol used in the subsequent experiments, which adapt the
+4B-parameter model with LoRA.
 
-The paper makes three main contributions.
+The paper makes three contributions.
 \begin{itemize}
-\item It evaluates shared encoder-decoder models for EP/BP variety identification and bidirectional rewriting.
-\item It compares encoder-controlled and decoder-controlled formulations under staged supervised adaptation and different data-composition settings.
-\item It evaluates not only corpus-level scores, but also copy behavior, conservative edits, paraphrasing, and over-generation.
+\item It evaluates a shared T5Gemma 2 setup for EP/BP variety identification and bidirectional rewriting under encoder-controlled and decoder-controlled formulations.
+\item It constructs and uses GPT-Wikipedia as reviewed supervision designed around localized EP/BP adaptation and examines how supervision composition changes identification and rewriting.
+\item It studies staged adaptation from large-scale OpenSubtitles supervision through targeted specialization and reward-based continuation, combining aggregate evaluation with analysis of copying, required edits, and unnecessary reformulation.
 \end{itemize}
 
-The results point to a conditional pattern. Supervision composition produces
-the largest matched rewriting shifts: the targeted GPT-Wikipedia resource
-aligns most closely with the conservative Golden Collection, while adding FRMT encourages broader
-changes and lowers Golden Collection performance. Control placement and
-staged adaptation remain resource- and direction-dependent rather than
-universally ordered. Reward-based continuation partly recovers Golden
-Collection performance in GPT-Wikipedia + FRMT configurations, while copy analysis shows
-that metrics reward restraint but cannot separate necessary adaptation from
-paraphrase.
+Supervision composition produces the largest rewriting changes: GPT-Wikipedia
+aligns most closely with the conservative Golden Collection, while adding FRMT
+sharply lowers Golden Collection rewriting and changes FRMT performance
+differently across directions and control formulations. Control placement also depends on rewriting direction, with decoder control
+stronger in every reported BP-to-EP rewriting comparison, whereas EP-to-BP
+results are mixed and include settings where encoder control performs better. Stage A and Stage C effects
+depend on the surrounding supervision, with reward-based continuation producing
+its clearest Golden Collection recovery after GPT-Wikipedia + FRMT
+specialization. Copy analysis further shows that automatic metrics can reward
+appropriate preservation but cannot fully distinguish required adaptation from
+acceptable paraphrase or unnecessary reformulation.
 
 The remainder of the paper is organized as follows. \Cref{sec:related-work} reviews the most relevant literature. \Cref{sec:methods} describes the data, task formulations, and training setup. \Cref{sec:results} presents the quantitative and qualitative results. \Cref{sec:discussion-limitations} discusses the main trade-offs and limitations, and \Cref{sec:conclusion} concludes the paper.
 
@@ -273,13 +278,13 @@ Early work on EP/BP identification showed that orthographic, lexical, and
 character-level patterns provide strong discriminative evidence. Using
 character \(n\)-grams and word \(n\)-gram language models,
 \citet{DBLP:conf/konvens/ZampieriG12} demonstrated the feasibility of
-distinguishing the two varieties from surface cues. More recent work asks
-whether this evidence remains reliable across domains and evaluation
-conditions. \citet{preda-etal-2024-across} compare surface-based and
-LoRA-adapted models under varied input lengths and cross-domain evaluation.
-Their experiments show that simple surface-based models remain competitive
-under domain shift and that greater complexity alone does not ensure robust
-variety identification.
+distinguishing the two varieties from surface cues. \citet{preda-etal-2024-across} examine whether this evidence remains reliable
+across different input lengths and domains by comparing surface-based
+classifiers with LoRA-adapted models. Their LoRA-adapted Albertina classifiers
+obtain the strongest in-domain results, whereas a logistic-regression bigram
+model performs best in the joint cross-dataset evaluation, showing that the
+strongest in-domain system is not also the strongest under their cross-domain
+comparison.
 
 Cross-domain robustness also depends on what signals the training labels
 encourage a model to learn. Labels inferred from country, domain, or URL
@@ -291,11 +296,10 @@ delexicalization can improve identification by reducing reliance on named
 entities and domain-specific lexical signals, with its strongest systems
 combining this procedure with BERTimbau \citep{souza2020bertimbau}. Sousa
 et al. therefore provide the closest dedicated EP/BP identification reference,
-whereas the present setting learns identification within the same
-encoder-decoder model used for rewriting. Dedicated studies thus establish
-strong approaches to EP/BP identification, but provide less evidence about how
-identification behaves when learned alongside sentence rewriting in the same
-model.
+whereas the present setting learns identification in the same model used for
+rewriting. Their work establishes a strong dedicated identification comparison
+but leaves open how identification behaves when learned alongside sentence
+rewriting.
 
 Rewriting introduces the additional requirement of preserving the source
 meaning while making only the changes appropriate to the requested variety.
@@ -308,17 +312,16 @@ supports a sequence-to-sequence formulation without implying that every input
 requires structural modification. \citet{costa-jussa-etal-2018-neural} show
 that a neural sequence-to-sequence system improves over a phrase-based approach
 in both Portuguese-variety directions and that human evaluators favor the
-neural outputs.
-
+neural outputs. More recently,
 \citet{sanches2024brazilianportugueseeuropeanportuguese} provide the closest
-dedicated rewriting comparison through BP-to-EP systems evaluated on the
+dedicated rewriting comparison by evaluating pretrained BP-to-EP systems on the
 manually curated Golden Collection. Their experiments show that modern models
 can perform competitively on the task, while the benchmark's conservative
 references make unchanged-source copying an important reference for judging
 whether a system rewrites only when needed. Portuguese identification and
 rewriting therefore have strong separate foundations, while less is known
-about how the two tasks behave when learned within the same encoder-decoder
-model and exposed to different forms of variety-specific supervision.
+about how the two tasks behave when learned in the same model under different
+forms of variety-specific supervision.
 
 \subsection{Language Model Adaptation for Controlled Generation}
 \label{sec:rw-adaptation-controlled-generation}
@@ -338,8 +341,8 @@ adaptation. Work on staged Machine Translation (MT) distinguishes broad
 exposure from smaller amounts of high-quality parallel data or targeted
 supervised specialization
 \citep{xu2024paradigmshiftmachinetranslation,alves2024tower}.
-Tower+ and Omnilingual extend this progression with preference, reward-based,
-or other post-training phases
+The Tower+ and Omnilingual MT models extend this progression with preference,
+reward-based, or other post-training phases
 \citep{rei-etal-2026-tower,omnilingualmtteam2026omnilingualmtmachinetranslation}.
 Across these systems, broad adaptation, targeted supervision, and post-training
 serve distinct functions, supporting their separation when the available data
@@ -350,9 +353,9 @@ translation models in scalar-feedback and low-resource dialect settings
 \citep{nguyen-etal-2017-reinforcement,thu2023rlnmt}, establishing that
 task-specific feedback can guide post-training continuation.
 
-The remaining question is what that feedback should measure. Reference-free
-quality estimates, learned translation preferences, and fine-grained error
-information can provide task-relevant MT rewards
+Task-specific feedback can be defined through reference-free quality estimates,
+learned translation preferences, or fine-grained error information, each of
+which can provide task-relevant MT rewards
 \citep{he-etal-2024-improving,xu2024advancingtranslationpreferencemodeling,ramos-etal-2026-fine}.
 However, reference-free reward optimization can become misaligned with actual
 translation quality \citep{he-etal-2024-improving}, making reward design
@@ -363,11 +366,11 @@ complementary criteria \citep{feng-etal-2025-mt-r1,10.1162/TACL.a.65}. For EP/BP
 \label{sec:methods}
 
 This section aims to define the experimental setup used to study Portuguese
-variety identification and rewriting. \Cref{sec:data-task-construction}
-introduces the data resources and task construction,
-\Cref{sec:task-control-formulations} describes the model scales and control
-formulations, and \Cref{sec:training-procedure} presents the staged training
-procedure and optimization settings. \Cref{sec:method-protocol-selection}
+variety identification and rewriting. \Cref{sec:data-task-construction} introduces the data resources and explains
+how aligned EP/BP pairs are converted into task-specific rewriting and
+identification examples, \Cref{sec:task-control-formulations} describes the
+model scales and control formulations, and \Cref{sec:training-procedure}
+presents the staged training procedure and optimization settings. \Cref{sec:method-protocol-selection}
 defines the supervised protocol-selection study, while
 \Cref{sec:evaluation-setup-paper} describes the evaluation procedure.
 
@@ -388,15 +391,14 @@ required for variety adaptation were made identical where appropriate,
 retaining equal pairs that provide copying supervision when no change is
 needed.
 
-FRMT broadens the available variation through a region-aware
-machine-translation resource and benchmark derived from English source
-sentences with regional outputs, including EP and BP
-\citep{riley-etal-2023-frmt}. FRMT is used primarily as an
-evaluation benchmark, while its training split is also introduced in the
-matched GPT-Wikipedia + FRMT condition. The Golden Collection
-complements this broader resource with a manually curated rewriting benchmark
-used only for evaluation
-\citep{sanches2024brazilianportugueseeuropeanportuguese}. Many of its
+FRMT adds region-aware variation through a machine-translation resource and
+benchmark derived from English source sentences with regional outputs,
+including EP and BP \citep{riley-etal-2023-frmt}. FRMT is used primarily as a
+held-out evaluation resource, while its training split is added only in the
+GPT-Wikipedia + FRMT condition to examine how this additional supervision
+changes identification and rewriting performance. The Golden Collection
+complements FRMT with a manually curated rewriting benchmark used only for
+evaluation \citep{sanches2024brazilianportugueseeuropeanportuguese}. Many of its
 references are identical or close to the source, so the benchmark rewards
 conservative, localized rewriting.
 
@@ -431,18 +433,22 @@ construction. Each aligned pair yields one BP-to-EP and one EP-to-BP rewriting
 example, while a non-equal pair also yields one identification example for each
 variety. Equal pairs remain useful for rewriting and are excluded from
 identification, since identical text cannot provide unambiguous supervision
-for two opposing variety labels. Evaluating both rewriting directions expands
-the 500 Golden Collection pairs into 1,000 directional cases.
-
+for two opposing variety labels.
 Additional details on resource construction and filtering are provided in
 \Cref{sec:appendix-data-construction}.
 
 \subsection{Models and Control Formulations}
 \label{sec:task-control-formulations}
 
-The experiments use T5Gemma 2 encoder-decoder models at 270M and 4B parameters \citep{zhang2025t5gemma2seeingreading}. Full fine-tuning at 270M scale is used for the supervised protocol-selection study, while LoRA adaptation at 4B scale \citep{hu2022lora} is used for the subsequent control, data-composition, and staged-training studies. The reported configurations use rank 48,
-\(\alpha=96\), and dropout 0.05, yielding 187,772,928 trainable adapter
-parameters while the underlying model remains frozen.
+The experiments use T5Gemma 2 encoder-decoder models with 270M and 4B
+parameters \citep{zhang2025t5gemma2seeingreading}. Their text-to-text
+architecture provides a single interface for short variety-label outputs and
+full-sentence rewriting. The 270M-parameter model is fully fine-tuned in a
+lower-cost supervised protocol-selection study that defines the training
+protocol used in the subsequent experiments. Those experiments adapt the
+4B-parameter model with LoRA \citep{hu2022lora}, using rank 48,
+\(\alpha=96\), and dropout 0.05, which yields 187,772,928 trainable adapter
+parameters while the base parameters remain frozen.
 
 Across both tasks, \texttt{PT} labels an EP source sentence and \texttt{BR}
 labels a BP source sentence. The two control formulations differ in where
@@ -456,9 +462,11 @@ The decoder-controlled formulation moves the input-variety label to the
 generated sequence. Its rewriting inputs contain only the source sentence,
 while each target begins with \texttt{PT} or \texttt{BR} and continues with
 the rewrite. For identification, the same unprefixed input is paired with a
-label-only target. Only its first label token contributes to the classification
-loss, as summarized with the other templates in
-\Cref{tab:training-templates}.
+label-only target. For decoder-controlled identification, loss is computed only
+on the \texttt{PT} or \texttt{BR} label token, whereas rewriting uses the
+complete target sequence. \Cref{sec:method-protocol-selection} specifies the
+supervised training protocol used with these task formulations, including task
+mixing, tokenizer treatment, and classification scoring.
 
 \begin{table*}[t]
   \centering
@@ -485,7 +493,7 @@ loss, as summarized with the other templates in
     \texttt{E} identification &
     --- & \texttt{CLS} \(x\) &
     \texttt{PT} or \texttt{BR} \\
-    \addlinespace[0.35em]
+    \midrule
     \multirow{2}{*}{\texttt{D} rewriting} &
     BP-to-EP & \(x_{\mathrm{BR}}\) &
     \texttt{BR} \(x_{\mathrm{PT}}\) \\
@@ -503,25 +511,29 @@ loss, as summarized with the other templates in
 \label{sec:training-procedure}
 
 Supervised adaptation uses the identification and rewriting examples described
-above, progressing from broad exposure in Stage A to
+above, progressing from large-scale OpenSubtitles exposure in Stage A to
 targeted specialization in Stage B. In Stage A, OpenSubtitles exposes the
-models to large-scale aligned EP/BP supervision. The contribution of this
-warm-up is isolated through matched configurations that omit Stage A, start
-directly at Stage B, and hold the subsequent specialization setup
-fixed.
+models to large-scale aligned EP/BP supervision. After task construction, the
+Stage A pool contains 20,695,766 rewriting examples and 7,666,883
+identification examples. The fixed optimization budgets expose the models to
+only a small fraction of this pool, so Stage A examples do not repeat before the
+maximum step budget is reached. The contribution of this warm-up is isolated
+through matched configurations that omit Stage A, start directly at Stage B,
+and hold the subsequent specialization setup fixed.
 
-Stage B moves this broad exposure to targeted supervised specialization.
-GPT-Wikipedia provides the primary targeted condition, while adding FRMT
-creates a data-composition condition that tests how broader supervision affects
-identification and rewriting. Before combining these two datasets, the FRMT rewriting pairs are
-filtered for high structural overlap and localized EP/BP differences to limit
-broader reformulation, while GPT-Wikipedia follows its separate reviewed-resource
-path. After task construction, the GPT-Wikipedia condition contains 9,038
-rewriting examples and 6,652 identification examples. The GPT-Wikipedia + FRMT
-condition contains 14,042 rewriting examples and 11,616 identification examples.
-This data mix concatenates the two resources without weighting or resampling,
-changing the available supervision while retaining the same task templates
-and training procedure.
+Stage B moves from large-scale subtitle exposure to targeted supervised
+specialization. GPT-Wikipedia provides the primary targeted condition, while
+the GPT-Wikipedia + FRMT condition adds the complete FRMT training split to
+examine how additional region-aware supervision changes identification and
+rewriting. The two training splits are concatenated without weighting or
+resampling, while the task templates and training procedure remain unchanged.
+After task construction, the GPT-Wikipedia condition contains 9,038 rewriting
+examples and 6,652 identification examples. The GPT-Wikipedia + FRMT condition
+contains 14,042 rewriting examples and 11,616 identification examples. For the
+4B-parameter model, both Stage B training sets are smaller than the maximum
+training-example presentation budget and can therefore repeat across shuffled
+epochs. For the 270M-parameter model, the corresponding budget exceeds the
+GPT-Wikipedia set but not the GPT-Wikipedia + FRMT set.
 
 Stage C preserves the two Stage B data conditions, GPT-Wikipedia and
 GPT-Wikipedia + FRMT, but continues each Stage B checkpoint using a more
@@ -536,17 +548,24 @@ tables.
 
 For each Stage C input, four candidate rewrites are sampled and the reference
 rewrite is added to the group. Candidate rewards are compared within this
-group to form the policy update. The reward evaluates each candidate against
-both the reference and the unchanged-source alternative. Its
-encoder-controlled form combines BLEU \citep{papineni2002bleu} and TER
-\citep{snover2006study}, while the decoder-controlled form adds a component
-that rewards a correct first \texttt{PT}/\texttt{BR} label. Since Stage C
+group to form the policy update. For each candidate, the BLEU \citep{papineni2002bleu} and TER
+\citep{snover2006study} components compare its agreement with the reference
+against the score obtained by returning the source unchanged, making the reward
+relative to a copy baseline rather than to the reference score alone. Under
+encoder control, the reward assigns equal weight to the relative BLEU and TER
+components, \(0.5R_{\mathrm{BLEU}}+0.5R_{\mathrm{TER}}\). Under decoder
+control, it uses
+\(0.4R_{\mathrm{BLEU}}+0.4R_{\mathrm{TER}}+0.2R_{\mathrm{label}}\), where
+\(R_{\mathrm{label}}\) rewards a correct first \texttt{PT}/\texttt{BR} label.
+After removing any decoder control label and normalizing whitespace, 0.10 is
+subtracted when a candidate exactly copies the source even though the reference
+requires a change. Since Stage C
 combines several reward components, supplementary 270M reward-design
 diagnostics examine the effects of individual components and candidate-grouping
 choices.
 \Cref{sec:appendix-rl-diagnostics} reports their design and results.
 
-The scale- and stage-dependent optimization settings are collected in
+The scale- and stage-dependent optimization settings are presented in
 \Cref{tab:training-settings}.
 
 \begin{table}[H]
@@ -583,25 +602,29 @@ lowest-validation-loss checkpoint restored.
 \subsection{Supervised Protocol Selection}
 \label{sec:method-protocol-selection}
 
-Four candidate supervised protocols are evaluated with the fully fine-tuned
-270M decoder-controlled model. The selected protocol is then applied in the
-4B experiments. The comparison holds the T5Gemma 2 checkpoint, task
-formulation and construction,
-Stage A-to-Stage B path, OpenSubtitles and GPT-Wikipedia data, and evaluation
-procedure fixed, with comparable step budgets across candidates. Only the
-supervised protocol varies.
+Four supervised protocols are evaluated with the fully fine-tuned
+270M-parameter decoder-controlled model. All four variants follow the same
+OpenSubtitles Stage A and GPT-Wikipedia Stage B path, with the same T5Gemma 2
+checkpoint, task construction, and comparable step budgets, and are evaluated
+with the common procedure described in \Cref{sec:evaluation-setup-paper}. Only
+the supervised protocol component changes, and the selected protocol is then
+used in the subsequent experiments with the 4B-parameter model.
 
-The base protocol establishes the reference with standard mixed batches,
-existing single-token representations of \texttt{PT}, \texttt{BR}, and
-\texttt{CLS}, and loss over the full decoder vocabulary at supervised target
-positions. Each alternative modifies one aspect of this reference. The
-task-balanced variant changes batch composition to give rewriting and
-identification equal representation in each optimizer update, whereas the
-added-token variant registers the same control strings explicitly with the
-tokenizer. The restricted-loss variant instead limits scoring competition to
-\texttt{PT} and \texttt{BR} for identification examples while retaining the
-full decoder vocabulary for rewriting. The results of this comparison are
-presented in \Cref{sec:supervised-protocol-selection}.
+The base protocol combines rewriting and identification rows in the same
+shuffled training mixture, so their contribution follows their natural
+frequency rather than an enforced task balance. \texttt{PT} and \texttt{BR}
+use their existing base-vocabulary representations rather than newly registered
+tokenizer tokens. For identification examples, loss is computed at the
+supervised label position against the normal decoder vocabulary, while
+rewriting uses the complete target sequence and normal decoder vocabulary. The
+task-balanced variant changes only batch composition by enforcing equal
+rewriting and identification representation in each optimizer update. The
+added-token variant keeps the same control strings but explicitly registers
+\texttt{PT} and \texttt{BR} with the tokenizer. The
+restricted-classification-loss variant changes only identification scoring by
+restricting the competing output labels to \texttt{PT} and \texttt{BR}, while
+rewriting remains unchanged. The results of this comparison are presented in
+\Cref{sec:supervised-protocol-selection}.
 
 \subsection{Evaluation}
 \label{sec:evaluation-setup-paper}
@@ -609,14 +632,17 @@ presented in \Cref{sec:supervised-protocol-selection}.
 The two tasks are evaluated under both control formulations on FRMT and the
 Golden Collection. Accuracy and macro-F1 measure identification, while BLEU
 \citep{papineni2002bleu}, computed with SacreBLEU \citep{post-2018-call}, and
-TER \citep{snover2006study} measure rewriting. Rewriting uses beam search with beam size 4, and
-BLEU and TER are reported separately for BP-to-EP and EP-to-BP so that
-differences between directions can be examined. Before these scores are
-computed, control labels are removed from predictions and references, keeping
-the metrics focused on sentence content. The copy baseline returns the source
-sentence unchanged and provides an informative rewriting reference since some
-EP/BP examples require no modification. \Cref{sec:qualitative-analysis}
-examines its behavior alongside representative outputs.
+TER \citep{snover2006study} measure rewriting. The principal aggregate
+rewriting comparisons use corpus BLEU and TER, reported separately for BP-to-EP
+and EP-to-BP, whereas sentence-level BLEU and TER are reserved for diagnostic
+analyses and also contribute to the Stage C reward described in
+\Cref{sec:training-procedure}. Rewriting uses beam search with beam size 4.
+Before the rewriting scores are computed, control labels are removed from
+predictions and references so that the metrics evaluate sentence content
+rather than the control tokens. The copy baseline returns the source sentence
+unchanged and provides an informative reference for rewriting, since some EP/BP
+examples require no modification, with \Cref{sec:qualitative-analysis}
+examining this behavior alongside representative outputs.
 
 \section{Results}
 \label{sec:results}
@@ -625,16 +651,17 @@ This section aims to determine how supervised protocol choice, control
 placement, training-data composition, staged adaptation, and reward-based
 continuation affect identification and rewriting.
 \Cref{sec:supervised-protocol-selection} reports the protocol-selection
-results, \Cref{sec:main-supervised-results} compares the supervised 4B
-configurations, and \Cref{sec:reward-continuation-results} examines
-reward-based continuation. \Cref{sec:qualitative-analysis} analyzes
+results, \Cref{sec:main-supervised-results} compares supervised identification
+and rewriting after Stage B, and \Cref{sec:reward-continuation-results}
+examines reward-based continuation. \Cref{sec:qualitative-analysis} analyzes
 representative outputs and copying behavior.
 
 \subsection{Supervised Protocol Selection}
 \label{sec:supervised-protocol-selection}
 
-The 270M protocol-selection study evaluates which supervised protocol provides
-the most suitable basis for the 4B experiments. \Cref{tab:protocol-ablation-270m-paper}
+The 270M-parameter protocol-selection study evaluates which supervised protocol
+provides the most suitable basis for the subsequent experiments with the
+4B-parameter model. \Cref{tab:protocol-ablation-270m-paper}
 compares the four candidates after the same OpenSubtitles Stage A and
 GPT-Wikipedia Stage B path.
 
@@ -643,7 +670,7 @@ GPT-Wikipedia Stage B path.
 \small
 \renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{3pt}
-\caption{Decoder-controlled 270M full-fine-tuning supervised protocol-selection ablations.}
+\caption{Decoder-controlled 270M full-fine-tuning supervised protocol-selection results. Macro-F1 is reported as a percentage, BLEU on a 0--100 scale, and lower TER is better.}
 \label{tab:protocol-ablation-270m-paper}
 \begin{tabular}{p{3.4cm}cccccccccc}
 \toprule
@@ -667,19 +694,25 @@ Task-balanced batches improve Golden Collection identification while reducing
 the other reported scores. Added-token treatment improves FRMT identification
 but not rewriting or Golden Collection identification. Restricted loss gives
 the strongest Golden Collection values and a small FRMT BLEU increase, but it
-does not improve FRMT identification. Since these improvements are confined to
-individual metrics while requiring additional batching, tokenizer, or loss
-mechanisms, the base protocol is retained as the simpler, broadly competitive
-configuration for the 4B experiments.
+does not improve FRMT identification. Since these improvements are confined to individual metrics while requiring
+additional batching, tokenizer, or loss mechanisms, the base protocol is
+retained as the simpler, broadly competitive configuration for the subsequent
+experiments with the 4B-parameter model. The retained protocol therefore uses the
+natural rewriting-to-identification mixture, the existing \texttt{PT}/\texttt{BR}
+base-vocabulary representations, and normal decoder-vocabulary scoring at the
+supervised identification label position, while rewriting uses loss over the
+complete target sequence.
 
-\subsection{Main Supervised Results}
+\subsection{Supervised Identification and Rewriting Results}
 \label{sec:main-supervised-results}
 
-With the supervised protocol fixed by the 270M protocol-selection study, the
-4B model is adapted with rank-48 LoRA under both control formulations.
-\Cref{tab:r48-classification-breakdown,tab:r48-translation-breakdown} include
-the Stage B supervised rows and matched Stage C rows for
-compactness. This section analyzes the results obtained through supervised Stage B training, while \Cref{sec:reward-continuation-results} examines the effect of the subsequent Stage C continuation.
+With the supervised protocol selected by the 270M-parameter study, the
+4B-parameter T5Gemma 2 model is adapted with rank-48 LoRA under both control
+formulations. \Cref{tab:r48-classification-breakdown,tab:r48-translation-breakdown}
+report identification and rewriting results after Stage B and Stage C. This
+section discusses the supervised Stage B results, while
+\Cref{sec:reward-continuation-results} examines the subsequent Stage C
+continuation.
 
 \begin{table*}[tbp]
 \centering
@@ -712,31 +745,30 @@ C & Decoder & GPT-Wikipedia + FRMT & 85.65 & 85.54 & 72.34 & 72.02 \\
 \end{tabular}
 \end{table*}
 
-The Stage B identification results first examine how the two control
-formulations behave across the evaluation sets. Adding FRMT supervision raises
-FRMT macro-F1 from 82.39 to 86.06 under encoder control and from 81.68 to 86.10
-under decoder control. The Golden Collection response is not consistent:
-encoder control declines from 73.92 to 71.19, while decoder control increases
-from 71.53 to 72.38. Adding FRMT therefore improves FRMT identification
-under both formulations but does not yield a consistent Golden Collection
-gain. The Golden response depends on control placement, and neither
-formulation dominates across the two datasets.
+Stage B identification first shows how adding FRMT supervision changes the
+two evaluation resources. On FRMT, macro-F1 rises from 82.39 to 86.06 under
+encoder control and from 81.68 to 86.10 under decoder control. On the Golden
+Collection, the effect is mixed: encoder-controlled macro-F1 decreases from
+73.92 to 71.19, while decoder-controlled macro-F1 increases from 71.53 to
+72.38. Adding FRMT therefore improves FRMT identification under both
+formulations but does not produce a consistent Golden Collection gain, and
+neither control formulation is consistently stronger across both evaluation
+resources.
 
 For external context, the encoder-controlled GPT-Wikipedia Stage B
 configuration reaches 82.39 macro-F1 on FRMT, compared with the 77.25 F1
-reported by \citet{Sousa_Almeida_Silvano_Cantante_Campos_Jorge_2025} for
-their strongest BERTimbau-based identifier. Although both studies use FRMT for
-evaluation, the comparison is contextual: Sousa et al. use a dedicated
+reported by \citet{Sousa_Almeida_Silvano_Cantante_Campos_Jorge_2025} for their
+strongest BERTimbau-based identifier. Although both studies use FRMT for
+evaluation, the comparison is contextual, as Sousa et al. use a dedicated
 identification model with a different training setup and objective, while the
-present configuration shares one encoder-decoder interface across
-identification and rewriting.
+present configuration learns identification and rewriting in the same model.
 
 \begin{table*}[tbp]
 \centering
 \small
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{3pt}
-\caption{Directional rewriting results for the 4B-parameter T5Gemma 2 model after Stage B and Stage C with rank-48 LoRA.}
+\caption{Directional rewriting results for the 4B-parameter T5Gemma 2 model after Stage B and Stage C with rank-48 LoRA. Lower TER is better.}
 \label{tab:r48-translation-breakdown}
 \begin{tabular}{@{}clp{4.4cm}cccc@{}}
 \toprule
@@ -762,51 +794,61 @@ C & Decoder & GPT-Wikipedia + FRMT & 42.72/0.4417 & 42.72/0.4466 & 81.52/0.1351 
 \end{tabular}
 \end{table*}
 
-Among the matched Stage B comparisons, data composition produces larger
-changes in rewriting than in identification. Adding FRMT has a
-direction-dependent effect on FRMT rewriting, ranging from almost no change to
-a clear improvement. In contrast, Golden Collection BLEU drops by roughly 20
+Across the Stage B comparisons, data composition produces larger changes in
+rewriting than in identification. Adding FRMT changes FRMT rewriting differently across directions and control
+formulations, ranging from almost no change in some comparisons to a clear
+improvement in others. In contrast, Golden Collection BLEU drops by roughly 20
 points across every direction and control comparison, with corresponding
 increases in TER.
 
-The matched rewriting-only baselines separately test whether adding
-identification supervision reduces rewriting performance. With GPT-Wikipedia
-alone, removing identification supervision changes rewriting very little. With
-the GPT-Wikipedia + FRMT data mix, the multitask and rewriting-only
-configurations remain close on FRMT, while the multitask configuration performs
-better on the Golden Collection by 9.04 BLEU in BP-to-EP and 7.92 BLEU in
-EP-to-BP. Within the encoder-controlled models, removing identification
+The rewriting-only baselines test whether identification supervision harms
+rewriting. With GPT-Wikipedia, the multitask and rewriting-only configurations
+remain very close: multitask BLEU is higher in three of the four
+dataset-direction comparisons, while rewriting-only is higher only on FRMT
+EP-to-BP, by 0.21 BLEU. With GPT-Wikipedia + FRMT, the multitask configuration
+obtains higher BLEU in all four comparisons, including gains of 9.04 points in
+Golden Collection BP-to-EP and 7.92 points in EP-to-BP. Across the eight
+directional BLEU comparisons, rewriting-only training exceeds multitask
+training only once and by a small margin, so removing identification
 supervision does not improve rewriting overall.
 
-The effect of control placement depends on rewriting direction. Decoder control
-performs better in every BP-to-EP comparison, while EP-to-BP is mixed and
-includes comparisons where encoder control performs better.
+Control placement shows a clearer directional tendency: decoder control
+performs better in every BP-to-EP rewriting comparison, whereas EP-to-BP is
+mixed and includes settings where encoder control performs better.
 
 The most directly comparable prior rewriting result is BP-to-EP evaluation on
 the Golden Collection. After rescaling the BLEU values reported by
 \citet{sanches2024brazilianportugueseeuropeanportuguese} to the 0--100 scale,
-their strongest trained system obtains approximately 84
-BLEU and 0.10 TER, while their published single-direction BP-to-EP copy
-baseline reaches approximately 89 BLEU and 0.07 TER. The decoder-controlled
-GPT-Wikipedia configuration reaches 87.75 BLEU and 0.0874 TER at Stage B and
-88.44 BLEU and 0.0824 TER after Stage C. This numerical relation is contextual,
-as
-Sanches et al. train specifically for BP-to-EP rewriting, while the present
-configuration is bidirectional and also supports identification.
-A descriptive rewriting comparison with prompted external models is reported
-in \Cref{sec:appendix-external-model-comparison}.
+their strongest trained system obtains approximately 84 BLEU and 0.10 TER,
+while their published single-direction copy baseline reaches approximately 89
+BLEU and 0.07 TER. The decoder-controlled GPT-Wikipedia configuration reaches
+87.75 BLEU and 0.0874 TER after Stage B and 88.44 BLEU and 0.0824 TER after
+Stage C. The comparison is contextual, as Sanches et al. train specifically for
+BP-to-EP rewriting, while the present configuration is bidirectional and also
+learns identification. \Cref{sec:appendix-external-model-comparison} provides a broader comparison with external pretrained and instruction-following systems. Across these systems, the best adapted T5Gemma 2 result is stronger in every reported identification and rewriting setting except FRMT BP-to-EP, where AMALIA SFT obtains 44.65 BLEU and 0.4289 TER compared with 43.97 BLEU and 0.4338 TER for the strongest adapted configuration.
 
-The Stage A ablation evaluates whether broad OpenSubtitles exposure contributes
-after targeted Stage B specialization. Relative to the matched no-Stage-A
-configurations in \Cref{tab:stage-a-ablation}, the clearest aggregate benefit
-occurs on the Golden Collection after specialization with GPT-Wikipedia data.
+After the Stage B comparisons, \Cref{tab:stage-a-ablation} isolates the
+contribution of Stage A OpenSubtitles warm-up by comparing each configuration
+with its corresponding no-Stage-A variant. The clearest benefit appears after
+GPT-Wikipedia specialization under encoder control. On FRMT, Stage A adds 0.87
+macro-F1 points and 4.40 BLEU points while reducing TER by 0.0573. On the
+Golden Collection, the same configuration gains 4.01 macro-F1 points and 25.41
+BLEU points while reducing TER by 0.2404. Under decoder control with
+GPT-Wikipedia, Stage A has almost no rewriting effect on FRMT and lowers
+macro-F1 by 1.28 points, but improves all three aggregate measures on the
+Golden Collection. The GPT-Wikipedia + FRMT conditions show smaller or mixed
+changes: encoder control improves FRMT but lowers Golden Collection rewriting
+by 6.79 BLEU points, whereas decoder control produces small rewriting gains on
+both resources. Stage A therefore provides its clearest aggregate benefit after
+GPT-Wikipedia specialization, especially on the Golden Collection, rather than
+improving every configuration uniformly.
 
 \begin{table*}[tbp]
 \centering
 \small
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{5pt}
-\caption{Stage A warm-up ablation under aggregate evaluation. Deltas are computed as the Stage A model minus the matched no-Stage-A model. Positive deltas indicate improvement for macro-F1 and BLEU, while negative deltas indicate improvement for TER.}
+\caption{Stage A warm-up ablation under aggregate evaluation. Deltas are computed as the Stage A model minus the corresponding no-Stage-A model. Positive deltas indicate improvement for macro-F1 and BLEU, while negative deltas indicate improvement for TER.}
 \label{tab:stage-a-ablation}
 \begin{tabular}{@{}llp{3.2cm}ccc@{}}
 \toprule
@@ -827,53 +869,46 @@ Decoder & GPT-Wikipedia + FRMT & Golden Collection & +2.19 & +2.00 & -0.0217 \\
 \end{tabular}
 \end{table*}
 
-Under encoder control, Stage A adds 4.01
-macro-F1 points and 25.41 BLEU points while reducing TER by 0.2404. The same
-condition also improves under decoder control, whereas the GPT-Wikipedia + FRMT
-conditions show smaller or mixed effects, including a Golden Collection
-rewriting decline under encoder control.
-
 \subsection{Reward-Based Continuation}
 \label{sec:reward-continuation-results}
 
-Stage C evaluates how the matched Stage B checkpoints change under
-reward-based continuation on the more conservative rewriting-only subsets. Although its updates use rewriting-only data, identification is
-retained to assess changes from the supervised starting points. Macro-F1
-remains close to those starting points, with small increases and decreases
-across configurations. For example, Golden Collection macro-F1 rises from
-71.53 to 71.81 for the decoder-controlled GPT-Wikipedia condition but falls
-from 73.92 to 73.50 for its encoder-controlled counterpart. Identification
-shows no consistent improvement.
+\Cref{tab:r48-classification-breakdown,tab:r48-translation-breakdown} also
+report how the Stage B configurations change after Stage C. Although
+continuation uses rewriting-only data, identification remains close to the
+corresponding Stage B values. Macro-F1 changes are small across both resources
+and control formulations, with increases and decreases rather than a consistent
+improvement.
 
-Rewriting is the direct target of Stage C. In the GPT-Wikipedia condition,
-reward-based continuation changes rewriting only slightly overall. The larger
-effect appears after GPT-Wikipedia + FRMT specialization, where Golden
-Collection BLEU recovers by roughly 12--13 points across the direction and
-control comparisons, while FRMT changes remain comparatively small and mixed.
-Stage C thus recovers much of the Golden Collection performance lost after
-Stage B specialization with the GPT-Wikipedia + FRMT data mix, while its FRMT
-response remains direction- and formulation-dependent. This contrast is
-consistent with the more
-conservative Stage C subset, although the automatic scores establish
-performance recovery rather than its mechanism. Stage C changes both the optimization procedure and the training
-data, so these outcomes should be attributed to the Stage C procedure
-as a whole rather than the reward objective in isolation.
+The rewriting effect depends strongly on the Stage B supervision condition.
+After GPT-Wikipedia specialization, Stage C changes rewriting only modestly,
+with BLEU differences below one point across all four dataset-direction
+comparisons. The larger effect follows GPT-Wikipedia + FRMT specialization.
+Golden Collection BLEU recovers by approximately 12--13 points in both
+directions under both control formulations, while FRMT rewriting changes remain
+smaller and differ across directions and formulations. Stage C therefore has
+its clearest effect as a recovery of Golden Collection rewriting after
+GPT-Wikipedia + FRMT specialization rather than as a uniform improvement across
+evaluation resources.
+
+These changes characterize the complete Stage C procedure. Since continuation
+changes both the optimization procedure and the rewriting subset used after
+Stage B, the reported comparison does not separate the effect of reward-based
+optimization from the effect of the continuation data.
 
 \subsection{Qualitative Analysis}
 \label{sec:qualitative-analysis}
 
-The qualitative analysis examines how reference structure and model copying
-behavior relate to the different rewriting responses observed above. The
+The qualitative analysis examines how source-reference similarity and model
+copying behavior relate to the rewriting differences observed above. The
 Golden Collection contains a high proportion of exact or near-copy
 references. Of its 1,000 bidirectional rows, 454 are exact source-reference
 matches, 566 have copy TER at most 0.05, and 636 have copy TER at most 0.08.
 Consistent with this composition, the unchanged-source baseline reaches 89.17
-BLEU and 0.0755 TER on the Golden Collection. The corresponding FRMT baseline
-is substantially weaker, at 38.75 BLEU and 0.4819 TER, consistent with broader
-source-reference differences in that resource. This contrast helps explain
-why unnecessary rewriting can be costly on the Golden Collection while
-improvement over copying is more readily achievable on FRMT, although it does
-not account for every difference between the model configurations.
+BLEU and 0.0755 TER on the Golden Collection. The corresponding FRMT baseline is substantially weaker, at 38.75 BLEU and
+0.4819 TER, consistent with larger source-reference differences in that
+resource. This contrast helps explain why unnecessary rewriting can be costly on the
+Golden Collection while FRMT provides more room to improve over unchanged-source
+copying.
 
 These reference profiles also clarify why useful local adaptations do not
 necessarily raise corpus BLEU above the Golden Collection copy baseline. A
@@ -882,24 +917,26 @@ paraphrase can remove many matching higher-order \(n\)-grams. Aggregate BLEU
 can therefore favor the unchanged source even when local edits are appropriate,
 but this does not make copying universally desirable.
 
-Matched encoder-controlled Stage B models make this restraint--rewriting
-trade-off visible. On the 454 exact-copy rows, the model trained with
+Encoder-controlled Stage B models make this contrast between conservative and
+more extensive rewriting visible. On the 454 exact-copy rows, the model trained with
 GPT-Wikipedia data preserves the source in 74.7\% of cases, compared with
 18.7\% for the model trained with the GPT-Wikipedia + FRMT data mix. On these
-rows, preserving the source is consistent with the reference. The model trained
-with GPT-Wikipedia data also remains more conservative on the 546 non-exact
-rows, copying 33.7\% unchanged compared with 3.1\% for the model trained with
-the GPT-Wikipedia + FRMT data mix. On these rows, however, unchanged copying can
-indicate under-editing rather than desirable conservatism. Supervision from the
-GPT-Wikipedia + FRMT data mix
-sharply reduces copying, which can help realize required changes but also creates
-more opportunities for unnecessary reformulation.
-\Cref{tab:golden-qualitative-overtranslation} contrasts the two outcomes.
+rows, preserving the source is consistent with the reference. The model trained with GPT-Wikipedia data also remains more conservative on
+the 546 non-exact rows, copying the source in 33.7\% of cases compared with
+3.1\% for the model trained with the GPT-Wikipedia + FRMT data mix. On these
+rows, copying can indicate under-editing when the reference contains a required
+variety-specific change, although a source-reference difference can also
+reflect paraphrastic or editorial changes that are not required for EP/BP
+adaptation. Supervision from the GPT-Wikipedia + FRMT data mix sharply reduces
+copying, which can help realize required changes but also creates more
+opportunities for unnecessary reformulation.
+\Cref{tab:golden-qualitative-overtranslation} illustrates how the two Stage B supervision conditions translate into different rewriting behavior.
 
-In ID 27, the reference replaces \textit{procura} with \textit{demanda}. The
+In the first example, the reference replaces \textit{procura} with
+\textit{demanda}. The
 model trained with GPT-Wikipedia data leaves the source unchanged despite the required lexical
 edit, whereas the model trained with the GPT-Wikipedia + FRMT data mix makes the change and reformulates the
-sentence more broadly. In ID 292, the reference is identical to the source.
+sentence more broadly. In the second example, the reference is identical to the source.
 The model trained with GPT-Wikipedia data preserves it, while the model trained
 with the GPT-Wikipedia + FRMT data mix
 unnecessarily reformulates this otherwise unchanged sentence.
@@ -909,19 +946,17 @@ unnecessarily reformulates this otherwise unchanged sentence.
 \small
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{3pt}
-\caption{Representative Golden Collection outputs from matched encoder-controlled Stage B models under GPT-Wikipedia and GPT-Wikipedia + FRMT supervision. Boldface marks model-output spans illustrating under-editing or unnecessary reformulation.}
+\caption{Representative Golden Collection outputs from encoder-controlled Stage B models trained with GPT-Wikipedia and GPT-Wikipedia + FRMT. Boldface marks model-output spans illustrating under-editing or unnecessary reformulation.}
 \label{tab:golden-qualitative-overtranslation}
-\begin{tabular}{@{}cp{0.205\textwidth}p{0.205\textwidth}p{0.225\textwidth}p{0.225\textwidth}@{}}
+\begin{tabular}{@{}p{0.205\textwidth}p{0.205\textwidth}p{0.225\textwidth}p{0.225\textwidth}@{}}
 \toprule
-\textbf{ID} & \textbf{Source} & \textbf{Reference} & \textbf{GPT-Wikipedia} & \textbf{GPT-Wikipedia + FRMT} \\
+\textbf{Source} & \textbf{Reference} & \textbf{GPT-Wikipedia} & \textbf{GPT-Wikipedia + FRMT} \\
 \midrule
-27 &
 \textit{``A procura aumenta de forma dr\'astica no mundo todo'', afirmou o especialista em recursos h\'idricos Jos\'e Galizia Tundisi, do Instituto Internacional de Ecologia, em S\~ao Carlos (SP).} &
 \textit{``A demanda aumenta de forma dr\'astica no mundo todo'', afirmou o especialista em recursos h\'idricos Jos\'e Galizia Tundisi, do Instituto Internacional de Ecologia, em S\~ao Carlos (SP).} &
 \textit{``A \textbf{procura} aumenta de forma dr\'astica no mundo todo'', afirmou o especialista em recursos h\'idricos Jos\'e Galizia Tundisi, do Instituto Internacional de Ecologia, em S\~ao Carlos (SP).} &
 \textit{``A demanda \textbf{est\'a aumentando drasticamente em todo o mundo}'', \textbf{disse} o especialista em recursos h\'idricos Jos\'e Galizia Tundisi, do Instituto Internacional de Ecologia em S\~ao Carlos (SP).} \\
 
-292 &
 \textit{Da\'i por que est\'a absolutamente correto no conte\'udo, como na forma, o parecer do ilustre Relator Bernardo Cabral.} &
 \textit{Da\'i por que est\'a absolutamente correto no conte\'udo, como na forma, o parecer do ilustre Relator Bernardo Cabral.} &
 \textit{Da\'i por que est\'a absolutamente correto no conte\'udo, como na forma, o parecer do ilustre Relator Bernardo Cabral.} &
@@ -930,138 +965,53 @@ unnecessarily reformulates this otherwise unchanged sentence.
 \end{tabular}
 \end{table*}
 
-The two cases illustrate the trade-off suggested by the aggregate copy
-statistics: more conservative supervision can leave required changes
-unrealized, whereas broader rewriting raises the risk of reformulating inputs
-unnecessarily.
+A separate issue concerns the references used for evaluation. Some source-reference pairs contain differences that extend beyond localized EP/BP conversion, so a model can produce an appropriate variety-specific rewrite without reproducing every transformation present in the reference. \Cref{tab:evaluation-reference-information-differences} gives representative cases from the Golden Collection and FRMT. In the Golden Collection example, the reference removes the final clause describing the returned gesture, while in the FRMT example it removes the feet conversions while preserving the corresponding measurements in metres. Other inspected FRMT references contain lexical substitutions such as \textit{marcante} to \textit{importante}, \textit{ganhou} to \textit{recebeu}, \textit{reside} to \textit{vive}, \textit{usar} to \textit{utilizar}, and \textit{música} to \textit{canção}, which are valid alternatives but are not consistently required for variety adaptation. These examples show that reference construction can include paraphrastic or editorial differences that complicate reference-based evaluation in addition to the supervision-dependent model behavior illustrated in \Cref{tab:golden-qualitative-overtranslation}.
 
-Qualitative inspection of selected FRMT pairs provides one plausible
-explanation for the broader rewriting behavior. The inspected pairs include
-source-reference differences that go beyond localized EP/BP conversion,
-including ordinary synonym substitutions and broader paraphrastic
-reformulations. Examples such as \textit{marcante}
-to \textit{importante}, \textit{ganhou} to
-\textit{recebeu}, \textit{reside} to \textit{vive}, \textit{usar}
-to \textit{utilizar}, and \textit{música} to
-\textit{canção} are linguistically valid substitutions, but they do not
-consistently represent obligatory variety-specific changes and therefore
-expose the model to ordinary synonymy alongside variety adaptation. Other
-inspected references recast longer spans or remove repeated parenthetical
-information, unit conversions, or other ancillary material. These editorial
-or paraphrastic transformations may be valid outputs, but they do not
-correspond cleanly to localized EP/BP conversion. Although these selected
-cases do not characterize every FRMT pair, they provide a plausible account
-of the broader rewriting observed after Stage B specialization with the
-GPT-Wikipedia + FRMT data mix
-and its association with lower Golden Collection performance. The use of a
-more conservative Stage C subset is also consistent with the partial
-Golden Collection recovery observed after Stage C, although the Stage C
-comparison does not isolate this data-selection effect from reward-based
-optimization.
+\begin{table*}[tbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3pt}
+\caption{Examples where source and reference sentences differ in expressed information beyond localized variety conversion. Boldface marks source spans whose information is omitted from the reference.}
+\label{tab:evaluation-reference-information-differences}
+\begin{tabular}{@{}p{0.13\textwidth}p{0.09\textwidth}p{0.34\textwidth}p{0.34\textwidth}@{}}
+\toprule
+\textbf{Dataset} & \textbf{Direction} & \textbf{Source} & \textbf{Reference} \\
+\midrule
+Golden Collection &
+BP-to-EP &
+\textit{- Oww voc\^e \'e um amor Obrigado viu!- \textbf{Falei e o mesmo retribuiu com um abra\c{c}o.}} &
+\textit{- Oww, \'es ador\'avel. Obrigado!} \\
+
+FRMT &
+BP-to-EP &
+\textit{O Aut\'odromo Internacional Orlando Moura tem uma pista de 3.433 metros \textbf{(11.263 p\'es)}, e o Kart\'odromo Ayrton Senna uma pista de 930 metros \textbf{(3.051 p\'es)}.} &
+\textit{O Aut\'odromo Internacional Orlando Moura tem uma pista de 3433 metros e o Kart\'odromo Ayrton Senna tem uma pista de 930 metros.} \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
 \section{Discussion and Limitations}
 \label{sec:discussion-limitations}
 
-Taken together, the matched comparisons indicate that aligned EP/BP
-supervision is not interchangeable. Additional aligned supervision does not
-necessarily improve every rewriting setting. GPT-Wikipedia was constructed
-around localized variety adaptation, whereas FRMT exposes the model to broader
-regional variation and, among the inspected pairs, paraphrastic differences.
-Both resources provide aligned EP/BP supervision, but they represent different
-kinds of transformations and encourage different policies over when and how
-extensively to rewrite. Under the
-evaluated conditions, supervision quality therefore depends on how closely the
-represented transformations align with the desired rewriting behavior, not
-only on whether the sentence pairs are valid or parallel.
+The supervised and qualitative results show that aligned EP/BP resources are not interchangeable simply by virtue of containing valid parallel sentences. Supervision composition produces substantially larger changes in rewriting than in identification, and \Cref{tab:golden-qualitative-overtranslation} shows that the GPT-Wikipedia and GPT-Wikipedia + FRMT conditions induce markedly different rewriting behavior. GPT-Wikipedia was constructed around localized variety adaptation, while FRMT provides a broader region-aware translation resource. Under the evaluated conditions, the usefulness of aligned supervision therefore depends on how closely the transformations represented in the training pairs match the intended rewriting behavior, not only on the amount of parallel data available.
 
-Given these differences in learned rewriting behavior, control placement does
-not provide a universally preferable formulation. Neither formulation dominates consistently across
-tasks, resources, and directions. This behavior is consistent with the two
-formulations exposing variety information at different points in the
-sequence-to-sequence process, but the experiments do not isolate the mechanism
-responsible for the observed ordering. Control placement should therefore
-remain an empirical choice rather than a universal rule.
+Control placement has a smaller and less uniform effect than supervision composition. Decoder control is consistently stronger in the reported BP-to-EP rewriting comparisons, whereas EP-to-BP remains mixed and includes settings where encoder control performs better. Identification likewise provides no universal ordering between the two formulations across the evaluation resources. The experiments establish these resource- and direction-dependent differences but do not determine why placing variety information on the encoder or decoder side changes their relative performance, so control placement remains an empirical design choice rather than a uniformly preferable formulation.
 
-Beyond supervision and control placement, the staged results suggest that
-adaptation history can further redirect the learned behavior.
-Stage A provides its clearest aggregate benefit in the Golden Collection and
-GPT-Wikipedia condition, while the other evaluated conditions are smaller or
-mixed and do not support a uniform warm-up benefit. Stage C has only modest
-effects in the GPT-Wikipedia condition, whereas the GPT-Wikipedia + FRMT
-condition shows substantial Golden Collection recovery and a conditional FRMT
-response. The
-value of an additional stage therefore appears to depend on the behavior
-induced by the preceding checkpoint and on the supervision used for
-continuation. The evidence does not establish that every pipeline requires all
-three stages.
+The staged comparisons reinforce the dependence on the behavior learned before an additional adaptation step. Stage A provides its clearest aggregate benefit after GPT-Wikipedia specialization, especially on the Golden Collection, while the other evaluated conditions show smaller or mixed changes. Stage C changes rewriting only modestly after GPT-Wikipedia specialization but substantially restores Golden Collection performance after GPT-Wikipedia + FRMT specialization, with smaller and mixed changes on FRMT. These patterns indicate that an additional training stage modifies a rewriting policy established by the preceding supervision rather than providing a uniform gain across starting conditions and evaluation resources.
 
-The interpretation of these conditional effects is also constrained by what
-the evaluation can establish. BLEU and TER remain useful surface-oriented
-measures, but controlled EP/BP rewriting requires meaning preservation,
-target-variety correctness, restraint, and copying when no change is needed.
-The Golden Collection copy behavior illustrates that automatic surface metrics
-cannot fully distinguish necessary adaptation, acceptable paraphrase,
-stylistic change, and unnecessary reformulation. The absence of large-scale
-human evaluation further limits conclusions about linguistic acceptability and
-meaning preservation, particularly for broader rewrites that differ from the
-reference.
+These conclusions are also constrained by the construction of the held-out evaluation references and by the metrics used to compare outputs with them. As the source-reference examples in \Cref{sec:qualitative-analysis} show, a valid evaluation pair can contain paraphrastic, editorial, or information-level differences beyond the localized variety changes required by the task, while the Golden Collection also contains many cases that require little or no rewriting. BLEU and TER remain useful surface-oriented measures, but a single reference cannot reliably distinguish every required variety change, appropriate copying, acceptable alternative phrasing, and unnecessary reformulation. The same reference dependence also enters Stage C, where sentence-level BLEU and TER against the reference contribute directly to the reward, so broader-than-required reference changes can also influence the continuation signal.
 
-Evaluation is also tied to the particular resources used. FRMT and the Golden
-Collection provide substantially different evaluation conditions in domain,
-reference construction, and rewriting conservatism. GPT-Wikipedia and
-OpenSubtitles shape the training conditions through different construction
-procedures, domains, and scales. The observed ordering of control formulations
-and data mixtures may therefore change under other training resources,
-evaluation resources, and domains.
-
-The model and ablation design further limit generalization. All experiments
-use the T5Gemma 2 encoder-decoder family, so conclusions about control
-placement, supervision composition, and staged adaptation have not been tested
-across multiple model families. The 270M protocol-selection experiments and
-the 4B LoRA experiments serve different roles and do not constitute a
-controlled scale comparison. The Stage A ablation is aggregate, and the
-absence of directional no-Stage-A rewriting evidence prevents confident
-decomposition of its effect by direction. The strongest identifiability
-limitation concerns Stage C. It changes reward-based optimization and the
-Stage C training subset together, so the observed effect cannot be attributed
-uniquely to the reward objective. A controlled follow-up should separate those
-two factors.
-
-These constraints motivate variety-focused supervision paired with human or
-learned evaluation that distinguishes necessary adaptation, appropriate
-copying, and acceptable paraphrase. Controlled continuation experiments should
-then vary reward design independently of data selection, while broader domains
-and model families test the stability of the observed trade-offs. Broader
-validation should test whether these conditional patterns extend beyond the
-present resources, model family, and experimental design.
+The experimental scope introduces additional limitations. All reported experiments use the T5Gemma 2 encoder-decoder family, so the effects of supervision composition, control placement, and staged adaptation have not been established across multiple model families. The 270M-parameter full-fine-tuning study and the experiments with the 4B-parameter model serve different purposes and use different adaptation methods, so they do not constitute a controlled comparison of scale or fine-tuning strategy. Stage C also changes the continuation subset and optimization procedure together, which prevents their individual contributions from being separated in the reported comparison. These limitations define the scope within which the quantitative and qualitative findings should be interpreted.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper investigated a shared T5Gemma 2 encoder-decoder setup for EP/BP
-identification and bidirectional rewriting. A single adapted model supports
-both tasks, but control placement has no universal ordering. The clearest
-supervised pattern concerns data composition: GPT-Wikipedia aligns more
-closely with conservative Golden Collection rewriting, whereas adding FRMT
-produces broader changes with resource-, direction-, and control-dependent
-effects.
+This work examined Portuguese variety identification and bidirectional EP/BP rewriting within a shared T5Gemma 2 text-to-text setup, with particular attention to how supervision composition, control placement, and staged adaptation shape the two tasks. The experiments show that one adapted model can support both identification and rewriting, while rewriting behavior is especially sensitive to the transformations represented in the aligned supervision. GPT-Wikipedia, which was constructed around localized variety adaptation, produces conservative rewriting that aligns closely with the Golden Collection, whereas adding FRMT changes the learned rewriting behavior substantially and produces different effects across resources and directions.
 
-The staged comparisons likewise show that adaptation history is conditional.
-OpenSubtitles warm-up is most useful in selected GPT-Wikipedia conditions, and
-reward-based continuation changes GPT-Wikipedia Stage C configurations modestly while
-partially recovering Golden Collection rewriting after specialization with the
-GPT-Wikipedia + FRMT data mix. Since Stage C changes both optimization and Stage C data,
-this recovery characterizes the whole procedure rather than isolating effects
-of the reward objective.
+Control placement and staged adaptation refine this picture without providing a single universally preferable configuration. Adding FRMT consistently improves FRMT identification under both control formulations, while its effect on Golden Collection identification is mixed. For rewriting, decoder control is consistently stronger for BP-to-EP, whereas EP-to-BP remains mixed across the evaluated conditions, and removing identification supervision does not improve rewriting overall. Stage A provides its clearest benefit in selected GPT-Wikipedia conditions, while Stage C changes the GPT-Wikipedia condition only modestly and has its largest effect after GPT-Wikipedia + FRMT specialization, where it restores a substantial part of the Golden Collection rewriting performance. The adapted configurations also numerically exceed the closest published task-specific results used for comparison, namely Sousa et al.~\citeyearpar{Sousa_Almeida_Silvano_Cantante_Campos_Jorge_2025} on FRMT identification and the strongest trained Sanches et al.~\citeyearpar{sanches2024brazilianportugueseeuropeanportuguese} system on Golden Collection BP-to-EP rewriting, although these comparisons involve dedicated setups that differ from the shared bidirectional setting used here. Across the additional external systems evaluated in \Cref{sec:appendix-external-model-comparison}, the best adapted result is stronger in every reported identification and rewriting setting except FRMT BP-to-EP, where AMALIA SFT is slightly stronger.
 
-Together, these findings make supervision alignment and evaluation central to
-controlled EP/BP rewriting. Future work should combine cleaner variety-focused
-data with human or learned evaluation that distinguishes necessary adaptation,
-appropriate copying, and acceptable paraphrase, then test the resulting
-trade-offs across broader domains and model families.
-A more complete external comparison should also evaluate a current frontier
-proprietary model under the same identification and bidirectional rewriting
-protocol.
+The broader implication is that effective EP/BP rewriting depends both on supervision whose transformations reflect the intended variety-adaptation task and on evaluation resources and metrics that can distinguish required edits from appropriate preservation and acceptable alternative phrasing. Future work should therefore prioritize more tightly verified variety-focused supervision together with human evaluation, targeted linguistic checks, multiple acceptable references, or validated learned evaluators that better capture these distinctions. Further experiments should also separate continuation-data selection from reward-based optimization, extend the comparison to additional model families and domains, and include a current frontier proprietary model under the same identification and bidirectional rewriting protocol.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{sample-base}
@@ -1134,9 +1084,8 @@ contextual coverage while reducing evident segmentation and alignment noise.
 FRMT is used primarily as held-out evaluation data. Its training split is
 introduced only in the GPT-Wikipedia + FRMT Stage B condition. It is
 converted into the common pair format with its regional bucket metadata
-retained. Before combination with GPT-Wikipedia, its Stage B rewriting pairs
-are filtered toward high structural overlap and localized EP/BP differences to
-limit broader reformulation. The corresponding Stage C condition continues
+retained, although the reported evaluation aggregates over the complete FRMT
+split. The corresponding Stage C condition continues
 from that Stage B checkpoint but uses a much smaller, more conservative
 rewriting-only subset.
 Consequently, the Stage C subset preserves the broader data condition without
