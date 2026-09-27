@@ -5,7 +5,7 @@ import pandas as pd
 pd.set_option("display.max_colwidth", 180)
 
 # Paths must match your training script
-BASE_DIR = pathlib.Path(__file__).resolve().parent
+BASE_DIR = pathlib.Path(__file__).resolve().parents[2]
 PROJECT_DB_PATH = BASE_DIR / "data" / "duckdb" / "subs_project.duckdb"
 SOURCE_DB_PATH  = BASE_DIR / "data" / "duckdb" / "subs.duckdb"
 

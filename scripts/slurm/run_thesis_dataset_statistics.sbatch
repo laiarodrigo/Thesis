@@ -118,13 +118,13 @@ if [[ ! -d "$REPO_ROOT" ]]; then
   exit 2
 fi
 
-if [[ ! -f "$REPO_ROOT/thesis_dataset_statistics.py" ]]; then
-  echo "ERROR: missing script: $REPO_ROOT/thesis_dataset_statistics.py" >&2
+if [[ ! -f "$REPO_ROOT/scripts/analysis/thesis_dataset_statistics.py" ]]; then
+  echo "ERROR: missing script: $REPO_ROOT/scripts/analysis/thesis_dataset_statistics.py" >&2
   exit 2
 fi
 
-if [[ ! -f "$REPO_ROOT/run_thesis_dataset_statistics.sh" ]]; then
-  echo "ERROR: missing wrapper: $REPO_ROOT/run_thesis_dataset_statistics.sh" >&2
+if [[ ! -f "$REPO_ROOT/scripts/analysis/run_thesis_dataset_statistics.sh" ]]; then
+  echo "ERROR: missing wrapper: $REPO_ROOT/scripts/analysis/run_thesis_dataset_statistics.sh" >&2
   exit 2
 fi
 
@@ -150,7 +150,7 @@ echo "[$(date)] python_bin=${PYTHON_BIN:-<auto>}"
 
 CMD=(
   bash
-  "$REPO_ROOT/run_thesis_dataset_statistics.sh"
+  "$REPO_ROOT/scripts/analysis/run_thesis_dataset_statistics.sh"
   --output-dir "$OUTPUT_DIR"
 )
 

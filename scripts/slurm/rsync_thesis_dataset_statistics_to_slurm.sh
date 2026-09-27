@@ -9,8 +9,8 @@ REMOTE_REPO="${REMOTE_REPO:-~/repos/Thesis}"
 DRY_RUN="${DRY_RUN:-0}"
 
 FILES=(
-  "thesis_dataset_statistics.py"
-  "run_thesis_dataset_statistics.sh"
+  "scripts/analysis/thesis_dataset_statistics.py"
+  "scripts/analysis/run_thesis_dataset_statistics.sh"
   "scripts/slurm/run_thesis_dataset_statistics.sbatch"
   "scripts/slurm/submit_thesis_dataset_statistics.sh"
   "scripts/slurm/rsync_thesis_dataset_statistics_to_slurm.sh"

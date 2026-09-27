@@ -19,6 +19,22 @@ directly alongside the project code and notes.
 
 See `report/README.md` for the project entry points and reference PDFs.
 
+## Repository structure
+
+- `configs/` contains the reported training configurations and data-builder configuration.
+- `data/` contains small, versioned inputs and artifact manifests. Large raw
+  corpora, databases, and generated training files are kept outside Git.
+- `docs/` contains reproducibility and artifact-release documentation.
+- `report/` contains the complete dissertation and summary-paper projects.
+- `results/` contains compact result tables, dataset statistics, and model manifests.
+- `scripts/` contains the canonical data construction, training, evaluation,
+  analysis, release, and Slurm entry points.
+- `src/` contains reusable preprocessing and alignment modules.
+
+Model weights, complete evaluation runs, DuckDB databases, raw subtitle files,
+and other large generated artifacts are intentionally excluded from Git. See
+`docs/artifact_release.md` for the private-backup and public-release boundary.
+
 ## Python environment
 
 Install the direct Python dependencies with:
@@ -31,22 +47,17 @@ PyTorch installations depend on the target CUDA environment. On a cluster,
 install the appropriate PyTorch build first if the default package is not
 compatible with the available CUDA modules.
 
-ja consigo extrair ficheiros pt e br do open subtitles.
-agr falta adicionalos a uma base de dados (em principio nao importa o filme em si, ou seja só precisamos de dar parse nos ficheiros e cada linha da base de dados é uma fala e a sua comparação)
-
-fazer funcao para dar parse
-fazer funcao de upload na base de dados
-colocar o codigo já existente dos notebooks em funcoes python e nos respetivos ficheiros
-fazer requirements.txt
 
 ## Docs
 
-- EDA inventory and pipeline diagrams: `docs/eda_map.md`
 - Artifact manifests and release sequence: `docs/artifact_release.md`
 
 ## Wikipedia-inspired pt-PT/pt-BR generation
 
 If you extract Portuguese Wikipedia with NeMo Curator, the resulting JSONL records contain fields such as `text`, `title`, `id`, `url`, `language`, and `source_id`. You can turn that output into small inspiration files and then use one file at a time to generate near-literal pt-PT/pt-BR pairs.
+
+The NeMo Curator download configuration is tracked at
+`configs/data/wikipedia_builder_pt.yaml`.
 
 1) Build inspiration JSON files from NeMo Curator Wikipedia JSONL:
 ```
@@ -283,10 +294,9 @@ Output DB: `data/duckdb/subs_project.duckdb` (views: `train_data`, `test_data`, 
 
 ## Length ratio outlier analysis (scatter_outliers.pdf)
 
-The length-ratio filter is based on `len_pt / len_br` and is used to
-generate `eda's/images/scatter_outliers.pdf`. That logic originates in
-`eda's/10_opus_statistics.ipynb` (e.g., `plot_scatter_with_outliers(...)` and
-`outlier_report(...)`) and is now **part of pass_2** via `src/shard_filter.py`.
+The length-ratio filter is based on `len_pt / len_br`. Its canonical
+implementation is part of `scripts/opus/pass_2_opus.py` through
+`src/shard_filter.py`; exploratory notebook copies are not part of the release.
 
 ## Tuning (recommended bounds + examples)
 

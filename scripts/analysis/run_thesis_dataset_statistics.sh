@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$REPO_ROOT"
 
 # Prefer the repo-local environment because the system python in this workspace
@@ -44,7 +44,7 @@ echo "  repo root:   $REPO_ROOT"
 echo "  python:      $python_bin"
 echo "  output dir:  $OUTPUT_DIR"
 
-"$python_bin" "$REPO_ROOT/thesis_dataset_statistics.py" \
+"$python_bin" "$REPO_ROOT/scripts/analysis/thesis_dataset_statistics.py" \
   --repo-root "$REPO_ROOT" \
   --output-dir "$OUTPUT_DIR" \
   "$@"

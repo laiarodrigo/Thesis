@@ -234,8 +234,6 @@ wget-log*
 *.xdy
 
 # project-local outputs (not for version control)
-eda's/images/
-eda's/csv's/
 qwen3-0_6b-ptbr-ptpt-lora-local_debug/
 thesis/
 data/axolotl/
@@ -246,6 +244,7 @@ data/corpus.clean.br
 data/corpus.clean.pt
 data/corpus.pt
 data/duckdb/*:Zone.Identifier
+data/subs_in_duckdb/
 data/filter_shards/
 data/keep.idx
 data/pairid_to_idx.tsv

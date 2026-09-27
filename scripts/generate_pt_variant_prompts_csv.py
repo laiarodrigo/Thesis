@@ -7,7 +7,7 @@ Default behavior:
 - 30% long, 30% short, 30% stories, 10% equal (split across long/short/story)
 - long sentences: >=16 words
 - stories: 3-5 sentences
-- style guided by exemplos.txt
+- style guided by data/examples/pt_variant_examples.txt
 """
 
 from __future__ import annotations
@@ -116,7 +116,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--examples-file",
         type=Path,
-        default=repo_root / "exemplos.txt",
+        default=repo_root / "data" / "examples" / "pt_variant_examples.txt",
         help=(
             "Reference inspiration file. Accepts TXT/JSON/JSONL with pt_PT/pt_BR pairs "
             "or monolingual passages (for example, Wikipedia excerpts)."

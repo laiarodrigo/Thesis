@@ -12,8 +12,8 @@ JOB_NAME="${JOB_NAME:-thesis_stats}"
 OUTPUT_DIR="${OUTPUT_DIR:-$REPO_ROOT/outputs/thesis_dataset_statistics/manual_$(date +%Y%m%d_%H%M%S)}"
 
 for req in \
-  "thesis_dataset_statistics.py" \
-  "run_thesis_dataset_statistics.sh" \
+  "scripts/analysis/thesis_dataset_statistics.py" \
+  "scripts/analysis/run_thesis_dataset_statistics.sh" \
   "scripts/slurm/run_thesis_dataset_statistics.sbatch"
 do
   [[ -f "$req" ]] || { echo "ERROR: missing file $req" >&2; exit 2; }
