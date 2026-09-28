@@ -22,9 +22,9 @@ specialization on GPT-Wikipedia under the supervised protocol selected in
 \Cref{sec:smaller-model-protocol-study}. No reward variant is continued from
 another.
 
-The encoder-controlled and decoder-controlled diagnostics start from different
-supervised checkpoints, so their effects are interpreted relative to their own
-Stage B baselines rather than through direct comparison of absolute values.
+The two control formulations start from different supervised checkpoints, so
+each diagnostic is interpreted relative to its own Stage B baseline rather than
+compared in absolute terms.
 
 All continuations use the same 1200-step optimization budget. Evaluation follows
 the 270M-parameter protocol-selection comparison, reporting macro-F1 for
@@ -36,15 +36,11 @@ Golden Collection.
 The base reward uses the normalized BLEU and TER components defined in
 \Cref{sec:method-stage-c}. For each generated candidate, sentence-level BLEU
 and TER are computed against the reference rewrite and normalized relative to
-the scores obtained by leaving the source unchanged. The base reward weights the two
-components equally and applies a penalty of 0.10 when a candidate copies the
-source but the reference requires a change.
+the scores obtained by leaving the source unchanged. The base reward weights both components equally and penalizes source copies by 0.10 when the reference requires a change.
 
 In the decoder-controlled diagnostic, the generated \texttt{PT}/\texttt{BR}
-control label is also checked before the sentence-level reward is used. An
-incorrect first label sets the candidate reward to zero, whereas the main
-decoder-controlled Stage C reward assigns a weighted component to first-label
-correctness instead of using this hard gate.
+control label is also checked before the sentence-level reward is used. An incorrect first label sets the candidate reward to zero, whereas main
+decoder-controlled Stage C uses a weighted first-label component.
 
 The classifier-reward variant adds an auxiliary variety-identification score.
 Each generated rewrite is passed back through the model using the identification
@@ -58,8 +54,7 @@ The token-conservatism variant adds a token-level score. After lowercasing and
 tokenizing the source, candidate, and reference, each generated token receives one of three scores.
 A token absent from the reference receives 0. A token present in both the
 reference and source receives 0.5. A token present in the reference but absent
-from the source receives 1.0. The sequence score is the mean of these token
-scores.
+from the source receives 1.0. The sequence score averages these token scores.
 
 For both auxiliary-reward variants, normalized BLEU and TER each receive a
 weight of 0.45, while the added component receives a weight of 0.10.
@@ -159,5 +154,5 @@ under some variants, with TER-diverse grouping giving the best
 decoder-controlled rewriting result. In contrast, every encoder-controlled
 continuation substantially reduces rewriting despite much smaller identification
 changes. The classifier and token-conservatism components provide no consistent
-advantage across formulations, so none of the tested modifications is generally
+advantage across formulations, so no tested modification is generally
 preferable.

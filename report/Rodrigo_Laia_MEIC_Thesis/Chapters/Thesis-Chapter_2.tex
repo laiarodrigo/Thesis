@@ -159,15 +159,15 @@ attend to in one forward pass \citep{NIPS2017_3f5ee243}.
 
 Given token representations $X$, which already include positional information,
 queries, keys, and values are obtained through learned linear projections,
-\[
+\begin{equation}
 Q = XW^Q, \qquad K = XW^K, \qquad V = XW^V.
-\]
+\end{equation}
 The scaled dot-product attention used throughout the architecture is then given
 by
-\[
+\begin{equation}
 \mathrm{Attention}(Q, K, V) =
 \mathrm{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
-\]
+\end{equation}
 The operation replaces each token representation by a similarity-weighted
 combination of the others. Multi-head attention repeats this computation with
 different learned projections and concatenates the results,
@@ -402,34 +402,34 @@ the decision on side information. At each round, a context \(X\) is sampled from
 a distribution \(\mathcal{D}\), the agent chooses an action
 \(a \sim \pi(\cdot \mid X)\), and observes a scalar reward \(r(X,a)\). The
 objective is to learn a policy \(\pi\) that maximizes expected reward,
-\[
+\begin{equation}
 J(\pi) =
 \mathbb{E}_{X \sim \mathcal{D}}
 \mathbb{E}_{a \sim \pi(\cdot \mid X)}
 \left[r(X,a)\right].
-\]
+\end{equation}
 
 In reward-based fine-tuning for language models, the context \(X\) corresponds
 to the conditioning information given to the model, such as an instruction and
 a source sentence. The action is not a single symbolic choice, but a complete
 generated output \(Y = (Y_1,\ldots,Y_{|Y|})\). A language model parameterized by
 \(\theta\) defines the following autoregressive policy over complete outputs:
-\[
+\begin{equation}
 \pi_\theta(Y \mid X) =
 \prod_{t=1}^{|Y|}
 \pi_\theta(Y_t \mid X, Y_{<t}).
-\]
+\end{equation}
 After sampling \(Y \sim \pi_\theta(\cdot \mid X)\), the output is evaluated by
 a scoring function, such as a reward model, verifier, preference scorer,
 automatic metric, or task-specific evaluator. The score is an outcome-level
 reward \(r(X,Y)\), and the contextual-bandit objective for language-model
 policy optimization becomes
-\[
+\begin{equation}
 J(\pi_\theta) =
 \mathbb{E}_{X \sim \mathcal{D}}
 \mathbb{E}_{Y \sim \pi_\theta(\cdot \mid X)}
 \left[r(X,Y)\right].
-\]
+\end{equation}
 
 The objective above can be optimized from different forms of feedback.
 Pairwise-preference methods such as Direct Preference Optimization (DPO) use
@@ -444,7 +444,7 @@ candidates generated for the same input and convert their rewards into relative
 advantages \citep{Shao2024DeepSeekMathPT}. If a group contains \(C\) candidates
 with rewards \(r_1,\ldots,r_C\), a standardized group-relative advantage can be
 written as
-\[
+\begin{equation}
 \hat{A}_i = \frac{r_i - \bar{r}}{\sigma_r + \epsilon},
 \qquad
 \bar{r} = \frac{1}{C}\sum_{j=1}^{C} r_j,
@@ -453,7 +453,7 @@ written as
 \sqrt{
 \frac{1}{C}\sum_{j=1}^{C}(r_j-\bar{r})^2
 }.
-\]
+\end{equation}
 A candidate receives a positive advantage when it scores above the group
 average and a negative advantage when it scores below it. The optimization
 signal therefore depends on how a candidate performs relative to alternatives
@@ -467,9 +467,9 @@ Recent work on language-model alignment studies how multiple reward
 models can be transformed and combined when optimizing for several properties
 at once \citep{pmlr-v235-wang24ay}. A common approach combines reward
 components into a scalar objective,
-\[
+\begin{equation}
 R(X,Y) = \sum_{m=1}^{M} \lambda_m r_m(X,Y),
-\]
+\end{equation}
 where \(r_m\) are component rewards and \(\lambda_m\) are weights controlling
 their relative importance. Reward shaping can also transform or augment these
 components, for example by normalizing them, comparing them to a baseline, or

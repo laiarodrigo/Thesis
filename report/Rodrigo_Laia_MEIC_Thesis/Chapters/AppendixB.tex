@@ -60,17 +60,15 @@ uses approximately one-sixth as many trainable adapter parameters as rank 48.
 Identification does not follow the same ordering: rank 16 gives the highest
 macro-F1, at 72.31 compared with 71.53 for rank 48, and macro-F1 does not
 increase monotonically with rank. The results therefore show a trade-off
-between trainable adapter size and performance. Rank 48 performs best on the
-rewriting metrics in this configuration, while substantially smaller adapters
-remain competitive when trainable-parameter efficiency is prioritized.
+between trainable adapter size and performance. Rank 48 performs best on rewriting in this configuration, while smaller
+adapters remain competitive when parameter efficiency matters.
 
-The experiment does not establish statistical significance or a general
-monotonic relationship between LoRA rank and performance.
+The experiment establishes neither statistical significance nor rank-performance monotonicity.
 
 {\tolerance=1500\looseness=-1
 Reducing LoRA rank lowers the number of trainable adapter parameters, but it
 does not reduce the size of the frozen base model or proportionally reduce
 activation and forward-pass costs. The percentages in
 \Cref{tab:appendix-lora-rank} describe adapter-parameter savings, not
-proportional reductions in total \mbox{training memory or computation}.
+proportional savings in \mbox{training memory or computation}.
 \par}

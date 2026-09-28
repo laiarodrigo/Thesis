@@ -93,11 +93,7 @@ FRMT identification gain.
 Although individual variants improve particular metrics, none provides a
 consistent gain across identification and rewriting. The base protocol is
 therefore retained as the simpler configuration for the subsequent experiments
-with the 4B-parameter model. The retained protocol uses the natural
-rewriting-to-identification mixture, the existing \texttt{PT}/\texttt{BR}
-base-vocabulary representations, and normal decoder-vocabulary scoring at the
-supervised identification label position, while rewriting uses loss over the
-complete target sequence.
+with the 4B-parameter model. The retained protocol uses the natural rewriting-to-identification mixture, the existing \texttt{PT}/\texttt{BR} base-vocabulary representations, and normal decoder-vocabulary scoring at the supervised label position, with the complete target sequence used for rewriting loss.
 
 \section{Variety Identification Results}
 \label{sec:identification-results}
@@ -174,7 +170,7 @@ stages.
 \centering
 \thesistablefont
 \setlength{\tabcolsep}{3pt}
-\caption{Directional rewriting results for the 4B-parameter T5Gemma 2 model after Stage B and Stage C with rank-48 LoRA.}
+\caption{Directional Stage B/C rewriting results for the 4B-parameter T5Gemma 2 model with rank-48 LoRA.}
 \label{tab:r48-translation-breakdown}
 \begin{tabularx}{\textwidth}{@{}clYcccc@{}}
 \toprule
@@ -428,9 +424,9 @@ this behavior. On the 454 exact-copy Golden Collection rows, where leaving the s
 unchanged matches the reference, the model trained with GPT-Wikipedia preserves
 the source exactly in 74.7\% of cases, compared with 18.7\% for the model trained
 with the GPT-Wikipedia + FRMT data mix. On the 546 non-exact rows, the
-corresponding copy rates are 33.7\% and 3.1\%. In these cases, unchanged copying
-can indicate under-editing, so reducing copying can help realize required
-changes but also increases the opportunity for unnecessary reformulation.
+corresponding copy rates are 33.7\% and 3.1\%. In these cases, copying can
+indicate under-editing, so reducing it can realize required changes but also
+encourage unnecessary reformulation.
 
 \Cref{tab:golden-qualitative-overtranslation} illustrates both sides of this
 trade-off. In the first row, the model trained with GPT-Wikipedia under-edits by

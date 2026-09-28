@@ -14,7 +14,12 @@ from both linguistic and data-centric perspectives
 the dissertation (\Cref{sec:intro-research-statement}), summarizes the main
 contributions (\Cref{sec:intro-contributions}), and describes the
 organization of the remaining chapters
-(\Cref{sec:intro-document-organization}).
+(\Cref{sec:intro-document-organization}).\footnote{Code and reproducibility
+artifacts: \href{https://github.com/laiarodrigo/Thesis}{GitHub}. Reported model
+weights:
+\href{https://huggingface.co/laiarodrigo/portuguese-variant-t5gemma2}{Hugging Face}.
+Curated data and provenance:
+\href{https://huggingface.co/datasets/laiarodrigo/portuguese-variant-data}{Hugging Face}.}
 
 \section{Motivation}
 \label{sec:intro-motivation}
@@ -26,8 +31,8 @@ success does not change the basic limitation that their behavior remains shaped
 by the distribution of the data on which they were trained. For languages with
 multiple standardized varieties, this creates a practical problem.
 Comparable challenges arise in languages such as English, Spanish, Arabic, or
-French, where users may expect computational systems to respect the variety
-they use rather than the one most represented in the training data
+French, where users may expect systems to respect their variety rather than the
+one most represented in training data
 \citep{zampieri2020natural}.
 
 Brazilian Portuguese is disproportionately represented in Portuguese text
@@ -55,9 +60,8 @@ and evaluation. As a result, corpora labeled only at the language level often
 mix multiple varieties, and models trained on them can blur distinctions that
 remain important to users. Automatic filtering can further affect this
 representation when corpus-construction pipelines depend on
-language-identification predictions. Under domain mismatch, class imbalance,
-and language similarity, identification errors can propagate into the
-composition of web corpora \citep{caswell-etal-2020-language-id-wild}.
+language-identification predictions. Under domain mismatch, class imbalance, and language similarity, identification
+errors can propagate into web corpora \citep{caswell-etal-2020-language-id-wild}.
 
 \section{Research Statement}
 \label{sec:intro-research-statement}
@@ -121,10 +125,9 @@ Accordingly, this research project makes four main contributions.
     \item It develops and evaluates models for both\hfil\break
     language variety
     identification and bidirectional rewriting between EP and BP.
-    \item It studies encoder-decoder adaptation through lower-cost full-fine-tuning
-experiments with the 270M-parameter T5Gemma 2 model for supervised protocol
-selection and LoRA experiments with the 4B-parameter model covering control
-formulation, data composition, staged training, and reward-based continuation.
+    \item It studies 270M T5Gemma 2 full fine-tuning for supervised protocol selection and
+4B LoRA for control placement, data composition, staged training, and
+reward-based continuation.
     \item It complements aggregate evaluation with corpus and qualitative error
     analyses, highlighting data strengths, model failures, and linguistic
     phenomena that remain difficult after fine-tuning.

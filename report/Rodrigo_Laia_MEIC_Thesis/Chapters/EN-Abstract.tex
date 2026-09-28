@@ -5,28 +5,6 @@
 % reset acronyms
 \acresetall
 % use \noindent in firts paragraph
-\noindent Portuguese is a pluricentric language, but large language models trained
-on generic web corpora are often shaped by the predominance of Brazilian
-Portuguese. This dissertation studies language-variety processing for European Portuguese (EP) and Brazilian Portuguese (BP) through two related tasks: sentence-level variety
-identification and bidirectional rewriting. The work consolidates supervision
-from OpenSubtitles, Few-shot Region-aware Machine Translation (FRMT), a manually curated Golden Collection, and a
-GPT-Wikipedia resource, applying preprocessing and filtering procedures aimed
-at preserving variety-relevant differences while reducing noisy paraphrase and
-alignment errors.
+\noindent Portuguese is a pluricentric language, but large language models trained on generic web corpora are often shaped by the predominance of Brazilian Portuguese. This work studies European Portuguese (EP) and Brazilian Portuguese (BP) through two related tasks: sentence-level variety identification and bidirectional rewriting. Supervision is consolidated from OpenSubtitles, Few-shot Region-aware Machine Translation (FRMT), the Golden Collection, and a GPT-Wikipedia resource, with preprocessing and filtering designed to preserve variety-relevant differences while reducing unrelated paraphrase and alignment noise.
 
-The experimental study adapts T5Gemma 2 encoder-decoder models with 270M and 4B
-parameters. The 270M-parameter T5Gemma 2 model is fully fine-tuned to test
-decoder-controlled protocol choices before the subsequent experiments, while
-the 4B-parameter model is adapted with Low-Rank Adaptation (LoRA). The study also compares encoder-side control strings with decoder-side variety labels and evaluates a three-stage training pipeline composed of broad supervised adaptation, targeted supervised specialization, and reward-based continuation. Additional diagnostics analyze LoRA rank and isolated
-reward-design variants. Among the matched supervised comparisons, data
-composition produces the largest observed changes in rewriting performance.
-Supervision aligned with localized rewriting is strongest on the conservative
-Golden Collection benchmark, while adding supervision from FRMT strongly
-lowers Golden Collection rewriting and produces formulation- and
-direction-dependent FRMT effects. Control placement is therefore conditional
-rather than universally ordered. Reward-based continuation partly restores
-Golden Collection performance for the GPT-Wikipedia + FRMT conditions. These findings make
-supervision quality and evaluation central to Portuguese variety adaptation:
-aligned EP/BP resources can encourage different rewriting behavior, while
-automatic metrics remain highly sensitive to copying and do not fully
-distinguish necessary adaptation from broader reformulation.
+The experimental study adapts T5Gemma 2 encoder-decoder models with 270M and 4B parameters. The 270M-parameter model is fully fine-tuned for supervised protocol selection and separate reward-design diagnostics, while the 4B-parameter model is adapted with Low-Rank Adaptation (LoRA) to compare control placement, supervision composition, staged adaptation, and reward-based continuation. Supervision composition produces the largest rewriting changes. GPT-Wikipedia is most closely aligned with the conservative Golden Collection, while adding FRMT improves FRMT identification, changes FRMT rewriting depending on direction and control, and strongly lowers Golden Collection rewriting after supervised specialization. Decoder control is consistently stronger for BP-to-EP rewriting, whereas EP-to-BP remains mixed. Reward-based continuation changes GPT-Wikipedia conditions modestly but substantially recovers Golden Collection rewriting after GPT-Wikipedia + FRMT specialization. The results show that aligned EP/BP resources can induce different rewriting policies, while reference construction and metrics do not fully distinguish required adaptation, appropriate preservation, and broader reformulation.

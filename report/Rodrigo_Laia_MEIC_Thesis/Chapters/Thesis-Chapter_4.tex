@@ -17,7 +17,7 @@ study preceding the 4B-parameter experiments.
 \label{sec:method-models}
 
 The reported experiments use encoder-decoder models from the T5Gemma 2 family
-\citep{zhang2025t5gemma2seeingreading} with 270M and 4B parameters. The 270M-parameter experiments start from \texttt{google/t5gemma-2-270m-270m},
+\citep{zhang2025t5gemma2seeingreading} with 270M and 4B parameters. The 270M-parameter experiments start from \texttt{google/\allowbreak{}t5gemma-\allowbreak{}2-\allowbreak{}270m-\allowbreak{}270m},
 and the 4B-parameter experiments start from \texttt{google/t5gemma-2-4b-4b}.
 
 The 270M-parameter model is fully fine-tuned for the supervised
@@ -65,8 +65,8 @@ and classification rows in each stage mixture.
 
 In both formulations, rewriting and identification share the same
 encoder-decoder parameters, embeddings, and decoder vocabulary. The
-formulations differ in where the control signal is introduced and how
-classification supervision is attached to the target sequence.
+formulations differ in control-signal placement and in how classification
+supervision is attached to the target sequence.
 
 \subsection{Encoder-Controlled Formulation}
 \label{sec:method-encoder-control}
@@ -169,7 +169,7 @@ procedures.
   \thesistablefont
   \setlength{\tabcolsep}{5pt}
   \renewcommand{\arraystretch}{1.12}
-  \caption{Task-specific training examples by stage and data condition. Percentages in parentheses give task shares within each training set.}
+  \caption{Task-specific training examples by stage and data condition, with task shares shown in parentheses.}
   \label{tab:method-training-composition}
   \begin{tabularx}{\textwidth}{@{}cYcc@{}}
     \toprule
@@ -339,19 +339,19 @@ The reward compares each rewrite with the reference and unchanged
 source. For the BLEU component, let \(B_m\) denote candidate sentence-level BLEU
 and \(B_c\) the BLEU from copying the source:
 
-\[
+\begin{equation}
 R_{\mathrm{BLEU}}
 =
 \frac{B_m}{B_m+B_c+\epsilon}.
-\]
+\end{equation}
 
 Similarly, let \(T_m\) be candidate TER and \(T_c\) the copy-source TER:
 
-\[
+\begin{equation}
 R_{\mathrm{TER}}
 =
 \frac{T_c+\epsilon}{T_m+T_c+2\epsilon}.
-\]
+\end{equation}
 
 The constant \(\epsilon=10^{-8}\) prevents division by zero.
 
@@ -359,18 +359,18 @@ These forms reward a candidate relative to the unchanged-source alternative
 rather than using the raw BLEU and TER values alone. Encoder-controlled models
 weight the two components equally:
 
-\[
+\begin{equation}
 R_{\mathrm{enc}}
 =
 0.5R_{\mathrm{BLEU}}
 +
 0.5R_{\mathrm{TER}},
-\]
+\end{equation}
 
 Decoder-controlled models additionally reward correctness of the first
 generated input-variety label:
 
-\[
+\begin{equation}
 R_{\mathrm{dec}}
 =
 0.4R_{\mathrm{BLEU}}
@@ -378,7 +378,7 @@ R_{\mathrm{dec}}
 0.4R_{\mathrm{TER}}
 +
 0.2R_{\mathrm{label}}.
-\]
+\end{equation}
 
 For BP-to-EP examples, \(R_{\mathrm{label}}\) is 1 when the first generated
 label is \texttt{BR}. For EP-to-BP examples, it is 1 when the first generated
@@ -392,20 +392,20 @@ procedure described in \Cref{sec:rl-reward-ft}. If the reward standard deviation
 within a group is zero, all advantages for that group are set to zero. The
 implemented Stage C loss is
 
-\[
+\begin{equation}
 \mathcal{L}_{\mathrm{StageC}}(\theta)
 =
 -\frac{1}{|G(x)|}
 \sum_{y_i \in G(x)}
 A_i
 \frac{\log p_\theta(y_i \mid x)}{L_{\max}},
-\]
+\end{equation}
 
 where \(A_i\) is the group-normalized advantage for candidate \(y_i\) and
 \(L_{\max}=128\) is the maximum completion length used for normalization. The
 implemented objective does not use Proximal Policy Optimization (PPO)-style
 likelihood ratios or clipping.
-With \(\beta=0\), no explicit KL penalty toward the starting policy is applied.
+At \(\beta=0\), the starting policy has no KL penalty.
 
 Stage C differs from Stage B in both the optimization procedure and the
 training data. Thus, Stage B-to-Stage C comparisons characterize the

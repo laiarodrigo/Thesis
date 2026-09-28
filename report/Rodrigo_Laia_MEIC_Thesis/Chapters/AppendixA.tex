@@ -75,8 +75,7 @@ content.
 As summarized in \Cref{sec:data-opensubtitles}, formatting cleanup removes
 subtitle-specific artifacts such as dialogue dashes, speaker labels, irregular
 spacing, wrapping artifacts, unbalanced quotation marks, and fully capitalized
-formatting. This subsection focuses on merging adjacent subtitle rows to restore
-sentence boundaries.
+formatting. This subsection describes adjacent-row merging to restore sentence boundaries.
 
 \looseness=-1
 Subtitle segmentation is then corrected when adjacent rows appear to belong to
@@ -111,8 +110,7 @@ After local cleanup, OpenSubtitles pairs are filtered with SimAlign
 between the BP and EP sentences using contextual multilingual representations.
 This is useful for EP/BP data, since valid correspondences are not always
 surface-identical. A BP gerund may correspond to an EP infinitival
-construction, and a lexical item in one sentence may correspond to a short
-phrase in the other.
+construction, and a lexical item may correspond to a short phrase.
 
 SimAlign requires three main choices. The first is the multilingual encoder
 used to compute contextual embeddings. The second is the granularity of the
@@ -191,30 +189,29 @@ their sets of normalized token types, let \(A\) be the selected set of
 word-alignment pairs, and let \(V_A\) be the subset of token types that
 participate in at least one pair in \(A\). The filter uses the following
 coverage score:
-\[
+\begin{equation}
 s(T_{\mathrm{bp}}, T_{\mathrm{ep}}) =
 \frac{\lvert V_A \rvert}
 {\lvert V_{\mathrm{bp}} \cup V_{\mathrm{ep}} \rvert},
-\]
+\end{equation}
 where the notation follows the definitions above.
 
 The coverage score is then compared with a length-adaptive threshold. If
 \(L = \max(\lvert T_{\mathrm{bp}} \rvert, \lvert T_{\mathrm{ep}} \rvert)\),
 the threshold is
-\[
+\begin{equation}
 \tau(L)=
 \begin{cases}
 0.30, & L \leq 8, \\
 0.70, & L \geq 28, \\
 0.30 + \dfrac{L-8}{28-8}(0.70-0.30), & \text{otherwise.}
 \end{cases}
-\]
+\end{equation}
 Short subtitle fragments are allowed lower coverage, while longer pairs must
 show stronger bilingual alignment. A separate length-ratio check rejects pairs
 where one sentence is implausibly short or long relative to the other. If \(r\) is
 the ratio between EP and BP character length, the pair is kept only when
-\(0.5 \leq r \leq 2.0\). The final rule therefore keeps pairs that pass both
-the alignment-coverage condition and the length-ratio condition.
+\(0.5 \leq r \leq 2.0\). The final rule retains pairs meeting alignment-coverage and length-ratio constraints.
 
 % Start the complete review procedure on a fresh page instead of leaving a four-line tail.
 \clearpage
