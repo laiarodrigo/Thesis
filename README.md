@@ -1,323 +1,45 @@
-# Thesis
+# Portuguese Variant Identification and Translation
+
+Code, configurations, results, and reports for a thesis on identifying and
+translating European and Brazilian Portuguese.
+
+## Repository structure
+
+- `configs/` — training and data-building configurations
+- `data/` — small versioned inputs and artifact manifests
+- `docs/` — reproducibility and artifact-release notes
+- `report/` — the dissertation and summary paper LaTeX projects
+- `results/` — compact result tables, statistics, and model manifests
+- `scripts/` — data preparation, training, evaluation, and analysis entry points
+- `src/` — reusable preprocessing and alignment modules
+
+Large datasets, model weights, databases, and generated evaluation artifacts are
+not tracked in Git. See `docs/artifact_release.md` for the artifact inventory and
+release process.
+
+## Environment
+
+Install the Python dependencies with:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Install the PyTorch build appropriate for the target CUDA environment when the
+default package is not compatible.
 
 ## Reports
 
-Both complete LaTeX projects are tracked under `report/`:
+The complete LaTeX projects are in:
 
-- `report/Rodrigo_Laia_MEIC_Thesis/` contains the dissertation.
-- `report/Rodrigo_Laia_Resumo_Tese/` contains the shorter summary paper.
+- `report/Rodrigo_Laia_MEIC_Thesis/` — dissertation
+- `report/Rodrigo_Laia_Resumo_Tese/` — summary paper
 
-To build either PDF locally, enter its directory and run:
+For example, build the dissertation with:
 
 ```bash
 cd report/Rodrigo_Laia_MEIC_Thesis
 make pdf
 ```
 
-This keeps the writing context in the repository so the report can be revised
-directly alongside the project code and notes.
-
-See `report/README.md` for the project entry points and reference PDFs.
-
-## Repository structure
-
-- `configs/` contains the reported training configurations and data-builder configuration.
-- `data/` contains small, versioned inputs and artifact manifests. Large raw
-  corpora, databases, and generated training files are kept outside Git.
-- `docs/` contains reproducibility and artifact-release documentation.
-- `report/` contains the complete dissertation and summary-paper projects.
-- `results/` contains compact result tables, dataset statistics, and model manifests.
-- `scripts/` contains the canonical data construction, training, evaluation,
-  analysis, release, and Slurm entry points.
-- `src/` contains reusable preprocessing and alignment modules.
-
-Model weights, complete evaluation runs, DuckDB databases, raw subtitle files,
-and other large generated artifacts are intentionally excluded from Git. See
-`docs/artifact_release.md` for the private-backup and public-release boundary.
-
-## Python environment
-
-Install the direct Python dependencies with:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-PyTorch installations depend on the target CUDA environment. On a cluster,
-install the appropriate PyTorch build first if the default package is not
-compatible with the available CUDA modules.
-
-
-## Docs
-
-- Artifact manifests and release sequence: `docs/artifact_release.md`
-
-## Wikipedia-inspired pt-PT/pt-BR generation
-
-If you extract Portuguese Wikipedia with NeMo Curator, the resulting JSONL records contain fields such as `text`, `title`, `id`, `url`, `language`, and `source_id`. You can turn that output into small inspiration files and then use one file at a time to generate near-literal pt-PT/pt-BR pairs.
-
-The NeMo Curator download configuration is tracked at
-`configs/data/wikipedia_builder_pt.yaml`.
-
-1) Build inspiration JSON files from NeMo Curator Wikipedia JSONL:
-```
-python scripts/build_wikipedia_pt_inspiration_batches.py \
-  --input-jsonl data/wikipedia/pt/*.jsonl \
-  --output-dir data/wikipedia_pt_inspiration \
-  --num-files 0 \
-  --articles-per-file 25 \
-  --sentences-per-article 5
-```
-
-2) Generate translation pairs with the simpler prompt style:
-```
-python scripts/generate_pt_variant_prompts_csv.py \
-  --env-file bla.env \
-  --examples-file data/wikipedia_pt_inspiration/ptwiki_inspiration_batch_01.json \
-  --prompt-style minimal_lexical \
-  --disable-topic-tags \
-  --exclude-equal \
-  --min-variant-differences 1 \
-  --output-csv data/pt_variant_prompts_wikipedia_batch01.csv
-```
-
-The `minimal_lexical` prompt style asks for pt-BR outputs that stay as close as possible to pt-PT, changing only clear lexical or morphosyntactic variant differences instead of paraphrasing freely.
-
-3) Generate 50 examples for each Wikipedia inspiration JSON file:
-```
-python scripts/generate_wikipedia_pt_variant_loop.py \
-  --env-file bla.env \
-  --input-dir data/wikipedia_pt_inspiration \
-  --output-dir data/wikipedia_pt_variant_csv \
-  --per-file-total 50
-```
-
-## Decoder-Only (Qwen3 + Axolotl, LoRA)
-
-1) Export training/validation JSONL for Axolotl:
-```
-python scripts/decoder_only/axolotl/export_qwen_chat_data.py
-```
-
-2) Preprocess + train with Axolotl:
-```
-scripts/decoder_only/axolotl/run_qwen3_lora.sh
-```
-
-3) Evaluate the trained adapter:
-```
-python scripts/test_qwen_lora.py \
-  --use-adapter \
-  --adapter-dir outputs/decoder_only/qwen3-0_6b-ptbr-ptpt-lora
-```
-
-### External chat-model evaluation
-
-Zero-shot chat-model evaluation scripts are also available for external causal
-LMs such as AMALIA, Qwen3-4B, and Phi-4-mini on the thesis test sets.
-
-Run an AMALIA-only SLURM sweep:
-```
-scripts/decoder_only/axolotl/run_eval_amalia_all.sh
-```
-
-Run the generic SLURM suite for AMALIA plus the comparison models:
-```
-scripts/slurm/submit_external_chat_eval_suite.sh
-```
-
-By default that suite uses the current control-string evaluation protocol:
-`data/encoder_decoder/t5gemma2/control_string_eval/{golden,frmt}/decoder_unified/`
-with binary classification labels and no `equal` rows. To switch protocols:
-```
-DATA_PROTOCOL=final DATA_KIND=decoder_unified scripts/slurm/submit_external_chat_eval_suite.sh
-DATA_PROTOCOL=legacy scripts/slurm/submit_external_chat_eval_suite.sh
-```
-
-The default model set is:
-```
-amalia-llm/AMALIA-9B-0626-SFT
-Qwen/Qwen3-4B
-microsoft/Phi-4-mini-instruct
-```
-
-The one-model convenience wrappers are still available:
-```
-scripts/decoder_only/axolotl/run_eval_amalia_translation_golden.sh
-scripts/decoder_only/axolotl/run_eval_amalia_translation_frmt.sh
-scripts/decoder_only/axolotl/run_eval_amalia_classification_golden.sh
-scripts/decoder_only/axolotl/run_eval_amalia_classification_frmt.sh
-```
-
-The classification wrappers default to `pt-br pt-pt` candidates so the scores
-match the binary macro-F1 convention already used in the existing comparison
-tables.
-
-Main config: `configs/decoder_only/axolotl/qwen3_lora.yaml`
-
-## Encoder-Decoder (HF + PEFT LoRA, 3-way classification)
-
-This path is organized under `scripts/encoder_decoder/` and `configs/encoder_decoder/`.
-Classification labels are: `pt-br`, `pt-pt`, `equal`.
-It uses `transformers` + `peft` training scripts under `scripts/encoder_decoder/` (not the Axolotl runner).
-
-1) Export encoder-decoder datasets (translation + classification):
-```
-scripts/encoder_decoder/single_task_models/run_export.sh
-```
-
-This writes:
-- `data/encoder_decoder/translation_train.jsonl`
-- `data/encoder_decoder/translation_valid.jsonl`
-- `data/encoder_decoder/classification_train.jsonl`
-- `data/encoder_decoder/classification_valid.jsonl`
-
-2) Train translation LoRA:
-```
-scripts/encoder_decoder/single_task_models/run_train_translation_lora.sh
-```
-
-3) Train classification LoRA:
-```
-scripts/encoder_decoder/single_task_models/run_train_classification_lora.sh
-```
-
-4) Evaluate translation:
-```
-scripts/encoder_decoder/eval/run_eval_translation.sh \
-  --dataset-path data/encoder_decoder/translation_valid.jsonl \
-  --model-id google/flan-t5-base \
-  --adapter-dir outputs/encoder_decoder/flan_t5_base_translation_lora
-```
-
-5) Evaluate classification:
-```
-scripts/encoder_decoder/eval/run_eval_classification.sh \
-  --dataset-path data/encoder_decoder/classification_valid.jsonl \
-  --model-id google/flan-t5-base \
-  --adapter-dir outputs/encoder_decoder/flan_t5_base_classification_lora
-```
-
-## HPO Pipelines
-
-### Encoder-Decoder (Optuna)
-
-1) Define search spaces:
-- `hpo/encoder_decoder/translation_search_space.yaml`
-- `hpo/encoder_decoder/classification_search_space.yaml`
-
-2) Run studies:
-```
-python scripts/hpo/encoder_decoder/run_optuna_translation.py
-python scripts/hpo/encoder_decoder/run_optuna_classification.py
-```
-
-3) Collect results:
-```
-python scripts/hpo/encoder_decoder/collect_optuna_results.py
-```
-
-The runner scripts call `scripts/encoder_decoder/train_encdec_lora.py` for each trial, write trial configs under `hpo/encoder_decoder/generated_*`, train outputs under `outputs/hpo/encoder_decoder/*`, and metrics are read from `trainer_state.json` (`eval_loss`).
-
-### Decoder-Only (Axolotl)
-
-1) Define search space:
-- `hpo/decoder_only/qwen3_search_space.yaml`
-
-2) Generate trial configs:
-```
-python scripts/hpo/decoder_only/generate_axolotl_trials.py
-```
-
-3) Run trials:
-```
-scripts/hpo/decoder_only/run_trials.sh
-```
-
-4) Collect results:
-```
-python scripts/hpo/decoder_only/collect_axolotl_metrics.py
-```
-
-The generator creates per-trial Axolotl configs and a manifest CSV, the runner executes `axolotl preprocess/train` per manifest row, and metrics are collected from `trainer_state.json` under each trial output directory.
-
-## OPUS pipeline (exact run order)
-
-1) Ingest OPUS/OpenSubtitles text files into DuckDB (`opus_moses`):
-```
-python scripts/opus/ingest_opus.py
-```
-
-2) Pass 1 cleaning on `opus_moses`:
-```
-python scripts/opus/pass_1_opus.py
-```
-
-3) Pass 2 filtering (SimAlign + length-adaptive thresholding + length-ratio outliers) and apply it to `opus_moses`:
-```
-python scripts/opus/pass_2_opus.py
-```
-
-Output DB: `data/duckdb/subs.duckdb` (table `opus_moses` is updated in-place).
-
-## PtBrVarId pipeline (exact run order)
-
-1) Ingest PtBrVId (raw) from HuggingFace into `subs.duckdb` (`ptbrvarid`, dataset tag `PtBrVId-Raw`):
-```
-python scripts/ptbrvarid/ingest_ptbrvarid.py
-```
-
-2) Run PtBrVId filtering pipeline (jusText + author transforms + dedup + IQR):
-```
-python scripts/ptbrvarid/filter_ptbrvarid.py
-```
-
-3) Build project views (splits + unified train/test views) into `subs_project.duckdb`:
-```
-python scripts/project/build_project_db.py
-```
-
-Output DB: `data/duckdb/subs_project.duckdb` (views: `train_data`, `test_data`, etc.).
-
-## Where the filters live (SimAlign + length-adaptive thresholding + length-ratio outliers)
-
-- **Current pipeline (used by `pass_2_opus.py`)**: `src/shard_filter.py`
-  - `new_sim(...)` builds SimAlign similarity with `SentenceAligner`.
-  - `length_adaptive_flag(...)` is the length-adaptive thresholding (based on sentence length, not ratio).
-  - `length_ratio_flag(...)` flags length-ratio outliers (`len_pt / len_br`, default bounds 0.5–2.0).
-- `scripts/opus/pass_2_opus.py` shards the data, runs `src/shard_filter.py`, and then removes flagged rows from `opus_moses`.
-  - You can override ratio bounds with `RATIO_LOW` and `RATIO_HIGH`.
-
-- **Alternate/monolithic filter inside `src/opus_pipeline.py`** (only used if you call it directly):
-  - `alignment_quality_features(...)` + `alignment_similarity_only_flag(...)`
-  - `build_simple_filter_flags_chunked(...)` and `apply_simple_filter_ctas_swap(...)`
-
-## Length ratio outlier analysis (scatter_outliers.pdf)
-
-The length-ratio filter is based on `len_pt / len_br`. Its canonical
-implementation is part of `scripts/opus/pass_2_opus.py` through
-`src/shard_filter.py`; exploratory notebook copies are not part of the release.
-
-## Tuning (recommended bounds + examples)
-
-Recommended defaults:
-- `RATIO_LOW=0.5`, `RATIO_HIGH=2.0` (length ratio `len_pt/len_br`)
-- `base_min_sim=0.30`, `long_min_sim=0.70`, `short_len=8`, `long_len=28`
-
-Examples:
-```
-RATIO_LOW=0.6 RATIO_HIGH=1.9 python scripts/opus/pass_2_opus.py
-```
-```
-WORKERS=1 RATIO_LOW=0.5 RATIO_HIGH=2.2 python scripts/opus/pass_2_opus.py
-```
-
-## What is `src/load/create_opus_filtered.py`? Am I using it?
-
-It is a utility that builds a **separate** filtered table (`opus_moses_filtered`) from the **Parquet shards**
-produced by `pass_2_opus.py`, and can optionally materialize `opus_filter_simple`. It is **not** called by the
-main pipeline above, so you are not using it unless you run it manually.
-
-The shards exist to parallelize the filter step across multiple CPU processes. If you run with a single worker
-(`WORKERS=1`), `pass_2_opus.py` simply creates **one shard** covering the full range; the results are identical,
-just slower.
+See `report/README.md` for the report entry points and reference PDFs.
