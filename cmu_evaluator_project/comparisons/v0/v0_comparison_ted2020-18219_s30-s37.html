@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0 DEV comparison — ted2020-18219_s30-s37</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+    body { margin: 0 auto; max-width: 1500px; padding: 24px; }
+    h1 { margin-bottom: 6px; } .summary { color: #526078; margin-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; font-size: 14px; }
+    .legend span { padding: 4px 9px; border-radius: 4px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
+    th[scope=row] { width: 25%; min-width: 240px; text-align: left; vertical-align: top; background: white; padding: 16px; border-radius: 8px 0 0 8px; }
+    td { background: white; padding: 12px; border-radius: 0 8px 8px 0; }
+    .sentence-number { font-weight: 750; } .position { color: #6b7280; font-size: 13px; }
+    .candidate-stack { display: grid; gap: 12px; }
+    .candidate-card { border: 1px solid #d8dee9; border-radius: 7px; padding: 12px; background: #fbfcfe; }
+    .candidate-card header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .system { font-weight: 750; } code { color: #687386; }
+    .candidate-full { margin: 9px 0; line-height: 1.45; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .judgment { border-radius: 6px; padding: 10px; min-width: 0; }
+    .human-panel { background: #fff8eb; border: 1px solid #f2d49b; }
+    .gemma-panel { background: #eef8ff; border: 1px solid #b9dcf3; }
+    h4 { margin: 0 0 5px; } .score { margin: 4px 0 7px; }
+    .annotated-text { background: white; padding: 8px; border-radius: 4px; line-height: 1.65; overflow-wrap: anywhere; }
+    mark.span { padding: 1px 2px; border-radius: 3px; }
+    mark.human.minor, .legend .human-minor { background: #ffe49b; }
+    mark.human.major, .legend .human-major { background: #ffaaa5; }
+    mark.gemma.minor, .legend .gemma-minor { background: #9de5f3; }
+    mark.gemma.major, .legend .gemma-major { background: #d1b3ff; }
+    mark.missing { border: 1px dashed #202938; font-weight: 700; }
+    .no-errors { color: #55805d; font-size: 13px; white-space: nowrap; }
+    .span-list { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+    .status { display: inline-block; font-weight: 700; font-size: 13px; padding: 3px 7px; border-radius: 4px; }
+    .status.valid { background: #ccebd2; color: #185928; }
+    .status.invalid { background: #ffd2cf; color: #8b1e18; }
+    .unvalidated { color: #8b1e18; } .parse-errors { color: #8b1e18; }
+    .warning { color: #8b1e18; font-weight: 650; margin-top: 5px; }
+    details { margin-top: 8px; } summary { cursor: pointer; color: #334e75; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172033; color: #f5f7fa; padding: 10px; border-radius: 5px; font-size: 12px; }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } th[scope=row] { width: auto; min-width: 180px; } }
+  </style>
+</head>
+<body>
+  <h1>Gemma V0 DEV comparison</h1>
+  <p class="summary"><strong>Passage:</strong> ted2020-18219_s30-s37 · <strong>Document:</strong> ted2020-18219 · <strong>Sentences:</strong> 9 · <strong>Candidate judgments:</strong> 36 · <strong>Invalid V0 outputs:</strong> 4</p>
+  <div class="legend">
+    <span class="human-minor">Human Minor</span><span class="human-major">Human Major</span>
+    <span class="gemma-minor">Gemma Minor</span><span class="gemma-major">Gemma Major</span>
+  </div>
+  <table>
+    <thead><tr><th>BP source sentence</th><th>Candidate comparisons</th></tr></thead>
+    <tbody>
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 30</div>
+                <div class="position">Passage position 1</div>
+                <p lang="pt-BR">E isso é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0001</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E isso é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">E isso é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas <mark class="span human minor" title="Human Minor [131:143] inclusive UTF-16">superprecisas</mark>, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.</div><ul class="span-list"><li><strong>Minor</strong> [131:143] inclusive UTF-16 superprecisas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E isso é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir <mark class="span gemma minor" title="Gemma Minor [264:271] exclusive">lá fora</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [264:271] exclusive lá fora</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;lá fora&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0002</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E isso é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">E isso é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas <mark class="span human minor" title="Human Minor [131:143] inclusive UTF-16">superprecisas</mark>, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.</div><ul class="span-list"><li><strong>Minor</strong> [131:143] inclusive UTF-16 superprecisas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E isso é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir <mark class="span gemma minor" title="Gemma Minor [264:271] exclusive">lá fora</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [264:271] exclusive lá fora</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;lá fora&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0003</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E isso é o que foi feito neste novo campo da robótica, chamado de “robótica mole”, cujo principal objetivo não é construir máquinas superprecisas, porque já as temos, mas sim construir robôs capazes de lidar com situações inesperadas no mundo real, capazes então de ir lá fora.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">E isso é o que foi feito neste novo campo da robótica, chamado de “robótica mole”, cujo principal objetivo não é construir máquinas <mark class="span human minor" title="Human Minor [132:144] inclusive UTF-16">superprecisas</mark>, porque já as temos, mas <mark class="span human major" title="Human Major [171:173] inclusive UTF-16">sim</mark> construir robôs capazes de <mark class="span human major" title="Human Major [202:206] inclusive UTF-16">lidar</mark> com situações inesperadas no mundo real, capazes então de ir lá fora.</div><ul class="span-list"><li><strong>Minor</strong> [132:144] inclusive UTF-16 superprecisas</li><li><strong>Major</strong> [171:173] inclusive UTF-16 sim</li><li><strong>Major</strong> [202:206] inclusive UTF-16 lidar</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E isso é o que foi feito neste novo campo da robótica, <mark class="span gemma minor" title="Gemma Minor [55:65] exclusive">chamado de</mark> “robótica mole”, cujo principal objetivo <mark class="span gemma minor" title="Gemma Minor [107:122] exclusive">não é construir</mark> máquinas superprecisas, porque já as temos, mas sim construir robôs capazes de <mark class="span gemma minor" title="Gemma Minor [202:211] exclusive">lidar com</mark> situações inesperadas no mundo real, capazes então de ir lá fora.</div><ul class="span-list"><li><strong>Minor</strong> [55:65] exclusive chamado de</li><li><strong>Minor</strong> [107:122] exclusive não é construir</li><li><strong>Minor</strong> [202:211] exclusive lidar com</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;chamado de&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;não é construir&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;lidar com&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0004</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E isto é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">E isto é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas <mark class="span human minor" title="Human Minor [131:143] inclusive UTF-16">superprecisas</mark>, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.</div><ul class="span-list"><li><strong>Minor</strong> [131:143] inclusive UTF-16 superprecisas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E <mark class="span gemma minor" title="Gemma Minor [2:6] exclusive">isto</mark> é o que foi feito neste novo campo da robótica, que se chama &quot;robótica mole&quot;, cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.</div><ul class="span-list"><li><strong>Minor</strong> [2:6] exclusive isto</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;isto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 31.1</div>
+                <div class="position">Passage position 2</div>
+                <p lang="pt-BR">E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0005</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [245:245] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [245:245] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0006</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E o que faz um robô ser mole, primeiro de tudo, é o seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais ligações rígidas, e também, para os poderes a mover, usamos o que chamamos de estímulo distribuído.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">E o que faz um robô ser mole, primeiro de tudo, é o seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais <mark class="span human minor" title="Human Minor [158:165] inclusive UTF-16">ligações</mark> rígidas, e também, para <mark class="span human major" title="Human Major [191:208] inclusive UTF-16">os poderes a mover</mark>, usamos o que chamamos de estímulo distribuído.</div><ul class="span-list"><li><strong>Minor</strong> [158:165] inclusive UTF-16 ligações</li><li><strong>Major</strong> [191:208] inclusive UTF-16 os poderes a mover</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">E o que faz um robô ser mole, primeiro de tudo, é <mark class="span gemma minor" title="Gemma Minor [50:66] exclusive">o seu corpo todo</mark>, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais <mark class="span gemma minor" title="Gemma Minor [158:174] exclusive">ligações rígidas</mark>, e também, <mark class="span gemma major" title="Gemma Major [186:209] exclusive">para os poderes a mover</mark>, usamos o que chamamos de estímulo distribuído.</div><ul class="span-list"><li><strong>Minor</strong> [50:66] exclusive o seu corpo todo</li><li><strong>Minor</strong> [158:174] exclusive ligações rígidas</li><li><strong>Major</strong> [186:209] exclusive para os poderes a mover</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;o seu corpo todo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;ligações rígidas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para os poderes a mover&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0007</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E o que torna um robô mole é, em primeiro lugar, o seu corpo inteiro, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais ligações rígidas, e, para os movimentar, usamos o que chamamos de estímulo distribuído.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E o que <mark class="span human major" title="Human Major [8:27] inclusive UTF-16">torna um robô mole é</mark>, <mark class="span human major" title="Human Major [30:46] inclusive UTF-16">em primeiro lugar</mark>, <mark class="span human major" title="Human Major [49:67] inclusive UTF-16">o seu corpo inteiro</mark>, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais <mark class="span human minor" title="Human Minor [160:167] inclusive UTF-16">ligações</mark> rígidas, e, para <mark class="span human major" title="Human Major [186:198] inclusive UTF-16">os movimentar</mark>, usamos o que chamamos de estímulo distribuído.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [247:247] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [8:27] inclusive UTF-16 torna um robô mole é</li><li><strong>Major</strong> [30:46] inclusive UTF-16 em primeiro lugar</li><li><strong>Major</strong> [49:67] inclusive UTF-16 o seu corpo inteiro</li><li><strong>Minor</strong> [160:167] inclusive UTF-16 ligações</li><li><strong>Major</strong> [186:198] inclusive UTF-16 os movimentar</li><li><strong>Minor</strong> [247:247] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E o que <mark class="span gemma minor" title="Gemma Minor [8:13] exclusive">torna</mark> um robô mole é, <mark class="span gemma minor" title="Gemma Minor [30:47] exclusive">em primeiro lugar</mark>, o seu <mark class="span gemma minor" title="Gemma Minor [55:68] exclusive">corpo inteiro</mark>, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais <mark class="span gemma minor" title="Gemma Minor [160:176] exclusive">ligações rígidas</mark>, e, <mark class="span gemma minor" title="Gemma Minor [181:199] exclusive">para os movimentar</mark>, usamos o que chamamos de estímulo distribuído.</div><ul class="span-list"><li><strong>Minor</strong> [8:13] exclusive torna</li><li><strong>Minor</strong> [30:47] exclusive em primeiro lugar</li><li><strong>Minor</strong> [55:68] exclusive corpo inteiro</li><li><strong>Minor</strong> [160:176] exclusive ligações rígidas</li><li><strong>Minor</strong> [181:199] exclusive para os movimentar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;torna&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;em primeiro lugar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;corpo inteiro&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;ligações rígidas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para os movimentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0008</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E o que faz um robô ser mole, primeiro de tudo, é o seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para os mover, usamos o que chamamos de estímulo distribuído.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">E o que faz um robô ser mole, primeiro de tudo, é o seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para <mark class="span human major" title="Human Major [191:198] inclusive UTF-16">os mover</mark>, usamos o que chamamos de estímulo distribuído.</div><ul class="span-list"><li><strong>Major</strong> [191:198] inclusive UTF-16 os mover</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E o que faz um robô ser mole, primeiro de tudo, é <mark class="span gemma minor" title="Gemma Minor [50:66] exclusive">o seu corpo todo</mark>, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, <mark class="span gemma minor" title="Gemma Minor [186:199] exclusive">para os mover</mark>, usamos o que chamamos de estímulo distribuído.</div><ul class="span-list"><li><strong>Minor</strong> [50:66] exclusive o seu corpo todo</li><li><strong>Minor</strong> [186:199] exclusive para os mover</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;o seu corpo todo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para os mover&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 31.2</div>
+                <div class="position">Passage position 3</div>
+                <p lang="pt-BR">Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0009</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0010</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0011</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Temos que controlar continuamente o molde desse corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo nenhuma estrutura dura.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>25</strong></div>
+            <div class="annotated-text">Temos que controlar continuamente o molde <mark class="span human minor" title="Human Minor [42:46] inclusive UTF-16">desse</mark> corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo <mark class="span human major" title="Human Major [139:145] inclusive UTF-16">nenhuma</mark> estrutura dura.</div><ul class="span-list"><li><strong>Minor</strong> [42:46] inclusive UTF-16 desse</li><li><strong>Major</strong> [139:145] inclusive UTF-16 nenhuma</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Temos que controlar continuamente o molde <mark class="span gemma minor" title="Gemma Minor [42:47] exclusive">desse</mark> corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo <mark class="span gemma minor" title="Gemma Minor [139:146] exclusive">nenhuma</mark> estrutura dura.</div><ul class="span-list"><li><strong>Minor</strong> [42:47] exclusive desse</li><li><strong>Minor</strong> [139:146] exclusive nenhuma</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;desse&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;nenhuma&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0012</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 32</div>
+                <div class="position">Passage position 4</div>
+                <p lang="pt-BR">Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0013</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Então <mark class="span human major" title="Human Major [6:9] inclusive UTF-16">você</mark> imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.</div><ul class="span-list"><li><strong>Major</strong> [6:9] inclusive UTF-16 você</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0014</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então imaginas que montar um robô mole é um processo muito diferente do que robótica dura, com ligações, engrenagens, parafusos que precisamos de combinar de uma maneira precisa.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>65</strong></div>
+            <div class="annotated-text">Então imaginas que montar um robô mole é um processo muito diferente do que robótica dura, com <mark class="span human minor" title="Human Minor [95:102] inclusive UTF-16">ligações</mark>, engrenagens, parafusos que precisamos de combinar de uma maneira precisa.</div><ul class="span-list"><li><strong>Minor</strong> [95:102] inclusive UTF-16 ligações</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Então <mark class="span gemma minor" title="Gemma Minor [6:14] exclusive">imaginas</mark> que montar um robô mole é um processo muito diferente do que robótica dura, com <mark class="span gemma minor" title="Gemma Minor [95:103] exclusive">ligações</mark>, engrenagens, parafusos que <mark class="span gemma minor" title="Gemma Minor [132:154] exclusive">precisamos de combinar</mark> de uma maneira precisa.</div><ul class="span-list"><li><strong>Minor</strong> [6:14] exclusive imaginas</li><li><strong>Minor</strong> [95:103] exclusive ligações</li><li><strong>Minor</strong> [132:154] exclusive precisamos de combinar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;imaginas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;ligações&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;precisamos de combinar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0015</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Imagina que montar um robô simples é um processo muito diferente da robótica avançada, com ligações, engrenagens e parafusos que temos de combinar de forma precisa.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Imagina que montar um robô <mark class="span human major" title="Human Major [27:33] inclusive UTF-16">simples</mark> é um processo muito diferente <mark class="span human minor" title="Human Minor [65:66] inclusive UTF-16">da</mark> robótica <mark class="span human major" title="Human Major [77:84] inclusive UTF-16">avançada</mark>, com <mark class="span human minor" title="Human Minor [91:98] inclusive UTF-16">ligações</mark>, engrenagens e parafusos que <mark class="span human major" title="Human Major [129:133] inclusive UTF-16">temos</mark> de combinar de forma precisa.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [164:164] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [27:33] inclusive UTF-16 simples</li><li><strong>Minor</strong> [65:66] inclusive UTF-16 da</li><li><strong>Major</strong> [77:84] inclusive UTF-16 avançada</li><li><strong>Minor</strong> [91:98] inclusive UTF-16 ligações</li><li><strong>Major</strong> [129:133] inclusive UTF-16 temos</li><li><strong>Minor</strong> [164:164] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">Imagina que montar um <mark class="span gemma major" title="Gemma Major [22:34] exclusive">robô simples</mark> é um processo muito diferente da <mark class="span gemma major" title="Gemma Major [68:85] exclusive">robótica avançada</mark>, com <mark class="span gemma minor" title="Gemma Minor [91:99] exclusive">ligações</mark>, engrenagens e parafusos que <mark class="span gemma minor" title="Gemma Minor [129:137] exclusive">temos de</mark> combinar de forma precisa.</div><ul class="span-list"><li><strong>Major</strong> [22:34] exclusive robô simples</li><li><strong>Major</strong> [68:85] exclusive robótica avançada</li><li><strong>Minor</strong> [91:99] exclusive ligações</li><li><strong>Minor</strong> [129:137] exclusive temos de</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;robô simples&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    },
+    {
+      &quot;text&quot;: &quot;robótica avançada&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    },
+    {
+      &quot;text&quot;: &quot;ligações&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;temos de&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0016</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então imagina que montar um robô mole é um processo muito diferente do que a robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Então imagina que montar um robô mole é um processo muito diferente do que a robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;você&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 33</div>
+                <div class="position">Passage position 5</div>
+                <p lang="pt-BR">Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0017</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Em robôs moles, <mark class="span human major" title="Human Major [16:28] inclusive UTF-16">você só monta</mark> seu estímulo do zero na maioria das vezes, mas <mark class="span human major" title="Human Major [77:90] inclusive UTF-16">você molda seu</mark> material flexível à forma que responda a um certo input.</div><ul class="span-list"><li><strong>Major</strong> [16:28] inclusive UTF-16 você só monta</li><li><strong>Major</strong> [77:90] inclusive UTF-16 você molda seu</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_ambiguous_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;você&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0018</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Em robôs moles, só montas o teu estímulo do zero na maioria das vezes, mas moldas o teu material flexível à forma que responda a um certo input.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Em robôs moles, só montas o teu estímulo do zero na maioria das vezes, mas moldas o teu material flexível à forma que responda a um certo input.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[1]_text_ambiguous_in_candidate</li><li>errors[3]_text_ambiguous_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;montas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;teu&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;moldas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;teu&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0019</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Nos robôs moles, a maioria dos estímulos é construída a partir de zero, mas o material flexível é moldado para responder a um determinado input.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:2] inclusive UTF-16">Nos</mark> robôs moles, <mark class="span human major" title="Human Major [17:69] inclusive UTF-16">a maioria dos estímulos é construída a partir de zero</mark>, <mark class="span human major" title="Human Major [72:136] inclusive UTF-16">mas o material flexível é moldado para responder a um determinado</mark> input.</div><ul class="span-list"><li><strong>Minor</strong> [0:2] inclusive UTF-16 Nos</li><li><strong>Major</strong> [17:69] inclusive UTF-16 a maioria dos estímulos é construída a partir de zero</li><li><strong>Major</strong> [72:136] inclusive UTF-16 mas o material flexível é moldado para responder a um determinado</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">Nos robôs moles, <mark class="span gemma major" title="Gemma Major [17:70] exclusive">a maioria dos estímulos é construída a partir de zero</mark>, mas o material flexível é moldado para responder a um determinado input.</div><ul class="span-list"><li><strong>Major</strong> [17:70] exclusive a maioria dos estímulos é construída a partir de zero</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a maioria dos estímulos é construída a partir de zero&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0020</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Em robôs moles, tu só montas o teu estímulo do zero na maioria das vezes, mas tu moldas o teu material flexível à forma que responda a um certo *input*.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>30</strong></div>
+            <div class="annotated-text">Em robôs moles, tu só montas o teu estímulo do zero na maioria das vezes, mas <mark class="span human minor" title="Human Minor [78:79] inclusive UTF-16">tu</mark> moldas o teu material flexível à forma que responda a um certo <mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [144:144] inclusive UTF-16">[MISSING]</mark>*input<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [150:150] inclusive UTF-16">[MISSING]</mark>*.</div><ul class="span-list"><li><strong>Minor</strong> [78:79] inclusive UTF-16 tu</li><li><strong>Major</strong> [144:144] inclusive UTF-16 [MISSING]</li><li><strong>Major</strong> [150:150] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Em robôs moles, <mark class="span gemma minor" title="Gemma Minor [16:43] exclusive">tu só montas o teu estímulo</mark> do zero na maioria das vezes, mas <mark class="span gemma minor" title="Gemma Minor [78:111] exclusive">tu moldas o teu material flexível</mark> à forma que responda a um certo *input*.</div><ul class="span-list"><li><strong>Minor</strong> [16:43] exclusive tu só montas o teu estímulo</li><li><strong>Minor</strong> [78:111] exclusive tu moldas o teu material flexível</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;tu só montas o teu estímulo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;tu moldas o teu material flexível&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 34</div>
+                <div class="position">Passage position 6</div>
+                <p lang="pt-BR">Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0021</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Por exemplo, <mark class="span human major" title="Human Major [13:16] inclusive UTF-16">você</mark> pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções <mark class="span human major" title="Human Major [137:143] inclusive UTF-16">rígidos</mark>, e aqui, o que se usa é só um input, como pressão do ar.</div><ul class="span-list"><li><strong>Major</strong> [13:16] inclusive UTF-16 você</li><li><strong>Major</strong> [137:143] inclusive UTF-16 rígidos</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Por exemplo, <mark class="span gemma minor" title="Gemma Minor [13:34] exclusive">você pode só deformar</mark> uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.</div><ul class="span-list"><li><strong>Minor</strong> [13:34] exclusive você pode só deformar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;você pode só deformar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0022</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Por exemplo, podes só deformar uma estrutura ao fazer um molde relativamente complexo se pensares em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">Por exemplo, podes só deformar uma estrutura ao fazer um molde relativamente complexo se pensares em fazer o mesmo com links e junções <mark class="span human major" title="Human Major [135:141] inclusive UTF-16">rígidos</mark>, e aqui, o que se usa é só um input, como pressão do ar.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [199:199] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [135:141] inclusive UTF-16 rígidos</li><li><strong>Minor</strong> [199:199] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Por exemplo, <mark class="span gemma minor" title="Gemma Minor [13:18] exclusive">podes</mark> só deformar uma estrutura ao fazer um molde relativamente complexo se <mark class="span gemma minor" title="Gemma Minor [89:97] exclusive">pensares</mark> em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.</div><ul class="span-list"><li><strong>Minor</strong> [13:18] exclusive podes</li><li><strong>Minor</strong> [89:97] exclusive pensares</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;podes&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;pensares&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0023</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Por exemplo, é possível apenas deformar uma estrutura ao fazer um molde relativamente complexo, ao invés de fazer o mesmo com ligações e junções rígidas, e aqui, o que se usa é apenas uma entrada, como a pressão do ar.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Por exemplo, <mark class="span human major" title="Human Major [13:29] inclusive UTF-16">é possível apenas</mark> deformar uma estrutura ao fazer um molde relativamente complexo, <mark class="span human major" title="Human Major [96:103] inclusive UTF-16">ao invés</mark> de fazer o mesmo com <mark class="span human minor" title="Human Minor [126:133] inclusive UTF-16">ligações</mark> e junções rígidas, e aqui, o que se usa <mark class="span human major" title="Human Major [175:194] inclusive UTF-16">é apenas uma entrada</mark>, como a pressão do ar.</div><ul class="span-list"><li><strong>Major</strong> [13:29] inclusive UTF-16 é possível apenas</li><li><strong>Major</strong> [96:103] inclusive UTF-16 ao invés</li><li><strong>Minor</strong> [126:133] inclusive UTF-16 ligações</li><li><strong>Major</strong> [175:194] inclusive UTF-16 é apenas uma entrada</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Por exemplo, é possível apenas deformar uma estrutura ao fazer um molde relativamente complexo, <mark class="span gemma minor" title="Gemma Minor [96:107] exclusive">ao invés de</mark> fazer o mesmo com ligações e junções rígidas, e aqui, o que se usa é <mark class="span gemma minor" title="Gemma Minor [177:195] exclusive">apenas uma entrada</mark>, como a pressão do ar.</div><ul class="span-list"><li><strong>Minor</strong> [96:107] exclusive ao invés de</li><li><strong>Minor</strong> [177:195] exclusive apenas uma entrada</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ao invés de&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;apenas uma entrada&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0024</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Por exemplo, pode-se apenas deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com elos e junções rígidos, e aqui, o que se usa é só uma entrada, como pressão de ar.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">Por exemplo, pode-se <mark class="span human minor" title="Human Minor [21:26] inclusive UTF-16">apenas</mark> deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com <mark class="span human major" title="Human Major [123:126] inclusive UTF-16">elos</mark> e junções <mark class="span human major" title="Human Major [138:144] inclusive UTF-16">rígidos</mark>, e aqui, o que se usa é só <mark class="span human major" title="Human Major [173:183] inclusive UTF-16">uma entrada</mark>, como pressão de ar.</div><ul class="span-list"><li><strong>Minor</strong> [21:26] inclusive UTF-16 apenas</li><li><strong>Major</strong> [123:126] inclusive UTF-16 elos</li><li><strong>Major</strong> [138:144] inclusive UTF-16 rígidos</li><li><strong>Major</strong> [173:183] inclusive UTF-16 uma entrada</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Por exemplo, pode-se apenas deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com <mark class="span gemma minor" title="Gemma Minor [123:127] exclusive">elos</mark> e junções rígidos, e aqui, o que se usa é só uma <mark class="span gemma minor" title="Gemma Minor [177:184] exclusive">entrada</mark>, como pressão de ar.</div><ul class="span-list"><li><strong>Minor</strong> [123:127] exclusive elos</li><li><strong>Minor</strong> [177:184] exclusive entrada</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;elos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;entrada&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 35</div>
+                <div class="position">Passage position 7</div>
+                <p lang="pt-BR">Mas vejamos alguns exemplos bacanas de robôs moles.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0025</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas vejamos alguns exemplos bacanas de robôs moles.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Mas vejamos alguns exemplos <mark class="span human major" title="Human Major [28:34] inclusive UTF-16">bacanas</mark> de robôs moles.</div><ul class="span-list"><li><strong>Major</strong> [28:34] inclusive UTF-16 bacanas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Mas vejamos alguns exemplos <mark class="span gemma minor" title="Gemma Minor [28:35] exclusive">bacanas</mark> de robôs moles.</div><ul class="span-list"><li><strong>Minor</strong> [28:35] exclusive bacanas</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;bacanas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0026</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas vejamos alguns exemplos bacanas de robôs moles.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Mas vejamos alguns exemplos <mark class="span human major" title="Human Major [28:34] inclusive UTF-16">bacanas</mark> de robôs moles.</div><ul class="span-list"><li><strong>Major</strong> [28:34] inclusive UTF-16 bacanas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Mas vejamos alguns exemplos <mark class="span gemma minor" title="Gemma Minor [28:35] exclusive">bacanas</mark> de robôs moles.</div><ul class="span-list"><li><strong>Minor</strong> [28:35] exclusive bacanas</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;bacanas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0027</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas vejamos alguns exemplos de robôs macios.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">Mas vejamos alguns exemplos de robôs <mark class="span human major" title="Human Major [37:43] inclusive UTF-16">macios.</mark><mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [44:44] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [37:43] inclusive UTF-16 macios.</li><li><strong>Minor</strong> [44:44] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;bacanas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0028</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas vejamos alguns exemplos bacanos de robôs moles.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Mas vejamos alguns exemplos bacanos de robôs moles.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Mas vejamos alguns exemplos <mark class="span gemma minor" title="Gemma Minor [28:35] exclusive">bacanos</mark> de robôs moles.</div><ul class="span-list"><li><strong>Minor</strong> [28:35] exclusive bacanos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;bacanos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 36</div>
+                <div class="position">Passage position 8</div>
+                <p lang="pt-BR">Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0029</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas <mark class="span human major" title="Human Major [125:130] inclusive UTF-16">em seu</mark> corpo, e graças à flexibilidade, ele também pode <mark class="span human major" title="Human Major [181:192] inclusive UTF-16">se esgueirar</mark> sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.</div><ul class="span-list"><li><strong>Major</strong> [125:130] inclusive UTF-16 em seu</li><li><strong>Major</strong> [181:192] inclusive UTF-16 se esgueirar</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0030</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas ao seu corpo, e graças à flexibilidade, ele também pode esgueirar-se sob uma ponte, continuar a andar, e então continuar a caminhar de uma forma ligeiramente diferente depois.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>90</strong></div>
+            <div class="annotated-text">Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas ao seu corpo, e graças à flexibilidade, ele também pode esgueirar-se <mark class="span human minor" title="Human Minor [194:196] inclusive UTF-16">sob</mark> uma ponte, continuar a andar, e então continuar a caminhar de uma forma ligeiramente diferente depois.</div><ul class="span-list"><li><strong>Minor</strong> [194:196] inclusive UTF-16 sob</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão <mark class="span gemma minor" title="Gemma Minor [115:137] exclusive">aplicadas ao seu corpo</mark>, e graças à flexibilidade, ele também pode <mark class="span gemma minor" title="Gemma Minor [181:193] exclusive">esgueirar-se</mark> sob uma ponte, continuar a andar, e então continuar a caminhar <mark class="span gemma minor" title="Gemma Minor [257:292] exclusive">de uma forma ligeiramente diferente</mark> depois.</div><ul class="span-list"><li><strong>Minor</strong> [115:137] exclusive aplicadas ao seu corpo</li><li><strong>Minor</strong> [181:193] exclusive esgueirar-se</li><li><strong>Minor</strong> [257:292] exclusive de uma forma ligeiramente diferente</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;aplicadas ao seu corpo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;esgueirar-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;de uma forma ligeiramente diferente&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0031</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Aqui está um pequeno e fofo robô, desenvolvido na Universidade de Harvard, que caminha graças às ondas de pressão aplicadas ao seu corpo, e, devido à sua flexibilidade, também consegue esgueirar-se sob uma ponte, continuar a andar e depois continuar a andar de uma forma ligeiramente diferente.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>25</strong></div>
+            <div class="annotated-text">Aqui está um pequeno e fofo robô, desenvolvido na Universidade de Harvard, que caminha graças às ondas de pressão aplicadas ao seu corpo, e<mark class="span human minor" title="Human Minor [139:146] inclusive UTF-16">, devido</mark> à sua flexibilidade, também <mark class="span human minor" title="Human Minor [176:183] inclusive UTF-16">consegue</mark> esgueirar-se sob uma ponte, continuar a andar e <mark class="span human minor" title="Human Minor [233:292] inclusive UTF-16">depois continuar a andar de uma forma ligeiramente diferente</mark>.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [294:294] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [139:146] inclusive UTF-16 , devido</li><li><strong>Minor</strong> [176:183] inclusive UTF-16 consegue</li><li><strong>Minor</strong> [233:292] inclusive UTF-16 depois continuar a andar de uma forma ligeiramente diferente</li><li><strong>Minor</strong> [294:294] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>88</strong></div><div class="annotated-text">Aqui está um pequeno e fofo robô, desenvolvido na Universidade de Harvard, que caminha graças às ondas de pressão aplicadas <mark class="span gemma minor" title="Gemma Minor [124:136] exclusive">ao seu corpo</mark>, e, <mark class="span gemma minor" title="Gemma Minor [141:167] exclusive">devido à sua flexibilidade</mark>, <mark class="span gemma minor" title="Gemma Minor [169:197] exclusive">também consegue esgueirar-se</mark> sob uma ponte, continuar a andar <mark class="span gemma minor" title="Gemma Minor [231:293] exclusive">e depois continuar a andar de uma forma ligeiramente diferente</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [124:136] exclusive ao seu corpo</li><li><strong>Minor</strong> [141:167] exclusive devido à sua flexibilidade</li><li><strong>Minor</strong> [169:197] exclusive também consegue esgueirar-se</li><li><strong>Minor</strong> [231:293] exclusive e depois continuar a andar de uma forma ligeiramente diferente</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ao seu corpo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;devido à sua flexibilidade&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;também consegue esgueirar-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;e depois continuar a andar de uma forma ligeiramente diferente&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 88
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0032</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas no seu corpo, e graças à flexibilidade, ele também pode esgueirar-se por baixo de uma ponte, continuar a andar, e depois continuar a caminhar um pouco diferente.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>80</strong></div>
+            <div class="annotated-text">Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas no seu corpo, e graças à flexibilidade, ele também pode esgueirar-se por baixo de uma ponte, continuar a andar, e <mark class="span human minor" title="Human Minor [239:245] inclusive UTF-16">depois </mark>continuar a caminhar um pouco diferente.</div><ul class="span-list"><li><strong>Minor</strong> [239:245] inclusive UTF-16 depois </li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas <mark class="span gemma minor" title="Gemma Minor [125:137] exclusive">no seu corpo</mark>, e graças à flexibilidade, ele também pode <mark class="span gemma minor" title="Gemma Minor [181:216] exclusive">esgueirar-se por baixo de uma ponte</mark>, continuar a andar, <mark class="span gemma minor" title="Gemma Minor [237:285] exclusive">e depois continuar a caminhar um pouco diferente</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [125:137] exclusive no seu corpo</li><li><strong>Minor</strong> [181:216] exclusive esgueirar-se por baixo de uma ponte</li><li><strong>Minor</strong> [237:285] exclusive e depois continuar a caminhar um pouco diferente</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;no seu corpo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;esgueirar-se por baixo de uma ponte&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;e depois continuar a caminhar um pouco diferente&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 37</div>
+                <div class="position">Passage position 9</div>
+                <p lang="pt-BR">Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0033</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:3] inclusive UTF-16">Isso</mark> é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser <mark class="span human major" title="Human Major [119:126] inclusive UTF-16">liberada</mark> livremente e enfrentar interações reais do mundo como um carro <mark class="span human major" title="Human Major [191:198] inclusive UTF-16">passando</mark> por cima dele...</div><ul class="span-list"><li><strong>Minor</strong> [0:3] inclusive UTF-16 Isso</li><li><strong>Major</strong> [119:126] inclusive UTF-16 liberada</li><li><strong>Major</strong> [191:198] inclusive UTF-16 passando</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro <mark class="span gemma minor" title="Gemma Minor [191:213] exclusive">passando por cima dele</mark>...</div><ul class="span-list"><li><strong>Minor</strong> [191:213] exclusive passando por cima dele</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;passando por cima dele&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0034</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser libertada livremente e enfrentar interações reais do mundo como um carro a passar por cima dele...</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>85</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:3] inclusive UTF-16">Isso</mark> é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser libertada livremente e enfrentar interações reais do mundo como um carro a passar por cima dele...</div><ul class="span-list"><li><strong>Minor</strong> [0:3] inclusive UTF-16 Isso</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser <mark class="span gemma minor" title="Gemma Minor [119:128] exclusive">libertada</mark> livremente e enfrentar interações reais do mundo como um carro <mark class="span gemma minor" title="Gemma Minor [192:200] exclusive">a passar</mark> por cima dele...</div><ul class="span-list"><li><strong>Minor</strong> [119:128] exclusive libertada</li><li><strong>Minor</strong> [192:200] exclusive a passar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;libertada&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;a passar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0035</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Este é um protótipo muito rudimentar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser libertada livremente e enfrentar interações reais do mundo, como um carro a passar por cima dela...</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">Este é um protótipo muito <mark class="span human minor" title="Human Minor [26:35] inclusive UTF-16">rudimentar</mark>, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser libertada livremente e enfrentar interações reais do mundo<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [179:179] inclusive UTF-16">[MISSING]</mark>, como um carro a passar por cima <mark class="span human minor" title="Human Minor [213:216] inclusive UTF-16">dela</mark>...</div><ul class="span-list"><li><strong>Minor</strong> [26:35] inclusive UTF-16 rudimentar</li><li><strong>Minor</strong> [179:179] inclusive UTF-16 [MISSING]</li><li><strong>Minor</strong> [213:216] inclusive UTF-16 dela</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>75</strong></div><div class="annotated-text">Este é um protótipo <mark class="span gemma minor" title="Gemma Minor [20:36] exclusive">muito rudimentar</mark>, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser <mark class="span gemma minor" title="Gemma Minor [121:130] exclusive">libertada</mark> livremente e enfrentar interações reais do mundo, <mark class="span gemma major" title="Gemma Major [181:217] exclusive">como um carro a passar por cima dela</mark>...</div><ul class="span-list"><li><strong>Minor</strong> [20:36] exclusive muito rudimentar</li><li><strong>Minor</strong> [121:130] exclusive libertada</li><li><strong>Major</strong> [181:217] exclusive como um carro a passar por cima dela</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;muito rudimentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;libertada&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;como um carro a passar por cima dela&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 75
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0036</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isto é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser lançada livremente e enfrentar interações reais do mundo como um carro a passar por cima dele...arecent</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Isto é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser lançada livremente e enfrentar interações reais do mundo como um carro a passar por cima dele...<mark class="span human major" title="Human Major [215:221] inclusive UTF-16">arecent</mark></div><ul class="span-list"><li><strong>Major</strong> [215:221] inclusive UTF-16 arecent</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Isto é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser lançada livremente e enfrentar interações reais do mundo como um carro a passar por cima dele...<mark class="span gemma major" title="Gemma Major [215:222] exclusive">arecent</mark></div><ul class="span-list"><li><strong>Major</strong> [215:222] exclusive arecent</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;arecent&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            </tbody>
+  </table>
+</body>
+</html>

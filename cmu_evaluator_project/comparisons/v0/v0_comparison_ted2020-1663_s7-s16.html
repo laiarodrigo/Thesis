@@ -1,0 +1,1223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0 DEV comparison — ted2020-1663_s7-s16</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+    body { margin: 0 auto; max-width: 1500px; padding: 24px; }
+    h1 { margin-bottom: 6px; } .summary { color: #526078; margin-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; font-size: 14px; }
+    .legend span { padding: 4px 9px; border-radius: 4px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
+    th[scope=row] { width: 25%; min-width: 240px; text-align: left; vertical-align: top; background: white; padding: 16px; border-radius: 8px 0 0 8px; }
+    td { background: white; padding: 12px; border-radius: 0 8px 8px 0; }
+    .sentence-number { font-weight: 750; } .position { color: #6b7280; font-size: 13px; }
+    .candidate-stack { display: grid; gap: 12px; }
+    .candidate-card { border: 1px solid #d8dee9; border-radius: 7px; padding: 12px; background: #fbfcfe; }
+    .candidate-card header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .system { font-weight: 750; } code { color: #687386; }
+    .candidate-full { margin: 9px 0; line-height: 1.45; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .judgment { border-radius: 6px; padding: 10px; min-width: 0; }
+    .human-panel { background: #fff8eb; border: 1px solid #f2d49b; }
+    .gemma-panel { background: #eef8ff; border: 1px solid #b9dcf3; }
+    h4 { margin: 0 0 5px; } .score { margin: 4px 0 7px; }
+    .annotated-text { background: white; padding: 8px; border-radius: 4px; line-height: 1.65; overflow-wrap: anywhere; }
+    mark.span { padding: 1px 2px; border-radius: 3px; }
+    mark.human.minor, .legend .human-minor { background: #ffe49b; }
+    mark.human.major, .legend .human-major { background: #ffaaa5; }
+    mark.gemma.minor, .legend .gemma-minor { background: #9de5f3; }
+    mark.gemma.major, .legend .gemma-major { background: #d1b3ff; }
+    mark.missing { border: 1px dashed #202938; font-weight: 700; }
+    .no-errors { color: #55805d; font-size: 13px; white-space: nowrap; }
+    .span-list { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+    .status { display: inline-block; font-weight: 700; font-size: 13px; padding: 3px 7px; border-radius: 4px; }
+    .status.valid { background: #ccebd2; color: #185928; }
+    .status.invalid { background: #ffd2cf; color: #8b1e18; }
+    .unvalidated { color: #8b1e18; } .parse-errors { color: #8b1e18; }
+    .warning { color: #8b1e18; font-weight: 650; margin-top: 5px; }
+    details { margin-top: 8px; } summary { cursor: pointer; color: #334e75; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172033; color: #f5f7fa; padding: 10px; border-radius: 5px; font-size: 12px; }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } th[scope=row] { width: auto; min-width: 180px; } }
+  </style>
+</head>
+<body>
+  <h1>Gemma V0 DEV comparison</h1>
+  <p class="summary"><strong>Passage:</strong> ted2020-1663_s7-s16 · <strong>Document:</strong> ted2020-1663 · <strong>Sentences:</strong> 10 · <strong>Candidate judgments:</strong> 40 · <strong>Invalid V0 outputs:</strong> 1</p>
+  <div class="legend">
+    <span class="human-minor">Human Minor</span><span class="human-major">Human Major</span>
+    <span class="gemma-minor">Gemma Minor</span><span class="gemma-major">Gemma Major</span>
+  </div>
+  <table>
+    <thead><tr><th>BP source sentence</th><th>Candidate comparisons</th></tr></thead>
+    <tbody>
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 7</div>
+                <div class="position">Passage position 1</div>
+                <p lang="pt-BR">Essencialmente, estou gravando um segundo de cada dia da minha vida, para o resto da minha vida, compilando cronologicamente essas minúsculas fatias de um segundo de minha vida, em um único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0233</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Essencialmente, estou gravando um segundo de cada dia da minha vida, para o resto da minha vida, compilando cronologicamente essas minúsculas fatias de um segundo de minha vida, em um único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Essencialmente, estou <mark class="span human major" title="Human Major [22:29] inclusive UTF-16">gravando</mark> um segundo de cada dia da minha vida, para o resto da minha vida, compilando cronologicamente essas minúsculas fatias de um segundo de minha vida, <mark class="span human major" title="Human Major [178:182] inclusive UTF-16">em um</mark> único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los.</div><ul class="span-list"><li><strong>Major</strong> [22:29] inclusive UTF-16 gravando</li><li><strong>Major</strong> [178:182] inclusive UTF-16 em um</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Essencialmente, estou gravando um segundo de cada dia da minha vida, para o resto da minha vida, compilando cronologicamente essas minúsculas fatias de um segundo de minha vida, em um único vídeo contínuo até que, <mark class="span gemma minor" title="Gemma Minor [214:225] exclusive">vocês sabem</mark>, eu não possa mais gravá-los.</div><ul class="span-list"><li><strong>Minor</strong> [214:225] exclusive vocês sabem</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;vocês sabem&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0234</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Essencialmente, estou a gravar um segundo de cada dia da minha vida, para o resto da minha vida. A compilar cronologicamente estas minúsculas fatias de um segundo da minha vida em um único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">Essencialmente, estou a gravar um segundo de cada dia da minha vida, para o resto da minha vida<mark class="span human minor" title="Human Minor [95:106] inclusive UTF-16">. A compilar</mark> cronologicamente estas minúsculas fatias de um segundo da minha vida <mark class="span human major" title="Human Major [177:181] inclusive UTF-16">em um</mark> único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [254:254] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [95:106] inclusive UTF-16 . A compilar</li><li><strong>Major</strong> [177:181] inclusive UTF-16 em um</li><li><strong>Minor</strong> [254:254] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">Essencialmente, estou a gravar um segundo de cada dia da minha vida, para o resto da minha vida. <mark class="span gemma major" title="Gemma Major [97:107] exclusive">A compilar</mark> cronologicamente estas minúsculas fatias de um segundo da minha vida em um único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los.</div><ul class="span-list"><li><strong>Major</strong> [97:107] exclusive A compilar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;A compilar&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0235</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Em essência, estou a gravar um segundo de cada dia da minha vida para o resto da minha vida, compilando cronologicamente estas minúsculas fatias de um segundo da minha vida num único vídeo contínuo até que, como sabem, não possa mais gravá-los.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:10] inclusive UTF-16">Em essência</mark>, estou a gravar um segundo de cada dia da minha vida para o resto da minha vida, compilando cronologicamente <mark class="span human minor" title="Human Minor [121:125] inclusive UTF-16">estas</mark> minúsculas fatias de um segundo da minha vida num único vídeo contínuo até que, <mark class="span human major" title="Human Major [207:210] inclusive UTF-16">como</mark> sabem, não possa mais gravá-los.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [244:244] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [0:10] inclusive UTF-16 Em essência</li><li><strong>Minor</strong> [121:125] inclusive UTF-16 estas</li><li><strong>Major</strong> [207:210] inclusive UTF-16 como</li><li><strong>Minor</strong> [244:244] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Em essência, <mark class="span gemma minor" title="Gemma Minor [13:27] exclusive">estou a gravar</mark> um segundo de cada dia da minha vida para o resto da minha vida, compilando cronologicamente <mark class="span gemma minor" title="Gemma Minor [121:126] exclusive">estas</mark> minúsculas fatias de um segundo da minha vida <mark class="span gemma minor" title="Gemma Minor [173:176] exclusive">num</mark> único vídeo contínuo até que, <mark class="span gemma minor" title="Gemma Minor [207:217] exclusive">como sabem</mark>, não possa mais gravá-los.</div><ul class="span-list"><li><strong>Minor</strong> [13:27] exclusive estou a gravar</li><li><strong>Minor</strong> [121:126] exclusive estas</li><li><strong>Minor</strong> [173:176] exclusive num</li><li><strong>Minor</strong> [207:217] exclusive como sabem</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estou a gravar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;num&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;como sabem&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0236</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Essencialmente, estou a gravar um segundo de cada dia da minha vida, para o resto da minha vida, compilando cronologicamente estas minúsculas fatias de um segundo da minha vida, num único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>90</strong></div>
+            <div class="annotated-text">Essencialmente, estou a gravar um segundo de cada dia da minha vida, para o resto da minha vida, compilando cronologicamente <mark class="span human minor" title="Human Minor [125:129] inclusive UTF-16">estas</mark> minúsculas fatias de um segundo da minha vida, num único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los.</div><ul class="span-list"><li><strong>Minor</strong> [125:129] inclusive UTF-16 estas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Essencialmente, <mark class="span gemma minor" title="Gemma Minor [16:30] exclusive">estou a gravar</mark> um segundo de cada dia da minha vida, para o resto da minha vida, compilando cronologicamente <mark class="span gemma minor" title="Gemma Minor [125:176] exclusive">estas minúsculas fatias de um segundo da minha vida</mark>, <mark class="span gemma minor" title="Gemma Minor [178:202] exclusive">num único vídeo contínuo</mark> até que, vocês sabem, eu não possa mais gravá-los.</div><ul class="span-list"><li><strong>Minor</strong> [16:30] exclusive estou a gravar</li><li><strong>Minor</strong> [125:176] exclusive estas minúsculas fatias de um segundo da minha vida</li><li><strong>Minor</strong> [178:202] exclusive num único vídeo contínuo</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estou a gravar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estas minúsculas fatias de um segundo da minha vida&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;num único vídeo contínuo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 8</div>
+                <div class="position">Passage position 2</div>
+                <p lang="pt-BR">O propósito desse projeto é, primeiro: Eu odeio não lembrar de coisas que fiz no passado.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0237</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O propósito desse projeto é, primeiro: Eu odeio não lembrar de coisas que fiz no passado.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">O propósito desse projeto é, primeiro: Eu odeio não lembrar de coisas que fiz no passado.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [89:89] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [89:89] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">O propósito desse projeto é, primeiro: Eu odeio não lembrar de coisas que fiz no passado.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0238</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O propósito deste projeto é, primeiro: Odeio não me lembrar de coisas que fiz no passado.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>75</strong></div>
+            <div class="annotated-text">O propósito <mark class="span human minor" title="Human Minor [12:16] inclusive UTF-16">deste</mark> projeto é, primeiro: Odeio não me lembrar de coisas que fiz no passado.</div><ul class="span-list"><li><strong>Minor</strong> [12:16] inclusive UTF-16 deste</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">O propósito <mark class="span gemma minor" title="Gemma Minor [12:17] exclusive">deste</mark> projeto é, primeiro: Odeio não me lembrar de coisas que fiz no passado.</div><ul class="span-list"><li><strong>Minor</strong> [12:17] exclusive deste</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;deste&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0239</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O propósito deste projeto é, em primeiro lugar: odeio não me lembrar das coisas que fiz no passado.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>30</strong></div>
+            <div class="annotated-text">O propósito <mark class="span human minor" title="Human Minor [12:16] inclusive UTF-16">deste</mark> projeto é, <mark class="span human minor" title="Human Minor [29:45] inclusive UTF-16">em primeiro lugar</mark>: odeio não me lembrar das coisas que fiz no passado.</div><ul class="span-list"><li><strong>Minor</strong> [12:16] inclusive UTF-16 deste</li><li><strong>Minor</strong> [29:45] inclusive UTF-16 em primeiro lugar</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">O propósito <mark class="span gemma minor" title="Gemma Minor [12:17] exclusive">deste</mark> projeto é, <mark class="span gemma minor" title="Gemma Minor [29:47] exclusive">em primeiro lugar:</mark> <mark class="span gemma minor" title="Gemma Minor [48:79] exclusive">odeio não me lembrar das coisas</mark> que fiz no passado.</div><ul class="span-list"><li><strong>Minor</strong> [12:17] exclusive deste</li><li><strong>Minor</strong> [29:47] exclusive em primeiro lugar:</li><li><strong>Minor</strong> [48:79] exclusive odeio não me lembrar das coisas</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;deste&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;em primeiro lugar:&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;odeio não me lembrar das coisas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0240</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O propósito deste projeto é, primeiro: Eu odeio não me lembrar de coisas que fiz no passado.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>75</strong></div>
+            <div class="annotated-text">O propósito <mark class="span human minor" title="Human Minor [12:16] inclusive UTF-16">deste</mark> projeto é, primeiro: Eu odeio não me lembrar de coisas que fiz no passado.</div><ul class="span-list"><li><strong>Minor</strong> [12:16] inclusive UTF-16 deste</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">O propósito <mark class="span gemma minor" title="Gemma Minor [12:17] exclusive">deste</mark> projeto é, primeiro: Eu odeio não me lembrar de coisas que fiz no passado.</div><ul class="span-list"><li><strong>Minor</strong> [12:17] exclusive deste</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;deste&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 9</div>
+                <div class="position">Passage position 3</div>
+                <p lang="pt-BR">Exitem todas essas coisas que fiz da minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso, &quot;Ah é, isso é algo que eu fiz.&quot;</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0241</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Exitem todas essas coisas que fiz da minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso, &quot;Ah é, isso é algo que eu fiz.&quot;</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Exitem todas essas coisas que fiz <mark class="span human minor" title="Human Minor [34:35] inclusive UTF-16">da</mark> minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso, &quot;<mark class="span human major" title="Human Major [142:145] inclusive UTF-16">Ah é</mark>, <mark class="span human minor" title="Human Minor [148:151] inclusive UTF-16">isso</mark> é algo que eu fiz.&quot;</div><ul class="span-list"><li><strong>Minor</strong> [34:35] inclusive UTF-16 da</li><li><strong>Major</strong> [142:145] inclusive UTF-16 Ah é</li><li><strong>Minor</strong> [148:151] inclusive UTF-16 isso</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text"><mark class="span gemma major" title="Gemma Major [0:6] exclusive">Exitem</mark> todas essas coisas que fiz da minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso, &quot;Ah é, isso é algo que eu fiz.&quot;</div><ul class="span-list"><li><strong>Major</strong> [0:6] exclusive Exitem</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Exitem&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0242</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Existem todas essas coisas que fiz da minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso, &quot;Ah é, isso é algo que eu fiz.&quot;</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Existem todas essas coisas que fiz <mark class="span human minor" title="Human Minor [35:36] inclusive UTF-16">da</mark> minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso, &quot;<mark class="span human major" title="Human Major [143:146] inclusive UTF-16">Ah é</mark>, <mark class="span human minor" title="Human Minor [149:152] inclusive UTF-16">isso</mark> é algo que eu fiz.&quot;</div><ul class="span-list"><li><strong>Minor</strong> [35:36] inclusive UTF-16 da</li><li><strong>Major</strong> [143:146] inclusive UTF-16 Ah é</li><li><strong>Minor</strong> [149:152] inclusive UTF-16 isso</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:7] exclusive">Existem</mark> todas essas coisas que fiz da minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso, &quot;Ah é, isso é algo que eu fiz.&quot;</div><ul class="span-list"><li><strong>Minor</strong> [0:7] exclusive Existem</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Existem&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0243</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Há muitas coisas que fiz durante a minha vida das quais não me lembro, a não ser que alguém as mencione, e às vezes penso: &quot;Ah, sim, isso é algo que fiz&quot;.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>80</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:15] inclusive UTF-16">Há muitas coisas</mark> que fiz durante a minha vida das quais não me lembro, a não ser que alguém as mencione, e às vezes penso: &quot;Ah, sim, isso é algo que fiz&quot;.</div><ul class="span-list"><li><strong>Minor</strong> [0:15] inclusive UTF-16 Há muitas coisas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:16] exclusive">Há muitas coisas</mark> que fiz durante a minha vida das quais não me lembro, a não ser que alguém as mencione, e às vezes penso: &quot;Ah, sim, isso é algo que fiz&quot;.</div><ul class="span-list"><li><strong>Minor</strong> [0:16] exclusive Há muitas coisas</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Há muitas coisas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0244</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Existem todas essas coisas que fiz da minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso: &quot;Ah é, isso é algo que eu fiz.&quot;</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Existem todas essas coisas que fiz <mark class="span human minor" title="Human Minor [35:36] inclusive UTF-16">da</mark> minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso: &quot;<mark class="span human major" title="Human Major [143:146] inclusive UTF-16">Ah é</mark>, <mark class="span human minor" title="Human Minor [149:152] inclusive UTF-16">isso</mark> é algo que eu fiz.&quot;</div><ul class="span-list"><li><strong>Minor</strong> [35:36] inclusive UTF-16 da</li><li><strong>Major</strong> [143:146] inclusive UTF-16 Ah é</li><li><strong>Minor</strong> [149:152] inclusive UTF-16 isso</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Existem todas essas coisas que fiz da minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu <mark class="span gemma minor" title="Gemma Minor [135:141] exclusive">penso:</mark> &quot;Ah é, isso é algo que eu fiz.&quot;</div><ul class="span-list"><li><strong>Minor</strong> [135:141] exclusive penso:</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;penso:&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 10</div>
+                <div class="position">Passage position 4</div>
+                <p lang="pt-BR">E uma coisa que percebi logo nesse projeto é que se eu não estivesse fazendo nada interessante, provavelmente eu esqueceria de gravar o vídeo.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0245</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E uma coisa que percebi logo nesse projeto é que se eu não estivesse fazendo nada interessante, provavelmente eu esqueceria de gravar o vídeo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E uma coisa que percebi logo <mark class="span human minor" title="Human Minor [29:33] inclusive UTF-16">nesse</mark> projeto é que se eu não <mark class="span human major" title="Human Major [59:75] inclusive UTF-16">estivesse fazendo</mark> nada interessante, provavelmente <mark class="span human major" title="Human Major [110:122] inclusive UTF-16">eu esqueceria</mark> de gravar o vídeo.</div><ul class="span-list"><li><strong>Minor</strong> [29:33] inclusive UTF-16 nesse</li><li><strong>Major</strong> [59:75] inclusive UTF-16 estivesse fazendo</li><li><strong>Major</strong> [110:122] inclusive UTF-16 eu esqueceria</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">E uma coisa que percebi logo nesse projeto é que se eu não estivesse fazendo nada interessante, provavelmente eu esqueceria de gravar o vídeo.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0246</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E uma coisa que percebi logo neste projeto é que se eu não estivesse a fazer nada interessante, provavelmente eu esqueceria de gravar o vídeo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">E uma coisa que percebi logo neste projeto é que se eu não estivesse a fazer nada interessante, provavelmente <mark class="span human minor" title="Human Minor [110:122] inclusive UTF-16">eu esqueceria</mark> de gravar o vídeo.</div><ul class="span-list"><li><strong>Minor</strong> [110:122] inclusive UTF-16 eu esqueceria</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E uma coisa que percebi logo <mark class="span gemma minor" title="Gemma Minor [29:34] exclusive">neste</mark> projeto é que se eu não <mark class="span gemma minor" title="Gemma Minor [59:76] exclusive">estivesse a fazer</mark> nada interessante, provavelmente eu esqueceria de gravar o vídeo.</div><ul class="span-list"><li><strong>Minor</strong> [29:34] exclusive neste</li><li><strong>Minor</strong> [59:76] exclusive estivesse a fazer</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;neste&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estivesse a fazer&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0247</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E uma coisa que percebi logo neste projeto é que, se não estivesse a fazer nada interessante, provavelmente esquecia-me de gravar o vídeo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">E uma coisa que percebi logo neste projeto é que, se não estivesse a fazer nada interessante, provavelmente esquecia-me de gravar o vídeo.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E uma coisa que percebi logo <mark class="span gemma minor" title="Gemma Minor [29:34] exclusive">neste</mark> projeto é que, se não <mark class="span gemma minor" title="Gemma Minor [57:74] exclusive">estivesse a fazer</mark> nada interessante, provavelmente <mark class="span gemma minor" title="Gemma Minor [108:119] exclusive">esquecia-me</mark> de gravar o vídeo.</div><ul class="span-list"><li><strong>Minor</strong> [29:34] exclusive neste</li><li><strong>Minor</strong> [57:74] exclusive estivesse a fazer</li><li><strong>Minor</strong> [108:119] exclusive esquecia-me</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;neste&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estivesse a fazer&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;esquecia-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0248</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E uma coisa que percebi logo neste projeto é que se eu não estivesse a fazer nada interessante, provavelmente esqueceria de gravar o vídeo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">E uma coisa que percebi logo neste projeto é que se eu não estivesse a fazer nada interessante, provavelmente <mark class="span human minor" title="Human Minor [110:119] inclusive UTF-16">esqueceria</mark> de gravar o vídeo.</div><ul class="span-list"><li><strong>Minor</strong> [110:119] inclusive UTF-16 esqueceria</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E uma coisa que percebi logo <mark class="span gemma minor" title="Gemma Minor [29:34] exclusive">neste</mark> projeto é que se eu não <mark class="span gemma minor" title="Gemma Minor [59:76] exclusive">estivesse a fazer</mark> nada interessante, <mark class="span gemma minor" title="Gemma Minor [96:120] exclusive">provavelmente esqueceria</mark> de gravar o vídeo.</div><ul class="span-list"><li><strong>Minor</strong> [29:34] exclusive neste</li><li><strong>Minor</strong> [59:76] exclusive estivesse a fazer</li><li><strong>Minor</strong> [96:120] exclusive provavelmente esqueceria</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;neste&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estivesse a fazer&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;provavelmente esqueceria&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 11</div>
+                <div class="position">Passage position 5</div>
+                <p lang="pt-BR">Então no dia -- a primeira vez que esqueci, fiquei muito mal, porque é algo que eu queria mesmo do momento em que fiz 30 anos, eu queria manter esse projeto rolando para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais esqueci.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0249</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então no dia -- a primeira vez que esqueci, fiquei muito mal, porque é algo que eu queria mesmo do momento em que fiz 30 anos, eu queria manter esse projeto rolando para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais esqueci.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Então no dia -- a primeira vez que <mark class="span human minor" title="Human Minor [35:41] inclusive UTF-16">esqueci</mark>, fiquei muito mal, porque é algo que eu queria <mark class="span human minor" title="Human Minor [90:105] inclusive UTF-16">mesmo do momento</mark> em que fiz 30 anos, eu queria manter esse projeto <mark class="span human minor" title="Human Minor [157:163] inclusive UTF-16">rolando</mark> para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais <mark class="span human minor" title="Human Minor [278:284] inclusive UTF-16">esqueci</mark>.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [286:286] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [35:41] inclusive UTF-16 esqueci</li><li><strong>Minor</strong> [90:105] inclusive UTF-16 mesmo do momento</li><li><strong>Minor</strong> [157:163] inclusive UTF-16 rolando</li><li><strong>Minor</strong> [278:284] inclusive UTF-16 esqueci</li><li><strong>Major</strong> [286:286] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Então no dia -- a primeira vez que esqueci, <mark class="span gemma minor" title="Gemma Minor [44:60] exclusive">fiquei muito mal</mark>, porque é algo que eu queria mesmo do momento em que fiz 30 anos, eu queria manter esse projeto rolando para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais esqueci.</div><ul class="span-list"><li><strong>Minor</strong> [44:60] exclusive fiquei muito mal</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;fiquei muito mal&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0250</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então no dia -- a primeira vez que esqueci, fiquei muito mal, porque é algo que eu queria mesmo do momento em que fiz 30 anos, eu queria manter esse projeto a rolar para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais esqueci.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Então no dia -- a primeira vez que <mark class="span human minor" title="Human Minor [35:41] inclusive UTF-16">esqueci</mark>, fiquei muito mal, porque é algo que eu queria <mark class="span human minor" title="Human Minor [90:105] inclusive UTF-16">mesmo do momento</mark> em que fiz 30 anos, eu queria manter esse projeto <mark class="span human major" title="Human Major [157:163] inclusive UTF-16">a rolar</mark> para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais <mark class="span human minor" title="Human Minor [278:284] inclusive UTF-16">esqueci</mark>.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [286:286] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [35:41] inclusive UTF-16 esqueci</li><li><strong>Minor</strong> [90:105] inclusive UTF-16 mesmo do momento</li><li><strong>Major</strong> [157:163] inclusive UTF-16 a rolar</li><li><strong>Minor</strong> [278:284] inclusive UTF-16 esqueci</li><li><strong>Major</strong> [286:286] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então no dia -- a primeira vez que esqueci, fiquei muito mal, porque é algo que eu queria mesmo do momento em que fiz 30 anos, eu queria manter esse projeto <mark class="span gemma minor" title="Gemma Minor [157:164] exclusive">a rolar</mark> para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais esqueci.</div><ul class="span-list"><li><strong>Minor</strong> [157:164] exclusive a rolar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a rolar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0251</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> No dia em que me esqueci, fiquei muito mal, porque é algo que eu queria desde que completei 30 anos, queria manter este projeto em marcha para sempre, e depois de ter perdido esse segundo, percebi que isso criou uma coisa na minha cabeça, onde nunca mais me esqueci.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>25</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:8] inclusive UTF-16">No dia em</mark> que me esqueci, fiquei muito mal, porque é algo que eu queria desde que <mark class="span human minor" title="Human Minor [82:90] inclusive UTF-16">completei</mark> 30 anos, queria manter este projeto em marcha para sempre, <mark class="span human minor" title="Human Minor [151:165] inclusive UTF-16">e depois de ter</mark> perdido esse segundo, percebi <mark class="span human minor" title="Human Minor [197:199] inclusive UTF-16">que</mark> isso criou uma coisa na minha cabeça, onde nunca mais me esqueci.</div><ul class="span-list"><li><strong>Minor</strong> [0:8] inclusive UTF-16 No dia em</li><li><strong>Minor</strong> [82:90] inclusive UTF-16 completei</li><li><strong>Minor</strong> [151:165] inclusive UTF-16 e depois de ter</li><li><strong>Minor</strong> [197:199] inclusive UTF-16 que</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text"><mark class="span gemma major" title="Gemma Major [0:24] exclusive">No dia em que me esqueci</mark>, fiquei muito mal, porque é algo que eu queria desde que completei 30 anos, queria manter este projeto em marcha para sempre, e depois de ter perdido esse segundo, percebi que isso criou uma coisa na minha cabeça, onde nunca mais me esqueci.</div><ul class="span-list"><li><strong>Major</strong> [0:24] exclusive No dia em que me esqueci</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;No dia em que me esqueci&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0252</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então no dia -- a primeira vez que esqueci, fiquei muito mal, porque é algo que eu queria mesmo desde o momento em que fiz 30 anos, eu queria manter este projeto a correr para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais esqueci.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">Então no dia -- a primeira vez que <mark class="span human minor" title="Human Minor [35:41] inclusive UTF-16">esqueci</mark>, fiquei muito mal, porque é algo que eu queria mesmo desde o momento em que fiz 30 anos, eu queria manter este projeto a correr para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais <mark class="span human minor" title="Human Minor [284:290] inclusive UTF-16">esqueci</mark>.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [292:292] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [35:41] inclusive UTF-16 esqueci</li><li><strong>Minor</strong> [284:290] inclusive UTF-16 esqueci</li><li><strong>Major</strong> [292:292] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então no dia -- a primeira vez que esqueci, fiquei muito mal, porque é algo que eu queria mesmo desde o momento em que fiz 30 anos, eu queria manter <mark class="span gemma minor" title="Gemma Minor [149:153] exclusive">este</mark> projeto a correr para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais esqueci.</div><ul class="span-list"><li><strong>Minor</strong> [149:153] exclusive este</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;este&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 12</div>
+                <div class="position">Passage position 6</div>
+                <p lang="pt-BR">Então se eu viver até os 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0253</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então se eu viver até os 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Então se eu viver até <mark class="span human major" title="Human Major [22:23] inclusive UTF-16">os</mark> 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div><ul class="span-list"><li><strong>Major</strong> [22:23] inclusive UTF-16 os</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Então se eu viver até os 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0254</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então se eu viver até os 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Então se eu viver até <mark class="span human major" title="Human Major [22:23] inclusive UTF-16">os</mark> 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div><ul class="span-list"><li><strong>Major</strong> [22:23] inclusive UTF-16 os</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Então se eu viver até os 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0255</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Assim, se eu viver até aos 80 anos, terei um vídeo de 5 horas que resume 50 anos da minha vida.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">Assim, se eu viver até aos 80 anos, <mark class="span human minor" title="Human Minor [36:40] inclusive UTF-16">terei</mark> um vídeo de 5 horas que <mark class="span human minor" title="Human Minor [66:71] inclusive UTF-16">resume</mark> 50 anos da minha vida.</div><ul class="span-list"><li><strong>Minor</strong> [36:40] inclusive UTF-16 terei</li><li><strong>Minor</strong> [66:71] inclusive UTF-16 resume</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:5] exclusive">Assim</mark>, se eu viver até aos 80 anos, terei um vídeo de 5 horas que resume 50 anos da minha vida.</div><ul class="span-list"><li><strong>Minor</strong> [0:5] exclusive Assim</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Assim&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0256</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então se eu viver até aos 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Então se eu viver até aos 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então se eu viver <mark class="span gemma minor" title="Gemma Minor [18:25] exclusive">até aos</mark> 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida.</div><ul class="span-list"><li><strong>Minor</strong> [18:25] exclusive até aos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;até aos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 13</div>
+                <div class="position">Passage position 7</div>
+                <p lang="pt-BR">Quando fizer 40, eu vou ter um vídeo de uma hora que inclui só os últimos dez anos.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0257</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Quando fizer 40, eu vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>85</strong></div>
+            <div class="annotated-text">Quando fizer 40, <mark class="span human minor" title="Human Minor [17:18] inclusive UTF-16">eu</mark> vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div><ul class="span-list"><li><strong>Minor</strong> [17:18] inclusive UTF-16 eu</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Quando fizer 40, eu vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0258</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Quando fizer 40, eu vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>85</strong></div>
+            <div class="annotated-text">Quando fizer 40, <mark class="span human minor" title="Human Minor [17:18] inclusive UTF-16">eu</mark> vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div><ul class="span-list"><li><strong>Minor</strong> [17:18] inclusive UTF-16 eu</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Quando fizer 40, eu vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0259</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Quando fizer 40 anos, vou ter um vídeo de uma hora que inclui apenas os últimos dez anos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Quando fizer 40 <mark class="span human minor" title="Human Minor [16:19] inclusive UTF-16">anos</mark>, vou ter um vídeo de uma hora que inclui <mark class="span human minor" title="Human Minor [62:67] inclusive UTF-16">apenas</mark> os últimos dez anos.</div><ul class="span-list"><li><strong>Minor</strong> [16:19] inclusive UTF-16 anos</li><li><strong>Minor</strong> [62:67] inclusive UTF-16 apenas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;eu&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0260</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Quando fizer 40, eu vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>85</strong></div>
+            <div class="annotated-text">Quando fizer 40, <mark class="span human minor" title="Human Minor [17:18] inclusive UTF-16">eu</mark> vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div><ul class="span-list"><li><strong>Minor</strong> [17:18] inclusive UTF-16 eu</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Quando fizer 40, eu vou ter um vídeo de uma hora que inclui só os últimos dez anos.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 14</div>
+                <div class="position">Passage position 8</div>
+                <p lang="pt-BR">Isso realmente me animou, dia após dia, quando acordo, a tentar e fazer algo interessante com meu dia.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0261</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso realmente me animou, dia após dia, quando acordo, a tentar e fazer algo interessante com meu dia.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:3] inclusive UTF-16">Isso</mark> realmente <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">me animou</mark>, dia após dia, quando acordo, a tentar e fazer algo interessante com meu dia.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [102:102] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:3] inclusive UTF-16 Isso</li><li><strong>Major</strong> [15:23] inclusive UTF-16 me animou</li><li><strong>Major</strong> [102:102] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Isso realmente me animou, dia após dia, quando acordo, a tentar e fazer algo interessante com meu dia.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0262</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso realmente me animou, dia após dia, quando acordo, a tentar e fazer algo interessante com meu dia.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:3] inclusive UTF-16">Isso</mark> realmente <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">me animou</mark>, dia após dia, quando acordo, a tentar e fazer algo interessante com meu dia.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [102:102] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:3] inclusive UTF-16 Isso</li><li><strong>Major</strong> [15:23] inclusive UTF-16 me animou</li><li><strong>Major</strong> [102:102] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Isso realmente me animou, dia após dia, quando acordo, a tentar e fazer algo interessante com meu dia.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0263</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso realmente animou-me, dia após dia, quando acordava, a tentar fazer algo interessante com o meu dia.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:3] inclusive UTF-16">Isso</mark> realmente animou-me, dia após dia, quando <mark class="span human major" title="Human Major [47:54] inclusive UTF-16">acordava</mark>, a tentar fazer algo interessante com o meu dia.</div><ul class="span-list"><li><strong>Minor</strong> [0:3] inclusive UTF-16 Isso</li><li><strong>Major</strong> [47:54] inclusive UTF-16 acordava</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Isso realmente <mark class="span gemma minor" title="Gemma Minor [15:24] exclusive">animou-me</mark>, dia após dia, quando <mark class="span gemma minor" title="Gemma Minor [47:55] exclusive">acordava</mark>, a tentar fazer algo interessante com o meu dia.</div><ul class="span-list"><li><strong>Minor</strong> [15:24] exclusive animou-me</li><li><strong>Minor</strong> [47:55] exclusive acordava</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;animou-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;acordava&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0264</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso realmente animou-me, dia após dia, quando acordo, a tentar e a fazer algo interessante com o meu dia.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>85</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:3] inclusive UTF-16">Isso</mark> realmente animou-me, dia após dia, quando acordo, a tentar e a fazer algo interessante com o meu dia.</div><ul class="span-list"><li><strong>Minor</strong> [0:3] inclusive UTF-16 Isso</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Isso realmente <mark class="span gemma minor" title="Gemma Minor [15:24] exclusive">animou-me</mark>, dia após dia, quando acordo, a tentar e a fazer algo interessante com o meu dia.</div><ul class="span-list"><li><strong>Minor</strong> [15:24] exclusive animou-me</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;animou-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 15</div>
+                <div class="position">Passage position 9</div>
+                <p lang="pt-BR">Agora, uma das coisas com a qual tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a embaçar e misturar um com o outro e, sabe, eu odiava isso, e a visualização é a forma de ativar a memória.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0265</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora, uma das coisas com a qual tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a embaçar e misturar um com o outro e, sabe, eu odiava isso, e a visualização é a forma de ativar a memória.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Agora, uma das coisas <mark class="span human major" title="Human Major [22:31] inclusive UTF-16">com a qual</mark> tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a <mark class="span human major" title="Human Major [122:128] inclusive UTF-16">embaçar</mark> e <mark class="span human major" title="Human Major [132:139] inclusive UTF-16">misturar</mark> um com o outro e, <mark class="span human major" title="Human Major [159:162] inclusive UTF-16">sabe</mark>, eu odiava isso, e a visualização é a forma de ativar a memória.</div><ul class="span-list"><li><strong>Major</strong> [22:31] inclusive UTF-16 com a qual</li><li><strong>Major</strong> [122:128] inclusive UTF-16 embaçar</li><li><strong>Major</strong> [132:139] inclusive UTF-16 misturar</li><li><strong>Major</strong> [159:162] inclusive UTF-16 sabe</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Agora, uma das coisas com a qual tenho problemas é que, com o passar das semanas e dos meses, o tempo <mark class="span gemma minor" title="Gemma Minor [102:112] exclusive">parece que</mark> começa a embaçar e misturar um com o outro e, sabe, eu odiava isso, e a visualização é a forma de ativar a memória.</div><ul class="span-list"><li><strong>Minor</strong> [102:112] exclusive parece que</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;parece que&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0266</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora, uma das coisas com a qual tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a embaçar e misturar um com o outro e, sabes, eu odiava isso, e a visualização é a forma de ativar a memória.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Agora, uma das coisas <mark class="span human major" title="Human Major [22:31] inclusive UTF-16">com a qual</mark> tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a <mark class="span human major" title="Human Major [122:128] inclusive UTF-16">embaçar</mark> e misturar um com o outro e, <mark class="span human major" title="Human Major [159:163] inclusive UTF-16">sabes</mark>, eu odiava isso, e a visualização é a forma de ativar a memória.</div><ul class="span-list"><li><strong>Major</strong> [22:31] inclusive UTF-16 com a qual</li><li><strong>Major</strong> [122:128] inclusive UTF-16 embaçar</li><li><strong>Major</strong> [159:163] inclusive UTF-16 sabes</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Agora, uma das coisas com a qual tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a embaçar e misturar um com o outro e, <mark class="span gemma minor" title="Gemma Minor [159:164] exclusive">sabes</mark>, eu odiava isso, e a visualização é a forma de ativar a memória.</div><ul class="span-list"><li><strong>Minor</strong> [159:164] exclusive sabes</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;sabes&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0267</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora, uma das coisas com que tenho problemas é que, à medida que passam as semanas e os meses, o tempo parece começar a embaçar-se e misturar-se um com o outro, e eu detesto isto, e a visualização é a forma de ativar a memória.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Agora, uma das coisas <mark class="span human minor" title="Human Minor [22:28] inclusive UTF-16">com que</mark> tenho problemas é que, à medida que passam as semanas e os meses, o tempo parece começar a <mark class="span human major" title="Human Major [121:130] inclusive UTF-16">embaçar-se</mark> e misturar-se um com o outro, e eu <mark class="span human minor" title="Human Minor [167:178] inclusive UTF-16">detesto isto</mark>, e a visualização é a forma de ativar a memória.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [228:228] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [22:28] inclusive UTF-16 com que</li><li><strong>Major</strong> [121:130] inclusive UTF-16 embaçar-se</li><li><strong>Minor</strong> [167:178] inclusive UTF-16 detesto isto</li><li><strong>Minor</strong> [228:228] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Agora, uma das coisas <mark class="span gemma minor" title="Gemma Minor [22:29] exclusive">com que</mark> tenho problemas é que, <mark class="span gemma minor" title="Gemma Minor [53:72] exclusive">à medida que passam</mark> as semanas e os meses, o tempo parece começar a <mark class="span gemma minor" title="Gemma Minor [121:145] exclusive">embaçar-se e misturar-se</mark> um com o outro, e eu <mark class="span gemma minor" title="Gemma Minor [167:179] exclusive">detesto isto</mark>, e a visualização é a forma de ativar a memória.</div><ul class="span-list"><li><strong>Minor</strong> [22:29] exclusive com que</li><li><strong>Minor</strong> [53:72] exclusive à medida que passam</li><li><strong>Minor</strong> [121:145] exclusive embaçar-se e misturar-se</li><li><strong>Minor</strong> [167:179] exclusive detesto isto</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;com que&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;à medida que passam&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;embaçar-se e misturar-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;detesto isto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0268</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora, uma das coisas com as quais tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a embaçar e a misturar um com o outro e, sabe, eu odiava isso, e a visualização é a forma de ativar a memória.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">Agora, uma das coisas com as quais tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a <mark class="span human major" title="Human Major [124:130] inclusive UTF-16">embaçar</mark> e a misturar um com o outro e, <mark class="span human major" title="Human Major [163:166] inclusive UTF-16">sabe</mark>, eu odiava isso, e a visualização é a forma de ativar a memória.</div><ul class="span-list"><li><strong>Major</strong> [124:130] inclusive UTF-16 embaçar</li><li><strong>Major</strong> [163:166] inclusive UTF-16 sabe</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Agora, uma das coisas <mark class="span gemma minor" title="Gemma Minor [22:34] exclusive">com as quais</mark> tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a embaçar <mark class="span gemma minor" title="Gemma Minor [132:144] exclusive">e a misturar</mark> um com o outro e, sabe, eu odiava isso, e a visualização é a forma de ativar a memória.</div><ul class="span-list"><li><strong>Minor</strong> [22:34] exclusive com as quais</li><li><strong>Minor</strong> [132:144] exclusive e a misturar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;com as quais&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;e a misturar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 16</div>
+                <div class="position">Passage position 10</div>
+                <p lang="pt-BR">Sabe, esse projeto pra mim é um jeito de superar essa lacuna e lembrar de tudo que eu já fiz.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0269</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sabe, esse projeto pra mim é um jeito de superar essa lacuna e lembrar de tudo que eu já fiz.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:3] inclusive UTF-16">Sabe</mark>, <mark class="span human minor" title="Human Minor [6:9] inclusive UTF-16">esse</mark> projeto <mark class="span human minor" title="Human Minor [19:21] inclusive UTF-16">pra</mark> mim é um jeito de superar essa lacuna e lembrar de tudo que <mark class="span human minor" title="Human Minor [83:84] inclusive UTF-16">eu</mark> já fiz.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [93:93] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [0:3] inclusive UTF-16 Sabe</li><li><strong>Minor</strong> [6:9] inclusive UTF-16 esse</li><li><strong>Minor</strong> [19:21] inclusive UTF-16 pra</li><li><strong>Minor</strong> [83:84] inclusive UTF-16 eu</li><li><strong>Major</strong> [93:93] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Sabe, esse projeto <mark class="span gemma minor" title="Gemma Minor [19:22] exclusive">pra</mark> mim é um jeito de superar essa lacuna e lembrar de tudo que eu já fiz.</div><ul class="span-list"><li><strong>Minor</strong> [19:22] exclusive pra</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0270</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sabes, este projeto para mim é uma forma de superar essa lacuna e lembrar-me de tudo o que já fiz.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>45</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:4] inclusive UTF-16">Sabes</mark>, este projeto para mim é uma forma de superar essa lacuna e lembrar-me de tudo o que já fiz.</div><ul class="span-list"><li><strong>Major</strong> [0:4] inclusive UTF-16 Sabes</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:5] exclusive">Sabes</mark>, este projeto para mim é uma forma de superar essa lacuna e lembrar-me de tudo o que já fiz.</div><ul class="span-list"><li><strong>Minor</strong> [0:5] exclusive Sabes</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Sabes&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0271</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sabe, este projeto é para mim uma forma de ultrapassar esta lacuna e lembrar-me de tudo o que já fiz.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:3] inclusive UTF-16">Sabe</mark>, este projeto é para mim uma forma de <mark class="span human minor" title="Human Minor [43:53] inclusive UTF-16">ultrapassar</mark> <mark class="span human minor" title="Human Minor [55:58] inclusive UTF-16">esta</mark> lacuna e lembrar-me de tudo o que já fiz.</div><ul class="span-list"><li><strong>Major</strong> [0:3] inclusive UTF-16 Sabe</li><li><strong>Minor</strong> [43:53] inclusive UTF-16 ultrapassar</li><li><strong>Minor</strong> [55:58] inclusive UTF-16 esta</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Sabe, <mark class="span gemma minor" title="Gemma Minor [6:39] exclusive">este projeto é para mim uma forma</mark> de ultrapassar esta lacuna e lembrar-me de tudo o que já fiz.</div><ul class="span-list"><li><strong>Minor</strong> [6:39] exclusive este projeto é para mim uma forma</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;este projeto é para mim uma forma&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0272</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sabe, este projeto para mim é um modo de superar esta lacuna e lembrar de tudo o que já fiz.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:3] inclusive UTF-16">Sabe</mark>, este projeto para mim é um modo de superar <mark class="span human minor" title="Human Minor [49:52] inclusive UTF-16">esta</mark> lacuna e lembrar de tudo o que já fiz.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [92:92] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [0:3] inclusive UTF-16 Sabe</li><li><strong>Minor</strong> [49:52] inclusive UTF-16 esta</li><li><strong>Major</strong> [92:92] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Sabe, <mark class="span gemma minor" title="Gemma Minor [6:10] exclusive">este</mark> projeto para mim é um <mark class="span gemma minor" title="Gemma Minor [33:37] exclusive">modo</mark> de superar <mark class="span gemma minor" title="Gemma Minor [49:53] exclusive">esta</mark> lacuna e lembrar de <mark class="span gemma minor" title="Gemma Minor [74:84] exclusive">tudo o que</mark> já fiz.</div><ul class="span-list"><li><strong>Minor</strong> [6:10] exclusive este</li><li><strong>Minor</strong> [33:37] exclusive modo</li><li><strong>Minor</strong> [49:53] exclusive esta</li><li><strong>Minor</strong> [74:84] exclusive tudo o que</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;este&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;modo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;esta&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;tudo o que&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            </tbody>
+  </table>
+</body>
+</html>

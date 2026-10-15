@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0 DEV comparison — ted2020-2203_s26-s32</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+    body { margin: 0 auto; max-width: 1500px; padding: 24px; }
+    h1 { margin-bottom: 6px; } .summary { color: #526078; margin-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; font-size: 14px; }
+    .legend span { padding: 4px 9px; border-radius: 4px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
+    th[scope=row] { width: 25%; min-width: 240px; text-align: left; vertical-align: top; background: white; padding: 16px; border-radius: 8px 0 0 8px; }
+    td { background: white; padding: 12px; border-radius: 0 8px 8px 0; }
+    .sentence-number { font-weight: 750; } .position { color: #6b7280; font-size: 13px; }
+    .candidate-stack { display: grid; gap: 12px; }
+    .candidate-card { border: 1px solid #d8dee9; border-radius: 7px; padding: 12px; background: #fbfcfe; }
+    .candidate-card header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .system { font-weight: 750; } code { color: #687386; }
+    .candidate-full { margin: 9px 0; line-height: 1.45; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .judgment { border-radius: 6px; padding: 10px; min-width: 0; }
+    .human-panel { background: #fff8eb; border: 1px solid #f2d49b; }
+    .gemma-panel { background: #eef8ff; border: 1px solid #b9dcf3; }
+    h4 { margin: 0 0 5px; } .score { margin: 4px 0 7px; }
+    .annotated-text { background: white; padding: 8px; border-radius: 4px; line-height: 1.65; overflow-wrap: anywhere; }
+    mark.span { padding: 1px 2px; border-radius: 3px; }
+    mark.human.minor, .legend .human-minor { background: #ffe49b; }
+    mark.human.major, .legend .human-major { background: #ffaaa5; }
+    mark.gemma.minor, .legend .gemma-minor { background: #9de5f3; }
+    mark.gemma.major, .legend .gemma-major { background: #d1b3ff; }
+    mark.missing { border: 1px dashed #202938; font-weight: 700; }
+    .no-errors { color: #55805d; font-size: 13px; white-space: nowrap; }
+    .span-list { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+    .status { display: inline-block; font-weight: 700; font-size: 13px; padding: 3px 7px; border-radius: 4px; }
+    .status.valid { background: #ccebd2; color: #185928; }
+    .status.invalid { background: #ffd2cf; color: #8b1e18; }
+    .unvalidated { color: #8b1e18; } .parse-errors { color: #8b1e18; }
+    .warning { color: #8b1e18; font-weight: 650; margin-top: 5px; }
+    details { margin-top: 8px; } summary { cursor: pointer; color: #334e75; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172033; color: #f5f7fa; padding: 10px; border-radius: 5px; font-size: 12px; }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } th[scope=row] { width: auto; min-width: 180px; } }
+  </style>
+</head>
+<body>
+  <h1>Gemma V0 DEV comparison</h1>
+  <p class="summary"><strong>Passage:</strong> ted2020-2203_s26-s32 · <strong>Document:</strong> ted2020-2203 · <strong>Sentences:</strong> 10 · <strong>Candidate judgments:</strong> 40 · <strong>Invalid V0 outputs:</strong> 3</p>
+  <div class="legend">
+    <span class="human-minor">Human Minor</span><span class="human-major">Human Major</span>
+    <span class="gemma-minor">Gemma Minor</span><span class="gemma-major">Gemma Major</span>
+  </div>
+  <table>
+    <thead><tr><th>BP source sentence</th><th>Candidate comparisons</th></tr></thead>
+    <tbody>
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 26</div>
+                <div class="position">Passage position 1</div>
+                <p lang="pt-BR">Mas você precisa ter um dispositivo no topo das árvores, certo?</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0037</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas você precisa ter um dispositivo no topo das árvores, certo?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Mas <mark class="span human major" title="Human Major [4:15] inclusive UTF-16">você precisa</mark> ter um dispositivo no topo das árvores, certo?</div><ul class="span-list"><li><strong>Major</strong> [4:15] inclusive UTF-16 você precisa</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Mas <mark class="span gemma minor" title="Gemma Minor [4:8] exclusive">você</mark> precisa ter um dispositivo no topo das árvores, certo?</div><ul class="span-list"><li><strong>Minor</strong> [4:8] exclusive você</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;você&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0038</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas precisas de ter um dispositivo no topo das árvores, certo?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Mas precisas de ter um dispositivo no topo das árvores, certo?</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Mas <mark class="span gemma minor" title="Gemma Minor [4:12] exclusive">precisas</mark> de ter um dispositivo no topo das árvores, certo?</div><ul class="span-list"><li><strong>Minor</strong> [4:12] exclusive precisas</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;precisas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0039</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas tens de ter um dispositivo no topo das árvores, certo?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">Mas <mark class="span human minor" title="Human Minor [4:7] inclusive UTF-16">tens</mark> de ter um dispositivo no topo das árvores, certo?</div><ul class="span-list"><li><strong>Minor</strong> [4:7] inclusive UTF-16 tens</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Mas <mark class="span gemma minor" title="Gemma Minor [4:15] exclusive">tens de ter</mark> um dispositivo no topo das árvores, certo?</div><ul class="span-list"><li><strong>Minor</strong> [4:15] exclusive tens de ter</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;tens de ter&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0040</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas você precisa ter um dispositivo no topo das árvores, certo?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Mas <mark class="span human major" title="Human Major [4:15] inclusive UTF-16">você precisa</mark> ter um dispositivo no topo das árvores, certo?</div><ul class="span-list"><li><strong>Major</strong> [4:15] inclusive UTF-16 você precisa</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Mas <mark class="span gemma minor" title="Gemma Minor [4:8] exclusive">você</mark> precisa ter um dispositivo no topo das árvores, certo?</div><ul class="span-list"><li><strong>Minor</strong> [4:8] exclusive você</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;você&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 27</div>
+                <div class="position">Passage position 2</div>
+                <p lang="pt-BR">Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0041</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de <mark class="span human major" title="Human Major [96:104] inclusive UTF-16">celulares</mark> e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.</div><ul class="span-list"><li><strong>Major</strong> [96:104] inclusive UTF-16 celulares</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, <mark class="span gemma minor" title="Gemma Minor [75:85] exclusive">conectá-lo</mark> à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.</div><ul class="span-list"><li><strong>Minor</strong> [75:85] exclusive conectá-lo</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;conectá-lo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0042</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez possamos ter uma solução para este problema.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>55</strong></div>
+            <div class="annotated-text">Se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez <mark class="span human minor" title="Human Minor [148:156] inclusive UTF-16">possamos </mark>ter uma solução para este problema.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [192:192] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [148:156] inclusive UTF-16 possamos </li><li><strong>Minor</strong> [192:192] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, <mark class="span gemma minor" title="Gemma Minor [141:156] exclusive">talvez possamos</mark> ter uma solução para este problema.</div><ul class="span-list"><li><strong>Minor</strong> [141:156] exclusive talvez possamos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;talvez possamos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0043</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se conseguirmos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez possamos ter uma solução para este problema.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>55</strong></div>
+            <div class="annotated-text">Se <mark class="span human minor" title="Human Minor [3:14] inclusive UTF-16">conseguirmos</mark> usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez possamos ter uma solução para este problema.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [196:196] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [3:14] inclusive UTF-16 conseguirmos</li><li><strong>Minor</strong> [196:196] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Se conseguirmos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, <mark class="span gemma minor" title="Gemma Minor [145:160] exclusive">talvez possamos</mark> ter uma solução para este problema.</div><ul class="span-list"><li><strong>Minor</strong> [145:160] exclusive talvez possamos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;talvez possamos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0044</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de <mark class="span gemma minor" title="Gemma Minor [96:106] exclusive">telemóveis</mark> e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.</div><ul class="span-list"><li><strong>Minor</strong> [96:106] exclusive telemóveis</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;telemóveis&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 28.1</div>
+                <div class="position">Passage position 3</div>
+                <p lang="pt-BR">Paremos por um instante, para falar sobre salvar a floresta.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0045</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Paremos por um instante, para falar sobre salvar a floresta.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Paremos por um instante, para falar sobre salvar a floresta.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:7] exclusive">Paremos</mark> por um instante, para falar sobre salvar a floresta.</div><ul class="span-list"><li><strong>Minor</strong> [0:7] exclusive Paremos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Paremos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0046</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Paremos por um instante, para falar sobre salvar a floresta.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Paremos por um instante, para falar sobre salvar a floresta.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:7] exclusive">Paremos</mark> por um instante, para falar sobre salvar a floresta.</div><ul class="span-list"><li><strong>Minor</strong> [0:7] exclusive Paremos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Paremos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0047</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Paremos por um instante, para falar sobre salvar a floresta.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Paremos por um instante, para falar sobre salvar a floresta.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:7] exclusive">Paremos</mark> por um instante, para falar sobre salvar a floresta.</div><ul class="span-list"><li><strong>Minor</strong> [0:7] exclusive Paremos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Paremos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0048</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Paremos por um instante, para falar sobre salvar a floresta.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Paremos por um instante, para falar sobre salvar a floresta.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:7] exclusive">Paremos</mark> por um instante, para falar sobre salvar a floresta.</div><ul class="span-list"><li><strong>Minor</strong> [0:7] exclusive Paremos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Paremos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 28.2</div>
+                <div class="position">Passage position 4</div>
+                <p lang="pt-BR">Todos nós já ouvimos falar disto.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0049</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Todos nós já ouvimos falar disto.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Todos nós já ouvimos falar disto.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Todos nós já ouvimos falar disto.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0050</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Todos nós já ouvimos falar disto.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Todos nós já ouvimos falar disto.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Todos nós já ouvimos falar disto.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0051</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Todos nós já ouvimos falar sobre isso.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">Todos nós já ouvimos falar <mark class="span human major" title="Human Major [27:36] inclusive UTF-16">sobre isso</mark>.</div><ul class="span-list"><li><strong>Major</strong> [27:36] inclusive UTF-16 sobre isso</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Todos nós já ouvimos falar <mark class="span gemma minor" title="Gemma Minor [27:37] exclusive">sobre isso</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [27:37] exclusive sobre isso</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;sobre isso&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0052</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Todos nós já ouvimos falar disto.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Todos nós já ouvimos falar disto.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Todos nós já ouvimos falar disto.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 29.1</div>
+                <div class="position">Passage position 5</div>
+                <p lang="pt-BR">Minha geração ouviu falar disto desde quando éramos crianças.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0053</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Minha geração ouviu falar disto desde quando éramos crianças.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Minha geração ouviu falar disto desde quando éramos crianças.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [61:61] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [61:61] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Minha geração ouviu falar disto desde quando éramos crianças.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0054</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Minha geração ouviu falar disto desde quando éramos crianças.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Minha geração ouviu falar disto desde quando éramos crianças.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [61:61] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [61:61] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Minha geração ouviu falar disto desde quando éramos crianças.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0055</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> A minha geração ouviu falar disto desde que éramos crianças.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">A minha geração ouviu falar disto desde que éramos crianças.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">A minha geração ouviu falar disto <mark class="span gemma minor" title="Gemma Minor [34:43] exclusive">desde que</mark> éramos crianças.</div><ul class="span-list"><li><strong>Minor</strong> [34:43] exclusive desde que</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;desde que&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0056</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> A minha geração ouviu falar disto desde que éramos crianças.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">A minha geração ouviu falar disto desde que éramos crianças.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">A minha geração ouviu falar disto <mark class="span gemma minor" title="Gemma Minor [34:43] exclusive">desde que</mark> éramos crianças.</div><ul class="span-list"><li><strong>Minor</strong> [34:43] exclusive desde que</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;desde que&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 29.2</div>
+                <div class="position">Passage position 6</div>
+                <p lang="pt-BR">Parece que a mensagem nunca muda.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0057</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Parece que a mensagem nunca muda.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Parece que a mensagem nunca muda.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Parece que a mensagem nunca muda.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0058</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Parece que a mensagem nunca muda.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Parece que a mensagem nunca muda.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Parece que a mensagem nunca muda.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0059</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Parece que a mensagem nunca muda.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Parece que a mensagem nunca muda.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Parece que a mensagem nunca muda.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0060</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Parece que a mensagem nunca muda.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Parece que a mensagem nunca muda.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Parece que a mensagem nunca muda.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 29.3</div>
+                <div class="position">Passage position 7</div>
+                <p lang="pt-BR">&quot;Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0061</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> &quot;Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">&quot;Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">&quot;Salvemos as florestas tropicais, isto é muito urgente, <mark class="span gemma major" title="Gemma Major [56:73] exclusive">ontem destruiu-se</mark> o equivalente a tantos campos de futebol.&quot;</div><ul class="span-list"><li><strong>Major</strong> [56:73] exclusive ontem destruiu-se</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ontem destruiu-se&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0062</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Salvemos as florestas tropicais, isso é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">Salvemos as florestas tropicais, <mark class="span human major" title="Human Major [33:36] inclusive UTF-16">isso</mark> é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [115:115] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [33:36] inclusive UTF-16 isso</li><li><strong>Major</strong> [115:115] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Salvemos as florestas tropicais, <mark class="span gemma minor" title="Gemma Minor [33:37] exclusive">isso</mark> é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;</div><ul class="span-list"><li><strong>Minor</strong> [33:37] exclusive isso</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;isso&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0063</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Salvemos as florestas tropicais, isso é muito urgente, ontem foi destruído o equivalente a tantos campos de futebol.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Salvemos as florestas tropicais, <mark class="span human major" title="Human Major [33:36] inclusive UTF-16">isso</mark> é muito urgente, ontem <mark class="span human major" title="Human Major [61:73] inclusive UTF-16">foi destruído</mark> o equivalente a tantos campos de futebol.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [116:116] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [33:36] inclusive UTF-16 isso</li><li><strong>Major</strong> [61:73] inclusive UTF-16 foi destruído</li><li><strong>Major</strong> [116:116] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Salvemos as florestas tropicais, <mark class="span gemma minor" title="Gemma Minor [33:37] exclusive">isso</mark> é muito urgente, ontem <mark class="span gemma minor" title="Gemma Minor [61:74] exclusive">foi destruído</mark> o equivalente a tantos campos de futebol.</div><ul class="span-list"><li><strong>Minor</strong> [33:37] exclusive isso</li><li><strong>Minor</strong> [61:74] exclusive foi destruído</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;isso&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;foi destruído&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0064</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> &quot;Salvem as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>55</strong></div>
+            <div class="annotated-text">&quot;<mark class="span human minor" title="Human Minor [1:6] inclusive UTF-16">Salvem</mark> as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;</div><ul class="span-list"><li><strong>Minor</strong> [1:6] inclusive UTF-16 Salvem</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">&quot;<mark class="span gemma major" title="Gemma Major [1:7] exclusive">Salvem</mark> as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.&quot;</div><ul class="span-list"><li><strong>Major</strong> [1:7] exclusive Salvem</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Salvem&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 30</div>
+                <div class="position">Passage position 8</div>
+                <p lang="pt-BR">Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0065</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>65</strong></div>
+            <div class="annotated-text">Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente <mark class="span human major" title="Human Major [86:88] inclusive UTF-16">brm</mark> mais urgentes, como a mudança climática.</div><ul class="span-list"><li><strong>Major</strong> [86:88] inclusive UTF-16 brm</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente <mark class="span gemma major" title="Gemma Major [86:89] exclusive">brm</mark> mais urgentes, como a mudança climática.</div><ul class="span-list"><li><strong>Major</strong> [86:89] exclusive brm</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;brm&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0066</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Entretanto, hoje resta metade das florestas tropicais e há problemas potencialmente mais urgentes, como a mudança climática.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>85</strong></div>
+            <div class="annotated-text">Entretanto, hoje resta metade das florestas tropicais e há problemas potencialmente mais urgentes, como a mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;brm&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 75
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0067</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Entretanto, metade das florestas tropicais restaram e há problemas potencialmente mais urgentes, como a mudança climática.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>35</strong></div>
+            <div class="annotated-text">Entretanto, <mark class="span human major" title="Human Major [12:50] inclusive UTF-16">metade das florestas tropicais restaram</mark> e há problemas potencialmente mais urgentes, como a mudança climática.</div><ul class="span-list"><li><strong>Major</strong> [12:50] inclusive UTF-16 metade das florestas tropicais restaram</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>55</strong></div><div class="annotated-text">Entretanto, <mark class="span gemma major" title="Gemma Major [12:51] exclusive">metade das florestas tropicais restaram</mark> e há problemas potencialmente mais urgentes, como a mudança climática.</div><ul class="span-list"><li><strong>Major</strong> [12:51] exclusive metade das florestas tropicais restaram</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;metade das florestas tropicais restaram&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 55
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0068</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Entretanto, hoje resta metade das florestas tropicais e há problemas potencialmente bem mais urgentes, como a mudança climática.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Entretanto, hoje resta metade das florestas tropicais e há problemas potencialmente bem mais urgentes, como a mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;brm&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 31</div>
+                <div class="position">Passage position 9</div>
+                <p lang="pt-BR">Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0069</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Eis um <mark class="span human minor" title="Human Minor [7:10] inclusive UTF-16">fato</mark> pouco conhecido do qual eu não <mark class="span human major" title="Human Major [43:50] inclusive UTF-16">havia me</mark> dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, <mark class="span human major" title="Human Major [149:153] inclusive UTF-16">trens</mark>, carros, <mark class="span human major" title="Human Major [164:172] inclusive UTF-16">caminhões</mark> e navios do mundo juntos.</div><ul class="span-list"><li><strong>Minor</strong> [7:10] inclusive UTF-16 fato</li><li><strong>Major</strong> [43:50] inclusive UTF-16 havia me</li><li><strong>Major</strong> [149:153] inclusive UTF-16 trens</li><li><strong>Major</strong> [164:172] inclusive UTF-16 caminhões</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Eis um fato pouco conhecido <mark class="span gemma minor" title="Gemma Minor [28:35] exclusive">do qual</mark> eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.</div><ul class="span-list"><li><strong>Minor</strong> [28:35] exclusive do qual</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;do qual&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0070</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eis um facto pouco conhecido do qual eu não me tinha dado conta: o desmatamento é responsável por mais gases de efeito de estufa do que todos os aviões, comboios, carros, camiões e navios do mundo juntos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Eis um facto pouco conhecido do qual eu não me tinha dado conta: o desmatamento é responsável por mais gases de efeito de estufa do que todos os aviões, comboios, carros, camiões e navios do mundo juntos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Eis um <mark class="span gemma minor" title="Gemma Minor [7:12] exclusive">facto</mark> pouco conhecido do qual eu <mark class="span gemma minor" title="Gemma Minor [40:63] exclusive">não me tinha dado conta</mark>: o desmatamento é responsável por mais gases de efeito <mark class="span gemma minor" title="Gemma Minor [119:128] exclusive">de estufa</mark> do que todos os aviões, <mark class="span gemma minor" title="Gemma Minor [153:161] exclusive">comboios</mark>, carros, <mark class="span gemma minor" title="Gemma Minor [171:178] exclusive">camiões</mark> e navios do mundo juntos.</div><ul class="span-list"><li><strong>Minor</strong> [7:12] exclusive facto</li><li><strong>Minor</strong> [40:63] exclusive não me tinha dado conta</li><li><strong>Minor</strong> [119:128] exclusive de estufa</li><li><strong>Minor</strong> [153:161] exclusive comboios</li><li><strong>Minor</strong> [171:178] exclusive camiões</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;facto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;não me tinha dado conta&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;de estufa&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;comboios&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;camiões&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0071</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Há um facto pouco conhecido que eu desconhecia: o desmatamento é responsável por mais gases com efeito de estufa do que todos os aviões, comboios, automóveis, camiões e navios do mundo juntos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:46] inclusive UTF-16">Há um facto pouco conhecido que eu desconhecia:</mark> o desmatamento é responsável por mais gases <mark class="span human minor" title="Human Minor [92:94] inclusive UTF-16">com</mark> efeito de estufa do que todos os aviões, comboios, <mark class="span human major" title="Human Major [147:156] inclusive UTF-16">automóveis</mark>, camiões e navios do mundo juntos.</div><ul class="span-list"><li><strong>Major</strong> [0:46] inclusive UTF-16 Há um facto pouco conhecido que eu desconhecia:</li><li><strong>Minor</strong> [92:94] inclusive UTF-16 com</li><li><strong>Major</strong> [147:156] inclusive UTF-16 automóveis</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Há um facto pouco conhecido <mark class="span gemma minor" title="Gemma Minor [28:46] exclusive">que eu desconhecia</mark>: o desmatamento é responsável por mais <mark class="span gemma minor" title="Gemma Minor [86:112] exclusive">gases com efeito de estufa</mark> do que todos os aviões, <mark class="span gemma minor" title="Gemma Minor [137:145] exclusive">comboios</mark>, <mark class="span gemma minor" title="Gemma Minor [147:157] exclusive">automóveis</mark>, camiões e navios do mundo juntos.</div><ul class="span-list"><li><strong>Minor</strong> [28:46] exclusive que eu desconhecia</li><li><strong>Minor</strong> [86:112] exclusive gases com efeito de estufa</li><li><strong>Minor</strong> [137:145] exclusive comboios</li><li><strong>Minor</strong> [147:157] exclusive automóveis</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;que eu desconhecia&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;gases com efeito de estufa&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;comboios&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;automóveis&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0072</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É um facto pouco conhecido do qual eu não tinha me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, comboios, carros, camiões e navios do mundo juntos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text"><mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [0:0] inclusive UTF-16">[MISSING]</mark>É um facto pouco conhecido do qual eu não <mark class="span human major" title="Human Major [42:49] inclusive UTF-16">tinha me</mark> dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, comboios, carros, camiões e navios do mundo juntos.</div><ul class="span-list"><li><strong>Minor</strong> [0:0] inclusive UTF-16 [MISSING]</li><li><strong>Major</strong> [42:49] inclusive UTF-16 tinha me</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">É um facto pouco conhecido do qual eu não <mark class="span gemma minor" title="Gemma Minor [42:61] exclusive">tinha me dado conta</mark>: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, comboios, carros, camiões e navios do mundo juntos.</div><ul class="span-list"><li><strong>Minor</strong> [42:61] exclusive tinha me dado conta</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;tinha me dado conta&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 32</div>
+                <div class="position">Passage position 10</div>
+                <p lang="pt-BR">Ele é também a segunda maior causa da mudança climática.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0073</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Ele é também a segunda maior causa da mudança climática.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Ele é também a segunda maior causa da mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Ele é também a segunda maior causa da mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0074</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Ele é também a segunda maior causa da mudança climática.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Ele é também a segunda maior causa da mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Ele é também a segunda maior causa da mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0075</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É também a segunda maior causa da mudança climática.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É também a segunda maior causa da mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Ele&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0076</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Ele é também a segunda maior causa da mudança climática.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Ele é também a segunda maior causa da mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Ele é também a segunda maior causa da mudança climática.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            </tbody>
+  </table>
+</body>
+</html>

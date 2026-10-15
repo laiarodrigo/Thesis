@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0 DEV comparison — ted2020-2609_s82-s91</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+    body { margin: 0 auto; max-width: 1500px; padding: 24px; }
+    h1 { margin-bottom: 6px; } .summary { color: #526078; margin-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; font-size: 14px; }
+    .legend span { padding: 4px 9px; border-radius: 4px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
+    th[scope=row] { width: 25%; min-width: 240px; text-align: left; vertical-align: top; background: white; padding: 16px; border-radius: 8px 0 0 8px; }
+    td { background: white; padding: 12px; border-radius: 0 8px 8px 0; }
+    .sentence-number { font-weight: 750; } .position { color: #6b7280; font-size: 13px; }
+    .candidate-stack { display: grid; gap: 12px; }
+    .candidate-card { border: 1px solid #d8dee9; border-radius: 7px; padding: 12px; background: #fbfcfe; }
+    .candidate-card header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .system { font-weight: 750; } code { color: #687386; }
+    .candidate-full { margin: 9px 0; line-height: 1.45; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .judgment { border-radius: 6px; padding: 10px; min-width: 0; }
+    .human-panel { background: #fff8eb; border: 1px solid #f2d49b; }
+    .gemma-panel { background: #eef8ff; border: 1px solid #b9dcf3; }
+    h4 { margin: 0 0 5px; } .score { margin: 4px 0 7px; }
+    .annotated-text { background: white; padding: 8px; border-radius: 4px; line-height: 1.65; overflow-wrap: anywhere; }
+    mark.span { padding: 1px 2px; border-radius: 3px; }
+    mark.human.minor, .legend .human-minor { background: #ffe49b; }
+    mark.human.major, .legend .human-major { background: #ffaaa5; }
+    mark.gemma.minor, .legend .gemma-minor { background: #9de5f3; }
+    mark.gemma.major, .legend .gemma-major { background: #d1b3ff; }
+    mark.missing { border: 1px dashed #202938; font-weight: 700; }
+    .no-errors { color: #55805d; font-size: 13px; white-space: nowrap; }
+    .span-list { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+    .status { display: inline-block; font-weight: 700; font-size: 13px; padding: 3px 7px; border-radius: 4px; }
+    .status.valid { background: #ccebd2; color: #185928; }
+    .status.invalid { background: #ffd2cf; color: #8b1e18; }
+    .unvalidated { color: #8b1e18; } .parse-errors { color: #8b1e18; }
+    .warning { color: #8b1e18; font-weight: 650; margin-top: 5px; }
+    details { margin-top: 8px; } summary { cursor: pointer; color: #334e75; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172033; color: #f5f7fa; padding: 10px; border-radius: 5px; font-size: 12px; }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } th[scope=row] { width: auto; min-width: 180px; } }
+  </style>
+</head>
+<body>
+  <h1>Gemma V0 DEV comparison</h1>
+  <p class="summary"><strong>Passage:</strong> ted2020-2609_s82-s91 · <strong>Document:</strong> ted2020-2609 · <strong>Sentences:</strong> 10 · <strong>Candidate judgments:</strong> 40 · <strong>Invalid V0 outputs:</strong> 0</p>
+  <div class="legend">
+    <span class="human-minor">Human Minor</span><span class="human-major">Human Major</span>
+    <span class="gemma-minor">Gemma Minor</span><span class="gemma-major">Gemma Major</span>
+  </div>
+  <table>
+    <thead><tr><th>BP source sentence</th><th>Candidate comparisons</th></tr></thead>
+    <tbody>
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 82</div>
+                <div class="position">Passage position 1</div>
+                <p lang="pt-BR">O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0193</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">O problema dos <mark class="span human major" title="Human Major [15:19] inclusive UTF-16">trens</mark> urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.</div><ul class="span-list"><li><strong>Major</strong> [15:19] inclusive UTF-16 trens</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">O problema dos trens urbanos é que, às vezes, <mark class="span gemma minor" title="Gemma Minor [46:51] exclusive">temos</mark> que parar 5, 10, 15 vezes antes de chegar ao destino.</div><ul class="span-list"><li><strong>Minor</strong> [46:51] exclusive temos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;temos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0194</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">O problema dos <mark class="span human major" title="Human Major [15:19] inclusive UTF-16">trens</mark> urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.</div><ul class="span-list"><li><strong>Major</strong> [15:19] inclusive UTF-16 trens</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">O problema dos trens urbanos é que, às vezes, <mark class="span gemma minor" title="Gemma Minor [46:51] exclusive">temos</mark> que parar 5, 10, 15 vezes antes de chegar ao destino.</div><ul class="span-list"><li><strong>Minor</strong> [46:51] exclusive temos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;temos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0195</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O problema dos comboios urbanos é que, às vezes, temos de parar 5, 10, 15 vezes antes de chegarmos ao destino.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">O problema dos comboios urbanos é que, às vezes, temos de parar 5, 10, 15 vezes antes de chegarmos ao destino.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">O problema dos <mark class="span gemma minor" title="Gemma Minor [15:23] exclusive">comboios</mark> urbanos é que, às vezes, <mark class="span gemma minor" title="Gemma Minor [49:63] exclusive">temos de parar</mark> 5, 10, 15 vezes antes de <mark class="span gemma minor" title="Gemma Minor [89:98] exclusive">chegarmos</mark> ao destino.</div><ul class="span-list"><li><strong>Minor</strong> [15:23] exclusive comboios</li><li><strong>Minor</strong> [49:63] exclusive temos de parar</li><li><strong>Minor</strong> [89:98] exclusive chegarmos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;comboios&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;temos de parar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;chegarmos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0196</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O problema dos comboios urbanos é que, às vezes, temos de parar 5, 10, 15 vezes antes de chegar ao destino.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">O problema dos comboios urbanos é que, às vezes, temos de parar 5, 10, 15 vezes antes de chegar ao destino.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">O problema dos <mark class="span gemma minor" title="Gemma Minor [15:23] exclusive">comboios</mark> urbanos é que, às vezes, <mark class="span gemma minor" title="Gemma Minor [49:57] exclusive">temos de</mark> parar 5, 10, 15 vezes antes de chegar ao destino.</div><ul class="span-list"><li><strong>Minor</strong> [15:23] exclusive comboios</li><li><strong>Minor</strong> [49:57] exclusive temos de</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;comboios&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;temos de&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 83</div>
+                <div class="position">Passage position 2</div>
+                <p lang="pt-BR">E se, nesse trem, não tivéssemos que parar?</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0197</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E se, nesse trem, não tivéssemos que parar?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">E se, nesse <mark class="span human major" title="Human Major [12:15] inclusive UTF-16">trem</mark>, não tivéssemos <mark class="span human minor" title="Human Minor [33:35] inclusive UTF-16">que</mark> parar?</div><ul class="span-list"><li><strong>Major</strong> [12:15] inclusive UTF-16 trem</li><li><strong>Minor</strong> [33:35] inclusive UTF-16 que</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E se, nesse trem, não <mark class="span gemma minor" title="Gemma Minor [22:32] exclusive">tivéssemos</mark> que parar?</div><ul class="span-list"><li><strong>Minor</strong> [22:32] exclusive tivéssemos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;tivéssemos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0198</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E se, nesse comboio, não tivéssemos que parar?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>80</strong></div>
+            <div class="annotated-text">E se, nesse comboio, não tivéssemos <mark class="span human minor" title="Human Minor [36:38] inclusive UTF-16">que</mark> parar?</div><ul class="span-list"><li><strong>Minor</strong> [36:38] inclusive UTF-16 que</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E se, nesse <mark class="span gemma minor" title="Gemma Minor [12:19] exclusive">comboio</mark>, não tivéssemos que parar?</div><ul class="span-list"><li><strong>Minor</strong> [12:19] exclusive comboio</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;comboio&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0199</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E se, nesse comboio, não tivéssemos de parar?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">E se, nesse comboio, não tivéssemos de parar?</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E se, nesse <mark class="span gemma minor" title="Gemma Minor [12:19] exclusive">comboio</mark>, não tivéssemos de parar?</div><ul class="span-list"><li><strong>Minor</strong> [12:19] exclusive comboio</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;comboio&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0200</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E se, nesse comboio, não tivéssemos de parar?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">E se, nesse comboio, não tivéssemos de parar?</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E se, nesse <mark class="span gemma minor" title="Gemma Minor [12:19] exclusive">comboio</mark>, não tivéssemos de parar?</div><ul class="span-list"><li><strong>Minor</strong> [12:19] exclusive comboio</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;comboio&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 84</div>
+                <div class="position">Passage position 3</div>
+                <p lang="pt-BR">Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0201</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:4] inclusive UTF-16">Nesse</mark> <mark class="span human major" title="Human Major [6:9] inclusive UTF-16">trem</mark>, <mark class="span human major" title="Human Major [12:20] inclusive UTF-16">os vagões</mark> conseguem separar-se dinamicamente enquanto se movem e se tornam <mark class="span human major" title="Human Major [87:92] inclusive UTF-16">ônibus</mark> expressos e sem motorista que se movem em vias secundárias.</div><ul class="span-list"><li><strong>Minor</strong> [0:4] inclusive UTF-16 Nesse</li><li><strong>Major</strong> [6:9] inclusive UTF-16 trem</li><li><strong>Major</strong> [12:20] inclusive UTF-16 os vagões</li><li><strong>Major</strong> [87:92] inclusive UTF-16 ônibus</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Nesse trem, os vagões conseguem <mark class="span gemma minor" title="Gemma Minor [32:42] exclusive">separar-se</mark> dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.</div><ul class="span-list"><li><strong>Minor</strong> [32:42] exclusive separar-se</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;separar-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0202</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Neste comboio, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>35</strong></div>
+            <div class="annotated-text">Neste comboio, <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">os vagões</mark> conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div><ul class="span-list"><li><strong>Major</strong> [15:23] inclusive UTF-16 os vagões</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:13] exclusive">Neste comboio</mark>, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div><ul class="span-list"><li><strong>Minor</strong> [0:13] exclusive Neste comboio</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Neste comboio&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0203</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Neste comboio, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>35</strong></div>
+            <div class="annotated-text">Neste comboio, <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">os vagões</mark> conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div><ul class="span-list"><li><strong>Major</strong> [15:23] inclusive UTF-16 os vagões</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:13] exclusive">Neste comboio</mark>, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div><ul class="span-list"><li><strong>Minor</strong> [0:13] exclusive Neste comboio</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Neste comboio&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0204</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Neste comboio, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>35</strong></div>
+            <div class="annotated-text">Neste comboio, <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">os vagões</mark> conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div><ul class="span-list"><li><strong>Major</strong> [15:23] inclusive UTF-16 os vagões</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:13] exclusive">Neste comboio</mark>, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.</div><ul class="span-list"><li><strong>Minor</strong> [0:13] exclusive Neste comboio</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Neste comboio&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 85</div>
+                <div class="position">Passage position 4</div>
+                <p lang="pt-BR">E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0205</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E, sem uma <mark class="span human major" title="Human Major [11:16] inclusive UTF-16">parada</mark> sequer, nem <mark class="span human major" title="Human Major [30:39] inclusive UTF-16">baldeações</mark> demoradas, você está sentado <mark class="span human major" title="Human Major [70:74] inclusive UTF-16">em um</mark> <mark class="span human major" title="Human Major [76:81] inclusive UTF-16">ônibus</mark> que vai para o seu bairro.</div><ul class="span-list"><li><strong>Major</strong> [11:16] inclusive UTF-16 parada</li><li><strong>Major</strong> [30:39] inclusive UTF-16 baldeações</li><li><strong>Major</strong> [70:74] inclusive UTF-16 em um</li><li><strong>Major</strong> [76:81] inclusive UTF-16 ônibus</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0206</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E, sem uma paragem sequer, nem baldeações demoradas, estás sentado num autocarro que vai para o teu bairro.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">E, sem uma paragem sequer, nem <mark class="span human major" title="Human Major [31:40] inclusive UTF-16">baldeações</mark> demoradas, estás sentado num autocarro que vai para o teu bairro.</div><ul class="span-list"><li><strong>Major</strong> [31:40] inclusive UTF-16 baldeações</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E, sem uma paragem sequer, nem baldeações demoradas, <mark class="span gemma minor" title="Gemma Minor [53:58] exclusive">estás</mark> sentado <mark class="span gemma minor" title="Gemma Minor [67:70] exclusive">num</mark> autocarro que vai para o teu bairro.</div><ul class="span-list"><li><strong>Minor</strong> [53:58] exclusive estás</li><li><strong>Minor</strong> [67:70] exclusive num</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estás&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;num&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0207</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E, sem paragens ou trocas demoradas, estás sentado num autocarro que te leva até ao teu bairro.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">E, sem paragens ou trocas demoradas, estás sentado num autocarro que te leva até ao teu bairro.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E, sem paragens ou trocas demoradas, <mark class="span gemma minor" title="Gemma Minor [37:42] exclusive">estás</mark> sentado <mark class="span gemma minor" title="Gemma Minor [51:54] exclusive">num</mark> autocarro que <mark class="span gemma minor" title="Gemma Minor [69:87] exclusive">te leva até ao teu</mark> bairro.</div><ul class="span-list"><li><strong>Minor</strong> [37:42] exclusive estás</li><li><strong>Minor</strong> [51:54] exclusive num</li><li><strong>Minor</strong> [69:87] exclusive te leva até ao teu</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estás&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;num&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;te leva até ao teu&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0208</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E, sem uma paragem sequer, nem baldeações demoradas, está sentado num autocarro que vai para o seu bairro.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">E, sem uma paragem sequer, nem <mark class="span human major" title="Human Major [31:40] inclusive UTF-16">baldeações</mark> demoradas, está sentado num autocarro que vai para o seu bairro.</div><ul class="span-list"><li><strong>Major</strong> [31:40] inclusive UTF-16 baldeações</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">E, sem uma paragem sequer, nem baldeações demoradas, <mark class="span gemma major" title="Gemma Major [53:65] exclusive">está sentado</mark> num autocarro que vai para o seu bairro.</div><ul class="span-list"><li><strong>Major</strong> [53:65] exclusive está sentado</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;está sentado&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 86</div>
+                <div class="position">Passage position 5</div>
+                <p lang="pt-BR">E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0209</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">E <mark class="span human major" title="Human Major [2:7] inclusive UTF-16">quanto</mark> estiver perto, a <mark class="span human minor" title="Human Minor [26:30] inclusive UTF-16">seção</mark> onde está sentado <mark class="span human major" title="Human Major [50:58] inclusive UTF-16">se separa</mark> e <mark class="span human major" title="Human Major [62:69] inclusive UTF-16">o conduz</mark> diretamente à sua porta.</div><ul class="span-list"><li><strong>Major</strong> [2:7] inclusive UTF-16 quanto</li><li><strong>Minor</strong> [26:30] inclusive UTF-16 seção</li><li><strong>Major</strong> [50:58] inclusive UTF-16 se separa</li><li><strong>Major</strong> [62:69] inclusive UTF-16 o conduz</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>55</strong></div><div class="annotated-text">E quanto estiver perto, a seção onde está sentado se separa e <mark class="span gemma major" title="Gemma Major [62:70] exclusive">o conduz</mark> diretamente à sua porta.</div><ul class="span-list"><li><strong>Major</strong> [62:70] exclusive o conduz</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;o conduz&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 55
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0210</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E quanto estiveres perto, a secção onde estás sentado separa-se e conduz-te diretamente à tua porta.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>35</strong></div>
+            <div class="annotated-text">E <mark class="span human major" title="Human Major [2:7] inclusive UTF-16">quanto</mark> estiveres perto, a secção onde <mark class="span human minor" title="Human Minor [40:44] inclusive UTF-16">estás</mark> sentado separa-se e <mark class="span human minor" title="Human Minor [66:74] inclusive UTF-16">conduz-te</mark> diretamente <mark class="span human minor" title="Human Minor [88:92] inclusive UTF-16">à tua</mark> porta.</div><ul class="span-list"><li><strong>Major</strong> [2:7] inclusive UTF-16 quanto</li><li><strong>Minor</strong> [40:44] inclusive UTF-16 estás</li><li><strong>Minor</strong> [66:74] inclusive UTF-16 conduz-te</li><li><strong>Minor</strong> [88:92] inclusive UTF-16 à tua</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">E quanto <mark class="span gemma minor" title="Gemma Minor [9:18] exclusive">estiveres</mark> perto, a secção onde <mark class="span gemma minor" title="Gemma Minor [40:45] exclusive">estás</mark> sentado <mark class="span gemma minor" title="Gemma Minor [54:63] exclusive">separa-se</mark> e <mark class="span gemma minor" title="Gemma Minor [66:75] exclusive">conduz-te</mark> diretamente à <mark class="span gemma minor" title="Gemma Minor [90:93] exclusive">tua</mark> porta.</div><ul class="span-list"><li><strong>Minor</strong> [9:18] exclusive estiveres</li><li><strong>Minor</strong> [40:45] exclusive estás</li><li><strong>Minor</strong> [54:63] exclusive separa-se</li><li><strong>Minor</strong> [66:75] exclusive conduz-te</li><li><strong>Minor</strong> [90:93] exclusive tua</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estiveres&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estás&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;separa-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;conduz-te&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;tua&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0211</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> À medida que se aproxima, a secção onde está sentado separa-se e conduz-o diretamente à sua porta.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:23] inclusive UTF-16">À medida que se aproxima</mark>, a secção onde está sentado separa-se e <mark class="span human minor" title="Human Minor [65:72] inclusive UTF-16">conduz-o</mark> diretamente à sua porta.</div><ul class="span-list"><li><strong>Major</strong> [0:23] inclusive UTF-16 À medida que se aproxima</li><li><strong>Minor</strong> [65:72] inclusive UTF-16 conduz-o</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">À medida que se aproxima, a secção onde está sentado separa-se e <mark class="span gemma minor" title="Gemma Minor [65:73] exclusive">conduz-o</mark> diretamente à sua porta.</div><ul class="span-list"><li><strong>Minor</strong> [65:73] exclusive conduz-o</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;conduz-o&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0212</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E quanto estiver perto, a secção onde está sentado separa-se e conduz-o diretamente à sua porta.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>40</strong></div>
+            <div class="annotated-text">E <mark class="span human major" title="Human Major [2:7] inclusive UTF-16">quanto</mark> estiver perto, a secção onde está sentado separa-se e <mark class="span human minor" title="Human Minor [63:70] inclusive UTF-16">conduz-o</mark> diretamente à sua porta.</div><ul class="span-list"><li><strong>Major</strong> [2:7] inclusive UTF-16 quanto</li><li><strong>Minor</strong> [63:70] inclusive UTF-16 conduz-o</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E quanto estiver perto, a secção onde está sentado <mark class="span gemma minor" title="Gemma Minor [51:60] exclusive">separa-se</mark> e conduz-o diretamente à sua porta.</div><ul class="span-list"><li><strong>Minor</strong> [51:60] exclusive separa-se</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;separa-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 87</div>
+                <div class="position">Passage position 6</div>
+                <p lang="pt-BR">É coletivo e individual ao mesmo tempo.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0213</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É coletivo e individual ao mesmo tempo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É coletivo e individual ao mesmo tempo.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">É coletivo e individual <mark class="span gemma minor" title="Gemma Minor [24:38] exclusive">ao mesmo tempo</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [24:38] exclusive ao mesmo tempo</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ao mesmo tempo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0214</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É coletivo e individual ao mesmo tempo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É coletivo e individual ao mesmo tempo.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">É coletivo e individual <mark class="span gemma minor" title="Gemma Minor [24:38] exclusive">ao mesmo tempo</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [24:38] exclusive ao mesmo tempo</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ao mesmo tempo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0215</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É coletivo e individual ao mesmo tempo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É coletivo e individual ao mesmo tempo.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">É coletivo e individual <mark class="span gemma minor" title="Gemma Minor [24:38] exclusive">ao mesmo tempo</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [24:38] exclusive ao mesmo tempo</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ao mesmo tempo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0216</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É coletivo e individual ao mesmo tempo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É coletivo e individual ao mesmo tempo.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">É coletivo e individual <mark class="span gemma minor" title="Gemma Minor [24:38] exclusive">ao mesmo tempo</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [24:38] exclusive ao mesmo tempo</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ao mesmo tempo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 88</div>
+                <div class="position">Passage position 7</div>
+                <p lang="pt-BR">Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0217</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:3] inclusive UTF-16">Esse</mark> pode ser um dos veículos modulares, <mark class="span human major" title="Human Major [41:54] inclusive UTF-16">compartilhados</mark> e sem motorista do futuro.</div><ul class="span-list"><li><strong>Minor</strong> [0:3] inclusive UTF-16 Esse</li><li><strong>Major</strong> [41:54] inclusive UTF-16 compartilhados</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:4] exclusive">Esse</mark> pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.</div><ul class="span-list"><li><strong>Minor</strong> [0:4] exclusive Esse</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Esse&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0218</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Este pode ser um dos veículos modulares, <mark class="span gemma minor" title="Gemma Minor [41:52] exclusive">partilhados</mark> e sem <mark class="span gemma minor" title="Gemma Minor [59:67] exclusive">condutor</mark> do futuro.</div><ul class="span-list"><li><strong>Minor</strong> [41:52] exclusive partilhados</li><li><strong>Minor</strong> [59:67] exclusive condutor</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;partilhados&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;condutor&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0219</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Este pode ser um dos veículos modulares, <mark class="span gemma minor" title="Gemma Minor [41:52] exclusive">partilhados</mark> e sem <mark class="span gemma minor" title="Gemma Minor [59:67] exclusive">condutor</mark> do futuro.</div><ul class="span-list"><li><strong>Minor</strong> [41:52] exclusive partilhados</li><li><strong>Minor</strong> [59:67] exclusive condutor</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;partilhados&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;condutor&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0220</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Este pode ser um dos veículos modulares, <mark class="span gemma minor" title="Gemma Minor [41:52] exclusive">partilhados</mark> e sem <mark class="span gemma minor" title="Gemma Minor [59:67] exclusive">condutor</mark> do futuro.</div><ul class="span-list"><li><strong>Minor</strong> [41:52] exclusive partilhados</li><li><strong>Minor</strong> [59:67] exclusive condutor</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;partilhados&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;condutor&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 89</div>
+                <div class="position">Passage position 8</div>
+                <p lang="pt-BR">Agora</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0221</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Agora</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:5] exclusive">Agora</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:5] exclusive Agora</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Agora&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0222</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Agora</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:5] exclusive">Agora</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:5] exclusive Agora</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Agora&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0223</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Agora</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:5] exclusive">Agora</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:5] exclusive Agora</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Agora&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0224</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Agora</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:5] exclusive">Agora</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:5] exclusive Agora</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Agora&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 90</div>
+                <div class="position">Passage position 9</div>
+                <p lang="pt-BR">como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0225</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">como se andar pela cidade com o zumbido de drones, táxis aéreos, <mark class="span human major" title="Human Major [65:70] inclusive UTF-16">ônibus</mark> modulares e cabines magnéticas suspensas não fosse exótico <mark class="span human major" title="Human Major [131:140] inclusive UTF-16">o bastante</mark>, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div><ul class="span-list"><li><strong>Major</strong> [65:70] inclusive UTF-16 ônibus</li><li><strong>Major</strong> [131:140] inclusive UTF-16 o bastante</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text"><mark class="span gemma major" title="Gemma Major [0:7] exclusive">como se</mark> andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div><ul class="span-list"><li><strong>Major</strong> [0:7] exclusive como se</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;como se&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0226</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Como se andar pela cidade com o zumbido de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>35</strong></div>
+            <div class="annotated-text"><mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [0:0] inclusive UTF-16">[MISSING]</mark>Como se andar pela cidade com o zumbido de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico <mark class="span human major" title="Human Major [135:144] inclusive UTF-16">o bastante</mark>, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div><ul class="span-list"><li><strong>Minor</strong> [0:0] inclusive UTF-16 [MISSING]</li><li><strong>Major</strong> [135:144] inclusive UTF-16 o bastante</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Como se andar pela cidade com o zumbido de drones, táxis aéreos, <mark class="span gemma minor" title="Gemma Minor [65:75] exclusive">autocarros</mark> modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div><ul class="span-list"><li><strong>Minor</strong> [65:75] exclusive autocarros</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;autocarros&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0227</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Como se andar pela cidade com o zunido de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico o suficiente, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>65</strong></div>
+            <div class="annotated-text"><mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [0:0] inclusive UTF-16">[MISSING]</mark>Como se andar pela cidade com o <mark class="span human minor" title="Human Minor [32:37] inclusive UTF-16">zunido</mark> de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico o suficiente, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div><ul class="span-list"><li><strong>Minor</strong> [0:0] inclusive UTF-16 [MISSING]</li><li><strong>Minor</strong> [32:37] inclusive UTF-16 zunido</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Como se andar pela cidade com o <mark class="span gemma minor" title="Gemma Minor [32:38] exclusive">zunido</mark> de drones, táxis aéreos, <mark class="span gemma minor" title="Gemma Minor [64:74] exclusive">autocarros</mark> modulares e cabines magnéticas suspensas não fosse <mark class="span gemma minor" title="Gemma Minor [126:146] exclusive">exótico o suficiente</mark>, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div><ul class="span-list"><li><strong>Minor</strong> [32:38] exclusive zunido</li><li><strong>Minor</strong> [64:74] exclusive autocarros</li><li><strong>Minor</strong> [126:146] exclusive exótico o suficiente</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;zunido&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;autocarros&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;exótico o suficiente&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0228</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Como se andar pela cidade com o zumbido de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico o suficiente, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>95</strong></div>
+            <div class="annotated-text"><mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [0:0] inclusive UTF-16">[MISSING]</mark>Como se andar pela cidade com o zumbido de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico o suficiente, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div><ul class="span-list"><li><strong>Minor</strong> [0:0] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Como se andar pela cidade com o zumbido de drones, táxis aéreos, <mark class="span gemma minor" title="Gemma Minor [65:75] exclusive">autocarros</mark> modulares e cabines magnéticas suspensas não fosse exótico o suficiente, acho que há outra força em ação que deixará o tráfego urbano fascinante.</div><ul class="span-list"><li><strong>Minor</strong> [65:75] exclusive autocarros</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;autocarros&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 91</div>
+                <div class="position">Passage position 10</div>
+                <p lang="pt-BR">Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0229</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Se pararem <mark class="span human minor" title="Human Minor [11:13] inclusive UTF-16">pra</mark> pensar, a atual geração de carros sem motoristas está <mark class="span human major" title="Human Major [69:76] inclusive UTF-16">tentando</mark> ganhar seu espaço <mark class="span human minor" title="Human Minor [96:97] inclusive UTF-16">em</mark> meio à rede de tráfego feita por e para humanos.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [147:147] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [11:13] inclusive UTF-16 pra</li><li><strong>Major</strong> [69:76] inclusive UTF-16 tentando</li><li><strong>Minor</strong> [96:97] inclusive UTF-16 em</li><li><strong>Major</strong> [147:147] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Se pararem <mark class="span gemma minor" title="Gemma Minor [11:14] exclusive">pra</mark> pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.</div><ul class="span-list"><li><strong>Minor</strong> [11:14] exclusive pra</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0230</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se pararem para pensar, a atual geração de carros sem condutores está a tentar ganhar o seu espaço em meio à rede de tráfego feita por e para humanos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>80</strong></div>
+            <div class="annotated-text">Se pararem para pensar, a atual geração de carros sem condutores está a tentar ganhar o seu espaço <mark class="span human minor" title="Human Minor [99:100] inclusive UTF-16">em</mark> meio à rede de tráfego feita por e para humanos.</div><ul class="span-list"><li><strong>Minor</strong> [99:100] inclusive UTF-16 em</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Se pararem para pensar, a atual geração de carros sem <mark class="span gemma minor" title="Gemma Minor [54:64] exclusive">condutores</mark> <mark class="span gemma minor" title="Gemma Minor [65:78] exclusive">está a tentar</mark> ganhar o seu espaço em meio à rede de tráfego feita por e para humanos.</div><ul class="span-list"><li><strong>Minor</strong> [54:64] exclusive condutores</li><li><strong>Minor</strong> [65:78] exclusive está a tentar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;condutores&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;está a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0231</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se pararem para pensar, a atual geração de carros sem condutor está a tentar ganhar espaço na rede de tráfego feita por e para humanos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Se pararem para pensar, a atual geração de carros sem condutor está a tentar ganhar espaço na rede de tráfego feita por e para humanos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Se pararem para pensar, a atual geração de carros sem condutor <mark class="span gemma minor" title="Gemma Minor [63:76] exclusive">está a tentar</mark> ganhar espaço na rede de tráfego feita por e para humanos.</div><ul class="span-list"><li><strong>Minor</strong> [63:76] exclusive está a tentar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;está a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0232</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se pararem para pensar, a atual geração de carros sem condutores está a tentar ganhar o seu espaço no meio da rede de tráfego feita por e para humanos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Se pararem para pensar, a atual geração de carros sem condutores está a tentar ganhar o seu espaço no meio da rede de tráfego feita por e para humanos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Se pararem para pensar, a atual geração de carros sem <mark class="span gemma minor" title="Gemma Minor [54:64] exclusive">condutores</mark> <mark class="span gemma minor" title="Gemma Minor [65:78] exclusive">está a tentar</mark> ganhar <mark class="span gemma minor" title="Gemma Minor [86:98] exclusive">o seu espaço</mark> no meio da rede de tráfego feita por e para humanos.</div><ul class="span-list"><li><strong>Minor</strong> [54:64] exclusive condutores</li><li><strong>Minor</strong> [65:78] exclusive está a tentar</li><li><strong>Minor</strong> [86:98] exclusive o seu espaço</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;condutores&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;está a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;o seu espaço&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            </tbody>
+  </table>
+</body>
+</html>

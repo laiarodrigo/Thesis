@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0 DEV comparison — ted2020-2860_s124-s133</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+    body { margin: 0 auto; max-width: 1500px; padding: 24px; }
+    h1 { margin-bottom: 6px; } .summary { color: #526078; margin-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; font-size: 14px; }
+    .legend span { padding: 4px 9px; border-radius: 4px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
+    th[scope=row] { width: 25%; min-width: 240px; text-align: left; vertical-align: top; background: white; padding: 16px; border-radius: 8px 0 0 8px; }
+    td { background: white; padding: 12px; border-radius: 0 8px 8px 0; }
+    .sentence-number { font-weight: 750; } .position { color: #6b7280; font-size: 13px; }
+    .candidate-stack { display: grid; gap: 12px; }
+    .candidate-card { border: 1px solid #d8dee9; border-radius: 7px; padding: 12px; background: #fbfcfe; }
+    .candidate-card header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .system { font-weight: 750; } code { color: #687386; }
+    .candidate-full { margin: 9px 0; line-height: 1.45; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .judgment { border-radius: 6px; padding: 10px; min-width: 0; }
+    .human-panel { background: #fff8eb; border: 1px solid #f2d49b; }
+    .gemma-panel { background: #eef8ff; border: 1px solid #b9dcf3; }
+    h4 { margin: 0 0 5px; } .score { margin: 4px 0 7px; }
+    .annotated-text { background: white; padding: 8px; border-radius: 4px; line-height: 1.65; overflow-wrap: anywhere; }
+    mark.span { padding: 1px 2px; border-radius: 3px; }
+    mark.human.minor, .legend .human-minor { background: #ffe49b; }
+    mark.human.major, .legend .human-major { background: #ffaaa5; }
+    mark.gemma.minor, .legend .gemma-minor { background: #9de5f3; }
+    mark.gemma.major, .legend .gemma-major { background: #d1b3ff; }
+    mark.missing { border: 1px dashed #202938; font-weight: 700; }
+    .no-errors { color: #55805d; font-size: 13px; white-space: nowrap; }
+    .span-list { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+    .status { display: inline-block; font-weight: 700; font-size: 13px; padding: 3px 7px; border-radius: 4px; }
+    .status.valid { background: #ccebd2; color: #185928; }
+    .status.invalid { background: #ffd2cf; color: #8b1e18; }
+    .unvalidated { color: #8b1e18; } .parse-errors { color: #8b1e18; }
+    .warning { color: #8b1e18; font-weight: 650; margin-top: 5px; }
+    details { margin-top: 8px; } summary { cursor: pointer; color: #334e75; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172033; color: #f5f7fa; padding: 10px; border-radius: 5px; font-size: 12px; }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } th[scope=row] { width: auto; min-width: 180px; } }
+  </style>
+</head>
+<body>
+  <h1>Gemma V0 DEV comparison</h1>
+  <p class="summary"><strong>Passage:</strong> ted2020-2860_s124-s133 · <strong>Document:</strong> ted2020-2860 · <strong>Sentences:</strong> 10 · <strong>Candidate judgments:</strong> 40 · <strong>Invalid V0 outputs:</strong> 7</p>
+  <div class="legend">
+    <span class="human-minor">Human Minor</span><span class="human-major">Human Major</span>
+    <span class="gemma-minor">Gemma Minor</span><span class="gemma-major">Gemma Major</span>
+  </div>
+  <table>
+    <thead><tr><th>BP source sentence</th><th>Candidate comparisons</th></tr></thead>
+    <tbody>
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 124</div>
+                <div class="position">Passage position 1</div>
+                <p lang="pt-BR">Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0273</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Eu fazia o que podia <mark class="span human minor" title="Human Minor [21:23] inclusive UTF-16">pra</mark> acalmá-los e <mark class="span human major" title="Human Major [38:48] inclusive UTF-16">os colocava</mark> em <mark class="span human minor" title="Human Minor [53:59] inclusive UTF-16">contato</mark> com a AcadianaCares, um recurso maravilhoso que temos <mark class="span human major" title="Human Major [115:116] inclusive UTF-16">em</mark> nossa comunidade para pessoas com HIV.</div><ul class="span-list"><li><strong>Minor</strong> [21:23] inclusive UTF-16 pra</li><li><strong>Major</strong> [38:48] inclusive UTF-16 os colocava</li><li><strong>Minor</strong> [53:59] inclusive UTF-16 contato</li><li><strong>Major</strong> [115:116] inclusive UTF-16 em</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Eu fazia o que podia <mark class="span gemma minor" title="Gemma Minor [21:24] exclusive">pra</mark> acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.</div><ul class="span-list"><li><strong>Minor</strong> [21:24] exclusive pra</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0274</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eu fazia o que podia para acalmá-los e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com HIV.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Eu fazia o que podia para acalmá-los e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com HIV.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Eu fazia o que podia para acalmá-los e <mark class="span gemma minor" title="Gemma Minor [39:50] exclusive">colocava-os</mark> em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com HIV.</div><ul class="span-list"><li><strong>Minor</strong> [39:50] exclusive colocava-os</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;colocava-os&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0275</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eu fazia tudo o que podia para os acalmar e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com VIH.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>40</strong></div>
+            <div class="annotated-text">Eu fazia <mark class="span human minor" title="Human Minor [9:12] inclusive UTF-16">tudo</mark> o que podia para os acalmar e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com <mark class="span human major" title="Human Major [159:161] inclusive UTF-16">VIH</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [9:12] inclusive UTF-16 tudo</li><li><strong>Major</strong> [159:161] inclusive UTF-16 VIH</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Eu fazia <mark class="span gemma minor" title="Gemma Minor [9:25] exclusive">tudo o que podia</mark> <mark class="span gemma minor" title="Gemma Minor [26:41] exclusive">para os acalmar</mark> e <mark class="span gemma minor" title="Gemma Minor [44:55] exclusive">colocava-os</mark> <mark class="span gemma minor" title="Gemma Minor [56:67] exclusive">em contacto</mark> com a AcadianaCares, um recurso maravilhoso que temos <mark class="span gemma minor" title="Gemma Minor [122:141] exclusive">na nossa comunidade</mark> para pessoas com <mark class="span gemma minor" title="Gemma Minor [159:162] exclusive">VIH</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [9:25] exclusive tudo o que podia</li><li><strong>Minor</strong> [26:41] exclusive para os acalmar</li><li><strong>Minor</strong> [44:55] exclusive colocava-os</li><li><strong>Minor</strong> [56:67] exclusive em contacto</li><li><strong>Minor</strong> [122:141] exclusive na nossa comunidade</li><li><strong>Minor</strong> [159:162] exclusive VIH</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;tudo o que podia&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para os acalmar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;colocava-os&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;em contacto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;na nossa comunidade&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;VIH&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0276</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eu fazia o que podia para acalmá-los e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com HIV.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Eu fazia o que podia para acalmá-los e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com HIV.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Eu fazia o que podia para acalmá-los e <mark class="span gemma minor" title="Gemma Minor [39:50] exclusive">colocava-os</mark> em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com HIV.</div><ul class="span-list"><li><strong>Minor</strong> [39:50] exclusive colocava-os</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;colocava-os&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 125</div>
+                <div class="position">Passage position 2</div>
+                <p lang="pt-BR">Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0277</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Eu <mark class="span human major" title="Human Major [3:13] inclusive UTF-16">os colocava</mark> em <mark class="span human minor" title="Human Minor [18:24] inclusive UTF-16">contato</mark> com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também <mark class="span human minor" title="Human Minor [143:145] inclusive UTF-16">pra</mark> que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div><ul class="span-list"><li><strong>Major</strong> [3:13] inclusive UTF-16 os colocava</li><li><strong>Minor</strong> [18:24] inclusive UTF-16 contato</li><li><strong>Minor</strong> [143:145] inclusive UTF-16 pra</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também <mark class="span gemma minor" title="Gemma Minor [143:150] exclusive">pra que</mark> tivessem os recursos de que precisavam para conseguirem os medicamentos.</div><ul class="span-list"><li><strong>Minor</strong> [143:150] exclusive pra que</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra que&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0278</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eu os colocava em contacto com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">Eu <mark class="span human major" title="Human Major [3:13] inclusive UTF-16">os colocava</mark> em contacto com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div><ul class="span-list"><li><strong>Major</strong> [3:13] inclusive UTF-16 os colocava</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Eu os colocava <mark class="span gemma minor" title="Gemma Minor [15:26] exclusive">em contacto</mark> com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div><ul class="span-list"><li><strong>Minor</strong> [15:26] exclusive em contacto</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;em contacto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0279</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Colocava-os em contacto com pessoas que conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Colocava-os em contacto com pessoas que conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:11] exclusive">Colocava-os</mark> em contacto com pessoas que conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div><ul class="span-list"><li><strong>Minor</strong> [0:11] exclusive Colocava-os</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Colocava-os&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0280</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Eu colocava-os em contacto com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Eu colocava-os em contacto com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Eu <mark class="span gemma minor" title="Gemma Minor [3:14] exclusive">colocava-os</mark> em contacto com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.</div><ul class="span-list"><li><strong>Minor</strong> [3:14] exclusive colocava-os</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;colocava-os&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 126</div>
+                <div class="position">Passage position 3</div>
+                <p lang="pt-BR">Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0281</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Esse foi com certeza o aspecto de <mark class="span human major" title="Human Major [34:50] inclusive UTF-16">maior aprendizado</mark> <mark class="span human minor" title="Human Minor [52:54] inclusive UTF-16">pra</mark> mim por ter sido franco, o <mark class="span human minor" title="Human Minor [83:86] inclusive UTF-16">fato</mark> de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar <mark class="span human minor" title="Human Minor [256:258] inclusive UTF-16">pra</mark> se estar.</div><ul class="span-list"><li><strong>Major</strong> [34:50] inclusive UTF-16 maior aprendizado</li><li><strong>Minor</strong> [52:54] inclusive UTF-16 pra</li><li><strong>Minor</strong> [83:86] inclusive UTF-16 fato</li><li><strong>Minor</strong> [256:258] inclusive UTF-16 pra</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[1]_text_ambiguous_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra mim&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;pra se estar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0282</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Este foi com certeza o aspecto de maior aprendizagem para mim por ter sido franco, o facto de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar para se estar.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Este foi com certeza o aspecto de maior aprendizagem para mim por ter sido franco, o facto de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar para se estar.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[2]_text_ambiguous_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;aprendizagem&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;facto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0283</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Este foi, sem dúvida, o aspeto mais importante que aprendi ao ser sincero, o facto de poder ter um impacto positivo naqueles que sofrem como eu, de poder ajudar aqueles que estão nas sombras, porque eu estive neles e não é um bom sítio para estar.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">Este foi, sem dúvida, o aspeto mais importante que aprendi ao ser sincero, o facto de poder <mark class="span human minor" title="Human Minor [92:94] inclusive UTF-16">ter</mark> um impacto positivo naqueles que <mark class="span human minor" title="Human Minor [129:134] inclusive UTF-16">sofrem</mark> como eu, de poder ajudar aqueles que <mark class="span human minor" title="Human Minor [173:177] inclusive UTF-16">estão</mark> nas sombras, porque eu estive <mark class="span human major" title="Human Major [209:213] inclusive UTF-16">neles</mark> e não é um bom sítio para estar.</div><ul class="span-list"><li><strong>Minor</strong> [92:94] inclusive UTF-16 ter</li><li><strong>Minor</strong> [129:134] inclusive UTF-16 sofrem</li><li><strong>Minor</strong> [173:177] inclusive UTF-16 estão</li><li><strong>Major</strong> [209:213] inclusive UTF-16 neles</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Este foi, sem dúvida, <mark class="span gemma minor" title="Gemma Minor [22:58] exclusive">o aspeto mais importante que aprendi</mark> ao ser sincero, o facto de poder ter um impacto positivo naqueles que sofrem como eu, de poder ajudar aqueles que estão nas sombras, porque eu estive neles e não é um bom sítio para estar.</div><ul class="span-list"><li><strong>Minor</strong> [22:58] exclusive o aspeto mais importante que aprendi</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;o aspeto mais importante que aprendi&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0284</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Esse foi com certeza o aspeto de maior aprendizado para mim por ter sido franco, o facto de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar para se estar.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Esse foi com certeza o aspeto de <mark class="span human major" title="Human Major [33:49] inclusive UTF-16">maior aprendizado</mark> para mim por ter sido franco, o facto de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar para se estar.</div><ul class="span-list"><li><strong>Major</strong> [33:49] inclusive UTF-16 maior aprendizado</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[2]_text_ambiguous_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;aspeto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;facto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 127</div>
+                <div class="position">Passage position 4</div>
+                <p lang="pt-BR">Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0285</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e <mark class="span human major" title="Human Major [97:109] inclusive UTF-16">me procuravam</mark> porque tinham medo.</div><ul class="span-list"><li><strong>Major</strong> [97:109] inclusive UTF-16 me procuravam</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0286</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Estes homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e procuravam-me porque tinham medo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>70</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:4] inclusive UTF-16">Estes</mark> homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e procuravam-me porque tinham medo.</div><ul class="span-list"><li><strong>Minor</strong> [0:4] inclusive UTF-16 Estes</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:5] exclusive">Estes</mark> homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e <mark class="span gemma minor" title="Gemma Minor [97:110] exclusive">procuravam-me</mark> porque tinham medo.</div><ul class="span-list"><li><strong>Minor</strong> [0:5] exclusive Estes</li><li><strong>Minor</strong> [97:110] exclusive procuravam-me</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Estes&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;procuravam-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0287</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Estes homens eram de todos os tipos e muitos deles não tinham a mesma informação que eu e procuravam-me porque tinham medo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:4] inclusive UTF-16">Estes</mark> homens eram <mark class="span human minor" title="Human Minor [18:28] inclusive UTF-16">de todos os</mark> tipos e muitos deles não tinham a mesma informação que eu e procuravam-me porque tinham medo.</div><ul class="span-list"><li><strong>Minor</strong> [0:4] inclusive UTF-16 Estes</li><li><strong>Minor</strong> [18:28] inclusive UTF-16 de todos os</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Estes homens eram <mark class="span gemma minor" title="Gemma Minor [18:35] exclusive">de todos os tipos</mark> e muitos deles não tinham a mesma informação que eu e <mark class="span gemma minor" title="Gemma Minor [90:103] exclusive">procuravam-me</mark> porque tinham medo.</div><ul class="span-list"><li><strong>Minor</strong> [18:35] exclusive de todos os tipos</li><li><strong>Minor</strong> [90:103] exclusive procuravam-me</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;de todos os tipos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;procuravam-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0288</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Estes homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e procuravam-me porque tinham medo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>70</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:4] inclusive UTF-16">Estes</mark> homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e procuravam-me porque tinham medo.</div><ul class="span-list"><li><strong>Minor</strong> [0:4] inclusive UTF-16 Estes</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:5] exclusive">Estes</mark> homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e <mark class="span gemma minor" title="Gemma Minor [97:110] exclusive">procuravam-me</mark> porque tinham medo.</div><ul class="span-list"><li><strong>Minor</strong> [0:5] exclusive Estes</li><li><strong>Minor</strong> [97:110] exclusive procuravam-me</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Estes&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;procuravam-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 128</div>
+                <div class="position">Passage position 5</div>
+                <p lang="pt-BR">Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0289</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Alguns deles eu conhecia pessoalmente, ou eles <mark class="span human major" title="Human Major [47:58] inclusive UTF-16">sabiam sobre</mark> mim, mas muitos outros eram <mark class="span human major" title="Human Major [88:95] inclusive UTF-16">anônimos</mark>,</div><ul class="span-list"><li><strong>Major</strong> [47:58] inclusive UTF-16 sabiam sobre</li><li><strong>Major</strong> [88:95] inclusive UTF-16 anônimos</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0290</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anónimos,</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Alguns deles eu conhecia pessoalmente, ou eles <mark class="span human major" title="Human Major [47:58] inclusive UTF-16">sabiam sobre</mark> mim, mas muitos outros eram anónimos,</div><ul class="span-list"><li><strong>Major</strong> [47:58] inclusive UTF-16 sabiam sobre</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram <mark class="span gemma minor" title="Gemma Minor [88:96] exclusive">anónimos</mark>,</div><ul class="span-list"><li><strong>Minor</strong> [88:96] exclusive anónimos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;anónimos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0291</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Alguns deles conhecia pessoalmente ou sabiam de mim, mas muitos outros eram anónimos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>85</strong></div>
+            <div class="annotated-text">Alguns deles conhecia pessoalmente ou sabiam de mim, mas muitos outros eram anónimos<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [84:84] inclusive UTF-16">[MISSING]</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [84:84] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">Alguns deles <mark class="span gemma major" title="Gemma Major [13:21] exclusive">conhecia</mark> pessoalmente ou <mark class="span gemma minor" title="Gemma Minor [38:51] exclusive">sabiam de mim</mark>, mas muitos outros eram anónimos.</div><ul class="span-list"><li><strong>Major</strong> [13:21] exclusive conhecia</li><li><strong>Minor</strong> [38:51] exclusive sabiam de mim</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;conhecia&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    },
+    {
+      &quot;text&quot;: &quot;sabiam de mim&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0292</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Alguns deles eu conhecia pessoalmente, ou eles sabiam de mim, mas muitos outros eram anónimos,</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Alguns deles eu conhecia pessoalmente, ou eles sabiam de mim, mas muitos outros eram anónimos,</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Alguns deles eu conhecia pessoalmente, ou eles <mark class="span gemma minor" title="Gemma Minor [47:60] exclusive">sabiam de mim</mark>, mas muitos outros eram <mark class="span gemma minor" title="Gemma Minor [85:93] exclusive">anónimos</mark>,</div><ul class="span-list"><li><strong>Minor</strong> [47:60] exclusive sabiam de mim</li><li><strong>Minor</strong> [85:93] exclusive anónimos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;sabiam de mim&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;anónimos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 129</div>
+                <div class="position">Passage position 6</div>
+                <p lang="pt-BR">com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0293</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0294</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>65</strong></div>
+            <div class="annotated-text"><mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [0:0] inclusive UTF-16">[MISSING]</mark>Com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div><ul class="span-list"><li><strong>Minor</strong> [0:0] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Com foto de perfil em branco por medo de <mark class="span gemma minor" title="Gemma Minor [41:50] exclusive">mostrarem</mark> o rosto depois do que me contaram.</div><ul class="span-list"><li><strong>Minor</strong> [41:50] exclusive mostrarem</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;mostrarem&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0295</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0296</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 130</div>
+                <div class="position">Passage position 7</div>
+                <p lang="pt-BR">Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0297</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>75</strong></div>
+            <div class="annotated-text">Sobre a questão de ser franco, quero deixar alguns pensamentos <mark class="span human minor" title="Human Minor [63:65] inclusive UTF-16">pra</mark> vocês.</div><ul class="span-list"><li><strong>Minor</strong> [63:65] inclusive UTF-16 pra</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Sobre a questão de ser franco, quero deixar alguns pensamentos <mark class="span gemma minor" title="Gemma Minor [63:66] exclusive">pra</mark> vocês.</div><ul class="span-list"><li><strong>Minor</strong> [63:66] exclusive pra</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0298</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>95</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>[
+  {
+    &quot;text&quot;: &quot;pra&quot;,
+    &quot;severity&quot;: &quot;Minor&quot;
+  }
+]</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0299</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>95</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>[
+  {
+    &quot;text&quot;: &quot;pra&quot;,
+    &quot;severity&quot;: &quot;Minor&quot;
+  }
+]</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0300</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>95</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>[
+  {
+    &quot;text&quot;: &quot;pra&quot;,
+    &quot;severity&quot;: &quot;Minor&quot;
+  }
+]</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 131</div>
+                <div class="position">Passage position 8</div>
+                <p lang="pt-BR">Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0301</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Descobri que, independentemente do risco que eu assumi <mark class="span human major" title="Human Major [55:64] inclusive UTF-16">me expondo</mark> daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</div><ul class="span-list"><li><strong>Major</strong> [55:64] inclusive UTF-16 me expondo</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0302</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Descobri que, independentemente do risco que eu assumi expondo-me daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Descobri que, independentemente do risco que eu assumi expondo-me daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;assumi me expondo&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 75
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0303</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Descobri que, independentemente do risco que assumi ao expor-me dessa forma, valia a pena qualquer comentário negativo ou crítica, porque sentia que conseguia causar um impacto real e tangível.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">Descobri que, independentemente do risco que assumi ao expor-me <mark class="span human minor" title="Human Minor [64:74] inclusive UTF-16">dessa forma</mark>, <mark class="span human minor" title="Human Minor [77:81] inclusive UTF-16">valia</mark> a pena qualquer comentário negativo <mark class="span human minor" title="Human Minor [119:128] inclusive UTF-16">ou crítica</mark>, porque <mark class="span human minor" title="Human Minor [138:144] inclusive UTF-16">sentia </mark>que conseguia causar um impacto real e tangível.</div><ul class="span-list"><li><strong>Minor</strong> [64:74] inclusive UTF-16 dessa forma</li><li><strong>Minor</strong> [77:81] inclusive UTF-16 valia</li><li><strong>Minor</strong> [119:128] inclusive UTF-16 ou crítica</li><li><strong>Minor</strong> [138:144] inclusive UTF-16 sentia </li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Descobri que, independentemente do risco que assumi <mark class="span gemma minor" title="Gemma Minor [52:75] exclusive">ao expor-me dessa forma</mark>, <mark class="span gemma minor" title="Gemma Minor [77:89] exclusive">valia a pena</mark> qualquer comentário negativo <mark class="span gemma minor" title="Gemma Minor [119:129] exclusive">ou crítica</mark>, porque sentia que conseguia causar um impacto real e tangível.</div><ul class="span-list"><li><strong>Minor</strong> [52:75] exclusive ao expor-me dessa forma</li><li><strong>Minor</strong> [77:89] exclusive valia a pena</li><li><strong>Minor</strong> [119:129] exclusive ou crítica</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ao expor-me dessa forma&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;valia a pena&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;ou crítica&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0304</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Descobri que, independentemente do risco que assumi ao expor-me daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>85</strong></div>
+            <div class="annotated-text">Descobri que, independentemente do risco que assumi <mark class="span human minor" title="Human Minor [52:62] inclusive UTF-16">ao expor-me</mark> daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</div><ul class="span-list"><li><strong>Minor</strong> [52:62] inclusive UTF-16 ao expor-me</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Descobri que, independentemente do risco <mark class="span gemma minor" title="Gemma Minor [41:63] exclusive">que assumi ao expor-me</mark> daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.</div><ul class="span-list"><li><strong>Minor</strong> [41:63] exclusive que assumi ao expor-me</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;que assumi ao expor-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 132</div>
+                <div class="position">Passage position 9</div>
+                <p lang="pt-BR">Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0305</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Isso <mark class="span human major" title="Human Major [5:14] inclusive UTF-16">me mostrou</mark> que nossos esforços se propagam, que podemos mudar <mark class="span human minor" title="Human Minor [67:69] inclusive UTF-16">pra</mark> melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [165:165] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [5:14] inclusive UTF-16 me mostrou</li><li><strong>Minor</strong> [67:69] inclusive UTF-16 pra</li><li><strong>Major</strong> [165:165] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Isso me mostrou que nossos esforços se propagam, que podemos mudar <mark class="span gemma minor" title="Gemma Minor [67:70] exclusive">pra</mark> melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</div><ul class="span-list"><li><strong>Minor</strong> [67:70] exclusive pra</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;pra&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0306</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso mostrou-me que os nossos esforços se propagam, que podemos mudar para melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Isso mostrou-me que os nossos esforços se propagam, que podemos mudar para melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:15] exclusive">Isso mostrou-me</mark> que os nossos esforços se propagam, que podemos mudar para melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</div><ul class="span-list"><li><strong>Minor</strong> [0:15] exclusive Isso mostrou-me</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Isso mostrou-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0307</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso mostrou-me que os nossos esforços se propagam, que podemos melhorar a vida das pessoas que encontramos e estas, por sua vez, podem levar este impacto mais longe.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">Isso mostrou-me que os nossos esforços se propagam, que podemos <mark class="span human minor" title="Human Minor [64:71] inclusive UTF-16">melhorar</mark> a vida das pessoas que encontramos e estas, por sua vez, podem levar este impacto <mark class="span human minor" title="Human Minor [155:164] inclusive UTF-16">mais longe</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [64:71] inclusive UTF-16 melhorar</li><li><strong>Minor</strong> [155:164] inclusive UTF-16 mais longe</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:15] exclusive">Isso mostrou-me</mark> que os nossos esforços se propagam, que podemos <mark class="span gemma minor" title="Gemma Minor [64:79] exclusive">melhorar a vida</mark> das pessoas que encontramos e <mark class="span gemma minor" title="Gemma Minor [110:165] exclusive">estas, por sua vez, podem levar este impacto mais longe</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [0:15] exclusive Isso mostrou-me</li><li><strong>Minor</strong> [64:79] exclusive melhorar a vida</li><li><strong>Minor</strong> [110:165] exclusive estas, por sua vez, podem levar este impacto mais longe</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Isso mostrou-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;melhorar a vida&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estas, por sua vez, podem levar este impacto mais longe&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0308</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Isso mostrou-me que os nossos esforços se propagam, que podemos mudar para melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Isso mostrou-me que os nossos esforços se propagam, que podemos mudar para melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:15] exclusive">Isso mostrou-me</mark> que os nossos esforços se propagam, que podemos mudar para melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.</div><ul class="span-list"><li><strong>Minor</strong> [0:15] exclusive Isso mostrou-me</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Isso mostrou-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 133</div>
+                <div class="position">Passage position 10</div>
+                <p lang="pt-BR">Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0309</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver <mark class="span human minor" title="Human Minor [80:93] inclusive UTF-16">quais recursos</mark> vocês têm <mark class="span human major" title="Human Major [105:111] inclusive UTF-16">em suas</mark> comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos <mark class="span human minor" title="Human Minor [225:227] inclusive UTF-16">pra</mark> indicar <mark class="span human major" title="Human Major [237:243] inclusive UTF-16">a vocês</mark> e será um prazer falar <mark class="span human minor" title="Human Minor [268:276] inclusive UTF-16">com vocês</mark> depois da palestra e esclarecer suas dúvidas.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [323:323] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [80:93] inclusive UTF-16 quais recursos</li><li><strong>Major</strong> [105:111] inclusive UTF-16 em suas</li><li><strong>Minor</strong> [225:227] inclusive UTF-16 pra</li><li><strong>Major</strong> [237:243] inclusive UTF-16 a vocês</li><li><strong>Minor</strong> [268:276] inclusive UTF-16 com vocês</li><li><strong>Major</strong> [323:323] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0310</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais os recursos que vocês têm nas vossas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos para indicar a vocês e será um prazer falar convosco depois da palestra e esclarecer as vossas dúvidas.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais os recursos que <mark class="span human minor" title="Human Minor [102:106] inclusive UTF-16">vocês</mark> têm nas vossas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos para indicar <mark class="span human major" title="Human Major [248:254] inclusive UTF-16">a vocês</mark> e será um prazer falar convosco depois da palestra e esclarecer as vossas dúvidas.</div><ul class="span-list"><li><strong>Minor</strong> [102:106] inclusive UTF-16 vocês</li><li><strong>Major</strong> [248:254] inclusive UTF-16 a vocês</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver <mark class="span gemma minor" title="Gemma Minor [80:97] exclusive">quais os recursos</mark> que vocês têm <mark class="span gemma minor" title="Gemma Minor [112:134] exclusive">nas vossas comunidades</mark> ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos <mark class="span gemma minor" title="Gemma Minor [235:255] exclusive">para indicar a vocês</mark> e será um prazer <mark class="span gemma minor" title="Gemma Minor [273:287] exclusive">falar convosco</mark> depois da palestra e <mark class="span gemma minor" title="Gemma Minor [309:337] exclusive">esclarecer as vossas dúvidas</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [80:97] exclusive quais os recursos</li><li><strong>Minor</strong> [112:134] exclusive nas vossas comunidades</li><li><strong>Minor</strong> [235:255] exclusive para indicar a vocês</li><li><strong>Minor</strong> [273:287] exclusive falar convosco</li><li><strong>Minor</strong> [309:337] exclusive esclarecer as vossas dúvidas</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;quais os recursos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;nas vossas comunidades&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para indicar a vocês&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;falar convosco&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;esclarecer as vossas dúvidas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0311</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se algum de vocês ou alguém que conhece vive com VIH, ou se quiserem saber quais são os recursos disponíveis nas vossas comunidades ou simplesmente obter mais informações sobre a doença, tenho alguns sítios Web norte-americanos maravilhosos para vos indicar e será um prazer falar convosco depois da conferência e esclarecer as vossas dúvidas.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Se algum de vocês ou alguém que <mark class="span human major" title="Human Major [32:38] inclusive UTF-16">conhece</mark> vive com <mark class="span human major" title="Human Major [49:51] inclusive UTF-16">VIH</mark>, ou se quiserem <mark class="span human minor" title="Human Minor [69:73] inclusive UTF-16">saber</mark> quais são os recursos disponíveis nas vossas comunidades ou simplesmente obter mais informações sobre a doença, tenho alguns <mark class="span human major" title="Human Major [200:209] inclusive UTF-16">sítios Web</mark> norte-americanos maravilhosos para vos indicar e será um prazer falar convosco depois da conferência e esclarecer as vossas dúvidas.</div><ul class="span-list"><li><strong>Major</strong> [32:38] inclusive UTF-16 conhece</li><li><strong>Major</strong> [49:51] inclusive UTF-16 VIH</li><li><strong>Minor</strong> [69:73] inclusive UTF-16 saber</li><li><strong>Major</strong> [200:209] inclusive UTF-16 sítios Web</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Se algum de vocês ou alguém que conhece vive com <mark class="span gemma minor" title="Gemma Minor [49:52] exclusive">VIH</mark>, ou se quiserem <mark class="span gemma minor" title="Gemma Minor [69:131] exclusive">saber quais são os recursos disponíveis nas vossas comunidades</mark> ou simplesmente <mark class="span gemma minor" title="Gemma Minor [148:170] exclusive">obter mais informações</mark> sobre a doença, tenho alguns <mark class="span gemma minor" title="Gemma Minor [200:210] exclusive">sítios Web</mark> norte-americanos maravilhosos <mark class="span gemma minor" title="Gemma Minor [241:257] exclusive">para vos indicar</mark> e será um prazer <mark class="span gemma minor" title="Gemma Minor [275:289] exclusive">falar convosco</mark> depois da <mark class="span gemma minor" title="Gemma Minor [300:311] exclusive">conferência</mark> e esclarecer as vossas dúvidas.</div><ul class="span-list"><li><strong>Minor</strong> [49:52] exclusive VIH</li><li><strong>Minor</strong> [69:131] exclusive saber quais são os recursos disponíveis nas vossas comunidades</li><li><strong>Minor</strong> [148:170] exclusive obter mais informações</li><li><strong>Minor</strong> [200:210] exclusive sítios Web</li><li><strong>Minor</strong> [241:257] exclusive para vos indicar</li><li><strong>Minor</strong> [275:289] exclusive falar convosco</li><li><strong>Minor</strong> [300:311] exclusive conferência</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;VIH&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;saber quais são os recursos disponíveis nas vossas comunidades&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;obter mais informações&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;sítios Web&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para vos indicar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;falar convosco&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;conferência&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0312</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se algum de vós ou alguém que vós conhecês vive com HIV, ou se quiserdes ver quais recursos tendes nas vossas comunidades ou simplesmente se informares mais sobre a doença, tenho alguns sites norte-americanos maravilhosos para vos indicar e será um prazer falar convosco depois da palestra e esclarecer as vossas dúvidas.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">Se algum de vós ou alguém que vós conhecês vive com HIV, ou se quiserdes ver quais recursos tendes nas vossas comunidades ou simplesmente <mark class="span human major" title="Human Major [138:150] inclusive UTF-16">se informares</mark> mais sobre a doença, tenho alguns sites norte-americanos maravilhosos para vos indicar e será um prazer falar convosco depois da palestra e esclarecer as vossas dúvidas.</div><ul class="span-list"><li><strong>Major</strong> [138:150] inclusive UTF-16 se informares</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Se algum de vós ou alguém que <mark class="span gemma minor" title="Gemma Minor [30:42] exclusive">vós conhecês</mark> vive com HIV, ou se <mark class="span gemma minor" title="Gemma Minor [63:72] exclusive">quiserdes</mark> ver quais recursos tendes nas vossas comunidades ou simplesmente se <mark class="span gemma minor" title="Gemma Minor [141:151] exclusive">informares</mark> mais sobre a doença, tenho alguns sites norte-americanos maravilhosos para vos indicar e será um prazer falar <mark class="span gemma minor" title="Gemma Minor [262:270] exclusive">convosco</mark> depois da palestra e esclarecer as vossas dúvidas.</div><ul class="span-list"><li><strong>Minor</strong> [30:42] exclusive vós conhecês</li><li><strong>Minor</strong> [63:72] exclusive quiserdes</li><li><strong>Minor</strong> [141:151] exclusive informares</li><li><strong>Minor</strong> [262:270] exclusive convosco</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;vós conhecês&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;quiserdes&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;informares&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;convosco&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            </tbody>
+  </table>
+</body>
+</html>

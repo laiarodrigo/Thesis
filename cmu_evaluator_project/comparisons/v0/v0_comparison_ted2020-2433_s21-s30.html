@@ -1,0 +1,1169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0 DEV comparison — ted2020-2433_s21-s30</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+    body { margin: 0 auto; max-width: 1500px; padding: 24px; }
+    h1 { margin-bottom: 6px; } .summary { color: #526078; margin-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; font-size: 14px; }
+    .legend span { padding: 4px 9px; border-radius: 4px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
+    th[scope=row] { width: 25%; min-width: 240px; text-align: left; vertical-align: top; background: white; padding: 16px; border-radius: 8px 0 0 8px; }
+    td { background: white; padding: 12px; border-radius: 0 8px 8px 0; }
+    .sentence-number { font-weight: 750; } .position { color: #6b7280; font-size: 13px; }
+    .candidate-stack { display: grid; gap: 12px; }
+    .candidate-card { border: 1px solid #d8dee9; border-radius: 7px; padding: 12px; background: #fbfcfe; }
+    .candidate-card header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .system { font-weight: 750; } code { color: #687386; }
+    .candidate-full { margin: 9px 0; line-height: 1.45; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .judgment { border-radius: 6px; padding: 10px; min-width: 0; }
+    .human-panel { background: #fff8eb; border: 1px solid #f2d49b; }
+    .gemma-panel { background: #eef8ff; border: 1px solid #b9dcf3; }
+    h4 { margin: 0 0 5px; } .score { margin: 4px 0 7px; }
+    .annotated-text { background: white; padding: 8px; border-radius: 4px; line-height: 1.65; overflow-wrap: anywhere; }
+    mark.span { padding: 1px 2px; border-radius: 3px; }
+    mark.human.minor, .legend .human-minor { background: #ffe49b; }
+    mark.human.major, .legend .human-major { background: #ffaaa5; }
+    mark.gemma.minor, .legend .gemma-minor { background: #9de5f3; }
+    mark.gemma.major, .legend .gemma-major { background: #d1b3ff; }
+    mark.missing { border: 1px dashed #202938; font-weight: 700; }
+    .no-errors { color: #55805d; font-size: 13px; white-space: nowrap; }
+    .span-list { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+    .status { display: inline-block; font-weight: 700; font-size: 13px; padding: 3px 7px; border-radius: 4px; }
+    .status.valid { background: #ccebd2; color: #185928; }
+    .status.invalid { background: #ffd2cf; color: #8b1e18; }
+    .unvalidated { color: #8b1e18; } .parse-errors { color: #8b1e18; }
+    .warning { color: #8b1e18; font-weight: 650; margin-top: 5px; }
+    details { margin-top: 8px; } summary { cursor: pointer; color: #334e75; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172033; color: #f5f7fa; padding: 10px; border-radius: 5px; font-size: 12px; }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } th[scope=row] { width: auto; min-width: 180px; } }
+  </style>
+</head>
+<body>
+  <h1>Gemma V0 DEV comparison</h1>
+  <p class="summary"><strong>Passage:</strong> ted2020-2433_s21-s30 · <strong>Document:</strong> ted2020-2433 · <strong>Sentences:</strong> 10 · <strong>Candidate judgments:</strong> 40 · <strong>Invalid V0 outputs:</strong> 1</p>
+  <div class="legend">
+    <span class="human-minor">Human Minor</span><span class="human-major">Human Major</span>
+    <span class="gemma-minor">Gemma Minor</span><span class="gemma-major">Gemma Major</span>
+  </div>
+  <table>
+    <thead><tr><th>BP source sentence</th><th>Candidate comparisons</th></tr></thead>
+    <tbody>
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 21</div>
+                <div class="position">Passage position 1</div>
+                <p lang="pt-BR">E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0077</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E eu não deveria ter <mark class="span human minor" title="Human Minor [21:23] inclusive UTF-16">que</mark> usar o <mark class="span human major" title="Human Major [32:39] inclusive UTF-16">banheiro</mark> masculino, porque eu não sou um homem.</div><ul class="span-list"><li><strong>Minor</strong> [21:23] inclusive UTF-16 que</li><li><strong>Major</strong> [32:39] inclusive UTF-16 banheiro</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:4] exclusive">E eu</mark> não deveria ter que usar o banheiro masculino, porque eu não sou um homem.</div><ul class="span-list"><li><strong>Minor</strong> [0:4] exclusive E eu</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;E eu&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0078</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E eu não deveria ter de usar o banheiro masculino, porque eu não sou um homem.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">E eu não deveria ter de usar o <mark class="span human major" title="Human Major [31:38] inclusive UTF-16">banheiro</mark> masculino, porque eu não sou um homem.</div><ul class="span-list"><li><strong>Major</strong> [31:38] inclusive UTF-16 banheiro</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E eu não deveria <mark class="span gemma minor" title="Gemma Minor [17:28] exclusive">ter de usar</mark> o banheiro masculino, porque eu não sou um homem.</div><ul class="span-list"><li><strong>Minor</strong> [17:28] exclusive ter de usar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ter de usar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0079</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E não devia ter de usar o WC masculino, porque não sou homem.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>55</strong></div>
+            <div class="annotated-text">E não devia ter de usar o <mark class="span human minor" title="Human Minor [26:27] inclusive UTF-16">WC</mark> masculino, porque não sou homem.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [61:61] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [26:27] inclusive UTF-16 WC</li><li><strong>Minor</strong> [61:61] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E não devia ter de usar o <mark class="span gemma minor" title="Gemma Minor [26:28] exclusive">WC</mark> masculino, porque não sou homem.</div><ul class="span-list"><li><strong>Minor</strong> [26:28] exclusive WC</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;WC&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0080</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E eu não deveria ter de usar a casa de banho masculina, porque eu não sou um homem.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">E eu não deveria ter de usar a casa de banho masculina, porque eu não sou um homem.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">E eu não deveria <mark class="span gemma minor" title="Gemma Minor [17:28] exclusive">ter de usar</mark> a <mark class="span gemma minor" title="Gemma Minor [31:54] exclusive">casa de banho masculina</mark>, porque eu não sou um homem.</div><ul class="span-list"><li><strong>Minor</strong> [17:28] exclusive ter de usar</li><li><strong>Minor</strong> [31:54] exclusive casa de banho masculina</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ter de usar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;casa de banho masculina&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 22</div>
+                <div class="position">Passage position 2</div>
+                <p lang="pt-BR">Sou uma pessoa trans.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0081</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sou uma pessoa trans.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Sou uma pessoa trans.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Sou uma pessoa trans.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0082</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sou uma pessoa trans.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Sou uma pessoa trans.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Sou uma pessoa trans.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0083</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sou uma pessoa trans.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Sou uma pessoa trans.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Sou uma pessoa trans.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0084</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sou uma pessoa trans.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Sou uma pessoa trans.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Sou uma pessoa trans.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 23</div>
+                <div class="position">Passage position 3</div>
+                <p lang="pt-BR">E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0085</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E agora alguns políticos que gostam de incitar o medo estão <mark class="span human major" title="Human Major [60:67] inclusive UTF-16">tentando</mark> aprovar leis sobre os <mark class="span human major" title="Human Major [91:99] inclusive UTF-16">banheiros</mark>.</div><ul class="span-list"><li><strong>Major</strong> [60:67] inclusive UTF-16 tentando</li><li><strong>Major</strong> [91:99] inclusive UTF-16 banheiros</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:7] exclusive">E agora</mark> alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.</div><ul class="span-list"><li><strong>Minor</strong> [0:7] exclusive E agora</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;E agora&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0086</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E agora alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os banheiros.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">E agora alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os <mark class="span human major" title="Human Major [91:99] inclusive UTF-16">banheiros</mark>.</div><ul class="span-list"><li><strong>Major</strong> [91:99] inclusive UTF-16 banheiros</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E agora alguns políticos que gostam de incitar o medo <mark class="span gemma minor" title="Gemma Minor [54:68] exclusive">estão a tentar</mark> aprovar leis sobre os banheiros.</div><ul class="span-list"><li><strong>Minor</strong> [54:68] exclusive estão a tentar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estão a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0087</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Agora, alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os banheiros.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:5] inclusive UTF-16">Agora,</mark> alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os <mark class="span human major" title="Human Major [90:99] inclusive UTF-16">banheiros.</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:5] inclusive UTF-16 Agora,</li><li><strong>Major</strong> [90:99] inclusive UTF-16 banheiros.</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Agora, alguns políticos que gostam de incitar o medo <mark class="span gemma minor" title="Gemma Minor [53:67] exclusive">estão a tentar</mark> aprovar leis sobre os banheiros.</div><ul class="span-list"><li><strong>Minor</strong> [53:67] exclusive estão a tentar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estão a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0088</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E agora alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os banheiros.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E agora alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os <mark class="span human major" title="Human Major [91:99] inclusive UTF-16">banheiros</mark>.</div><ul class="span-list"><li><strong>Major</strong> [91:99] inclusive UTF-16 banheiros</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E agora alguns políticos que gostam de incitar o medo <mark class="span gemma minor" title="Gemma Minor [54:68] exclusive">estão a tentar</mark> aprovar leis sobre os banheiros.</div><ul class="span-list"><li><strong>Minor</strong> [54:68] exclusive estão a tentar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estão a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 24</div>
+                <div class="position">Passage position 4</div>
+                <p lang="pt-BR">Ouviram falar disso?</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0089</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Ouviram falar disso?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Ouviram falar disso?</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Ouviram falar disso?</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0090</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Ouviram falar disto?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">Ouviram falar <mark class="span human minor" title="Human Minor [14:18] inclusive UTF-16">disto</mark>?</div><ul class="span-list"><li><strong>Minor</strong> [14:18] inclusive UTF-16 disto</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Ouviram falar <mark class="span gemma minor" title="Gemma Minor [14:19] exclusive">disto</mark>?</div><ul class="span-list"><li><strong>Minor</strong> [14:19] exclusive disto</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;disto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0091</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Já ouviste falar disto?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:9] inclusive UTF-16">Já ouviste</mark> falar disto?</div><ul class="span-list"><li><strong>Major</strong> [0:9] inclusive UTF-16 Já ouviste</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Já <mark class="span gemma minor" title="Gemma Minor [3:10] exclusive">ouviste</mark> falar disto?</div><ul class="span-list"><li><strong>Minor</strong> [3:10] exclusive ouviste</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ouviste&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0092</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Ouviram falar disso?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Ouviram falar disso?</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Ouviram falar disso?</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 25</div>
+                <div class="position">Passage position 5</div>
+                <p lang="pt-BR">Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0093</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Estão <mark class="span human major" title="Human Major [6:13] inclusive UTF-16">tentando</mark> criar leis para forçar pessoas como eu a usar o <mark class="span human major" title="Human Major [63:70] inclusive UTF-16">banheiro</mark> que eles consideram apropriado de acordo com o <mark class="span human major" title="Human Major [119:124] inclusive UTF-16">gênero</mark> que me foi designado quando nasci.</div><ul class="span-list"><li><strong>Major</strong> [6:13] inclusive UTF-16 tentando</li><li><strong>Major</strong> [63:70] inclusive UTF-16 banheiro</li><li><strong>Major</strong> [119:124] inclusive UTF-16 gênero</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:14] exclusive">Estão tentando</mark> criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.</div><ul class="span-list"><li><strong>Minor</strong> [0:14] exclusive Estão tentando</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Estão tentando&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0094</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Estão a tentar criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o género que me foi designado quando nasci.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">Estão a tentar criar leis para forçar pessoas como eu a usar o <mark class="span human major" title="Human Major [63:70] inclusive UTF-16">banheiro</mark> que eles consideram apropriado de acordo com o género que me foi designado quando nasci.</div><ul class="span-list"><li><strong>Major</strong> [63:70] inclusive UTF-16 banheiro</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:14] exclusive">Estão a tentar</mark> criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o género que me foi designado quando nasci.</div><ul class="span-list"><li><strong>Minor</strong> [0:14] exclusive Estão a tentar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Estão a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0095</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Estão a tentar criar leis para forçar pessoas como eu a usar o WC que consideram adequado, de acordo com o género que me foi atribuído quando nasci.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>70</strong></div>
+            <div class="annotated-text">Estão a tentar criar leis para forçar pessoas como eu a usar o <mark class="span human minor" title="Human Minor [63:64] inclusive UTF-16">WC</mark> que consideram <mark class="span human minor" title="Human Minor [81:88] inclusive UTF-16">adequado</mark>, de acordo com o género que me foi atribuído quando nasci.</div><ul class="span-list"><li><strong>Minor</strong> [63:64] inclusive UTF-16 WC</li><li><strong>Minor</strong> [81:88] inclusive UTF-16 adequado</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:14] exclusive">Estão a tentar</mark> criar leis para forçar pessoas como eu a usar o <mark class="span gemma minor" title="Gemma Minor [63:65] exclusive">WC</mark> que consideram <mark class="span gemma minor" title="Gemma Minor [81:89] exclusive">adequado</mark>, de acordo com o <mark class="span gemma minor" title="Gemma Minor [107:113] exclusive">género</mark> que me foi <mark class="span gemma minor" title="Gemma Minor [125:134] exclusive">atribuído</mark> quando nasci.</div><ul class="span-list"><li><strong>Minor</strong> [0:14] exclusive Estão a tentar</li><li><strong>Minor</strong> [63:65] exclusive WC</li><li><strong>Minor</strong> [81:89] exclusive adequado</li><li><strong>Minor</strong> [107:113] exclusive género</li><li><strong>Minor</strong> [125:134] exclusive atribuído</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Estão a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;WC&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;adequado&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;género&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;atribuído&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0096</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Estão a tentar criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o género que me foi designado quando nasci.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">Estão a tentar criar leis para forçar pessoas como eu a usar o <mark class="span human major" title="Human Major [63:70] inclusive UTF-16">banheiro</mark> que eles consideram apropriado de acordo com o género que me foi designado quando nasci.</div><ul class="span-list"><li><strong>Major</strong> [63:70] inclusive UTF-16 banheiro</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:14] exclusive">Estão a tentar</mark> criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o género que me foi designado quando nasci.</div><ul class="span-list"><li><strong>Minor</strong> [0:14] exclusive Estão a tentar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Estão a tentar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 26</div>
+                <div class="position">Passage position 6</div>
+                <p lang="pt-BR">E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0097</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o <mark class="span human major" title="Human Major [152:159] inclusive UTF-16">banheiro</mark> masculino também não será uma opção <mark class="span human major" title="Human Major [197:201] inclusive UTF-16">legal</mark> para mim.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [212:212] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [152:159] inclusive UTF-16 banheiro</li><li><strong>Major</strong> [197:201] inclusive UTF-16 legal</li><li><strong>Major</strong> [212:212] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0098</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E se estes políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E se <mark class="span human minor" title="Human Minor [5:9] inclusive UTF-16">estes</mark> políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o <mark class="span human major" title="Human Major [152:159] inclusive UTF-16">banheiro</mark> masculino também não será uma opção <mark class="span human major" title="Human Major [197:201] inclusive UTF-16">legal</mark> para mim.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [212:212] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [5:9] inclusive UTF-16 estes</li><li><strong>Major</strong> [152:159] inclusive UTF-16 banheiro</li><li><strong>Major</strong> [197:201] inclusive UTF-16 legal</li><li><strong>Major</strong> [212:212] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E se <mark class="span gemma minor" title="Gemma Minor [5:10] exclusive">estes</mark> políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.</div><ul class="span-list"><li><strong>Minor</strong> [5:10] exclusive estes</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estes&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0099</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Se os políticos conseguirem o que pretendem no Arizona, na Califórnia ou na Flórida, ou mesmo na semana passada em Houston, no Texas, ou em Ottawa, usar o WC masculino também não será uma opção legal para mim.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text">Se os políticos conseguirem o que pretendem no Arizona, na Califórnia ou na Flórida, ou mesmo na semana passada em Houston, no Texas, ou em Ottawa, usar o WC masculino também não será uma opção <mark class="span human major" title="Human Major [194:198] inclusive UTF-16">legal</mark> para mim.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [209:209] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [194:198] inclusive UTF-16 legal</li><li><strong>Minor</strong> [209:209] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:27] exclusive">Se os políticos conseguirem</mark> <mark class="span gemma minor" title="Gemma Minor [28:43] exclusive">o que pretendem</mark> no Arizona, na Califórnia ou na Flórida, <mark class="span gemma minor" title="Gemma Minor [85:132] exclusive">ou mesmo na semana passada em Houston, no Texas</mark>, ou em Ottawa, usar o <mark class="span gemma minor" title="Gemma Minor [155:167] exclusive">WC masculino</mark> também não será uma opção legal para mim.</div><ul class="span-list"><li><strong>Minor</strong> [0:27] exclusive Se os políticos conseguirem</li><li><strong>Minor</strong> [28:43] exclusive o que pretendem</li><li><strong>Minor</strong> [85:132] exclusive ou mesmo na semana passada em Houston, no Texas</li><li><strong>Minor</strong> [155:167] exclusive WC masculino</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Se os políticos conseguirem&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;o que pretendem&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;ou mesmo na semana passada em Houston, no Texas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;WC masculino&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0100</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o sanitário masculino também não será uma opção legal para mim.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o sanitário masculino também não será uma opção <mark class="span human major" title="Human Major [198:202] inclusive UTF-16">legal</mark> para mim.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [213:213] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [198:202] inclusive UTF-16 legal</li><li><strong>Major</strong> [213:213] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o <mark class="span gemma minor" title="Gemma Minor [152:161] exclusive">sanitário</mark> masculino também não será uma opção legal para mim.</div><ul class="span-list"><li><strong>Minor</strong> [152:161] exclusive sanitário</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;sanitário&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 27</div>
+                <div class="position">Passage position 7</div>
+                <p lang="pt-BR">E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0101</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E <mark class="span human major" title="Human Major [2:9] inclusive UTF-16">toda vez</mark> que algum desses políticos propõe uma lei dessas, eu <mark class="span human major" title="Human Major [64:74] inclusive UTF-16">me pergunto</mark> como se aplicaria uma lei dessas, e quem a aplicaria, sabe?</div><ul class="span-list"><li><strong>Major</strong> [2:9] inclusive UTF-16 toda vez</li><li><strong>Major</strong> [64:74] inclusive UTF-16 me pergunto</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, <mark class="span gemma minor" title="Gemma Minor [130:135] exclusive">sabe?</mark></div><ul class="span-list"><li><strong>Minor</strong> [130:135] exclusive sabe?</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;sabe?&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0102</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E toda vez que algum desses políticos propõe uma lei dessas, eu pergunto-me como se aplicaria uma lei dessas e quem a aplicaria, sabes?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>40</strong></div>
+            <div class="annotated-text">E <mark class="span human major" title="Human Major [2:9] inclusive UTF-16">toda vez</mark> que algum desses políticos propõe uma lei dessas, eu pergunto-me como se aplicaria uma lei dessas e quem a aplicaria, sabes?</div><ul class="span-list"><li><strong>Major</strong> [2:9] inclusive UTF-16 toda vez</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E toda vez que algum desses políticos propõe uma lei dessas, <mark class="span gemma minor" title="Gemma Minor [61:75] exclusive">eu pergunto-me</mark> como se aplicaria uma lei dessas e quem a aplicaria, <mark class="span gemma minor" title="Gemma Minor [129:135] exclusive">sabes?</mark></div><ul class="span-list"><li><strong>Minor</strong> [61:75] exclusive eu pergunto-me</li><li><strong>Minor</strong> [129:135] exclusive sabes?</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;eu pergunto-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;sabes?&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0103</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E toda vez que um desses políticos propõe uma lei desta natureza, eu questiono-me como seria aplicada tal lei e quem a aplicaria, sabe?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E <mark class="span human major" title="Human Major [2:9] inclusive UTF-16">toda vez</mark> que um desses políticos propõe uma lei <mark class="span human minor" title="Human Minor [50:63] inclusive UTF-16">desta natureza</mark>, eu <mark class="span human minor" title="Human Minor [69:77] inclusive UTF-16">questiono</mark>-me como seria aplicada <mark class="span human minor" title="Human Minor [102:108] inclusive UTF-16">tal lei</mark> e quem a aplicaria, sabe?</div><ul class="span-list"><li><strong>Major</strong> [2:9] inclusive UTF-16 toda vez</li><li><strong>Minor</strong> [50:63] inclusive UTF-16 desta natureza</li><li><strong>Minor</strong> [69:77] inclusive UTF-16 questiono</li><li><strong>Minor</strong> [102:108] inclusive UTF-16 tal lei</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">E toda vez que <mark class="span gemma minor" title="Gemma Minor [15:34] exclusive">um desses políticos</mark> propõe uma <mark class="span gemma minor" title="Gemma Minor [46:64] exclusive">lei desta natureza</mark>, <mark class="span gemma minor" title="Gemma Minor [66:81] exclusive">eu questiono-me</mark> <mark class="span gemma minor" title="Gemma Minor [82:109] exclusive">como seria aplicada tal lei</mark> e quem a aplicaria, sabe?</div><ul class="span-list"><li><strong>Minor</strong> [15:34] exclusive um desses políticos</li><li><strong>Minor</strong> [46:64] exclusive lei desta natureza</li><li><strong>Minor</strong> [66:81] exclusive eu questiono-me</li><li><strong>Minor</strong> [82:109] exclusive como seria aplicada tal lei</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;um desses políticos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;lei desta natureza&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;eu questiono-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;como seria aplicada tal lei&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0104</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E toda vez que algum desses políticos propõe uma lei dessas, eu pergunto-me como se aplicaria uma lei dessas, e quem a aplicaria, sabe?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>40</strong></div>
+            <div class="annotated-text">E <mark class="span human major" title="Human Major [2:9] inclusive UTF-16">toda vez</mark> que algum desses políticos propõe uma lei dessas, eu pergunto-me como se aplicaria uma lei dessas, e quem a aplicaria, sabe?</div><ul class="span-list"><li><strong>Major</strong> [2:9] inclusive UTF-16 toda vez</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;eu me pergunto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 28</div>
+                <div class="position">Passage position 8</div>
+                <p lang="pt-BR">Verificação de calcinhas?</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0105</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Verificação de calcinhas?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Verificação de <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">calcinhas</mark>?</div><ul class="span-list"><li><strong>Major</strong> [15:23] inclusive UTF-16 calcinhas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Verificação de calcinhas?</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0106</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Verificação de calcinhas?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Verificação de <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">calcinhas</mark>?</div><ul class="span-list"><li><strong>Major</strong> [15:23] inclusive UTF-16 calcinhas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Verificação de calcinhas?</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0107</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Verificação de calcinhas?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Verificação de <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">calcinhas</mark>?</div><ul class="span-list"><li><strong>Major</strong> [15:23] inclusive UTF-16 calcinhas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Verificação de calcinhas?</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0108</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Verificação de calcinhas?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Verificação de <mark class="span human major" title="Human Major [15:23] inclusive UTF-16">calcinhas</mark>?</div><ul class="span-list"><li><strong>Major</strong> [15:23] inclusive UTF-16 calcinhas</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Verificação de calcinhas?</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 29</div>
+                <div class="position">Passage position 9</div>
+                <p lang="pt-BR">Sério.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0109</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sério.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:4] inclusive UTF-16">Sério</mark>.</div><ul class="span-list"><li><strong>Major</strong> [0:4] inclusive UTF-16 Sério</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:6] exclusive">Sério.</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:6] exclusive Sério.</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Sério.&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0110</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sério.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:4] inclusive UTF-16">Sério</mark>.</div><ul class="span-list"><li><strong>Major</strong> [0:4] inclusive UTF-16 Sério</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:6] exclusive">Sério.</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:6] exclusive Sério.</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Sério.&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0111</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É sério.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:6] inclusive UTF-16">É sério</mark>.</div><ul class="span-list"><li><strong>Major</strong> [0:6] inclusive UTF-16 É sério</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:7] exclusive">É sério</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [0:7] exclusive É sério</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;É sério&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0112</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Sério.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:4] inclusive UTF-16">Sério</mark>.</div><ul class="span-list"><li><strong>Major</strong> [0:4] inclusive UTF-16 Sério</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:6] exclusive">Sério.</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:6] exclusive Sério.</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Sério.&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 30</div>
+                <div class="position">Passage position 10</div>
+                <p lang="pt-BR">Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0113</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Inspeções genitais <mark class="span human major" title="Human Major [19:20] inclusive UTF-16">na</mark> porta dos <mark class="span human major" title="Human Major [32:40] inclusive UTF-16">banheiros</mark> e vestiários das piscinas públicas?</div><ul class="span-list"><li><strong>Major</strong> [19:20] inclusive UTF-16 na</li><li><strong>Major</strong> [32:40] inclusive UTF-16 banheiros</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:18] exclusive">Inspeções genitais</mark> na porta dos banheiros e vestiários das piscinas públicas?</div><ul class="span-list"><li><strong>Minor</strong> [0:18] exclusive Inspeções genitais</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Inspeções genitais&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0114</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Inspeções genitais à porta dos banheiros e vestiários das piscinas públicas?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">Inspeções genitais à porta dos <mark class="span human major" title="Human Major [31:39] inclusive UTF-16">banheiros</mark> e vestiários das piscinas públicas?</div><ul class="span-list"><li><strong>Major</strong> [31:39] inclusive UTF-16 banheiros</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Inspeções genitais <mark class="span gemma minor" title="Gemma Minor [19:26] exclusive">à porta</mark> dos banheiros e vestiários das piscinas públicas?</div><ul class="span-list"><li><strong>Minor</strong> [19:26] exclusive à porta</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;à porta&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0115</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Inspeções genitais à porta das casas de banho e dos vestiários das piscinas públicas?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Inspeções genitais à porta das casas de banho e dos vestiários das piscinas públicas?</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Inspeções genitais <mark class="span gemma minor" title="Gemma Minor [19:45] exclusive">à porta das casas de banho</mark> e dos vestiários das piscinas públicas?</div><ul class="span-list"><li><strong>Minor</strong> [19:45] exclusive à porta das casas de banho</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;à porta das casas de banho&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0116</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Inspeções genitais na porta dos balneários e vestiários das piscinas públicas?</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Inspeções genitais <mark class="span human major" title="Human Major [19:20] inclusive UTF-16">na</mark> porta dos <mark class="span human minor" title="Human Minor [32:41] inclusive UTF-16">balneários</mark> e vestiários das piscinas públicas?</div><ul class="span-list"><li><strong>Major</strong> [19:20] inclusive UTF-16 na</li><li><strong>Minor</strong> [32:41] inclusive UTF-16 balneários</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Inspeções genitais na porta dos <mark class="span gemma minor" title="Gemma Minor [32:42] exclusive">balneários</mark> e vestiários das piscinas públicas?</div><ul class="span-list"><li><strong>Minor</strong> [32:42] exclusive balneários</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;balneários&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            </tbody>
+  </table>
+</body>
+</html>

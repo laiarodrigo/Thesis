@@ -1,0 +1,6 @@
+# Keep Gemma 4 isolated from the dissertation environment, which pins
+# transformers 5.2.0. Google documents Gemma 4 support from 5.10.1.
+transformers>=5.10.1,<6
+accelerate>=1.11,<2
+huggingface-hub>=1.4.1,<2
+safetensors>=0.6,<1

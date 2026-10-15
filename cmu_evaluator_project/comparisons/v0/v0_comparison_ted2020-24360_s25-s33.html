@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0 DEV comparison — ted2020-24360_s25-s33</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+    body { margin: 0 auto; max-width: 1500px; padding: 24px; }
+    h1 { margin-bottom: 6px; } .summary { color: #526078; margin-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; font-size: 14px; }
+    .legend span { padding: 4px 9px; border-radius: 4px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
+    th[scope=row] { width: 25%; min-width: 240px; text-align: left; vertical-align: top; background: white; padding: 16px; border-radius: 8px 0 0 8px; }
+    td { background: white; padding: 12px; border-radius: 0 8px 8px 0; }
+    .sentence-number { font-weight: 750; } .position { color: #6b7280; font-size: 13px; }
+    .candidate-stack { display: grid; gap: 12px; }
+    .candidate-card { border: 1px solid #d8dee9; border-radius: 7px; padding: 12px; background: #fbfcfe; }
+    .candidate-card header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .system { font-weight: 750; } code { color: #687386; }
+    .candidate-full { margin: 9px 0; line-height: 1.45; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .judgment { border-radius: 6px; padding: 10px; min-width: 0; }
+    .human-panel { background: #fff8eb; border: 1px solid #f2d49b; }
+    .gemma-panel { background: #eef8ff; border: 1px solid #b9dcf3; }
+    h4 { margin: 0 0 5px; } .score { margin: 4px 0 7px; }
+    .annotated-text { background: white; padding: 8px; border-radius: 4px; line-height: 1.65; overflow-wrap: anywhere; }
+    mark.span { padding: 1px 2px; border-radius: 3px; }
+    mark.human.minor, .legend .human-minor { background: #ffe49b; }
+    mark.human.major, .legend .human-major { background: #ffaaa5; }
+    mark.gemma.minor, .legend .gemma-minor { background: #9de5f3; }
+    mark.gemma.major, .legend .gemma-major { background: #d1b3ff; }
+    mark.missing { border: 1px dashed #202938; font-weight: 700; }
+    .no-errors { color: #55805d; font-size: 13px; white-space: nowrap; }
+    .span-list { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+    .status { display: inline-block; font-weight: 700; font-size: 13px; padding: 3px 7px; border-radius: 4px; }
+    .status.valid { background: #ccebd2; color: #185928; }
+    .status.invalid { background: #ffd2cf; color: #8b1e18; }
+    .unvalidated { color: #8b1e18; } .parse-errors { color: #8b1e18; }
+    .warning { color: #8b1e18; font-weight: 650; margin-top: 5px; }
+    details { margin-top: 8px; } summary { cursor: pointer; color: #334e75; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172033; color: #f5f7fa; padding: 10px; border-radius: 5px; font-size: 12px; }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } th[scope=row] { width: auto; min-width: 180px; } }
+  </style>
+</head>
+<body>
+  <h1>Gemma V0 DEV comparison</h1>
+  <p class="summary"><strong>Passage:</strong> ted2020-24360_s25-s33 · <strong>Document:</strong> ted2020-24360 · <strong>Sentences:</strong> 9 · <strong>Candidate judgments:</strong> 36 · <strong>Invalid V0 outputs:</strong> 2</p>
+  <div class="legend">
+    <span class="human-minor">Human Minor</span><span class="human-major">Human Major</span>
+    <span class="gemma-minor">Gemma Minor</span><span class="gemma-major">Gemma Major</span>
+  </div>
+  <table>
+    <thead><tr><th>BP source sentence</th><th>Candidate comparisons</th></tr></thead>
+    <tbody>
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 25</div>
+                <div class="position">Passage position 1</div>
+                <p lang="pt-BR">E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0157</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E então há o <mark class="span human major" title="Human Major [13:23] inclusive UTF-16">aprendizado</mark> através do fracasso, um dos benefícios mais transformadores e duradouros na prática de <mark class="span human major" title="Human Major [112:119] inclusive UTF-16">esportes</mark>.</div><ul class="span-list"><li><strong>Major</strong> [13:23] inclusive UTF-16 aprendizado</li><li><strong>Major</strong> [112:119] inclusive UTF-16 esportes</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:10] exclusive">E então há</mark> o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.</div><ul class="span-list"><li><strong>Minor</strong> [0:10] exclusive E então há</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;E então há&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0158</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de desportos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>30</strong></div>
+            <div class="annotated-text">E então há o <mark class="span human major" title="Human Major [13:23] inclusive UTF-16">aprendizado</mark> através do fracasso, um dos benefícios mais transformadores e duradouros na prática de desportos.</div><ul class="span-list"><li><strong>Major</strong> [13:23] inclusive UTF-16 aprendizado</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de <mark class="span gemma minor" title="Gemma Minor [112:121] exclusive">desportos</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [112:121] exclusive desportos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;desportos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0159</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E depois há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros da prática desportiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">E <mark class="span human minor" title="Human Minor [2:7] inclusive UTF-16">depois</mark> há o <mark class="span human major" title="Human Major [14:24] inclusive UTF-16">aprendizado</mark> através do fracasso, um dos benefícios mais transformadores e duradouros da prática desportiva.</div><ul class="span-list"><li><strong>Minor</strong> [2:7] inclusive UTF-16 depois</li><li><strong>Major</strong> [14:24] inclusive UTF-16 aprendizado</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:8] exclusive">E depois</mark> há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros <mark class="span gemma minor" title="Gemma Minor [99:120] exclusive">da prática desportiva</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [0:8] exclusive E depois</li><li><strong>Minor</strong> [99:120] exclusive da prática desportiva</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;E depois&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;da prática desportiva&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0160</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de desportos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>30</strong></div>
+            <div class="annotated-text">E então há o <mark class="span human major" title="Human Major [13:23] inclusive UTF-16">aprendizado</mark> através do fracasso, um dos benefícios mais transformadores e duradouros na prática de desportos.</div><ul class="span-list"><li><strong>Major</strong> [13:23] inclusive UTF-16 aprendizado</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de <mark class="span gemma minor" title="Gemma Minor [112:121] exclusive">desportos</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [112:121] exclusive desportos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;desportos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 26</div>
+                <div class="position">Passage position 2</div>
+                <p lang="pt-BR">A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0161</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos <mark class="span human major" title="Human Major [127:136] inclusive UTF-16">acadêmicos</mark>, sociais e físicos.</div><ul class="span-list"><li><strong>Major</strong> [127:136] inclusive UTF-16 acadêmicos</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">A experiência <mark class="span gemma major" title="Gemma Major [14:25] exclusive">da conviver</mark> com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.</div><ul class="span-list"><li><strong>Major</strong> [14:25] exclusive da conviver</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;da conviver&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0162</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">A experiência <mark class="span gemma minor" title="Gemma Minor [14:25] exclusive">de conviver</mark> com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos <mark class="span gemma minor" title="Gemma Minor [127:137] exclusive">académicos</mark>, sociais e físicos.</div><ul class="span-list"><li><strong>Minor</strong> [14:25] exclusive de conviver</li><li><strong>Minor</strong> [127:137] exclusive académicos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;de conviver&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;académicos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0163</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">A experiência <mark class="span gemma minor" title="Gemma Minor [14:25] exclusive">de conviver</mark> com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos <mark class="span gemma minor" title="Gemma Minor [127:137] exclusive">académicos</mark>, sociais e físicos.</div><ul class="span-list"><li><strong>Minor</strong> [14:25] exclusive de conviver</li><li><strong>Minor</strong> [127:137] exclusive académicos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;de conviver&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;académicos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0164</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">A experiência <mark class="span gemma minor" title="Gemma Minor [14:25] exclusive">de conviver</mark> com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos <mark class="span gemma minor" title="Gemma Minor [127:137] exclusive">académicos</mark>, sociais e físicos.</div><ul class="span-list"><li><strong>Minor</strong> [14:25] exclusive de conviver</li><li><strong>Minor</strong> [127:137] exclusive académicos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;de conviver&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;académicos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 27</div>
+                <div class="position">Passage position 3</div>
+                <p lang="pt-BR">Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0165</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Mesmo que sua equipe não <mark class="span human major" title="Human Major [25:46] inclusive UTF-16">esteja sempre ganhando</mark>, ou <mark class="span human major" title="Human Major [52:66] inclusive UTF-16">esteja perdendo</mark>, existe um benefício real através da experiência.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [117:117] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [25:46] inclusive UTF-16 esteja sempre ganhando</li><li><strong>Major</strong> [52:66] inclusive UTF-16 esteja perdendo</li><li><strong>Major</strong> [117:117] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Mesmo que <mark class="span gemma minor" title="Gemma Minor [10:13] exclusive">sua</mark> equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.</div><ul class="span-list"><li><strong>Minor</strong> [10:13] exclusive sua</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;sua&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0166</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mesmo que a tua equipa não esteja sempre a ganhar, ou esteja a perder, existe um benefício real através da experiência.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Mesmo que a tua equipa não esteja sempre a ganhar, ou esteja a perder, existe um benefício real através da experiência.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Mesmo que <mark class="span gemma minor" title="Gemma Minor [10:15] exclusive">a tua</mark> equipa não esteja sempre a ganhar, ou esteja a perder, existe um benefício real através da experiência.</div><ul class="span-list"><li><strong>Minor</strong> [10:15] exclusive a tua</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a tua&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0167</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mesmo que a tua equipa não esteja sempre a ganhar ou a perder, existe um benefício real através da experiência.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">Mesmo que a tua equipa não esteja sempre a ganhar ou a perder, existe um benefício real através da experiência.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [111:111] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [111:111] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Mesmo que <mark class="span gemma minor" title="Gemma Minor [10:22] exclusive">a tua equipa</mark> não esteja sempre a ganhar ou a perder, existe um benefício real através da experiência.</div><ul class="span-list"><li><strong>Minor</strong> [10:22] exclusive a tua equipa</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a tua equipa&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0168</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mesmo que a sua equipa não esteja sempre a ganhar, ou esteja a perder, existe um benefício real através da experiência.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Mesmo que a sua equipa não esteja sempre a ganhar, ou esteja a perder, existe um benefício real através da experiência.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Mesmo que <mark class="span gemma minor" title="Gemma Minor [10:15] exclusive">a sua</mark> equipa não esteja sempre a ganhar, ou esteja a perder, existe um benefício real através da experiência.</div><ul class="span-list"><li><strong>Minor</strong> [10:15] exclusive a sua</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a sua&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 28</div>
+                <div class="position">Passage position 4</div>
+                <p lang="pt-BR">No entanto, nem todo mundo vai gostar de todos os esportes.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0169</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> No entanto, nem todo mundo vai gostar de todos os esportes.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">No entanto, nem <mark class="span human major" title="Human Major [16:25] inclusive UTF-16">todo mundo</mark> vai gostar de todos os <mark class="span human major" title="Human Major [50:57] inclusive UTF-16">esportes</mark>.</div><ul class="span-list"><li><strong>Major</strong> [16:25] inclusive UTF-16 todo mundo</li><li><strong>Major</strong> [50:57] inclusive UTF-16 esportes</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">No entanto, nem todo mundo <mark class="span gemma minor" title="Gemma Minor [27:37] exclusive">vai gostar</mark> de todos os esportes.</div><ul class="span-list"><li><strong>Minor</strong> [27:37] exclusive vai gostar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;vai gostar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0170</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> No entanto, nem todo o mundo vai gostar de todos os desportos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">No entanto, nem <mark class="span human major" title="Human Major [16:27] inclusive UTF-16">todo o mundo</mark> vai gostar de todos os desportos.</div><ul class="span-list"><li><strong>Major</strong> [16:27] inclusive UTF-16 todo o mundo</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">No entanto, nem <mark class="span gemma minor" title="Gemma Minor [16:28] exclusive">todo o mundo</mark> vai gostar de todos os desportos.</div><ul class="span-list"><li><strong>Minor</strong> [16:28] exclusive todo o mundo</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;todo o mundo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0171</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> No entanto, nem todos gostam de todos os desportos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">No entanto, nem todos gostam de todos os desportos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">No entanto, <mark class="span gemma minor" title="Gemma Minor [12:21] exclusive">nem todos</mark> gostam de todos os desportos.</div><ul class="span-list"><li><strong>Minor</strong> [12:21] exclusive nem todos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;nem todos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0172</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> No entanto, nem toda a gente vai gostar de todos os desportos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">No entanto, nem toda a gente vai gostar de todos os desportos.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">No entanto, nem <mark class="span gemma minor" title="Gemma Minor [16:28] exclusive">toda a gente</mark> vai gostar de todos os desportos.</div><ul class="span-list"><li><strong>Minor</strong> [16:28] exclusive toda a gente</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;toda a gente&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 29</div>
+                <div class="position">Passage position 5</div>
+                <p lang="pt-BR">Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0173</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Talvez uma <mark class="span human major" title="Human Major [11:16] inclusive UTF-16">equipe</mark> seja muito competitiva ou não competitiva o suficiente.</div><ul class="span-list"><li><strong>Major</strong> [11:16] inclusive UTF-16 equipe</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:6] exclusive">Talvez</mark> uma equipe seja muito competitiva ou não competitiva o suficiente.</div><ul class="span-list"><li><strong>Minor</strong> [0:6] exclusive Talvez</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Talvez&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0174</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Talvez uma equipa seja muito competitiva ou não competitiva o suficiente.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Talvez uma equipa seja muito competitiva ou não competitiva o suficiente.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Talvez uma <mark class="span gemma minor" title="Gemma Minor [11:17] exclusive">equipa</mark> seja muito competitiva ou não competitiva o suficiente.</div><ul class="span-list"><li><strong>Minor</strong> [11:17] exclusive equipa</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;equipa&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0175</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Talvez uma equipa seja demasiado competitiva ou não competitiva o suficiente.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">Talvez uma equipa seja <mark class="span human minor" title="Human Minor [23:31] inclusive UTF-16">demasiado</mark> competitiva ou não competitiva o suficiente.</div><ul class="span-list"><li><strong>Minor</strong> [23:31] inclusive UTF-16 demasiado</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Talvez uma equipa seja <mark class="span gemma minor" title="Gemma Minor [23:32] exclusive">demasiado</mark> competitiva ou não competitiva o suficiente.</div><ul class="span-list"><li><strong>Minor</strong> [23:32] exclusive demasiado</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;demasiado&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0176</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Talvez uma equipa seja muito competitiva ou não competitiva o suficiente.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Talvez uma equipa seja muito competitiva ou não competitiva o suficiente.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Talvez uma <mark class="span gemma minor" title="Gemma Minor [11:17] exclusive">equipa</mark> seja muito competitiva ou não competitiva o suficiente.</div><ul class="span-list"><li><strong>Minor</strong> [11:17] exclusive equipa</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;equipa&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 30</div>
+                <div class="position">Passage position 6</div>
+                <p lang="pt-BR">Também pode levar tempo para encontrar um esporte que seja ideal para você.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0177</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Também pode levar tempo para encontrar um esporte que seja ideal para você.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Também pode <mark class="span human major" title="Human Major [12:22] inclusive UTF-16">levar tempo</mark> para encontrar um <mark class="span human major" title="Human Major [42:48] inclusive UTF-16">esporte</mark> que seja ideal para <mark class="span human major" title="Human Major [70:73] inclusive UTF-16">você</mark>.</div><ul class="span-list"><li><strong>Major</strong> [12:22] inclusive UTF-16 levar tempo</li><li><strong>Major</strong> [42:48] inclusive UTF-16 esporte</li><li><strong>Major</strong> [70:73] inclusive UTF-16 você</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Também pode levar tempo para encontrar um esporte que seja ideal para <mark class="span gemma minor" title="Gemma Minor [70:74] exclusive">você</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [70:74] exclusive você</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;você&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0178</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Também pode levar tempo para encontrar um esporte que seja ideal para ti.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Também pode <mark class="span human major" title="Human Major [12:22] inclusive UTF-16">levar tempo</mark> para encontrar um <mark class="span human major" title="Human Major [42:48] inclusive UTF-16">esporte</mark> que seja ideal para ti.</div><ul class="span-list"><li><strong>Major</strong> [12:22] inclusive UTF-16 levar tempo</li><li><strong>Major</strong> [42:48] inclusive UTF-16 esporte</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Também pode levar tempo para encontrar um esporte que seja ideal para <mark class="span gemma minor" title="Gemma Minor [70:72] exclusive">ti</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [70:72] exclusive ti</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;ti&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0179</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Também pode demorar a encontrar o desporto ideal para si.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>70</strong></div>
+            <div class="annotated-text">Também pode demorar a encontrar <mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [32:32] inclusive UTF-16">[MISSING]</mark>o desporto ideal para si.</div><ul class="span-list"><li><strong>Minor</strong> [32:32] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Também pode <mark class="span gemma minor" title="Gemma Minor [12:19] exclusive">demorar</mark> a encontrar o desporto ideal para si.</div><ul class="span-list"><li><strong>Minor</strong> [12:19] exclusive demorar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;demorar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0180</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Também pode demorar tempo a encontrar um desporto que seja ideal para si.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Também pode demorar tempo a encontrar um desporto que seja ideal para si.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Também pode <mark class="span gemma minor" title="Gemma Minor [12:37] exclusive">demorar tempo a encontrar</mark> um desporto que seja ideal para si.</div><ul class="span-list"><li><strong>Minor</strong> [12:37] exclusive demorar tempo a encontrar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;demorar tempo a encontrar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 31</div>
+                <div class="position">Passage position 7</div>
+                <p lang="pt-BR">É perfeitamente normal.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0181</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É perfeitamente normal.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É perfeitamente normal.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:23] exclusive">É perfeitamente normal.</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:23] exclusive É perfeitamente normal.</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;É perfeitamente normal.&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0182</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É perfeitamente normal.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É perfeitamente normal.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:23] exclusive">É perfeitamente normal.</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:23] exclusive É perfeitamente normal.</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;É perfeitamente normal.&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0183</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É perfeitamente normal.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É perfeitamente normal.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:23] exclusive">É perfeitamente normal.</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:23] exclusive É perfeitamente normal.</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;É perfeitamente normal.&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0184</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É perfeitamente normal.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">É perfeitamente normal.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:23] exclusive">É perfeitamente normal.</mark></div><ul class="span-list"><li><strong>Minor</strong> [0:23] exclusive É perfeitamente normal.</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;É perfeitamente normal.&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 32</div>
+                <div class="position">Passage position 8</div>
+                <p lang="pt-BR">Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0185</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Mas se <mark class="span human major" title="Human Major [7:10] inclusive UTF-16">você</mark> passar um tempo <mark class="span human major" title="Human Major [28:37] inclusive UTF-16">procurando</mark>, será capaz de encontrar um <mark class="span human major" title="Human Major [67:73] inclusive UTF-16">esporte</mark> que atenda suas necessidades individuais, e, se <mark class="span human major" title="Human Major [123:126] inclusive UTF-16">você</mark> encontrar, há muitos benefícios.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [160:160] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [7:10] inclusive UTF-16 você</li><li><strong>Major</strong> [28:37] inclusive UTF-16 procurando</li><li><strong>Major</strong> [67:73] inclusive UTF-16 esporte</li><li><strong>Major</strong> [123:126] inclusive UTF-16 você</li><li><strong>Major</strong> [160:160] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>90</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_ambiguous_in_candidate</li><li>errors[1]_text_ambiguous_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>[
+  {
+    &quot;text&quot;: &quot;você&quot;,
+    &quot;severity&quot;: &quot;Minor&quot;
+  },
+  {
+    &quot;text&quot;: &quot;você&quot;,
+    &quot;severity&quot;: &quot;Minor&quot;
+  }
+]</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;você&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;você&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0186</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas se passares um tempo a procurar, serás capaz de encontrar um esporte que atenda às tuas necessidades individuais, e, se o encontras, há muitos benefícios.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">Mas se passares um tempo a procurar, serás capaz de encontrar um <mark class="span human major" title="Human Major [65:71] inclusive UTF-16">esporte</mark> que atenda às tuas necessidades individuais, e, se o encontras, há muitos benefícios.</div><ul class="span-list"><li><strong>Major</strong> [65:71] inclusive UTF-16 esporte</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Mas se <mark class="span gemma minor" title="Gemma Minor [7:15] exclusive">passares</mark> um tempo <mark class="span gemma minor" title="Gemma Minor [25:35] exclusive">a procurar</mark>, <mark class="span gemma minor" title="Gemma Minor [37:42] exclusive">serás</mark> capaz de encontrar um esporte que atenda às <mark class="span gemma minor" title="Gemma Minor [87:91] exclusive">tuas</mark> necessidades individuais, e, se <mark class="span gemma minor" title="Gemma Minor [124:135] exclusive">o encontras</mark>, há muitos benefícios.</div><ul class="span-list"><li><strong>Minor</strong> [7:15] exclusive passares</li><li><strong>Minor</strong> [25:35] exclusive a procurar</li><li><strong>Minor</strong> [37:42] exclusive serás</li><li><strong>Minor</strong> [87:91] exclusive tuas</li><li><strong>Minor</strong> [124:135] exclusive o encontras</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;passares&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;a procurar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;serás&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;tuas&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;o encontras&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0187</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> No entanto, se dedicar algum tempo à procura, será capaz de encontrar um desporto que satisfaça as suas necessidades individuais, e, se o conseguir, há muitos benefícios.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>45</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:9] inclusive UTF-16">No entanto</mark>, se <mark class="span human minor" title="Human Minor [15:21] inclusive UTF-16">dedicar</mark> algum tempo à procura, será capaz de encontrar um desporto que <mark class="span human minor" title="Human Minor [86:94] inclusive UTF-16">satisfaça</mark> as suas necessidades individuais, e, se o conseguir, há muitos benefícios.</div><ul class="span-list"><li><strong>Minor</strong> [0:9] inclusive UTF-16 No entanto</li><li><strong>Minor</strong> [15:21] inclusive UTF-16 dedicar</li><li><strong>Minor</strong> [86:94] inclusive UTF-16 satisfaça</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text"><mark class="span gemma major" title="Gemma Major [0:10] exclusive">No entanto</mark>, se dedicar algum tempo à procura, será capaz de encontrar um desporto que satisfaça as suas necessidades individuais, e, se o conseguir, há muitos benefícios.</div><ul class="span-list"><li><strong>Major</strong> [0:10] exclusive No entanto</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;No entanto&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0188</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Mas se passar um tempo a procurar, será capaz de encontrar um desporto que atenda às suas necessidades individuais, e, se encontrar, há muitos benefícios.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Mas se passar um tempo a procurar, será capaz de encontrar um desporto que atenda às suas necessidades individuais, e, se encontrar, há muitos benefícios.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Mas <mark class="span gemma minor" title="Gemma Minor [4:13] exclusive">se passar</mark> um tempo <mark class="span gemma minor" title="Gemma Minor [23:33] exclusive">a procurar</mark>, será capaz de encontrar um <mark class="span gemma minor" title="Gemma Minor [62:70] exclusive">desporto</mark> que <mark class="span gemma minor" title="Gemma Minor [75:84] exclusive">atenda às</mark> suas necessidades individuais, e, <mark class="span gemma minor" title="Gemma Minor [119:131] exclusive">se encontrar</mark>, há muitos benefícios.</div><ul class="span-list"><li><strong>Minor</strong> [4:13] exclusive se passar</li><li><strong>Minor</strong> [23:33] exclusive a procurar</li><li><strong>Minor</strong> [62:70] exclusive desporto</li><li><strong>Minor</strong> [75:84] exclusive atenda às</li><li><strong>Minor</strong> [119:131] exclusive se encontrar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;se passar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;a procurar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;desporto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;atenda às&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;se encontrar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 33</div>
+                <div class="position">Passage position 9</div>
+                <p lang="pt-BR">Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0189</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:3] inclusive UTF-16">Você</mark> será parte de uma comunidade solidária, <mark class="span human major" title="Human Major [45:61] inclusive UTF-16">estará melhorando</mark> sua confiança, <mark class="span human major" title="Human Major [78:99] inclusive UTF-16">exercitando seu corpo </mark>e <mark class="span human major" title="Human Major [102:111] inclusive UTF-16">alimentado</mark> sua mente, sem mencionar o divertimento.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [153:153] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [0:3] inclusive UTF-16 Você</li><li><strong>Major</strong> [45:61] inclusive UTF-16 estará melhorando</li><li><strong>Major</strong> [78:99] inclusive UTF-16 exercitando seu corpo </li><li><strong>Major</strong> [102:111] inclusive UTF-16 alimentado</li><li><strong>Major</strong> [153:153] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e <mark class="span gemma major" title="Gemma Major [102:122] exclusive">alimentado sua mente</mark>, sem mencionar o divertimento.</div><ul class="span-list"><li><strong>Major</strong> [102:122] exclusive alimentado sua mente</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;alimentado sua mente&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0190</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Serás parte de uma comunidade solidária, estarás a melhorar a tua confiança, a exercitar o teu corpo e a alimentar a tua mente, sem mencionar o divertimento.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Serás parte de uma comunidade solidária, estarás a melhorar a tua confiança, a exercitar o teu corpo e a alimentar a tua mente, sem mencionar o divertimento.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_ambiguous_in_candidate</li><li>errors[2]_text_ambiguous_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a tua&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;o teu&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;a tua&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0191</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Vai fazer parte de uma comunidade solidária, vai melhorar a sua confiança, exercitar o seu corpo e alimentar a sua mente, sem mencionar o divertimento.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Vai fazer parte de uma comunidade solidária, vai melhorar a sua confiança, exercitar o seu corpo e alimentar a sua mente, sem mencionar o divertimento.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>75</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:15] exclusive">Vai fazer parte</mark> de uma comunidade solidária, <mark class="span gemma minor" title="Gemma Minor [45:73] exclusive">vai melhorar a sua confiança</mark>, <mark class="span gemma minor" title="Gemma Minor [75:96] exclusive">exercitar o seu corpo</mark> e <mark class="span gemma minor" title="Gemma Minor [99:120] exclusive">alimentar a sua mente</mark>, sem mencionar o divertimento.</div><ul class="span-list"><li><strong>Minor</strong> [0:15] exclusive Vai fazer parte</li><li><strong>Minor</strong> [45:73] exclusive vai melhorar a sua confiança</li><li><strong>Minor</strong> [75:96] exclusive exercitar o seu corpo</li><li><strong>Minor</strong> [99:120] exclusive alimentar a sua mente</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Vai fazer parte&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;vai melhorar a sua confiança&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;exercitar o seu corpo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;alimentar a sua mente&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 75
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0192</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Você fará parte de uma comunidade solidária, estará a melhorar a sua confiança, a exercitar o seu corpo e a alimentar a sua mente, sem mencionar o divertimento.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>30</strong></div>
+            <div class="annotated-text"><mark class="span human major" title="Human Major [0:3] inclusive UTF-16">Você</mark> <mark class="span human minor" title="Human Minor [5:9] inclusive UTF-16">fará </mark>parte de uma comunidade solidária, estará a melhorar a sua confiança, a exercitar o seu corpo e a alimentar a sua mente, sem mencionar o divertimento.</div><ul class="span-list"><li><strong>Major</strong> [0:3] inclusive UTF-16 Você</li><li><strong>Minor</strong> [5:9] inclusive UTF-16 fará </li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>85</strong></div><div class="annotated-text">Você fará parte de uma comunidade solidária, <mark class="span gemma minor" title="Gemma Minor [45:78] exclusive">estará a melhorar a sua confiança</mark>, <mark class="span gemma minor" title="Gemma Minor [80:103] exclusive">a exercitar o seu corpo</mark> e <mark class="span gemma minor" title="Gemma Minor [106:129] exclusive">a alimentar a sua mente</mark>, sem mencionar o divertimento.</div><ul class="span-list"><li><strong>Minor</strong> [45:78] exclusive estará a melhorar a sua confiança</li><li><strong>Minor</strong> [80:103] exclusive a exercitar o seu corpo</li><li><strong>Minor</strong> [106:129] exclusive a alimentar a sua mente</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estará a melhorar a sua confiança&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;a exercitar o seu corpo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;a alimentar a sua mente&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 85
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            </tbody>
+  </table>
+</body>
+</html>

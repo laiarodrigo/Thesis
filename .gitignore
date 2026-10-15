@@ -192,7 +192,19 @@ data/opus_cache/
 *.orig
 wget-log*
 /.codex
+/.railway/
 /tmp/
+
+# researcher-private human identities, comments/provenance, and mutable Pearmut state
+/cmu_evaluator_project/data/pearmut/**/private/
+/cmu_evaluator_project/data/pearmut/*_PRIVATE.json
+/cmu_evaluator_project/data/annotations/raw/*
+!/cmu_evaluator_project/data/annotations/raw/.gitkeep
+/cmu_evaluator_project/data/annotations/normalized/*
+!/cmu_evaluator_project/data/annotations/normalized/.gitkeep
+/cmu_evaluator_project/data/benchmark/dev_01_evaluator.json
+/cmu_evaluator_project/runtime/
+# Hosted snapshots are created below runtime/ and remain researcher-local.
 
 # logs and generated run output
 /logs/

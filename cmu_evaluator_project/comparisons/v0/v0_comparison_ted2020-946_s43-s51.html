@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V0 DEV comparison — ted2020-946_s43-s51</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+    body { margin: 0 auto; max-width: 1500px; padding: 24px; }
+    h1 { margin-bottom: 6px; } .summary { color: #526078; margin-top: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; font-size: 14px; }
+    .legend span { padding: 4px 9px; border-radius: 4px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
+    th[scope=row] { width: 25%; min-width: 240px; text-align: left; vertical-align: top; background: white; padding: 16px; border-radius: 8px 0 0 8px; }
+    td { background: white; padding: 12px; border-radius: 0 8px 8px 0; }
+    .sentence-number { font-weight: 750; } .position { color: #6b7280; font-size: 13px; }
+    .candidate-stack { display: grid; gap: 12px; }
+    .candidate-card { border: 1px solid #d8dee9; border-radius: 7px; padding: 12px; background: #fbfcfe; }
+    .candidate-card header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .system { font-weight: 750; } code { color: #687386; }
+    .candidate-full { margin: 9px 0; line-height: 1.45; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .judgment { border-radius: 6px; padding: 10px; min-width: 0; }
+    .human-panel { background: #fff8eb; border: 1px solid #f2d49b; }
+    .gemma-panel { background: #eef8ff; border: 1px solid #b9dcf3; }
+    h4 { margin: 0 0 5px; } .score { margin: 4px 0 7px; }
+    .annotated-text { background: white; padding: 8px; border-radius: 4px; line-height: 1.65; overflow-wrap: anywhere; }
+    mark.span { padding: 1px 2px; border-radius: 3px; }
+    mark.human.minor, .legend .human-minor { background: #ffe49b; }
+    mark.human.major, .legend .human-major { background: #ffaaa5; }
+    mark.gemma.minor, .legend .gemma-minor { background: #9de5f3; }
+    mark.gemma.major, .legend .gemma-major { background: #d1b3ff; }
+    mark.missing { border: 1px dashed #202938; font-weight: 700; }
+    .no-errors { color: #55805d; font-size: 13px; white-space: nowrap; }
+    .span-list { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+    .status { display: inline-block; font-weight: 700; font-size: 13px; padding: 3px 7px; border-radius: 4px; }
+    .status.valid { background: #ccebd2; color: #185928; }
+    .status.invalid { background: #ffd2cf; color: #8b1e18; }
+    .unvalidated { color: #8b1e18; } .parse-errors { color: #8b1e18; }
+    .warning { color: #8b1e18; font-weight: 650; margin-top: 5px; }
+    details { margin-top: 8px; } summary { cursor: pointer; color: #334e75; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172033; color: #f5f7fa; padding: 10px; border-radius: 5px; font-size: 12px; }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } th[scope=row] { width: auto; min-width: 180px; } }
+  </style>
+</head>
+<body>
+  <h1>Gemma V0 DEV comparison</h1>
+  <p class="summary"><strong>Passage:</strong> ted2020-946_s43-s51 · <strong>Document:</strong> ted2020-946 · <strong>Sentences:</strong> 9 · <strong>Candidate judgments:</strong> 36 · <strong>Invalid V0 outputs:</strong> 1</p>
+  <div class="legend">
+    <span class="human-minor">Human Minor</span><span class="human-major">Human Major</span>
+    <span class="gemma-minor">Gemma Minor</span><span class="gemma-major">Gemma Major</span>
+  </div>
+  <table>
+    <thead><tr><th>BP source sentence</th><th>Candidate comparisons</th></tr></thead>
+    <tbody>
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 43</div>
+                <div class="position">Passage position 1</div>
+                <p lang="pt-BR">É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0353</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, <mark class="span human major" title="Human Major [82:85] inclusive UTF-16">você</mark> não encontra tantas representações físicas de divindades ou de <mark class="span human minor" title="Human Minor [150:158] inclusive UTF-16">liberação</mark> espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div><ul class="span-list"><li><strong>Major</strong> [82:85] inclusive UTF-16 você</li><li><strong>Minor</strong> [150:158] inclusive UTF-16 liberação</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, <mark class="span gemma major" title="Gemma Major [82:86] exclusive">você</mark> não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div><ul class="span-list"><li><strong>Major</strong> [82:86] exclusive você</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;você&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0354</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, não encontras tantas representações físicas de divindades ou de libertação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>70</strong></div>
+            <div class="annotated-text">Claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, não encontras tantas representações físicas de divindades ou de libertação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [283:283] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [283:283] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, <mark class="span gemma minor" title="Gemma Minor [80:93] exclusive">não encontras</mark> tantas representações físicas de divindades ou de libertação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div><ul class="span-list"><li><strong>Minor</strong> [80:93] exclusive não encontras</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;não encontras&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0355</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, não se encontram tantas representações físicas de divindades ou de libertação espiritual como na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>70</strong></div>
+            <div class="annotated-text">Na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, não se encontram tantas representações físicas de divindades ou de libertação espiritual como na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [267:267] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [267:267] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, <mark class="span gemma minor" title="Gemma Minor [73:89] exclusive">não se encontram</mark> tantas representações físicas de divindades ou de libertação espiritual como na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div><ul class="span-list"><li><strong>Minor</strong> [73:89] exclusive não se encontram</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;não se encontram&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0356</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É claro, no muçulmano, devido aos ensinamentos em torno do conceito de idolatria, não se encontram tantas representações físicas de divindades ou de libertação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>60</strong></div>
+            <div class="annotated-text">É claro, <mark class="span human minor" title="Human Minor [9:20] inclusive UTF-16">no muçulmano</mark>, devido aos ensinamentos em torno do conceito de idolatria, não se encontram tantas representações físicas de divindades ou de libertação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div><ul class="span-list"><li><strong>Minor</strong> [9:20] inclusive UTF-16 no muçulmano</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>75</strong></div><div class="annotated-text">É claro, <mark class="span gemma major" title="Gemma Major [9:21] exclusive">no muçulmano</mark>, devido aos ensinamentos em torno do conceito de idolatria, não se encontram tantas representações físicas de divindades ou de libertação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.</div><ul class="span-list"><li><strong>Major</strong> [9:21] exclusive no muçulmano</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;no muçulmano&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 75
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 44</div>
+                <div class="position">Passage position 2</div>
+                <p lang="pt-BR">Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0357</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Então, estávamos <mark class="span human major" title="Human Major [17:23] inclusive UTF-16">falando</mark> sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos <mark class="span human major" title="Human Major [200:209] inclusive UTF-16">olhar isto</mark> de uma forma positiva.</div><ul class="span-list"><li><strong>Major</strong> [17:23] inclusive UTF-16 falando</li><li><strong>Major</strong> [200:209] inclusive UTF-16 olhar isto</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0358</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, estávamos a falar sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>25</strong></div>
+            <div class="annotated-text">Então, estávamos a falar sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos <mark class="span human major" title="Human Major [200:209] inclusive UTF-16">olhar isto</mark> de uma forma positiva.</div><ul class="span-list"><li><strong>Major</strong> [200:209] inclusive UTF-16 olhar isto</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então, <mark class="span gemma minor" title="Gemma Minor [7:24] exclusive">estávamos a falar</mark> sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.</div><ul class="span-list"><li><strong>Minor</strong> [7:24] exclusive estávamos a falar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estávamos a falar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0359</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Por isso, falámos sobre as diferenças entre as tradições e sobre o que muitas pessoas consideravam a tragédia da destruição dos Budas de Bamiyan, mas ofereci a sugestão de que talvez pudéssemos olhar para isto de uma forma positiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:7] inclusive UTF-16">Por isso</mark>, <mark class="span human major" title="Human Major [10:16] inclusive UTF-16">falámos</mark> sobre as diferenças entre as tradições e <mark class="span human minor" title="Human Minor [59:63] inclusive UTF-16">sobre</mark> o que muitas pessoas <mark class="span human minor" title="Human Minor [86:97] inclusive UTF-16">consideravam</mark> a tragédia da destruição dos Budas de Bamiyan, mas ofereci a sugestão de que talvez pudéssemos olhar para isto de uma forma positiva.</div><ul class="span-list"><li><strong>Minor</strong> [0:7] inclusive UTF-16 Por isso</li><li><strong>Major</strong> [10:16] inclusive UTF-16 falámos</li><li><strong>Minor</strong> [59:63] inclusive UTF-16 sobre</li><li><strong>Minor</strong> [86:97] inclusive UTF-16 consideravam</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:8] exclusive">Por isso</mark>, falámos sobre as diferenças entre as tradições e sobre o que muitas pessoas consideravam a tragédia da destruição dos Budas de Bamiyan, mas ofereci a sugestão de que talvez pudéssemos olhar para isto de uma forma positiva.</div><ul class="span-list"><li><strong>Minor</strong> [0:8] exclusive Por isso</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Por isso&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0360</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, estávamos a falar sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyã, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Então, estávamos a falar sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de <mark class="span human minor" title="Human Minor [140:145] inclusive UTF-16">Bamiyã</mark>, mas eu ofereci a sugestão de que talvez pudéssemos <mark class="span human major" title="Human Major [199:208] inclusive UTF-16">olhar isto</mark> de uma forma positiva.</div><ul class="span-list"><li><strong>Minor</strong> [140:145] inclusive UTF-16 Bamiyã</li><li><strong>Major</strong> [199:208] inclusive UTF-16 olhar isto</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então, <mark class="span gemma minor" title="Gemma Minor [7:24] exclusive">estávamos a falar</mark> sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyã, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.</div><ul class="span-list"><li><strong>Minor</strong> [7:24] exclusive estávamos a falar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estávamos a falar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 45</div>
+                <div class="position">Passage position 3</div>
+                <p lang="pt-BR">O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0361</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida <mark class="span human major" title="Human Major [98:103] inclusive UTF-16">caindo</mark> e <mark class="span human major" title="Human Major [107:122] inclusive UTF-16">se desintegrando</mark>.</div><ul class="span-list"><li><strong>Major</strong> [98:103] inclusive UTF-16 caindo</li><li><strong>Major</strong> [107:122] inclusive UTF-16 se desintegrando</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida <mark class="span gemma minor" title="Gemma Minor [98:123] exclusive">caindo e se desintegrando</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [98:123] exclusive caindo e se desintegrando</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;caindo e se desintegrando&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0362</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida a cair e desintegrar-se.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida a cair e desintegrar-se.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida <mark class="span gemma minor" title="Gemma Minor [98:121] exclusive">a cair e desintegrar-se</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [98:121] exclusive a cair e desintegrar-se</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a cair e desintegrar-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0363</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, uma substância sólida a cair e desintegrar-se.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>65</strong></div>
+            <div class="annotated-text">O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, uma substância sólida a cair e desintegrar-se.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [119:119] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [119:119] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, uma substância sólida <mark class="span gemma minor" title="Gemma Minor [95:118] exclusive">a cair e desintegrar-se</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [95:118] exclusive a cair e desintegrar-se</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a cair e desintegrar-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0364</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O que vimos na destruição dos Budas de Bamiyã foi a redução da matéria, de uma substância sólida a cair e desintegrar-se.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>40</strong></div>
+            <div class="annotated-text">O que vimos na destruição dos Budas de <mark class="span human minor" title="Human Minor [39:44] inclusive UTF-16">Bamiyã</mark> foi a redução da matéria, de uma substância sólida a cair e desintegrar-se.</div><ul class="span-list"><li><strong>Minor</strong> [39:44] inclusive UTF-16 Bamiyã</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">O que vimos na destruição dos Budas de Bamiyã foi a redução da matéria, de uma substância sólida <mark class="span gemma minor" title="Gemma Minor [97:120] exclusive">a cair e desintegrar-se</mark>.</div><ul class="span-list"><li><strong>Minor</strong> [97:120] exclusive a cair e desintegrar-se</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;a cair e desintegrar-se&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 46</div>
+                <div class="position">Passage position 4</div>
+                <p lang="pt-BR">Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0365</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>30</strong></div>
+            <div class="annotated-text">Talvez pudéssemos <mark class="span human major" title="Human Major [18:27] inclusive UTF-16">olhar isto</mark> de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div><ul class="span-list"><li><strong>Major</strong> [18:27] inclusive UTF-16 olhar isto</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0366</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>30</strong></div>
+            <div class="annotated-text">Talvez pudéssemos <mark class="span human major" title="Human Major [18:27] inclusive UTF-16">olhar isto</mark> de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div><ul class="span-list"><li><strong>Major</strong> [18:27] inclusive UTF-16 olhar isto</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0367</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Talvez possamos olhar para isso de forma semelhante à queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separados entrou em colapso e abriu caminho para um aumento da comunicação.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Talvez <mark class="span human minor" title="Human Minor [7:14] inclusive UTF-16">possamos</mark> olhar para <mark class="span human minor" title="Human Minor [27:30] inclusive UTF-16">isso</mark> de forma <mark class="span human minor" title="Human Minor [41:50] inclusive UTF-16">semelhante</mark> à queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas <mark class="span human major" title="Human Major [130:138] inclusive UTF-16">separados</mark> entrou em colapso e abriu <mark class="span human minor" title="Human Minor [166:172] inclusive UTF-16">caminho</mark> para um aumento da comunicação.</div><ul class="span-list"><li><strong>Minor</strong> [7:14] inclusive UTF-16 possamos</li><li><strong>Minor</strong> [27:30] inclusive UTF-16 isso</li><li><strong>Minor</strong> [41:50] inclusive UTF-16 semelhante</li><li><strong>Major</strong> [130:138] inclusive UTF-16 separados</li><li><strong>Minor</strong> [166:172] inclusive UTF-16 caminho</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Talvez <mark class="span gemma minor" title="Gemma Minor [7:31] exclusive">possamos olhar para isso</mark> de forma <mark class="span gemma minor" title="Gemma Minor [41:59] exclusive">semelhante à queda</mark> do Muro de Berlim, onde uma divisão que manteve dois tipos de <mark class="span gemma minor" title="Gemma Minor [122:139] exclusive">pessoas separados</mark> entrou em colapso e <mark class="span gemma minor" title="Gemma Minor [160:178] exclusive">abriu caminho para</mark> um aumento da comunicação.</div><ul class="span-list"><li><strong>Minor</strong> [7:31] exclusive possamos olhar para isso</li><li><strong>Minor</strong> [41:59] exclusive semelhante à queda</li><li><strong>Minor</strong> [122:139] exclusive pessoas separados</li><li><strong>Minor</strong> [160:178] exclusive abriu caminho para</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;possamos olhar para isso&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;semelhante à queda&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;pessoas separados&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;abriu caminho para&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0368</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Talvez pudéssemos olhar isto de forma mais semelhante com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">Talvez pudéssemos <mark class="span human major" title="Human Major [18:27] inclusive UTF-16">olhar isto</mark> de forma mais <mark class="span human minor" title="Human Minor [43:52] inclusive UTF-16">semelhante</mark> com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div><ul class="span-list"><li><strong>Major</strong> [18:27] inclusive UTF-16 olhar isto</li><li><strong>Minor</strong> [43:52] inclusive UTF-16 semelhante</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Talvez pudéssemos olhar isto de forma mais <mark class="span gemma minor" title="Gemma Minor [43:57] exclusive">semelhante com</mark> a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.</div><ul class="span-list"><li><strong>Minor</strong> [43:57] exclusive semelhante com</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;semelhante com&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 47</div>
+                <div class="position">Passage position 5</div>
+                <p lang="pt-BR">Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0369</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Então penso isso, desta forma, é sempre possível para nós <mark class="span human minor" title="Human Minor [58:69] inclusive UTF-16">derivar para</mark> algo positivo que <mark class="span human major" title="Human Major [89:121] inclusive UTF-16">pode melhor nos ajudar a entender</mark> uns aos outros.</div><ul class="span-list"><li><strong>Minor</strong> [58:69] inclusive UTF-16 derivar para</li><li><strong>Major</strong> [89:121] inclusive UTF-16 pode melhor nos ajudar a entender</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">Então penso isso, desta forma, é sempre possível para nós <mark class="span gemma major" title="Gemma Major [58:70] exclusive">derivar para</mark> algo positivo que pode melhor nos ajudar a entender uns aos outros.</div><ul class="span-list"><li><strong>Major</strong> [58:70] exclusive derivar para</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;derivar para&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0370</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Penso assim, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor ajudar-nos a compreender uns aos outros.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:10] inclusive UTF-16">Penso assim</mark>, desta forma, é sempre possível para nós <mark class="span human minor" title="Human Minor [53:64] inclusive UTF-16">derivar para</mark> algo positivo que <mark class="span human minor" title="Human Minor [84:119] inclusive UTF-16">pode melhor ajudar-nos a compreender</mark> uns aos outros.</div><ul class="span-list"><li><strong>Minor</strong> [0:10] inclusive UTF-16 Penso assim</li><li><strong>Minor</strong> [53:64] inclusive UTF-16 derivar para</li><li><strong>Minor</strong> [84:119] inclusive UTF-16 pode melhor ajudar-nos a compreender</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:11] exclusive">Penso assim</mark>, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor ajudar-nos a compreender uns aos outros.</div><ul class="span-list"><li><strong>Minor</strong> [0:11] exclusive Penso assim</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Penso assim&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0371</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, penso assim, é sempre possível para nós derivar para algo positivo que pode nos ajudar melhor a entender uns aos outros.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>10</strong></div>
+            <div class="annotated-text">Então<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [5:5] inclusive UTF-16">[MISSING]</mark>, penso <mark class="span human minor" title="Human Minor [13:17] inclusive UTF-16">assim</mark>, é sempre possível para nós <mark class="span human minor" title="Human Minor [47:58] inclusive UTF-16">derivar para</mark> algo positivo que <mark class="span human minor" title="Human Minor [78:110] inclusive UTF-16">pode nos ajudar melhor a entender</mark> uns aos outros.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [127:127] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [5:5] inclusive UTF-16 [MISSING]</li><li><strong>Minor</strong> [13:17] inclusive UTF-16 assim</li><li><strong>Minor</strong> [47:58] inclusive UTF-16 derivar para</li><li><strong>Minor</strong> [78:110] inclusive UTF-16 pode nos ajudar melhor a entender</li><li><strong>Minor</strong> [127:127] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Então, <mark class="span gemma minor" title="Gemma Minor [7:18] exclusive">penso assim</mark>, é sempre possível para nós derivar para algo positivo que pode <mark class="span gemma minor" title="Gemma Minor [83:100] exclusive">nos ajudar melhor</mark> a entender uns aos outros.</div><ul class="span-list"><li><strong>Minor</strong> [7:18] exclusive penso assim</li><li><strong>Minor</strong> [83:100] exclusive nos ajudar melhor</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;penso assim&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;nos ajudar melhor&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0372</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então penso isto, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Então penso <mark class="span human minor" title="Human Minor [12:15] inclusive UTF-16">isto</mark>, desta forma, é sempre possível para nós <mark class="span human minor" title="Human Minor [58:69] inclusive UTF-16">derivar para</mark> algo positivo que <mark class="span human major" title="Human Major [89:121] inclusive UTF-16">pode melhor nos ajudar a entender</mark> uns aos outros.</div><ul class="span-list"><li><strong>Minor</strong> [12:15] inclusive UTF-16 isto</li><li><strong>Minor</strong> [58:69] inclusive UTF-16 derivar para</li><li><strong>Major</strong> [89:121] inclusive UTF-16 pode melhor nos ajudar a entender</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então penso <mark class="span gemma minor" title="Gemma Minor [12:16] exclusive">isto</mark>, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.</div><ul class="span-list"><li><strong>Minor</strong> [12:16] exclusive isto</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;isto&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 48</div>
+                <div class="position">Passage position 6</div>
+                <p lang="pt-BR">Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0373</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Então, no que diz respeito ao desenvolvimento que nós estamos <mark class="span human major" title="Human Major [62:68] inclusive UTF-16">falando</mark> aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.</div><ul class="span-list"><li><strong>Major</strong> [62:68] inclusive UTF-16 falando</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então, no que diz respeito ao desenvolvimento que <mark class="span gemma minor" title="Gemma Minor [50:69] exclusive">nós estamos falando</mark> aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.</div><ul class="span-list"><li><strong>Minor</strong> [50:69] exclusive nós estamos falando</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;nós estamos falando&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0374</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, no que diz respeito ao desenvolvimento que nós estamos a falar aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar o nosso estilo de vida fundamental de como vivemos no mundo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Então, no que diz respeito ao desenvolvimento que nós estamos a falar aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar o nosso estilo de vida fundamental de como vivemos no mundo.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então, no que diz respeito ao desenvolvimento que nós <mark class="span gemma minor" title="Gemma Minor [54:69] exclusive">estamos a falar</mark> aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar o nosso estilo de vida fundamental de como vivemos no mundo.</div><ul class="span-list"><li><strong>Minor</strong> [54:69] exclusive estamos a falar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estamos a falar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0375</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Assim, no que diz respeito ao desenvolvimento que estamos a falar aqui nesta conferência, penso que o desenvolvimento que fazemos não deve criar mais um fardo para os seres humanos, mas deve ser usado para melhorar o estilo de vida fundamental de como vivemos no mundo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:4] inclusive UTF-16">Assim</mark>, no que diz respeito ao desenvolvimento que estamos a falar aqui nesta conferência, <mark class="span human minor" title="Human Minor [90:94] inclusive UTF-16">penso</mark> que o desenvolvimento que fazemos não <mark class="span human minor" title="Human Minor [134:137] inclusive UTF-16">deve</mark> criar mais um fardo para <mark class="span human major" title="Human Major [164:165] inclusive UTF-16">os</mark> seres humanos, mas <mark class="span human minor" title="Human Minor [186:189] inclusive UTF-16">deve</mark> ser usado para melhorar o estilo de vida fundamental de como vivemos no mundo.</div><ul class="span-list"><li><strong>Minor</strong> [0:4] inclusive UTF-16 Assim</li><li><strong>Minor</strong> [90:94] inclusive UTF-16 penso</li><li><strong>Minor</strong> [134:137] inclusive UTF-16 deve</li><li><strong>Major</strong> [164:165] inclusive UTF-16 os</li><li><strong>Minor</strong> [186:189] inclusive UTF-16 deve</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Assim, no que diz respeito ao desenvolvimento que estamos a falar aqui nesta conferência, <mark class="span gemma minor" title="Gemma Minor [90:99] exclusive">penso que</mark> o desenvolvimento que fazemos não deve criar mais um fardo para os seres humanos, mas deve ser usado para melhorar o estilo de vida fundamental de como vivemos no mundo.</div><ul class="span-list"><li><strong>Minor</strong> [90:99] exclusive penso que</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;penso que&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0376</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, no que diz respeito ao desenvolvimento de que estamos a falar aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar o nosso estilo de vida fundamental de como vivemos no mundo.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>100</strong></div>
+            <div class="annotated-text">Então, no que diz respeito ao desenvolvimento de que estamos a falar aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar o nosso estilo de vida fundamental de como vivemos no mundo.</div><div class="no-errors">No errors.</div>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então, no que diz respeito ao desenvolvimento <mark class="span gemma minor" title="Gemma Minor [46:68] exclusive">de que estamos a falar</mark> aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar o nosso estilo de vida fundamental de como vivemos no mundo.</div><ul class="span-list"><li><strong>Minor</strong> [46:68] exclusive de que estamos a falar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;de que estamos a falar&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 49</div>
+                <div class="position">Passage position 7</div>
+                <p lang="pt-BR">É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0377</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">É claro, eu <mark class="span human major" title="Human Major [12:22] inclusive UTF-16">me regozijo</mark> <mark class="span human minor" title="Human Minor [24:25] inclusive UTF-16">do</mark> desenvolvimento e do crescimento e ascensão da nobre terra da <mark class="span human minor" title="Human Minor [89:93] inclusive UTF-16">India</mark>, o grande país <mark class="span human minor" title="Human Minor [110:114] inclusive UTF-16">India</mark>, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão <mark class="span human major" title="Human Major [241:251] inclusive UTF-16">estão vindo</mark> <mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [253:253] inclusive UTF-16">[MISSING]</mark>a custo da própria terra em que estamos.</div><ul class="span-list"><li><strong>Major</strong> [12:22] inclusive UTF-16 me regozijo</li><li><strong>Minor</strong> [24:25] inclusive UTF-16 do</li><li><strong>Minor</strong> [89:93] inclusive UTF-16 India</li><li><strong>Minor</strong> [110:114] inclusive UTF-16 India</li><li><strong>Major</strong> [241:251] inclusive UTF-16 estão vindo</li><li><strong>Major</strong> [253:253] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>75</strong></div><div class="annotated-text">É claro, eu me <mark class="span gemma major" title="Gemma Major [15:26] exclusive">regozijo do</mark> desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.</div><ul class="span-list"><li><strong>Major</strong> [15:26] exclusive regozijo do</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;regozijo do&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 75
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0378</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Claro, eu regozijo-me do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão a vindo a custo da própria terra em que estamos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">Claro, eu regozijo-me <mark class="span human minor" title="Human Minor [22:23] inclusive UTF-16">do</mark> desenvolvimento e do crescimento e ascensão da nobre terra da <mark class="span human minor" title="Human Minor [87:91] inclusive UTF-16">India</mark>, o grande país <mark class="span human minor" title="Human Minor [108:112] inclusive UTF-16">India</mark>, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão <mark class="span human major" title="Human Major [245:251] inclusive UTF-16">a vindo</mark> <mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [253:253] inclusive UTF-16">[MISSING]</mark>a custo da própria terra em que estamos.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [293:293] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [22:23] inclusive UTF-16 do</li><li><strong>Minor</strong> [87:91] inclusive UTF-16 India</li><li><strong>Minor</strong> [108:112] inclusive UTF-16 India</li><li><strong>Major</strong> [245:251] inclusive UTF-16 a vindo</li><li><strong>Major</strong> [253:253] inclusive UTF-16 [MISSING]</li><li><strong>Minor</strong> [293:293] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">Claro, eu <mark class="span gemma minor" title="Gemma Minor [10:21] exclusive">regozijo-me</mark> do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão <mark class="span gemma minor" title="Gemma Minor [239:252] exclusive">estão a vindo</mark> a custo da própria terra em que estamos.</div><ul class="span-list"><li><strong>Minor</strong> [10:21] exclusive regozijo-me</li><li><strong>Minor</strong> [239:252] exclusive estão a vindo</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;regozijo-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estão a vindo&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0379</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Claro que me regozijo com o desenvolvimento e o crescimento e a ascensão da nobre terra da Índia, o grande país da Índia. Mas, ao mesmo tempo, penso que, tal como alguns de nós reconhecem, devemos estar atentos ao facto de que alguns dos aspetos desta ascensão vêm ao custo da própria terra em que vivemos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>15</strong></div>
+            <div class="annotated-text">Claro <mark class="span human minor" title="Human Minor [6:20] inclusive UTF-16">que me regozijo</mark> com o desenvolvimento e o crescimento e a ascensão da nobre terra da Índia, o grande país da Índia<mark class="span human minor" title="Human Minor [120:122] inclusive UTF-16">. M</mark>as, ao mesmo tempo, <mark class="span human minor" title="Human Minor [143:151] inclusive UTF-16">penso que</mark>, tal como alguns de nós <mark class="span human minor" title="Human Minor [177:186] inclusive UTF-16">reconhecem</mark>, devemos estar atentos <mark class="span human minor" title="Human Minor [211:221] inclusive UTF-16">ao facto de</mark> que alguns dos aspetos desta ascensão vêm ao custo da própria terra em que <mark class="span human minor" title="Human Minor [298:304] inclusive UTF-16">vivemos</mark>.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [306:306] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [6:20] inclusive UTF-16 que me regozijo</li><li><strong>Minor</strong> [120:122] inclusive UTF-16 . M</li><li><strong>Minor</strong> [143:151] inclusive UTF-16 penso que</li><li><strong>Minor</strong> [177:186] inclusive UTF-16 reconhecem</li><li><strong>Minor</strong> [211:221] inclusive UTF-16 ao facto de</li><li><strong>Minor</strong> [298:304] inclusive UTF-16 vivemos</li><li><strong>Minor</strong> [306:306] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>88</strong></div><div class="annotated-text">Claro que me regozijo <mark class="span gemma minor" title="Gemma Minor [22:43] exclusive">com o desenvolvimento</mark> e <mark class="span gemma minor" title="Gemma Minor [46:72] exclusive">o crescimento e a ascensão</mark> da nobre terra da Índia, o grande país da Índia. Mas, ao mesmo tempo, penso que, <mark class="span gemma minor" title="Gemma Minor [154:187] exclusive">tal como alguns de nós reconhecem</mark>, devemos estar atentos <mark class="span gemma minor" title="Gemma Minor [211:245] exclusive">ao facto de que alguns dos aspetos</mark> desta ascensão vêm ao custo da própria terra em que vivemos.</div><ul class="span-list"><li><strong>Minor</strong> [22:43] exclusive com o desenvolvimento</li><li><strong>Minor</strong> [46:72] exclusive o crescimento e a ascensão</li><li><strong>Minor</strong> [154:187] exclusive tal como alguns de nós reconhecem</li><li><strong>Minor</strong> [211:245] exclusive ao facto de que alguns dos aspetos</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;com o desenvolvimento&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;o crescimento e a ascensão&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;tal como alguns de nós reconhecem&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;ao facto de que alguns dos aspetos&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 88
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0380</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> É claro, regozijo-me do desenvolvimento e do crescimento e ascensão da nobre terra da Índia, o grande país Índia, mas ao mesmo tempo, penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspetos dessa ascensão estão a vir ao custo da própria terra em que estamos.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>80</strong></div>
+            <div class="annotated-text">É claro, regozijo-me <mark class="span human minor" title="Human Minor [21:22] inclusive UTF-16">do</mark> desenvolvimento e do crescimento e ascensão da nobre terra da Índia, o grande país Índia, mas ao mesmo tempo, penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspetos dessa ascensão estão a vir ao custo da própria terra em que estamos.</div><ul class="span-list"><li><strong>Minor</strong> [21:22] inclusive UTF-16 do</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status invalid">Invalid / unvalidated prediction</span><div class="score unvalidated">Raw score (unvalidated): <strong>unavailable</strong></div><div class="parse-errors"><strong>Parsing errors:</strong><ul><li>errors[0]_text_not_in_candidate</li><li>errors[1]_text_ambiguous_in_candidate</li><li>errors[2]_text_ambiguous_in_candidate</li></ul></div><div><strong>Raw error objects (not repaired or highlighted):</strong></div><pre>Raw error objects could not be read as exact JSON.</pre>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;regozo-me&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;Índia&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;Índia&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estão a vir&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 50</div>
+                <div class="position">Passage position 8</div>
+                <p lang="pt-BR">Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0381</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">Então, enquanto subimos a árvore, algumas das coisas que estamos <mark class="span human major" title="Human Major [65:71] inclusive UTF-16">fazendo</mark> para conseguir subir <mark class="span human major" title="Human Major [94:95] inclusive UTF-16">na</mark> árvore estão realmente enfraquecendo a própria raiz dessa árvore.</div><ul class="span-list"><li><strong>Major</strong> [65:71] inclusive UTF-16 fazendo</li><li><strong>Major</strong> [94:95] inclusive UTF-16 na</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>100</strong></div><div class="annotated-text">Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.</div><div class="no-errors">No errors.</div>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [],
+  &quot;score&quot;: 100
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0382</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, enquanto subimos a árvore, algumas das coisas que estamos a fazer para conseguir subir na árvore estão realmente a enfraquecer a própria raiz dessa árvore.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>50</strong></div>
+            <div class="annotated-text">Então, enquanto subimos a árvore, algumas das coisas que estamos a fazer para conseguir subir <mark class="span human major" title="Human Major [94:95] inclusive UTF-16">na</mark> árvore estão realmente a enfraquecer a própria raiz dessa árvore.</div><ul class="span-list"><li><strong>Major</strong> [94:95] inclusive UTF-16 na</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então, enquanto subimos a árvore, algumas das coisas que <mark class="span gemma minor" title="Gemma Minor [57:72] exclusive">estamos a fazer</mark> para conseguir subir na árvore <mark class="span gemma minor" title="Gemma Minor [104:133] exclusive">estão realmente a enfraquecer</mark> a própria raiz dessa árvore.</div><ul class="span-list"><li><strong>Minor</strong> [57:72] exclusive estamos a fazer</li><li><strong>Minor</strong> [104:133] exclusive estão realmente a enfraquecer</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estamos a fazer&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estão realmente a enfraquecer&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0383</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Por isso, à medida que subimos a árvore, algumas das coisas que fazemos para conseguirmos subir a árvore estão a enfraquecer a própria raiz da árvore.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:7] inclusive UTF-16">Por isso</mark>, <mark class="span human minor" title="Human Minor [10:21] inclusive UTF-16">à medida que</mark> subimos a árvore, algumas das coisas que fazemos para conseguirmos subir a árvore estão a enfraquecer a própria raiz <mark class="span human minor" title="Human Minor [140:141] inclusive UTF-16">da</mark> árvore.</div><ul class="span-list"><li><strong>Minor</strong> [0:7] inclusive UTF-16 Por isso</li><li><strong>Minor</strong> [10:21] inclusive UTF-16 à medida que</li><li><strong>Minor</strong> [140:141] inclusive UTF-16 da</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:8] exclusive">Por isso</mark>, à medida que subimos a árvore, algumas das coisas que fazemos para conseguirmos subir a árvore estão a enfraquecer a própria raiz da árvore.</div><ul class="span-list"><li><strong>Minor</strong> [0:8] exclusive Por isso</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;Por isso&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0384</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> Então, enquanto subimos a árvore, algumas das coisas que estamos a fazer para conseguir subir na árvore estão realmente a enfraquecer a própria raiz dessa árvore.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>50</strong></div>
+            <div class="annotated-text">Então, enquanto subimos a árvore, algumas das coisas que estamos a fazer para conseguir subir <mark class="span human major" title="Human Major [94:95] inclusive UTF-16">na</mark> árvore estão realmente a enfraquecer a própria raiz dessa árvore.</div><ul class="span-list"><li><strong>Major</strong> [94:95] inclusive UTF-16 na</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">Então, enquanto subimos a árvore, algumas das coisas que <mark class="span gemma minor" title="Gemma Minor [57:72] exclusive">estamos a fazer</mark> para conseguir subir na árvore <mark class="span gemma minor" title="Gemma Minor [104:133] exclusive">estão realmente a enfraquecer</mark> a própria raiz dessa árvore.</div><ul class="span-list"><li><strong>Minor</strong> [57:72] exclusive estamos a fazer</li><li><strong>Minor</strong> [104:133] exclusive estão realmente a enfraquecer</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;estamos a fazer&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;estão realmente a enfraquecer&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">
+                <div class="sentence-number">Sentence 51</div>
+                <div class="position">Passage position 9</div>
+                <p lang="pt-BR">E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.</p>
+              </th>
+              <td><div class="candidate-stack">
+      <section class="candidate-card">
+        <header><span class="system">copy</span><code>dev-v0-0385</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>0</strong></div>
+            <div class="annotated-text">E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está <mark class="span human major" title="Human Major [94:104] inclusive UTF-16">acontecendo</mark>, mas prestar atenção deixando isso mudar nossa motivação para que ela <mark class="span human major" title="Human Major [176:183] inclusive UTF-16">torne-se</mark> mais sincera e genuinamente positiva.<mark class="span human major missing" data-annotation-marker="missing" title="Human Major at [222:222] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Major</strong> [94:104] inclusive UTF-16 acontecendo</li><li><strong>Major</strong> [176:183] inclusive UTF-16 torne-se</li><li><strong>Major</strong> [222:222] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>65</strong></div><div class="annotated-text">E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção <mark class="span gemma major" title="Gemma Major [127:146] exclusive">deixando isso mudar</mark> nossa motivação para que ela torne-se mais sincera e genuinamente positiva.</div><ul class="span-list"><li><strong>Major</strong> [127:146] exclusive deixando isso mudar</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;deixando isso mudar&quot;,
+      &quot;severity&quot;: &quot;Major&quot;
+    }
+  ],
+  &quot;score&quot;: 65
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-G-PTBR</span><code>dev-v0-0386</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está a acontecer, mas prestar atenção deixando isso mudar a nossa motivação para que ela torne-se mais sincera e genuinamente positiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>5</strong></div>
+            <div class="annotated-text">E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está a acontecer, mas prestar atenção deixando isso mudar a nossa motivação para que ela <mark class="span human major" title="Human Major [178:185] inclusive UTF-16">torne-se</mark> mais sincera e genuinamente positiva.</div><ul class="span-list"><li><strong>Major</strong> [178:185] inclusive UTF-16 torne-se</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text">E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que <mark class="span gemma minor" title="Gemma Minor [89:105] exclusive">está a acontecer</mark>, mas prestar atenção deixando isso mudar <mark class="span gemma minor" title="Gemma Minor [147:154] exclusive">a nossa</mark> motivação para que ela torne-se mais sincera e genuinamente positiva.</div><ul class="span-list"><li><strong>Minor</strong> [89:105] exclusive está a acontecer</li><li><strong>Minor</strong> [147:154] exclusive a nossa</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;está a acontecer&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;a nossa&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">B4-D-GF-PTBR</span><code>dev-v0-0387</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> O que penso é que se resume a uma questão de, não apenas ter informação sobre o que está a acontecer, mas prestar atenção e deixar que isso mude a nossa motivação para que esta seja mais sincera e genuinamente positiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>20</strong></div>
+            <div class="annotated-text"><mark class="span human minor" title="Human Minor [0:26] inclusive UTF-16">O que penso é que se resume</mark> a uma questão de, não apenas ter informação sobre o que está a acontecer, mas prestar atenção e deixar que isso mude a nossa motivação para que esta seja mais sincera e genuinamente positiva.</div><ul class="span-list"><li><strong>Minor</strong> [0:26] inclusive UTF-16 O que penso é que se resume</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>95</strong></div><div class="annotated-text"><mark class="span gemma minor" title="Gemma Minor [0:27] exclusive">O que penso é que se resume</mark> a uma questão de, não apenas ter informação sobre o que está a acontecer, mas prestar atenção e deixar que isso mude a nossa motivação para que esta seja mais sincera e genuinamente positiva.</div><ul class="span-list"><li><strong>Minor</strong> [0:27] exclusive O que penso é que se resume</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;O que penso é que se resume&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 95
+}</pre></details>
+      </section>
+    
+      <section class="candidate-card">
+        <header><span class="system">gemma-4-E4B-it</span><code>dev-v0-0388</code></header>
+        <div class="candidate-full"><strong>Candidate:</strong> E então, o que penso resume-se a uma questão de não apenas ter a informação sobre o que está a acontecer, mas prestar atenção para deixar isso mudar a nossa motivação para que se torne mais sincera e genuinamente positiva.</div>
+        <div class="comparison-grid">
+          <div class="judgment human-panel">
+            <h4>Human gold</h4>
+            <div class="score">Score: <strong>95</strong></div>
+            <div class="annotated-text">E então, o que penso resume-se a uma questão de não apenas ter a informação sobre o que está a acontecer, mas prestar atenção para deixar isso mudar a nossa motivação para que se torne mais sincera e genuinamente positiva.<mark class="span human minor missing" data-annotation-marker="missing" title="Human Minor at [222:222] inclusive UTF-16">[MISSING]</mark></div><ul class="span-list"><li><strong>Minor</strong> [222:222] inclusive UTF-16 [MISSING]</li></ul>
+          </div>
+          <div class="judgment gemma-panel">
+            <h4>Gemma V0</h4>
+            <span class="status valid">Valid parsed prediction</span><div class="score">Score: <strong>90</strong></div><div class="annotated-text">E então, o que penso resume-se a uma questão de não apenas ter a informação sobre o que está a acontecer, mas prestar atenção <mark class="span gemma minor" title="Gemma Minor [126:166] exclusive">para deixar isso mudar a nossa motivação</mark> <mark class="span gemma minor" title="Gemma Minor [167:184] exclusive">para que se torne</mark> mais sincera e genuinamente positiva.</div><ul class="span-list"><li><strong>Minor</strong> [126:166] exclusive para deixar isso mudar a nossa motivação</li><li><strong>Minor</strong> [167:184] exclusive para que se torne</li></ul>
+          </div>
+        </div>
+        <details><summary>Raw V0 response</summary><pre>```json
+{
+  &quot;errors&quot;: [
+    {
+      &quot;text&quot;: &quot;para deixar isso mudar a nossa motivação&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    },
+    {
+      &quot;text&quot;: &quot;para que se torne&quot;,
+      &quot;severity&quot;: &quot;Minor&quot;
+    }
+  ],
+  &quot;score&quot;: 90
+}</pre></details>
+      </section>
+    </div></td>
+            </tr>
+            </tbody>
+  </table>
+</body>
+</html>
