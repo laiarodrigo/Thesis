@@ -1,0 +1,579 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p05",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-24360_s25-s33"
+    ],
+    "displayed_segment_count": 81,
+    "judged_source_item_count": 9,
+    "candidate_judgment_count": 36,
+    "assignment_id": "dev01-p05",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {
+            "System-A": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+            "System-B": "E depois há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros da prática desportiva.",
+            "System-C": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de desportos.",
+            "System-D": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de desportos."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {
+            "System-A": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+            "System-B": "A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos.",
+            "System-C": "A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos.",
+            "System-D": "A experiência de conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos académicos, sociais e físicos."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {
+            "System-A": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+            "System-B": "Mesmo que a tua equipa não esteja sempre a ganhar ou a perder, existe um benefício real através da experiência.",
+            "System-C": "Mesmo que a tua equipa não esteja sempre a ganhar, ou esteja a perder, existe um benefício real através da experiência.",
+            "System-D": "Mesmo que a sua equipa não esteja sempre a ganhar, ou esteja a perder, existe um benefício real através da experiência."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {
+            "System-A": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+            "System-B": "No entanto, nem todos gostam de todos os desportos.",
+            "System-C": "No entanto, nem todo o mundo vai gostar de todos os desportos.",
+            "System-D": "No entanto, nem toda a gente vai gostar de todos os desportos."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {
+            "System-A": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+            "System-B": "Talvez uma equipa seja demasiado competitiva ou não competitiva o suficiente.",
+            "System-C": "Talvez uma equipa seja muito competitiva ou não competitiva o suficiente.",
+            "System-D": "Talvez uma equipa seja muito competitiva ou não competitiva o suficiente."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {
+            "System-A": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+            "System-B": "Também pode demorar a encontrar o desporto ideal para si.",
+            "System-C": "Também pode levar tempo para encontrar um esporte que seja ideal para ti.",
+            "System-D": "Também pode demorar tempo a encontrar um desporto que seja ideal para si."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {
+            "System-A": "É perfeitamente normal.",
+            "System-B": "É perfeitamente normal.",
+            "System-C": "É perfeitamente normal.",
+            "System-D": "É perfeitamente normal."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {
+            "System-A": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+            "System-B": "No entanto, se dedicar algum tempo à procura, será capaz de encontrar um desporto que satisfaça as suas necessidades individuais, e, se o conseguir, há muitos benefícios.",
+            "System-C": "Mas se passares um tempo a procurar, serás capaz de encontrar um esporte que atenda às tuas necessidades individuais, e, se o encontras, há muitos benefícios.",
+            "System-D": "Mas se passar um tempo a procurar, será capaz de encontrar um desporto que atenda às suas necessidades individuais, e, se encontrar, há muitos benefícios."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"25\"]",
+          "src": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"26\"]",
+          "src": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"27\"]",
+          "src": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"28\"]",
+          "src": "No entanto, nem todo mundo vai gostar de todos os esportes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"29\"]",
+          "src": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"30\"]",
+          "src": "Também pode levar tempo para encontrar um esporte que seja ideal para você.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"31\"]",
+          "src": "É perfeitamente normal.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]::[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"32\"]",
+          "src": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-24360\",\"ted2020-24360_s25-s33\",\"33\"]",
+          "src": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+          "tgt": {
+            "System-A": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento.",
+            "System-B": "Vai fazer parte de uma comunidade solidária, vai melhorar a sua confiança, exercitar o seu corpo e alimentar a sua mente, sem mencionar o divertimento.",
+            "System-C": "Serás parte de uma comunidade solidária, estarás a melhorar a tua confiança, a exercitar o teu corpo e a alimentar a tua mente, sem mencionar o divertimento.",
+            "System-D": "Você fará parte de uma comunidade solidária, estará a melhorar a sua confiança, a exercitar o seu corpo e a alimentar a sua mente, sem mencionar o divertimento."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

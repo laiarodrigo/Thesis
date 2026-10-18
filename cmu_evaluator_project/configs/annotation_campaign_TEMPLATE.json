@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "template_status": "UNINSTANTIATED_TEST_REQUIRES_X_Y_AND_PASSAGES",
+  "campaign_project_id": "<CAMPAIGN_PROJECT_ID>",
+  "path_root": "../..",
+  "paths": {
+    "candidate_dataset": "<PREPARED_DATASET>/combined/candidates.json",
+    "pearmut_instructions": "cmu_evaluator_project/guidelines/CMU_BP_EP_pearmut_instructions.md",
+    "assignment_manifest": "<CAMPAIGN_OUTPUT_ROOT>/assignment_manifest_PRIVATE.json",
+    "campaign_output_dir": "<CAMPAIGN_OUTPUT_ROOT>/campaigns",
+    "private_mapping_dir": "<CAMPAIGN_OUTPUT_ROOT>/private",
+    "raw_annotations": "cmu_evaluator_project/data/annotations/raw",
+    "normalized_annotations": "cmu_evaluator_project/data/annotations/normalized",
+    "adjudicated_annotations": "cmu_evaluator_project/data/annotations/adjudicated"
+  },
+  "selected_passage_ids": [],
+  "candidate_systems": [],
+  "annotators": [],
+  "assignment_strategy": {
+    "link_granularity": "one_passage_per_link",
+    "overlap_policy": "exactly_two_distinct_annotators",
+    "allocation": "balanced_exact_coverage",
+    "required_annotators_per_passage": 2,
+    "seed": 20261009
+  },
+  "anonymization": {
+    "label_prefix": "System",
+    "independent_per_assignment": true
+  },
+  "assignments": [],
+  "assignment_record_schema": {
+    "annotator_id": "<STABLE_RESEARCH_ID>",
+    "assignment_id": "<UNIQUE_ASSIGNMENT_ID>",
+    "passage_ids": ["<PASSAGE_ID>"],
+    "anonymization_seed": "<INTEGER>",
+    "campaign_id": "<UNIQUE_PEARMUT_CAMPAIGN_ID>",
+    "campaign_output": "<CAMPAIGN_OUTPUT_ROOT>/<ASSIGNMENT_ID>.json",
+    "mapping_output": "<PRIVATE_MAPPING_ROOT>/<ASSIGNMENT_ID>.json",
+    "raw_exports": []
+  },
+  "pearmut": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "instructions_format": "markdown",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "textfield": "visible",
+    "special_tokens": ["[MISSING]"]
+  },
+  "expected_counts": {
+    "passages": null,
+    "assignments": null,
+    "candidate_judgments": null,
+    "individual_annotations": null
+  }
+}

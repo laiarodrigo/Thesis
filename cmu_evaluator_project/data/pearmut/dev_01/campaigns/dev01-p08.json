@@ -1,0 +1,700 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p08",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-2860_s124-s133"
+    ],
+    "displayed_segment_count": 100,
+    "judged_source_item_count": 10,
+    "candidate_judgment_count": 40,
+    "assignment_id": "dev01-p08",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {
+            "System-A": "Eu fazia tudo o que podia para os acalmar e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com VIH.",
+            "System-B": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+            "System-C": "Eu fazia o que podia para acalmá-los e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com HIV.",
+            "System-D": "Eu fazia o que podia para acalmá-los e colocava-os em contacto com a AcadianaCares, um recurso maravilhoso que temos na nossa comunidade para pessoas com HIV."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {
+            "System-A": "Colocava-os em contacto com pessoas que conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+            "System-B": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+            "System-C": "Eu os colocava em contacto com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+            "System-D": "Eu colocava-os em contacto com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também para que tivessem os recursos de que precisavam para conseguirem os medicamentos."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {
+            "System-A": "Este foi, sem dúvida, o aspeto mais importante que aprendi ao ser sincero, o facto de poder ter um impacto positivo naqueles que sofrem como eu, de poder ajudar aqueles que estão nas sombras, porque eu estive neles e não é um bom sítio para estar.",
+            "System-B": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+            "System-C": "Este foi com certeza o aspecto de maior aprendizagem para mim por ter sido franco, o facto de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar para se estar.",
+            "System-D": "Esse foi com certeza o aspeto de maior aprendizado para mim por ter sido franco, o facto de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar para se estar."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {
+            "System-A": "Estes homens eram de todos os tipos e muitos deles não tinham a mesma informação que eu e procuravam-me porque tinham medo.",
+            "System-B": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+            "System-C": "Estes homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e procuravam-me porque tinham medo.",
+            "System-D": "Estes homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e procuravam-me porque tinham medo."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {
+            "System-A": "Alguns deles conhecia pessoalmente ou sabiam de mim, mas muitos outros eram anónimos.",
+            "System-B": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+            "System-C": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anónimos,",
+            "System-D": "Alguns deles eu conhecia pessoalmente, ou eles sabiam de mim, mas muitos outros eram anónimos,"
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {
+            "System-A": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+            "System-B": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+            "System-C": "Com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+            "System-D": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {
+            "System-A": "Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês.",
+            "System-B": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+            "System-C": "Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês.",
+            "System-D": "Sobre a questão de ser franco, quero deixar alguns pensamentos para vocês."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {
+            "System-A": "Descobri que, independentemente do risco que assumi ao expor-me dessa forma, valia a pena qualquer comentário negativo ou crítica, porque sentia que conseguia causar um impacto real e tangível.",
+            "System-B": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+            "System-C": "Descobri que, independentemente do risco que eu assumi expondo-me daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+            "System-D": "Descobri que, independentemente do risco que assumi ao expor-me daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {
+            "System-A": "Isso mostrou-me que os nossos esforços se propagam, que podemos melhorar a vida das pessoas que encontramos e estas, por sua vez, podem levar este impacto mais longe.",
+            "System-B": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+            "System-C": "Isso mostrou-me que os nossos esforços se propagam, que podemos mudar para melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+            "System-D": "Isso mostrou-me que os nossos esforços se propagam, que podemos mudar para melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"124\"]",
+          "src": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"125\"]",
+          "src": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"126\"]",
+          "src": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"127\"]",
+          "src": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"128\"]",
+          "src": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"129\"]",
+          "src": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"130\"]",
+          "src": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"131\"]",
+          "src": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]::[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"132\"]",
+          "src": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2860\",\"ted2020-2860_s124-s133\",\"133\"]",
+          "src": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+          "tgt": {
+            "System-A": "Se algum de vocês ou alguém que conhece vive com VIH, ou se quiserem saber quais são os recursos disponíveis nas vossas comunidades ou simplesmente obter mais informações sobre a doença, tenho alguns sítios Web norte-americanos maravilhosos para vos indicar e será um prazer falar convosco depois da conferência e esclarecer as vossas dúvidas.",
+            "System-B": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas.",
+            "System-C": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais os recursos que vocês têm nas vossas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos para indicar a vocês e será um prazer falar convosco depois da palestra e esclarecer as vossas dúvidas.",
+            "System-D": "Se algum de vós ou alguém que vós conhecês vive com HIV, ou se quiserdes ver quais recursos tendes nas vossas comunidades ou simplesmente se informares mais sobre a doença, tenho alguns sites norte-americanos maravilhosos para vos indicar e será um prazer falar convosco depois da palestra e esclarecer as vossas dúvidas."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

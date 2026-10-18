@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "campaign_id": "ted2020_test_pool_01",
+  "path_root": "../..",
+  "paths": {
+    "source": "cmu_evaluator_project/data/prepared/test_pool_01/source/source.json",
+    "candidate_dataset": "cmu_evaluator_project/data/prepared/test_pool_01/combined/candidates.json",
+    "candidate_review": "cmu_evaluator_project/data/prepared/test_pool_01/combined/candidates_review.md"
+  },
+  "include_copy_baseline": true,
+  "systems": [
+    {
+      "system_id": "copy",
+      "display_name": "Copy",
+      "kind": "copy"
+    },
+    {
+      "system_id": "B4-D-G-PTBR",
+      "display_name": "B4-D-G-PTBR",
+      "kind": "output_file",
+      "output_path": "cmu_evaluator_project/data/prepared/test_pool_01/candidates/B4-D-G-PTBR.json",
+      "candidate_field": "cleaned_candidate",
+      "raw_output_field": "raw_model_output"
+    },
+    {
+      "system_id": "B4-D-GF-PTBR",
+      "display_name": "B4-D-GF-PTBR",
+      "kind": "output_file",
+      "output_path": "cmu_evaluator_project/data/prepared/test_pool_01/candidates/B4-D-GF-PTBR.json",
+      "candidate_field": "cleaned_candidate",
+      "raw_output_field": "raw_model_output"
+    },
+    {
+      "system_id": "gemma-4-E4B-it",
+      "display_name": "Gemma-4-E4B-it",
+      "kind": "output_file",
+      "output_path": "cmu_evaluator_project/data/prepared/test_pool_01/candidates/gemma4_E4B_it.json",
+      "candidate_field": "cleaned_candidate",
+      "raw_output_field": "raw_model_output"
+    }
+  ],
+  "validation": {
+    "expected_source_sentence_count": 40,
+    "expected_system_count": 4
+  }
+}

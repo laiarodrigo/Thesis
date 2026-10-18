@@ -1,0 +1,700 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p04",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-27951_s18-s27"
+    ],
+    "displayed_segment_count": 100,
+    "judged_source_item_count": 10,
+    "candidate_judgment_count": 40,
+    "assignment_id": "dev01-p04",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {
+            "System-A": "Ou seja: certo, presumimos que o teu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que te importes com a vida pessoal do super-heroí, só estarás a ler uma história superficial.",
+            "System-B": "Ou seja, suponha-se que o seu super-herói é extraordinariamente forte, pode voar ou correr tão rápido como um cometa, mas, a menos que esteja interessado na vida pessoal do super-heroi, estará apenas a ler uma história superficial.",
+            "System-C": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+            "System-D": "Ou seja: certo, presumimos que o seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, estará apenas a ler uma história superficial."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {
+            "System-A": "O facto de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que tu ou eu possa ter.",
+            "System-B": "O facto de uma pessoa ter superpoderes não significa que não tenha os mesmos problemas pessoais que tu ou eu possamos ter.",
+            "System-C": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+            "System-D": "O facto de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que tu ou eu possamos ter."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {
+            "System-A": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a rapariga que ele ama não o ama.",
+            "System-B": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a rapariga que ele ama não o ame.",
+            "System-C": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+            "System-D": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a rapariga que ele ama não o ame."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {
+            "System-A": "Ou quem sabe se a rapariga que ele ama não quer envolvimento com um super-herói.",
+            "System-B": "Ou quem sabe se a rapariga que ele ama não quer envolvimento com um super-herói.",
+            "System-C": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+            "System-D": "Ou quem sabe se a rapariga que ele ama não quer envolvimento com um super-herói."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {
+            "System-A": "Há tantas coisas que podes imaginar que completam o personagem e a sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+            "System-B": "Há tantas coisas que podes imaginar que completam o personagem e a sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+            "System-C": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+            "System-D": "Há tantas coisas que se pode imaginar que completam o personagem e a sua personalidade, o super-herói não tem só uma ou duas dimensões."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {
+            "System-A": "Queres um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que tu e eu exceto pelo facto de que ele tem superpoderes.",
+            "System-B": "Queres um personagem tridimensional que viva, respire e tenha preocupações e que passe pelas mesmas coisas que tu e eu, excepto pelo facto de ele ter superpoderes.",
+            "System-C": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+            "System-D": "Queres um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que tu e eu, exceto pelo facto de ele ter superpoderes."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {
+            "System-A": "Uma coisa que eu mencionaria, mais para os escritores, e acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+            "System-B": "Uma coisa que gostaria de mencionar, mais para os escritores, e acho que é uma coisa lamentável, é que eles tentam escrever algo pensando que um determinado público pode gostar.",
+            "System-C": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+            "System-D": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, é que eles tentam escrever algo achando que um determinado público poderia gostar."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {
+            "System-A": "Eu nunca soube fazer isso porque não posso colocar-me dentro da cabeça das pessoas.",
+            "System-B": "Nunca consegui fazer isso porque não consigo colocar-me na cabeça das pessoas.",
+            "System-C": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+            "System-D": "Eu nunca soube fazer isso porque não consigo colocar-me no lugar das pessoas."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {
+            "System-A": "Eu só sei do que gosto, por isso toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse a escrever como se estivesse a esperar para descobrir o que acontece depois.",
+            "System-B": "Só sei o que gosto, por isso, toda a vez que escrevo uma história, tento sempre escrever um tipo de história que gostaria de ler, uma história que me interessasse enquanto escrevia, como se estivesse à espera de descobrir o que acontece depois.",
+            "System-C": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+            "System-D": "Eu só sei do que gosto, por isso toda vez que escrevo uma história, tento sempre escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse a escrever, como se estivesse à espera de descobrir o que acontece depois."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"18\"]",
+          "src": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"19\"]",
+          "src": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"20\"]",
+          "src": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"21\"]",
+          "src": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"22\"]",
+          "src": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"23\"]",
+          "src": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"24\"]",
+          "src": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"25\"]",
+          "src": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]::[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"26\"]",
+          "src": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-27951\",\"ted2020-27951_s18-s27\",\"27\"]",
+          "src": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+          "tgt": {
+            "System-A": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+            "System-B": "Não posso saber o que os outros pensam, mas sei o que penso e sinto que não sou tão incomum. Se existe um tipo de história que gosto, deve haver muita gente que gosta do mesmo tipo de história.",
+            "System-C": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história.",
+            "System-D": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver muita gente que gosta desse mesmo tipo de história."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

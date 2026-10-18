@@ -1,0 +1,700 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p03",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-2433_s21-s30"
+    ],
+    "displayed_segment_count": 100,
+    "judged_source_item_count": 10,
+    "candidate_judgment_count": 40,
+    "assignment_id": "dev01-p03",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {
+            "System-A": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+            "System-B": "E eu não deveria ter de usar o banheiro masculino, porque eu não sou um homem.",
+            "System-C": "E não devia ter de usar o WC masculino, porque não sou homem.",
+            "System-D": "E eu não deveria ter de usar a casa de banho masculina, porque eu não sou um homem."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {
+            "System-A": "Sou uma pessoa trans.",
+            "System-B": "Sou uma pessoa trans.",
+            "System-C": "Sou uma pessoa trans.",
+            "System-D": "Sou uma pessoa trans."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {
+            "System-A": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+            "System-B": "E agora alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os banheiros.",
+            "System-C": "Agora, alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os banheiros.",
+            "System-D": "E agora alguns políticos que gostam de incitar o medo estão a tentar aprovar leis sobre os banheiros."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {
+            "System-A": "Ouviram falar disso?",
+            "System-B": "Ouviram falar disto?",
+            "System-C": "Já ouviste falar disto?",
+            "System-D": "Ouviram falar disso?"
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {
+            "System-A": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+            "System-B": "Estão a tentar criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o género que me foi designado quando nasci.",
+            "System-C": "Estão a tentar criar leis para forçar pessoas como eu a usar o WC que consideram adequado, de acordo com o género que me foi atribuído quando nasci.",
+            "System-D": "Estão a tentar criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o género que me foi designado quando nasci."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {
+            "System-A": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+            "System-B": "E se estes políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+            "System-C": "Se os políticos conseguirem o que pretendem no Arizona, na Califórnia ou na Flórida, ou mesmo na semana passada em Houston, no Texas, ou em Ottawa, usar o WC masculino também não será uma opção legal para mim.",
+            "System-D": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o sanitário masculino também não será uma opção legal para mim."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {
+            "System-A": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+            "System-B": "E toda vez que algum desses políticos propõe uma lei dessas, eu pergunto-me como se aplicaria uma lei dessas e quem a aplicaria, sabes?",
+            "System-C": "E toda vez que um desses políticos propõe uma lei desta natureza, eu questiono-me como seria aplicada tal lei e quem a aplicaria, sabe?",
+            "System-D": "E toda vez que algum desses políticos propõe uma lei dessas, eu pergunto-me como se aplicaria uma lei dessas, e quem a aplicaria, sabe?"
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {
+            "System-A": "Verificação de calcinhas?",
+            "System-B": "Verificação de calcinhas?",
+            "System-C": "Verificação de calcinhas?",
+            "System-D": "Verificação de calcinhas?"
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {
+            "System-A": "Sério.",
+            "System-B": "Sério.",
+            "System-C": "É sério.",
+            "System-D": "Sério."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"21\"]",
+          "src": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"22\"]",
+          "src": "Sou uma pessoa trans.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"23\"]",
+          "src": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"24\"]",
+          "src": "Ouviram falar disso?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"25\"]",
+          "src": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"26\"]",
+          "src": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"27\"]",
+          "src": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"28\"]",
+          "src": "Verificação de calcinhas?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]::[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"29\"]",
+          "src": "Sério.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2433\",\"ted2020-2433_s21-s30\",\"30\"]",
+          "src": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+          "tgt": {
+            "System-A": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?",
+            "System-B": "Inspeções genitais à porta dos banheiros e vestiários das piscinas públicas?",
+            "System-C": "Inspeções genitais à porta das casas de banho e dos vestiários das piscinas públicas?",
+            "System-D": "Inspeções genitais na porta dos balneários e vestiários das piscinas públicas?"
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

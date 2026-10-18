@@ -1,0 +1,700 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p09",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-1886_s23-s32"
+    ],
+    "displayed_segment_count": 100,
+    "judged_source_item_count": 10,
+    "candidate_judgment_count": 40,
+    "assignment_id": "dev01-p09",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {
+            "System-A": "De facto, quando me tornei prefeito, apliquei o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um autocarro com 100 pessoas tem direito a 10 vezes mais espaço rodoviário do que um carro, e implementámos um sistema de transporte coletivo baseado em autocarros em corredores exclusivos.",
+            "System-B": "De facto, quando me tornei presidente da câmara, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um autocarro com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementámos um sistema de transporte coletivo baseado em autocarros em corredores exclusivos.",
+            "System-C": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+            "System-D": "De facto, quando me tornei presidente da câmara, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um autocarro com 100 pessoas tem direito a 10 vezes mais espaço rodoviário do que um carro, implementámos um sistema de transporte coletivo baseado em autocarros em corredores exclusivos."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {
+            "System-A": "Chamamos-lhe TransMilênio para tornar os autocarros mais atraentes.",
+            "System-B": "Nós chamamo-lo TransMilênio, a fim de tornar os autocarros mais atraentes.",
+            "System-C": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+            "System-D": "Nós o chamamos TransMilênio, a fim de tornar os autocarros mais atraentes."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {
+            "System-A": "É também um símbolo democrático muito bonito, porque, enquanto os autocarros passam, carros de luxo ficam parados no trânsito, o que é claramente uma imagem da democracia a funcionar.",
+            "System-B": "É também um símbolo democrático muito bonito, porque, enquanto os autocarros passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia a funcionar.",
+            "System-C": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+            "System-D": "É também um símbolo democrático muito bonito, porque, enquanto os autocarros passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia a funcionar."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {
+            "System-A": "Na verdade, não se trata apenas de equidade.",
+            "System-B": "De facto, não é apenas uma questão de equidade.",
+            "System-C": "De fato, não é apenas uma questão de equidade.",
+            "System-D": "De facto, não é apenas uma questão de equidade."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {
+            "System-A": "Não é necessário ter um doutoramento.",
+            "System-B": "Não é necessário ter doutoramento.",
+            "System-C": "Não é necessário ter doutorado.",
+            "System-D": "Não é necessário ter doutorado."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {
+            "System-A": "Um grupo de crianças com 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o espaço do espaço rodoviário é com corredores exclusivos para autocarros.",
+            "System-B": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escasso espaço rodoviário é com corredores exclusivos para autocarros.",
+            "System-C": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+            "System-D": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para autocarros."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {
+            "System-A": "De facto, os autocarros não são atraentes, mas são a única forma de proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+            "System-B": "De facto, os autocarros não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+            "System-C": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+            "System-D": "De fato, autocarros não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {
+            "System-A": "Também têm uma grande capacidade.",
+            "System-B": "Eles também têm grande capacidade.",
+            "System-C": "Eles também têm grande capacidade.",
+            "System-D": "Eles também têm grande capacidade."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {
+            "System-A": "Por exemplo, este sistema em Cantão transporta mais passageiros para os seus destinos do que todas as linhas de metro na China, com excepção de uma linha em Pequim, a um custo muito inferior.",
+            "System-B": "Por exemplo, este sistema em Cantão está a levar mais passageiros aos seus destinos do que todas as linhas de metro na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+            "System-C": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+            "System-D": "Por exemplo, esse sistema em Cantão está a levar mais passageiros aos seus destinos do que todas as linhas de metro na China, com exceção de uma linha em Pequim, por uma fração do custo."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"23\"]",
+          "src": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"24\"]",
+          "src": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"25\"]",
+          "src": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"26\"]",
+          "src": "De fato, não é apenas uma questão de equidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"27\"]",
+          "src": "Não é necessário ter doutorado.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"28\"]",
+          "src": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"29\"]",
+          "src": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"30\"]",
+          "src": "Eles também têm grande capacidade.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]::[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"31\"]",
+          "src": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-1886\",\"ted2020-1886_s23-s32\",\"32\"]",
+          "src": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+          "tgt": {
+            "System-A": "Lutamos não só pelo espaço para os autocarros, mas também pelo espaço para as pessoas, o que é ainda mais difícil.",
+            "System-B": "Lutamos não apenas por espaço para os autocarros, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+            "System-C": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil.",
+            "System-D": "Lutamos não apenas por espaço para os autocarros, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

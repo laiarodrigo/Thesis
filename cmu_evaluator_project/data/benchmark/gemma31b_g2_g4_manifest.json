@@ -1,0 +1,575 @@
+{
+  "artifact_hashes": {
+    "blind_evaluation_input_sha256": "d61bdedac649a6f9cbc8b628c330f81eca8e97a91a1e1aa3b5d55281ee82325c",
+    "canonical_dev_sha256": "542f76bc2d17a093a86528fdd6d2be2f59326b8b835a4d5e65a322b14eab57bb",
+    "demonstration_payload_sha256": "442fb355cf3e4c6858860ca4be15df9cfdee89c6bfb79faa0b40175b6268835b",
+    "source_g0_g1_input_sha256": "e0e3f358a763885afc6c336e1278bbf7affc905b24352acbce1b66fe47024f52",
+    "source_g0_g1_manifest_sha256": "371e317b63fa110a31d1693c18e69f3889137c533b3b61dbcf7d2859a23a615f",
+    "stage1_demonstration_appendix_sha256": "a0f96da1b8753ee3d357290daa9c182cd678afda9a974f3e14446dbd55d257d3",
+    "stage2_demonstration_appendix_sha256": "0d0f22cd9b6cb2f1b25afa7ff2adfb9350765c74e62412e1f2d332fca0390afd"
+  },
+  "counts": {
+    "demonstration_documents": 2,
+    "evaluation_documents": 6,
+    "evaluation_judgments": 72,
+    "evaluation_source_sentences": 18,
+    "new_judgments": 64,
+    "previously_inspected_judgments": 8,
+    "shared_demonstrations": 5,
+    "stage1_demonstrations": 8,
+    "stage2_demonstrations": 8
+  },
+  "demonstration_documents": [
+    "ted2020-946",
+    "ted2020-1886"
+  ],
+  "evaluation_documents": [
+    "ted2020-18219",
+    "ted2020-2433",
+    "ted2020-24360",
+    "ted2020-2609",
+    "ted2020-1663",
+    "ted2020-2860"
+  ],
+  "evaluation_groups": [
+    {
+      "document_id": "ted2020-18219",
+      "evaluation_ids": [
+        "dev-v0-0013",
+        "dev-v0-0014",
+        "dev-v0-0015",
+        "dev-v0-0016"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "32"
+    },
+    {
+      "document_id": "ted2020-18219",
+      "evaluation_ids": [
+        "dev-v0-0017",
+        "dev-v0-0018",
+        "dev-v0-0019",
+        "dev-v0-0020"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "33"
+    },
+    {
+      "document_id": "ted2020-18219",
+      "evaluation_ids": [
+        "dev-v0-0029",
+        "dev-v0-0030",
+        "dev-v0-0031",
+        "dev-v0-0032"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "36"
+    },
+    {
+      "document_id": "ted2020-2433",
+      "evaluation_ids": [
+        "dev-v0-0081",
+        "dev-v0-0082",
+        "dev-v0-0083",
+        "dev-v0-0084"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "22"
+    },
+    {
+      "document_id": "ted2020-2433",
+      "evaluation_ids": [
+        "dev-v0-0101",
+        "dev-v0-0102",
+        "dev-v0-0103",
+        "dev-v0-0104"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "27"
+    },
+    {
+      "document_id": "ted2020-2433",
+      "evaluation_ids": [
+        "dev-v0-0109",
+        "dev-v0-0110",
+        "dev-v0-0111",
+        "dev-v0-0112"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "29"
+    },
+    {
+      "document_id": "ted2020-24360",
+      "evaluation_ids": [
+        "dev-v0-0165",
+        "dev-v0-0166",
+        "dev-v0-0167",
+        "dev-v0-0168"
+      ],
+      "previously_inspected": true,
+      "sentence_id": "27"
+    },
+    {
+      "document_id": "ted2020-24360",
+      "evaluation_ids": [
+        "dev-v0-0169",
+        "dev-v0-0170",
+        "dev-v0-0171",
+        "dev-v0-0172"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "28"
+    },
+    {
+      "document_id": "ted2020-24360",
+      "evaluation_ids": [
+        "dev-v0-0177",
+        "dev-v0-0178",
+        "dev-v0-0179",
+        "dev-v0-0180"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "30"
+    },
+    {
+      "document_id": "ted2020-2609",
+      "evaluation_ids": [
+        "dev-v0-0201",
+        "dev-v0-0202",
+        "dev-v0-0203",
+        "dev-v0-0204"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "84"
+    },
+    {
+      "document_id": "ted2020-2609",
+      "evaluation_ids": [
+        "dev-v0-0205",
+        "dev-v0-0206",
+        "dev-v0-0207",
+        "dev-v0-0208"
+      ],
+      "previously_inspected": true,
+      "sentence_id": "85"
+    },
+    {
+      "document_id": "ted2020-2609",
+      "evaluation_ids": [
+        "dev-v0-0217",
+        "dev-v0-0218",
+        "dev-v0-0219",
+        "dev-v0-0220"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "88"
+    },
+    {
+      "document_id": "ted2020-1663",
+      "evaluation_ids": [
+        "dev-v0-0237",
+        "dev-v0-0238",
+        "dev-v0-0239",
+        "dev-v0-0240"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "8"
+    },
+    {
+      "document_id": "ted2020-1663",
+      "evaluation_ids": [
+        "dev-v0-0253",
+        "dev-v0-0254",
+        "dev-v0-0255",
+        "dev-v0-0256"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "12"
+    },
+    {
+      "document_id": "ted2020-1663",
+      "evaluation_ids": [
+        "dev-v0-0269",
+        "dev-v0-0270",
+        "dev-v0-0271",
+        "dev-v0-0272"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "16"
+    },
+    {
+      "document_id": "ted2020-2860",
+      "evaluation_ids": [
+        "dev-v0-0285",
+        "dev-v0-0286",
+        "dev-v0-0287",
+        "dev-v0-0288"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "127"
+    },
+    {
+      "document_id": "ted2020-2860",
+      "evaluation_ids": [
+        "dev-v0-0293",
+        "dev-v0-0294",
+        "dev-v0-0295",
+        "dev-v0-0296"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "129"
+    },
+    {
+      "document_id": "ted2020-2860",
+      "evaluation_ids": [
+        "dev-v0-0305",
+        "dev-v0-0306",
+        "dev-v0-0307",
+        "dev-v0-0308"
+      ],
+      "previously_inspected": false,
+      "sentence_id": "132"
+    }
+  ],
+  "evaluation_ids": [
+    "dev-v0-0013",
+    "dev-v0-0014",
+    "dev-v0-0015",
+    "dev-v0-0016",
+    "dev-v0-0017",
+    "dev-v0-0018",
+    "dev-v0-0019",
+    "dev-v0-0020",
+    "dev-v0-0029",
+    "dev-v0-0030",
+    "dev-v0-0031",
+    "dev-v0-0032",
+    "dev-v0-0081",
+    "dev-v0-0082",
+    "dev-v0-0083",
+    "dev-v0-0084",
+    "dev-v0-0101",
+    "dev-v0-0102",
+    "dev-v0-0103",
+    "dev-v0-0104",
+    "dev-v0-0109",
+    "dev-v0-0110",
+    "dev-v0-0111",
+    "dev-v0-0112",
+    "dev-v0-0165",
+    "dev-v0-0166",
+    "dev-v0-0167",
+    "dev-v0-0168",
+    "dev-v0-0169",
+    "dev-v0-0170",
+    "dev-v0-0171",
+    "dev-v0-0172",
+    "dev-v0-0177",
+    "dev-v0-0178",
+    "dev-v0-0179",
+    "dev-v0-0180",
+    "dev-v0-0201",
+    "dev-v0-0202",
+    "dev-v0-0203",
+    "dev-v0-0204",
+    "dev-v0-0205",
+    "dev-v0-0206",
+    "dev-v0-0207",
+    "dev-v0-0208",
+    "dev-v0-0217",
+    "dev-v0-0218",
+    "dev-v0-0219",
+    "dev-v0-0220",
+    "dev-v0-0237",
+    "dev-v0-0238",
+    "dev-v0-0239",
+    "dev-v0-0240",
+    "dev-v0-0253",
+    "dev-v0-0254",
+    "dev-v0-0255",
+    "dev-v0-0256",
+    "dev-v0-0269",
+    "dev-v0-0270",
+    "dev-v0-0271",
+    "dev-v0-0272",
+    "dev-v0-0285",
+    "dev-v0-0286",
+    "dev-v0-0287",
+    "dev-v0-0288",
+    "dev-v0-0293",
+    "dev-v0-0294",
+    "dev-v0-0295",
+    "dev-v0-0296",
+    "dev-v0-0305",
+    "dev-v0-0306",
+    "dev-v0-0307",
+    "dev-v0-0308"
+  ],
+  "experiment_id": "gemma31b-g2-g4-dev-v1",
+  "leakage_audit": {
+    "document_disjoint": "PASS",
+    "evaluation_gold_fields_in_blind_input": 0,
+    "human_comment_fields": 0,
+    "stage1_score_fields": 0,
+    "system_identity_fields": 0,
+    "target_ids_absent_from_demonstrations": "PASS",
+    "test_data_loaded": false
+  },
+  "model": {
+    "deterministic": true,
+    "dtype": "bfloat16",
+    "model_id": "google/gemma-4-31B-it",
+    "quantization": null,
+    "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+    "thinking": false
+  },
+  "new_evaluation_ids": [
+    "dev-v0-0013",
+    "dev-v0-0014",
+    "dev-v0-0015",
+    "dev-v0-0016",
+    "dev-v0-0017",
+    "dev-v0-0018",
+    "dev-v0-0019",
+    "dev-v0-0020",
+    "dev-v0-0029",
+    "dev-v0-0030",
+    "dev-v0-0031",
+    "dev-v0-0032",
+    "dev-v0-0081",
+    "dev-v0-0082",
+    "dev-v0-0083",
+    "dev-v0-0084",
+    "dev-v0-0101",
+    "dev-v0-0102",
+    "dev-v0-0103",
+    "dev-v0-0104",
+    "dev-v0-0109",
+    "dev-v0-0110",
+    "dev-v0-0111",
+    "dev-v0-0112",
+    "dev-v0-0169",
+    "dev-v0-0170",
+    "dev-v0-0171",
+    "dev-v0-0172",
+    "dev-v0-0177",
+    "dev-v0-0178",
+    "dev-v0-0179",
+    "dev-v0-0180",
+    "dev-v0-0201",
+    "dev-v0-0202",
+    "dev-v0-0203",
+    "dev-v0-0204",
+    "dev-v0-0217",
+    "dev-v0-0218",
+    "dev-v0-0219",
+    "dev-v0-0220",
+    "dev-v0-0237",
+    "dev-v0-0238",
+    "dev-v0-0239",
+    "dev-v0-0240",
+    "dev-v0-0253",
+    "dev-v0-0254",
+    "dev-v0-0255",
+    "dev-v0-0256",
+    "dev-v0-0269",
+    "dev-v0-0270",
+    "dev-v0-0271",
+    "dev-v0-0272",
+    "dev-v0-0285",
+    "dev-v0-0286",
+    "dev-v0-0287",
+    "dev-v0-0288",
+    "dev-v0-0293",
+    "dev-v0-0294",
+    "dev-v0-0295",
+    "dev-v0-0296",
+    "dev-v0-0305",
+    "dev-v0-0306",
+    "dev-v0-0307",
+    "dev-v0-0308"
+  ],
+  "previously_inspected_evaluation_ids": [
+    "dev-v0-0165",
+    "dev-v0-0166",
+    "dev-v0-0167",
+    "dev-v0-0168",
+    "dev-v0-0205",
+    "dev-v0-0206",
+    "dev-v0-0207",
+    "dev-v0-0208"
+  ],
+  "prompt_hashes": {
+    "stage1": "fde2e0a7224edd694c66268d40d4a5f448e5e617a362b0bdb69e3803650f90ed",
+    "stage2": "d4405349a285ccabfadfb94565a0cd382509c98685aa5cb2a8d46a9b846e12fd"
+  },
+  "schema_version": "1.0",
+  "shared_demonstration_ids": [
+    "dev-v0-0374",
+    "dev-v0-0373",
+    "dev-v0-0316",
+    "dev-v0-0314",
+    "dev-v0-0319"
+  ],
+  "source_split": "DEV",
+  "stage1_demonstration_ids": [
+    "dev-v0-0374",
+    "dev-v0-0373",
+    "dev-v0-0316",
+    "dev-v0-0314",
+    "dev-v0-0323",
+    "dev-v0-0319",
+    "dev-v0-0341",
+    "dev-v0-0359"
+  ],
+  "stage1_demonstrations": [
+    {
+      "canonical_error_json_sha256": "debf84af8d66827e1cbc6791aa686504e3116d8cb20f4697fef23108333061f8",
+      "document_id": "ted2020-946",
+      "evaluation_id": "dev-v0-0374",
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 6,
+      "sentence_id": "48"
+    },
+    {
+      "canonical_error_json_sha256": "9ce7ae87135a0158e0242eecf1830aea5569701315668badcad9c97e129aba09",
+      "document_id": "ted2020-946",
+      "evaluation_id": "dev-v0-0373",
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 6,
+      "sentence_id": "48"
+    },
+    {
+      "canonical_error_json_sha256": "debf84af8d66827e1cbc6791aa686504e3116d8cb20f4697fef23108333061f8",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0316",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 1,
+      "sentence_id": "23"
+    },
+    {
+      "canonical_error_json_sha256": "3abc3a344b96099043179883c04ab4e82bd10d73299a4b6fc11d3f71caee634c",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0314",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 1,
+      "sentence_id": "23"
+    },
+    {
+      "canonical_error_json_sha256": "f941fedf332329e896c650fbc487f4bfa1953a178476ecbc24e78c3f0292f2b4",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0323",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 3,
+      "sentence_id": "25"
+    },
+    {
+      "canonical_error_json_sha256": "343afe3fa35bd71ce0514a3362e31877a2f3babe93496d23b32ec4cfd5e913bd",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0319",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 2,
+      "sentence_id": "24"
+    },
+    {
+      "canonical_error_json_sha256": "debf84af8d66827e1cbc6791aa686504e3116d8cb20f4697fef23108333061f8",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0341",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 8,
+      "sentence_id": "30"
+    },
+    {
+      "canonical_error_json_sha256": "8b315be6c36edde190c8793aa8ecf829b87b9ecf0a3441b79d60ea9e3aa48d2c",
+      "document_id": "ted2020-946",
+      "evaluation_id": "dev-v0-0359",
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 2,
+      "sentence_id": "44"
+    }
+  ],
+  "stage2_demonstration_ids": [
+    "dev-v0-0374",
+    "dev-v0-0373",
+    "dev-v0-0316",
+    "dev-v0-0314",
+    "dev-v0-0363",
+    "dev-v0-0319",
+    "dev-v0-0380",
+    "dev-v0-0338"
+  ],
+  "stage2_demonstrations": [
+    {
+      "canonical_error_json_sha256": "debf84af8d66827e1cbc6791aa686504e3116d8cb20f4697fef23108333061f8",
+      "document_id": "ted2020-946",
+      "evaluation_id": "dev-v0-0374",
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 6,
+      "score": 100,
+      "sentence_id": "48"
+    },
+    {
+      "canonical_error_json_sha256": "9ce7ae87135a0158e0242eecf1830aea5569701315668badcad9c97e129aba09",
+      "document_id": "ted2020-946",
+      "evaluation_id": "dev-v0-0373",
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 6,
+      "score": 0,
+      "sentence_id": "48"
+    },
+    {
+      "canonical_error_json_sha256": "debf84af8d66827e1cbc6791aa686504e3116d8cb20f4697fef23108333061f8",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0316",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 1,
+      "score": 100,
+      "sentence_id": "23"
+    },
+    {
+      "canonical_error_json_sha256": "3abc3a344b96099043179883c04ab4e82bd10d73299a4b6fc11d3f71caee634c",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0314",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 1,
+      "score": 10,
+      "sentence_id": "23"
+    },
+    {
+      "canonical_error_json_sha256": "8a22a0356f2060ca2d84e904d75ef1b68f1cf48482b1af75d022e01b27f98912",
+      "document_id": "ted2020-946",
+      "evaluation_id": "dev-v0-0363",
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 3,
+      "score": 65,
+      "sentence_id": "45"
+    },
+    {
+      "canonical_error_json_sha256": "343afe3fa35bd71ce0514a3362e31877a2f3babe93496d23b32ec4cfd5e913bd",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0319",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 2,
+      "score": 70,
+      "sentence_id": "24"
+    },
+    {
+      "canonical_error_json_sha256": "4918acfacd14cd151b72b49dbb2349136d949fb4e257d95a0e938ca219e4add3",
+      "document_id": "ted2020-946",
+      "evaluation_id": "dev-v0-0380",
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 7,
+      "score": 80,
+      "sentence_id": "49"
+    },
+    {
+      "canonical_error_json_sha256": "5c377d3b5e9bb728c4f6e423d49295ff02b9ca5dbf5707fb7518567ebcc92d81",
+      "document_id": "ted2020-1886",
+      "evaluation_id": "dev-v0-0338",
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 7,
+      "score": 90,
+      "sentence_id": "29"
+    }
+  ]
+}

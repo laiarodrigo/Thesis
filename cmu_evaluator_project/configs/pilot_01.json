@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "campaign_id": "ted2020_pilot_01_cesa",
+  "pilot_id": "ted2020_pilot_01",
+  "path_root": "../..",
+  "paths": {
+    "source": "cmu_evaluator_project/data/prepared/pilot_01/source/source.json",
+    "full_guidelines": "cmu_evaluator_project/guidelines/CMU_BP_EP_annotation_guidelines.md",
+    "pearmut_instructions": "cmu_evaluator_project/guidelines/CMU_BP_EP_pearmut_instructions.md",
+    "candidate_dataset": "cmu_evaluator_project/data/prepared/pilot_01/combined/candidates.json",
+    "candidate_review": "cmu_evaluator_project/data/prepared/pilot_01/combined/candidates_review.md",
+    "private_mapping": "cmu_evaluator_project/data/pearmut/ted2020_pilot_01_system_mapping_PRIVATE.json",
+    "pearmut_campaign": "cmu_evaluator_project/data/pearmut/ted2020_pilot_01_cesa_resumable.json"
+  },
+  "selection": [
+    {
+      "document_id": "ted2020-2292",
+      "passage_ids": ["ted2020-2292_s3-s12"]
+    }
+  ],
+  "include_copy_baseline": true,
+  "systems": [
+    {
+      "system_id": "copy",
+      "display_name": "Copy",
+      "kind": "copy"
+    },
+    {
+      "system_id": "B4-D-G-PTBR",
+      "display_name": "B4-D-G-PTBR",
+      "kind": "output_file",
+      "output_path": "cmu_evaluator_project/data/prepared/pilot_01/candidates/B4-D-G-PTBR.json",
+      "candidate_field": "cleaned_candidate",
+      "raw_output_field": "raw_model_output"
+    },
+    {
+      "system_id": "B4-D-GF-PTBR",
+      "display_name": "B4-D-GF-PTBR",
+      "kind": "output_file",
+      "output_path": "cmu_evaluator_project/data/prepared/pilot_01/candidates/B4-D-GF-PTBR.json",
+      "candidate_field": "cleaned_candidate",
+      "raw_output_field": "raw_model_output"
+    },
+    {
+      "system_id": "gemma-4-E4B-it",
+      "display_name": "Gemma-4-E4B-it",
+      "kind": "output_file",
+      "output_path": "cmu_evaluator_project/data/prepared/pilot_01/candidates/gemma4_E4B_it.json",
+      "candidate_field": "cleaned_candidate",
+      "raw_output_field": "raw_model_output"
+    }
+  ],
+  "anonymization": {
+    "seed": 42,
+    "label_prefix": "System"
+  },
+  "validation": {
+    "expected_source_sentence_count": 10,
+    "expected_system_count": 4
+  },
+  "pearmut": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "instructions_format": "markdown",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "textfield": "visible",
+    "special_tokens": ["[MISSING]"]
+  }
+}

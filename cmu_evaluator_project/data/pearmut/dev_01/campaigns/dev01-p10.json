@@ -1,0 +1,579 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p10",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-946_s43-s51"
+    ],
+    "displayed_segment_count": 81,
+    "judged_source_item_count": 9,
+    "candidate_judgment_count": 36,
+    "assignment_id": "dev01-p10",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {
+            "System-A": "É claro, no muçulmano, devido aos ensinamentos em torno do conceito de idolatria, não se encontram tantas representações físicas de divindades ou de libertação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+            "System-B": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+            "System-C": "Na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, não se encontram tantas representações físicas de divindades ou de libertação espiritual como na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+            "System-D": "Claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, não encontras tantas representações físicas de divindades ou de libertação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {
+            "System-A": "Então, estávamos a falar sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyã, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+            "System-B": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+            "System-C": "Por isso, falámos sobre as diferenças entre as tradições e sobre o que muitas pessoas consideravam a tragédia da destruição dos Budas de Bamiyan, mas ofereci a sugestão de que talvez pudéssemos olhar para isto de uma forma positiva.",
+            "System-D": "Então, estávamos a falar sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {
+            "System-A": "O que vimos na destruição dos Budas de Bamiyã foi a redução da matéria, de uma substância sólida a cair e desintegrar-se.",
+            "System-B": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+            "System-C": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, uma substância sólida a cair e desintegrar-se.",
+            "System-D": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida a cair e desintegrar-se."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {
+            "System-A": "Talvez pudéssemos olhar isto de forma mais semelhante com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+            "System-B": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+            "System-C": "Talvez possamos olhar para isso de forma semelhante à queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separados entrou em colapso e abriu caminho para um aumento da comunicação.",
+            "System-D": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {
+            "System-A": "Então penso isto, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+            "System-B": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+            "System-C": "Então, penso assim, é sempre possível para nós derivar para algo positivo que pode nos ajudar melhor a entender uns aos outros.",
+            "System-D": "Penso assim, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor ajudar-nos a compreender uns aos outros."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {
+            "System-A": "Então, no que diz respeito ao desenvolvimento de que estamos a falar aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar o nosso estilo de vida fundamental de como vivemos no mundo.",
+            "System-B": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+            "System-C": "Assim, no que diz respeito ao desenvolvimento que estamos a falar aqui nesta conferência, penso que o desenvolvimento que fazemos não deve criar mais um fardo para os seres humanos, mas deve ser usado para melhorar o estilo de vida fundamental de como vivemos no mundo.",
+            "System-D": "Então, no que diz respeito ao desenvolvimento que nós estamos a falar aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar o nosso estilo de vida fundamental de como vivemos no mundo."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {
+            "System-A": "É claro, regozijo-me do desenvolvimento e do crescimento e ascensão da nobre terra da Índia, o grande país Índia, mas ao mesmo tempo, penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspetos dessa ascensão estão a vir ao custo da própria terra em que estamos.",
+            "System-B": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+            "System-C": "Claro que me regozijo com o desenvolvimento e o crescimento e a ascensão da nobre terra da Índia, o grande país da Índia. Mas, ao mesmo tempo, penso que, tal como alguns de nós reconhecem, devemos estar atentos ao facto de que alguns dos aspetos desta ascensão vêm ao custo da própria terra em que vivemos.",
+            "System-D": "Claro, eu regozijo-me do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão a vindo a custo da própria terra em que estamos."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {
+            "System-A": "Então, enquanto subimos a árvore, algumas das coisas que estamos a fazer para conseguir subir na árvore estão realmente a enfraquecer a própria raiz dessa árvore.",
+            "System-B": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+            "System-C": "Por isso, à medida que subimos a árvore, algumas das coisas que fazemos para conseguirmos subir a árvore estão a enfraquecer a própria raiz da árvore.",
+            "System-D": "Então, enquanto subimos a árvore, algumas das coisas que estamos a fazer para conseguir subir na árvore estão realmente a enfraquecer a própria raiz dessa árvore."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"43\"]",
+          "src": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"44\"]",
+          "src": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"45\"]",
+          "src": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"46\"]",
+          "src": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"47\"]",
+          "src": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"48\"]",
+          "src": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"49\"]",
+          "src": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]::[\"ted2020-946\",\"ted2020-946_s43-s51\",\"50\"]",
+          "src": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-946\",\"ted2020-946_s43-s51\",\"51\"]",
+          "src": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+          "tgt": {
+            "System-A": "E então, o que penso resume-se a uma questão de não apenas ter a informação sobre o que está a acontecer, mas prestar atenção para deixar isso mudar a nossa motivação para que se torne mais sincera e genuinamente positiva.",
+            "System-B": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva.",
+            "System-C": "O que penso é que se resume a uma questão de, não apenas ter informação sobre o que está a acontecer, mas prestar atenção e deixar que isso mude a nossa motivação para que esta seja mais sincera e genuinamente positiva.",
+            "System-D": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está a acontecer, mas prestar atenção deixando isso mudar a nossa motivação para que ela torne-se mais sincera e genuinamente positiva."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

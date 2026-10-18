@@ -1,0 +1,23 @@
+# Keep the CLI upload/build context small and researcher-safe.
+*
+!.railwayignore
+!.dockerignore
+!Dockerfile
+!scripts/
+scripts/*
+!scripts/pearmut_public_proxy.py
+!scripts/pearmut_user_backup.py
+!scripts/annotator_backup.js
+!scripts/start_railway_pearmut.sh
+!data/
+data/*
+!data/pearmut/
+data/pearmut/*
+!data/pearmut/external_smoke_01/
+data/pearmut/external_smoke_01/*
+!data/pearmut/external_smoke_01/campaigns/
+!data/pearmut/external_smoke_01/campaigns/*.json
+!data/pearmut/pool_01/
+data/pearmut/pool_01/*
+!data/pearmut/pool_01/campaigns/
+!data/pearmut/pool_01/campaigns/*.json

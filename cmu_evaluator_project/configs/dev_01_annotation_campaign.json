@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "campaign_project_id": "ted2020_dev_01",
+  "path_root": "../..",
+  "paths": {
+    "candidate_dataset": "cmu_evaluator_project/data/prepared/dev_01/combined/candidates.json",
+    "pearmut_instructions": "cmu_evaluator_project/guidelines/CMU_BP_EP_pearmut_instructions.md",
+    "assignment_manifest": "cmu_evaluator_project/data/pearmut/dev_01/private/assignment_manifest_PRIVATE.json"
+  },
+  "selected_passage_ids": [
+    "ted2020-18219_s30-s37",
+    "ted2020-2203_s26-s32",
+    "ted2020-2433_s21-s30",
+    "ted2020-27951_s18-s27",
+    "ted2020-24360_s25-s33",
+    "ted2020-2609_s82-s91",
+    "ted2020-1663_s7-s16",
+    "ted2020-2860_s124-s133",
+    "ted2020-1886_s23-s32",
+    "ted2020-946_s43-s51"
+  ],
+  "candidate_systems": ["copy", "B4-D-G-PTBR", "B4-D-GF-PTBR", "gemma-4-E4B-it"],
+  "annotators": ["rodrigo"],
+  "assignment_strategy": {
+    "link_granularity": "one_passage_per_link",
+    "overlap_policy": "single_dev_annotator",
+    "target_annotations_per_passage": 1
+  },
+  "anonymization": {
+    "label_prefix": "System",
+    "independent_per_assignment": true
+  },
+  "assignments": [
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p01", "campaign_id": "ted2020_dev01_p01", "passage_ids": ["ted2020-18219_s30-s37"], "anonymization_seed": 1001, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p01.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p01.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p02", "campaign_id": "ted2020_dev01_p02", "passage_ids": ["ted2020-2203_s26-s32"], "anonymization_seed": 1002, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p02.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p02.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p03", "campaign_id": "ted2020_dev01_p03", "passage_ids": ["ted2020-2433_s21-s30"], "anonymization_seed": 1003, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p03.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p03.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p04", "campaign_id": "ted2020_dev01_p04", "passage_ids": ["ted2020-27951_s18-s27"], "anonymization_seed": 1004, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p04.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p04.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p05", "campaign_id": "ted2020_dev01_p05", "passage_ids": ["ted2020-24360_s25-s33"], "anonymization_seed": 1005, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p05.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p05.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p06", "campaign_id": "ted2020_dev01_p06", "passage_ids": ["ted2020-2609_s82-s91"], "anonymization_seed": 1006, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p06.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p06.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p07", "campaign_id": "ted2020_dev01_p07", "passage_ids": ["ted2020-1663_s7-s16"], "anonymization_seed": 1007, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p07.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p07.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p08", "campaign_id": "ted2020_dev01_p08", "passage_ids": ["ted2020-2860_s124-s133"], "anonymization_seed": 1008, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p08.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p08.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p09", "campaign_id": "ted2020_dev01_p09", "passage_ids": ["ted2020-1886_s23-s32"], "anonymization_seed": 1009, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p09.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p09.json", "raw_exports": []},
+    {"annotator_id": "rodrigo", "assignment_id": "dev01-p10", "campaign_id": "ted2020_dev01_p10", "passage_ids": ["ted2020-946_s43-s51"], "anonymization_seed": 1010, "campaign_output": "cmu_evaluator_project/data/pearmut/dev_01/campaigns/dev01-p10.json", "mapping_output": "cmu_evaluator_project/data/pearmut/dev_01/private/dev01-p10.json", "raw_exports": []}
+  ],
+  "pearmut": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "instructions_format": "markdown",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "textfield": "visible",
+    "special_tokens": ["[MISSING]"]
+  },
+  "expected_counts": {
+    "passages": 10,
+    "assignments": 10,
+    "candidate_judgments": 388,
+    "individual_annotations": 388
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "template_status": "NON_RUNNABLE_MISSING_THREE_SYSTEM_OUTPUTS",
+  "template_note": "Null targets are intentional and invalid in Pearmut 1.1.5. Populate all targets, replace role names with reproducibly assigned anonymous keys, save the private mapping, and validate before adding this campaign.",
+  "campaign_id": "ted2020_pilot_01_cesa",
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "users": ["self-pilot"],
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": ["[MISSING]"]
+  },
+  "private_preparation": {
+    "document_id": "ted2020-2292",
+    "passage_id": "ted2020-2292_s3-s12",
+    "candidate_roles": ["copy", "thesis_model_a", "thesis_model_b", "external_model"],
+    "anonymization_required": true,
+    "recommended_shuffle_seed": 22920312,
+    "reference_used": false
+  },
+  "data": [
+    [
+      [
+        {"item_id": "ted2020-2292_s3-s12:3", "src": "E com quatro anos de idade, eu tive a oportunidade de navegar pela primeira vez.", "tgt": {"copy": "E com quatro anos de idade, eu tive a oportunidade de navegar pela primeira vez.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:4", "src": "Nunca vou me esquecer da emoção quando nos aproximávamos da costa.", "tgt": {"copy": "Nunca vou me esquecer da emoção quando nos aproximávamos da costa.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:5", "src": "Nunca vou me esquecer do sentimento de aventura quando eu subi a bordo do barco e vi sua pequena cabine pela primeira vez.", "tgt": {"copy": "Nunca vou me esquecer do sentimento de aventura quando eu subi a bordo do barco e vi sua pequena cabine pela primeira vez.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:6", "src": "Mas a sensação mais incrível era aquela de liberdade, a sensação que eu tive quando içamos as velas.", "tgt": {"copy": "Mas a sensação mais incrível era aquela de liberdade, a sensação que eu tive quando içamos as velas.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:7", "src": "Com quatro anos de idade, foi o maior sentimento de liberdade que eu podia imaginar.", "tgt": {"copy": "Com quatro anos de idade, foi o maior sentimento de liberdade que eu podia imaginar.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:8", "src": "Naquele momento eu decidi que algum dia, de alguma maneira, eu iria navegar ao redor do mundo.", "tgt": {"copy": "Naquele momento eu decidi que algum dia, de alguma maneira, eu iria navegar ao redor do mundo.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:9", "src": "Então eu fiz o que pude na minha vida para alcançar aquele sonho.", "tgt": {"copy": "Então eu fiz o que pude na minha vida para alcançar aquele sonho.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:10", "src": "Com dez anos, eu economizava o dinheiro da cantina.", "tgt": {"copy": "Com dez anos, eu economizava o dinheiro da cantina.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:11", "src": "Todos os dias durante oito anos, eu comia purê de batatas e feijão, que custavam 4p cada, e o molho era gratuito.", "tgt": {"copy": "Todos os dias durante oito anos, eu comia purê de batatas e feijão, que custavam 4p cada, e o molho era gratuito.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}},
+        {"item_id": "ted2020-2292_s3-s12:12", "src": "Todos os dias eu empilhava os trocados em cima do meu cofrinho, e quando juntava uma libra, eu colocava dentro e riscava um dos 100 quadrados que eu tinha desenhado num papel.", "tgt": {"copy": "Todos os dias eu empilhava os trocados em cima do meu cofrinho, e quando juntava uma libra, eu colocava dentro e riscava um dos 100 quadrados que eu tinha desenhado num papel.", "thesis_model_a": null, "thesis_model_b": null, "external_model": null}}
+      ]
+    ]
+  ]
+}

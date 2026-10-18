@@ -1,0 +1,86 @@
+{
+  "schema_version": "2.0",
+  "pool_id": "pool_01",
+  "campaign_project_id": "ted2020_pool_01",
+  "path_root": "../..",
+  "paths": {
+    "pearmut_instructions": "cmu_evaluator_project/guidelines/CMU_BP_EP_pearmut_instructions.md",
+    "assignment_manifest": "cmu_evaluator_project/data/pearmut/pool_01/private/pool_01_manifest_PRIVATE.json",
+    "private_mapping_dir": "cmu_evaluator_project/data/pearmut/pool_01/private/mappings"
+  },
+  "annotators": [
+    {"user_id": "A01", "screening_status": "pending"},
+    {"user_id": "A02", "screening_status": "pending"},
+    {"user_id": "A03", "screening_status": "pending"},
+    {"user_id": "A04", "screening_status": "pending"},
+    {"user_id": "A05", "screening_status": "pending"},
+    {"user_id": "A06", "screening_status": "pending"},
+    {"user_id": "A07", "screening_status": "pending"},
+    {"user_id": "A08", "screening_status": "pending"}
+  ],
+  "anonymization": {
+    "label_prefix": "System",
+    "independent_per_assignment": true
+  },
+  "campaigns": [
+    {
+      "campaign_id": "ted2020_pilot_screening_pool_01_cesa",
+      "campaign_project_id": "ted2020_pilot_screening_pool_01",
+      "role": "pilot_screening",
+      "candidate_dataset": "cmu_evaluator_project/data/prepared/pilot_01/combined/candidates.json",
+      "campaign_output": "cmu_evaluator_project/data/pearmut/pool_01/campaigns/ted2020_pilot_screening_pool_01_cesa.json",
+      "users": ["A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08"],
+      "selected_passage_ids": ["ted2020-2292_s3-s12"],
+      "assignment_strategy": {
+        "link_granularity": "one_passage_per_link",
+        "allocation": "explicit_same_material",
+        "seed": 2026101201
+      },
+      "assignments": [
+        {"user_id": "A01", "assignment_id": "pilot_pool_01__A01", "passage_ids": ["ted2020-2292_s3-s12"]},
+        {"user_id": "A02", "assignment_id": "pilot_pool_01__A02", "passage_ids": ["ted2020-2292_s3-s12"]},
+        {"user_id": "A03", "assignment_id": "pilot_pool_01__A03", "passage_ids": ["ted2020-2292_s3-s12"]},
+        {"user_id": "A04", "assignment_id": "pilot_pool_01__A04", "passage_ids": ["ted2020-2292_s3-s12"]},
+        {"user_id": "A05", "assignment_id": "pilot_pool_01__A05", "passage_ids": ["ted2020-2292_s3-s12"]},
+        {"user_id": "A06", "assignment_id": "pilot_pool_01__A06", "passage_ids": ["ted2020-2292_s3-s12"]},
+        {"user_id": "A07", "assignment_id": "pilot_pool_01__A07", "passage_ids": ["ted2020-2292_s3-s12"]},
+        {"user_id": "A08", "assignment_id": "pilot_pool_01__A08", "passage_ids": ["ted2020-2292_s3-s12"]}
+      ]
+    },
+    {
+      "campaign_id": "ted2020_test_strong_pool_01_cesa",
+      "campaign_project_id": "ted2020_test_strong_pool_01",
+      "role": "test_provisional",
+      "candidate_dataset": "cmu_evaluator_project/data/prepared/test_pool_01/combined/candidates.json",
+      "candidate_systems": ["copy", "B4-D-G-PTBR", "B4-D-GF-PTBR", "gemma-4-E4B-it"],
+      "expected_candidate_judgments_per_task": 40,
+      "campaign_output": "cmu_evaluator_project/data/pearmut/pool_01/campaigns/ted2020_test_strong_pool_01_cesa.json",
+      "users": ["A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08"],
+      "selected_passage_ids": [
+        "ted2020-1188_s9.2-s18",
+        "ted2020-2279_s83-s91",
+        "ted2020-1565_s7.2-s14",
+        "ted2020-2568_s127-s135"
+      ],
+      "assignment_strategy": {
+        "link_granularity": "one_passage_per_link",
+        "overlap_policy": "exactly_two_distinct_annotators",
+        "allocation": "balanced_exact_coverage",
+        "required_annotators_per_passage": 2,
+        "seed": 20261009
+      },
+      "assignments": []
+    }
+  ],
+  "pearmut": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "instructions_format": "markdown",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "textfield": "visible",
+    "special_tokens": ["[MISSING]"]
+  }
+}

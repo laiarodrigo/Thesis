@@ -1,0 +1,57 @@
+{
+  "schema_version": "2.0",
+  "pool_id": "external_smoke_01_disposable",
+  "campaign_project_id": "ted2020_pilot_external_smoke_01",
+  "path_root": "../..",
+  "paths": {
+    "pearmut_instructions": "cmu_evaluator_project/guidelines/CMU_BP_EP_pearmut_instructions.md",
+    "assignment_manifest": "cmu_evaluator_project/data/pearmut/external_smoke_01/private/assignment_manifest_PRIVATE.json",
+    "private_mapping_dir": "cmu_evaluator_project/data/pearmut/external_smoke_01/private/mappings"
+  },
+  "gold_eligibility_rule": "Disposable external-web smoke records are never eligible for DEV or TEST gold",
+  "required_accepted_annotators_per_test_passage": 0,
+  "annotators": [
+    {"user_id": "SMOKE-FRIEND-01", "screening_status": "pending"}
+  ],
+  "anonymization": {
+    "label_prefix": "System",
+    "independent_per_assignment": true
+  },
+  "campaigns": [
+    {
+      "campaign_id": "ted2020_pilot_external_smoke_01_cesa",
+      "campaign_project_id": "ted2020_pilot_external_smoke_01",
+      "role": "external_web_smoke_test",
+      "purpose": "external_web_smoke_test",
+      "eligible_for_gold": false,
+      "disposable": true,
+      "candidate_dataset": "cmu_evaluator_project/data/prepared/pilot_01/combined/candidates.json",
+      "campaign_output": "cmu_evaluator_project/data/pearmut/external_smoke_01/campaigns/ted2020_pilot_external_smoke_01_cesa.json",
+      "users": ["SMOKE-FRIEND-01"],
+      "selected_passage_ids": ["ted2020-2292_s3-s12"],
+      "assignment_strategy": {
+        "link_granularity": "one_passage_per_link",
+        "allocation": "explicit_same_material",
+        "seed": 2026101202
+      },
+      "assignments": [
+        {
+          "user_id": "SMOKE-FRIEND-01",
+          "assignment_id": "external_smoke_01__SMOKE-FRIEND-01",
+          "passage_ids": ["ted2020-2292_s3-s12"]
+        }
+      ]
+    }
+  ],
+  "pearmut": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "instructions_format": "markdown",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "textfield": "visible",
+    "special_tokens": ["[MISSING]"]
+  }
+}

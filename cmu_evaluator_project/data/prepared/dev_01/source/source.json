@@ -1,0 +1,840 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "ted2020_dev_01",
+  "split": "DEV",
+  "status": "selected_dev_source",
+  "source_language": "pt-BR",
+  "target_language": "pt-PT",
+  "passage_count": 10,
+  "source_item_count": 97,
+  "selection_record": "cmu_evaluator_project/data/passage_selection/ted2020_selected_candidates.md",
+  "historical_review_record": "cmu_evaluator_project/data/passage_selection/ted2020_manual_review_candidates.md",
+  "test_passages_frozen": false,
+  "documents": [
+    {
+      "document_id": "ted2020-18219",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-18219.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-18219_s30-s37",
+          "sentence_ids": [
+            "30",
+            "31.1",
+            "31.2",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37"
+          ],
+          "sentence_count": 9,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "New corpus-driven contrast shortlist.",
+            "evidence_character": "structural-heavy.",
+            "quality_concerns": "None recorded in the source shortlist."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "30",
+              "position": 1,
+              "source_bp": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora."
+            },
+            {
+              "sentence_id": "31.1",
+              "position": 2,
+              "source_bp": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído."
+            },
+            {
+              "sentence_id": "31.2",
+              "position": 3,
+              "source_bp": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura."
+            },
+            {
+              "sentence_id": "32",
+              "position": 4,
+              "source_bp": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa."
+            },
+            {
+              "sentence_id": "33",
+              "position": 5,
+              "source_bp": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input."
+            },
+            {
+              "sentence_id": "34",
+              "position": 6,
+              "source_bp": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar."
+            },
+            {
+              "sentence_id": "35",
+              "position": 7,
+              "source_bp": "Mas vejamos alguns exemplos bacanas de robôs moles."
+            },
+            {
+              "sentence_id": "36",
+              "position": 8,
+              "source_bp": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois."
+            },
+            {
+              "sentence_id": "37",
+              "position": 9,
+              "source_bp": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele..."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-2203",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2203.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-2203_s26-s32",
+          "sentence_ids": [
+            "26",
+            "27",
+            "28.1",
+            "28.2",
+            "29.1",
+            "29.2",
+            "29.3",
+            "30",
+            "31",
+            "32"
+          ],
+          "sentence_count": 10,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "Earlier hand-built larger pool.",
+            "evidence_character": "balanced.",
+            "quality_concerns": "None recorded in the source shortlist."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "26",
+              "position": 1,
+              "source_bp": "Mas você precisa ter um dispositivo no topo das árvores, certo?"
+            },
+            {
+              "sentence_id": "27",
+              "position": 2,
+              "source_bp": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema."
+            },
+            {
+              "sentence_id": "28.1",
+              "position": 3,
+              "source_bp": "Paremos por um instante, para falar sobre salvar a floresta."
+            },
+            {
+              "sentence_id": "28.2",
+              "position": 4,
+              "source_bp": "Todos nós já ouvimos falar disto."
+            },
+            {
+              "sentence_id": "29.1",
+              "position": 5,
+              "source_bp": "Minha geração ouviu falar disto desde quando éramos crianças."
+            },
+            {
+              "sentence_id": "29.2",
+              "position": 6,
+              "source_bp": "Parece que a mensagem nunca muda."
+            },
+            {
+              "sentence_id": "29.3",
+              "position": 7,
+              "source_bp": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\""
+            },
+            {
+              "sentence_id": "30",
+              "position": 8,
+              "source_bp": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática."
+            },
+            {
+              "sentence_id": "31",
+              "position": 9,
+              "source_bp": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos."
+            },
+            {
+              "sentence_id": "32",
+              "position": 10,
+              "source_bp": "Ele é também a segunda maior causa da mudança climática."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-2433",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2433.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-2433_s21-s30",
+          "sentence_ids": [
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30"
+          ],
+          "sentence_count": 10,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "Earlier hand-built larger pool.",
+            "evidence_character": "lexical-heavy.",
+            "quality_concerns": "Repeated instances of one strong lexical type; repetition is capped in scoring."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "21",
+              "position": 1,
+              "source_bp": "E eu não deveria ter que usar o banheiro masculino, porque eu não sou um homem."
+            },
+            {
+              "sentence_id": "22",
+              "position": 2,
+              "source_bp": "Sou uma pessoa trans."
+            },
+            {
+              "sentence_id": "23",
+              "position": 3,
+              "source_bp": "E agora alguns políticos que gostam de incitar o medo estão tentando aprovar leis sobre os banheiros."
+            },
+            {
+              "sentence_id": "24",
+              "position": 4,
+              "source_bp": "Ouviram falar disso?"
+            },
+            {
+              "sentence_id": "25",
+              "position": 5,
+              "source_bp": "Estão tentando criar leis para forçar pessoas como eu a usar o banheiro que eles consideram apropriado de acordo com o gênero que me foi designado quando nasci."
+            },
+            {
+              "sentence_id": "26",
+              "position": 6,
+              "source_bp": "E se esses políticos conseguirem o que querem no Arizona, na Califórnia ou na Flórida, ou semana passada mesmo, em Houston, Texas, ou em Ottawa, usar o banheiro masculino também não será uma opção legal para mim."
+            },
+            {
+              "sentence_id": "27",
+              "position": 7,
+              "source_bp": "E toda vez que algum desses políticos propõe uma lei dessas, eu me pergunto como se aplicaria uma lei dessas, e quem a aplicaria, sabe?"
+            },
+            {
+              "sentence_id": "28",
+              "position": 8,
+              "source_bp": "Verificação de calcinhas?"
+            },
+            {
+              "sentence_id": "29",
+              "position": 9,
+              "source_bp": "Sério."
+            },
+            {
+              "sentence_id": "30",
+              "position": 10,
+              "source_bp": "Inspeções genitais na porta dos banheiros e vestiários das piscinas públicas?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-27951",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-27951.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-27951_s18-s27",
+          "sentence_ids": [
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27"
+          ],
+          "sentence_count": 10,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "New corpus-driven contrast shortlist.",
+            "evidence_character": "lexical-heavy.",
+            "quality_concerns": "None recorded in the source shortlist."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "18",
+              "position": 1,
+              "source_bp": "Ou seja: certo, presumimos que seu super-herói seja extra forte, que possa voar ou correr tão rápido como um cometa, mas a não ser que se importe com a vida pessoal do super-herói, você só estará lendo uma história superficial."
+            },
+            {
+              "sentence_id": "19",
+              "position": 2,
+              "source_bp": "O fato de uma pessoa possuir superpoderes não significa que ela não tenha os mesmos problemas pessoais que você ou eu possa ter."
+            },
+            {
+              "sentence_id": "20",
+              "position": 3,
+              "source_bp": "Talvez ele não tenha dinheiro sobrando, talvez ele tenha um problema familiar, talvez a garota que ele ama não o ama."
+            },
+            {
+              "sentence_id": "21",
+              "position": 4,
+              "source_bp": "Ou quem sabe se a garota que ele ama não quer envolvimento com um super-herói."
+            },
+            {
+              "sentence_id": "22",
+              "position": 5,
+              "source_bp": "Há tantas coisas que você pode imaginar que completam o personagem e sua personalidade, o super-herói não tem só uma ou duas dimensões."
+            },
+            {
+              "sentence_id": "23",
+              "position": 6,
+              "source_bp": "Você quer um personagem tridimensional que vive, respira e tem preocupações e que passe pelas mesmas coisas que você e eu exceto pelo fato de que ele tem superpoderes."
+            },
+            {
+              "sentence_id": "24",
+              "position": 7,
+              "source_bp": "Uma coisa que eu mencionaria, mais para os escritores, e eu acho que é uma coisa lamentável, eles tentam escrever algo achando que um determinado público poderia gostar."
+            },
+            {
+              "sentence_id": "25",
+              "position": 8,
+              "source_bp": "Eu nunca soube fazer isso porque não posso me colocar dentro da cabeça das pessoas."
+            },
+            {
+              "sentence_id": "26",
+              "position": 9,
+              "source_bp": "Eu só sei do que eu gosto, então toda vez que escrevo uma história, sempre tento escrever uma do tipo que eu gostaria de ler, uma história que me interessasse enquanto estivesse escrevendo como se estivesse esperando para descobrir o que acontece depois."
+            },
+            {
+              "sentence_id": "27",
+              "position": 10,
+              "source_bp": "Eu não posso saber o que os outros pensam, mas eu sei o que eu penso, e sinto que eu não sou tão incomum; Se existe um tipo de história que gosto, deve haver um monte de gente que gosta desse mesmo tipo de história."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-24360",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-24360.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-24360_s25-s33",
+          "sentence_ids": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33"
+          ],
+          "sentence_count": 9,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "Earlier hand-built larger pool.",
+            "evidence_character": "balanced.",
+            "quality_concerns": "None recorded in the source shortlist."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "25",
+              "position": 1,
+              "source_bp": "E então há o aprendizado através do fracasso, um dos benefícios mais transformadores e duradouros na prática de esportes."
+            },
+            {
+              "sentence_id": "26",
+              "position": 2,
+              "source_bp": "A experiência da conviver com a derrota pode construir a resistência e a autoconsciência necessárias para lidar com obstáculos acadêmicos, sociais e físicos."
+            },
+            {
+              "sentence_id": "27",
+              "position": 3,
+              "source_bp": "Mesmo que sua equipe não esteja sempre ganhando, ou esteja perdendo, existe um benefício real através da experiência."
+            },
+            {
+              "sentence_id": "28",
+              "position": 4,
+              "source_bp": "No entanto, nem todo mundo vai gostar de todos os esportes."
+            },
+            {
+              "sentence_id": "29",
+              "position": 5,
+              "source_bp": "Talvez uma equipe seja muito competitiva ou não competitiva o suficiente."
+            },
+            {
+              "sentence_id": "30",
+              "position": 6,
+              "source_bp": "Também pode levar tempo para encontrar um esporte que seja ideal para você."
+            },
+            {
+              "sentence_id": "31",
+              "position": 7,
+              "source_bp": "É perfeitamente normal."
+            },
+            {
+              "sentence_id": "32",
+              "position": 8,
+              "source_bp": "Mas se você passar um tempo procurando, será capaz de encontrar um esporte que atenda suas necessidades individuais, e, se você encontrar, há muitos benefícios."
+            },
+            {
+              "sentence_id": "33",
+              "position": 9,
+              "source_bp": "Você será parte de uma comunidade solidária, estará melhorando sua confiança, exercitando seu corpo e alimentado sua mente, sem mencionar o divertimento."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-2609",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2609.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-2609_s82-s91",
+          "sentence_ids": [
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "87",
+            "88",
+            "89",
+            "90",
+            "91"
+          ],
+          "sentence_count": 10,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "Earlier hand-built larger pool.",
+            "evidence_character": "balanced.",
+            "quality_concerns": "None recorded in the source shortlist."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "82",
+              "position": 1,
+              "source_bp": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino."
+            },
+            {
+              "sentence_id": "83",
+              "position": 2,
+              "source_bp": "E se, nesse trem, não tivéssemos que parar?"
+            },
+            {
+              "sentence_id": "84",
+              "position": 3,
+              "source_bp": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias."
+            },
+            {
+              "sentence_id": "85",
+              "position": 4,
+              "source_bp": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro."
+            },
+            {
+              "sentence_id": "86",
+              "position": 5,
+              "source_bp": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta."
+            },
+            {
+              "sentence_id": "87",
+              "position": 6,
+              "source_bp": "É coletivo e individual ao mesmo tempo."
+            },
+            {
+              "sentence_id": "88",
+              "position": 7,
+              "source_bp": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro."
+            },
+            {
+              "sentence_id": "89",
+              "position": 8,
+              "source_bp": "Agora"
+            },
+            {
+              "sentence_id": "90",
+              "position": 9,
+              "source_bp": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante."
+            },
+            {
+              "sentence_id": "91",
+              "position": 10,
+              "source_bp": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-1663",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-1663.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-1663_s7-s16",
+          "sentence_ids": [
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "sentence_count": 10,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "New corpus-driven contrast shortlist.",
+            "evidence_character": "balanced.",
+            "quality_concerns": "None recorded in the source shortlist."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "7",
+              "position": 1,
+              "source_bp": "Essencialmente, estou gravando um segundo de cada dia da minha vida, para o resto da minha vida, compilando cronologicamente essas minúsculas fatias de um segundo de minha vida, em um único vídeo contínuo até que, vocês sabem, eu não possa mais gravá-los."
+            },
+            {
+              "sentence_id": "8",
+              "position": 2,
+              "source_bp": "O propósito desse projeto é, primeiro: Eu odeio não lembrar de coisas que fiz no passado."
+            },
+            {
+              "sentence_id": "9",
+              "position": 3,
+              "source_bp": "Exitem todas essas coisas que fiz da minha vida das quais não tenho nenhuma lembrança a não ser que alguém mencione, e aí às vezes eu penso, \"Ah é, isso é algo que eu fiz.\""
+            },
+            {
+              "sentence_id": "10",
+              "position": 4,
+              "source_bp": "E uma coisa que percebi logo nesse projeto é que se eu não estivesse fazendo nada interessante, provavelmente eu esqueceria de gravar o vídeo."
+            },
+            {
+              "sentence_id": "11",
+              "position": 5,
+              "source_bp": "Então no dia -- a primeira vez que esqueci, fiquei muito mal, porque é algo que eu queria mesmo do momento em que fiz 30 anos, eu queria manter esse projeto rolando para sempre, e tendo perdido esse um segundo, percebi, isso criou essa coisa na minha cabeça, onde eu nunca mais esqueci."
+            },
+            {
+              "sentence_id": "12",
+              "position": 6,
+              "source_bp": "Então se eu viver até os 80 anos, vou ter um vídeo de 5 horas que encapsula 50 anos da minha vida."
+            },
+            {
+              "sentence_id": "13",
+              "position": 7,
+              "source_bp": "Quando fizer 40, eu vou ter um vídeo de uma hora que inclui só os últimos dez anos."
+            },
+            {
+              "sentence_id": "14",
+              "position": 8,
+              "source_bp": "Isso realmente me animou, dia após dia, quando acordo, a tentar e fazer algo interessante com meu dia."
+            },
+            {
+              "sentence_id": "15",
+              "position": 9,
+              "source_bp": "Agora, uma das coisas com a qual tenho problemas é que, com o passar das semanas e dos meses, o tempo parece que começa a embaçar e misturar um com o outro e, sabe, eu odiava isso, e a visualização é a forma de ativar a memória."
+            },
+            {
+              "sentence_id": "16",
+              "position": 10,
+              "source_bp": "Sabe, esse projeto pra mim é um jeito de superar essa lacuna e lembrar de tudo que eu já fiz."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-2860",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2860.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-2860_s124-s133",
+          "sentence_ids": [
+            "124",
+            "125",
+            "126",
+            "127",
+            "128",
+            "129",
+            "130",
+            "131",
+            "132",
+            "133"
+          ],
+          "sentence_count": 10,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "New corpus-driven contrast shortlist.",
+            "evidence_character": "balanced.",
+            "quality_concerns": "None recorded in the source shortlist."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "124",
+              "position": 1,
+              "source_bp": "Eu fazia o que podia pra acalmá-los e os colocava em contato com a AcadianaCares, um recurso maravilhoso que temos em nossa comunidade para pessoas com HIV."
+            },
+            {
+              "sentence_id": "125",
+              "position": 2,
+              "source_bp": "Eu os colocava em contato com pessoas que eu conhecia para que não só tivessem um espaço seguro para se sentirem humanos novamente, mas também pra que tivessem os recursos de que precisavam para conseguirem os medicamentos."
+            },
+            {
+              "sentence_id": "126",
+              "position": 3,
+              "source_bp": "Esse foi com certeza o aspecto de maior aprendizado pra mim por ter sido franco, o fato de eu poder causar um impacto positivo naqueles que sofriam como eu, de eu poder ajudar aqueles que estavam nas sombras, porque eu estive nelas, e não era um bom lugar pra se estar."
+            },
+            {
+              "sentence_id": "127",
+              "position": 4,
+              "source_bp": "Esses homens eram dos mais variados tipos e muitos deles não tinham a mesma informação que eu, e me procuravam porque tinham medo."
+            },
+            {
+              "sentence_id": "128",
+              "position": 5,
+              "source_bp": "Alguns deles eu conhecia pessoalmente, ou eles sabiam sobre mim, mas muitos outros eram anônimos,"
+            },
+            {
+              "sentence_id": "129",
+              "position": 6,
+              "source_bp": "com foto de perfil em branco por medo de mostrarem o rosto depois do que me contaram."
+            },
+            {
+              "sentence_id": "130",
+              "position": 7,
+              "source_bp": "Sobre a questão de ser franco, quero deixar alguns pensamentos pra vocês."
+            },
+            {
+              "sentence_id": "131",
+              "position": 8,
+              "source_bp": "Descobri que, independentemente do risco que eu assumi me expondo daquela maneira, valeu a pena qualquer comentário negativo, qualquer crítica, porque senti que conseguia causar um impacto real e tangível."
+            },
+            {
+              "sentence_id": "132",
+              "position": 9,
+              "source_bp": "Isso me mostrou que nossos esforços se propagam, que podemos mudar pra melhor a vida das pessoas que encontramos e elas por sua vez podem levar esse impacto adiante."
+            },
+            {
+              "sentence_id": "133",
+              "position": 10,
+              "source_bp": "Se algum de vocês ou alguém que vocês conhecem vive com HIV, ou se quiserem ver quais recursos vocês têm em suas comunidades ou simplesmente se informarem mais sobre a doença, tenho alguns sites norte-americanos maravilhosos pra indicar a vocês e será um prazer falar com vocês depois da palestra e esclarecer suas dúvidas."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-1886",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-1886.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-1886_s23-s32",
+          "sentence_ids": [
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32"
+          ],
+          "sentence_count": 10,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "Earlier hand-built larger pool.",
+            "evidence_character": "lexical-heavy.",
+            "quality_concerns": "Repeated instances of one strong lexical type; repetition is capped in scoring."
+          },
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "23",
+              "position": 1,
+              "source_bp": "De fato, quando eu me tornei prefeito, aplicando o princípio democrático de que o bem público prevalece sobre o interesse privado, de que um ônibus com 100 pessoas tem direito a 100 vezes mais espaço rodoviário do que um carro, implementamos um sistema de transporte coletivo baseado em ônibus em corredores exclusivos."
+            },
+            {
+              "sentence_id": "24",
+              "position": 2,
+              "source_bp": "Nós o chamamos TransMilênio, a fim de tornar os ônibus mais atraentes."
+            },
+            {
+              "sentence_id": "25",
+              "position": 3,
+              "source_bp": "É também um símbolo democrático muito bonito, porque, enquanto os ônibus passam, carros caros ficam presos no trânsito, o que é claramente quase uma imagem da democracia funcionando."
+            },
+            {
+              "sentence_id": "26",
+              "position": 4,
+              "source_bp": "De fato, não é apenas uma questão de equidade."
+            },
+            {
+              "sentence_id": "27",
+              "position": 5,
+              "source_bp": "Não é necessário ter doutorado."
+            },
+            {
+              "sentence_id": "28",
+              "position": 6,
+              "source_bp": "Um grupo de crianças de 12 anos de idade perceberia em 20 minutos que o meio mais eficiente de utilizar o escaço espaço rodoviário é com corredores exclusivos para ônibus."
+            },
+            {
+              "sentence_id": "29",
+              "position": 7,
+              "source_bp": "De fato, ônibus não são atraentes, mas são os únicos meios possíveis para proporcionar transporte coletivo a todas as áreas das cidades que crescem e se desenvolvem rapidamente."
+            },
+            {
+              "sentence_id": "30",
+              "position": 8,
+              "source_bp": "Eles também têm grande capacidade."
+            },
+            {
+              "sentence_id": "31",
+              "position": 9,
+              "source_bp": "Por exemplo, esse sistema em Cantão está levando mais passageiros a seus destinos do que todas as linhas de metrô na China, com exceção de uma linha em Pequim, por uma fração do custo."
+            },
+            {
+              "sentence_id": "32",
+              "position": 10,
+              "source_bp": "Lutamos não apenas por espaço para os ônibus, mas lutamos por espaço para as pessoas, e isto é ainda mais difícil."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-946",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-946.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-946_s43-s51",
+          "sentence_ids": [
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51"
+          ],
+          "sentence_count": 9,
+          "previous_manual_review": {
+            "manual_review_category": null,
+            "origin": "New corpus-driven contrast shortlist.",
+            "evidence_character": "balanced.",
+            "quality_concerns": "None recorded in the source shortlist."
+          },
+          "source_preparation": {
+            "removed_leading_speaker_label": "TD:",
+            "sentence_ids": [
+              "48",
+              "49"
+            ],
+            "scope": "prepared DEV representation only"
+          },
+          "sentences": [
+            {
+              "sentence_id": "43",
+              "position": 1,
+              "source_bp": "É claro, na muçulmana, devido aos ensinamentos em torno do conceito de idolatria, você não encontra tantas representações físicas de divindades ou de liberação espiritual como se encontra na tradição budista, onde, é claro, existem muitas estátuas de Buda que são altamente reverenciadas."
+            },
+            {
+              "sentence_id": "44",
+              "position": 2,
+              "source_bp": "Então, estávamos falando sobre as diferenças entre as tradições e o que muitas pessoas entendiam como a tragédia da destruição dos Budas de Bamiyan, mas eu ofereci a sugestão de que talvez pudéssemos olhar isto de uma forma positiva."
+            },
+            {
+              "sentence_id": "45",
+              "position": 3,
+              "source_bp": "O que vimos na destruição dos Budas de Bamiyan foi a redução da matéria, de uma substância sólida caindo e se desintegrando."
+            },
+            {
+              "sentence_id": "46",
+              "position": 4,
+              "source_bp": "Talvez pudéssemos olhar isto de forma mais similar com a queda do Muro de Berlim, onde uma divisão que manteve dois tipos de pessoas separadas entrou em colapso e abriu uma porta para um aumento da comunicação."
+            },
+            {
+              "sentence_id": "47",
+              "position": 5,
+              "source_bp": "Então penso isso, desta forma, é sempre possível para nós derivar para algo positivo que pode melhor nos ajudar a entender uns aos outros."
+            },
+            {
+              "sentence_id": "48",
+              "position": 6,
+              "source_bp": "Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+              "raw_source_bp": "TD: Então, no que diz respeito ao desenvolvimento que nós estamos falando aqui nesta conferência, eu realmente acho que o desenvolvimento que fazemos não deveria criar mais um fardo para nós seres humanos, mas deveria ser usado para melhorar nosso estilo de vida fundamental de como vivemos no mundo.",
+              "source_preparation": {
+                "removed_leading_speaker_label": "TD:"
+              }
+            },
+            {
+              "sentence_id": "49",
+              "position": 7,
+              "source_bp": "É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+              "raw_source_bp": "TD: É claro, eu me regozijo do desenvolvimento e do crescimento e ascensão da nobre terra da India, o grande país India, mas ao mesmo tempo, eu penso, como alguns de nós reconhecemos, que devemos estar atentos que alguns aspectos dessa ascensão estão vindo a custo da própria terra em que estamos.",
+              "source_preparation": {
+                "removed_leading_speaker_label": "TD:"
+              }
+            },
+            {
+              "sentence_id": "50",
+              "position": 8,
+              "source_bp": "Então, enquanto subimos a árvore, algumas das coisas que estamos fazendo para conseguir subir na árvore estão realmente enfraquecendo a própria raiz dessa árvore."
+            },
+            {
+              "sentence_id": "51",
+              "position": 9,
+              "source_bp": "E então, o que penso resume-se a uma questão de, não apenas ter a informação sobre o que está acontecendo, mas prestar atenção deixando isso mudar nossa motivação para que ela torne-se mais sincera e genuinamente positiva."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

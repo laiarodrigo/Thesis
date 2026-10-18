@@ -1,0 +1,329 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "ted2020_test_pool_01",
+  "split": "TEST",
+  "pool_id": "pool_01",
+  "status": "provisional_external_annotator_collection",
+  "final_benchmark_frozen": false,
+  "source_language": "pt-BR",
+  "target_language": "pt-PT",
+  "passage_count": 4,
+  "source_item_count": 40,
+  "selection_record": "cmu_evaluator_project/data/passage_selection/ted2020_selected_candidates.md",
+  "historical_review_record": "cmu_evaluator_project/data/passage_selection/ted2020_manual_review_candidates.md",
+  "source_text_policy": "exact authoritative pt-BR XML; no cleanup or normalization",
+  "documents": [
+    {
+      "document_id": "ted2020-1188",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-1188.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-1188_s9.2-s18",
+          "sentence_ids": [
+            "9.2",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18"
+          ],
+          "sentence_count": 10,
+          "selection_label": "Strong",
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "9.2",
+              "position": 1,
+              "source_bp": "A Apple lança o iPhone na China e censura aplicativos do Dalai Lama junto a outros tantos aplicativos politicamente sensíveis, a pedido do governo chinês para sua loja app chinesa."
+            },
+            {
+              "sentence_id": "10",
+              "position": 2,
+              "source_bp": "O chargista político americano Mark Fiore também teve seu aplicativo de sátira censurado nos Estados Unidos porque alguns da equipe da Apple estavam preocupados se ele seria ofensivo a certos grupos."
+            },
+            {
+              "sentence_id": "11",
+              "position": 3,
+              "source_bp": "Seu aplicativo só foi readmitido quando ele ganhou o Prêmio Pulitzer."
+            },
+            {
+              "sentence_id": "12",
+              "position": 4,
+              "source_bp": "A revista alemã Stern, uma revista de notícias, teve seu aplicativo censurado porque as 'babás da Apple' o julgaram picante demais para seus usuários, a despeito dessa revista ser legalmente vendida nas bancas de toda a Alemanha."
+            },
+            {
+              "sentence_id": "13",
+              "position": 5,
+              "source_bp": "E mais controversialmente, recentemente, a Apple censurou um aplicativo de protesto palestino depois que o governo israelense demonstrou receio de que ele poderia ser usado para organizar ataques violentos."
+            },
+            {
+              "sentence_id": "14",
+              "position": 6,
+              "source_bp": "Então, é o seguinte,"
+            },
+            {
+              "sentence_id": "15",
+              "position": 7,
+              "source_bp": "temos uma situação onde empresas privadas estão utilizando critérios de censura que são quase sempre um tanto arbitrários e geralmente mais restritos que as normas constitucionais de liberdade de expressão que temos nas democracias."
+            },
+            {
+              "sentence_id": "16",
+              "position": 8,
+              "source_bp": "Ou estão respondendo a pedidos de censura de regimes autoritários que não refletem consentimento dos governados."
+            },
+            {
+              "sentence_id": "17",
+              "position": 9,
+              "source_bp": "Ou respondem a pedidos e interesses dos governos que não têm jurisdição sobre tantos, ou da maioria, dos usuários e espectadores que estão interagindo com o conteúdo em questão."
+            },
+            {
+              "sentence_id": "18",
+              "position": 10,
+              "source_bp": "Então, a situação é esta."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-2279",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2279.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-2279_s83-s91",
+          "sentence_ids": [
+            "83",
+            "84.1",
+            "84.2",
+            "85",
+            "86",
+            "87",
+            "88",
+            "89",
+            "90",
+            "91"
+          ],
+          "sentence_count": 10,
+          "selection_label": "Strong",
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "83",
+              "position": 1,
+              "source_bp": "Na educação, imagine se seus aplicativos de ensino perceberem que você está confuso e desacelerarem, ou que você está entediado e acelerarem, assim como faria um bom professor em sala de aula."
+            },
+            {
+              "sentence_id": "84.1",
+              "position": 2,
+              "source_bp": "E se seu relógio de pulso acompanhasse seu humor ou seu carro percebesse que você está cansado, ou talvez sua geladeira saiba que você está estressada, e se tranca sozinha para que você não coma demais."
+            },
+            {
+              "sentence_id": "84.2",
+              "position": 3,
+              "source_bp": "(Risos) Eu gostaria disso, sim."
+            },
+            {
+              "sentence_id": "85",
+              "position": 4,
+              "source_bp": "E se, quando eu estava em Cambridge, eu tivesse acesso ao meu fluxo de sentimentos em tempo real, e pudesse compartilhá-lo com a minha família em casa de maneira natural, assim como eu faria se estivéssemos todos juntos na sala?"
+            },
+            {
+              "sentence_id": "86",
+              "position": 5,
+              "source_bp": "Acredito que daqui a cinco anos, todos os nossos dispositivos vão ter um chip de sentimentos, e nem vamos nos lembrar como era quando não adiantava fazer cara feia para o dispositivo e ele diria: \"Hm, você não gostou disso, né?\""
+            },
+            {
+              "sentence_id": "87",
+              "position": 6,
+              "source_bp": "Nosso maior desafio é que há tantas aplicações para essa tecnologia, que minha equipe percebeu que não podemos satisfazê-las sozinhos, então nós disponibilizamos essa tecnologia a outros desenvolvedores para que construam e usem a criatividade."
+            },
+            {
+              "sentence_id": "88",
+              "position": 7,
+              "source_bp": "Nós reconhecemos que há potenciais riscos e potencial para abuso, mas pessoalmente, após muitos anos fazendo isso, acredito que os benefícios à humanidade de ter tecnologia emocionalmente inteligente superam de longe o potencial de abuso."
+            },
+            {
+              "sentence_id": "89",
+              "position": 8,
+              "source_bp": "E eu os convido todos a participarem da conversa."
+            },
+            {
+              "sentence_id": "90",
+              "position": 9,
+              "source_bp": "Quanto mais pessoas conhecerem essa tecnologia, mais peso terá nossa opinião sobre como usá-la."
+            },
+            {
+              "sentence_id": "91",
+              "position": 10,
+              "source_bp": "E à medida que nossas vidas vão se digitalizando, nós lutamos uma batalha perdida tentando frear nosso uso de dispositivos para reivindicar nossos sentimentos."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-1565",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-1565.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-1565_s7.2-s14",
+          "sentence_ids": [
+            "7.2",
+            "7.3",
+            "8",
+            "9",
+            "10.1",
+            "10.2",
+            "11",
+            "12",
+            "13",
+            "14"
+          ],
+          "sentence_count": 10,
+          "selection_label": "Strong",
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "7.2",
+              "position": 1,
+              "source_bp": "Meus porcos transformaram aquele resíduo alimentar em uma deliciosa carne de porco."
+            },
+            {
+              "sentence_id": "7.3",
+              "position": 2,
+              "source_bp": "Eu vendi aquela carne para os pais de meus colegas da escola, e eu fiz um bom dinheiro extra para minha mesada."
+            },
+            {
+              "sentence_id": "8",
+              "position": 3,
+              "source_bp": "Mas eu notei que a maior parte da comida que eu estava dando aos meus porcos era de fato própria para consumo humano, e eu via apenas na ponta do iceberg, e , certamente, na cadeia de abastecimento de alimentos, em supermercados, verdureiros, padarias, em nosso lares, em fábricas e fazendas, nós estávamos jogando alimentos pelo ralo."
+            },
+            {
+              "sentence_id": "9",
+              "position": 4,
+              "source_bp": "Supermercados não queriam nem falar comigo sobre quanto alimento eles estavam desperdiçando."
+            },
+            {
+              "sentence_id": "10.1",
+              "position": 5,
+              "source_bp": "Eu estive nos fundos."
+            },
+            {
+              "sentence_id": "10.2",
+              "position": 6,
+              "source_bp": "E eu vi lixeiras cheias de comida sendo fechadas e enviadas em caminhões para aterros sanitários, e eu pensei, realmente há algo mais sensato para fazer com alimentos do que desperdiçá-los."
+            },
+            {
+              "sentence_id": "11",
+              "position": 7,
+              "source_bp": "Certa manhã, quando eu estava alimentando meus porcos, eu notei em particular uma vistosa fatia de tomate seco que surgia de vez em quando."
+            },
+            {
+              "sentence_id": "12",
+              "position": 8,
+              "source_bp": "Eu a peguei, sentei e tomei meu café da manhã com meus porcos. (risos) Esse foi o primeiro ato do que mais tarde eu aprendi a chamar de freeganismo, realmente uma exibição da injustiça do desperdício de alimentos e a provisão da solução para o desperdício de alimentos, é simplesmente sentar e comê-los, em vez de jogá-los fora."
+            },
+            {
+              "sentence_id": "13",
+              "position": 9,
+              "source_bp": "Isso tornou-se, por assim dizer, uma forma de enfrentar grandes empresas no negócio do desperdício alimentar, e expor, mais importante, ao público, que quando nós estamos falando sobre alimentos jogados fora, não estamos falando de coisas podres, não estamos falando de coisas que não servem mais."
+            },
+            {
+              "sentence_id": "14",
+              "position": 10,
+              "source_bp": "Nós estamos falando de comida fresca e boa que está sendo desperdiçada em uma escala colossal."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "ted2020-2568",
+      "source_xml": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2568.xml",
+      "passages": [
+        {
+          "passage_id": "ted2020-2568_s127-s135",
+          "sentence_ids": [
+            "127",
+            "128",
+            "129",
+            "130",
+            "131",
+            "132",
+            "133",
+            "134.1",
+            "134.2",
+            "135"
+          ],
+          "sentence_count": 10,
+          "selection_label": "Strong",
+          "source_preparation": {
+            "ad_hoc_changes": "none"
+          },
+          "sentences": [
+            {
+              "sentence_id": "127",
+              "position": 1,
+              "source_bp": "E as duas equipes quebraram a mesma regra, justamente a que dizia que eles não podiam jogar futebol."
+            },
+            {
+              "sentence_id": "128",
+              "position": 2,
+              "source_bp": "Quando alguém os vê jogando, não vê deficiência, vê competência."
+            },
+            {
+              "sentence_id": "129",
+              "position": 3,
+              "source_bp": "O problema é quando termina a partida e saem da quadra"
+            },
+            {
+              "sentence_id": "130",
+              "position": 4,
+              "source_bp": "para jogar a nossa partida, em uma sociedade que estabelece regras que não os leva em conta, que não cuida deles."
+            },
+            {
+              "sentence_id": "131",
+              "position": 5,
+              "source_bp": "Com o esporte eu aprendi que a deficiência depende muito das regras do jogo."
+            },
+            {
+              "sentence_id": "132",
+              "position": 6,
+              "source_bp": "Por isso acredito que, se trocarmos algumas regras da nossa partida, podemos tornar a vida um pouco mais fácil para eles."
+            },
+            {
+              "sentence_id": "133",
+              "position": 7,
+              "source_bp": "Todos sabemos que existem pessoas com deficiência, vemos isso diariamente."
+            },
+            {
+              "sentence_id": "134.1",
+              "position": 8,
+              "source_bp": "Mas talvez por não termos contato direto com elas, não sejamos conscientes da problemática que enfrentam no dia a dia."
+            },
+            {
+              "sentence_id": "134.2",
+              "position": 9,
+              "source_bp": "Como é difícil subir em um ônibus, conseguir um trabalho, pegar o metrô, atravessar uma rua."
+            },
+            {
+              "sentence_id": "135",
+              "position": 10,
+              "source_bp": "É certo que há uma maior responsabilidade social em relação à inclusão de pessoas com deficiência."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

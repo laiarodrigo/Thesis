@@ -1,0 +1,696 @@
+{
+  "schema_version": "1.0",
+  "source_language": "pt-BR",
+  "dataset": "TED2020",
+  "selection_status": "final_selected",
+  "final_passage_selected": true,
+  "selected_candidate_id": "ted_candidate_02",
+  "pt_pt_used_for_selection": false,
+  "candidates": [
+    {
+      "candidate_id": "ted_candidate_01",
+      "document_id": "ted2020-2387",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2387.xml",
+      "sentence_range": {
+        "start": "24",
+        "end": "33"
+      },
+      "sentence_count": 10,
+      "topic": "A Black woman returns to her goal of earning a PhD in astrophysics after seeing representation in physics.",
+      "quality_notes": [
+        "Coherent chronological personal narrative.",
+        "Clear referents and intact sentence boundaries.",
+        "Contains institution names and the abbreviation “PhD”, but no source corruption."
+      ],
+      "reader_concern": "Several university and organization names appear, though they are not needed to understand the narrative.",
+      "sentences": [
+        {
+          "sentence_id": "24",
+          "position": 1,
+          "source_bp": "Depois de me formar, e apesar de saber que queria um PhD em astrofísica, deixei tudo para trás."
+        },
+        {
+          "sentence_id": "25",
+          "position": 2,
+          "source_bp": "Foi um cartaz que salvou meu sonho, além de algumas pessoas e programas realmente incríveis."
+        },
+        {
+          "sentence_id": "26",
+          "position": 3,
+          "source_bp": "A Sociedade Americana de Física tinha um cartaz lindo encorajando os estudantes de cor a se tornarem físicos."
+        },
+        {
+          "sentence_id": "27",
+          "position": 4,
+          "source_bp": "Fiquei em choque, pois mostrava uma menina negra, em torno dos seus 12 anos, olhando absorta para algumas equações de física."
+        },
+        {
+          "sentence_id": "28",
+          "position": 5,
+          "source_bp": "Lembro-me de pensar que estava olhando direto para o passado, para a menina que primeiro ousou sonhar aquele sonho."
+        },
+        {
+          "sentence_id": "29",
+          "position": 6,
+          "source_bp": "Imediatamente escrevi para a Sociedade e pedi uma cópia daquele cartaz, que até hoje está pendurado no meu escritório."
+        },
+        {
+          "sentence_id": "30",
+          "position": 7,
+          "source_bp": "Descrevi para eles por e-mail minha trajetória educacional e meu desejo de tentar o PhD novamente."
+        },
+        {
+          "sentence_id": "31",
+          "position": 8,
+          "source_bp": "Fui direcionada para um programa das Universidades Fisk e Vanderbilt, ele próprio uma interseção do mestrado e do doutorado nas duas instituições."
+        },
+        {
+          "sentence_id": "32",
+          "position": 9,
+          "source_bp": "Depois de dois anos fora da escola, eles me aceitaram no programa, e me vi novamente a caminho do PhD."
+        },
+        {
+          "sentence_id": "33",
+          "position": 10,
+          "source_bp": "Depois de obter meu mestrado na Fisk, fui para Yale completar meu PhD."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_02",
+      "document_id": "ted2020-2292",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2292.xml",
+      "sentence_range": {
+        "start": "3",
+        "end": "12"
+      },
+      "sentence_count": 10,
+      "topic": "A childhood sailing experience becomes a long-term dream, followed by years of saving money.",
+      "quality_notes": [
+        "Coherent first-person narrative with strong tense and referent continuity.",
+        "Ordinary vocabulary and intact segmentation.",
+        "No stage directions or source corruption."
+      ],
+      "reader_concern": "The last two sentences contain British currency notation and several numbers.",
+      "sentences": [
+        {
+          "sentence_id": "3",
+          "position": 1,
+          "source_bp": "E com quatro anos de idade, eu tive a oportunidade de navegar pela primeira vez."
+        },
+        {
+          "sentence_id": "4",
+          "position": 2,
+          "source_bp": "Nunca vou me esquecer da emoção quando nos aproximávamos da costa."
+        },
+        {
+          "sentence_id": "5",
+          "position": 3,
+          "source_bp": "Nunca vou me esquecer do sentimento de aventura quando eu subi a bordo do barco e vi sua pequena cabine pela primeira vez."
+        },
+        {
+          "sentence_id": "6",
+          "position": 4,
+          "source_bp": "Mas a sensação mais incrível era aquela de liberdade, a sensação que eu tive quando içamos as velas."
+        },
+        {
+          "sentence_id": "7",
+          "position": 5,
+          "source_bp": "Com quatro anos de idade, foi o maior sentimento de liberdade que eu podia imaginar."
+        },
+        {
+          "sentence_id": "8",
+          "position": 6,
+          "source_bp": "Naquele momento eu decidi que algum dia, de alguma maneira, eu iria navegar ao redor do mundo."
+        },
+        {
+          "sentence_id": "9",
+          "position": 7,
+          "source_bp": "Então eu fiz o que pude na minha vida para alcançar aquele sonho."
+        },
+        {
+          "sentence_id": "10",
+          "position": 8,
+          "source_bp": "Com dez anos, eu economizava o dinheiro da cantina."
+        },
+        {
+          "sentence_id": "11",
+          "position": 9,
+          "source_bp": "Todos os dias durante oito anos, eu comia purê de batatas e feijão, que custavam 4p cada, e o molho era gratuito."
+        },
+        {
+          "sentence_id": "12",
+          "position": 10,
+          "source_bp": "Todos os dias eu empilhava os trocados em cima do meu cofrinho, e quando juntava uma libra, eu colocava dentro e riscava um dos 100 quadrados que eu tinha desenhado num papel."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_03",
+      "document_id": "ted2020-4062",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-4062.xml",
+      "sentence_range": {
+        "start": "80",
+        "end": "89"
+      },
+      "sentence_count": 10,
+      "topic": "A visual artist explains how lettering, color, and form became a personal voice across languages.",
+      "quality_notes": [
+        "Cohesive first-person reflection.",
+        "Manageable sentence lengths and clear referents.",
+        "No stage directions, malformed quotations, or obvious corruption."
+      ],
+      "reader_concern": "Sentence 3 contains the word “palavrão”, but no profanity itself.",
+      "sentences": [
+        {
+          "sentence_id": "80",
+          "position": 1,
+          "source_bp": "Gestos e tons fazem parte da mensagem."
+        },
+        {
+          "sentence_id": "81",
+          "position": 2,
+          "source_bp": "Dando forma às letras, posso decidir com mais precisão o que quero dizer e como, além do texto literal."
+        },
+        {
+          "sentence_id": "82",
+          "position": 3,
+          "source_bp": "Posso dizer meu palavrão favorito de uma maneira muito enfeitada e ser bem brega quando falo de amor."
+        },
+        {
+          "sentence_id": "83",
+          "position": 4,
+          "source_bp": "Posso falar alto e de forma imponente ou numa voz suave e poética."
+        },
+        {
+          "sentence_id": "84",
+          "position": 5,
+          "source_bp": "E posso falar da diferença entre Buenos Aires e Berlim, duas cidades que conheço muito bem."
+        },
+        {
+          "sentence_id": "85",
+          "position": 6,
+          "source_bp": "Foi justamente em Berlim que meu trabalho ficou mais colorido, mais expressivo, mais preciso ao contar histórias."
+        },
+        {
+          "sentence_id": "86",
+          "position": 7,
+          "source_bp": "Tudo que eu não conseguia dizer naquelas festas, ali parada, segurando minha taça de vinho, explodia em formas e cores no papel."
+        },
+        {
+          "sentence_id": "87",
+          "position": 8,
+          "source_bp": "Sem perceber, essa limitação da língua se tornou um motor que me impulsionou para aperfeiçoar minhas ferramentas de expressão."
+        },
+        {
+          "sentence_id": "88",
+          "position": 9,
+          "source_bp": "Se não conseguia falar, este era meu jeito de dizer e contar coisas ao mundo."
+        },
+        {
+          "sentence_id": "89",
+          "position": 10,
+          "source_bp": "Desde então, minha busca tem sido a de encontrar minha própria voz e contar histórias com os tons e gestos exatos da minha vontade."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_04",
+      "document_id": "ted2020-2511",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-2511.xml",
+      "sentence_range": {
+        "start": "31",
+        "end": "40"
+      },
+      "sentence_count": 10,
+      "topic": "After her mother's illness and death, an artist continues their planned Arctic journey and reflects on Greenland's ice.",
+      "quality_notes": [
+        "Coherent narrative arc from planning and bereavement to travel and artistic response.",
+        "Clear first-person continuity and intact segmentation.",
+        "No stage directions or multimedia-dependent references."
+      ],
+      "reader_concern": "Contains bereavement and cancer; the final sentence uses the less common adjective “temporão”.",
+      "sentences": [
+        {
+          "sentence_id": "31",
+          "position": 1,
+          "source_bp": "Era minha mãe quem ia liderar essa viagem."
+        },
+        {
+          "sentence_id": "32",
+          "position": 2,
+          "source_bp": "Eu e ela estávamos iniciando o planejamento, já que iríamos juntas, quando ela foi vitimada por um tumor cerebral."
+        },
+        {
+          "sentence_id": "33",
+          "position": 3,
+          "source_bp": "O câncer rapidamente tomou conta de seu corpo e sua mente, e ela faleceu seis meses depois."
+        },
+        {
+          "sentence_id": "34",
+          "position": 4,
+          "source_bp": "Durante a doença, no entanto, sua dedicação à expedição nunca esmoreceu, e eu prometi a ela levar adiante sua jornada final."
+        },
+        {
+          "sentence_id": "35",
+          "position": 5,
+          "source_bp": "A paixão da minha mãe pelo Ártico ecoou na minha experiência na Groenlândia, e eu senti o poder e a fragilidade da paisagem."
+        },
+        {
+          "sentence_id": "36",
+          "position": 6,
+          "source_bp": "A grandiosidade dos icebergs nos dá uma lição de humildade."
+        },
+        {
+          "sentence_id": "37",
+          "position": 7,
+          "source_bp": "Os campos de gelo estão vivos com movimento e som de uma forma que nunca esperei."
+        },
+        {
+          "sentence_id": "38",
+          "position": 8,
+          "source_bp": "Expandi o tamanho das minhas obras para nelas imprimir o mesmo sentimento de reverência que experimentei."
+        },
+        {
+          "sentence_id": "39",
+          "position": 9,
+          "source_bp": "Mesmo assim, apesar de ser evidente a magnitude do gelo, também é evidente a sua vulnerabilidade."
+        },
+        {
+          "sentence_id": "40",
+          "position": 10,
+          "source_bp": "Do nosso barco, pude ver o gelo transpirando sob o sol quente temporão."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_05",
+      "document_id": "ted2020-21996",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-21996.xml",
+      "sentence_range": {
+        "start": "20",
+        "end": "29"
+      },
+      "sentence_count": 10,
+      "topic": "Why impostor feelings persist and how open discussion and feedback can help.",
+      "quality_notes": [
+        "Coherent explanatory passage with a clear progression from cause to coping strategy.",
+        "Natural mix of general statements and direct address.",
+        "No obvious source corruption."
+      ],
+      "reader_concern": "Mental-health-adjacent topic; sentence 8 is deliberately short but complete.",
+      "sentences": [
+        {
+          "sentence_id": "20",
+          "position": 1,
+          "source_bp": "Todos são suscetíveis a um fenômeno conhecido como ignorância pluralista, em que particularmente duvidamos de nós mesmos, mas achamos que só nós pensamos assim, pois ninguém mais expressa suas dúvidas."
+        },
+        {
+          "sentence_id": "21",
+          "position": 2,
+          "source_bp": "Como é difícil saber o quanto nossos colegas se esforçam, suas dificuldades em certas tarefas, ou o quanto eles duvidam de si mesmos, não há maneira fácil de rejeitar sentimentos de que somos menos capazes do que as pessoas ao nosso redor."
+        },
+        {
+          "sentence_id": "22",
+          "position": 3,
+          "source_bp": "Sentimentos intensos de ser um impostor podem evitar que pessoas compartilhem boas ideias ou se candidatem a empregos e programas em que são excelentes."
+        },
+        {
+          "sentence_id": "23",
+          "position": 4,
+          "source_bp": "Pelo menos até agora, a melhor maneira de combater a síndrome do impostor é falar sobre ela."
+        },
+        {
+          "sentence_id": "24",
+          "position": 5,
+          "source_bp": "Muitas pessoas com síndrome do impostor têm medo de perguntar sobre seu desempenho e confirmar o que temem."
+        },
+        {
+          "sentence_id": "25",
+          "position": 6,
+          "source_bp": "E mesmo quando recebem um feedback positivo, geralmente não conseguem aliviar a sensação de fraude."
+        },
+        {
+          "sentence_id": "26",
+          "position": 7,
+          "source_bp": "Mas, por outro lado, ouvir que um orientador ou mentor já se sentiu um impostor pode aliviar esses sentimentos."
+        },
+        {
+          "sentence_id": "27",
+          "position": 8,
+          "source_bp": "O mesmo vale para os colegas."
+        },
+        {
+          "sentence_id": "28",
+          "position": 9,
+          "source_bp": "Até descobrir que há um termo para esses sentimentos pode ser um alívio incrível."
+        },
+        {
+          "sentence_id": "29",
+          "position": 10,
+          "source_bp": "Ao estar ciente do fenômeno, você poderá combater a sua síndrome do impostor reunindo e revisitando feedback positivo."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_06",
+      "document_id": "ted2020-24556",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-24556.xml",
+      "sentence_range": {
+        "start": "20",
+        "end": "27"
+      },
+      "sentence_count": 9,
+      "topic": "Linux task scheduling is used as an analogy for prioritizing a crowded email inbox.",
+      "quality_notes": [
+        "Nine-sentence passage beginning at a clean topic boundary.",
+        "The technical example is explained and returns to an everyday email problem.",
+        "Intact segmentation, including the original 22.1 and 22.2 sentence IDs."
+      ],
+      "reader_concern": "Contains light computing terminology and ends by introducing the next topic, interruptions.",
+      "sentences": [
+        {
+          "sentence_id": "20",
+          "position": 1,
+          "source_bp": "Os programadores do sistema operacional Linux encontraram um problema similar em 2003."
+        },
+        {
+          "sentence_id": "21",
+          "position": 2,
+          "source_bp": "O Linux colocava cada uma de suas tarefas em ordem de importância, e às vezes gastava mais tempo ordenando as tarefas do que as executando."
+        },
+        {
+          "sentence_id": "22.1",
+          "position": 3,
+          "source_bp": "A solução encontrada pelos programadores foi substituir esse ordenamento por um número limitado de cestos de prioridades."
+        },
+        {
+          "sentence_id": "22.2",
+          "position": 4,
+          "source_bp": "O sistema era menos preciso sobre o que fazer na sequência, mas mais do que compensou por isso gastando tempo fazendo progresso."
+        },
+        {
+          "sentence_id": "23",
+          "position": 5,
+          "source_bp": "Assim, quanto aos e-mails, insistir em sempre fazer o mais importante primeiro pode nos levar a um colapso."
+        },
+        {
+          "sentence_id": "24",
+          "position": 6,
+          "source_bp": "Organizar uma caixa de entrada três vezes mais cheia do que o normal pode levar nove vezes mais tempo para limpá-la."
+        },
+        {
+          "sentence_id": "25",
+          "position": 7,
+          "source_bp": "O melhor seria responder em ordem cronológica ou até mesmo aleatória!"
+        },
+        {
+          "sentence_id": "26",
+          "position": 8,
+          "source_bp": "Surpreendentemente, às vezes, deixar de fazer as coisas em uma ordem perfeita pode ser a melhor forma de fazê-las."
+        },
+        {
+          "sentence_id": "27",
+          "position": 9,
+          "source_bp": "Outra ideia oriunda do escalonamento de computadores tem a ver com uma das maiores questões da vida moderna: interrupções."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_07",
+      "document_id": "ted2020-46519",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-46519.xml",
+      "sentence_range": {
+        "start": "9",
+        "end": "18"
+      },
+      "sentence_count": 10,
+      "topic": "Temujin's rise, military organization, religious worldview, and emergence as Genghis Khan.",
+      "quality_notes": [
+        "Coherent chronological historical explanation.",
+        "Clear pronoun continuity and complete sentences.",
+        "No stage directions or source corruption."
+      ],
+      "reader_concern": "Contains several historical names, one date, and references to conquest and killing.",
+      "sentences": [
+        {
+          "sentence_id": "9",
+          "position": 1,
+          "source_bp": "Apesar de perder o pai bem cedo e crescer na pobreza, ele chegou rapidamente ao poder formando alianças estratégicas com outros líderes."
+        },
+        {
+          "sentence_id": "10",
+          "position": 2,
+          "source_bp": "Ao contrário desses cãs, Temujin promovia soldados com base no mérito e distribuía igualmente os espólios entre eles."
+        },
+        {
+          "sentence_id": "11",
+          "position": 3,
+          "source_bp": "A jogada mais genial dele foi espalhar os nômades que conquistou entre seus próprios soldados, para que não pudessem se unir contra ele."
+        },
+        {
+          "sentence_id": "12",
+          "position": 4,
+          "source_bp": "Essas inovações o tornaram irrefreável e, em 1206, ele uniu o povo das tendas de feltro e tornou-se Gengis Khan."
+        },
+        {
+          "sentence_id": "13",
+          "position": 5,
+          "source_bp": "Os mongóis eram xamanistas e acreditavam que os espíritos da natureza e seus ancestrais habitavam o mundo ao seu redor."
+        },
+        {
+          "sentence_id": "14",
+          "position": 6,
+          "source_bp": "Acima de tudo, curvavam-se ao deus do céu Tengri."
+        },
+        {
+          "sentence_id": "15",
+          "position": 7,
+          "source_bp": "Gengis Khan acreditava que Tengri queria que ele conquistasse o mundo inteiro em seu nome."
+        },
+        {
+          "sentence_id": "16",
+          "position": 8,
+          "source_bp": "Com os nômades da planície mongol unidos, isso parecia ao seu alcance."
+        },
+        {
+          "sentence_id": "17",
+          "position": 9,
+          "source_bp": "Qualquer um que resistisse aos mongóis resistia à vontade de Tengri e, por essa insubordinação, seria morto."
+        },
+        {
+          "sentence_id": "18",
+          "position": 10,
+          "source_bp": "Sob Gengis Khan, os mongóis dominaram o norte da China e as terras islâmicas orientais."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_08",
+      "document_id": "ted2020-1418",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-1418.xml",
+      "sentence_range": {
+        "start": "8",
+        "end": "17"
+      },
+      "sentence_count": 10,
+      "topic": "Public acceptance and controversy surrounding contraception and family planning.",
+      "quality_notes": [
+        "Coherent policy-oriented argument.",
+        "Mostly ordinary vocabulary with intact sentence boundaries.",
+        "No stage directions or malformed text."
+      ],
+      "reader_concern": "Sensitive subject matter includes contraception, abortion, and sex; the final sentence contains a percentage.",
+      "sentences": [
+        {
+          "sentence_id": "8",
+          "position": 1,
+          "source_bp": "Mais de um bilhão de pessoas usam métodos contraceptivos sem qualquer hesitação."
+        },
+        {
+          "sentence_id": "9",
+          "position": 2,
+          "source_bp": "Elas querem ter o poder de planejar sua própria vida e criar famílias mais saudáveis, mais instruídas e mais prósperas."
+        },
+        {
+          "sentence_id": "10",
+          "position": 3,
+          "source_bp": "No entanto, para uma ideia que é amplamente aceita no âmbito do privado, o controle de natalidade certamente gera muita polêmica em público."
+        },
+        {
+          "sentence_id": "11",
+          "position": 4,
+          "source_bp": "Algumas pessoas pensam, quando falamos sobre contracepção, que é uma porta para o aborto, o que não é."
+        },
+        {
+          "sentence_id": "12",
+          "position": 5,
+          "source_bp": "Algumas pessoas, sejamos sinceros, ficam constrangidas com o assunto, porque é sobre sexo."
+        },
+        {
+          "sentence_id": "13",
+          "position": 6,
+          "source_bp": "Algumas pessoas se preocupam que o real objetivo do planejamento familiar seja o controle populacional."
+        },
+        {
+          "sentence_id": "14",
+          "position": 7,
+          "source_bp": "Todas essas são questões secundárias ligadas à ideia principal de que homens e mulheres devem ser capazes de decidir quando querem ter um filho."
+        },
+        {
+          "sentence_id": "15",
+          "position": 8,
+          "source_bp": "E, como resultado, a contracepção desapareceu quase que completamente da pauta global da saúde."
+        },
+        {
+          "sentence_id": "16",
+          "position": 9,
+          "source_bp": "As vítimas dessa inércia são os povos da África subsariana e do sul da Ásia."
+        },
+        {
+          "sentence_id": "17",
+          "position": 10,
+          "source_bp": "Aqui, na Alemanha, a proporção de pessoas que usam métodos contraceptivos é de aproximadamente 66%."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_09",
+      "document_id": "ted2020-29998",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-29998.xml",
+      "sentence_range": {
+        "start": "18",
+        "end": "27"
+      },
+      "sentence_count": 10,
+      "topic": "The effectiveness, treatment schedule, and possible side effects of electroconvulsive therapy.",
+      "quality_notes": [
+        "Coherent medical explanation with consistent topic and referents.",
+        "Manageable sentence lengths and intact segmentation.",
+        "No obvious source corruption."
+      ],
+      "reader_concern": "Medical and mental-health content; the abbreviation “ECT” is not expanded inside this excerpt.",
+      "sentences": [
+        {
+          "sentence_id": "18",
+          "position": 1,
+          "source_bp": "Metade ou mais daqueles que passam por tratamento sentem uma melhora em seus sintomas."
+        },
+        {
+          "sentence_id": "19",
+          "position": 2,
+          "source_bp": "A maioria dos pacientes tratados com ECT tem duas ou três sessões por semana durante várias semanas."
+        },
+        {
+          "sentence_id": "20",
+          "position": 3,
+          "source_bp": "Alguns começam a notar uma melhora em seus sintomas após apenas uma sessão, enquanto outros demoram mais para reagir."
+        },
+        {
+          "sentence_id": "21",
+          "position": 4,
+          "source_bp": "Os pacientes geralmente continuam tratamentos menos frequentes por vários meses a um ano, e alguns precisam de sessões esporádicas de manutenção pelo resto da vida."
+        },
+        {
+          "sentence_id": "22",
+          "position": 5,
+          "source_bp": "A ECT moderna é muito mais segura do que costumava ser, mas os pacientes ainda podem sofrer efeitos colaterais."
+        },
+        {
+          "sentence_id": "23",
+          "position": 6,
+          "source_bp": "Podem sentir dores, fadiga ou náuseas logo após o tratamento."
+        },
+        {
+          "sentence_id": "24",
+          "position": 7,
+          "source_bp": "Alguns têm dificuldade em lembrar o que aconteceu antes de uma sessão, como, por exemplo, o que comeram no jantar da noite anterior."
+        },
+        {
+          "sentence_id": "25",
+          "position": 8,
+          "source_bp": "Raramente, podem ter dificuldade em se lembrar de semanas e meses antes."
+        },
+        {
+          "sentence_id": "26",
+          "position": 9,
+          "source_bp": "Para a maioria dos pacientes, essa perda de memória melhora com o tempo."
+        },
+        {
+          "sentence_id": "27",
+          "position": 10,
+          "source_bp": "O fascinante é que, apesar de seu histórico comprovado, ainda não sabemos exatamente por que a ECT funciona."
+        }
+      ]
+    },
+    {
+      "candidate_id": "ted_candidate_10",
+      "document_id": "ted2020-58601",
+      "source_file": "data/external/TED2020/TED2020/raw/pt_br/ted2020-58601.xml",
+      "sentence_range": {
+        "start": "9",
+        "end": "18"
+      },
+      "sentence_count": 10,
+      "topic": "How penicillin damages bacterial cell walls and how it moved from laboratory curiosity toward larger-scale use.",
+      "quality_notes": [
+        "Coherent scientific explanation with a clear causal sequence.",
+        "Complete sentences and consistent terminology.",
+        "No stage directions, lists, or obvious corruption."
+      ],
+      "reader_concern": "Some biological terminology is specialized, although the mechanism is explained in the passage.",
+      "sentences": [
+        {
+          "sentence_id": "9",
+          "position": 1,
+          "source_bp": "O fungo Penicillium produz penicilina constantemente para se defender de ameaças, como colônias bacterianas próximas que podem consumir seus recursos."
+        },
+        {
+          "sentence_id": "10",
+          "position": 2,
+          "source_bp": "A penicilina destrói muitos tipos de bactérias, interrompendo a síntese de suas paredes celulares."
+        },
+        {
+          "sentence_id": "11",
+          "position": 3,
+          "source_bp": "Essas paredes se fortalecem com uma malha espessa e protetora de açúcares e aminoácidos, que são constantemente quebrados e reconstruídos."
+        },
+        {
+          "sentence_id": "12",
+          "position": 4,
+          "source_bp": "A penicilina se liga a um dos compostos que tece essa malha e impede a reconstrução da parede em uma fase crítica."
+        },
+        {
+          "sentence_id": "13",
+          "position": 5,
+          "source_bp": "Enquanto isso, a penicilina estimula a liberação de moléculas altamente reativas que causam danos adicionais."
+        },
+        {
+          "sentence_id": "14",
+          "position": 6,
+          "source_bp": "Por fim, a estrutura da célula se decompõe completamente."
+        },
+        {
+          "sentence_id": "15",
+          "position": 7,
+          "source_bp": "Esse ataque duplo é letal para uma ampla gama de bactérias, seja em placas de Petri, no corpo ou em outros lugares."
+        },
+        {
+          "sentence_id": "16",
+          "position": 8,
+          "source_bp": "No entanto, não é prejudicial para nossas próprias células, porque elas não têm paredes celulares."
+        },
+        {
+          "sentence_id": "17",
+          "position": 9,
+          "source_bp": "Por mais de uma década após a descoberta de Fleming, a penicilina permaneceu uma curiosidade de laboratório."
+        },
+        {
+          "sentence_id": "18",
+          "position": 10,
+          "source_bp": "Mas, durante a Segunda Guerra Mundial, pesquisadores descobriram como isolar o composto ativo e cultivar o fungo em quantidades maiores."
+        }
+      ]
+    }
+  ]
+}

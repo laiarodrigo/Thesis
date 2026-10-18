@@ -1,0 +1,321 @@
+{
+  "schema_version": "1.0",
+  "document_id": "ted2020-2292",
+  "passage_id": "ted2020-2292_s3-s12",
+  "system_id": "gemma-4-E4B-it",
+  "model": {
+    "model_id": "google/gemma-4-E4B-it",
+    "requested_revision": "ee0ef6023621cff504d758262d4e04895a5af4a2",
+    "resolved_revision": null,
+    "architecture": "Gemma4ForConditionalGeneration",
+    "processor": "Gemma4Processor"
+  },
+  "prompt": {
+    "task_instruction": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.",
+    "source_separator": "\n\nSource sentence:\n",
+    "chat_template": "official processor.apply_chat_template",
+    "add_generation_prompt": true,
+    "enable_thinking": false,
+    "one_sentence_at_a_time": true,
+    "passage_context_provided": false
+  },
+  "generation_config": {
+    "deterministic": true,
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "use_cache": true,
+    "pad_token_id": 0,
+    "eos_token_id": 1,
+    "model_generation_defaults": {
+      "max_length": null,
+      "max_new_tokens": null,
+      "min_length": null,
+      "min_new_tokens": null,
+      "early_stopping": null,
+      "max_time": null,
+      "stop_strings": null,
+      "do_sample": true,
+      "num_beams": null,
+      "use_mtp": null,
+      "use_cache": null,
+      "cache_implementation": null,
+      "cache_config": null,
+      "max_cache_len": null,
+      "temperature": 1.0,
+      "top_k": 64,
+      "top_p": 0.95,
+      "min_p": null,
+      "top_h": null,
+      "typical_p": null,
+      "epsilon_cutoff": null,
+      "eta_cutoff": null,
+      "repetition_penalty": null,
+      "encoder_repetition_penalty": null,
+      "length_penalty": null,
+      "no_repeat_ngram_size": null,
+      "bad_words_ids": null,
+      "renormalize_logits": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "remove_invalid_values": null,
+      "exponential_decay_length_penalty": null,
+      "suppress_tokens": null,
+      "begin_suppress_tokens": null,
+      "sequence_bias": null,
+      "token_healing": null,
+      "guidance_scale": null,
+      "watermarking_config": null,
+      "num_return_sequences": null,
+      "output_attentions": null,
+      "output_hidden_states": null,
+      "output_scores": null,
+      "output_logits": null,
+      "return_dict_in_generate": null,
+      "pad_token_id": 0,
+      "bos_token_id": 2,
+      "eos_token_id": [
+        1,
+        106,
+        50
+      ],
+      "encoder_no_repeat_ngram_size": null,
+      "decoder_start_token_id": null,
+      "is_assistant": null,
+      "num_assistant_tokens": null,
+      "num_assistant_tokens_schedule": null,
+      "assistant_confidence_threshold": null,
+      "prompt_lookup_num_tokens": null,
+      "max_matching_ngram_size": null,
+      "assistant_early_exit": null,
+      "assistant_lookbehind": null,
+      "target_lookbehind": null,
+      "assistant_ensemble_weight": null,
+      "speculation_type": null,
+      "compile_config": null,
+      "disable_compile": null,
+      "continuous_batching_config": null,
+      "low_memory": null,
+      "penalty_alpha": null,
+      "dola_layers": null,
+      "diversity_penalty": null,
+      "num_beam_groups": null,
+      "constraints": null,
+      "force_words_ids": null,
+      "prefill_chunk_size": null,
+      "_from_model_config": null,
+      "transformers_version": "5.19.0"
+    }
+  },
+  "runtime": {
+    "python": "3.11.15",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.19.0",
+    "cuda_device_name": "Quadro RTX 6000",
+    "cuda_device_count": 1,
+    "model_device": "cuda:0",
+    "model_dtype": "torch.bfloat16",
+    "hf_device_map": {}
+  },
+  "sentences": [
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "3",
+      "position": 1,
+      "source_bp": "E com quatro anos de idade, eu tive a oportunidade de navegar pela primeira vez.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE com quatro anos de idade, eu tive a oportunidade de navegar pela primeira vez."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE com quatro anos de idade, eu tive a oportunidade de navegar pela primeira vez.<turn|>\n<|turn>model\n",
+      "raw_model_output": "E com quatro anos de idade, tive a oportunidade de navegar pela primeira vez.",
+      "cleaned_candidate": "E com quatro anos de idade, tive a oportunidade de navegar pela primeira vez.",
+      "input_token_count": 126,
+      "output_token_count": 20,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "4",
+      "position": 2,
+      "source_bp": "Nunca vou me esquecer da emoção quando nos aproximávamos da costa.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNunca vou me esquecer da emoção quando nos aproximávamos da costa."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNunca vou me esquecer da emoção quando nos aproximávamos da costa.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Nunca me esquecerei da emoção quando nos aproximávamos da costa.",
+      "cleaned_candidate": "Nunca me esquecerei da emoção quando nos aproximávamos da costa.",
+      "input_token_count": 125,
+      "output_token_count": 20,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "5",
+      "position": 3,
+      "source_bp": "Nunca vou me esquecer do sentimento de aventura quando eu subi a bordo do barco e vi sua pequena cabine pela primeira vez.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNunca vou me esquecer do sentimento de aventura quando eu subi a bordo do barco e vi sua pequena cabine pela primeira vez."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNunca vou me esquecer do sentimento de aventura quando eu subi a bordo do barco e vi sua pequena cabine pela primeira vez.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Nunca me esquecerei do sentimento de aventura quando subi a bordo do barco e vi a sua pequena cabine pela primeira vez.\n",
+      "cleaned_candidate": "Nunca me esquecerei do sentimento de aventura quando subi a bordo do barco e vi a sua pequena cabine pela primeira vez.",
+      "input_token_count": 135,
+      "output_token_count": 32,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "6",
+      "position": 4,
+      "source_bp": "Mas a sensação mais incrível era aquela de liberdade, a sensação que eu tive quando içamos as velas.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nMas a sensação mais incrível era aquela de liberdade, a sensação que eu tive quando içamos as velas."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nMas a sensação mais incrível era aquela de liberdade, a sensação que eu tive quando içamos as velas.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Mas a sensação mais incrível era aquela de liberdade, a sensação que tive quando içámos as velas.",
+      "cleaned_candidate": "Mas a sensação mais incrível era aquela de liberdade, a sensação que tive quando içámos as velas.",
+      "input_token_count": 130,
+      "output_token_count": 26,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "7",
+      "position": 5,
+      "source_bp": "Com quatro anos de idade, foi o maior sentimento de liberdade que eu podia imaginar.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nCom quatro anos de idade, foi o maior sentimento de liberdade que eu podia imaginar."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nCom quatro anos de idade, foi o maior sentimento de liberdade que eu podia imaginar.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Com quatro anos de idade, foi o maior sentimento de liberdade que eu podia imaginar.",
+      "cleaned_candidate": "Com quatro anos de idade, foi o maior sentimento de liberdade que eu podia imaginar.",
+      "input_token_count": 126,
+      "output_token_count": 21,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "8",
+      "position": 6,
+      "source_bp": "Naquele momento eu decidi que algum dia, de alguma maneira, eu iria navegar ao redor do mundo.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNaquele momento eu decidi que algum dia, de alguma maneira, eu iria navegar ao redor do mundo."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNaquele momento eu decidi que algum dia, de alguma maneira, eu iria navegar ao redor do mundo.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Naquele momento decidi que algum dia, de alguma maneira, eu iria navegar ao redor do mundo.",
+      "cleaned_candidate": "Naquele momento decidi que algum dia, de alguma maneira, eu iria navegar ao redor do mundo.",
+      "input_token_count": 131,
+      "output_token_count": 26,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "9",
+      "position": 7,
+      "source_bp": "Então eu fiz o que pude na minha vida para alcançar aquele sonho.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEntão eu fiz o que pude na minha vida para alcançar aquele sonho."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEntão eu fiz o que pude na minha vida para alcançar aquele sonho.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Então eu fiz o que pude na minha vida para alcançar aquele sonho.",
+      "cleaned_candidate": "Então eu fiz o que pude na minha vida para alcançar aquele sonho.",
+      "input_token_count": 123,
+      "output_token_count": 18,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "10",
+      "position": 8,
+      "source_bp": "Com dez anos, eu economizava o dinheiro da cantina.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nCom dez anos, eu economizava o dinheiro da cantina."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nCom dez anos, eu economizava o dinheiro da cantina.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Aos dez anos, eu poupava o dinheiro da cantina.",
+      "cleaned_candidate": "Aos dez anos, eu poupava o dinheiro da cantina.",
+      "input_token_count": 123,
+      "output_token_count": 20,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "11",
+      "position": 9,
+      "source_bp": "Todos os dias durante oito anos, eu comia purê de batatas e feijão, que custavam 4p cada, e o molho era gratuito.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nTodos os dias durante oito anos, eu comia purê de batatas e feijão, que custavam 4p cada, e o molho era gratuito."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nTodos os dias durante oito anos, eu comia purê de batatas e feijão, que custavam 4p cada, e o molho era gratuito.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Todos os dias durante oito anos, eu comia puré de batatas e feijão, que custavam 4p cada, e o molho era gratuito.",
+      "cleaned_candidate": "Todos os dias durante oito anos, eu comia puré de batatas e feijão, que custavam 4p cada, e o molho era gratuito.",
+      "input_token_count": 144,
+      "output_token_count": 40,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2292",
+      "passage_id": "ted2020-2292_s3-s12",
+      "sentence_id": "12",
+      "position": 10,
+      "source_bp": "Todos os dias eu empilhava os trocados em cima do meu cofrinho, e quando juntava uma libra, eu colocava dentro e riscava um dos 100 quadrados que eu tinha desenhado num papel.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nTodos os dias eu empilhava os trocados em cima do meu cofrinho, e quando juntava uma libra, eu colocava dentro e riscava um dos 100 quadrados que eu tinha desenhado num papel."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nTodos os dias eu empilhava os trocados em cima do meu cofrinho, e quando juntava uma libra, eu colocava dentro e riscava um dos 100 quadrados que eu tinha desenhado num papel.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Todos os dias eu empilhava os trocos em cima do meu cofrinho, e quando juntava uma libra, eu colocava dentro e riscava um dos 100 quadrados que eu tinha desenhado num papel.\n",
+      "cleaned_candidate": "Todos os dias eu empilhava os trocos em cima do meu cofrinho, e quando juntava uma libra, eu colocava dentro e riscava um dos 100 quadrados que eu tinha desenhado num papel.",
+      "input_token_count": 157,
+      "output_token_count": 52,
+      "technical_flags": []
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.1",
+  "artifact_audit_date": "2026-10-06",
+  "protocol": {
+    "family": "control_strings_ptbr",
+    "control_semantics": "source_variety",
+    "bp_to_ep_encoder_input": "exact source_bp with no prefix",
+    "bp_to_ep_expected_decoder_label": "BR",
+    "decoder_label_cleaning": "retain raw output, then strip the leading control label"
+  },
+  "systems": {
+    "thesis_model_a": {
+      "run_name": "B4-D-G-PTBR",
+      "checkpoint_name": "t5gemma2_4b_stageB_gpt_wiki_decoder_ptbr",
+      "base_model": "google/t5gemma-2-4b-4b",
+      "adapter_path": "outputs/encoder_decoder/control_strings_ptbr/t5gemma2_4b_stageB_gpt_wiki_decoder_ptbr",
+      "adapter_status": "recorded_complete_but_missing_from_current_checkout",
+      "training_config": "configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_decoder_ptbr.yaml",
+      "stage_a_adapter": "outputs/encoder_decoder/control_strings_ptbr/t5gemma2_4b_stageA_opensubs_decoder_ptbr",
+      "control_formulation": "decoder_controlled_ptbr_source_variety",
+      "input_prefix_bp_to_ep": null,
+      "expected_decoder_label_bp_to_ep": "BR",
+      "training_stage": "Stage B GPT-Wikipedia, initialized from Stage A OpenSubtitles",
+      "lora_rank": 48,
+      "lora_alpha": 96,
+      "lora_dropout": 0.05
+    },
+    "thesis_model_b": {
+      "run_name": "B4-D-GF-PTBR",
+      "checkpoint_name": "t5gemma2_4b_stageB_gpt_wiki_frmt_decoder_ptbr",
+      "base_model": "google/t5gemma-2-4b-4b",
+      "adapter_path": "outputs/encoder_decoder/control_strings_ptbr/t5gemma2_4b_stageB_gpt_wiki_frmt_decoder_ptbr",
+      "adapter_status": "recorded_complete_but_missing_from_current_checkout",
+      "training_config": "configs/encoder_decoder/t5gemma2_4b/control_strings_ptbr/stageB_gpt_wiki_frmt_decoder_ptbr.yaml",
+      "stage_a_adapter": "outputs/encoder_decoder/control_strings_ptbr/t5gemma2_4b_stageA_opensubs_decoder_ptbr",
+      "control_formulation": "decoder_controlled_ptbr_source_variety",
+      "input_prefix_bp_to_ep": null,
+      "expected_decoder_label_bp_to_ep": "BR",
+      "training_stage": "Stage B GPT-Wikipedia+FRMT, initialized from Stage A OpenSubtitles",
+      "lora_rank": 48,
+      "lora_alpha": 96,
+      "lora_dropout": 0.05
+    }
+  },
+  "generation_defaults": {
+    "deterministic": true,
+    "do_sample": false,
+    "one_sentence_at_a_time": true,
+    "max_source_length": 512,
+    "max_new_tokens": 256,
+    "num_beams": 4,
+    "length_penalty": 0.8,
+    "early_stopping": true,
+    "adaptive_max_new_tokens": true,
+    "adaptive_ratio": 1.15,
+    "adaptive_margin": 6,
+    "adaptive_min_new_tokens": 8,
+    "adaptive_max_new_tokens_ceiling": 384,
+    "no_repeat_ngram_size": 4,
+    "repetition_penalty": 1.2,
+    "forced_eos": true
+  }
+}

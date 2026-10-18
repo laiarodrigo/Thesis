@@ -1,0 +1,925 @@
+{
+  "schema_version": "1.0",
+  "source_dataset_id": "ted2020_test_pool_01",
+  "source_item_count": 40,
+  "system_id": "gemma-4-E4B-it",
+  "model": {
+    "model_id": "google/gemma-4-E4B-it",
+    "requested_revision": "ee0ef6023621cff504d758262d4e04895a5af4a2",
+    "resolved_revision": null,
+    "architecture": "Gemma4ForConditionalGeneration",
+    "processor": "Gemma4Processor"
+  },
+  "prompt": {
+    "task_instruction": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.",
+    "source_separator": "\n\nSource sentence:\n",
+    "chat_template": "official processor.apply_chat_template",
+    "add_generation_prompt": true,
+    "enable_thinking": false,
+    "one_sentence_at_a_time": true,
+    "passage_context_provided": false
+  },
+  "generation_config": {
+    "deterministic": true,
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "use_cache": true,
+    "pad_token_id": 0,
+    "eos_token_id": 1,
+    "model_generation_defaults": {
+      "max_length": null,
+      "max_new_tokens": null,
+      "min_length": null,
+      "min_new_tokens": null,
+      "early_stopping": null,
+      "max_time": null,
+      "stop_strings": null,
+      "do_sample": true,
+      "num_beams": null,
+      "use_mtp": null,
+      "use_cache": null,
+      "cache_implementation": null,
+      "cache_config": null,
+      "max_cache_len": null,
+      "temperature": 1.0,
+      "top_k": 64,
+      "top_p": 0.95,
+      "min_p": null,
+      "top_h": null,
+      "typical_p": null,
+      "epsilon_cutoff": null,
+      "eta_cutoff": null,
+      "repetition_penalty": null,
+      "encoder_repetition_penalty": null,
+      "length_penalty": null,
+      "no_repeat_ngram_size": null,
+      "bad_words_ids": null,
+      "renormalize_logits": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "remove_invalid_values": null,
+      "exponential_decay_length_penalty": null,
+      "suppress_tokens": null,
+      "begin_suppress_tokens": null,
+      "sequence_bias": null,
+      "token_healing": null,
+      "guidance_scale": null,
+      "watermarking_config": null,
+      "num_return_sequences": null,
+      "output_attentions": null,
+      "output_hidden_states": null,
+      "output_scores": null,
+      "output_logits": null,
+      "return_dict_in_generate": null,
+      "pad_token_id": 0,
+      "bos_token_id": 2,
+      "eos_token_id": [
+        1,
+        106,
+        50
+      ],
+      "encoder_no_repeat_ngram_size": null,
+      "decoder_start_token_id": null,
+      "is_assistant": null,
+      "num_assistant_tokens": null,
+      "num_assistant_tokens_schedule": null,
+      "assistant_confidence_threshold": null,
+      "prompt_lookup_num_tokens": null,
+      "max_matching_ngram_size": null,
+      "assistant_early_exit": null,
+      "assistant_lookbehind": null,
+      "target_lookbehind": null,
+      "assistant_ensemble_weight": null,
+      "speculation_type": null,
+      "compile_config": null,
+      "disable_compile": null,
+      "continuous_batching_config": null,
+      "low_memory": null,
+      "penalty_alpha": null,
+      "dola_layers": null,
+      "diversity_penalty": null,
+      "num_beam_groups": null,
+      "constraints": null,
+      "force_words_ids": null,
+      "prefill_chunk_size": null,
+      "_from_model_config": null,
+      "transformers_version": "5.19.0"
+    }
+  },
+  "runtime": {
+    "python": "3.11.15",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.19.0",
+    "cuda_device_name": "Quadro RTX 6000",
+    "cuda_device_count": 1,
+    "model_device": "cuda:0",
+    "model_dtype": "torch.bfloat16",
+    "hf_device_map": {}
+  },
+  "sentences": [
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "9.2",
+      "position": 1,
+      "source_bp": "A Apple lança o iPhone na China e censura aplicativos do Dalai Lama junto a outros tantos aplicativos politicamente sensíveis, a pedido do governo chinês para sua loja app chinesa.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nA Apple lança o iPhone na China e censura aplicativos do Dalai Lama junto a outros tantos aplicativos politicamente sensíveis, a pedido do governo chinês para sua loja app chinesa."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nA Apple lança o iPhone na China e censura aplicativos do Dalai Lama junto a outros tantos aplicativos politicamente sensíveis, a pedido do governo chinês para sua loja app chinesa.<turn|>\n<|turn>model\n",
+      "raw_model_output": "A Apple lança o iPhone na China e censura aplicações do Dalai Lama juntamente com outros tantos aplicações politicamente sensíveis, a pedido do governo chinês para a sua loja de aplicações chinesa.",
+      "cleaned_candidate": "A Apple lança o iPhone na China e censura aplicações do Dalai Lama juntamente com outros tantos aplicações politicamente sensíveis, a pedido do governo chinês para a sua loja de aplicações chinesa.",
+      "input_token_count": 147,
+      "output_token_count": 47,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "10",
+      "position": 2,
+      "source_bp": "O chargista político americano Mark Fiore também teve seu aplicativo de sátira censurado nos Estados Unidos porque alguns da equipe da Apple estavam preocupados se ele seria ofensivo a certos grupos.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nO chargista político americano Mark Fiore também teve seu aplicativo de sátira censurado nos Estados Unidos porque alguns da equipe da Apple estavam preocupados se ele seria ofensivo a certos grupos."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nO chargista político americano Mark Fiore também teve seu aplicativo de sátira censurado nos Estados Unidos porque alguns da equipe da Apple estavam preocupados se ele seria ofensivo a certos grupos.<turn|>\n<|turn>model\n",
+      "raw_model_output": "O caricaturista político americano Mark Fiore também teve a sua aplicação de sátira censurada nos Estados Unidos porque alguns da equipa da Apple estavam preocupados se seria ofensivo a certos grupos.",
+      "cleaned_candidate": "O caricaturista político americano Mark Fiore também teve a sua aplicação de sátira censurada nos Estados Unidos porque alguns da equipa da Apple estavam preocupados se seria ofensivo a certos grupos.",
+      "input_token_count": 146,
+      "output_token_count": 45,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "11",
+      "position": 3,
+      "source_bp": "Seu aplicativo só foi readmitido quando ele ganhou o Prêmio Pulitzer.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nSeu aplicativo só foi readmitido quando ele ganhou o Prêmio Pulitzer."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nSeu aplicativo só foi readmitido quando ele ganhou o Prêmio Pulitzer.<turn|>\n<|turn>model\n",
+      "raw_model_output": "A sua aplicação só foi readmitida quando ganhou o Prémio Pulitzer.",
+      "cleaned_candidate": "A sua aplicação só foi readmitida quando ganhou o Prémio Pulitzer.",
+      "input_token_count": 124,
+      "output_token_count": 21,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "12",
+      "position": 4,
+      "source_bp": "A revista alemã Stern, uma revista de notícias, teve seu aplicativo censurado porque as 'babás da Apple' o julgaram picante demais para seus usuários, a despeito dessa revista ser legalmente vendida nas bancas de toda a Alemanha.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nA revista alemã Stern, uma revista de notícias, teve seu aplicativo censurado porque as 'babás da Apple' o julgaram picante demais para seus usuários, a despeito dessa revista ser legalmente vendida nas bancas de toda a Alemanha."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nA revista alemã Stern, uma revista de notícias, teve seu aplicativo censurado porque as 'babás da Apple' o julgaram picante demais para seus usuários, a despeito dessa revista ser legalmente vendida nas bancas de toda a Alemanha.<turn|>\n<|turn>model\n",
+      "raw_model_output": "A revista alemã Stern, uma revista de notícias, teve o seu aplicativo censurado porque as 'babás da Apple' o julgaram picante demais para os seus utilizadores, apesar de esta revista ser legalmente vendida nas bancas de toda a Alemanha.\n",
+      "cleaned_candidate": "A revista alemã Stern, uma revista de notícias, teve o seu aplicativo censurado porque as 'babás da Apple' o julgaram picante demais para os seus utilizadores, apesar de esta revista ser legalmente vendida nas bancas de toda a Alemanha.",
+      "input_token_count": 162,
+      "output_token_count": 60,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "13",
+      "position": 5,
+      "source_bp": "E mais controversialmente, recentemente, a Apple censurou um aplicativo de protesto palestino depois que o governo israelense demonstrou receio de que ele poderia ser usado para organizar ataques violentos.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE mais controversialmente, recentemente, a Apple censurou um aplicativo de protesto palestino depois que o governo israelense demonstrou receio de que ele poderia ser usado para organizar ataques violentos."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE mais controversialmente, recentemente, a Apple censurou um aplicativo de protesto palestino depois que o governo israelense demonstrou receio de que ele poderia ser usado para organizar ataques violentos.<turn|>\n<|turn>model\n",
+      "raw_model_output": "E mais controversamente, recentemente, a Apple censurou uma aplicação de protesto palestino depois de o governo israelita demonstrar receio de que pudesse ser usado para organizar ataques violentos.>",
+      "cleaned_candidate": "E mais controversamente, recentemente, a Apple censurou uma aplicação de protesto palestino depois de o governo israelita demonstrar receio de que pudesse ser usado para organizar ataques violentos.",
+      "input_token_count": 151,
+      "output_token_count": 192,
+      "technical_flags": [
+        "possible_truncation_max_new_tokens"
+      ]
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "14",
+      "position": 6,
+      "source_bp": "Então, é o seguinte,",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEntão, é o seguinte,"
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEntão, é o seguinte,<turn|>\n<|turn>model\n",
+      "raw_model_output": "Então, é o seguinte,",
+      "cleaned_candidate": "Então, é o seguinte,",
+      "input_token_count": 115,
+      "output_token_count": 10,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "15",
+      "position": 7,
+      "source_bp": "temos uma situação onde empresas privadas estão utilizando critérios de censura que são quase sempre um tanto arbitrários e geralmente mais restritos que as normas constitucionais de liberdade de expressão que temos nas democracias.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\ntemos uma situação onde empresas privadas estão utilizando critérios de censura que são quase sempre um tanto arbitrários e geralmente mais restritos que as normas constitucionais de liberdade de expressão que temos nas democracias."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\ntemos uma situação onde empresas privadas estão utilizando critérios de censura que são quase sempre um tanto arbitrários e geralmente mais restritos que as normas constitucionais de liberdade de expressão que temos nas democracias.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Temos uma situação em que empresas privadas estão a utilizar critérios de censura que são quase sempre um tanto arbitrários e geralmente mais restritivos do que as normas constitucionais de liberdade de expressão que temos nas democracias.",
+      "cleaned_candidate": "Temos uma situação em que empresas privadas estão a utilizar critérios de censura que são quase sempre um tanto arbitrários e geralmente mais restritivos do que as normas constitucionais de liberdade de expressão que temos nas democracias.",
+      "input_token_count": 152,
+      "output_token_count": 52,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "16",
+      "position": 8,
+      "source_bp": "Ou estão respondendo a pedidos de censura de regimes autoritários que não refletem consentimento dos governados.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nOu estão respondendo a pedidos de censura de regimes autoritários que não refletem consentimento dos governados."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nOu estão respondendo a pedidos de censura de regimes autoritários que não refletem consentimento dos governados.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Ou estão a responder a pedidos de censura de regimes autoritários que não refletem consentimento dos governados.",
+      "cleaned_candidate": "Ou estão a responder a pedidos de censura de regimes autoritários que não refletem consentimento dos governados.",
+      "input_token_count": 133,
+      "output_token_count": 28,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "17",
+      "position": 9,
+      "source_bp": "Ou respondem a pedidos e interesses dos governos que não têm jurisdição sobre tantos, ou da maioria, dos usuários e espectadores que estão interagindo com o conteúdo em questão.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nOu respondem a pedidos e interesses dos governos que não têm jurisdição sobre tantos, ou da maioria, dos usuários e espectadores que estão interagindo com o conteúdo em questão."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nOu respondem a pedidos e interesses dos governos que não têm jurisdição sobre tantos, ou da maioria, dos usuários e espectadores que estão interagindo com o conteúdo em questão.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Ou respondem a pedidos e interesses dos governos que não têm jurisdição sobre tantos, ou da maioria, dos utilizadores e espetadores que estão a interagir com o conteúdo em questão.",
+      "cleaned_candidate": "Ou respondem a pedidos e interesses dos governos que não têm jurisdição sobre tantos, ou da maioria, dos utilizadores e espetadores que estão a interagir com o conteúdo em questão.",
+      "input_token_count": 146,
+      "output_token_count": 46,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1188",
+      "passage_id": "ted2020-1188_s9.2-s18",
+      "sentence_id": "18",
+      "position": 10,
+      "source_bp": "Então, a situação é esta.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEntão, a situação é esta."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEntão, a situação é esta.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Então, a situação é esta.",
+      "cleaned_candidate": "Então, a situação é esta.",
+      "input_token_count": 116,
+      "output_token_count": 11,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "83",
+      "position": 1,
+      "source_bp": "Na educação, imagine se seus aplicativos de ensino perceberem que você está confuso e desacelerarem, ou que você está entediado e acelerarem, assim como faria um bom professor em sala de aula.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNa educação, imagine se seus aplicativos de ensino perceberem que você está confuso e desacelerarem, ou que você está entediado e acelerarem, assim como faria um bom professor em sala de aula."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNa educação, imagine se seus aplicativos de ensino perceberem que você está confuso e desacelerarem, ou que você está entediado e acelerarem, assim como faria um bom professor em sala de aula.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Na educação, imagine se os seus aplicativos de ensino percebessem que está confuso e desacelerassem, ou que está entediado e acelerassem, assim como faria um bom professor em sala de aula.\n",
+      "cleaned_candidate": "Na educação, imagine se os seus aplicativos de ensino percebessem que está confuso e desacelerassem, ou que está entediado e acelerassem, assim como faria um bom professor em sala de aula.",
+      "input_token_count": 153,
+      "output_token_count": 49,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "84.1",
+      "position": 2,
+      "source_bp": "E se seu relógio de pulso acompanhasse seu humor ou seu carro percebesse que você está cansado, ou talvez sua geladeira saiba que você está estressada, e se tranca sozinha para que você não coma demais.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE se seu relógio de pulso acompanhasse seu humor ou seu carro percebesse que você está cansado, ou talvez sua geladeira saiba que você está estressada, e se tranca sozinha para que você não coma demais."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE se seu relógio de pulso acompanhasse seu humor ou seu carro percebesse que você está cansado, ou talvez sua geladeira saiba que você está estressada, e se tranca sozinha para que você não coma demais.<turn|>\n<|turn>model\n",
+      "raw_model_output": "E se o seu relógio de pulso acompanhasse o seu humor ou o seu carro percebesse que está cansado, ou talvez a sua geladeira soubesse que está stressada, e se trancasse sozinha para que não coma demais.\n",
+      "cleaned_candidate": "E se o seu relógio de pulso acompanhasse o seu humor ou o seu carro percebesse que está cansado, ou talvez a sua geladeira soubesse que está stressada, e se trancasse sozinha para que não coma demais.",
+      "input_token_count": 160,
+      "output_token_count": 58,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "84.2",
+      "position": 3,
+      "source_bp": "(Risos) Eu gostaria disso, sim.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\n(Risos) Eu gostaria disso, sim."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\n(Risos) Eu gostaria disso, sim.<turn|>\n<|turn>model\n",
+      "raw_model_output": "(Risos) Eu gostaria disso, sim.",
+      "cleaned_candidate": "(Risos) Eu gostaria disso, sim.",
+      "input_token_count": 119,
+      "output_token_count": 14,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "85",
+      "position": 4,
+      "source_bp": "E se, quando eu estava em Cambridge, eu tivesse acesso ao meu fluxo de sentimentos em tempo real, e pudesse compartilhá-lo com a minha família em casa de maneira natural, assim como eu faria se estivéssemos todos juntos na sala?",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE se, quando eu estava em Cambridge, eu tivesse acesso ao meu fluxo de sentimentos em tempo real, e pudesse compartilhá-lo com a minha família em casa de maneira natural, assim como eu faria se estivéssemos todos juntos na sala?"
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE se, quando eu estava em Cambridge, eu tivesse acesso ao meu fluxo de sentimentos em tempo real, e pudesse compartilhá-lo com a minha família em casa de maneira natural, assim como eu faria se estivéssemos todos juntos na sala?<turn|>\n<|turn>model\n",
+      "raw_model_output": "E se, quando eu estava em Cambridge, eu tivesse acesso ao meu fluxo de sentimentos em tempo real, e pudesse partilhá-lo com a minha família em casa de maneira natural, assim como eu faria se estivéssemos todos juntos na sala?\n",
+      "cleaned_candidate": "E se, quando eu estava em Cambridge, eu tivesse acesso ao meu fluxo de sentimentos em tempo real, e pudesse partilhá-lo com a minha família em casa de maneira natural, assim como eu faria se estivéssemos todos juntos na sala?",
+      "input_token_count": 163,
+      "output_token_count": 60,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "86",
+      "position": 5,
+      "source_bp": "Acredito que daqui a cinco anos, todos os nossos dispositivos vão ter um chip de sentimentos, e nem vamos nos lembrar como era quando não adiantava fazer cara feia para o dispositivo e ele diria: \"Hm, você não gostou disso, né?\"",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nAcredito que daqui a cinco anos, todos os nossos dispositivos vão ter um chip de sentimentos, e nem vamos nos lembrar como era quando não adiantava fazer cara feia para o dispositivo e ele diria: \"Hm, você não gostou disso, né?\""
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nAcredito que daqui a cinco anos, todos os nossos dispositivos vão ter um chip de sentimentos, e nem vamos nos lembrar como era quando não adiantava fazer cara feia para o dispositivo e ele diria: \"Hm, você não gostou disso, né?\"<turn|>\n<|turn>model\n",
+      "raw_model_output": "Acredito que daqui a cinco anos, todos os nossos dispositivos terão um chip de sentimentos, e nem vamos nos lembrar como era quando não adiantava fazer cara feia para o dispositivo e ele diria: \"Hm, não gostaste disso, não é?\"\n",
+      "cleaned_candidate": "Acredito que daqui a cinco anos, todos os nossos dispositivos terão um chip de sentimentos, e nem vamos nos lembrar como era quando não adiantava fazer cara feia para o dispositivo e ele diria: \"Hm, não gostaste disso, não é?\"",
+      "input_token_count": 165,
+      "output_token_count": 61,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "87",
+      "position": 6,
+      "source_bp": "Nosso maior desafio é que há tantas aplicações para essa tecnologia, que minha equipe percebeu que não podemos satisfazê-las sozinhos, então nós disponibilizamos essa tecnologia a outros desenvolvedores para que construam e usem a criatividade.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNosso maior desafio é que há tantas aplicações para essa tecnologia, que minha equipe percebeu que não podemos satisfazê-las sozinhos, então nós disponibilizamos essa tecnologia a outros desenvolvedores para que construam e usem a criatividade."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNosso maior desafio é que há tantas aplicações para essa tecnologia, que minha equipe percebeu que não podemos satisfazê-las sozinhos, então nós disponibilizamos essa tecnologia a outros desenvolvedores para que construam e usem a criatividade.<turn|>\n<|turn>model\n",
+      "raw_model_output": "O nosso maior desafio é que há tantas aplicações para esta tecnologia, que a minha equipa percebeu que não podemos satisfazê-las sozinhos, então disponibilizámos esta tecnologia a outros desenvolvedores para que construam e usem a criatividade.\n",
+      "cleaned_candidate": "O nosso maior desafio é que há tantas aplicações para esta tecnologia, que a minha equipa percebeu que não podemos satisfazê-las sozinhos, então disponibilizámos esta tecnologia a outros desenvolvedores para que construam e usem a criatividade.",
+      "input_token_count": 160,
+      "output_token_count": 59,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "88",
+      "position": 7,
+      "source_bp": "Nós reconhecemos que há potenciais riscos e potencial para abuso, mas pessoalmente, após muitos anos fazendo isso, acredito que os benefícios à humanidade de ter tecnologia emocionalmente inteligente superam de longe o potencial de abuso.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNós reconhecemos que há potenciais riscos e potencial para abuso, mas pessoalmente, após muitos anos fazendo isso, acredito que os benefícios à humanidade de ter tecnologia emocionalmente inteligente superam de longe o potencial de abuso."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNós reconhecemos que há potenciais riscos e potencial para abuso, mas pessoalmente, após muitos anos fazendo isso, acredito que os benefícios à humanidade de ter tecnologia emocionalmente inteligente superam de longe o potencial de abuso.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Nós reconhecemos que há potenciais riscos e potencial para abuso, mas pessoalmente, após muitos anos a fazer isto, acredito que os benefícios para a humanidade de ter tecnologia emocionalmente inteligente superam de longe o potencial de abuso.",
+      "cleaned_candidate": "Nós reconhecemos que há potenciais riscos e potencial para abuso, mas pessoalmente, após muitos anos a fazer isto, acredito que os benefícios para a humanidade de ter tecnologia emocionalmente inteligente superam de longe o potencial de abuso.",
+      "input_token_count": 155,
+      "output_token_count": 54,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "89",
+      "position": 8,
+      "source_bp": "E eu os convido todos a participarem da conversa.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE eu os convido todos a participarem da conversa."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE eu os convido todos a participarem da conversa.<turn|>\n<|turn>model\n",
+      "raw_model_output": "E eu convido todos a participarem da conversa.",
+      "cleaned_candidate": "E eu convido todos a participarem da conversa.",
+      "input_token_count": 121,
+      "output_token_count": 15,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "90",
+      "position": 9,
+      "source_bp": "Quanto mais pessoas conhecerem essa tecnologia, mais peso terá nossa opinião sobre como usá-la.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nQuanto mais pessoas conhecerem essa tecnologia, mais peso terá nossa opinião sobre como usá-la."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nQuanto mais pessoas conhecerem essa tecnologia, mais peso terá nossa opinião sobre como usá-la.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Quanto mais pessoas conhecerem esta tecnologia, mais peso terá a nossa opinião sobre como a usar.",
+      "cleaned_candidate": "Quanto mais pessoas conhecerem esta tecnologia, mais peso terá a nossa opinião sobre como a usar.",
+      "input_token_count": 129,
+      "output_token_count": 24,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2279",
+      "passage_id": "ted2020-2279_s83-s91",
+      "sentence_id": "91",
+      "position": 10,
+      "source_bp": "E à medida que nossas vidas vão se digitalizando, nós lutamos uma batalha perdida tentando frear nosso uso de dispositivos para reivindicar nossos sentimentos.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE à medida que nossas vidas vão se digitalizando, nós lutamos uma batalha perdida tentando frear nosso uso de dispositivos para reivindicar nossos sentimentos."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE à medida que nossas vidas vão se digitalizando, nós lutamos uma batalha perdida tentando frear nosso uso de dispositivos para reivindicar nossos sentimentos.<turn|>\n<|turn>model\n",
+      "raw_model_output": "E à medida que as nossas vidas vão digitalizando-se, lutamos uma batalha perdida tentando frear o nosso uso de dispositivos para reivindicar os nossos sentimentos.",
+      "cleaned_candidate": "E à medida que as nossas vidas vão digitalizando-se, lutamos uma batalha perdida tentando frear o nosso uso de dispositivos para reivindicar os nossos sentimentos.",
+      "input_token_count": 141,
+      "output_token_count": 40,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "7.2",
+      "position": 1,
+      "source_bp": "Meus porcos transformaram aquele resíduo alimentar em uma deliciosa carne de porco.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nMeus porcos transformaram aquele resíduo alimentar em uma deliciosa carne de porco."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nMeus porcos transformaram aquele resíduo alimentar em uma deliciosa carne de porco.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Os meus porcos transformaram aquele resíduo alimentar numa deliciosa carne de porco.",
+      "cleaned_candidate": "Os meus porcos transformaram aquele resíduo alimentar numa deliciosa carne de porco.",
+      "input_token_count": 129,
+      "output_token_count": 24,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "7.3",
+      "position": 2,
+      "source_bp": "Eu vendi aquela carne para os pais de meus colegas da escola, e eu fiz um bom dinheiro extra para minha mesada.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEu vendi aquela carne para os pais de meus colegas da escola, e eu fiz um bom dinheiro extra para minha mesada."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEu vendi aquela carne para os pais de meus colegas da escola, e eu fiz um bom dinheiro extra para minha mesada.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Eu vendi aquela carne aos pais dos meus colegas da escola, e fiz um bom dinheiro extra para a minha mesada.",
+      "cleaned_candidate": "Eu vendi aquela carne aos pais dos meus colegas da escola, e fiz um bom dinheiro extra para a minha mesada.",
+      "input_token_count": 135,
+      "output_token_count": 30,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "8",
+      "position": 3,
+      "source_bp": "Mas eu notei que a maior parte da comida que eu estava dando aos meus porcos era de fato própria para consumo humano, e eu via apenas na ponta do iceberg, e , certamente, na cadeia de abastecimento de alimentos, em supermercados, verdureiros, padarias, em nosso lares, em fábricas e fazendas, nós estávamos jogando alimentos pelo ralo.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nMas eu notei que a maior parte da comida que eu estava dando aos meus porcos era de fato própria para consumo humano, e eu via apenas na ponta do iceberg, e , certamente, na cadeia de abastecimento de alimentos, em supermercados, verdureiros, padarias, em nosso lares, em fábricas e fazendas, nós estávamos jogando alimentos pelo ralo."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nMas eu notei que a maior parte da comida que eu estava dando aos meus porcos era de fato própria para consumo humano, e eu via apenas na ponta do iceberg, e , certamente, na cadeia de abastecimento de alimentos, em supermercados, verdureiros, padarias, em nosso lares, em fábricas e fazendas, nós estávamos jogando alimentos pelo ralo.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Mas eu notei que a maior parte da comida que eu estava a dar aos meus porcos era de facto própria para consumo humano, e eu via apenas na ponta do iceberg, e, certamente, na cadeia de abastecimento de alimentos, em supermercados, verdureiros, padarias, em nossos lares, em fábricas e fazendas, estávamos a deitar alimentos pelo ralo.",
+      "cleaned_candidate": "Mas eu notei que a maior parte da comida que eu estava a dar aos meus porcos era de facto própria para consumo humano, e eu via apenas na ponta do iceberg, e, certamente, na cadeia de abastecimento de alimentos, em supermercados, verdureiros, padarias, em nossos lares, em fábricas e fazendas, estávamos a deitar alimentos pelo ralo.",
+      "input_token_count": 190,
+      "output_token_count": 87,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "9",
+      "position": 4,
+      "source_bp": "Supermercados não queriam nem falar comigo sobre quanto alimento eles estavam desperdiçando.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nSupermercados não queriam nem falar comigo sobre quanto alimento eles estavam desperdiçando."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nSupermercados não queriam nem falar comigo sobre quanto alimento eles estavam desperdiçando.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Supermercados não queriam nem falar comigo sobre quanto alimento estavam a desperdiçar.",
+      "cleaned_candidate": "Supermercados não queriam nem falar comigo sobre quanto alimento estavam a desperdiçar.",
+      "input_token_count": 127,
+      "output_token_count": 23,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "10.1",
+      "position": 5,
+      "source_bp": "Eu estive nos fundos.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEu estive nos fundos."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEu estive nos fundos.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Eu estive nos fundos.",
+      "cleaned_candidate": "Eu estive nos fundos.",
+      "input_token_count": 116,
+      "output_token_count": 11,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "10.2",
+      "position": 6,
+      "source_bp": "E eu vi lixeiras cheias de comida sendo fechadas e enviadas em caminhões para aterros sanitários, e eu pensei, realmente há algo mais sensato para fazer com alimentos do que desperdiçá-los.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE eu vi lixeiras cheias de comida sendo fechadas e enviadas em caminhões para aterros sanitários, e eu pensei, realmente há algo mais sensato para fazer com alimentos do que desperdiçá-los."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE eu vi lixeiras cheias de comida sendo fechadas e enviadas em caminhões para aterros sanitários, e eu pensei, realmente há algo mais sensato para fazer com alimentos do que desperdiçá-los.<turn|>\n<|turn>model\n",
+      "raw_model_output": "E eu vi lixeiras cheias de comida a serem fechadas e enviadas em camiões para aterros sanitários, e eu pensei, realmente há algo mais sensato para fazer com alimentos do que desperdiçá-los.",
+      "cleaned_candidate": "E eu vi lixeiras cheias de comida a serem fechadas e enviadas em camiões para aterros sanitários, e eu pensei, realmente há algo mais sensato para fazer com alimentos do que desperdiçá-los.",
+      "input_token_count": 158,
+      "output_token_count": 56,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "11",
+      "position": 7,
+      "source_bp": "Certa manhã, quando eu estava alimentando meus porcos, eu notei em particular uma vistosa fatia de tomate seco que surgia de vez em quando.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nCerta manhã, quando eu estava alimentando meus porcos, eu notei em particular uma vistosa fatia de tomate seco que surgia de vez em quando."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nCerta manhã, quando eu estava alimentando meus porcos, eu notei em particular uma vistosa fatia de tomate seco que surgia de vez em quando.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Certa manhã, quando eu estava a alimentar os meus porcos, notei em particular uma vistosa fatia de tomate seco que surgia de vez em quando.>",
+      "cleaned_candidate": "Certa manhã, quando eu estava a alimentar os meus porcos, notei em particular uma vistosa fatia de tomate seco que surgia de vez em quando.",
+      "input_token_count": 143,
+      "output_token_count": 41,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "12",
+      "position": 8,
+      "source_bp": "Eu a peguei, sentei e tomei meu café da manhã com meus porcos. (risos) Esse foi o primeiro ato do que mais tarde eu aprendi a chamar de freeganismo, realmente uma exibição da injustiça do desperdício de alimentos e a provisão da solução para o desperdício de alimentos, é simplesmente sentar e comê-los, em vez de jogá-los fora.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEu a peguei, sentei e tomei meu café da manhã com meus porcos. (risos) Esse foi o primeiro ato do que mais tarde eu aprendi a chamar de freeganismo, realmente uma exibição da injustiça do desperdício de alimentos e a provisão da solução para o desperdício de alimentos, é simplesmente sentar e comê-los, em vez de jogá-los fora."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nEu a peguei, sentei e tomei meu café da manhã com meus porcos. (risos) Esse foi o primeiro ato do que mais tarde eu aprendi a chamar de freeganismo, realmente uma exibição da injustiça do desperdício de alimentos e a provisão da solução para o desperdício de alimentos, é simplesmente sentar e comê-los, em vez de jogá-los fora.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Eu apanhei-a, sentei-me e tomei o meu pequeno-almoço com os meus porcos. (risos) Este foi o primeiro ato do que mais tarde aprendi a chamar de freeganismo, realmente uma exibição da injustiça do desperdício de alimentos e a provisão da solução para o desperdício de alimentos, é simplesmente sentar e comê-los, em vez de os deitar fora.",
+      "cleaned_candidate": "Eu apanhei-a, sentei-me e tomei o meu pequeno-almoço com os meus porcos. (risos) Este foi o primeiro ato do que mais tarde aprendi a chamar de freeganismo, realmente uma exibição da injustiça do desperdício de alimentos e a provisão da solução para o desperdício de alimentos, é simplesmente sentar e comê-los, em vez de os deitar fora.",
+      "input_token_count": 197,
+      "output_token_count": 192,
+      "technical_flags": [
+        "possible_truncation_max_new_tokens"
+      ]
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "13",
+      "position": 9,
+      "source_bp": "Isso tornou-se, por assim dizer, uma forma de enfrentar grandes empresas no negócio do desperdício alimentar, e expor, mais importante, ao público, que quando nós estamos falando sobre alimentos jogados fora, não estamos falando de coisas podres, não estamos falando de coisas que não servem mais.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nIsso tornou-se, por assim dizer, uma forma de enfrentar grandes empresas no negócio do desperdício alimentar, e expor, mais importante, ao público, que quando nós estamos falando sobre alimentos jogados fora, não estamos falando de coisas podres, não estamos falando de coisas que não servem mais."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nIsso tornou-se, por assim dizer, uma forma de enfrentar grandes empresas no negócio do desperdício alimentar, e expor, mais importante, ao público, que quando nós estamos falando sobre alimentos jogados fora, não estamos falando de coisas podres, não estamos falando de coisas que não servem mais.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Isto tornou-se, por assim dizer, uma forma de enfrentar grandes empresas no negócio do desperdício alimentar, e expor, mais importante, ao público, que quando estamos a falar sobre alimentos deitados fora, não estamos a falar de coisas podres, não estamos a falar de coisas que não servem mais.\n",
+      "cleaned_candidate": "Isto tornou-se, por assim dizer, uma forma de enfrentar grandes empresas no negócio do desperdício alimentar, e expor, mais importante, ao público, que quando estamos a falar sobre alimentos deitados fora, não estamos a falar de coisas podres, não estamos a falar de coisas que não servem mais.",
+      "input_token_count": 173,
+      "output_token_count": 72,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-1565",
+      "passage_id": "ted2020-1565_s7.2-s14",
+      "sentence_id": "14",
+      "position": 10,
+      "source_bp": "Nós estamos falando de comida fresca e boa que está sendo desperdiçada em uma escala colossal.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNós estamos falando de comida fresca e boa que está sendo desperdiçada em uma escala colossal."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nNós estamos falando de comida fresca e boa que está sendo desperdiçada em uma escala colossal.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Nós estamos a falar de comida fresca e boa que está a ser desperdiçada numa escala colossal.",
+      "cleaned_candidate": "Nós estamos a falar de comida fresca e boa que está a ser desperdiçada numa escala colossal.",
+      "input_token_count": 129,
+      "output_token_count": 26,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "127",
+      "position": 1,
+      "source_bp": "E as duas equipes quebraram a mesma regra, justamente a que dizia que eles não podiam jogar futebol.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE as duas equipes quebraram a mesma regra, justamente a que dizia que eles não podiam jogar futebol."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nE as duas equipes quebraram a mesma regra, justamente a que dizia que eles não podiam jogar futebol.<turn|>\n<|turn>model\n",
+      "raw_model_output": "E as duas equipas quebraram a mesma regra, justamente a que dizia que eles não podiam jogar futebol.",
+      "cleaned_candidate": "E as duas equipas quebraram a mesma regra, justamente a que dizia que eles não podiam jogar futebol.",
+      "input_token_count": 132,
+      "output_token_count": 28,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "128",
+      "position": 2,
+      "source_bp": "Quando alguém os vê jogando, não vê deficiência, vê competência.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nQuando alguém os vê jogando, não vê deficiência, vê competência."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nQuando alguém os vê jogando, não vê deficiência, vê competência.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Quando alguém os vê a jogar, não vê deficiência, vê competência.",
+      "cleaned_candidate": "Quando alguém os vê a jogar, não vê deficiência, vê competência.",
+      "input_token_count": 125,
+      "output_token_count": 20,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "129",
+      "position": 3,
+      "source_bp": "O problema é quando termina a partida e saem da quadra",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nO problema é quando termina a partida e saem da quadra"
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nO problema é quando termina a partida e saem da quadra<turn|>\n<|turn>model\n",
+      "raw_model_output": "O problema é quando termina o jogo e saem da quadra",
+      "cleaned_candidate": "O problema é quando termina o jogo e saem da quadra",
+      "input_token_count": 122,
+      "output_token_count": 17,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "130",
+      "position": 4,
+      "source_bp": "para jogar a nossa partida, em uma sociedade que estabelece regras que não os leva em conta, que não cuida deles.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\npara jogar a nossa partida, em uma sociedade que estabelece regras que não os leva em conta, que não cuida deles."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\npara jogar a nossa partida, em uma sociedade que estabelece regras que não os leva em conta, que não cuida deles.<turn|>\n<|turn>model\n",
+      "raw_model_output": "para jogar a nossa partida, numa sociedade que estabelece regras que não os leva em conta, que não cuida deles.",
+      "cleaned_candidate": "para jogar a nossa partida, numa sociedade que estabelece regras que não os leva em conta, que não cuida deles.",
+      "input_token_count": 135,
+      "output_token_count": 30,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "131",
+      "position": 5,
+      "source_bp": "Com o esporte eu aprendi que a deficiência depende muito das regras do jogo.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nCom o esporte eu aprendi que a deficiência depende muito das regras do jogo."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nCom o esporte eu aprendi que a deficiência depende muito das regras do jogo.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Com o desporto aprendi que a deficiência depende muito das regras do jogo.",
+      "cleaned_candidate": "Com o desporto aprendi que a deficiência depende muito das regras do jogo.",
+      "input_token_count": 127,
+      "output_token_count": 22,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "132",
+      "position": 6,
+      "source_bp": "Por isso acredito que, se trocarmos algumas regras da nossa partida, podemos tornar a vida um pouco mais fácil para eles.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nPor isso acredito que, se trocarmos algumas regras da nossa partida, podemos tornar a vida um pouco mais fácil para eles."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nPor isso acredito que, se trocarmos algumas regras da nossa partida, podemos tornar a vida um pouco mais fácil para eles.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Por isso acredito que, se trocarmos algumas regras da nossa partida, podemos tornar a vida um pouco mais fácil para eles.",
+      "cleaned_candidate": "Por isso acredito que, se trocarmos algumas regras da nossa partida, podemos tornar a vida um pouco mais fácil para eles.",
+      "input_token_count": 135,
+      "output_token_count": 31,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "133",
+      "position": 7,
+      "source_bp": "Todos sabemos que existem pessoas com deficiência, vemos isso diariamente.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nTodos sabemos que existem pessoas com deficiência, vemos isso diariamente."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nTodos sabemos que existem pessoas com deficiência, vemos isso diariamente.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Todos sabemos que existem pessoas com deficiência, vemos isso diariamente.",
+      "cleaned_candidate": "Todos sabemos que existem pessoas com deficiência, vemos isso diariamente.",
+      "input_token_count": 122,
+      "output_token_count": 17,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "134.1",
+      "position": 8,
+      "source_bp": "Mas talvez por não termos contato direto com elas, não sejamos conscientes da problemática que enfrentam no dia a dia.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nMas talvez por não termos contato direto com elas, não sejamos conscientes da problemática que enfrentam no dia a dia."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nMas talvez por não termos contato direto com elas, não sejamos conscientes da problemática que enfrentam no dia a dia.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Mas talvez por não termos contacto direto com elas, não sejamos conscientes da problemática que enfrentam no dia a dia.",
+      "cleaned_candidate": "Mas talvez por não termos contacto direto com elas, não sejamos conscientes da problemática que enfrentam no dia a dia.",
+      "input_token_count": 133,
+      "output_token_count": 28,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "134.2",
+      "position": 9,
+      "source_bp": "Como é difícil subir em um ônibus, conseguir um trabalho, pegar o metrô, atravessar uma rua.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nComo é difícil subir em um ônibus, conseguir um trabalho, pegar o metrô, atravessar uma rua."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nComo é difícil subir em um ônibus, conseguir um trabalho, pegar o metrô, atravessar uma rua.<turn|>\n<|turn>model\n",
+      "raw_model_output": "Como é difícil subir num autocarro, conseguir um trabalho, apanhar o metro, atravessar uma rua.",
+      "cleaned_candidate": "Como é difícil subir num autocarro, conseguir um trabalho, apanhar o metro, atravessar uma rua.",
+      "input_token_count": 132,
+      "output_token_count": 30,
+      "technical_flags": []
+    },
+    {
+      "document_id": "ted2020-2568",
+      "passage_id": "ted2020-2568_s127-s135",
+      "sentence_id": "135",
+      "position": 10,
+      "source_bp": "É certo que há uma maior responsabilidade social em relação à inclusão de pessoas com deficiência.",
+      "system_id": "gemma-4-E4B-it",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nÉ certo que há uma maior responsabilidade social em relação à inclusão de pessoas com deficiência."
+        }
+      ],
+      "rendered_prompt": "<bos><|turn>user\nYou are given one sentence in Brazilian Portuguese.\n\nRewrite it in standard European Portuguese while preserving the original\nmeaning, wording, tone, and structure as much as possible.\n\nMake only changes that are necessary for an acceptable European Portuguese\nversion.\n\nDo not paraphrase, summarize, expand, explain, or stylistically improve the\nsentence.\n\nIf the original sentence is already acceptable in European Portuguese,\nreturn it unchanged.\n\nReturn only the rewritten sentence and no explanation.\n\nSource sentence:\nÉ certo que há uma maior responsabilidade social em relação à inclusão de pessoas com deficiência.<turn|>\n<|turn>model\n",
+      "raw_model_output": "É certo que há uma maior responsabilidade social em relação à inclusão de pessoas com deficiência.",
+      "cleaned_candidate": "É certo que há uma maior responsabilidade social em relação à inclusão de pessoas com deficiência.",
+      "input_token_count": 129,
+      "output_token_count": 24,
+      "technical_flags": []
+    }
+  ]
+}

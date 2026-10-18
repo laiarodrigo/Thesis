@@ -1,0 +1,700 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p02",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-2203_s26-s32"
+    ],
+    "displayed_segment_count": 100,
+    "judged_source_item_count": 10,
+    "candidate_judgment_count": 40,
+    "assignment_id": "dev01-p02",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {
+            "System-A": "Mas precisas de ter um dispositivo no topo das árvores, certo?",
+            "System-B": "Mas tens de ter um dispositivo no topo das árvores, certo?",
+            "System-C": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+            "System-D": "Mas você precisa ter um dispositivo no topo das árvores, certo?"
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {
+            "System-A": "Se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez possamos ter uma solução para este problema.",
+            "System-B": "Se conseguirmos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez possamos ter uma solução para este problema.",
+            "System-C": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+            "System-D": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de telemóveis e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {
+            "System-A": "Paremos por um instante, para falar sobre salvar a floresta.",
+            "System-B": "Paremos por um instante, para falar sobre salvar a floresta.",
+            "System-C": "Paremos por um instante, para falar sobre salvar a floresta.",
+            "System-D": "Paremos por um instante, para falar sobre salvar a floresta."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {
+            "System-A": "Todos nós já ouvimos falar disto.",
+            "System-B": "Todos nós já ouvimos falar sobre isso.",
+            "System-C": "Todos nós já ouvimos falar disto.",
+            "System-D": "Todos nós já ouvimos falar disto."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {
+            "System-A": "Minha geração ouviu falar disto desde quando éramos crianças.",
+            "System-B": "A minha geração ouviu falar disto desde que éramos crianças.",
+            "System-C": "Minha geração ouviu falar disto desde quando éramos crianças.",
+            "System-D": "A minha geração ouviu falar disto desde que éramos crianças."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {
+            "System-A": "Parece que a mensagem nunca muda.",
+            "System-B": "Parece que a mensagem nunca muda.",
+            "System-C": "Parece que a mensagem nunca muda.",
+            "System-D": "Parece que a mensagem nunca muda."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {
+            "System-A": "Salvemos as florestas tropicais, isso é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+            "System-B": "Salvemos as florestas tropicais, isso é muito urgente, ontem foi destruído o equivalente a tantos campos de futebol.",
+            "System-C": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+            "System-D": "\"Salvem as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\""
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {
+            "System-A": "Entretanto, hoje resta metade das florestas tropicais e há problemas potencialmente mais urgentes, como a mudança climática.",
+            "System-B": "Entretanto, metade das florestas tropicais restaram e há problemas potencialmente mais urgentes, como a mudança climática.",
+            "System-C": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+            "System-D": "Entretanto, hoje resta metade das florestas tropicais e há problemas potencialmente bem mais urgentes, como a mudança climática."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {
+            "System-A": "Eis um facto pouco conhecido do qual eu não me tinha dado conta: o desmatamento é responsável por mais gases de efeito de estufa do que todos os aviões, comboios, carros, camiões e navios do mundo juntos.",
+            "System-B": "Há um facto pouco conhecido que eu desconhecia: o desmatamento é responsável por mais gases com efeito de estufa do que todos os aviões, comboios, automóveis, camiões e navios do mundo juntos.",
+            "System-C": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+            "System-D": "É um facto pouco conhecido do qual eu não tinha me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, comboios, carros, camiões e navios do mundo juntos."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"26\"]",
+          "src": "Mas você precisa ter um dispositivo no topo das árvores, certo?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"27\"]",
+          "src": "Então se pudermos usar um dispositivo que possa ouvir os sons da floresta, conectá-lo à rede de celulares e enviar um alerta às pessoas em terra, talvez pudéssemos ter uma solução para este problema.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.1\"]",
+          "src": "Paremos por um instante, para falar sobre salvar a floresta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"28.2\"]",
+          "src": "Todos nós já ouvimos falar disto.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.1\"]",
+          "src": "Minha geração ouviu falar disto desde quando éramos crianças.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.2\"]",
+          "src": "Parece que a mensagem nunca muda.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"29.3\"]",
+          "src": "\"Salvemos as florestas tropicais, isto é muito urgente, ontem destruiu-se o equivalente a tantos campos de futebol.\"",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"30\"]",
+          "src": "Entretanto, hoje resta a metade das florestas tropicais e há problemas potencialmente brm mais urgentes, como a mudança climática.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]::[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"31\"]",
+          "src": "Eis um fato pouco conhecido do qual eu não havia me dado conta: o desmatamento é responsável por mais gases de efeito estufa do que todos os aviões, trens, carros, caminhões e navios do mundo juntos.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2203\",\"ted2020-2203_s26-s32\",\"32\"]",
+          "src": "Ele é também a segunda maior causa da mudança climática.",
+          "tgt": {
+            "System-A": "Ele é também a segunda maior causa da mudança climática.",
+            "System-B": "É também a segunda maior causa da mudança climática.",
+            "System-C": "Ele é também a segunda maior causa da mudança climática.",
+            "System-D": "Ele é também a segunda maior causa da mudança climática."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

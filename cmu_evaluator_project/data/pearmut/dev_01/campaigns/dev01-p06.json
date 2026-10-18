@@ -1,0 +1,700 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p06",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-2609_s82-s91"
+    ],
+    "displayed_segment_count": 100,
+    "judged_source_item_count": 10,
+    "candidate_judgment_count": 40,
+    "assignment_id": "dev01-p06",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {
+            "System-A": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+            "System-B": "O problema dos comboios urbanos é que, às vezes, temos de parar 5, 10, 15 vezes antes de chegar ao destino.",
+            "System-C": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+            "System-D": "O problema dos comboios urbanos é que, às vezes, temos de parar 5, 10, 15 vezes antes de chegarmos ao destino."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {
+            "System-A": "E se, nesse comboio, não tivéssemos que parar?",
+            "System-B": "E se, nesse comboio, não tivéssemos de parar?",
+            "System-C": "E se, nesse trem, não tivéssemos que parar?",
+            "System-D": "E se, nesse comboio, não tivéssemos de parar?"
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {
+            "System-A": "Neste comboio, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.",
+            "System-B": "Neste comboio, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias.",
+            "System-C": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+            "System-D": "Neste comboio, os vagões conseguem separar-se dinamicamente enquanto se movem e tornam-se autocarros expressos e sem condutor que se movem em vias secundárias."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {
+            "System-A": "E, sem uma paragem sequer, nem baldeações demoradas, estás sentado num autocarro que vai para o teu bairro.",
+            "System-B": "E, sem uma paragem sequer, nem baldeações demoradas, está sentado num autocarro que vai para o seu bairro.",
+            "System-C": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+            "System-D": "E, sem paragens ou trocas demoradas, estás sentado num autocarro que te leva até ao teu bairro."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {
+            "System-A": "E quanto estiveres perto, a secção onde estás sentado separa-se e conduz-te diretamente à tua porta.",
+            "System-B": "E quanto estiver perto, a secção onde está sentado separa-se e conduz-o diretamente à sua porta.",
+            "System-C": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+            "System-D": "À medida que se aproxima, a secção onde está sentado separa-se e conduz-o diretamente à sua porta."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {
+            "System-A": "É coletivo e individual ao mesmo tempo.",
+            "System-B": "É coletivo e individual ao mesmo tempo.",
+            "System-C": "É coletivo e individual ao mesmo tempo.",
+            "System-D": "É coletivo e individual ao mesmo tempo."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {
+            "System-A": "Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro.",
+            "System-B": "Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro.",
+            "System-C": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+            "System-D": "Este pode ser um dos veículos modulares, partilhados e sem condutor do futuro."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {
+            "System-A": "Agora",
+            "System-B": "Agora",
+            "System-C": "Agora",
+            "System-D": "Agora"
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {
+            "System-A": "Como se andar pela cidade com o zumbido de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+            "System-B": "Como se andar pela cidade com o zumbido de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico o suficiente, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+            "System-C": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+            "System-D": "Como se andar pela cidade com o zunido de drones, táxis aéreos, autocarros modulares e cabines magnéticas suspensas não fosse exótico o suficiente, acho que há outra força em ação que deixará o tráfego urbano fascinante."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"82\"]",
+          "src": "O problema dos trens urbanos é que, às vezes, temos que parar 5, 10, 15 vezes antes de chegar ao destino.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"83\"]",
+          "src": "E se, nesse trem, não tivéssemos que parar?",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"84\"]",
+          "src": "Nesse trem, os vagões conseguem separar-se dinamicamente enquanto se movem e se tornam ônibus expressos e sem motorista que se movem em vias secundárias.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"85\"]",
+          "src": "E, sem uma parada sequer, nem baldeações demoradas, você está sentado em um ônibus que vai para o seu bairro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"86\"]",
+          "src": "E quanto estiver perto, a seção onde está sentado se separa e o conduz diretamente à sua porta.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"87\"]",
+          "src": "É coletivo e individual ao mesmo tempo.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"88\"]",
+          "src": "Esse pode ser um dos veículos modulares, compartilhados e sem motorista do futuro.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"89\"]",
+          "src": "Agora",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]::[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"90\"]",
+          "src": "como se andar pela cidade com o zumbido de drones, táxis aéreos, ônibus modulares e cabines magnéticas suspensas não fosse exótico o bastante, acho que há outra força em ação que deixará o tráfego urbano fascinante.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-2609\",\"ted2020-2609_s82-s91\",\"91\"]",
+          "src": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+          "tgt": {
+            "System-A": "Se pararem para pensar, a atual geração de carros sem condutores está a tentar ganhar o seu espaço em meio à rede de tráfego feita por e para humanos.",
+            "System-B": "Se pararem para pensar, a atual geração de carros sem condutores está a tentar ganhar o seu espaço no meio da rede de tráfego feita por e para humanos.",
+            "System-C": "Se pararem pra pensar, a atual geração de carros sem motoristas está tentando ganhar seu espaço em meio à rede de tráfego feita por e para humanos.",
+            "System-D": "Se pararem para pensar, a atual geração de carros sem condutor está a tentar ganhar espaço na rede de tráfego feita por e para humanos."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,579 @@
+{
+  "info": {
+    "assignment": "task-based",
+    "protocol": "cESA",
+    "instructions": "<h2>Task</h2>\n<p>Evaluate each candidate as a conservative rewrite from Brazilian Portuguese into standard European Portuguese.</p>\n<p>A good rewrite should:</p>\n<ol>\n<li>preserve the source meaning;</li>\n<li>be acceptable European Portuguese in the same context and register;</li>\n<li>make BP→EP changes that are actually needed;</li>\n<li>avoid unnecessary rewriting or paraphrasing;</li>\n<li>be grammatical and natural;</li>\n<li>remain consistent with the surrounding passage.</li>\n</ol>\n<h2>Marking errors</h2>\n<p>Highlight the smallest candidate span that identifies each error.</p>\n<p>Mark separate errors separately.</p>\n<p>Use <strong>Minor</strong> for a localized problem when the candidate is still essentially a valid conservative European Portuguese rewrite.</p>\n<p>Use <strong>Major</strong> when the problem materially fails the task, such as:</p>\n<ul>\n<li>changed, missing, or unsupported meaning;</li>\n<li>a clearly required BP→EP change left undone;</li>\n<li>a clearly inappropriate European Portuguese form;</li>\n<li>substantial unnecessary rewriting;</li>\n<li>a serious grammatical or contextual problem.</li>\n</ul>\n<p>Use <code>[MISSING]</code> only when source meaning or discourse function is absent. If the same meaning is expressed through another grammatical construction, do not use <code>[MISSING]</code>; evaluate that construction instead.</p>\n<p>Judge dependent changes that belong to the same grammatical construction together, rather than as separate errors.</p>\n<p>An unnecessary punctuation change is normally Minor unless it materially affects meaning or structure.</p>\n<h2>Important</h2>\n<p>Copying the source can be fully correct when no BP→EP change is needed.</p>\n<p>Do not penalize a candidate merely because another valid European Portuguese wording is possible.</p>\n<p>Do not reward unnecessary stylistic improvement or paraphrasing.</p>\n<p>A clearly Brazilian Portuguese form that requires adaptation is Major.</p>\n<p>Do not mark a form as an error only because another form is more frequent or preferred in European Portuguese.</p>\n<p>Use the surrounding passage only to interpret the current sentence and check consistency. Judge only the current candidate.</p>\n<p>BP <code>você</code> has no single mandatory EP replacement. Depending on context and register, <code>você não encontra</code>, <code>não encontra</code>, <code>tu não encontras</code>, or <code>não encontras</code> may be acceptable. Portuguese is pro-drop: do not use <code>[MISSING]</code> merely because an explicit <code>você</code> is omitted while the same addressee is preserved. Do not penalize retained <code>você</code> solely for being explicit. Mark a form only when it is clearly unnatural, grammatically inconsistent, or inappropriate for the passage; explicit <code>tu</code> requires second-person agreement (<code>tu não encontras</code>, not <code>tu não encontra</code>). Accept all natural meaning-preserving realizations rather than enforcing one canonical reference. Use passage context only for supported address/register consistency; do not invent a social relationship. An unnatural or inconsistent choice is usually Minor when meaning remains clear and Major only when it materially changes meaning, the addressee, or their communicative relationship.</p>\n<p>If two candidates are exactly identical for the same source and context, give them the same spans, severities, and score.</p>\n<h2>Score</h2>\n<p><strong>85–100:</strong> Very good<br><strong>65–80:</strong> Good<br><strong>45–60:</strong> Acceptable<br><strong>25–40:</strong> Borderline<br><strong>0–20:</strong> Not acceptable</p>\n<p>If you mark no errors, give the candidate a score of <strong>100</strong>.</p>\n<p>Use the comment field for genuinely uncertain or unusual cases.</p>\n",
+    "textfield": "visible",
+    "show_model_names": false,
+    "show_progress": true,
+    "shuffle": false,
+    "special_tokens": [
+      "[MISSING]"
+    ]
+  },
+  "campaign_id": "ted2020_dev01_p01",
+  "metadata": {
+    "page_layout": "one_sentence_per_page_with_full_source_context",
+    "passage_ids": [
+      "ted2020-18219_s30-s37"
+    ],
+    "displayed_segment_count": 81,
+    "judged_source_item_count": 9,
+    "candidate_judgment_count": 36,
+    "assignment_id": "dev01-p01",
+    "annotator_id": "rodrigo"
+  },
+  "data": [
+    [
+      [
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {
+            "System-A": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+            "System-B": "E isso é o que foi feito neste novo campo da robótica, chamado de “robótica mole”, cujo principal objetivo não é construir máquinas superprecisas, porque já as temos, mas sim construir robôs capazes de lidar com situações inesperadas no mundo real, capazes então de ir lá fora.",
+            "System-C": "E isto é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+            "System-D": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {
+            "System-A": "E o que faz um robô ser mole, primeiro de tudo, é o seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais ligações rígidas, e também, para os poderes a mover, usamos o que chamamos de estímulo distribuído.",
+            "System-B": "E o que torna um robô mole é, em primeiro lugar, o seu corpo inteiro, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais ligações rígidas, e, para os movimentar, usamos o que chamamos de estímulo distribuído.",
+            "System-C": "E o que faz um robô ser mole, primeiro de tudo, é o seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para os mover, usamos o que chamamos de estímulo distribuído.",
+            "System-D": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {
+            "System-A": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+            "System-B": "Temos que controlar continuamente o molde desse corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo nenhuma estrutura dura.",
+            "System-C": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+            "System-D": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {
+            "System-A": "Então imaginas que montar um robô mole é um processo muito diferente do que robótica dura, com ligações, engrenagens, parafusos que precisamos de combinar de uma maneira precisa.",
+            "System-B": "Imagina que montar um robô simples é um processo muito diferente da robótica avançada, com ligações, engrenagens e parafusos que temos de combinar de forma precisa.",
+            "System-C": "Então imagina que montar um robô mole é um processo muito diferente do que a robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+            "System-D": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {
+            "System-A": "Em robôs moles, só montas o teu estímulo do zero na maioria das vezes, mas moldas o teu material flexível à forma que responda a um certo input.",
+            "System-B": "Nos robôs moles, a maioria dos estímulos é construída a partir de zero, mas o material flexível é moldado para responder a um determinado input.",
+            "System-C": "Em robôs moles, tu só montas o teu estímulo do zero na maioria das vezes, mas tu moldas o teu material flexível à forma que responda a um certo *input*.",
+            "System-D": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {
+            "System-A": "Por exemplo, podes só deformar uma estrutura ao fazer um molde relativamente complexo se pensares em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+            "System-B": "Por exemplo, é possível apenas deformar uma estrutura ao fazer um molde relativamente complexo, ao invés de fazer o mesmo com ligações e junções rígidas, e aqui, o que se usa é apenas uma entrada, como a pressão do ar.",
+            "System-C": "Por exemplo, pode-se apenas deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com elos e junções rígidos, e aqui, o que se usa é só uma entrada, como pressão de ar.",
+            "System-D": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {
+            "System-A": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+            "System-B": "Mas vejamos alguns exemplos de robôs macios.",
+            "System-C": "Mas vejamos alguns exemplos bacanos de robôs moles.",
+            "System-D": "Mas vejamos alguns exemplos bacanas de robôs moles."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {
+            "System-A": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas ao seu corpo, e graças à flexibilidade, ele também pode esgueirar-se sob uma ponte, continuar a andar, e então continuar a caminhar de uma forma ligeiramente diferente depois.",
+            "System-B": "Aqui está um pequeno e fofo robô, desenvolvido na Universidade de Harvard, que caminha graças às ondas de pressão aplicadas ao seu corpo, e, devido à sua flexibilidade, também consegue esgueirar-se sob uma ponte, continuar a andar e depois continuar a andar de uma forma ligeiramente diferente.",
+            "System-C": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas no seu corpo, e graças à flexibilidade, ele também pode esgueirar-se por baixo de uma ponte, continuar a andar, e depois continuar a caminhar um pouco diferente.",
+            "System-D": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {},
+          "context_only": true
+        }
+      ],
+      [
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"30\"]",
+          "src": "E isso é o que foi feito neste novo campo da robótica, que se chama \"robótica mole\", cujo principal objetivo não é montar máquinas superprecisas, porque já as temos, mas construir robôs capazes de enfrentar situações inesperadas no mundo real, capazes então de ir lá fora.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.1\"]",
+          "src": "E o que faz um robô ser mole, primeiro de tudo, é seu corpo todo, que é feito de materiais ou estruturas que podem sofrer grandes deformações, sem ter mais conexões rígidas, e também, para movê-los, usamos o que chamamos de estímulo distribuído.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"31.2\"]",
+          "src": "Temos de controlar continuamente o molde deste corpo muito flexível, o que tem o efeito de ter várias conexões e junções, mesmo não tendo qualquer estrutura dura.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"32\"]",
+          "src": "Então você imagina que montar um robô mole é um processo muito diferente do que robótica dura, com conexões, engrenagens, parafusos que precisamos combinar de uma maneira precisa.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"33\"]",
+          "src": "Em robôs moles, você só monta seu estímulo do zero na maioria das vezes, mas você molda seu material flexível à forma que responda a um certo input.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"34\"]",
+          "src": "Por exemplo, você pode só deformar uma estrutura ao fazer um molde relativamente complexo se pensar em fazer o mesmo com links e junções rígidos, e aqui, o que se usa é só um input, como pressão do ar.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"35\"]",
+          "src": "Mas vejamos alguns exemplos bacanas de robôs moles.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "context::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]::[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"36\"]",
+          "src": "Aqui está um pequeno e fofo robô desenvolvido na Universidade de Harvard, e ele caminha graças às ondas de pressão aplicadas em seu corpo, e graças à flexibilidade, ele também pode se esgueirar sob uma ponte, continuar a andar, e então continuar a caminhar um pouco diferente depois.",
+          "tgt": {},
+          "context_only": true
+        },
+        {
+          "item_id": "[\"ted2020-18219\",\"ted2020-18219_s30-s37\",\"37\"]",
+          "src": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele...",
+          "tgt": {
+            "System-A": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser libertada livremente e enfrentar interações reais do mundo como um carro a passar por cima dele...",
+            "System-B": "Este é um protótipo muito rudimentar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser libertada livremente e enfrentar interações reais do mundo, como um carro a passar por cima dela...",
+            "System-C": "Isto é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser lançada livremente e enfrentar interações reais do mundo como um carro a passar por cima dele...arecent",
+            "System-D": "Isso é um protótipo bem preliminar, mas eles também criaram uma versão mais robusta com bateria integrada que pode ser liberada livremente e enfrentar interações reais do mundo como um carro passando por cima dele..."
+          },
+          "instructions": "<strong>Current sentence — annotate the candidates below.</strong>"
+        }
+      ]
+    ]
+  ]
+}

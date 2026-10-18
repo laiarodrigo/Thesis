@@ -1,0 +1,731 @@
+{
+  "artifact_hashes": {
+    "blind_evaluation_input_sha256": "e0e3f358a763885afc6c336e1278bbf7affc905b24352acbce1b66fe47024f52",
+    "canonical_dev_sha256": "542f76bc2d17a093a86528fdd6d2be2f59326b8b835a4d5e65a322b14eab57bb",
+    "demonstration_payload_sha256": "da5d0bf157a902cbc51341c390b228772b83c46e52b800149e0e08a8fea3c2ad",
+    "stage1_demonstration_appendix_sha256": "7afc2f90ea84087122f7dd360b163dff16a51a0929ab2dc8df8d9ad05dfce15c",
+    "stage2_demonstration_appendix_sha256": "16ab381cbf54858533af6c8d977f50da2dec4f9bbd0f312262e20520725881fb"
+  },
+  "counts": {
+    "demonstration_documents": 2,
+    "demonstration_source_sentences": 8,
+    "demonstrations": 8,
+    "evaluation_by_system": {
+      "B4-D-G-PTBR": 24,
+      "B4-D-GF-PTBR": 24,
+      "copy": 24,
+      "gemma-4-E4B-it": 24
+    },
+    "evaluation_documents": 8,
+    "evaluation_judgments": 96,
+    "evaluation_source_sentences": 24,
+    "new_judgments": 84,
+    "previously_inspected_judgments": 12,
+    "source_documents": 10
+  },
+  "demonstration_documents": [
+    "ted2020-2203",
+    "ted2020-27951"
+  ],
+  "demonstration_text_hashes": {
+    "exact_sha256": [
+      "0297a51872f0cd09b8cc141668c5f31a42e0db9ccf7894c08d1dc85d5b0b44f7",
+      "24737d7a8fccb5ea45b83866863c359de4143eca5422557604a28c0c3e5592b9",
+      "3da63204bac13c5d3d2309097716a5d291798727114dbaa5c8571ef4f799e543",
+      "5c673f120505ae36c4e8609670bef7723122bd873bf5dd9c9712b754ce42a7a7",
+      "620dfbfe86b19fa32b0480aa14e489a724f4849bff7e9405181e020883415822",
+      "78a4ce85644f151d7f8a153ddf8e270b50550e13c0592471ac7606d783f44e60",
+      "8cb2fc3d66aed1def58a40118ebc20bf98a14e580a82f8f5b82c1ee376fae9f9",
+      "965182dc033e6d1bdc69f70caea3c3dff45897481370440fffb49d78e19dda50",
+      "a9f27b83f333946dce37aac5b09f61c04f4453441d0b62aa8e48a965baa7e5af",
+      "b9502654c4ca29bfac2db04a34bee1cac5a7b5f0443f05f528cdb46e70e41302",
+      "be35e0bf5e3f06f32d6ea4cf0c3d8161ad601ee270f0bbb267d49abe8c72d1b7",
+      "c36e022d66b87a840d3181322708b59dae662bf566666e09e520fcc344365235",
+      "e72862eae9e8fe686de0e5283534d936ad2b88336e46a8d1982d113576f3ceba"
+    ],
+    "normalized_nfkc_casefold_whitespace_sha256": [
+      "09cecf9d851b4334a30f797360c70e3b003976c9b33475d5f24a65914d6835f4",
+      "0ee70598e167232a39fe157c229ed2be60eccc825e7e18e843faebd011dda123",
+      "0f502d6b6276db2c735337df6a1bbd84ae8bb346ec314339f9b2ec3baba77900",
+      "1a87fc1b644092dca6646c27e7fcce5947cecd14cf0518a48c68b07202aed100",
+      "20d3532c66e1c2844f554c7eb2bc4c4f4d40571ccc8d80f9b74c58ca72e94939",
+      "4360d87957c50b0acaabf7d61a51543a5c5efb6088c4973114ec42d9f6afc201",
+      "55bc513f31a53c4b27a15fb9ccb4a81580c30c9e7ab5e4798e009dcc82a395be",
+      "6b69db42b86797226ca7259c54927b3ec7c7b7affc87b201c93e7db7e42c1234",
+      "8b6fb991f63a21100951bf6a61f5da8f0456c992196bae1fd7eb0ce7504cb25a",
+      "b163c4abb4c21ea0ecdba2529b14d8ea6379c5f60eb3ca8afa745d7f528e46c4",
+      "bdff880e19755f5710555af75b6c2425df1a17be7efe36daec72b7ab78e3d08c",
+      "e172bd06bc5afdd0cbc175a1609a2311d4832cab082effc4e45177c6dd8303b0",
+      "e9c63655dfc3ec29c9a24655b8730cf267de1a9964cbdc76f85f8df10ac65519"
+    ]
+  },
+  "demonstrations": [
+    {
+      "coverage_category": "correct_ep",
+      "coverage_note": "error-free score-100 adaptation",
+      "document_id": "ted2020-2203",
+      "evaluation_id": "dev-v0-0045",
+      "major_error_count": 0,
+      "minor_error_count": 0,
+      "missing_error_count": 0,
+      "order": 1,
+      "passage_id": "ted2020-2203_s26-s32",
+      "position": 3,
+      "score": 100,
+      "sentence_id": "28.1"
+    },
+    {
+      "coverage_category": "correct_ep",
+      "coverage_note": "error-free score-100 adaptation",
+      "document_id": "ted2020-27951",
+      "evaluation_id": "dev-v0-0134",
+      "major_error_count": 0,
+      "minor_error_count": 0,
+      "missing_error_count": 0,
+      "order": 2,
+      "passage_id": "ted2020-27951_s18-s27",
+      "position": 5,
+      "score": 100,
+      "sentence_id": "22"
+    },
+    {
+      "coverage_category": "bp_retention_major",
+      "coverage_note": "important BP construction retained",
+      "document_id": "ted2020-2203",
+      "evaluation_id": "dev-v0-0037",
+      "major_error_count": 1,
+      "minor_error_count": 0,
+      "missing_error_count": 0,
+      "order": 3,
+      "passage_id": "ted2020-2203_s26-s32",
+      "position": 1,
+      "score": 0,
+      "sentence_id": "26"
+    },
+    {
+      "coverage_category": "bp_retention_major",
+      "coverage_note": "important BP construction retained",
+      "document_id": "ted2020-27951",
+      "evaluation_id": "dev-v0-0121",
+      "major_error_count": 1,
+      "minor_error_count": 0,
+      "missing_error_count": 0,
+      "order": 4,
+      "passage_id": "ted2020-27951_s18-s27",
+      "position": 2,
+      "score": 0,
+      "sentence_id": "19"
+    },
+    {
+      "coverage_category": "missing_content",
+      "coverage_note": "gold contains one Minor [MISSING]",
+      "document_id": "ted2020-2203",
+      "evaluation_id": "dev-v0-0042",
+      "major_error_count": 0,
+      "minor_error_count": 2,
+      "missing_error_count": 1,
+      "order": 5,
+      "passage_id": "ted2020-2203_s26-s32",
+      "position": 2,
+      "score": 55,
+      "sentence_id": "27"
+    },
+    {
+      "coverage_category": "missing_content",
+      "coverage_note": "gold contains one Minor [MISSING]",
+      "document_id": "ted2020-27951",
+      "evaluation_id": "dev-v0-0142",
+      "major_error_count": 0,
+      "minor_error_count": 1,
+      "missing_error_count": 1,
+      "order": 6,
+      "passage_id": "ted2020-27951_s18-s27",
+      "position": 7,
+      "score": 95,
+      "sentence_id": "24"
+    },
+    {
+      "coverage_category": "conservative_rewriting",
+      "coverage_note": "unnecessary structural rewrite",
+      "document_id": "ted2020-2203",
+      "evaluation_id": "dev-v0-0067",
+      "major_error_count": 1,
+      "minor_error_count": 0,
+      "missing_error_count": 0,
+      "order": 7,
+      "passage_id": "ted2020-2203_s26-s32",
+      "position": 8,
+      "score": 35,
+      "sentence_id": "30"
+    },
+    {
+      "coverage_category": "conservative_rewriting",
+      "coverage_note": "localized Minor paraphrase",
+      "document_id": "ted2020-27951",
+      "evaluation_id": "dev-v0-0148",
+      "major_error_count": 0,
+      "minor_error_count": 1,
+      "missing_error_count": 0,
+      "order": 8,
+      "passage_id": "ted2020-27951_s18-s27",
+      "position": 8,
+      "score": 60,
+      "sentence_id": "25"
+    }
+  ],
+  "evaluation_documents": [
+    "ted2020-18219",
+    "ted2020-2433",
+    "ted2020-24360",
+    "ted2020-2609",
+    "ted2020-1663",
+    "ted2020-2860",
+    "ted2020-1886",
+    "ted2020-946"
+  ],
+  "evaluation_groups": [
+    {
+      "document_id": "ted2020-18219",
+      "evaluation_ids": [
+        "dev-v0-0013",
+        "dev-v0-0014",
+        "dev-v0-0015",
+        "dev-v0-0016"
+      ],
+      "passage_id": "ted2020-18219_s30-s37",
+      "position": 4,
+      "previously_inspected": false,
+      "sentence_id": "32"
+    },
+    {
+      "document_id": "ted2020-18219",
+      "evaluation_ids": [
+        "dev-v0-0017",
+        "dev-v0-0018",
+        "dev-v0-0019",
+        "dev-v0-0020"
+      ],
+      "passage_id": "ted2020-18219_s30-s37",
+      "position": 5,
+      "previously_inspected": false,
+      "sentence_id": "33"
+    },
+    {
+      "document_id": "ted2020-18219",
+      "evaluation_ids": [
+        "dev-v0-0029",
+        "dev-v0-0030",
+        "dev-v0-0031",
+        "dev-v0-0032"
+      ],
+      "passage_id": "ted2020-18219_s30-s37",
+      "position": 8,
+      "previously_inspected": false,
+      "sentence_id": "36"
+    },
+    {
+      "document_id": "ted2020-2433",
+      "evaluation_ids": [
+        "dev-v0-0081",
+        "dev-v0-0082",
+        "dev-v0-0083",
+        "dev-v0-0084"
+      ],
+      "passage_id": "ted2020-2433_s21-s30",
+      "position": 2,
+      "previously_inspected": false,
+      "sentence_id": "22"
+    },
+    {
+      "document_id": "ted2020-2433",
+      "evaluation_ids": [
+        "dev-v0-0101",
+        "dev-v0-0102",
+        "dev-v0-0103",
+        "dev-v0-0104"
+      ],
+      "passage_id": "ted2020-2433_s21-s30",
+      "position": 7,
+      "previously_inspected": false,
+      "sentence_id": "27"
+    },
+    {
+      "document_id": "ted2020-2433",
+      "evaluation_ids": [
+        "dev-v0-0109",
+        "dev-v0-0110",
+        "dev-v0-0111",
+        "dev-v0-0112"
+      ],
+      "passage_id": "ted2020-2433_s21-s30",
+      "position": 9,
+      "previously_inspected": false,
+      "sentence_id": "29"
+    },
+    {
+      "document_id": "ted2020-24360",
+      "evaluation_ids": [
+        "dev-v0-0165",
+        "dev-v0-0166",
+        "dev-v0-0167",
+        "dev-v0-0168"
+      ],
+      "passage_id": "ted2020-24360_s25-s33",
+      "position": 3,
+      "previously_inspected": true,
+      "sentence_id": "27"
+    },
+    {
+      "document_id": "ted2020-24360",
+      "evaluation_ids": [
+        "dev-v0-0169",
+        "dev-v0-0170",
+        "dev-v0-0171",
+        "dev-v0-0172"
+      ],
+      "passage_id": "ted2020-24360_s25-s33",
+      "position": 4,
+      "previously_inspected": false,
+      "sentence_id": "28"
+    },
+    {
+      "document_id": "ted2020-24360",
+      "evaluation_ids": [
+        "dev-v0-0177",
+        "dev-v0-0178",
+        "dev-v0-0179",
+        "dev-v0-0180"
+      ],
+      "passage_id": "ted2020-24360_s25-s33",
+      "position": 6,
+      "previously_inspected": false,
+      "sentence_id": "30"
+    },
+    {
+      "document_id": "ted2020-2609",
+      "evaluation_ids": [
+        "dev-v0-0201",
+        "dev-v0-0202",
+        "dev-v0-0203",
+        "dev-v0-0204"
+      ],
+      "passage_id": "ted2020-2609_s82-s91",
+      "position": 3,
+      "previously_inspected": false,
+      "sentence_id": "84"
+    },
+    {
+      "document_id": "ted2020-2609",
+      "evaluation_ids": [
+        "dev-v0-0205",
+        "dev-v0-0206",
+        "dev-v0-0207",
+        "dev-v0-0208"
+      ],
+      "passage_id": "ted2020-2609_s82-s91",
+      "position": 4,
+      "previously_inspected": true,
+      "sentence_id": "85"
+    },
+    {
+      "document_id": "ted2020-2609",
+      "evaluation_ids": [
+        "dev-v0-0217",
+        "dev-v0-0218",
+        "dev-v0-0219",
+        "dev-v0-0220"
+      ],
+      "passage_id": "ted2020-2609_s82-s91",
+      "position": 7,
+      "previously_inspected": false,
+      "sentence_id": "88"
+    },
+    {
+      "document_id": "ted2020-1663",
+      "evaluation_ids": [
+        "dev-v0-0237",
+        "dev-v0-0238",
+        "dev-v0-0239",
+        "dev-v0-0240"
+      ],
+      "passage_id": "ted2020-1663_s7-s16",
+      "position": 2,
+      "previously_inspected": false,
+      "sentence_id": "8"
+    },
+    {
+      "document_id": "ted2020-1663",
+      "evaluation_ids": [
+        "dev-v0-0253",
+        "dev-v0-0254",
+        "dev-v0-0255",
+        "dev-v0-0256"
+      ],
+      "passage_id": "ted2020-1663_s7-s16",
+      "position": 6,
+      "previously_inspected": false,
+      "sentence_id": "12"
+    },
+    {
+      "document_id": "ted2020-1663",
+      "evaluation_ids": [
+        "dev-v0-0269",
+        "dev-v0-0270",
+        "dev-v0-0271",
+        "dev-v0-0272"
+      ],
+      "passage_id": "ted2020-1663_s7-s16",
+      "position": 10,
+      "previously_inspected": false,
+      "sentence_id": "16"
+    },
+    {
+      "document_id": "ted2020-2860",
+      "evaluation_ids": [
+        "dev-v0-0285",
+        "dev-v0-0286",
+        "dev-v0-0287",
+        "dev-v0-0288"
+      ],
+      "passage_id": "ted2020-2860_s124-s133",
+      "position": 4,
+      "previously_inspected": false,
+      "sentence_id": "127"
+    },
+    {
+      "document_id": "ted2020-2860",
+      "evaluation_ids": [
+        "dev-v0-0293",
+        "dev-v0-0294",
+        "dev-v0-0295",
+        "dev-v0-0296"
+      ],
+      "passage_id": "ted2020-2860_s124-s133",
+      "position": 6,
+      "previously_inspected": false,
+      "sentence_id": "129"
+    },
+    {
+      "document_id": "ted2020-2860",
+      "evaluation_ids": [
+        "dev-v0-0305",
+        "dev-v0-0306",
+        "dev-v0-0307",
+        "dev-v0-0308"
+      ],
+      "passage_id": "ted2020-2860_s124-s133",
+      "position": 9,
+      "previously_inspected": false,
+      "sentence_id": "132"
+    },
+    {
+      "document_id": "ted2020-1886",
+      "evaluation_ids": [
+        "dev-v0-0317",
+        "dev-v0-0318",
+        "dev-v0-0319",
+        "dev-v0-0320"
+      ],
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 2,
+      "previously_inspected": false,
+      "sentence_id": "24"
+    },
+    {
+      "document_id": "ted2020-1886",
+      "evaluation_ids": [
+        "dev-v0-0321",
+        "dev-v0-0322",
+        "dev-v0-0323",
+        "dev-v0-0324"
+      ],
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 3,
+      "previously_inspected": false,
+      "sentence_id": "25"
+    },
+    {
+      "document_id": "ted2020-1886",
+      "evaluation_ids": [
+        "dev-v0-0349",
+        "dev-v0-0350",
+        "dev-v0-0351",
+        "dev-v0-0352"
+      ],
+      "passage_id": "ted2020-1886_s23-s32",
+      "position": 10,
+      "previously_inspected": false,
+      "sentence_id": "32"
+    },
+    {
+      "document_id": "ted2020-946",
+      "evaluation_ids": [
+        "dev-v0-0353",
+        "dev-v0-0354",
+        "dev-v0-0355",
+        "dev-v0-0356"
+      ],
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 1,
+      "previously_inspected": false,
+      "sentence_id": "43"
+    },
+    {
+      "document_id": "ted2020-946",
+      "evaluation_ids": [
+        "dev-v0-0357",
+        "dev-v0-0358",
+        "dev-v0-0359",
+        "dev-v0-0360"
+      ],
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 2,
+      "previously_inspected": false,
+      "sentence_id": "44"
+    },
+    {
+      "document_id": "ted2020-946",
+      "evaluation_ids": [
+        "dev-v0-0361",
+        "dev-v0-0362",
+        "dev-v0-0363",
+        "dev-v0-0364"
+      ],
+      "passage_id": "ted2020-946_s43-s51",
+      "position": 3,
+      "previously_inspected": true,
+      "sentence_id": "45"
+    }
+  ],
+  "evaluation_ids": [
+    "dev-v0-0013",
+    "dev-v0-0014",
+    "dev-v0-0015",
+    "dev-v0-0016",
+    "dev-v0-0017",
+    "dev-v0-0018",
+    "dev-v0-0019",
+    "dev-v0-0020",
+    "dev-v0-0029",
+    "dev-v0-0030",
+    "dev-v0-0031",
+    "dev-v0-0032",
+    "dev-v0-0081",
+    "dev-v0-0082",
+    "dev-v0-0083",
+    "dev-v0-0084",
+    "dev-v0-0101",
+    "dev-v0-0102",
+    "dev-v0-0103",
+    "dev-v0-0104",
+    "dev-v0-0109",
+    "dev-v0-0110",
+    "dev-v0-0111",
+    "dev-v0-0112",
+    "dev-v0-0165",
+    "dev-v0-0166",
+    "dev-v0-0167",
+    "dev-v0-0168",
+    "dev-v0-0169",
+    "dev-v0-0170",
+    "dev-v0-0171",
+    "dev-v0-0172",
+    "dev-v0-0177",
+    "dev-v0-0178",
+    "dev-v0-0179",
+    "dev-v0-0180",
+    "dev-v0-0201",
+    "dev-v0-0202",
+    "dev-v0-0203",
+    "dev-v0-0204",
+    "dev-v0-0205",
+    "dev-v0-0206",
+    "dev-v0-0207",
+    "dev-v0-0208",
+    "dev-v0-0217",
+    "dev-v0-0218",
+    "dev-v0-0219",
+    "dev-v0-0220",
+    "dev-v0-0237",
+    "dev-v0-0238",
+    "dev-v0-0239",
+    "dev-v0-0240",
+    "dev-v0-0253",
+    "dev-v0-0254",
+    "dev-v0-0255",
+    "dev-v0-0256",
+    "dev-v0-0269",
+    "dev-v0-0270",
+    "dev-v0-0271",
+    "dev-v0-0272",
+    "dev-v0-0285",
+    "dev-v0-0286",
+    "dev-v0-0287",
+    "dev-v0-0288",
+    "dev-v0-0293",
+    "dev-v0-0294",
+    "dev-v0-0295",
+    "dev-v0-0296",
+    "dev-v0-0305",
+    "dev-v0-0306",
+    "dev-v0-0307",
+    "dev-v0-0308",
+    "dev-v0-0317",
+    "dev-v0-0318",
+    "dev-v0-0319",
+    "dev-v0-0320",
+    "dev-v0-0321",
+    "dev-v0-0322",
+    "dev-v0-0323",
+    "dev-v0-0324",
+    "dev-v0-0349",
+    "dev-v0-0350",
+    "dev-v0-0351",
+    "dev-v0-0352",
+    "dev-v0-0353",
+    "dev-v0-0354",
+    "dev-v0-0355",
+    "dev-v0-0356",
+    "dev-v0-0357",
+    "dev-v0-0358",
+    "dev-v0-0359",
+    "dev-v0-0360",
+    "dev-v0-0361",
+    "dev-v0-0362",
+    "dev-v0-0363",
+    "dev-v0-0364"
+  ],
+  "experiment_id": "gemma31b-g0-g1-dev-v1",
+  "leakage_audit": {
+    "demonstration_candidate_absent_from_evaluation": "PASS",
+    "demonstration_source_sentence_absent_from_evaluation": "PASS",
+    "demonstration_source_sentences_unique": "PASS",
+    "document_disjoint": "PASS",
+    "evaluation_gold_fields_in_blind_input": 0,
+    "exact_cross_pool_text_duplicates": 0,
+    "four_candidates_per_evaluation_sentence": "PASS",
+    "normalized_cross_pool_text_duplicates": 0,
+    "shared_g0_g1_evaluation_input": "PASS",
+    "test_data_loaded": false
+  },
+  "model": {
+    "deterministic": true,
+    "dtype": "bfloat16",
+    "model_id": "google/gemma-4-31B-it",
+    "quantization": null,
+    "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+    "thinking": false
+  },
+  "new_evaluation_ids": [
+    "dev-v0-0013",
+    "dev-v0-0014",
+    "dev-v0-0015",
+    "dev-v0-0016",
+    "dev-v0-0017",
+    "dev-v0-0018",
+    "dev-v0-0019",
+    "dev-v0-0020",
+    "dev-v0-0029",
+    "dev-v0-0030",
+    "dev-v0-0031",
+    "dev-v0-0032",
+    "dev-v0-0081",
+    "dev-v0-0082",
+    "dev-v0-0083",
+    "dev-v0-0084",
+    "dev-v0-0101",
+    "dev-v0-0102",
+    "dev-v0-0103",
+    "dev-v0-0104",
+    "dev-v0-0109",
+    "dev-v0-0110",
+    "dev-v0-0111",
+    "dev-v0-0112",
+    "dev-v0-0169",
+    "dev-v0-0170",
+    "dev-v0-0171",
+    "dev-v0-0172",
+    "dev-v0-0177",
+    "dev-v0-0178",
+    "dev-v0-0179",
+    "dev-v0-0180",
+    "dev-v0-0201",
+    "dev-v0-0202",
+    "dev-v0-0203",
+    "dev-v0-0204",
+    "dev-v0-0217",
+    "dev-v0-0218",
+    "dev-v0-0219",
+    "dev-v0-0220",
+    "dev-v0-0237",
+    "dev-v0-0238",
+    "dev-v0-0239",
+    "dev-v0-0240",
+    "dev-v0-0253",
+    "dev-v0-0254",
+    "dev-v0-0255",
+    "dev-v0-0256",
+    "dev-v0-0269",
+    "dev-v0-0270",
+    "dev-v0-0271",
+    "dev-v0-0272",
+    "dev-v0-0285",
+    "dev-v0-0286",
+    "dev-v0-0287",
+    "dev-v0-0288",
+    "dev-v0-0293",
+    "dev-v0-0294",
+    "dev-v0-0295",
+    "dev-v0-0296",
+    "dev-v0-0305",
+    "dev-v0-0306",
+    "dev-v0-0307",
+    "dev-v0-0308",
+    "dev-v0-0317",
+    "dev-v0-0318",
+    "dev-v0-0319",
+    "dev-v0-0320",
+    "dev-v0-0321",
+    "dev-v0-0322",
+    "dev-v0-0323",
+    "dev-v0-0324",
+    "dev-v0-0349",
+    "dev-v0-0350",
+    "dev-v0-0351",
+    "dev-v0-0352",
+    "dev-v0-0353",
+    "dev-v0-0354",
+    "dev-v0-0355",
+    "dev-v0-0356",
+    "dev-v0-0357",
+    "dev-v0-0358",
+    "dev-v0-0359",
+    "dev-v0-0360"
+  ],
+  "previously_inspected_evaluation_ids": [
+    "dev-v0-0165",
+    "dev-v0-0166",
+    "dev-v0-0167",
+    "dev-v0-0168",
+    "dev-v0-0205",
+    "dev-v0-0206",
+    "dev-v0-0207",
+    "dev-v0-0208",
+    "dev-v0-0361",
+    "dev-v0-0362",
+    "dev-v0-0363",
+    "dev-v0-0364"
+  ],
+  "prompt_hashes": {
+    "stage1": "fde2e0a7224edd694c66268d40d4a5f448e5e617a362b0bdb69e3803650f90ed",
+    "stage2": "d4405349a285ccabfadfb94565a0cd382509c98685aa5cb2a8d46a9b846e12fd"
+  },
+  "schema_version": "1.0",
+  "selection_procedure": {
+    "demonstration_documents": "exclude documents containing the three inspected pilot groups, then sort eligible document IDs by SHA-256(seed:document_id)",
+    "demonstrations": "manual coverage selection from reserved documents only, frozen before inference",
+    "evaluation_groups": "retain each inspected pilot group and fill to three groups per document by SHA-256(seed:evaluation:document_id:sentence_id); emit canonical order"
+  },
+  "selection_seed": 20261016,
+  "source_split": "DEV"
+}
