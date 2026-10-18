@@ -109,14 +109,14 @@ This masking isolates classification from sequence termination
 and avoids teaching the decoder to treat the control string alone as a complete
 rewriting output.
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \thesistablefont
   \setlength{\tabcolsep}{4pt}
   \renewcommand{\arraystretch}{1.14}
   \caption{Sequence-to-sequence templates used to construct rewriting and identification instances. PT and BR denote the input variety, while CLS marks identification inputs.}
   \label{tab:method-training-templates}
-  \begin{tabularx}{\textwidth}{@{}>{\hsize=.7\hsize}Y>{\hsize=1.15\hsize}Y>{\hsize=1.15\hsize}Y@{}}
+  \begin{tabularx}{\textwidth}{@{}>{\hsize=.9\hsize}Y>{\hsize=1.05\hsize}Y>{\hsize=1.05\hsize}Y@{}}
     \toprule
     Setup & Encoder input & Decoder target \\
     \midrule
